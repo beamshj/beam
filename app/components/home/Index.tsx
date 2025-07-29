@@ -1,10 +1,10 @@
 import React from 'react'
-import Banner from './sections/Banner'
+import HeroSection from './sections/HeroSection'
 
 const Index = () => {
   return (
     <>
-    <Banner/>
+    <HeroSection/>
     </>
   )
 }
