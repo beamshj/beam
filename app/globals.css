@@ -5,6 +5,7 @@
   --background: #ffffff;
   --foreground: #626262;
   --primary: #42BADC;
+  --bdrcolor: #D3D3D3;
   --text-4xl: clamp(4rem, 8vw, 5.625rem);   /* 64px–90px */
   --text-3xl: clamp(3.5rem, 7vw, 5rem);     /* 56px–80px */
   --text-2xl: clamp(3rem, 6vw, 4.375rem);   /* 48px–70px */
@@ -21,6 +22,7 @@
   --color-foreground: var(--foreground);
   --font-sans: "DM Sans", sans-serif;
   --color-primary: var(--primary);
+  --color-bdrcolor: var(--bdrcolor);
   --breakpoint-2xl: 96.875rem;
   --text-4xl: var(--text-4xl);
   --text-3xl: var(--text-3xl);
