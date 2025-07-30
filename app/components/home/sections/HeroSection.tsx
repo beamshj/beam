@@ -79,8 +79,7 @@ const HeroSection = () => {
                       </div>
                     </div>
 
-              <div className="h-[1px] w-[60%] bg-white lg:bottom-[170px] absolute left-[40%]"></div>
-              <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-black to-black bottom-[170px] absolute left-[50%]"></div>
+              <div className="h-[1px] w-[60%] bg-gradient-to-r from-white to-transparent lg:bottom-[170px] absolute left-[40%]"></div>
                   </div>
                 </div>
               </div>
