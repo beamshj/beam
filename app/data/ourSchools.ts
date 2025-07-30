@@ -3,8 +3,8 @@ export const schoolData = {
    schools: [
       {
          id: 1,
-         img: '',
-         logo: '',
+         img: '/images/home/sc1.jpg',
+         logo: '/images/home/lgsvg.svg',
          title: 'International School of Creative Science',
          curriculum: 'British Curriculum',
          location: 'Muwaileh, Sharjah',
@@ -15,8 +15,8 @@ export const schoolData = {
       },
       {
          id: 2,
-         img: '',
-         logo: '',
+         img: '/images/home/sc2.jpg',
+         logo: '/images/home/lgsvg.svg',
          title: 'International School of Creative Science',
          curriculum: 'British Curriculum',
          location: 'Nad Al Sheba, Dubai',
@@ -27,8 +27,8 @@ export const schoolData = {
       },
       {
          id: 3,
-         img: '',
-         logo: '',
+         img: '/images/home/sc3.jpg',
+         logo: '/images/home/lgsvg.svg',
          title: 'International School of Creative Science',
          curriculum: 'British Curriculum',
          location: 'Al Riffa, Bahrain',

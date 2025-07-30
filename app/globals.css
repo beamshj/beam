@@ -50,3 +50,8 @@ body {
 .container {
   @apply mx-auto px-[15px];
 }
+@media screen and (max-width: 460px) {
+.smtext10{
+  @apply text-[10px];
+}
+}

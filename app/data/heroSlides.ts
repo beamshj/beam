@@ -5,7 +5,7 @@ export const slides = [
        title: '20 Years of Inspiring Leaders with Faith, Knowledge & Innovation', 
     },
     {
-       id: 1,
+       id: 2,
        img: '',
        title: '20 Years of Inspiring Leaders with Faith, Knowledge & Innovation', 
     }
