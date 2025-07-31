@@ -7,10 +7,21 @@ export const schoolData = {
          logo: '/images/home/lgsvg.svg',
          title: 'International School of Creative Science',
          curriculum: 'British Curriculum',
-         location: 'Muwaileh, Sharjah',
-         activeStudents: '4750',
-         nationalities: '68',
-         teachers: '85',
+         location: 'Muwaileh, Sharjah', 
+         labels: [
+            {
+               label: 'Active Students', 
+               count: '4750', 
+            },
+            {
+               label: 'Nationalities',
+               count: '68',
+            },
+            {
+               label: 'Teachers',
+               count: '85',
+            }
+         ]
 
       },
       {
@@ -20,9 +31,20 @@ export const schoolData = {
          title: 'International School of Creative Science',
          curriculum: 'British Curriculum',
          location: 'Nad Al Sheba, Dubai',
-         activeStudents: '4750',
-         nationalities: '68',
-         teachers: '85',
+         labels: [
+            {
+               label: 'Active Students', 
+               count: '4750', 
+            },
+            {
+               label: 'Nationalities',
+               count: '68',
+            },
+            {
+               label: 'Teachers',
+               count: '85',
+            }
+         ]
 
       },
       {
@@ -32,9 +54,20 @@ export const schoolData = {
          title: 'International School of Creative Science',
          curriculum: 'British Curriculum',
          location: 'Al Riffa, Bahrain',
-         activeStudents: '4750',
-         nationalities: '68',
-         teachers: '85',
+         labels: [
+            {
+               label: 'Active Students', 
+               count: '4750', 
+            },
+            {
+               label: 'Nationalities',
+               count: '68',
+            },
+            {
+               label: 'Teachers',
+               count: '85',
+            }
+         ]
 
       }
    ],

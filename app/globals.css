@@ -70,3 +70,40 @@ body {
   background: linear-gradient(90deg, #42BADC 0%, #236476 100%); 
   opacity: 1;
 }
+@media screen and (min-width: 1024px) {
+.aftergd::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 50%;
+  right: 0;
+  height: 100%; 
+  background: radial-gradient(200.18% 159.42%   at 96.84%  1.49%, #42BADC 0%, rgba(66, 186, 220, 0) 65% , rgba(66, 186, 220, 0) 100%) ;
+
+  z-index: 0;
+}
+}
+.swiper-slide:nth-child(odd) .aluminibg{
+  background: radial-gradient(83.56% 68.58% at 0% 100%, #42BADC 0%, rgba(66, 186, 220, 0) 100%); 
+}
+.swiper-slide:nth-child(even) .aluminibg{
+  background: radial-gradient(83.56% 68.58% at 0% 100%, #7E5AA3 0%, rgba(126, 90, 163, 0) 100%) ;
+
+}
+.swiper-slide:nth-child(odd) .slidegpmn .hdriv{background:  linear-gradient(180deg, rgba(66, 186, 220, 0) 61.58%, #42BADC 94.52%)}
+.swiper-slide:nth-child(even) .slidegpmn .hdriv{background: linear-gradient(180deg, rgba(126, 90, 163, 0) 60.77%, #7E5AA3 92.82%);}
+.swiper-slide:nth-child(odd) .slidegpmn:hover .hdriv{
+ background: #42badbf0;
+}
+.swiper-slide:nth-child(even) .slidegpmn:hover .hdriv{
+  background: #3F225CF0; 
+} 
+
+.swiper-slide:nth-child(odd) .slidegpmn:hover .strokclass{
+  stroke: #3F225C; 
+  
+} 
+.swiper-slide:nth-child(even) .slidegpmn:hover .strokclass{
+  stroke: #42badb; 
+  
+} 

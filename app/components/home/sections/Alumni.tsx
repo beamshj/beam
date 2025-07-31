@@ -44,16 +44,19 @@ const Alumni = () => {
 >
   {alumniData.alumni.map((value, index) => (
     <SwiperSlide key={index}>
-      <div className='border-t border-bdrcolor pt-4 md:pt-6'>
-        <h3 className='text-xl font-light text-black'>{value.name}</h3>
-        <p className='text-sm font-light text-[#626262]'>{value.designation}</p>
-        <div
-          className={`mt-9 bg-[${value.bgcolor}] `}
-        >
-          <Image src={value.img} alt={value.name} width={351} height={413} />
-        </div>
+    <div className="border-t border-bdrcolor pt-4 md:pt-6 group overflow-hidden">
+      <h3 className="text-xl font-light text-black transition-all duration-300 ">
+        {value.name}
+      </h3>
+      <p className="text-sm font-light text-[#626262] transition-all duration-300 ">
+        {value.designation}
+      </p>
+      <div className="mt-9 aluminibg transform transition-transform duration-500 group-hover:scale-105">
+        <Image src={value.img} alt={value.name} width={351} height={413} />
       </div>
-    </SwiperSlide>
+    </div>
+  </SwiperSlide>
+  
   ))}
 </Swiper>
 

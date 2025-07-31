@@ -8,6 +8,7 @@ import MessageSection from './sections/MessageSection'
 import DiverseGrowing from './sections/DiverseGrowing'
 import Alumni from './sections/Alumni'
 import MediaHub from './sections/MediaHub'
+import LogoSlider from './sections/LogoSlider'
 const Index = () => {
   return (
     <>
@@ -15,10 +16,11 @@ const Index = () => {
     <OurSchools />
     <AcademicCultural />
     <VideoSection/>
-    <MessageSection/>
     <DiverseGrowing />
+    <MessageSection/>
     <Alumni />
     <MediaHub />
+    <LogoSlider />  
     </>
   )
 }
