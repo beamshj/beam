@@ -22,12 +22,12 @@ const AcademicCultural = () => {
               <h2 className='text-3xl md:text-4xl font-light leading-tight text-black max-w-[13ch]'>{academicCulturalData.heading}</h2>
             </div>
             <div className='mt-5 lg:mt-[43px] mb-5 lg:mb-[93px]'>
-              <p className='text-xs font-light text-foreground max-w-[82ch]' dangerouslySetInnerHTML={{ __html: academicCulturalData.desc }}></p>
+              <p className='text-sm font-light text-foreground max-w-[82ch]' dangerouslySetInnerHTML={{ __html: academicCulturalData.desc }}></p>
             </div>
-            <div className='bg-[linear-gradient(90deg,_#000000_0%,_rgba(0,_0,_0,_0)_30%)] h-[1px] ' ></div>
+            <div className='bg-[linear-gradient(90deg,_#000000_0%,_rgba(0,_0,_0,_0)_60%)] h-[1px] lg:bg-[linear-gradient(90deg,_#000000_0%,_rgba(0,_0,_0,_0)_30%)] h-[1px] ' ></div>
             <div  >
               {academicCulturalData.accvalues.map((value, index) => (
-                <div className={`flex gap-8 items-center py-10 group  hover:bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)] transition-all duration-300 
+                <div className={`flex flex-col md:flex-row gap-2 md:gap-8 items-baseline md:items-center py-7 lg:py-10 group  hover:bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)] transition-all duration-300 
               ${index === academicCulturalData.accvalues.length - 2 ? 'ps-0 xl:ps-[8%] 2xl:ps-[15%]' : ''} ${index === academicCulturalData.accvalues.length - 1 ? 'ps-0 xl:ps-[18%] 2xl:ps-[30%]' : ''}`} key={index}>
                   <div className='group-hover:px-2 transition-all duration-300'>
                     <Image src={value.img} alt={value.title} width={value.imgwidth} height={value.imgheight} className=' group-hover:filter-[brightness(0)] transition-all duration-300' />

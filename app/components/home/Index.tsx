@@ -10,6 +10,7 @@ import Alumni from './sections/Alumni'
 import MediaHub from './sections/MediaHub'
 import JoinBeam from './sections/JoinBeam'
 
+import LogoSlider from './sections/LogoSlider'
 const Index = () => {
   return (
     <>
@@ -17,10 +18,11 @@ const Index = () => {
     <OurSchools />
     <AcademicCultural />
     <VideoSection/>
-    <MessageSection/>
     <DiverseGrowing />
+    <MessageSection/>
     <Alumni />
     <MediaHub />
+    <LogoSlider />  
     <JoinBeam/>
     </>
   )

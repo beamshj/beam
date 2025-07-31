@@ -97,7 +97,7 @@ const OurSchools = () => {
       <div className='bg-[#F5F5F5] rounded-[15px] p-1 hover:bg-[#F0F0F0] transition-all duration-300 group'>
         <div className='rounded-xl overflow-hidden relative'>
           <Image src={school.img} alt={school.title} width={500} height={500} />
-          <div className='absolute opacity-0 group-hover:opacity-100 transition-all duration-300 top-5 right-5 p-2 bg-white/30 backdrop-blur-md  rounded-full w-[75px] h-[75px] flex items-center justify-center border border-[#42BADC]'>
+          <div className='absolute opacity-0 delay-200 group-hover:-translate-y-2 group-hover:opacity-100 transition-all duration-300 top-5 right-5 p-2 bg-white/30 backdrop-blur-md  rounded-full w-[75px] h-[75px] flex items-center justify-center border border-[#42BADC]'>
             <Image src='/images/home/arrow-top.svg' alt={school.title} width={15} height={15} />
           </div>
           <div className='absolute bottom-2 left-2 p-2 bg-white rounded-md w-fit'>
@@ -118,18 +118,37 @@ const OurSchools = () => {
           </div>
 
           <div>
-            <div className="flex justify-between items-center px-3 rounded-[10px] bg-[linear-gradient(90deg,_#DDF7FF_0%,_rgba(221,_247,_255,_0)_100%)] transition-all duration-500  group-hover:bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)] ">
-              <p className='text-md font-light text-foreground leading-[1.8] group-hover:text-black'>{school.activeStudents} +</p>
-              <p className='text-sm font-light text-foreground leading-[1.8]'>Active Students</p>
+          {school.labels.map((label, index)  => ( 
+            <div
+            key={index}
+            className={`relative group overflow-hidden flex justify-between items-center px-3 py-2 rounded-[10px] transition-all duration-500`}
+          >
+            <div
+              className={`absolute inset-0 transition-opacity duration-500 ${index % 2 === 0
+                ? 'bg-[linear-gradient(90deg,#E2F5FF_0%,rgba(226,245,255,0)_100%)] group-hover:opacity-0'
+                : 'bg-[linear-gradient(90deg,#F5EBFF_0%,rgba(245,235,255,0)_100%)] group-hover:opacity-0'
+                }`}
+            ></div>
+          
+            <div
+              className={`absolute inset-0 opacity-0 transition-opacity duration-500 ${index % 2 === 0
+                ? 'group-hover:opacity-100 bg-[linear-gradient(90deg,#42BADC_0%,rgba(66,186,220,0)_100%)]'
+                : 'group-hover:opacity-100 bg-[linear-gradient(90deg,#7E5AA3_0%,rgba(126,90,163,0)_100%)]'
+                }`}
+            ></div>
+          
+            <div className="relative z-10 flex justify-between w-full">
+              <p className='text-md font-light text-foreground leading-[1.8] transition-colors duration-500 group-hover:text-black'>
+                {label.count} +
+              </p>
+              <p className='text-sm font-light text-foreground leading-[1.8] transition-colors duration-500'>
+                {label.label}
+              </p>
             </div>
-            <div className="flex justify-between items-center px-3 rounded-[10px] bg-[linear-gradient(90deg,_#F5EBFF_0%,_rgba(245,_235,_255,_0)_100%)] transition-all duration-500  group-hover:bg-[linear-gradient(90deg,_#7E5AA3_0%,_rgba(126,_90,_163,_0)_100%)]">
-              <p className='text-md font-light text-foreground leading-[1.8] group-hover:text-black'>{school.nationalities} +</p>
-              <p className='text-sm font-light text-foreground leading-[1.8]'>Nationalities</p>
-            </div>
-            <div className="flex justify-between items-center px-3 rounded-[10px] bg-[linear-gradient(90deg,_#E2F5FF_0%,_rgba(226,_245,_255,_0)_100%)] transition-all duration-500 group-hover:bg-[linear-gradient(90deg,_#9FDAF9_0%,_rgba(159,_218,_249,_0)_100%)]">
-              <p className='text-md font-light text-foreground leading-[1.8] group-hover:text-black'>{school.teachers} +</p>
-              <p className='text-sm font-light text-foreground leading-[1.8]'>Teachers</p>
-            </div>
+          </div>
+          ))}
+
+           
           </div>
         </div>
       </div>
