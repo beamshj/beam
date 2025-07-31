@@ -67,20 +67,19 @@ const HeroSection = () => {
                 <div className="container h-full">
                   <div className="h-full relative w-full overflow-hidden">
                     <div
-                      className="title absolute bottom-[80px] lg:bottom-[50px] transition-all ease-in-out grid grid-cols-6 items-end"
+                      className="title absolute bottom-[80px] lg:bottom-[50px] transition-all ease-in-out grid grid-cols-7 items-end"
 
                     >
                       <div className="mb-[116px] col-span-5">
                         <h1 className="text-2xl text-white leading-none font-custom font-normal xl:w-[80%]">
                         <span className="text-primary">20 Years</span> of Inspiring Leaders with Faith, Knowledge & Innovation</h1>
                       </div>
-                      <div className="mb-[150px] flex justify-end flex-col items-end">
+                      <div className="mb-[150px] flex justify-end flex-col items-end col-span-2">
                          <button className='uppercase border-primary border-[1px] px-3 py-1 flex items-center gap-2 rounded-[50px] text-sm cursor-pointer text-nowrap w-fit'>Register Interest<span className='bg-primary rounded-full p-2'><Image src="/assets/arrow.svg" alt="Arrow" width={20} height={20} /></span></button>
                       </div>
                     </div>
 
-              <div className="h-[1px] w-[60%] bg-white lg:bottom-[170px] absolute left-[40%]"></div>
-              <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-black to-black bottom-[170px] absolute left-[50%]"></div>
+              <div className="h-[1px] w-[60%] bg-gradient-to-r from-white to-transparent lg:bottom-[170px] absolute left-[55%]"></div>
                   </div>
                 </div>
               </div>

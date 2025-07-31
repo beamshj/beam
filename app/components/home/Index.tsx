@@ -1,7 +1,10 @@
 import React from 'react'
 import HeroSection from './sections/HeroSection'
+import VideoSection from './sections/VideoSection'
 import OurSchools from './sections/OurSchools'
 import AcademicCultural from './sections/AcademicCultural'
+import MessageSection from './sections/MessageSection'
+
 import DiverseGrowing from './sections/DiverseGrowing'
 import Alumni from './sections/Alumni'
 import MediaHub from './sections/MediaHub'
@@ -11,6 +14,8 @@ const Index = () => {
     <HeroSection/>
     <OurSchools />
     <AcademicCultural />
+    <VideoSection/>
+    <MessageSection/>
     <DiverseGrowing />
     <Alumni />
     <MediaHub />
