@@ -22,8 +22,8 @@ const Index = () => {
     <MessageSection/>
     <Alumni />
     <MediaHub />
-    <JoinBeam/>
     <LogoSlider />  
+    <JoinBeam/>
     </>
   )
 }
