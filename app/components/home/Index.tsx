@@ -8,6 +8,8 @@ import MessageSection from './sections/MessageSection'
 import DiverseGrowing from './sections/DiverseGrowing'
 import Alumni from './sections/Alumni'
 import MediaHub from './sections/MediaHub'
+import JoinBeam from './sections/JoinBeam'
+
 const Index = () => {
   return (
     <>
@@ -19,6 +21,7 @@ const Index = () => {
     <DiverseGrowing />
     <Alumni />
     <MediaHub />
+    <JoinBeam/>
     </>
   )
 }
