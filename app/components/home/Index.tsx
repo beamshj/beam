@@ -5,6 +5,9 @@ import OurSchools from './sections/OurSchools'
 import AcademicCultural from './sections/AcademicCultural'
 import MessageSection from './sections/MessageSection'
 
+import DiverseGrowing from './sections/DiverseGrowing'
+import Alumni from './sections/Alumni'
+import MediaHub from './sections/MediaHub'
 const Index = () => {
   return (
     <>
@@ -13,6 +16,9 @@ const Index = () => {
     <AcademicCultural />
     <VideoSection/>
     <MessageSection/>
+    <DiverseGrowing />
+    <Alumni />
+    <MediaHub />
     </>
   )
 }

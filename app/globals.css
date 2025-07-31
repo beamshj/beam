@@ -55,3 +55,18 @@ body {
   @apply text-[10px];
 }
 }
+.custom-pagination .swiper-pagination-bullet {
+  display: inline-block;
+  height: 4px;
+  width: 16px;
+  background-color: #ccc;
+  border-radius: 9999px;
+  transition: all 0.3s ease-in-out;
+  opacity: 0.6;
+}
+
+.custom-pagination .swiper-pagination-bullet-active {
+  width: 35px;
+  background: linear-gradient(90deg, #42BADC 0%, #236476 100%); 
+  opacity: 1;
+}

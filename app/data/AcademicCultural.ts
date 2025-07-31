@@ -1,6 +1,7 @@
 export const academicCulturalData = {
    heading: 'Academic & Cultural Excellence',
    desc: "<span>Our schools are <span class='text-[#42BADC]'>value-driven learning communities</span> where everyone strives for academic excellence instilled with strong moral compass to nurture students' growth and deepen their understanding of the world around them.</span>",
+   image: '/images/home/acadamicmain.png',
    accvalues: [
       {
          id: 1,
