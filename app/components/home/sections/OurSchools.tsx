@@ -17,16 +17,16 @@ const OurSchools = () => {
 
   const [selected, setSelected] = useState('');
   return (
-    <section className='  pt-12 pb-12 md:pt-15 md:pb-15 xl:pt-[133px] xl:pb-[160px]'>
+    <section className='  py-12 md:pt-20 md:pb-25 2xl:pt-[133px] 2xl:pb-[160px] '>
 
       <div className="container">
-        <div className='mb-5 md:mb-8 xl:mb-[53px]'><h2 className='text-3xl md:text-4xl font-light leading-tight text-black'>{schoolData.heading}</h2></div>
+        <div className='mb-5 md:mb-7  2xl:mb-[53px]'><h2 className='text-3xl md:text-4xl font-light leading-tight text-black lettersp-4'>{schoolData.heading}</h2></div>
         <div className='pb-5 md:pb-7 border-b border-bdrcolor'>
           <div className="flex-col md:flex-row flex justify-start md:justify-between items-start md:items-center gap-4 md:gap-0" >
             <div className="flex gap-3">
-              <div className='p-[1px] group transition-all duration-300  bg-bdrcolor hover:bg-[linear-gradient(90deg,_#42BADC_0%,_#12586C_100%)] rounded-full '>
+              <div className='p-[1px] group transition-all duration-300  bg-[linear-gradient(90deg,_#42BADC_0%,_#12586C_100%)] rounded-full '>
                 <div className='cursor-pointer  px-2 md:px-5 py-2 md:py-3 bg-white rounded-full'>
-                  <p className='group-hover:text-black smtext10 text-xs font-light text-foreground uppercase '>All</p>
+                  <p className='text-black smtext10 text-xs font-light   uppercase '>All</p>
                 </div>
               </div>
               
@@ -45,11 +45,11 @@ const OurSchools = () => {
               <div className="   ">
 
                 <div className="w-full">
-                  <div className="relative inline-block min-w-[120px]">
+                  <div className="relative inline-block min-w-[120px] lg:min-w-[348px]">
                     <select
                       value={selected}
                       onChange={(e) => setSelected(e.target.value)}
-                      className="appearance-none border border-bdrcolor cursor-pointer rounded-full pl-2 md:pl-4 pr-10 py-2 md:py-3 smtext10 text-xs focus:outline-none focus:ring-0 w-auto"
+                      className="w-full appearance-none border border-bdrcolor cursor-pointer rounded-full pl-2 md:pl-4 pr-10 py-2 md:py-3 smtext10 text-xs focus:outline-none focus:ring-0 w-auto"
                     >
                       <option value="">Location</option>
                       {schoolData.schools.map((option) => (
@@ -90,7 +90,7 @@ const OurSchools = () => {
     768: { slidesPerView: 2 },
     1024: { slidesPerView: 3 },
   }}
-  className="mt-5 md:mt-15"
+  className="mt-5 md:mt-8 2xl:mt-15"
 >
   {schoolData.schools.map((school, index) => (
     <SwiperSlide key={index}>
@@ -104,7 +104,7 @@ const OurSchools = () => {
             <Image src={school.logo} alt={school.title} width={109} height={45} />
           </div>
         </div>
-        <div className='p-5 md:p-5 xl:p-10'>
+        <div className='p-5 md:p-6 2xl:p-10'>
           <div className="flex justify-between items-center pb-3 border-b border-bdrcolor">
             <p className='text-xs font-light text-foreground'>{school.curriculum}</p>
             <div className='flex items-center gap-2'>
@@ -113,15 +113,15 @@ const OurSchools = () => {
             </div>
           </div>
 
-          <div className='mt-6 mb-8'>
-            <p className='text-xl font-light text-black'>{school.title}</p>
+          <div className='my-4 2xl:mt-6 2xl:mb-8'>
+            <p className='text-lg md:text-md 2xl:text-xl font-light text-black leading-[1.2] lettersp-1'>{school.title}</p>
           </div>
 
           <div>
           {school.labels.map((label, index)  => ( 
             <div
             key={index}
-            className={`relative group overflow-hidden flex justify-between items-center px-3 py-2 rounded-[10px] transition-all duration-500`}
+            className={`relative group overflow-hidden flex justify-between items-center px-3 py-[2.5px] rounded-[10px] transition-all duration-500`}
           >
             <div
               className={`absolute inset-0 transition-opacity duration-500 ${index % 2 === 0
@@ -137,7 +137,7 @@ const OurSchools = () => {
                 }`}
             ></div>
           
-            <div className="relative z-10 flex justify-between w-full">
+            <div className="relative z-10 flex justify-between items-center w-full">
               <p className='text-md font-light text-foreground leading-[1.8] transition-colors duration-500 group-hover:text-black'>
                 {label.count} +
               </p>

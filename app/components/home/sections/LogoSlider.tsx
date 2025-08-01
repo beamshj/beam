@@ -3,20 +3,19 @@ import React from 'react';
 import { logoSliderData } from '@/app/data/logoSlider'
 import Image from 'next/image';
 import 'swiper/css';
-import 'swiper/css/navigation';
-import { useState } from 'react';
+import 'swiper/css/navigation'; 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Autoplay } from 'swiper/modules';
 // Optional: Add modules if needed
-import { Navigation, Pagination } from 'swiper/modules';
+import {  Pagination } from 'swiper/modules';
 
 const LogoSlider = () => {
 
   return (
-    <section className='py-12 md:py-15 xl:py-23'> 
+    <section className='py-12 md:py-25 2xl:py-23'> 
           <div className="container"> 
           <Swiper
             modules={[Autoplay, Pagination]}
