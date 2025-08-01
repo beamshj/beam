@@ -1,17 +1,15 @@
 'use client'
 import React from 'react';
-import { mediaHubData } from '@/app/data/MediaHub'
-import Image from 'next/image';
+import { mediaHubData } from '@/app/data/MediaHub' 
 import 'swiper/css';
-import 'swiper/css/navigation';
-import { useState } from 'react';
+import 'swiper/css/navigation'; 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Autoplay } from 'swiper/modules';
 // Optional: Add modules if needed
-import { Navigation, Pagination } from 'swiper/modules';
+import {  Pagination } from 'swiper/modules';
 
 const Alumni = () => {
 
@@ -20,9 +18,9 @@ const Alumni = () => {
 
       <div   >
         <div className="container border-t border-bdrcolor "></div>
-        <div className='  pt-12 pb-12 md:pt-15 md:pb-15 xl:pt-[83px] xl:pb-[150px] overflow-hidden '>
+        <div className='  pt-12 pb-12 md:pt-15 md:pb-25 xl:pt-[83px] 2xl:pb-[150px] overflow-hidden '>
           <div className="container">
-            <div className='mb-5 md:mb-8 xl:mb-[52px]'><h2 className='text-3xl md:text-4xl font-light leading-tight text-black  '  >{mediaHubData.heading}</h2></div>
+            <div className='mb-5 md:mb-8 xl:mb-[52px]'><h2 className='text-3xl md:text-4xl font-light leading-tight text-black lettersp-4 '  >{mediaHubData.heading}</h2></div>
           </div>
           <div className="container">
           <Swiper

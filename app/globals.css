@@ -84,10 +84,11 @@ body {
 }
 }
 .swiper-slide:nth-child(odd) .aluminibg{
-  background: radial-gradient(83.56% 68.58% at 0% 100%, #42BADC 0%, rgba(66, 186, 220, 0) 100%); 
+  background: radial-gradient(91.56% 98.58% at 0% 100%, #42BADC 0%, rgb(66 186 220 / 27%) 70%, rgb(66 186 220 / 0%) 100%); 
 }
 .swiper-slide:nth-child(even) .aluminibg{
-  background: radial-gradient(83.56% 68.58% at 0% 100%, #7E5AA3 0%, rgba(126, 90, 163, 0) 100%) ;
+  background: radial-gradient(91.56% 98.58% at 0% 100%, #7E5AA3 0%, #7e5aa366 70%, #7e5aa300 100%);
+ 
 
 }
 .swiper-slide:nth-child(odd) .slidegpmn .hdriv{background:  linear-gradient(180deg, rgba(66, 186, 220, 0) 61.58%, #42BADC 94.52%)}
@@ -107,3 +108,19 @@ body {
   stroke: #42badb; 
   
 } 
+.lettersp-4{letter-spacing: -4px;}
+.lettersp-1{letter-spacing: -1px;}
+.lettersp-2{letter-spacing: -2px;}
+@media screen and (max-width: 767px){
+  .lettersp-4{letter-spacing: 0px;}
+  .lettersp-1{letter-spacing: 0px;}
+  .lettersp-2{letter-spacing: 0px;}
+}
+* {
+  -ms-overflow-style: none;     /* IE and Edge */
+  scrollbar-width: none;        /* Firefox */
+}
+
+*::-webkit-scrollbar {
+  display: none;                /* Chrome, Safari */
+}

@@ -3,23 +3,21 @@ import React from 'react';
 import { alumniData } from '@/app/data/alumni'
 import Image from 'next/image';
 import 'swiper/css';
-import 'swiper/css/navigation';
-import { useState } from 'react';
+import 'swiper/css/navigation'; 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import { Autoplay } from 'swiper/modules';
-// Optional: Add modules if needed
-import { Navigation, Pagination } from 'swiper/modules';
+import { Autoplay, Pagination } from 'swiper/modules';
+// Optional: Add modules if needed 
 
 const Alumni = () => {
 
   return (
-    <section className='  pt-12 pb-12 md:pt-15 md:pb-15 xl:pt-[135px] xl:pb-[126px]'>
+    <section className='  py-12 md:pt-20 md:pb-25 2xl:pt-[135px] 2xl:pb-[126px]'>
 
       <div className="container">
-        <div className='mb-5 md:mb-8 xl:mb-[64px]'><h2 className='text-3xl md:text-4xl font-light leading-tight text-black  ' dangerouslySetInnerHTML={{ __html: alumniData.heading }}></h2></div>
+        <div className='mb-5 md:mb-8 xl:mb-[64px]'><h2 className='text-3xl md:text-4xl font-light   text-black lettersp-4 leading-[1] 2xl:leading-tight ' dangerouslySetInnerHTML={{ __html: alumniData.heading }}></h2></div>
 
         <Swiper
   modules={[Autoplay, Pagination]}
@@ -74,9 +72,10 @@ const Alumni = () => {
           </div>
         </div>
         </div>
-<div className="custom-pagination   flex justify-end gap-2"></div>
 
 </div>
+
+<div className="custom-pagination   flex justify-end gap-2"></div>
 
         
 
