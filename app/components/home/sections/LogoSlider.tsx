@@ -11,11 +11,17 @@ import 'swiper/css/pagination';
 import { Autoplay } from 'swiper/modules';
 // Optional: Add modules if needed
 import {  Pagination } from 'swiper/modules';
+import { motion } from "framer-motion";
+import { fadeUp  } from "@/public/assets/FramerAnimation/animation";
 
 const LogoSlider = () => {
 
   return (
-    <section className='py-12 md:py-25 2xl:py-23'> 
+    <motion.section className='py-12 md:py-25 2xl:py-23'
+    variants={fadeUp}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true, amount: 0.2 }}> 
           <div className="container"> 
           <Swiper
             modules={[Autoplay, Pagination]}
@@ -50,7 +56,7 @@ const LogoSlider = () => {
             ))}
           </Swiper>
         </div>  
-    </section>
+    </motion.section>
   )
 }
 

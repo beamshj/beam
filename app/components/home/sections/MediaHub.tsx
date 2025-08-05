@@ -10,17 +10,29 @@ import 'swiper/css/pagination';
 import { Autoplay } from 'swiper/modules';
 // Optional: Add modules if needed
 import {  Pagination } from 'swiper/modules';
+import { motion } from "framer-motion";
+import { fadeInLeft, fadeUp  } from "@/public/assets/FramerAnimation/animation";
 
 const Alumni = () => {
 
   return (
-    <section>
+    <motion.section
+     variants={fadeUp}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, amount: 0.2 }}>
 
       <div   >
         <div className="container border-t border-bdrcolor "></div>
         <div className='  pt-12 pb-12 md:pt-15 md:pb-25 xl:pt-[83px] 2xl:pb-[150px] overflow-hidden '>
           <div className="container">
-            <div className='mb-5 md:mb-8 xl:mb-[52px]'><h2 className='text-3xl md:text-4xl font-light leading-tight text-black lettersp-4 '  >{mediaHubData.heading}</h2></div>
+            <motion.div className='mb-5 md:mb-8 xl:mb-[52px]'
+            variants={fadeInLeft}
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true, amount: 0.2 }}>
+                                  <h2 className='text-3xl md:text-4xl font-light leading-tight text-black lettersp-4 '  >{mediaHubData.heading}</h2>
+             </motion.div>
           </div>
           <div className="container">
           <Swiper
@@ -30,7 +42,9 @@ const Alumni = () => {
             spaceBetween={10}
             slidesPerView={1}
             loop={true} 
-            
+            effect="fade"
+            loopAdditionalSlides={3} // add more duplicate slides for seamless transition
+            speed={800}
             autoplay={{
               delay: 3000,
               disableOnInteraction: false,
@@ -43,6 +57,7 @@ const Alumni = () => {
                 return `<span class="${className}"></span>`;
               },
             }}
+           
             breakpoints={{
               768: { slidesPerView: 2, 
                 slidesOffsetBefore: 30,
@@ -76,7 +91,7 @@ const Alumni = () => {
                       </div>
 
                     </div>
-                    <div className='px-3 py-1 border border-white rounded-full text-white absolute bottom-5 left-5'><p>{value.category}</p></div>
+                    <div className='group-hover:translate-x-2  group-hover:delay-300 transition-all duration-300 px-3 py-1 border border-white rounded-full text-white absolute bottom-5 left-5'><p>{value.category}</p></div>
                  
                     </div>
                   </div> 
@@ -93,7 +108,7 @@ const Alumni = () => {
       </div>
 
 
-    </section>
+    </motion.section>
   )
 }
 
