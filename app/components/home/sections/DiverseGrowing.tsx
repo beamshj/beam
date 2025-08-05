@@ -7,7 +7,8 @@ import 'swiper/css/navigation';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-
+import { motion } from "framer-motion";
+import { fadeUp, fadeInLeft, fadeInRight } from "@/public/assets/FramerAnimation/animation";
 // Optional: Add modules if needed 
 
 const DiverseGrowing = () => {
@@ -17,14 +18,25 @@ const DiverseGrowing = () => {
       <div className='relative pb-12 md:pb-15 xl:pb-[150px] max-w-[1920px] mx-auto'>
         <div className="container">
           <div  >
-            <div>
+          <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }} // Trigger when only 10% of image enters viewport 
+        >
               <h2 className='text-3xl 2xl:text-4xl  font-light leading-tight text-black max-w-[20ch] lettersp-4'>{diverseGrowingData.heading}</h2>
-            </div>
+            </motion.div>
             <div className='2xl:w-4/5 ml-auto mt-8 lg:mt-[140px]  xl:mt-[64px] relative'  >
 
-
+            <motion.div
+          variants={fadeInRight}
+          initial="hidden"
+          whileInView="visible"
+          transition={{ delay: 0.9 }}
+          viewport={{ once: true, amount: 0.1 }} // Trigger when only 10% of image enters viewport 
+        >
               <div className="flex flex-col gap-5 lg:gap-0 xl:w-[80%] 2xl:w-fit m-auto xl:ml-auto mr-0 2xl:m-auto">
-                <div className="relative group overflow-hidden border relative 2xl:left-[50px] bg-white/30 backdrop-blur-md border-[#ccc] rounded-[15px] min-w-full lg:min-w-[250px] 2xl:min-w-[597px] px-10 py-4 w-fit m-auto">
+                <div className=" group overflow-hidden border relative 2xl:left-[50px] bg-white/30 backdrop-blur-md border-[#ccc] rounded-[15px] min-w-full lg:min-w-[250px] 2xl:min-w-[597px] px-10 py-4 w-fit m-auto">
                   {/* Hover Gradient Overlay */}
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
                     <div className="w-full h-full bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)]"></div>
@@ -166,7 +178,7 @@ const DiverseGrowing = () => {
 
 
               </div>
-
+              </motion.div>
 
 
             </div>
@@ -174,9 +186,16 @@ const DiverseGrowing = () => {
 
           </div>
         </div>
-
-        <Image src={diverseGrowingData.image} alt={diverseGrowingData.heading} width={913} height={944} className='absolute bottom-0 lg:left-[5%] z-[-1] responsive md:w-[50%] 2xl:w-[913px]' />
-      </div>
+<motion.div
+          variants={fadeInLeft}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }} // Trigger when only 10% of image enters viewport
+          className="absolute bottom-0 lg:left-[5%] z-[-1] responsive md:w-[50%] 2xl:w-[913px]"
+        >
+        <Image src={diverseGrowingData.image} alt={diverseGrowingData.heading} width={913} height={944} className='' />
+        </motion.div>
+        </div>
 
     </section>
   )

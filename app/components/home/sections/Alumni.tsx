@@ -9,16 +9,33 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Autoplay, Pagination } from 'swiper/modules';
+import { motion } from "framer-motion";
+import { fadeInLeft,cardVariants2,containerVariants2, fadeUp  } from "@/public/assets/FramerAnimation/animation";
 // Optional: Add modules if needed 
 
 const Alumni = () => {
 
   return (
-    <section className='  py-12 md:pt-20 md:pb-25 2xl:pt-[135px] 2xl:pb-[126px]'>
+    <motion.section className='  py-12 md:pt-20 md:pb-25 2xl:pt-[135px] 2xl:pb-[126px]'
+    variants={fadeUp}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.2 }}>
 
       <div className="container">
-        <div className='mb-5 md:mb-8 xl:mb-[64px]'><h2 className='text-3xl md:text-4xl font-light   text-black lettersp-4 leading-[1] 2xl:leading-tight ' dangerouslySetInnerHTML={{ __html: alumniData.heading }}></h2></div>
-
+        <motion.div className='mb-5 md:mb-8 xl:mb-[64px]'
+         variants={fadeInLeft}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.2 }}>
+            <h2 className='text-3xl md:text-4xl font-light   text-black lettersp-4 leading-[1] 2xl:leading-tight ' dangerouslySetInnerHTML={{ __html: alumniData.heading }}></h2>
+            </motion.div>
+            <motion.div
+  variants={containerVariants2}
+  initial="hidden"
+  whileInView="show"
+  viewport={{ once: true, amount: 0.3 }}
+>
         <Swiper
   modules={[Autoplay, Pagination]}
   spaceBetween={24}
@@ -42,21 +59,31 @@ const Alumni = () => {
 >
   {alumniData.alumni.map((value, index) => (
     <SwiperSlide key={index}>
-    <div className="border-t border-bdrcolor pt-4 md:pt-6 group overflow-hidden">
-      <h3 className="text-xl font-light text-black transition-all duration-300 ">
+    <motion.div
+      variants={cardVariants2}
+      className="border-t border-bdrcolor pt-4 md:pt-6 group overflow-hidden"
+    >
+      <h3 className="text-xl font-light text-black transition-all duration-300">
         {value.name}
       </h3>
-      <p className="text-sm font-light text-[#626262] transition-all duration-300 ">
+      <p className="text-sm font-light text-[#626262] transition-all duration-300">
         {value.designation}
       </p>
       <div className="mt-9 aluminibg transform transition-transform duration-500 group-hover:scale-105">
-        <Image src={value.img} alt={value.name} width={351} height={413} />
+        <Image
+          src={value.img}
+          alt={value.name}
+          width={351}
+          height={413}
+          className="w-full h-auto"
+        />
       </div>
-    </div>
+    </motion.div>
   </SwiperSlide>
   
   ))}
 </Swiper>
+</motion.div>
 
 {/* Custom pagination container */}
 <div className='flex justify-between items-center'> 
@@ -82,7 +109,7 @@ const Alumni = () => {
       </div>
 
 
-    </section>
+    </motion.section>
   )
 }
 

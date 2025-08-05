@@ -9,18 +9,36 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-
+import {  motion } from "framer-motion"; 
+import { fadeInLeft } from "@/public/assets/FramerAnimation/animation";
 // Optional: Add modules if needed
 import { Navigation, Pagination } from 'swiper/modules';
-
+import { fadeUp, cardVariants } from "@/public/assets/FramerAnimation/animation";
 const OurSchools = () => {
 
-  const [selected, setSelected] = useState('');
+  const [selected, setSelected] = useState(''); 
+
+ 
+
+  
+  
+  
   return (
     <section className='  py-12 md:pt-20 md:pb-25 2xl:pt-[133px] 2xl:pb-[160px] '>
-
+<motion.div 
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+       
+    > 
       <div className="container">
-        <div className='mb-5 md:mb-7  2xl:mb-[53px]'><h2 className='text-3xl md:text-4xl font-light leading-tight text-black lettersp-4'>{schoolData.heading}</h2></div>
+        <motion.div className='mb-5 md:mb-7  2xl:mb-[53px]'
+         variants={fadeInLeft}
+           initial="hidden"
+           whileInView="visible"
+           viewport={{ once: true, amount: 0.2 }}>
+            <h2 className='text-3xl md:text-4xl font-light leading-tight text-black lettersp-4'>{schoolData.heading}</h2></motion.div>
         <div className='pb-5 md:pb-7 border-b border-bdrcolor'>
           <div className="flex-col md:flex-row flex justify-start md:justify-between items-start md:items-center gap-4 md:gap-0" >
             <div className="flex gap-3">
@@ -85,7 +103,13 @@ const OurSchools = () => {
   spaceBetween={20}
   slidesPerView={1}
   // navigation
-  pagination={{ clickable: true }}
+  pagination={{
+    clickable: true,
+    el: '.cus-pagination',
+    renderBullet: (index, className) => {
+      return `<span class="${className}"></span>`;
+    },
+  }}
   breakpoints={{
     768: { slidesPerView: 2 },
     1024: { slidesPerView: 3 },
@@ -94,6 +118,14 @@ const OurSchools = () => {
 >
   {schoolData.schools.map((school, index) => (
     <SwiperSlide key={index}>
+        <motion.div
+      className='bg-[#F5F5F5] rounded-[15px] p-1 hover:bg-[#F0F0F0] transition-all duration-300 group'
+      custom={index}
+      variants={cardVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+    >
       <div className='bg-[#F5F5F5] rounded-[15px] p-1 hover:bg-[#F0F0F0] transition-all duration-300 group'>
         <div className='rounded-xl overflow-hidden relative'>
           <Image src={school.img} alt={school.title} width={500} height={500} />
@@ -152,13 +184,15 @@ const OurSchools = () => {
           </div>
         </div>
       </div>
+      </motion.div>
     </SwiperSlide>
   ))}
-</Swiper>
-
+        </Swiper>
+<div className="cus-pagination   flex justify-end gap-2"></div>
         </div>
       </div>
 
+      </motion.div>
 
     </section>
   )
