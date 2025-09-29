@@ -34,7 +34,7 @@ const Breadcrumb = ({ standard = false }: Props) => {
         {pathParts.length > 0 && (
           <span className="group-last:hidden">
             <Image
-              src="/assets/about-us/arrow-right.svg"
+              src="/images/about-us/arrow-right.svg"
               alt="arrow-right"
               width={15}
               height={14}

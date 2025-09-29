@@ -41,3 +41,43 @@ export const visionMissionItems = {
     },
   ],
 };
+
+
+export const valuesData = [
+  {
+    number: "01",
+    title: "Integrity",
+    points: [
+      "Honor",
+      "Honesty",
+      "Self-monitoring",
+      "Honest competition",
+      "Avoid taking advantage of others",
+    ],
+    image: "/images/integrity.png",
+  },
+  {
+    number: "02",
+    title: "Compassion",
+    points: [],
+    image: "/images/compassion.png",
+  },
+  {
+    number: "03",
+    title: "Courage",
+    points: [],
+    image: "/images/courage.png",
+  },
+  {
+    number: "04",
+    title: "Collaboration",
+    points: [],
+    image: "/images/collaboration.png",
+  },
+  {
+    number: "05",
+    title: "Tolerance",
+    points: [],
+    image: "/images/tolerance.png",
+  },
+];
