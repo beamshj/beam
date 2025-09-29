@@ -36,7 +36,7 @@ const OurStorySection: React.FC<OurStorySectionProps> = ({ data }) => {
           {/* Gradient overlay */}
           <div className="absolute bottom-0 w-full h-[60%] bg-gradient-to-t from-black to-transparent"></div>
 
-          <h2 className="absolute left-[40px] bottom-[30px] xl:left-[50px] xl:bottom-[40px] 2xl:left-[60px] 2xl:bottom-[50px] text-white text-3xl 2xl:text-4xl font-light leading-[1.111111111]">
+          <h2 className="absolute left-[20px] bottom-[20px] right-[20px] lg:right-0  xl:left-[50px] xl:bottom-[40px] 2xl:left-[60px] 2xl:bottom-[50px] text-white text-xl xl:text-3xl 2xl:text-4xl font-light leading-[1.111111111]">
             {data.imageTitle}{" "}
             <span className="text-primary">{data.highlight}</span>
           </h2>
@@ -49,7 +49,7 @@ const OurStorySection: React.FC<OurStorySectionProps> = ({ data }) => {
               {" "}
               {/* paragraph spacing */}
               {para.split("\n").map((line, i) => (
-                <span key={i} className="block mb-6 last:mb-0">
+                <span key={i} className="block mb-[14px] xl:mb-6 last:mb-0">
                   {" "}
                   {/* line spacing */}
                   {line}
