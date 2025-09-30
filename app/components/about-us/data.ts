@@ -1,8 +1,6 @@
-import { a } from "framer-motion/client";
-
 export const BannerData = {
   BannerTitle: "About Us",
-  BannerImg: "/assets/about-us/Banner.jpg",
+  BannerImg: "/images/about-us/Banner.jpg",
 };
 
 export const ourStory = {
@@ -24,24 +22,23 @@ export const visionMissionItems = {
     {
       id: "vision",
       title: "Our Vision",
-      icon: "/assets/about-us/visionMission/visionIcon.svg",
+      icon: "/images/about-us/visionMission/visionIcon.svg",
       description:
         "Lighting the way to excellence, rooted in faith, cultivating life-long learners and global citizens equipped with a moral compass.",
       iconBg: "bg-blue-100",
-      image: "/assets/about-us/visionMission/vision.jpg",
+      image: "/images/about-us/visionMission/vision.jpg",
     },
     {
       id: "mission",
       title: "Our Mission",
-      icon: "/assets/about-us/visionMission/missionIcon.svg",
+      icon: "/images/about-us/visionMission/missionIcon.svg",
       description:
         "We aim to inspire a love for learning by building an inclusive community that promotes values, innovation, and excellence.",
       iconBg: "bg-purple-100",
-      image: "/assets/about-us/visionMission/mission.jpg",
+      image: "/images/about-us/visionMission/mission.jpg",
     },
   ],
 };
-
 
 export const valuesData = [
   {
@@ -54,30 +51,54 @@ export const valuesData = [
       "Honest competition",
       "Avoid taking advantage of others",
     ],
-    image: "/images/integrity.png",
+    image: "/images/about-us/OurValues/1.jpg",
   },
   {
     number: "02",
     title: "Compassion",
-    points: [],
-    image: "/images/compassion.png",
+    points: [
+      "lorem ipsum",
+      "lorem ipsum",
+      "lorem ipsum",
+      "lorem ipsum",
+      "lorem ipsum",
+    ],
+    image: "/images/about-us/OurValues/2.jpg",
   },
   {
     number: "03",
     title: "Courage",
-    points: [],
-    image: "/images/courage.png",
+    points: [
+      "lorem ipsum",
+      "lorem ipsum",
+      "lorem ipsum",
+      "lorem ipsum",
+      "lorem ipsum",
+    ],
+    image: "/images/about-us/OurValues/3.jpg",
   },
   {
     number: "04",
     title: "Collaboration",
-    points: [],
-    image: "/images/collaboration.png",
+    points: [
+      "lorem ipsum",
+      "lorem ipsum",
+      "lorem ipsum",
+      "lorem ipsum",
+      "lorem ipsum",
+    ],
+    image: "/images/about-us/OurValues/4.jpg",
   },
   {
     number: "05",
     title: "Tolerance",
-    points: [],
-    image: "/images/tolerance.png",
+    points: [
+      "lorem ipsum",
+      "lorem ipsum",
+      "lorem ipsum",
+      "lorem ipsum",
+      "lorem ipsum",
+    ],
+    image: "/images/about-us/OurValues/5.jpg",
   },
 ];

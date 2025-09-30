@@ -47,11 +47,12 @@ const VisionMissionSection = ({
               {visionMissionItems.VMItems.map((item) => (
                 <div
                   key={item.id}
-                  className="flex items-start gap-4 cursor-pointer"
+                  className="flex items-stretch gap-4 cursor-pointer"
                   onMouseEnter={() => setActive(item.id)}
                 >
+                  {/* Left icon box - fixed width, stretched height */}
                   <div
-                    className={`flex-shrink-0 w-[125px] h-[135px] flex items-center justify-center rounded-[12px] transition-colors duration-300 bg-[#F5EBFF] hover:bg-[#DDF7FF] group`}
+                    className={`flex-shrink-0 w-[125px] flex items-center justify-center rounded-[12px] transition-colors duration-300 bg-[#F5EBFF] hover:bg-[#DDF7FF] group`}
                   >
                     <Image
                       src={item.icon}
@@ -60,8 +61,10 @@ const VisionMissionSection = ({
                       height={70}
                     />
                   </div>
-                  <div>
-                    <h3 className="text-xl font-light text-black leading-[1.2]">
+
+                  {/* Right content - natural height */}
+                  <div className="flex flex-col justify-center flex-1 ml-[10px]">
+                    <h3 className="text-xl font-light text-black leading-[1.2] mb-[15px]">
                       {item.title}
                     </h3>
                     <p className="text-[#6D6E71] text-sm leading-[1.526315789473684]">
@@ -72,7 +75,6 @@ const VisionMissionSection = ({
               ))}
             </div>
           </div>
-          {/* Right Image */}
           {/* Right Image */}
           <div className="relative w-full h-[250px] md:h-auto rounded-[12px] overflow-hidden">
             {activeItem && (
