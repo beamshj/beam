@@ -102,3 +102,9 @@ export const valuesData = [
     image: "/images/about-us/OurValues/5.jpg",
   },
 ];
+export const inclusionData = {
+  bgImage: "/images/about-us/inclusion/bgImage.jpg",
+  title: "Inclusion at our Schools",
+  description:
+    "BEAM Creative Science Schools promote an inclusive ethos that aims to support children by removing barriers to their inclusion, whether for individuals or groups of children. We respond to a spectrum of diverse needs by setting suitable challenges that are best placed to bring out the full potential from our children. Every member of staff shares the responsibility and ownership to remove barriers to learning for all students, regardless of age, gender, ethnicity, special needs, attainment and background.",
+};
