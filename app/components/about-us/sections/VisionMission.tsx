@@ -87,8 +87,8 @@ const VisionMissionSection = ({
             )}
             <motion.div
               className="absolute bottom-0 w-full h-[60%] bg-gradient-to-b from-black/0 to-[#42BADCC9]/79"
-              initial={{ y: "100%" }} // start completely below
-              animate={{ y: "0%" }} // slide up into place
+              initial={{ y: "100%" }}
+              animate={{ y: "0%" }}
               transition={{ duration: 0.4, ease: "easeInOut" }}
               key={active}
             />
