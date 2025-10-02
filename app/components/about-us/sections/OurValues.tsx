@@ -68,7 +68,7 @@ export default function ValuesGrid({ values }: Props) {
                     {/* Title that moves */}
                     <div
                       className={`
-                        absolute rounded-[22px] 2xl:w-[220px] px-2 2xl:px-4 2xl:text-lg 3xl:text-xl font-light transition-all duration-500 flex items-center justify-center
+                        absolute rounded-[22px] 2xl:w-[220px] px-2 2xl:px-4 text-lg 3xl:text-xl font-light transition-all duration-500 flex items-center justify-center
                         ${
                           hovered === index
                             ? "top-3 left-3 text-left border-none bg-[linear-gradient(131deg,rgba(66,186,220,1)_0%,rgba(126,90,163,1)_100%)]"
