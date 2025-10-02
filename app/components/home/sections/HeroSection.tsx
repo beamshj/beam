@@ -25,7 +25,7 @@ const HeroSection = () => {
   return (
     <section
       // className="h-[95.4dvh] relative overflow-hidden "
-      className="h-screen relative overflow-hidden "
+      className="h-screen relative overflow-hidden max-w-[1920px] mx-auto"
       ref={triggerRef}
       suppressHydrationWarning
     >
