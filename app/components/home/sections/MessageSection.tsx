@@ -114,7 +114,7 @@ const MessageSection = () => {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
-              className="w-full lg:ml-[55%] lg:mt-[70%] 2xl:ml-[65%] 2xl:mt-[52%] justify-center flex flex-col gap-1 z-10"
+              className="w-full lg:ml-[54%] lg:mt-[63%] 2xl:ml-[65%] 2xl:mt-[52%] justify-center flex flex-col gap-1 z-10"
             >
               <h3 className="text-black text-xl font-light">
                 {messageSectionData.founder}
