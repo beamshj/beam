@@ -26,7 +26,7 @@ const MessageSection = () => {
             {messageSectionData.heading}
           </h2>
         </div>
-        <div className="lg:absolute bottom-0 left-0 flex ">
+        <div className="lg:absolute bottom-0 left-0 flex pl-[15px]">
           <Image
             src={messageSectionData.image}
             alt="Message"
