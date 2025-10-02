@@ -2,10 +2,6 @@
 import Image from "next/image";
 import React, { useRef, useState } from "react";
 import { BannerSliderData } from "@/app/data/BannerSlider";
-
-/* import { motion } from "framer-motion"; */
-// import c01web2 from "@/public/assets/img/home/slide1.jpg";
-// import c01web3 from "@/public/assets/img/home/secbnr.jpg";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade, EffectCreative } from "swiper/modules";
 import { Swiper as SwiperClass } from "swiper";
@@ -67,7 +63,7 @@ const HeroSection = () => {
                 <figure className="h-full w-full absolute -z-50">
                   <Image
                     className="h-full w-full absolute object-cover object-center"
-                    src={slide.img}
+                    src={slide?.img}
                     alt={"slide1"}
                     width={2500}
                     height={1000}
