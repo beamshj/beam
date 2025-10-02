@@ -48,7 +48,7 @@ const MessageSection = () => {
       </div>
       <div className="container">
         <div className="grid grid-cols-1 lg:grid-cols-2  ">
-          <div className="py-8 md:py-15 xl:py-[142px]">
+          <div className="py-8 md:py-15 xl:py-[120px] 2xl:py-[142px]">
             <motion.div
               className="flex flex-col justify-center"
               variants={containerVariants}
