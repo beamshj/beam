@@ -15,13 +15,13 @@ interface InclusionSectionProps {
 const InclusionSection: React.FC<InclusionSectionProps> = ({ data }) => {
   return (
     <section className="py-12 md:py-20 2xl:py-[135px]">
-      <div className="container relative h-[638px]">
+      <div className="relative h-[638px] rounded-[12px] overflow-hidden">
         {/* Background Image inside container */}
         <Image
           src={data.bgImage}
           alt={data.title}
           fill
-          className="object-cover rounded-lg"
+          className="object-cover"
         />
 
         {/* overlay */}
