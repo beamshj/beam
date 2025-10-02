@@ -21,7 +21,7 @@ import {
 const Alumni = () => {
   return (
     <motion.section
-      className="  py-12 md:pt-20 md:pb-25 2xl:pt-[135px] 2xl:pb-[126px]"
+      className="  py-12 md:pt-20 md:pb-25 2xl:pt-[135px] 2xl:pb-[126px] max-w-[1920px] mx-auto overflow-hidden"
       variants={fadeUp}
       initial="hidden"
       whileInView="visible"
