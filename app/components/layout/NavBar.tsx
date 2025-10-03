@@ -100,10 +100,10 @@ const NavBar = () => {
                   </span>
                 </button>
               </div>
-              <div className={`${isSticky ? "py-2 px-1" : "py-2 px-2"}`}>
+              <div className={`transition-all duration-300 ${isSticky ? "py-2 px-2" : "py-0 px-0"}`}>
                 <div
                   onClick={() => setIsMenuOpen(true)}
-                  className="rounded-[10px] bg-[#42BADC] h-full flex items-center justify-center px-[20px] xl:px-[35px] gap-3 cursor-pointer"
+                  className="rounded-[10px] bg-[#42BADC] h-full flex items-center justify-center px-[30px] xl:px-[35px] gap-3 cursor-pointer"
                 >
                   <div className="flex gap-[6px] flex-col w-[24px]">
                     <div className="w-full h-[1px] bg-black"></div>
