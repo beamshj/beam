@@ -14,7 +14,7 @@ import {
   fadeInRight,
 } from "@/public/assets/FramerAnimation/animation";
 import Counter from "../../common/Counter";
-// Optional: Add modules if needed
+import SplitText from "@/components/SplitText";
 
 const DiverseGrowing = () => {
   return (
@@ -28,8 +28,20 @@ const DiverseGrowing = () => {
               whileInView="visible"
               viewport={{ once: true, amount: 0.1 }} // Trigger when only 10% of image enters viewport
             >
-              <h2 className="text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-light leading-tight text-black max-w-[20ch] lettersp-4 xl:mb-30 2xl:mb-40">
-                {diverseGrowingData.heading}
+              <h2>
+                <SplitText
+                tag="h2" text={diverseGrowingData.heading}
+                  className="text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-light leading-tight text-black max-w-[20ch] lettersp-4 xl:mb-30 2xl:mb-40"
+                delay={100}
+                duration={0.6}
+                ease="power3.out"
+                splitType="words"
+                from={{ opacity: 0, y: 40 }}
+                to={{ opacity: 1, y: 0 }}
+                threshold={0.1}
+                rootMargin="-100px"
+                textAlign="left"
+              />
               </h2>
             </motion.div>
             <div className="2xl:w-4/5 ml-auto mt-8 lg:mt-[140px]  xl:mt-[64px] relative">

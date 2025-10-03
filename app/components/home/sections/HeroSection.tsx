@@ -3,10 +3,11 @@ import Image from "next/image";
 import React, { useRef, useState } from "react";
 import { BannerSliderData } from "@/app/data/BannerSlider";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, EffectFade, EffectCreative } from "swiper/modules";
+import { Autoplay, EffectFade } from "swiper/modules";
 import { Swiper as SwiperClass } from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
+import "swiper/css/effect-fade";
 import { motion, AnimatePresence } from "framer-motion";
 import { Variants } from "framer-motion";
 const HeroSection = () => {
@@ -47,16 +48,12 @@ const HeroSection = () => {
     <section className="h-screen relative overflow-hidden max-w-[1920px] mx-auto" ref={triggerRef} suppressHydrationWarning>
       <div className="prject-sec h-full flex flex-wrap" style={{ width: `${4 * 100}vw` }} ref={sectionRef} >
         <Swiper
-          modules={[Autoplay, EffectFade, EffectCreative]}
-          effect="creative"
-          creativeEffect={{
-            prev: {
-              translate: [0, 0, 0],
-            },
-            next: {
-              translate: [200, 0, 0],
-            },
+          modules={[Autoplay, EffectFade]}
+          effect="fade"
+          fadeEffect={{
+            crossFade: true,
           }}
+         
           autoplay={{ delay: 6000, disableOnInteraction: false }}
           speed={1800}
           slidesPerView={1}

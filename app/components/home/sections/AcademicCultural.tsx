@@ -11,7 +11,7 @@ import {
   fadeInLeft,
   fadeInRight,
 } from "@/public/assets/FramerAnimation/animation";
-
+import SplitText from "@/components/SplitText";
 const AcademicCultural = () => {
   const [activeIndex, setActiveIndex] = useState(1); // 2nd item active by default
 
@@ -26,16 +26,26 @@ const AcademicCultural = () => {
         <div className="container">
           <div>
             {/* Heading */}
-            <motion.div
-              variants={fadeInLeft}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-            >
-              <h2 className="text-lg md:text-xl xl:text-2xl 2xl:text-3xl font-light leading-tight text-black max-w-[13ch] lettersp-4">
-                {academicCulturalData.heading}
+            <div >
+              <h2 className="">
+                
+             
+              <SplitText
+              tag="h2"
+              text={academicCulturalData.heading}
+                  className="text-lg md:text-xl xl:text-2xl 2xl:text-3xl font-light leading-tight text-black max-w-[13ch] lettersp-4"
+              delay={100}
+              duration={0.6}
+              ease="power3.out"
+              splitType="chars"
+              from={{ opacity: 0, y: 40 }}
+              to={{ opacity: 1, y: 0 }}
+              threshold={0.1}
+              rootMargin="-100px"
+              textAlign="left"
+            />
               </h2>
-            </motion.div>
+            </div>
 
             {/* Description */}
             <motion.div

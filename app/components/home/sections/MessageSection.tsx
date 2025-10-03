@@ -10,7 +10,7 @@ import {
   fadeInRight,
   fadeUp,
 } from "@/public/assets/FramerAnimation/animation";
-
+import SplitText from "@/components/SplitText";
 const MessageSection = () => {
   return (
     <motion.section
@@ -22,8 +22,20 @@ const MessageSection = () => {
     >
       <div className="relative z-10 block lg:hidden">
         <div className="container border-b border-[#D3D3D3] pb-5 pt-10 mb-10  w-[95%]">
-          <h2 className="text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl text-black  font-light ">
-            {messageSectionData.heading}
+          <h2>
+            <SplitText
+            tag="h2" text={messageSectionData.heading}
+              className="text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl text-black  font-light "
+            delay={100}
+            duration={0.6}
+            ease="power3.out"
+            splitType="chars"
+            from={{ opacity: 0, y: 40 }}
+            to={{ opacity: 1, y: 0 }}
+            threshold={0.1}
+            rootMargin="-100px"
+            textAlign="left"
+          />
           </h2>
         </div>
         <div className="lg:absolute bottom-0 left-0 flex pl-[15px]">
@@ -71,8 +83,20 @@ const MessageSection = () => {
                 className="pt-0 pb-4 xl:py-7 2xl:pt-[56px] 2xl:pb-[44px]"
                 variants={fadeTop}
               >
-                <h1 className="text-xl xl:text-2xl 2xl:text-4xl text-black leading-[1.2] xl:leading-[1.1] font-light 2xl:max-w-[82%] lettersp-4">
-                  {messageSectionData.title}
+                <h1>
+                 <SplitText
+                 tag="h1" text={messageSectionData.title}
+                 className="text-xl xl:text-2xl 2xl:text-4xl text-black leading-[1.2] xl:leading-[1.1] font-light 2xl:max-w-[82%] lettersp-4"
+                 delay={100}
+                 duration={0.6}
+                 ease="power3.out"
+                 splitType="words"
+                 from={{ opacity: 0, y: 40 }}
+                 to={{ opacity: 1, y: 0 }}
+                 threshold={0.1}
+                 rootMargin="-100px"
+                 textAlign="left"
+               />
                 </h1>
               </motion.div>
 
