@@ -16,10 +16,10 @@ const VideoSection = () => {
   return (
     <motion.section
       className="w-full relative max-w-[1920px] mx-auto overflow-hidden 2xl:h-screen py-10 md:py-28 2xl:py-0"
-      variants={fadeUp}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: "easeInOut" }}
+      viewport={{ once: true }}
     >
       <Image
         src="/assets/home/video-poster.jpg"
