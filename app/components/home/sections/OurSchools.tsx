@@ -21,7 +21,7 @@ const OurSchools = () => {
   const [selected, setSelected] = useState("");
 
   return (
-    <section className="  py-12 md:pt-20 md:pb-25 2xl:pt-[133px] 2xl:pb-[160px] ">
+    <section className="py-8 md:pt-20 md:pb-25 2xl:pt-[133px] 2xl:pb-[160px] ">
       <motion.div
         variants={fadeUp}
         initial="hidden"

@@ -62,7 +62,7 @@ const MessageSection = () => {
 
               {/* h1 */}
               <motion.div
-                className="py-7 2xl:pt-[56px] 2xl:pb-[44px]"
+                className="pt-0 pb-4 xl:py-7 2xl:pt-[56px] 2xl:pb-[44px]"
                 variants={fadeTop}
               >
                 <h1 className="text-xl 2xl:text-4xl text-black leading-[1.2] 2xl:leading-[1.1] font-light 2xl:max-w-[82%] lettersp-4">

@@ -17,7 +17,7 @@ import {
 
 const DiverseGrowing = () => {
   return (
-    <section className="pt-12 md:pt-20 2xl:pt-[137px]">
+    <section className="pt-8 md:pt-20 2xl:pt-[137px]">
       <div className="relative pb-12 md:pb-15 xl:pb-[150px] max-w-[1920px] mx-auto overflow-hidden">
         <div className="container">
           <div>
