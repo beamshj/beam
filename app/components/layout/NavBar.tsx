@@ -147,7 +147,7 @@ const NavBar = () => {
 
       {/* Sliding Drawer */}
       <div
-        className={`fixed top-0 right-0 bottom-0 h-full w-[300px] xl:w-[350px] bg-white z-50 transform transition-transform duration-400 ${
+        className={`fixed top-0 right-0 bottom-0 h-full w-[300px] xl:w-[400px] 2xl:w-[430px] bg-white z-50 transform transition-transform duration-400 ${
           isMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
