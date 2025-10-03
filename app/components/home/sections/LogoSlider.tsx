@@ -17,7 +17,7 @@ import { fadeUp } from "@/public/assets/FramerAnimation/animation";
 const LogoSlider = () => {
   return (
     <motion.section
-      className="py-8 md:py-25 2xl:py-23 max-w-[1920px] mx-auto overflow-hidden"
+      className="py-8 xl:py-25 2xl:py-23 max-w-[1920px] mx-auto overflow-hidden"
       variants={fadeUp}
       initial="hidden"
       whileInView="visible"

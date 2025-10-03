@@ -23,7 +23,7 @@ const AcademicCultural = () => {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
-      className="  pt-8  md:pt-20 2xl:pt-[137px] max-w-[1920px] mx-auto overflow-hidden bg-[#F6F6F6]"
+      className="pt-8 xl:pt-20 2xl:pt-[137px] max-w-[1920px] mx-auto overflow-hidden bg-[#F6F6F6]"
     >
       <div className="relative pb-12 md:pb-15 xl:pb-[150px] ">
         <div className="container">
@@ -80,7 +80,7 @@ const AcademicCultural = () => {
                   </div>
                   <div>
                     <p
-                      className={`text-md md:text-lg 2xl:text-xl font-light text-black leading-[1.2] lettersp-1 ${
+                      className={`text-md xl:text-lg 2xl:text-xl font-light text-black leading-[1.2] lettersp-1 ${
                         index === academicCulturalData.accvalues.length - 1
                           ? "max-w-[15ch]"
                           : "max-w-[18ch]"

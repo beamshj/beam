@@ -15,7 +15,7 @@ const VideoSection = () => {
   const closePopup = () => setIsOpen(false);
   return (
     <motion.section
-      className="w-full relative max-w-[1920px] mx-auto overflow-hidden 2xl:h-screen py-10 md:py-28 2xl:py-0"
+      className="w-full relative max-w-[1920px] mx-auto overflow-hidden 2xl:h-screen py-10 xl:py-28 2xl:py-0"
       variants={fadeUp}
       initial="hidden"
       whileInView="visible"
@@ -36,7 +36,7 @@ const VideoSection = () => {
           whileInView="show"
           viewport={{ once: true, amount: 0.2 }}
         >
-          <motion.h2 className="text-xl md:text-3xl 2xl:text-4xl leading-[1.2] text-white w-full md:w-3/4 font-light lettersp-4 text-center md:text-left"
+          <motion.h2 className="text-xl md:text-2xl xl:text-3xl 2xl:text-4xl leading-[1.2] text-white w-full md:w-3/4 font-light lettersp-4 text-center md:text-left"
             variants={fadeLeft} > Get to Know Our School!
           </motion.h2>
 
