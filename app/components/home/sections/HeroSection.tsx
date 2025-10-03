@@ -19,7 +19,7 @@ const HeroSection = () => {
   const [textVersion, setTextVersion] = useState(0);
 
   return (
-    <section className="h-[80dvh] xl:h-screen relative overflow-hidden max-w-[1920px] mx-auto" ref={triggerRef} suppressHydrationWarning>
+    <section className="h-screen relative overflow-hidden max-w-[1920px] mx-auto" ref={triggerRef} suppressHydrationWarning>
       <div className="prject-sec h-full flex flex-wrap" style={{ width: `${4 * 100}vw` }} ref={sectionRef} >
         <Swiper
           modules={[Autoplay, EffectFade, EffectCreative]}
@@ -62,7 +62,7 @@ const HeroSection = () => {
                   <div className="container h-full">
                     <div className="h-full relative w-full overflow-hidden">
                       <div
-                        className="title absolute bottom-[80px] lg:bottom-[50px] transition-all ease-in-out grid grid-cols-1 md:grid-cols-7 items-end"
+                        className="title absolute bottom-[80px] lg:bottom-[50px] transition-all ease-in-out grid grid-cols-1 2xl:grid-cols-7 items-end gap-2"
                         key={`${index}-${textVersion}`}
                       >
                         <motion.div
@@ -75,7 +75,7 @@ const HeroSection = () => {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, ease: "easeOut" }}
-                            className="text-[2.8rem] lg:text-3xl 2xl:text-4xl text-white leading-[1.2] 2xl:leading-[1.1] font-custom font-light lettersp-4 mb-15 xl:mb-0"
+                            className="text-[2.8rem] md:text-2xl lg:text-3xl 2xl:text-4xl text-white leading-[1.2] 2xl:leading-[1.1] font-custom font-light lettersp-4 mb-15 md:mb-0 xl:mb-0 md:max-w-[80%] xl:max-w-none"
                           >
                             {slide.titleblue} {slide.titlewhite}
                           </motion.h2>
