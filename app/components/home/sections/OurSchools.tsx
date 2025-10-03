@@ -21,22 +21,17 @@ const OurSchools = () => {
   const [selected, setSelected] = useState("");
 
   return (
-    <section className="py-8 md:pt-20 md:pb-25 2xl:pt-[133px] 2xl:pb-[160px] ">
-      <motion.div
-        variants={fadeUp}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-      >
+    <section className="py-8 xl:pt-20 xl:pb-25 2xl:pt-[133px] 2xl:pb-[160px] ">
+      <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} >
         <div className="container">
           <motion.div
-            className="mb-5 md:mb-7  2xl:mb-[53px]"
+            className="mb-5 xl:mb-7  2xl:mb-[53px]"
             variants={fadeInLeft}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
           >
-            <h2 className="text-xl 2xl:text-3xl md:text-4xl font-light leading-tight text-black lettersp-4">
+            <h2 className="text-xl md:text-2xl xl:text-3xl 2xl:text-4xl font-light leading-tight text-black lettersp-4">
               {schoolData.heading}
             </h2>
           </motion.div>
@@ -44,22 +39,22 @@ const OurSchools = () => {
             <div className="flex-col md:flex-row flex justify-start md:justify-between items-start md:items-center gap-4 md:gap-0">
               <div className="flex gap-3">
                 <div className="p-[1px] group transition-all duration-300  bg-[linear-gradient(90deg,_#42BADC_0%,_#12586C_100%)] rounded-full ">
-                  <div className="cursor-pointer  px-2 md:px-5 py-2 md:py-3 bg-white rounded-full">
-                    <p className="text-black smtext10 text-xs font-light   uppercase ">
+                  <div className="cursor-pointer  px-2 md:px-3 xl:px-5 py-2 md:py-3 xl:py-3 bg-white rounded-full">
+                    <p className="text-black smtext10 text-xs font-light  uppercase ">
                       All
                     </p>
                   </div>
                 </div>
 
-                <div className="p-[1px] group transition-all duration-300  bg-bdrcolor hover:bg-[linear-gradient(90deg,_#42BADC_0%,_#12586C_100%)] rounded-full ">
-                  <div className="cursor-pointer  px-2 md:px-5 py-2 md:py-3 bg-white rounded-full">
+                <div className="p-[1px] group h-fit transition-all duration-300  bg-bdrcolor hover:bg-[linear-gradient(90deg,_#42BADC_0%,_#12586C_100%)] rounded-full ">
+                  <div className="cursor-pointer px-2 md:px-4 xl:px-5 py-2 md:py-2 xl:py-3 bg-white rounded-full">
                     <p className="group-hover:text-black smtext10 text-xs font-light text-foreground uppercase ">
                       British Curriculum
                     </p>
                   </div>
                 </div>
-                <div className="p-[1px] group transition-all duration-300  bg-bdrcolor hover:bg-[linear-gradient(90deg,_#42BADC_0%,_#12586C_100%)] rounded-full ">
-                  <div className="cursor-pointer  px-2 md:px-5 py-2 md:py-3 bg-white rounded-full">
+                <div className="p-[1px] group h-fit transition-all duration-300  bg-bdrcolor hover:bg-[linear-gradient(90deg,_#42BADC_0%,_#12586C_100%)] rounded-full ">
+                  <div className="cursor-pointer px-2 md:px-4 xl:px-5 py-2 md:py-2 xl:py-3 bg-white rounded-full">
                     <p className="group-hover:text-black smtext10 text-xs font-light text-foreground uppercase ">
                       American Curriculum
                     </p>
