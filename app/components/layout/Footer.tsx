@@ -191,7 +191,7 @@ const Footer = () => {
             viewport={{ once: true, amount: 0.3 }}
           >
             <motion.div variants={fadeUponeone}>
-              <h2 className="text-2xl 2xl:text-4xl font-light lettersp-4"> Register Interest </h2>
+              <h2 className="text-xl xl:text-2xl 2xl:text-4xl font-light lettersp-4"> Register Interest </h2>
             </motion.div>
             <div className="text-sm font-light leading-[1.52] pt-15">
               <form action="" className="flex flex-col gap-10 xl:gap-[43px]">

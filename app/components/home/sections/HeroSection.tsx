@@ -19,7 +19,7 @@ const HeroSection = () => {
   const [textVersion, setTextVersion] = useState(0);
 
   return (
-    <section className="h-screen relative overflow-hidden max-w-[1920px] mx-auto" ref={triggerRef} suppressHydrationWarning>
+    <section className="h-[80dvh] xl:h-screen relative overflow-hidden max-w-[1920px] mx-auto" ref={triggerRef} suppressHydrationWarning>
       <div className="prject-sec h-full flex flex-wrap" style={{ width: `${4 * 100}vw` }} ref={sectionRef} >
         <Swiper
           modules={[Autoplay, EffectFade, EffectCreative]}
@@ -32,7 +32,7 @@ const HeroSection = () => {
               translate: [200, 0, 0],
             },
           }}
-          autoplay={{ delay: 3000, disableOnInteraction: false }}
+          autoplay={{ delay: 600000, disableOnInteraction: false }}
           slidesPerView={1}
           spaceBetween={0}
           loop
@@ -52,13 +52,7 @@ const HeroSection = () => {
                 className="slide h-full w-screen relative overflow-hidden text-white"
               >
                 <figure className="h-full w-full absolute -z-50">
-                  <Image
-                    className="h-full w-full absolute object-cover object-center"
-                    src={slide?.img}
-                    alt={"slide1"}
-                    width={2500}
-                    height={1000}
-                  />
+                  <Image className="h-full w-full absolute object-cover object-center" src={slide?.img} alt={"slide1"} width={1920} height={1280} />
                 </figure>
                 <div key={`${index}-${textVersion}`}
                   className="h-full w-full -z-40 absolute bg-[linear-gradient(180deg,_rgba(0,0,0,0)_21.7%,_rgba(0,0,0,0.6)_63.57%,_rgba(0,0,0,0.8)_100%)]"
@@ -81,7 +75,7 @@ const HeroSection = () => {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, ease: "easeOut" }}
-                            className="text-2xl lg:text-3xl 2xl:text-4xl text-white leading-[1.1] font-custom font-light lettersp-4"
+                            className="text-[2.8rem] lg:text-3xl 2xl:text-4xl text-white leading-[1.2] 2xl:leading-[1.1] font-custom font-light lettersp-4 mb-15 xl:mb-0"
                           >
                             {slide.titleblue} {slide.titlewhite}
                           </motion.h2>
@@ -94,13 +88,12 @@ const HeroSection = () => {
                             ease: "easeOut",
                             delay: 0.5,
                           }}
-                          className="md:mb-[120px] flex justify-end flex-col items-end col-span-1 md:col-span-2"
+                          className="md:mb-[120px] flex justify-end flex-col xl:items-end col-span-1 md:col-span-2"
                         >
                           <div className="">
                             <div className="mt-5 w-fit md:mt-10 p-[1px] group transition-all duration-300 bg-bdrcolor bg-[linear-gradient(90deg,_#42BADC_0%,_#12586C_100%)] rounded-full hover:-translate-x-2 hover:shadow-[0_0_15px_rgba(66,186,220,0.5)] ">
-                              <a
-                                href={"#"}
-                                className="cursor-pointer px-2 md:px-4 py-2 md:py-3 bg-primary rounded-full flex items-center gap-2 transition-all duration-300"
+                              <a href={"#"}
+                                className="cursor-pointer pl-4 pr-2 md:px-4 py-[10px] md:py-3 bg-primary rounded-full flex items-center gap-2 transition-all duration-300"
                               >
                                 <p className="group-hover:text-white text-xs font-light text-white uppercase transition-colors duration-300">
                                   {slide.button}
