@@ -34,7 +34,7 @@ const AcademicCultural = () => {
               whileInView="visible"
               viewport={{ once: true, amount: 0.2 }}
             >
-              <h2 className="text-lg md:text-xl 2xl:text-3xl font-light leading-tight text-black max-w-[13ch] lettersp-4">
+              <h2 className="text-lg md:text-xl xl:text-2xl 2xl:text-3xl font-light leading-tight text-black max-w-[13ch] lettersp-4">
                 {academicCulturalData.heading}
               </h2>
             </motion.div>
@@ -47,14 +47,17 @@ const AcademicCultural = () => {
               transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
               className="mt-5 md:mt-6 2xl:mt-[43px] mb-5 md:mb-7 2xl:mb-[93px]"
             >
-              <p className="text-sm font-light text-foreground md:max-w-[68ch] 2xl:max-w-[82ch]" dangerouslySetInnerHTML={{ __html: academicCulturalData.desc }}
+              <p
+                className="text-sm font-light text-foreground md:max-w-[68ch] 2xl:max-w-[82ch]"
+                dangerouslySetInnerHTML={{ __html: academicCulturalData.desc }}
               ></p>
             </motion.div>
 
             <div className="bg-[linear-gradient(90deg,_#000000_0%,_rgba(0,_0,_0,_0)_60%)] h-[1px] lg:bg-[linear-gradient(90deg,_#000000_0%,_rgba(0,_0,_0,_0)_30%)]   "></div>
             <div>
               {academicCulturalData.accvalues.map((value, index) => (
-                <div className={`flex flex-col md:flex-row gap-2 md:gap-8 items-baseline md:items-center py-7 lg:py-10 group  hover:bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)] transition-all duration-300 
+                <div
+                  className={`flex flex-col md:flex-row gap-2 md:gap-8 items-baseline md:items-center py-7 lg:py-10 group  hover:bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)] transition-all duration-300 
               ${
                 index === academicCulturalData.accvalues.length - 2
                   ? "ps-0 xl:ps-[8%] 2xl:ps-[15%]"

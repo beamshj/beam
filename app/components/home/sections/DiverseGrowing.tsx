@@ -27,7 +27,7 @@ const DiverseGrowing = () => {
               whileInView="visible"
               viewport={{ once: true, amount: 0.1 }} // Trigger when only 10% of image enters viewport
             >
-              <h2 className="text-xl md:text-2xl xl:text-3xl 2xl:text-4xl font-light leading-tight text-black max-w-[20ch] lettersp-4 xl:mb-20 2xl:mb-40">
+              <h2 className="text-xl md:text-2xl xl:text-3xl 2xl:text-4xl font-light leading-tight text-black max-w-[20ch] lettersp-4 xl:mb-30 2xl:mb-40">
                 {diverseGrowingData.heading}
               </h2>
             </motion.div>

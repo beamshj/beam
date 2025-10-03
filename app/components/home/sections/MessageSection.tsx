@@ -27,7 +27,13 @@ const MessageSection = () => {
           </h2>
         </div>
         <div className="lg:absolute bottom-0 left-0 flex pl-[15px]">
-          <Image src={messageSectionData.image} alt="Message" width={702}height={964}className="w-[50%] sm:w-[100%]"/>
+          <Image
+            src={messageSectionData.image}
+            alt="Message"
+            width={702}
+            height={964}
+            className="w-[50%] sm:w-[100%]"
+          />
           <div className="container justify-center flex flex-col gap-1      pt-10">
             <h3 className="text-black text-sm sm:text-xl font-light ">
               {messageSectionData.founder}
@@ -65,7 +71,7 @@ const MessageSection = () => {
                 className="pt-0 pb-4 xl:py-7 2xl:pt-[56px] 2xl:pb-[44px]"
                 variants={fadeTop}
               >
-                <h1 className="text-xl 2xl:text-4xl text-black leading-[1.2] 2xl:leading-[1.1] font-light 2xl:max-w-[82%] lettersp-4">
+                <h1 className="text-xl xl:text-2xl 2xl:text-4xl text-black leading-[1.2] xl:leading-[1.1] font-light 2xl:max-w-[82%] lettersp-4">
                   {messageSectionData.title}
                 </h1>
               </motion.div>
