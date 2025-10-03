@@ -24,7 +24,7 @@ const MessageSection = () => {
         <div className="container border-b border-[#D3D3D3] pb-5 pt-10 mb-10  w-[95%]">
           <h2>
             <SplitText
-            tag="h2" text={messageSectionData.heading}
+            tag="span" text={messageSectionData.heading}
               className="text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl text-black  font-light "
             delay={100}
             duration={0.6}
@@ -83,9 +83,9 @@ const MessageSection = () => {
                 className="pt-0 pb-4 xl:py-7 2xl:pt-[56px] 2xl:pb-[44px]"
                 variants={fadeTop}
               >
-                <h1>
+                <h2>
                  <SplitText
-                 tag="h1" text={messageSectionData.title}
+                 tag="span" text={messageSectionData.title}
                  className="text-xl xl:text-2xl 2xl:text-4xl text-black leading-[1.2] xl:leading-[1.1] font-light 2xl:max-w-[82%] lettersp-4"
                  delay={100}
                  duration={0.6}
@@ -97,7 +97,7 @@ const MessageSection = () => {
                  rootMargin="-100px"
                  textAlign="left"
                />
-                </h1>
+                </h2>
               </motion.div>
 
               {/* paragraphs */}

@@ -27,11 +27,11 @@ const AcademicCultural = () => {
           <div>
             {/* Heading */}
             <div >
-              <h2 className="">
+            <h2 className="">
                 
              
               <SplitText
-              tag="h2"
+              tag="span"
               text={academicCulturalData.heading}
                   className="text-lg md:text-xl xl:text-2xl 2xl:text-3xl font-light leading-tight text-black max-w-[13ch] lettersp-4"
               delay={100}
@@ -44,7 +44,7 @@ const AcademicCultural = () => {
               rootMargin="-100px"
               textAlign="left"
             />
-              </h2>
+         </h2>
             </div>
 
             {/* Description */}

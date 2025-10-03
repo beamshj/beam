@@ -30,7 +30,7 @@ const DiverseGrowing = () => {
             >
               <h2>
                 <SplitText
-                tag="h2" text={diverseGrowingData.heading}
+                tag="span" text={diverseGrowingData.heading}
                   className="text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-light leading-tight text-black max-w-[20ch] lettersp-4 xl:mb-30 2xl:mb-40"
                 delay={100}
                 duration={0.6}
