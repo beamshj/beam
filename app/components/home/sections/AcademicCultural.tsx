@@ -66,13 +66,13 @@ const AcademicCultural = () => {
                   }`}
                   key={index}
                 >
-                  <div className="group-hover:px-2 transition-all duration-300">
+                  <div className="group-hover:px-2 transition-all duration-300 mb-3 xl:mb-0">
                     <Image
                       src={value.img}
                       alt={value.title}
                       width={value.imgwidth}
                       height={value.imgheight}
-                      className=" group-hover:filter-[brightness(0)] transition-all duration-300"
+                      className="group-hover:filter-[brightness(0)] transition-all duration-300 w-15 xl:w-auto h-auto "
                     />
                   </div>
                   <div>
