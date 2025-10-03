@@ -8,6 +8,7 @@ import {
   lineFade,
   playFadeUp,
 } from "@/public/assets/FramerAnimation/animation";
+import SplitText from "@/components/SplitText";
 const VideoSection = () => {
   const [isOpen, setIsOpen] = useState(false);
   const openPopup = () => setIsOpen(true);
@@ -35,9 +36,22 @@ const VideoSection = () => {
           whileInView="show"
           viewport={{ once: true, amount: 0.2 }}
         >
-          <motion.h2 className="text-xl md:text-2xl xl:text-3xl 2xl:text-4xl leading-[1.2] text-white w-full md:w-3/4 font-light lettersp-4 text-center md:text-left"
-            variants={fadeLeft} > Get to Know Our School!
-          </motion.h2>
+          <h2> 
+          <SplitText
+          tag="h2"
+              text={"Get to Know Our School!"}
+              className="text-xl md:text-2xl xl:text-3xl 2xl:text-4xl leading-[1.2] text-white w-full md:w-3/4 font-light lettersp-4 text-center md:text-left"
+          delay={100}
+          duration={0.6}
+          ease="power3.out"
+          splitType="chars"
+          from={{ opacity: 0, y: 40 }}
+          to={{ opacity: 1, y: 0 }}
+          threshold={0.1}
+          rootMargin="-100px"
+          textAlign="left"
+        />
+          </h2>
 
           <motion.div
             className="w-full md:w-3/4 h-px bg-gradient-to-r from-white to-transparent origin-left"

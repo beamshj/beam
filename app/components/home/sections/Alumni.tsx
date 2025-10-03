@@ -10,6 +10,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Autoplay, Pagination } from "swiper/modules";
 import { motion } from "framer-motion";
+import SplitText from "@/components/SplitText";
 import {
   fadeInLeft,
   cardVariants2,
@@ -19,6 +20,7 @@ import {
 // Optional: Add modules if needed
 
 const Alumni = () => {
+  const textParts = alumniData.heading.split(/<br\s*\/?>/gi);
   return (
     <motion.section
       className="py-8 xl:pt-20 xl:pb-25 2xl:pt-[135px] 2xl:pb-[126px] max-w-[1920px] mx-auto overflow-hidden"
@@ -35,10 +37,27 @@ const Alumni = () => {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
         >
-          <h2
-            className="text-xl md:text-xl xl:text-2xl 2xl:text-3xl md:text-4xl font-light text-black lettersp-4 leading-[1.3] 2xl:leading-tight "
-            dangerouslySetInnerHTML={{ __html: alumniData.heading }}
-          ></h2>
+          <h2 className="text-xl md:text-xl xl:text-2xl 2xl:text-3xl font-light text-black lettersp-4 leading-[1.3] 2xl:leading-tight">
+            {textParts.map((part, index) => (
+              <React.Fragment key={index}>
+                <SplitText
+                  text={part.replace(/<[^>]*>/g, '')}
+                  tag="span"
+                  className="block" // Add this to make it display as block
+                  delay={100}
+                  duration={0.6}
+                  ease="power3.out"
+                  splitType="words"
+                  from={{ opacity: 0, y: 40 }}
+                  to={{ opacity: 1, y: 0 }}
+                  threshold={0.1}
+                  rootMargin="-100px"
+                  textAlign="center"
+                />
+                {index < textParts.length - 1 && <br />}
+              </React.Fragment>
+            ))}
+          </h2>
         </motion.div>
         <motion.div
           variants={containerVariants2}

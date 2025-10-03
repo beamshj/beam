@@ -17,6 +17,8 @@ import {
   fadeUp,
   cardVariants,
 } from "@/public/assets/FramerAnimation/animation";
+import SplitText from "@/components/SplitText";
+
 const OurSchools = () => {
   const [selected, setSelected] = useState("");
 
@@ -24,17 +26,25 @@ const OurSchools = () => {
     <section className="py-8 xl:pt-20 xl:pb-25 2xl:pt-[133px] 2xl:pb-[160px] ">
       <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} >
         <div className="container">
-          <motion.div
-            className="mb-5 xl:mb-7  2xl:mb-[53px]"
-            variants={fadeInLeft}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-          >
+          <div className="mb-5 xl:mb-7  2xl:mb-[53px]">
             <h2 className="text-xl md:text-2xl xl:text-3xl 2xl:text-4xl font-light leading-tight text-black lettersp-4">
-              {schoolData.heading}
+            <SplitText
+              tag="h2"
+              text={schoolData.heading}
+              className=""
+              delay={100}
+              duration={0.6}
+              ease="power3.out"
+              splitType="chars"
+              from={{ opacity: 0, y: 40 }}
+              to={{ opacity: 1, y: 0 }}
+              threshold={0.1}
+              rootMargin="-100px"
+              textAlign="left"
+            />
+              
             </h2>
-          </motion.div>
+          </div>
           <div className="pb-5 md:pb-7 border-b border-bdrcolor">
             <div className="flex-col md:flex-row flex justify-start md:justify-between items-start md:items-center gap-4 md:gap-0">
               <div className="flex gap-3 items-center">

@@ -12,7 +12,7 @@ import { Autoplay } from "swiper/modules";
 import { Pagination } from "swiper/modules";
 import { motion } from "framer-motion";
 import { fadeInLeft, fadeUp } from "@/public/assets/FramerAnimation/animation";
-
+import SplitText from "@/components/SplitText";
 const MediaHub = () => {
   return (
     <motion.section
@@ -26,17 +26,28 @@ const MediaHub = () => {
         <div className="container border-t border-bdrcolor "></div>
         <div className="  pt-7 pb-12 md:pt-10 md:pb-10 xl:pt-[83px] 2xl:pb-[150px] overflow-hidden ">
           <div className="container">
-            <motion.div
+            <div
               className="mb-5 md:mb-8 xl:mb-[52px]"
-              variants={fadeInLeft}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
+              
             >
               <h2 className="text-xl md:text-2xl 2xl:text-3xl font-light leading-tight text-black lettersp-4 ">
-                {mediaHubData.heading}
+              
+                <SplitText
+                  text={mediaHubData.heading}
+                  tag="h2"
+                  className="" // Add this to make it display as block
+                  delay={100}
+                  duration={0.6}
+                  ease="power3.out"
+                  splitType="chars"
+                  from={{ opacity: 0, y: 40 }}
+                  to={{ opacity: 1, y: 0 }}
+                  threshold={0.1}
+                  rootMargin="-100px"
+                  textAlign="left"
+                />
               </h2>
-            </motion.div>
+            </div>
           </div>
           <div className="container">
             <Swiper
