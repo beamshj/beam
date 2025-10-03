@@ -28,7 +28,7 @@ const OurSchools = () => {
         <div className="container">
           <div className="mb-5 xl:mb-7  2xl:mb-[53px]">
             <h2 className="text-xl md:text-2xl xl:text-3xl 2xl:text-4xl font-light leading-tight text-black lettersp-4">
-            <SplitText
+            {/* <SplitText
               tag="h2"
               text={schoolData.heading}
               className=""
@@ -41,8 +41,8 @@ const OurSchools = () => {
               threshold={0.1}
               rootMargin="-100px"
               textAlign="left"
-            />
-              
+            /> */}
+              {schoolData.heading}
             </h2>
           </div>
           <div className="pb-5 md:pb-7 border-b border-bdrcolor">

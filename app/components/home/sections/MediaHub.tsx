@@ -34,7 +34,7 @@ const MediaHub = () => {
               
                 <SplitText
                   text={mediaHubData.heading}
-                  tag="h2"
+                  tag="span"
                   className="" // Add this to make it display as block
                   delay={100}
                   duration={0.6}
