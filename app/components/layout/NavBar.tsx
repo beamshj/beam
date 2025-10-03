@@ -100,7 +100,11 @@ const NavBar = () => {
                   </span>
                 </button>
               </div>
-              <div className={`transition-all duration-300 ${isSticky ? "py-2 px-2" : "py-0 px-0"}`}>
+              <div
+                className={`transition-all duration-300 ${
+                  isSticky ? "py-2 px-2" : "py-0 px-0"
+                }`}
+              >
                 <div
                   onClick={() => setIsMenuOpen(true)}
                   className="rounded-[10px] bg-[#42BADC] h-full flex items-center justify-center px-[30px] xl:px-[35px] gap-3 cursor-pointer"
@@ -184,7 +188,7 @@ const NavBar = () => {
             {/* Social Icons + Divider at top */}
             <div className="mt-auto">
               {/* Divider right above icons */}
-              <div className="h-[1px] w-full bg-gradient-to-r from-primary to-transparent" />
+              <div className="h-[2px] w-full bg-gradient-to-r from-primary to-transparent" />
 
               {/* Icons */}
               <div className="flex gap-[7px] p-6">
