@@ -7,8 +7,8 @@ import { Autoplay, EffectFade, EffectCreative } from "swiper/modules";
 import { Swiper as SwiperClass } from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
-import { motion } from "framer-motion";
-
+import { motion, AnimatePresence } from "framer-motion";
+import { Variants } from "framer-motion";
 const HeroSection = () => {
   const sectionRef = useRef(null);
   const triggerRef = useRef(null);
@@ -17,6 +17,31 @@ const HeroSection = () => {
   const totalSlides = BannerSliderData.slides.length;
 
   const [textVersion, setTextVersion] = useState(0);
+
+  // Ken Burns animation variants
+  const kenBurnsVariants: Variants = {
+    initial: {
+      scale: 1,
+      x: 0,
+      y: 0,
+      opacity: 0.7,
+    },
+    animate: {
+      scale: 1.15,
+      x: [0, -20, -40] as number[], // 👈 explicitly typed
+      y: [0, -15, -30] as number[],
+      opacity: 1,
+      transition: {
+        duration: 12,
+        ease: [0.43, 0.13, 0.23, 0.96],
+        opacity: {
+          duration: 1.5,
+          ease: "easeOut",
+        },
+      },
+    },
+  };
+
 
   return (
     <section className="h-screen relative overflow-hidden max-w-[1920px] mx-auto" ref={triggerRef} suppressHydrationWarning>
@@ -32,7 +57,8 @@ const HeroSection = () => {
               translate: [200, 0, 0],
             },
           }}
-          autoplay={{ delay: 600000, disableOnInteraction: false }}
+          autoplay={{ delay: 6000, disableOnInteraction: false }}
+          speed={1800}
           slidesPerView={1}
           spaceBetween={0}
           loop
@@ -51,8 +77,26 @@ const HeroSection = () => {
                 key={index}
                 className="slide h-full w-screen relative overflow-hidden text-white"
               >
-                <figure className="h-full w-full absolute -z-50">
-                  <Image className="h-full w-full absolute object-cover object-center" src={slide?.img} alt={"slide1"} width={1920} height={1280} />
+                <figure className="h-full w-full absolute -z-50 overflow-hidden">
+                  <motion.div
+                    key={`kenburns-${index}-${textVersion}`}
+                    variants={kenBurnsVariants}
+                    initial="initial"
+                    animate="animate"
+                    className="h-full w-full relative"
+                    style={{
+                      willChange: 'transform, opacity',
+                    }}
+                  >
+                    <Image
+                      className="h-full w-full object-cover object-center"
+                      src={slide?.img}
+                      alt={"slide1"}
+                      width={1920}
+                      height={1280}
+                      priority={index === 0}
+                    />
+                  </motion.div>
                 </figure>
                 <div key={`${index}-${textVersion}`}
                   className="h-full w-full -z-40 absolute bg-[linear-gradient(180deg,_rgba(0,0,0,0)_21.7%,_rgba(0,0,0,0.6)_63.57%,_rgba(0,0,0,0.8)_100%)]"
@@ -66,15 +110,15 @@ const HeroSection = () => {
                         key={`${index}-${textVersion}`}
                       >
                         <motion.div
-                          initial={{ opacity: 0, y: 20 }}
+                          initial={{ opacity: 0, y: 40 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ duration: 0.6, ease: "easeOut" }}
                           className="md:mb-[65px]  col-span-1 md:col-span-5"
                         >
                           <motion.h2
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: 40 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, ease: "easeOut" }}
+                            transition={{ duration: 1, ease: "easeOut" }}
                             className="text-[2.8rem] md:text-2xl lg:text-3xl 2xl:text-4xl text-white leading-[1.2] 2xl:leading-[1.1] font-custom font-light lettersp-4 mb-15 md:mb-0 xl:mb-0 md:max-w-[80%] xl:max-w-none"
                           >
                             {slide.titleblue} {slide.titlewhite}

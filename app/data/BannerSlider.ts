@@ -24,7 +24,7 @@ export const BannerSliderData = {
 
     {
       id: 4,
-      img: "/assets/home/banner.jpg",
+      img: "/assets/home/slider2.jpg",
       titleblue: "20 + Years",
       titlewhite: "of Inspiring Leaders with Faith, Knowledge & Innovation",
       button: "Register Interest",
