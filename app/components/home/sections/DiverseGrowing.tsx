@@ -13,6 +13,7 @@ import {
   fadeInLeft,
   fadeInRight,
 } from "@/public/assets/FramerAnimation/animation";
+import Counter from "../../common/Counter";
 // Optional: Add modules if needed
 
 const DiverseGrowing = () => {
@@ -50,7 +51,12 @@ const DiverseGrowing = () => {
                     <div className="relative z-10">
                       <div className="flex justify-between items-center gap-4 pb-5">
                         <p className="text-xl 2xl:text-2xl font-light text-primary group-hover:text-black group-hover:-translate-x-3 transition-all duration-500">
-                          {diverseGrowingData.secvalues[0].count}+
+                          {/* {diverseGrowingData.secvalues[0].Xcount}+  */}
+                          <Counter
+                            from={0}
+                            to={Number(diverseGrowingData.secvalues[0].count)}
+                          />
+                          +
                         </p>
                         <Image
                           className="grayscale group-hover:grayscale-0 transition-all duration-400 group-hover:scale-110 "
@@ -77,7 +83,11 @@ const DiverseGrowing = () => {
                       <div className="relative z-10 flex flex-col justify-between min-w-full lg:min-w-[250px] 2xl:min-w-[434px] 2xl:min-h-[310px] px-6 pt-4 pb-5 2xl:px-10 xl:py-4">
                         <div className="flex justify-between items-center gap-4 pb-5">
                           <p className="text-xl 2xl:text-2xl font-light text-[#7E5AA3] group-hover:text-black  group-hover:-translate-x-3 transition-all duration-500">
-                            {diverseGrowingData.secvalues[1].count}+
+                            <Counter
+                              from={0}
+                              to={Number(diverseGrowingData.secvalues[1].count)}
+                            />
+                            +
                           </p>
                           <Image
                             className="grayscale group-hover:grayscale-0 transition-all duration-400 group-hover:scale-110"
@@ -105,7 +115,13 @@ const DiverseGrowing = () => {
                         <div className="relative z-10 flex flex-col justify-between px-6 pt-4 pb-5 2xl:px-10 xl:py-4 min-w-full lg:min-w-[250px] 2xl:min-w-[389px] 2xl:min-h-[258px]">
                           <div className="flex justify-between items-center gap-4 pb-5">
                             <p className="text-xl 2xl:text-2xl font-light text-[#7E5AA3] group-hover:text-black  group-hover:-translate-x-3 transition-all duration-500">
-                              {diverseGrowingData.secvalues[2].count}+
+                              <Counter
+                                from={0}
+                                to={Number(
+                                  diverseGrowingData.secvalues[2].count
+                                )}
+                              />
+                              +
                             </p>
                             <Image
                               className="grayscale group-hover:grayscale-0 transition-all duration-400 group-hover:scale-110"
@@ -132,7 +148,13 @@ const DiverseGrowing = () => {
                         <div className="relative z-10 flex flex-col justify-between px-6 pt-4 pb-5 2xl:px-10 xl:py-4 min-w-full lg:min-w-[250px] 2xl:min-w-[389px] 2xl:min-h-[245px]">
                           <div className="flex justify-between items-center gap-4 pb-5">
                             <p className="text-xl 2xl:text-2xl font-light text-primary group-hover:text-black group-hover:-translate-x-3 transition-all duration-500">
-                              {diverseGrowingData.secvalues[4].count}+
+                              <Counter
+                                from={0}
+                                to={Number(
+                                  diverseGrowingData.secvalues[4].count
+                                )}
+                              />
+                              +
                             </p>
                             <Image
                               className="grayscale group-hover:grayscale-0 transition-all duration-400 group-hover:scale-110"
@@ -160,7 +182,11 @@ const DiverseGrowing = () => {
                       <div className="relative z-10 flex flex-col justify-between px-6 pt-4 pb-5 2xl:px-10 xl:py-4 min-w-full lg:min-w-[250px] 2xl:min-w-[417px] 2xl:min-h-[362px]">
                         <div className="flex justify-between items-center gap-4 xl:pb-5">
                           <p className="text-xl 2xl:text-2xl font-light text-[#7E5AA3] group-hover:text-black group-hover:-translate-x-3 transition-all duration-500">
-                            {diverseGrowingData.secvalues[3].count}+
+                            <Counter
+                              from={0}
+                              to={Number(diverseGrowingData.secvalues[3].count)}
+                            />
+                            +
                           </p>
                           <Image
                             className="grayscale group-hover:grayscale-0 transition-all duration-400 group-hover:scale-110"
