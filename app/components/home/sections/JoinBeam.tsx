@@ -22,10 +22,10 @@ const JoinBeam = () => {
         />
       </div>
       <div className="container h-full z-30 relative">
-        <div className="relative z-20 flex justify-center h-full text-white flex-col w-full md:w-[75%] gap-10 pt-20 pb-25 md:py-[160px]">
-          <div className="flex flex-col gap-7">
+        <div className="relative z-20 flex justify-center h-full text-white flex-col w-full md:w-[75%] gap-0 2xl:gap-10 pt-8 pb-8 md:pt-12 md:pb-12 lg:pt-16 lg:pb-16 2xl:pt-20 2xl:pb-25 md:py-[160px]">
+          <div className="flex flex-col gap-4 2xl:gap-7">
             <motion.h2
-              className="text-4xl font-light lettersp-4"
+              className="text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-light lettersp-4"
               variants={fadeInLeft}
               initial="hidden"
               whileInView="visible"
@@ -40,7 +40,7 @@ const JoinBeam = () => {
               viewport={{ once: true, amount: 0.2 }}
               transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
             >
-              <p className="text-lg font-light max-w-[45ch]">
+              <p className="text-base 2xl:text-lg font-light max-w-[45ch]">
                 Join Beam&apos;s dynamic team where innovation meets passion.
                 Grow your career, make an impact, and help shape tomorrow.
               </p>

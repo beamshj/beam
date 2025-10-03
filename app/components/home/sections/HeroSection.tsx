@@ -19,17 +19,8 @@ const HeroSection = () => {
   const [textVersion, setTextVersion] = useState(0);
 
   return (
-    <section
-      // className="h-[95.4dvh] relative overflow-hidden "
-      className="h-screen relative overflow-hidden max-w-[1920px] mx-auto"
-      ref={triggerRef}
-      suppressHydrationWarning
-    >
-      <div
-        className="prject-sec h-full flex flex-wrap"
-        style={{ width: `${4 * 100}vw` }}
-        ref={sectionRef}
-      >
+    <section className="h-screen relative overflow-hidden max-w-[1920px] mx-auto" ref={triggerRef} suppressHydrationWarning>
+      <div className="prject-sec h-full flex flex-wrap" style={{ width: `${4 * 100}vw` }} ref={sectionRef} >
         <Swiper
           modules={[Autoplay, EffectFade, EffectCreative]}
           effect="creative"
@@ -69,8 +60,7 @@ const HeroSection = () => {
                     height={1000}
                   />
                 </figure>
-                <div
-                  key={`${index}-${textVersion}`}
+                <div key={`${index}-${textVersion}`}
                   className="h-full w-full -z-40 absolute bg-[linear-gradient(180deg,_rgba(0,0,0,0)_21.7%,_rgba(0,0,0,0.6)_63.57%,_rgba(0,0,0,0.8)_100%)]"
                 ></div>
 
@@ -87,14 +77,14 @@ const HeroSection = () => {
                           transition={{ duration: 0.6, ease: "easeOut" }}
                           className="md:mb-[65px]  col-span-1 md:col-span-5"
                         >
-                          <motion.h1
+                          <motion.h2
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, ease: "easeOut" }}
-                            className="text-3xl  text-white leading-[1.1] font-custom font-light lettersp-4"
+                            className="text-2xl lg:text-3xl 2xl:text-4xl text-white leading-[1.1] font-custom font-light lettersp-4"
                           >
                             {slide.titleblue} {slide.titlewhite}
-                          </motion.h1>
+                          </motion.h2>
                         </motion.div>
                         <motion.div
                           initial={{ opacity: 0, x: 20 }}
@@ -168,9 +158,8 @@ const HeroSection = () => {
                 {BannerSliderData.slides.map((_, index) => (
                   <span
                     key={index}
-                    className={`font-medium w-[1px] h-[10px] mt-2 ${
-                      index === currentSlide - 1 ? "bg-primary" : "bg-white"
-                    }`}
+                    className={`font-medium w-[1px] h-[10px] mt-2 ${index === currentSlide - 1 ? "bg-primary" : "bg-white"
+                      }`}
                   ></span>
                 ))}
               </div>

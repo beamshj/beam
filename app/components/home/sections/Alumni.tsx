@@ -36,7 +36,7 @@ const Alumni = () => {
           viewport={{ once: true, amount: 0.2 }}
         >
           <h2
-            className="text-3xl md:text-4xl font-light   text-black lettersp-4 leading-[1] 2xl:leading-tight "
+            className="text-xl xl:text-2xl 2xl:text-3xl md:text-4xl font-light text-black lettersp-4 leading-[1.3] 2xl:leading-tight "
             dangerouslySetInnerHTML={{ __html: alumniData.heading }}
           ></h2>
         </motion.div>
@@ -73,7 +73,7 @@ const Alumni = () => {
                   variants={cardVariants2}
                   className="border-t border-bdrcolor pt-4 md:pt-6 group overflow-hidden"
                 >
-                  <h3 className="text-xl font-light text-black transition-all duration-300">
+                  <h3 className="text-md 2xl:text-xl font-light text-black transition-all duration-300">
                     {value.name}
                   </h3>
                   <p className="text-sm font-light text-[#626262] transition-all duration-300">
@@ -85,7 +85,7 @@ const Alumni = () => {
                       alt={value.name}
                       width={351}
                       height={413}
-                      className="w-full h-auto"
+                      className="w-full h-[250px] xl:h-auto object-contain object-bottom-left"
                     />
                   </div>
                 </motion.div>
