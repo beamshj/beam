@@ -169,8 +169,7 @@ const Footer = () => {
                       Press Release
                     </span>
                   </Link>
-                  <Link
-                    href="/"
+                  <Link href="/"
                     className="group relative overflow-hidden hover:text-primary"
                   >
                     <span className="block transition-transform duration-300 group-hover:translate-x-1">
@@ -193,7 +192,7 @@ const Footer = () => {
             <motion.div variants={fadeUponeone}>
               <h2 className="text-xl xl:text-2xl 2xl:text-4xl font-light lettersp-4"> Register Interest </h2>
             </motion.div>
-            <div className="text-sm font-light leading-[1.52] pt-15">
+            <div className="text-sm font-light leading-[1.52] pt-5 xl:pt-15">
               <form action="" className="flex flex-col gap-10 xl:gap-[43px]">
                 <motion.div className="flex flex-col" variants={fadeUponeone}>
                   <label htmlFor="">Name</label>
