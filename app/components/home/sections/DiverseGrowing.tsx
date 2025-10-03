@@ -18,7 +18,7 @@ import Counter from "../../common/Counter";
 
 const DiverseGrowing = () => {
   return (
-    <section className="pt-8 md:pt-20 2xl:pt-[137px]">
+    <section className="pt-8 xl:pt-20 2xl:pt-[137px]">
       <div className="relative pb-12 md:pb-15 xl:pb-[150px] max-w-[1920px] mx-auto overflow-hidden">
         <div className="container">
           <div>
@@ -28,7 +28,7 @@ const DiverseGrowing = () => {
               whileInView="visible"
               viewport={{ once: true, amount: 0.1 }} // Trigger when only 10% of image enters viewport
             >
-              <h2 className="text-xl md:text-2xl xl:text-3xl 2xl:text-4xl font-light leading-tight text-black max-w-[20ch] lettersp-4 xl:mb-30 2xl:mb-40">
+              <h2 className="text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-light leading-tight text-black max-w-[20ch] lettersp-4 xl:mb-30 2xl:mb-40">
                 {diverseGrowingData.heading}
               </h2>
             </motion.div>
@@ -41,7 +41,7 @@ const DiverseGrowing = () => {
                 viewport={{ once: true, amount: 0.1 }} // Trigger when only 10% of image enters viewport
               >
                 <div className="flex flex-col gap-5 lg:gap-0 xl:w-[80%] 2xl:w-fit m-auto xl:ml-auto mr-0 2xl:m-auto">
-                  <div className=" group overflow-hidden border relative 2xl:left-[50px] bg-white/30 backdrop-blur-md border-[#ccc] rounded-[15px] min-w-full lg:min-w-[250px] 2xl:min-w-[597px] px-6 pt-4 pb-5 2xl:px-10 xl:py-4 w-fit m-auto">
+                  <div className="group overflow-hidden border relative 2xl:left-[50px] bg-white/30 backdrop-blur-md border-[#ccc] rounded-[15px] min-w-full md:min-w- lg:min-w-[250px] 2xl:min-w-[597px] px-6 pt-4 pb-5 2xl:px-10 xl:py-4 w-fit m-auto">
                     {/* Hover Gradient Overlay */}
                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
                       <div className="w-full h-full bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)]"></div>

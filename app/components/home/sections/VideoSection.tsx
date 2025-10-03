@@ -35,12 +35,8 @@ const VideoSection = () => {
           whileInView="show"
           viewport={{ once: true, amount: 0.2 }}
         >
-          <motion.h2
-            className="text-xl md:text-3xl 2xl:text-4xl leading-[1.2] text-white w-full md:w-3/4 font-light lettersp-4 text-center md:text-left"
-            variants={fadeLeft}
-          >
-            {" "}
-            Get to Know Our School!
+          <motion.h2 className="text-xl md:text-2xl xl:text-3xl 2xl:text-4xl leading-[1.2] text-white w-full md:w-3/4 font-light lettersp-4 text-center md:text-left"
+            variants={fadeLeft} > Get to Know Our School!
           </motion.h2>
 
           <motion.div

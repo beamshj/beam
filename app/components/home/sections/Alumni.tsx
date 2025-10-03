@@ -21,7 +21,7 @@ import {
 const Alumni = () => {
   return (
     <motion.section
-      className="py-8 md:pt-20 md:pb-25 2xl:pt-[135px] 2xl:pb-[126px] max-w-[1920px] mx-auto overflow-hidden"
+      className="py-8 xl:pt-20 xl:pb-25 2xl:pt-[135px] 2xl:pb-[126px] max-w-[1920px] mx-auto overflow-hidden"
       variants={fadeUp}
       initial="hidden"
       whileInView="visible"
@@ -36,7 +36,7 @@ const Alumni = () => {
           viewport={{ once: true, amount: 0.2 }}
         >
           <h2
-            className="text-xl xl:text-2xl 2xl:text-3xl md:text-4xl font-light text-black lettersp-4 leading-[1.3] 2xl:leading-tight "
+            className="text-xl md:text-xl xl:text-2xl 2xl:text-3xl md:text-4xl font-light text-black lettersp-4 leading-[1.3] 2xl:leading-tight "
             dangerouslySetInnerHTML={{ __html: alumniData.heading }}
           ></h2>
         </motion.div>

@@ -22,10 +22,10 @@ const Footer = () => {
       </div>
 
       {/* Content container on top */}
-      <div className="relative z-10 container py-12 md:py-25   2xl:pt-[139px] 2xl:pb-[89px]">
+      <div className="relative z-10 container py-12 xl:py-25 2xl:pt-[139px] 2xl:pb-[89px]">
         <div className="grid grid-cols-1 lg:grid-cols-2 text-white">
           {/* Left Column */}
-          <div className="flex flex-col gap-5 md:gap-25 2xl:gap-[167px]">
+          <div className="flex flex-col gap-5 xl:gap-25 2xl:gap-[167px]">
             <div>
               <motion.div
                 variants={parentStagger}
@@ -183,7 +183,7 @@ const Footer = () => {
 
           {/* Right Column (Empty or for future use) */}
           <motion.div
-            className="flex flex-col md:pl-[75px] 2xl:pl-[144px] gap-2 md:gap-14 2xl:gap-[73px] pt-8 pb-0 md:pt-0 md:pb-0 md:mt-0"
+            className="flex flex-col xl:pl-[75px] 2xl:pl-[144px] gap-2 md:gap-14 2xl:gap-[73px] pt-8 pb-0 xl:pt-0 md:pb-0 md:mt-0"
             variants={parentStagger}
             initial="hidden"
             whileInView="show"
