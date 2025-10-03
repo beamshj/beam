@@ -7,7 +7,6 @@ import {
   fadeLeft,
   lineFade,
   playFadeUp,
-  fadeUp,
 } from "@/public/assets/FramerAnimation/animation";
 const VideoSection = () => {
   const [isOpen, setIsOpen] = useState(false);
