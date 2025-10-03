@@ -115,7 +115,7 @@ body {
 .lettersp-4{letter-spacing: -4px;}
 .lettersp-1{letter-spacing: -1px;}
 .lettersp-2{letter-spacing: -2px;}
-@media screen and (max-width: 767px){
+@media screen and (max-width: 992px){
   .lettersp-4{letter-spacing: 0px;}
   .lettersp-1{letter-spacing: 0px;}
   .lettersp-2{letter-spacing: 0px;}
