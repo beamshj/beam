@@ -157,7 +157,7 @@ const OurSchools = () => {
                         </div>
 
                         <div className="my-4 2xl:mt-6 2xl:mb-8">
-                          <h3 className="text-md md:text-lg 2xl:text-xl font-light text-black leading-[1.2] lettersp-1">
+                          <h3 className="text-md md:text-lg 2xl:text-xl font-light text-black leading-[1.18] lettersp-1">
                             {school.title}
                           </h3>
                         </div>
