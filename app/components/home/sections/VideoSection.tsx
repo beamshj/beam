@@ -7,7 +7,6 @@ import {
   fadeLeft,
   lineFade,
   playFadeUp,
-  fadeUp,
 } from "@/public/assets/FramerAnimation/animation";
 const VideoSection = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,10 +15,10 @@ const VideoSection = () => {
   return (
     <motion.section
       className="w-full relative max-w-[1920px] mx-auto overflow-hidden 2xl:h-screen py-10 md:py-28 2xl:py-0"
-      variants={fadeUp}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: "easeInOut" }}
+      viewport={{ once: true }}
     >
       <Image
         src="/assets/home/video-poster.jpg"
@@ -36,12 +35,18 @@ const VideoSection = () => {
           whileInView="show"
           viewport={{ once: true, amount: 0.2 }}
         >
-          <motion.h2 className="text-xl md:text-3xl 2xl:text-4xl leading-[1.2] text-white w-full md:w-3/4 font-light lettersp-4 text-center md:text-left"
-            variants={fadeLeft} > Get to Know Our School!
+          <motion.h2
+            className="text-xl md:text-3xl 2xl:text-4xl leading-[1.2] text-white w-full md:w-3/4 font-light lettersp-4 text-center md:text-left"
+            variants={fadeLeft}
+          >
+            {" "}
+            Get to Know Our School!
           </motion.h2>
 
-          <motion.div className="w-full md:w-3/4 h-px bg-gradient-to-r from-white to-transparent origin-left"
-            variants={lineFade} ></motion.div>
+          <motion.div
+            className="w-full md:w-3/4 h-px bg-gradient-to-r from-white to-transparent origin-left"
+            variants={lineFade}
+          ></motion.div>
           <motion.div
             className="text-md md:text-lg 2xl:text-xl font-light justify-center md:justify-start flex text-white gap-5 items-center"
             variants={playFadeUp}
@@ -75,7 +80,10 @@ const VideoSection = () => {
                   transition={{ duration: 0.5, ease: "easeOut" }}
                 >
                   {/* Close button */}
-                  <button onClick={closePopup} className="absolute top-0 right-0 text-white text-lg z-10 cursor-pointer" >
+                  <button
+                    onClick={closePopup}
+                    className="absolute top-0 right-0 text-white text-lg z-10 cursor-pointer"
+                  >
                     ✕
                   </button>
 
