@@ -37,13 +37,13 @@ const Footer = () => {
                 <div>
                   <div className="flex flex-col md:gap-3">
                     <motion.h2
-                      className="text-xl 2xl:text-2xl font-light lettersp-2"
+                      className="text-md 2xl:text-2xl font-light lettersp-2"
                       variants={fadeUponeone}
                     >
                       800 BEAM (2326)
                     </motion.h2>
                     <motion.p
-                      className="text-xl 2xl:text-2xl font-light break-words lettersp-2"
+                      className="text-md 2xl:text-2xl font-light break-words lettersp-2"
                       variants={fadeUponeone}
                     >
                       enquiries@beam.co.ae
@@ -184,19 +184,17 @@ const Footer = () => {
 
           {/* Right Column (Empty or for future use) */}
           <motion.div
-            className="flex flex-col md:pl-[75px] 2xl:pl-[144px] gap-2 md:gap-14 2xl:gap-[73px] mt-12 md:mt-0"
+            className="flex flex-col md:pl-[75px] 2xl:pl-[144px] gap-2 md:gap-14 2xl:gap-[73px] pt-8 pb-0 md:pt-0 md:pb-0 md:mt-0"
             variants={parentStagger}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.3 }}
           >
             <motion.div variants={fadeUponeone}>
-              <h2 className="text-2xl 2xl:text-4xl font-light lettersp-4">
-                Register Interest
-              </h2>
+              <h2 className="text-xl xl:text-2xl 2xl:text-4xl font-light lettersp-4"> Register Interest </h2>
             </motion.div>
-            <div className="text-sm font-light leading-[1.52]">
-              <form action="" className="flex flex-col gap-[43px]">
+            <div className="text-sm font-light leading-[1.52] pt-15">
+              <form action="" className="flex flex-col gap-10 xl:gap-[43px]">
                 <motion.div className="flex flex-col" variants={fadeUponeone}>
                   <label htmlFor="">Name</label>
                   <input

@@ -17,7 +17,7 @@ import {
 
 const DiverseGrowing = () => {
   return (
-    <section className="pt-12 md:pt-20 2xl:pt-[137px]">
+    <section className="pt-8 md:pt-20 2xl:pt-[137px]">
       <div className="relative pb-12 md:pb-15 xl:pb-[150px] max-w-[1920px] mx-auto overflow-hidden">
         <div className="container">
           <div>
@@ -27,7 +27,7 @@ const DiverseGrowing = () => {
               whileInView="visible"
               viewport={{ once: true, amount: 0.1 }} // Trigger when only 10% of image enters viewport
             >
-              <h2 className="text-3xl 2xl:text-4xl font-light leading-tight text-black max-w-[20ch] lettersp-4 mb-40">
+              <h2 className="text-xl md:text-2xl xl:text-3xl 2xl:text-4xl font-light leading-tight text-black max-w-[20ch] lettersp-4 xl:mb-20 2xl:mb-40">
                 {diverseGrowingData.heading}
               </h2>
             </motion.div>
@@ -40,7 +40,7 @@ const DiverseGrowing = () => {
                 viewport={{ once: true, amount: 0.1 }} // Trigger when only 10% of image enters viewport
               >
                 <div className="flex flex-col gap-5 lg:gap-0 xl:w-[80%] 2xl:w-fit m-auto xl:ml-auto mr-0 2xl:m-auto">
-                  <div className=" group overflow-hidden border relative 2xl:left-[50px] bg-white/30 backdrop-blur-md border-[#ccc] rounded-[15px] min-w-full lg:min-w-[250px] 2xl:min-w-[597px] px-10 py-4 w-fit m-auto">
+                  <div className=" group overflow-hidden border relative 2xl:left-[50px] bg-white/30 backdrop-blur-md border-[#ccc] rounded-[15px] min-w-full lg:min-w-[250px] 2xl:min-w-[597px] px-6 pt-4 pb-5 2xl:px-10 xl:py-4 w-fit m-auto">
                     {/* Hover Gradient Overlay */}
                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
                       <div className="w-full h-full bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)]"></div>
@@ -74,7 +74,7 @@ const DiverseGrowing = () => {
                       </div>
 
                       {/* Content */}
-                      <div className="relative z-10 flex flex-col justify-between min-w-full lg:min-w-[250px] 2xl:min-w-[434px] 2xl:min-h-[310px] px-10 py-4">
+                      <div className="relative z-10 flex flex-col justify-between min-w-full lg:min-w-[250px] 2xl:min-w-[434px] 2xl:min-h-[310px] px-6 pt-4 pb-5 2xl:px-10 xl:py-4">
                         <div className="flex justify-between items-center gap-4 pb-5">
                           <p className="text-xl 2xl:text-2xl font-light text-[#7E5AA3] group-hover:text-black  group-hover:-translate-x-3 transition-all duration-500">
                             {diverseGrowingData.secvalues[1].count}+
@@ -95,14 +95,14 @@ const DiverseGrowing = () => {
 
                     <div className="flex flex-col w-full gap-5 lg:gap-0 xl:max-w-[389px]">
                       {/* Card 1 */}
-                      <div className="relative group overflow-hidden border bg-white/30 backdrop-blur-md border-[#ccc] rounded-[15px] w-full">
+                      <div className="relative group overflow-hidden border bg-white xl:bg-white/30 xl:backdrop-blur-md border-[#ccc] rounded-[15px] w-full">
                         {/* Gradient hover overlay */}
                         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
                           <div className="w-full h-full bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)]"></div>
                         </div>
 
                         {/* Content */}
-                        <div className="relative z-10 flex flex-col justify-between px-10 py-4 min-w-full lg:min-w-[250px] 2xl:min-w-[389px] 2xl:min-h-[258px]">
+                        <div className="relative z-10 flex flex-col justify-between px-6 pt-4 pb-5 2xl:px-10 xl:py-4 min-w-full lg:min-w-[250px] 2xl:min-w-[389px] 2xl:min-h-[258px]">
                           <div className="flex justify-between items-center gap-4 pb-5">
                             <p className="text-xl 2xl:text-2xl font-light text-[#7E5AA3] group-hover:text-black  group-hover:-translate-x-3 transition-all duration-500">
                               {diverseGrowingData.secvalues[2].count}+
@@ -122,14 +122,14 @@ const DiverseGrowing = () => {
                       </div>
 
                       {/* Card 2 */}
-                      <div className="relative group overflow-hidden border bg-white/30 backdrop-blur-md border-[#ccc] rounded-[15px] w-full">
+                      <div className="relative group overflow-hidden border bg-white xl:bg-white/30 xl:backdrop-blur-md border-[#ccc] rounded-[15px] w-full">
                         {/* Gradient hover overlay */}
                         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
                           <div className="w-full h-full bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)]"></div>
                         </div>
 
                         {/* Content */}
-                        <div className="relative z-10 flex flex-col justify-between px-10 py-4 min-w-full lg:min-w-[250px] 2xl:min-w-[389px] 2xl:min-h-[245px]">
+                        <div className="relative z-10 flex flex-col justify-between px-6 pt-4 pb-5 2xl:px-10 xl:py-4 min-w-full lg:min-w-[250px] 2xl:min-w-[389px] 2xl:min-h-[245px]">
                           <div className="flex justify-between items-center gap-4 pb-5">
                             <p className="text-xl 2xl:text-2xl font-light text-primary group-hover:text-black group-hover:-translate-x-3 transition-all duration-500">
                               {diverseGrowingData.secvalues[4].count}+
@@ -150,15 +150,15 @@ const DiverseGrowing = () => {
                     </div>
 
                     {/* Card with animated gradient background on hover */}
-                    <div className="relative group overflow-hidden border bg-white/30 backdrop-blur-md border-[#ccc] rounded-[15px] w-full">
+                    <div className="relative group overflow-hidden border bg-white xl:bg-white/30 xl:backdrop-blur-md border-[#ccc] rounded-[15px] w-full">
                       {/* Hover Gradient Overlay */}
                       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
                         <div className="w-full h-full bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)]"></div>
                       </div>
 
                       {/* Content */}
-                      <div className="relative z-10 flex flex-col justify-between px-10 py-4 min-w-full lg:min-w-[250px] 2xl:min-w-[417px] 2xl:min-h-[362px]">
-                        <div className="flex justify-between items-center gap-4 pb-5">
+                      <div className="relative z-10 flex flex-col justify-between px-6 pt-4 pb-5 2xl:px-10 xl:py-4 min-w-full lg:min-w-[250px] 2xl:min-w-[417px] 2xl:min-h-[362px]">
+                        <div className="flex justify-between items-center gap-4 xl:pb-5">
                           <p className="text-xl 2xl:text-2xl font-light text-[#7E5AA3] group-hover:text-black group-hover:-translate-x-3 transition-all duration-500">
                             {diverseGrowingData.secvalues[3].count}+
                           </p>

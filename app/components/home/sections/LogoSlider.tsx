@@ -17,7 +17,7 @@ import { fadeUp } from "@/public/assets/FramerAnimation/animation";
 const LogoSlider = () => {
   return (
     <motion.section
-      className="py-12 md:py-25 2xl:py-23 max-w-[1920px] mx-auto overflow-hidden"
+      className="py-8 md:py-25 2xl:py-23 max-w-[1920px] mx-auto overflow-hidden"
       variants={fadeUp}
       initial="hidden"
       whileInView="visible"
@@ -26,7 +26,7 @@ const LogoSlider = () => {
       <div className="container">
         <Swiper
           modules={[Autoplay, Pagination]}
-          spaceBetween={10}
+          spaceBetween={30}
           slidesPerView={2}
           autoplay={{
             delay: 3000,
@@ -40,9 +40,9 @@ const LogoSlider = () => {
             },
           }}
           breakpoints={{
-            992: { slidesPerView: 3 },
-            1024: { slidesPerView: 4 },
-            1400: { slidesPerView: 5 },
+            992: { slidesPerView: 3,spaceBetween: 20 },
+            1024: { slidesPerView: 4,spaceBetween: 20 },
+            1400: { slidesPerView: 5,spaceBetween: 10 },
           }}
           className="alumni-swiper"
         >
