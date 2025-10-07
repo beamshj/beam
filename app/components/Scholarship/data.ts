@@ -33,5 +33,35 @@ export const offerData = {
     },
   ]
 };
+export const criteriaData = {
+  title: "Selection Criteria",
+  description: 'The BEAM Scholarship is awarded through a rigorous selection process. Applicants must demonstrate:',  
+  secondtitle:'Retention of the Scholarship',
+  seconddescription:'Recipients must maintain high academic standards and uphold the values of integrity, respect, and social responsibility throughout their studies to retain their scholarship benefits.',
+  items:[
+    {
+      icon:"",
+      title:"Head of Department",
+      description:"Consistent top academic performance over multiple years"
+
+    },
+    {
+      icon:"",
+      title:"Character & Values",
+      description:"Strong moral character and ethical values."
+    },
+    {
+      icon:"",
+      title:"Leadership Potential",
+      description:"Proven leadership qualities and potential."
+    },
+    {
+      icon:"",
+      title:"Career Aspiration",
+      description:"Shortlisted candidates will be invited for a leadership interview."
+    }, 
+  ]
+};
+
  
  

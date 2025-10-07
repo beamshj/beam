@@ -27,62 +27,23 @@ const WeOffer = ({
               {offerData.title}
             </h2>
             {offerData.description.map((item) => (
-              <p key={item} className=" text-sm leading-[1.526315789473684] mb-[30px] font-light  text-colorpara">{item}</p>
+              <p key={item} className=" text-sm leading-[1.526315789473684] mb-4 lg:mb-7 last:lg:mb-13 font-light  text-colorpara">{item}</p>
             ))} 
           
           </div>
-          <div>
-            <ul>
-              {offerData.items.map((item) => (
-                <li key={item.title}>{item.title}</li>
-              ))}
-            </ul>
+          <div  >
+          <div className="relative grid grid-cols-1 md:grid-cols-5 justify-between  gap-8 md:gap-10">
+             
+              {offerData.items.map((item ,index) => ( 
+              <div className={`relative z-10 flex gap-4 md:gap-0 flex-row md:flex-col items-center aftercontent${index + 1}`} key={index}>
+                <div className="w-14 h-14 lg:w-18 lg:h-18 flex items-center justify-center rounded-full bg-sky-200 border border-sky-400 text-xl font-semibold">
+                  <p className=" text-sm font-light leading-[1.526315789473684] mb-0">{index + 1}</p>
+                </div>
+                <div className="md:mt-5 lg:mt-8 2xl:mt-17"><p className="text-sm lg:text-md text-center font-light leading-[1.526315789473684] mb-0">{item.title}</p></div>
+              </div>
+              ))} 
           </div>
-          <section className="flex flex-col items-center justify-center py-16 px-4 bg-white">
-            <div className="relative flex flex-wrap justify-center items-center gap-8 md:gap-16 lg:gap-24">
-              
-              <div className="relative z-10 flex flex-col items-center aftercontent">
-                <div className="w-14 h-14 flex items-center justify-center rounded-full bg-sky-200 border border-sky-400 text-xl font-semibold">
-                  1
-                </div>
-                <div><p>Head of Department</p></div>
-              </div>
-          
-               
-
-              <div className="relative z-10 flex flex-col items-center aftercontent2">
-                <div className="w-14 h-14 flex items-center justify-center rounded-full bg-sky-200 border border-sky-400 text-xl font-semibold">
-                  2
-                </div>
-                <div><p>Head of Department</p></div>
-              </div>
-
-              
-              <div className="relative z-10 flex flex-col items-center aftercontent">
-                <div className="w-14 h-14 flex items-center justify-center rounded-full bg-sky-200 border border-sky-400 text-xl font-semibold">
-                  3
-                </div>
-                <div><p>Head of Department</p></div>
-              </div>
-
-               
-              <div className="relative z-10 flex flex-col items-center aftercontent2">
-                <div className="w-14 h-14 flex items-center justify-center rounded-full bg-sky-200 border border-sky-400 text-xl font-semibold">
-                  4
-                </div>
-                <div><p>Head of Department</p></div>
-              </div>
-
-               
-              <div className="relative z-10 flex flex-col items-center ">
-                <div className="w-14 h-14 flex items-center justify-center rounded-full bg-sky-200 border border-sky-400 text-xl font-semibold">
-                  5
-                </div>
-                <div><p>Head of Department</p></div>
-              </div>
-
-            </div>
-          </section>
+          </div> 
 
          
         </div>

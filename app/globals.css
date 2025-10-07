@@ -200,23 +200,64 @@ body {
   }
 
 }
-.aftercontent::after{
+.aftercontent1::after,.aftercontent3::after{
   content: url(/images/scholarship/svg8.svg);
   position: absolute;
   bottom: 0;
-  right: -409px;
-  top: 12px;
-  width: 488px;
+  right: -170px;
+  top: 43px; 
   overflow: hidden;
   z-index: -1;
 }
-.aftercontent2::after{
+.aftercontent2::after,.aftercontent4::after{
   content: url(/images/scholarship/svg81.svg);
   position: absolute;
   bottom: 0;
-  right: -409px;
-  top: -6px;
-  width: 508px;
+  right: -176px;
+  top: -6px; 
   overflow: hidden;
   z-index: -1;
+}
+
+@media (max-width: 767px){
+  .aftercontent1::after,.aftercontent3::after,
+  .aftercontent2::after,.aftercontent4::after{
+  display: none;
+  }
+}
+ 
+
+@media (min-width: 1280px) and (max-width: 1549px){
+.aftercontent2::after, .aftercontent4::after{
+  top:9px;
+}
+.aftercontent1::after, .aftercontent3::after{
+  top: 35px;
+}
+}
+
+@media (min-width: 1024px) and (max-width: 1279px){
+  .aftercontent1::after, .aftercontent3::after { 
+    right: -94px;
+    top: 16px;
+    width: 94%;
+}
+.aftercontent2::after, .aftercontent4::after { 
+  right: -98px;
+  top: 11px;
+  width: 100%;
+}
+}
+
+@media (min-width: 767px) and (max-width: 1023.89px){
+  .aftercontent1::after, .aftercontent3::after { 
+    right: -73px;
+    top: 4px;
+    width: 126%;
+}
+.aftercontent2::after, .aftercontent4::after { 
+  right: -81px;
+  top: 10px;
+  width: 140%;
+}
 }
