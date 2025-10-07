@@ -1,4 +1,4 @@
-import InnerBanner from "../Common/InnerBanner";
+import InnerBanner from "@/app/components/Common/InnerBanner";
 import {
   BannerData,
   ourStory,
