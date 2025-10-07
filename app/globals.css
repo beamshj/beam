@@ -7,6 +7,7 @@
 :root {
   --primary: #42BADC;
   --bdrcolor: #D3D3D3;
+  --colorpara: #626262;
   --text-4xl: clamp(4rem, 8vw, 5.625rem);   /* 64px–90px */
   --text-3xl: clamp(3.5rem, 7vw, 5rem);     /* 56px–80px */
   --text-2xl: clamp(3rem, 6vw, 4.375rem);   /* 48px–70px */
@@ -23,7 +24,8 @@
   --color-foreground: var(--foreground);
   --font-sans: "DM Sans", sans-serif;
   --color-primary: var(--primary);
-  --color-bdrcolor: var(--bdrcolor);
+  --color-colorpara: var(--colorpara);
+  --color-colorp: var(--colorp);
   --breakpoint-2xl: 96.875rem;
   --text-4xl: var(--text-4xl);
   --text-3xl: var(--text-3xl);
@@ -197,4 +199,24 @@ body {
 
   }
 
+}
+.aftercontent::after{
+  content: url(/images/scholarship/svg8.svg);
+  position: absolute;
+  bottom: 0;
+  right: -409px;
+  top: 12px;
+  width: 488px;
+  overflow: hidden;
+  z-index: -1;
+}
+.aftercontent2::after{
+  content: url(/images/scholarship/svg81.svg);
+  position: absolute;
+  bottom: 0;
+  right: -409px;
+  top: -6px;
+  width: 508px;
+  overflow: hidden;
+  z-index: -1;
 }
