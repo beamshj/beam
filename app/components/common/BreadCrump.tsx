@@ -89,8 +89,6 @@
 
 // export default Breadcrumb;
 
-
-
 "use client";
 
 import React from "react";
@@ -99,7 +97,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
-const Breadcrumb = () => {
+const Breadcrump = () => {
   const pathname = usePathname();
   const pathParts = pathname.split("/").filter((part) => part);
 
@@ -175,4 +173,4 @@ const Breadcrumb = () => {
   );
 };
 
-export default Breadcrumb;
+export default Breadcrump;
