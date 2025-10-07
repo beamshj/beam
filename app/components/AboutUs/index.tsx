@@ -21,6 +21,7 @@ const Index = () => {
       <VisionMissionSection visionMissionItems={visionMissionItems} />
       <ValuesGrid values={valuesData} />
       <InclusionSection data={inclusionData} />
+      
       <HealthSafety
         title={healthSafetyData.title}
         description={healthSafetyData.description}
