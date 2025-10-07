@@ -1,10 +1,9 @@
- 
-import Index from "../components/home/Index";
+import Index from "@/app/components/Home/Index";
 
 export default function Home() {
   return (
-   <>
-    <Index/>
-   </>
+    <>
+      <Index />
+    </>
   );
 }

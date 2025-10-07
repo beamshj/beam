@@ -8,7 +8,7 @@ import { Swiper as SwiperClass } from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/effect-fade";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Variants } from "framer-motion";
 const HeroSection = () => {
   const sectionRef = useRef(null);

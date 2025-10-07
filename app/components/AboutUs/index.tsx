@@ -1,15 +1,17 @@
-import InnerBanner from "../common/InnerBanner";
+import InnerBanner from "@/app/components/Common/InnerBanner";
 import {
   BannerData,
   ourStory,
   visionMissionItems,
   valuesData,
   inclusionData,
+  healthSafetyData,
 } from "./data";
 import OurStorySection from "./sections/OurStory";
 import VisionMissionSection from "./sections/VisionMission";
 import ValuesGrid from "./sections/OurValues";
 import InclusionSection from "./sections/Inclusion";
+import HealthSafety from "./sections/HealthandSafety";
 
 const Index = () => {
   return (
@@ -19,6 +21,12 @@ const Index = () => {
       <VisionMissionSection visionMissionItems={visionMissionItems} />
       <ValuesGrid values={valuesData} />
       <InclusionSection data={inclusionData} />
+      
+      <HealthSafety
+        title={healthSafetyData.title}
+        description={healthSafetyData.description}
+        items={healthSafetyData.items}
+      />
     </>
   );
 };

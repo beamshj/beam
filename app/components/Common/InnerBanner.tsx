@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Breadcrumb from "./BreadCrump";
+import Breadcrump from "./BreadCrump";
 import { motion } from "framer-motion";
 
 interface PageBnrProps {
@@ -53,7 +53,7 @@ const InnerBanner = ({ BannerData }: PageBnrProps) => {
           </motion.h2>
         </div>
         <div className="h-[1px] w-[60%] bg-gradient-to-r from-white to-transparent mb-[15px] md:mb-[20px] xl:mb-[25px]"></div>
-        <Breadcrumb />
+        <Breadcrump />
       </div>
     </section>
   );

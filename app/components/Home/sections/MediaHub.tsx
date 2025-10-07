@@ -11,7 +11,7 @@ import { Autoplay } from "swiper/modules";
 // Optional: Add modules if needed
 import { Pagination } from "swiper/modules";
 import { motion } from "framer-motion";
-import { fadeInLeft, fadeUp } from "@/public/assets/FramerAnimation/animation";
+import { fadeUp } from "@/public/assets/FramerAnimation/animation";
 import SplitText from "@/components/SplitText";
 const MediaHub = () => {
   return (
