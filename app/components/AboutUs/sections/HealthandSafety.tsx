@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import { div } from "framer-motion/client";
 
 interface HealthSafetyProps {
   title: string;
@@ -14,53 +15,52 @@ interface HealthSafetyProps {
   }[];
 }
 
-export default function HealthSafety({
-  title,
-  description,
-  items,
-}: HealthSafetyProps) {
+export default function HealthSafety({ data }: { data: HealthSafetyProps }) {
   const [active, setActive] = useState(0);
+  const { title, description, items } = data;
 
   return (
-    <section className="w-full py-16 md:py-24 bg-white">
-      <div className="container mx-auto grid md:grid-cols-2 gap-10 items-stretch">
+    <section className="container">
+      <div className="grid md:grid-cols-2 gap-10">
         {/* LEFT COLUMN */}
         <div className="flex flex-col justify-center">
-          <h2 className="text-4xl md:text-5xl font-semibold text-gray-900 mb-6">
-            {title}
-          </h2>
-          <p className="text-gray-600 mb-10 leading-relaxed max-w-lg">
+          <h2 className="text-4xl font-light text-black mb-[50px]">{title}</h2>
+          <p className="text-[#626262] text-sm mb-[50px] leading-[1.52] md:max-w-[55ch]">
             {description}
           </p>
 
-          <ul className="space-y-4">
+          <ul className="group space-y-[30px] ">
             {items.map((item, index) => (
               <li
                 key={item.id}
-                className={`flex items-center justify-between border-b border-gray-200 pb-2 cursor-pointer transition-all duration-200 ${
-                  active === index
-                    ? "text-blue-600 font-medium"
-                    : "text-gray-700"
+                className={`flex text-xl items-center border-bdrcolor border-b justify-between pb-[20px] cursor-pointer transition-all duration-300 ${
+                  active === index ? "text-primary font-medium" : "text-black"
                 }`}
                 onMouseEnter={() => setActive(index)}
               >
-                <div className="flex items-center gap-3">
-                  <span className="text-gray-400 font-medium">
+                <div className="flex items-center gap-3 font-light">
+                  <span
+                    className={`text-sm mt-2 ${
+                      active === index ? "text-black" : "text-[#626262]"
+                    }`}
+                  >
                     {String(item.id).padStart(2, "0")}
                   </span>
-                  <span>{item.title}</span>
+                  <span className="text-xl font-light leading-[1.2]">
+                    {item.title}
+                  </span>
                 </div>
 
                 {active === index && (
-                  <motion.span
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: 10 }}
-                    transition={{ duration: 0.2 }}
-                    className="text-blue-500"
-                  >
-                    →
-                  </motion.span>
+                  <motion.div className="group bg-primary text-white w-[27px] h-[27px] flex items-center justify-center rounded-full">
+                    <Image
+                      src="/images/arrow-right-tip.svg"
+                      alt="arrow-right-tip"
+                      width={15}
+                      height={15}
+                      className="w-[15px] h-[15px]"
+                    />
+                  </motion.div>
                 )}
               </li>
             ))}
@@ -69,14 +69,10 @@ export default function HealthSafety({
 
         {/* RIGHT COLUMN */}
         <div className="relative flex justify-center items-center">
-          <div className="relative w-full h-[400px] md:h-[500px] rounded-xl overflow-hidden shadow-md">
+          <div className="relative w-full h-[400px] md:h-[500px] xl:h-[600px] 2xl:h-[743px] rounded-[12px] overflow-hidden">
             <AnimatePresence mode="wait">
               <motion.div
                 key={items[active].image}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.4 }}
                 className="absolute inset-0"
               >
                 <Image
@@ -84,6 +80,13 @@ export default function HealthSafety({
                   alt={items[active].title}
                   fill
                   className="object-cover object-center"
+                />
+                <div
+                  style={{
+                    background:
+                      "linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(126, 90, 163, 0.72) 100%)",
+                  }}
+                  className="absolute bottom-0 h-[70%] w-full"
                 />
               </motion.div>
             </AnimatePresence>

@@ -119,27 +119,27 @@ export const healthSafetyData = {
     {
       id: 1,
       title: "Personal safety, accident prevention",
-      image: "/images/safety-1.jpg",
+      image: "/images/about-us/health/1.jpg",
     },
     {
       id: 2,
       title: "Health and safety planning",
-      image: "/images/safety-2.jpg",
+      image: "/images/about-us/health/2.jpg",
     },
     {
       id: 3,
       title: "Safe school culture",
-      image: "/images/safety-3.jpg",
+      image: "/images/about-us/health/3.jpg",
     },
     {
       id: 4,
       title: "Continuous improvement",
-      image: "/images/safety-4.jpg",
+      image: "/images/about-us/health/4.jpg",
     },
     {
       id: 5,
       title: "Positive and secure school climate",
-      image: "/images/safety-5.jpg",
+      image: "/images/about-us/health/5.jpg",
     },
   ],
 };
