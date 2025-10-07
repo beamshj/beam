@@ -10,25 +10,28 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { motion } from "framer-motion";
-import { fadeInLeft } from "@/public/assets/FramerAnimation/animation";
 // Optional: Add modules if needed
 import { Navigation, Pagination } from "swiper/modules";
 import {
   fadeUp,
   cardVariants,
 } from "@/public/assets/FramerAnimation/animation";
-import SplitText from "@/components/SplitText";
 
 const OurSchools = () => {
   const [selected, setSelected] = useState("");
 
   return (
     <section className="py-8 xl:pt-20 xl:pb-25 2xl:pt-[133px] 2xl:pb-[160px] ">
-      <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} >
+      <motion.div
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+      >
         <div className="container">
           <div className="mb-5 xl:mb-7  2xl:mb-[53px]">
             <h2 className="text-xl md:text-2xl xl:text-3xl 2xl:text-4xl font-light leading-tight text-black lettersp-4">
-            {/* <SplitText
+              {/* <SplitText
               tag="h2"
               text={schoolData.heading}
               className=""
@@ -75,7 +78,8 @@ const OurSchools = () => {
                 <div className="   ">
                   <div className="w-full">
                     <div className="relative inline-block min-w-[120px] lg:min-w-[348px]">
-                      <select value={selected}
+                      <select
+                        value={selected}
                         onChange={(e) => setSelected(e.target.value)}
                         className="appearance-none border border-bdrcolor cursor-pointer rounded-full pl-2 md:pl-4 pr-10 py-2 md:py-3 smtext10 text-xs focus:outline-none focus:ring-0 w-auto"
                       >
@@ -140,12 +144,27 @@ const OurSchools = () => {
                   >
                     <div className="bg-[#F5F5F5] rounded-[15px] p-1 hover:bg-[#F0F0F0] transition-all duration-300 group">
                       <div className="rounded-xl overflow-hidden relative">
-                        <Image src={school.img} alt={school.title} width={500} height={500} />
+                        <Image
+                          src={school.img}
+                          alt={school.title}
+                          width={500}
+                          height={500}
+                        />
                         <div className="absolute opacity-0 delay-200 group-hover:-translate-y-2 group-hover:opacity-100 transition-all duration-300 top-5 right-5 p-2 bg-white/30 backdrop-blur-md  rounded-full w-[75px] h-[75px] flex items-center justify-center border border-[#42BADC]">
-                          <Image src="/images/home/arrow-top.svg" alt={school.title} width={15} height={15} />
+                          <Image
+                            src="/images/home/arrow-top.svg"
+                            alt={school.title}
+                            width={15}
+                            height={15}
+                          />
                         </div>
                         <div className="absolute bottom-2 left-2 p-2 bg-white rounded-md w-fit">
-                          <Image src={school.logo} alt={school.title} width={109} height={45} />
+                          <Image
+                            src={school.logo}
+                            alt={school.title}
+                            width={109}
+                            height={45}
+                          />
                         </div>
                       </div>
                       <div className="p-2 md:p-3 xl:p-6 2xl:p-10">
@@ -154,7 +173,12 @@ const OurSchools = () => {
                             {school.curriculum}
                           </p>
                           <div className="flex items-center gap-2">
-                            <Image src="/images/home/location.svg" alt={school.title} width={12} height={16} />
+                            <Image
+                              src="/images/home/location.svg"
+                              alt={school.title}
+                              width={12}
+                              height={16}
+                            />
                             <p className="text-xs font-light text-foreground">
                               {school.location}
                             </p>
@@ -169,7 +193,10 @@ const OurSchools = () => {
 
                         <div>
                           {school.labels.map((label, index) => (
-                            <div key={index} className={`relative group overflow-hidden flex justify-between items-center px-3 py-[2.5px] rounded-[10px] transition-all duration-500`} >
+                            <div
+                              key={index}
+                              className={`relative group overflow-hidden flex justify-between items-center px-3 py-[2.5px] rounded-[10px] transition-all duration-500`}
+                            >
                               <div
                                 className={`absolute inset-0 transition-opacity duration-500 ${
                                   index % 2 === 0

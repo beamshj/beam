@@ -13,7 +13,7 @@ import {
   fadeInLeft,
   fadeInRight,
 } from "@/public/assets/FramerAnimation/animation";
-import Counter from "../../common/Counter";
+import Counter from "../../Common/Counter";
 import SplitText from "@/components/SplitText";
 
 const DiverseGrowing = () => {
@@ -30,18 +30,19 @@ const DiverseGrowing = () => {
             >
               <h2>
                 <SplitText
-                tag="span" text={diverseGrowingData.heading}
+                  tag="span"
+                  text={diverseGrowingData.heading}
                   className="text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-light leading-tight text-black max-w-[20ch] lettersp-4 xl:mb-30 2xl:mb-40"
-                delay={100}
-                duration={0.6}
-                ease="power3.out"
-                splitType="words"
-                from={{ opacity: 0, y: 40 }}
-                to={{ opacity: 1, y: 0 }}
-                threshold={0.1}
-                rootMargin="-100px"
-                textAlign="left"
-              />
+                  delay={100}
+                  duration={0.6}
+                  ease="power3.out"
+                  splitType="words"
+                  from={{ opacity: 0, y: 40 }}
+                  to={{ opacity: 1, y: 0 }}
+                  threshold={0.1}
+                  rootMargin="-100px"
+                  textAlign="left"
+                />
               </h2>
             </motion.div>
             <div className="2xl:w-4/5 ml-auto mt-8 lg:mt-[140px]  xl:mt-[64px] relative">

@@ -8,7 +8,6 @@ import "swiper/css/pagination";
 import { motion } from "framer-motion";
 import {
   fadeUp,
-  fadeInLeft,
   fadeInRight,
 } from "@/public/assets/FramerAnimation/animation";
 import SplitText from "@/components/SplitText";

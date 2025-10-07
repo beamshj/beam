@@ -4,7 +4,6 @@ import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   container,
-  fadeLeft,
   lineFade,
   playFadeUp,
 } from "@/public/assets/FramerAnimation/animation";
