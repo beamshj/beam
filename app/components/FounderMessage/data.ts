@@ -4,7 +4,7 @@ export const BannerData = {
 };
 
 export const founderMessageData = {
-  title: `Founders'
+  title: `Founders’
   Message`,
   photo: "/images/founderMessage/founder.png",
   name: "Salah A. Bukhatir",
