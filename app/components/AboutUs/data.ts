@@ -143,3 +143,29 @@ export const healthSafetyData = {
     },
   ],
 };
+
+export const cards = {
+  title: "More to Explore",
+  items: [
+    {
+      title: "Bukhatir Group",
+      image: "/images/about-us/MoreToExplore/1.jpg",
+    },
+    {
+      title: "Founder's Message",
+      image: "/images/about-us/MoreToExplore/2.jpg",
+    },
+    {
+      title: "General Manager’s Message",
+      image: "/images/about-us/MoreToExplore/3.jpg",
+    },
+    {
+      title: "Schools’ Leadership Team",
+      image: "/images/about-us/MoreToExplore/4.jpg",
+    },
+    {
+      title: "",
+      image: "/images/about-us/MoreToExplore/2.jpg",
+    },
+  ],
+};

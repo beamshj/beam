@@ -6,12 +6,14 @@ import {
   valuesData,
   inclusionData,
   healthSafetyData,
+  cards,
 } from "./data";
 import OurStorySection from "./sections/OurStory";
 import VisionMissionSection from "./sections/VisionMission";
 import ValuesGrid from "./sections/OurValues";
 import InclusionSection from "./sections/Inclusion";
 import HealthSafety from "./sections/HealthandSafety";
+import MoreToExplore from "./sections/MoreToExplore";
 
 const Index = () => {
   return (
@@ -22,6 +24,7 @@ const Index = () => {
       <ValuesGrid values={valuesData} />
       <InclusionSection data={inclusionData} />
       <HealthSafety data={healthSafetyData} />
+      <MoreToExplore data={cards} />
     </>
   );
 };

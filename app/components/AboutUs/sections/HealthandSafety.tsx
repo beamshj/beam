@@ -15,7 +15,7 @@ interface HealthSafetyProps {
   }[];
 }
 
-export default function HealthSafety({ data }: { data: HealthSafetyProps }) {
+export default function ealthSafety({ data }: { data: HealthSafetyProps }) {
   const [active, setActive] = useState(0);
   const { title, description, items } = data;
 
