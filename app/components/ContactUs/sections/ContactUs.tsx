@@ -1,0 +1,220 @@
+"use client";
+
+import React from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import Image from "next/image";
+
+const formSchema = z.object({
+  firstName: z.string().min(1, "Required"),
+  lastName: z.string().min(1, "Required"),
+  email: z.string().email("Invalid email"),
+  phone: z.string().min(5, "Enter valid number"),
+  purpose: z.string().min(1, "Please select a purpose"),
+  message: z.string().min(1, "Message is required"),
+});
+
+type FormData = z.infer<typeof formSchema>;
+
+const ContactForm: React.FC = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({
+    resolver: zodResolver(formSchema),
+  });
+
+  const onSubmit = (data: FormData) => {
+    console.log("Submitted data:", data);
+  };
+
+  return (
+    <section className="container py-12 md:py-20 xl:py-[135px]">
+      <div className="flex flex-col lg:flex-row gap-[103px]">
+        {/* Left section */}
+        <div className="lg:w-[34%]">
+          <h1 className="text-3xl xl:text-4xl text-black font-light leading-[1.111] lettersp-4">
+            Get In Touch
+          </h1>
+          <p className="text-colorpara text-sm leading-[1.52] mt-[13px]">
+            Together, we can manage smarter and learn further.
+          </p>
+          <div className="mt-[13px] text-sm leading-[1.52] font-light">
+            <h2 className="text-primary text-xl leading-[1.2]">BEAM</h2>
+            <p className="text-colorpara mt-[17px]">
+              The City Gate, Al Ittihad Road
+              <br />
+              Sharjah, UAE. PO Box: 88
+            </p>
+            <div className="space-y-[17px] mt-[17px]">
+              {/* First row */}
+              <div className="flex items-center gap-[20px]">
+                <Image
+                  src="/images/contact-us/icons/phone.svg"
+                  alt="Location"
+                  width={24}
+                  height={24}
+                  className="object-contain"
+                />
+                <p className="font-light text-sm leading-[1.52] text-primary">
+                  800 BEAM (2326)
+                </p>
+              </div>
+
+              {/* Second row */}
+              <div className="flex items-center gap-[20px]">
+                <Image
+                  src="/images/contact-us/icons/email.svg"
+                  alt="Mail"
+                  width={24}
+                  height={24}
+                  className="object-contain"
+                />
+                <a
+                  href="mailto:enquiries@beam.co.ae"
+                  className="text-primary font-light text-sm leading-[1.52]"
+                >
+                  enquiries@beam.co.ae
+                </a>
+              </div>
+            </div>
+          </div>
+          <div className="mt-[17px] w-full max-h-[287px] 2xl:max-w-[453px] rounded-[12px] overflow-hidden">
+            <div className="relative w-full pt-[63.35%]">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28861.219018315405!2d55.31368687406142!3d25.28227677506068!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f5b877ffa610b%3A0x45235431be0819e!2sCity%20Gate%20Tower!5e0!3m2!1sen!2sin!4v1759920246808!5m2!1sen!2sin"
+                className="absolute inset-0 w-full h-full rounded-[12px]"
+                style={{ border: 0 }}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+
+        {/* Right form */}
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="lg:w-[68%] lg:space-y-[70px]"
+        >
+          <div className="flex flex-col lg:flex-row lg:gap-[54px]">
+            <div className="w-full lg:w-1/2">
+              <input
+                type="text"
+                placeholder="Enter Your First Name"
+                {...register("firstName")}
+                className="w-full border-b border-colorpara py-[23px] focus:outline-none placeholder:text-colorpara text-sm"
+              />
+              <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
+                {errors.firstName?.message || ""}
+              </p>
+            </div>
+
+            <div className="w-full lg:w-1/2">
+              <input
+                type="text"
+                placeholder="Enter Second Name"
+                {...register("lastName")}
+                className="w-full border-b border-colorpara py-[23px] focus:outline-none placeholder:text-colorpara text-sm"
+              />
+              <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
+                {errors.lastName?.message || ""}
+              </p>
+            </div>
+          </div>
+
+          <div className="flex flex-col lg:flex-row lg:gap-[54px]">
+            <div className="w-full lg:w-1/2">
+              <input
+                type="email"
+                placeholder="Enter Your Email ID"
+                {...register("email")}
+                className="w-full border-b border-colorpara py-[23px] focus:outline-none placeholder:text-colorpara text-sm"
+              />
+              <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
+                {errors.email?.message || ""}
+              </p>
+            </div>
+
+            <div className="w-full lg:w-1/2">
+              <input
+                type="text"
+                placeholder="Enter Your Phone Number"
+                {...register("phone")}
+                className="w-full border-b border-colorpara py-[23px] focus:outline-none placeholder:text-colorpara text-sm"
+              />
+              <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
+                {errors.phone?.message || ""}
+              </p>
+            </div>
+          </div>
+
+          <div className="relative w-full">
+            <select
+              {...register("purpose")}
+              className="w-full border-b border-colorpara py-[23px] pr-10 focus:outline-none bg-white text-colorpara text-sm appearance-none"
+            >
+              <option value="">Purpose of enquiry</option>
+              <option value="admission">Admission</option>
+              <option value="career">Career</option>
+              <option value="general">General</option>
+            </select>
+
+            {/* Custom arrow icon */}
+            <span className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+              {/* Replace below with your own icon component or img */}
+              <Image
+                src="/images/arrow-down.svg"
+                width={16}
+                height={8}
+                alt="dropdown arrow"
+              />
+            </span>
+
+            {errors.purpose && (
+              <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
+                {errors.purpose.message}
+              </p>
+            )}
+          </div>
+
+          <div>
+            <textarea
+              rows={4}
+              placeholder="Tell us more"
+              {...register("message")}
+              className="w-full border-b border-colorpara py-[23px] focus:outline-none resize-none placeholder:text-colorpara text-sm"
+            />
+            {errors.message && (
+              <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
+                {errors.message.message}
+              </p>
+            )}
+          </div>
+          <div className="relative inline-block rounded-[50px] p-[1px] bg-gradient-to-r from-[#42BADC] to-[#12586C]">
+            <button
+              type="submit"
+              className="group flex items-center justify-center gap-[10px] px-[20px] py-[11px] w-full h-full text-black bg-white rounded-[50px] text-xs font-light overflow-hidden"
+            >
+              SEND MESSAGE
+              {/* Arrow circle */}
+              <span className="flex items-center justify-center w-[27px] h-[27px] bg-primary rounded-full transition-transform duration-300 group-hover:translate-x-2">
+                <Image
+                  src="/images/arrow-black.svg"
+                  alt="Arrow"
+                  width={8}
+                  height={8}
+                  className="object-contain"
+                />
+              </span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+  );
+};
+
+export default ContactForm;
