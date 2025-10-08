@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { div } from "framer-motion/client";
 
 interface HealthSafetyProps {
   title: string;
@@ -15,7 +14,7 @@ interface HealthSafetyProps {
   }[];
 }
 
-export default function ealthSafety({ data }: { data: HealthSafetyProps }) {
+export default function HealthSafety({ data }: { data: HealthSafetyProps }) {
   const [active, setActive] = useState(0);
   const { title, description, items } = data;
 
