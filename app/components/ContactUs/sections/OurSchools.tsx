@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { no } from "zod/v4/locales";
 
 interface OurSchoolsProps {
   title: string;
