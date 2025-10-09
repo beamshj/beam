@@ -29,7 +29,7 @@ const WeOffer = ({
             ))} 
           
           </div>
-          <div  >
+          <div className="mt-8 lg:mt-0" >
           <div className="relative grid grid-cols-1 md:grid-cols-5 justify-between  gap-8 md:gap-10">
              
               {offerData.items.map((item ,index) => ( 
@@ -37,7 +37,7 @@ const WeOffer = ({
                 <div className="w-14 h-14 lg:w-18 lg:h-18 flex items-center justify-center rounded-full bg-sky-200 border border-sky-400 text-xl font-semibold">
                   <p className=" text-sm font-light leading-[1.526315789473684] mb-0">{index + 1}</p>
                 </div>
-                <div className="md:mt-5 lg:mt-8 2xl:mt-17"><p className="text-sm lg:text-md text-center font-light leading-[1.526315789473684] mb-0">{item.title}</p></div>
+                <div className="md:mt-5 lg:mt-8 2xl:mt-17"><p className="text-md  lg:text-md text-center font-light leading-[1.526315789473684] mb-0">{item.title}</p></div>
               </div>
               ))} 
           </div>
