@@ -164,7 +164,6 @@ const ContactForm: React.FC = () => {
 
             {/* Custom arrow icon */}
             <span className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-              {/* Replace below with your own icon component or img */}
               <Image
                 src="/images/arrow-down.svg"
                 width={16}
