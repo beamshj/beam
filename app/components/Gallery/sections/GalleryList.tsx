@@ -29,11 +29,11 @@ export default function GalleryList({ data }: { data: GalleryList }) {
         );
 
   return (
-    <section className="py-12 md:py-20 xl:py-[135px]">
+    <section className="py-10 xl:py-20 2xl:py-[135px]">
       <div className="container">
         {/* Header */}
-        <div className="flex flex-col lg:flex-row justify-between lg:items-center pb-[31px] mb-[65px] border-b border-bdrcolor">
-          <h2 className="text-4xl font-light text-black leading-[1.1111] mb-6 lg:mb-0">
+        <div className="flex flex-col lg:flex-row justify-between lg:items-center pb-5 2xl:pb-[31px] mb-10 2xl:mb-[65px] border-b border-bdrcolor">
+          <h2 className="text-lg md:text-xl xl:text-3xl 2xl:text-4xl font-light text-black leading-[1.1111] mb-6 lg:mb-0">
             {data.title}
           </h2>
 
@@ -54,7 +54,7 @@ export default function GalleryList({ data }: { data: GalleryList }) {
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-[20px] 2xl:gap-[33px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[20px] 2xl:gap-[33px]">
           {filteredItems.map((item, idx) => (
             <div
               key={idx}
@@ -62,24 +62,16 @@ export default function GalleryList({ data }: { data: GalleryList }) {
               onClick={() => setSelectedItem(item)}
             >
               {/* Main Image */}
-              <Image
-                src={item.images[0]}
-                alt={item.title}
-                fill
-                className="object-cover"
-              />
-
+              <Image src={item.images[0]} alt={item.title} fill className="object-cover" />
               {/* Black Gradient (always visible) */}
-              <div
-                className="absolute inset-0 pointer-events-none"
+              <div className="absolute inset-0 pointer-events-none"
                 style={{
                   background: `linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.75) 100%)`,
                 }}
               />
 
               {/* Blue Gradient (only on hover, slides from bottom) */}
-              <div
-                className="absolute inset-0 pointer-events-none transform translate-y-full group-hover:translate-y-0 transition-transform duration-400"
+              <div className="absolute inset-0 pointer-events-none transform translate-y-full group-hover:translate-y-0 transition-transform duration-400"
                 style={{
                   background: `linear-gradient(180.09deg, rgba(0,0,0,0) 50.09%, rgba(66,186,220,0.75) 99.92%)`,
                 }}
@@ -99,7 +91,7 @@ export default function GalleryList({ data }: { data: GalleryList }) {
 
               {/* Title & Thumbnails */}
               <div className="absolute bottom-[20px] left-[20px] lg:bottom-[40px] lg:left-[40px] text-white z-10">
-                <h3 className="text-xl font-light leading-[1.2] mb-[10px]">
+                <h3 className="text-md lg:text-lg xl:text-xl font-light leading-[1.2] mb-[10px]">
                   {item.title}
                 </h3>
 
