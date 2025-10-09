@@ -262,7 +262,12 @@ body {
 }
 }
 
-@media screen and (max-width: 767px){
+@media screen and (max-width: 992px){
+.schl{
+    max-width: 48%!important;
+  }
+}
+@media screen and (max-width: 768px){
 .schl{
     max-width: 100%!important;
   }
