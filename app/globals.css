@@ -25,6 +25,7 @@
   --font-sans: "DM Sans", sans-serif;
   --color-primary: var(--primary);
   --color-colorpara: var(--colorpara);
+  --color-bdrcolor: var(--bdrcolor);
   --color-colorp: var(--colorp);
   --breakpoint-2xl: 96.875rem;
   --text-4xl: var(--text-4xl);
