@@ -1,42 +1,75 @@
 export const BannerData = {
   BannerTitle: "School Uniqueness",
-  BannerImg: "/images/scholarship/banner.jpg",
+  BannerImg: "/images/school-uniqueness/banner.jpg",
 };
 
  
 
-export const focusData = {
-  title: "Your Future, our Focus",
-  description: `Dream of leading the future of education? The BEAM University Scholarship Program is your gateway! Created exclusively for our high-achieving graduates, this unique opportunity guarantees you a position within our schools and a clear path to leadership. Be part of a legacy that values your potential, rewards your ambition, and prepares you to inspire generations to come. No one embodies the Creative Science Schools’ vision and values better than you, our own graduates. Carry the torch forward and let your success keep our legacy shining bright. Apply now, at BEAM, your future is our focus!`,
-  image: "/images/scholarship/main.jpg",
+export const fsData = {
+  title: "Fostering Strong Morals Through Faith",
+  description: `Creative Science Schools blend global curricula with a strong focus on Arabic, Islamic Studies, Quran programs, and social responsibility.`,
+  image: "/images/school-uniqueness/main.jpg",
+  items:[
+    { 
+      title:"BEAM hosts Quran and inter-school competitions." 
+    }, 
+    { 
+      title:"Recitation workshops for students" 
+    }, 
+    { 
+      title:"Quran memorization scholarships" 
+    }, 
+    { 
+      title:"Red Crescent students drive community service." 
+    }, 
+    { 
+      title:"Awarded by Sharjah Quran & Sunnah Est." 
+    }, 
+
+    
+    
+  ]
 };
  
-export const criteriaData = {
-  title: "Selection Criteria",
-  description: 'The BEAM Scholarship is awarded through a rigorous selection process. Applicants must demonstrate:',  
-  secondtitle:'Retention of the Scholarship',
-  seconddescription:'Recipients must maintain high academic standards and uphold the values of integrity, respect, and social responsibility throughout their studies to retain their scholarship benefits.',
+export const academicsData = {
+  title: "Beyond Academics",
+  description: 'Creative Science Schools go beyond academics by equipping students with future-ready skills and supporting families through workshops, programs, and a strong values-based community.',  
   items:[
     {
-      icon:"/images/scholarship/sc1.svg",
-      title:"Academic Performance",
-      description:"Consistent top academic performance over multiple years"
-
-    },
+      image:"/images/school-uniqueness/ba1.jpg",
+      title:"Transcending the Curriculum",
+      description:"Creative Science Schools prepare students for life beyond school.",
+      list:[
+        "Safeguarding and learner welfare awareness",
+        "Wellbeing and social-emotional learning programs",
+        "Career guidance from university leaders and alumni",
+        "University partnerships offering scholarship pathways",
+        "Career opportunities through Bukhatir Group affiliation",
+      ] 
+    }, 
     {
-      icon:"/images/scholarship/sc2.svg",
-      title:"Character & Values",
-      description:"Strong moral character and ethical values."
-    },
+      image:"/images/school-uniqueness/ba2.jpg",
+      title:"Transcending the Curriculum",
+      description:"Consistent top academic performance over multiple years",
+      list:[
+        "Consistent top academic performance over multiple years",
+        "Consistent top academic performance over multiple years",
+        "Consistent top academic performance over multiple years",
+        "Consistent top academic performance over multiple years",
+        "Consistent top academic performance over multiple years",
+      ] 
+    }, 
     {
-      icon:"/images/scholarship/sc3.svg",
-      title:"Leadership Potential",
-      description:"Proven leadership qualities and potential."
-    },
-    {
-      icon:"/images/scholarship/sc4.svg",
-      title:"Career Aspiration",
-      description:"Shortlisted candidates will be invited for a leadership interview."
+      image:"/images/school-uniqueness/ba3.jpg",
+      title:"Transcending the Curriculum",
+      description:"Consistent top academic performance over multiple years",
+      list:[
+        "Consistent top academic performance over multiple years",
+        "Consistent top academic performance over multiple years",
+        "Consistent top academic performance over multiple years",
+        "Consistent top academic performance over multiple years",
+        "Consistent top academic performance over multiple years",
+      ] 
     }, 
   ]
 };

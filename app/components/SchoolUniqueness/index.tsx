@@ -1,18 +1,18 @@
 import InnerBanner from "../Common/InnerBanner";
 import {
   BannerData, 
-  focusData, 
-  criteriaData 
+  fsData, 
+  academicsData 
 } from "./data"; 
-import FutureFocus from "./sections/FutureFocus";  
-import SelectionCriteria from "./sections/SelectionCriteria"; 
+import FosteringStrong from "./sections/FosteringStrong";  
+import BeyondAcademics from "./sections/BeyondAcademics"; 
 
 const Index = () => {
   return (
     <>
       <InnerBanner BannerData={BannerData} /> 
-      <FutureFocus focusData={focusData} />  
-      <SelectionCriteria criteriaData={criteriaData} />  
+      <FosteringStrong fsData={fsData} />  
+      <BeyondAcademics academicsData={academicsData} />  
     </>
   );
 };

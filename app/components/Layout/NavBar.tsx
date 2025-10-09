@@ -60,7 +60,7 @@ const NavBar = () => {
         }`}
       >
         <div className="container">
-          <div className="bg-white flex justify-between lg:pl-3 rounded-[10px] h-[70px] lg:h-full">
+          <div className="bg-white flex justify-between lg:pl-3 rounded-[10px] h-[70px] lg:h-full" style={{boxShadow:"0px 4px 45px 0px #0000000F"}}>
             <div className="flex gap-12 items-center">
               <div className="flex items-center justify-center h-full gap-4">
                 <div className="lg:py-3">

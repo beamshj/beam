@@ -1,0 +1,165 @@
+"use client";
+
+import Image from "next/image"; 
+
+const NewsArea = () => {
+  return (
+    <section className="pb-8 md:pb-12 lg:pb-20 2xl:pb-[135px] pt-[135px] lg:pt-[198px] 2xl:pt-[193px]">
+      <div className="container">
+        <div>
+          <ul className="flex items-center gap-[3px] text-colorpara">
+            <li>Home</li>
+            <li>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="15"
+                height="14"
+                viewBox="0 0 15 14"
+                fill="none"
+              >
+                <path
+                  d="M5.56836 10.8141L9.64336 7.27455C10.1246 6.85653 10.1246 6.17251 9.64336 5.75449L5.56836 2.21492"
+                  stroke="#626262"
+                  strokeMiterlimit="10"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </li>
+            <li>
+              <a href="#">News & Media</a>
+            </li>
+            <li>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="15"
+                height="14"
+                viewBox="0 0 15 14"
+                fill="none"
+              >
+                <path
+                  d="M5.56836 10.8141L9.64336 7.27455C10.1246 6.85653 10.1246 6.17251 9.64336 5.75449L5.56836 2.21492"
+                  stroke="#626262"
+                  strokeMiterlimit="10"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </li>
+            <li className="text-black">News</li>
+          </ul>
+        </div>
+        <div className="mt-4 md:mt-6 xl:mt-8 2xl:mt-12 mb-4 md:mb-6 xl:mb-8 2xl:mb-8">
+          <h2 className="text-xl md:text-2xl xl:text-3xl 2xl:text-4xl font-light leading-tight text-black lettersp-4">
+            Challenges Faced by Elementary School Students in 2022
+          </h2>
+        </div>
+        <div className="flex justify-between pl-5">
+          <div>
+            <ul className="list-disc lg:flex gap-10  text-colorpara text-sm">
+              <li>Published in Blog on July 14, 2025</li>
+              <li>10 mins read</li>
+              <li>Curriculum</li>
+            </ul>
+          </div>
+          <div>
+            <Image
+              src="/images/newsdetails/share.svg"
+              alt=""
+              width={19}
+              height={22}
+            />
+          </div>
+        </div>
+        <div className="py-4 md:py-6 xl:py-8 2xl:py-12">
+          <Image
+            src="/images/newsdetails/banner.jpg"
+            alt=""
+            width={1360}
+            height={535}
+            className="rounded-sm"
+          />
+        </div>
+        <div>
+          <p className="text-colorpara text-sm font-light">
+            Elementary students faced many challenges after COVID-19, especially
+            with the sudden shift to online learning. Returning to physical
+            classrooms in 2022 added to their struggles, changing the overall
+            school culture. This blog explores the key challenges they faced
+            post-pandemic.
+          </p>
+          <h3 className="text-[1.3rem] md:text-md xl:text-lg 2xl:text-xl font-light text-black leading-[1.18]  pt-4 md:pt-6 2xl:pt-10 mb-4  xl:mb-5 2xl:mb-5">
+            Elementary School Education During COVID-19
+          </h3>
+          <p className="text-colorpara text-sm font-light">
+            The pandemic disrupted education worldwide, replacing in-person
+            learning with online classes. This shift weakened student-teacher
+            interaction and made it hard for young students to build
+            friendships. Elementary students especially struggled to focus
+            during video lessons, and teachers found it difficult to address
+            doubts effectively.
+          </p>
+          <h3 className="text-[1.3rem] md:text-md xl:text-lg 2xl:text-xl font-light text-black leading-[1.18]  pt-4 md:pt-6 2xl:pt-10 mb-4  xl:mb-5 2xl:mb-5">
+            Elementary School Education Post COVID-19
+          </h3>
+          <p className="text-colorpara text-sm font-light">
+            After nearly two years of school closures, returning to physical
+            classrooms was tough for elementary students. Many struggled to
+            adjust to routines, follow safety protocols, and adapt to hybrid
+            learning. Poor virtual kindergarten education left gaps in basic
+            skills like numbers and letters, making the transition even harder.
+          </p>
+          <h3 className="text-[1.3rem] md:text-md xl:text-lg 2xl:text-xl font-light text-black leading-[1.18]  pt-4 md:pt-6 2xl:pt-10 mb-4  xl:mb-5 2xl:mb-5">
+            Challenges Faced By Elementary Students in Classroom  
+          </h3>
+          <div className=" mb-4 md:mb-6 xl:mb-7 ">
+            <ul className="list-disc pl-5 pb-3">
+              <li className="text-sm font-medium text-black">
+                Emotional and Social Development
+              </li>
+            </ul>
+            <p>
+              Due to the pandemic, children lacked social interaction and did
+              more solo work during online classes. Returning to school in 2022,
+              many faced stress from lifestyle changes, loss, and disrupted
+              learning. Teachers must focus on emotional and social support to
+              help them readjust.
+            </p>
+          </div>
+          <div className=" mb-4 md:mb-6 xl:mb-7 ">
+            <ul className="list-disc pl-5 pb-3">
+              <li className="text-sm font-medium text-black">
+                Dependence on Technology
+              </li>
+            </ul>
+            <p>
+              With increased virtual learning, elementary students rely more on
+              gadgets for schoolwork. While technology aids learning, it can
+              isolate them from the real world. Parents and teachers should
+              guide healthy tech use and encourage offline activities like
+              &quot;analog weekends&quot; for balance.
+            </p>
+          </div>
+          <div >
+            <ul className="list-disc pl-5 pb-3">
+              <li className="text-sm font-medium text-black">
+                Prioritize Mental Health And Well-Being
+              </li>
+            </ul>
+            <p>
+              Virtual learning made young students tech-dependent. While
+              helpful, it can lead to disconnection from real life. Parents and
+              teachers should promote healthy tech habits and offline
+              activities.
+            </p>
+          </div>
+        </div> 
+        
+        <div className="pt-8 md:pt-12 lg:pt-20 2xl:pt-[135px]"><hr /></div>
+      </div>
+      <div></div>
+    </section>
+  );
+};
+
+export default NewsArea;

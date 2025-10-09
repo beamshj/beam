@@ -31,18 +31,16 @@ const ContactForm: React.FC = () => {
   };
 
   return (
-    <section className="container py-12 md:py-20 xl:py-[135px]">
-      <div className="flex flex-col lg:flex-row gap-[103px]">
+    <section className="container py-10 lg:py-15 xl:py-[135px]">
+      <div className="flex flex-col lg:flex-row gap-5 lg:gap-10 xl:gap-20 2xl:gap-[103px]">
         {/* Left section */}
         <div className="lg:w-[34%]">
-          <h1 className="text-3xl xl:text-4xl text-black font-light leading-[1.111] lettersp-4">
-            Get In Touch
-          </h1>
+          <h1 className="text-lg lg:text-xl xl:text-3xl 2xl:text-4xl text-black font-light leading-[1.111] lettersp-4"> Get In Touch </h1>
           <p className="text-colorpara text-sm leading-[1.52] mt-[13px]">
             Together, we can manage smarter and learn further.
           </p>
           <div className="mt-[13px] text-sm leading-[1.52] font-light">
-            <h2 className="text-primary text-xl leading-[1.2]">BEAM</h2>
+            <h2 className="text-primary text-md lg:text-lg xl:text-xl leading-[1.2]">BEAM</h2>
             <p className="text-colorpara mt-[17px]">
               The City Gate, Al Ittihad Road
               <br />
@@ -51,13 +49,7 @@ const ContactForm: React.FC = () => {
             <div className="space-y-[17px] mt-[17px]">
               {/* First row */}
               <div className="flex items-center gap-[20px]">
-                <Image
-                  src="/images/contact-us/icons/phone.svg"
-                  alt="Location"
-                  width={24}
-                  height={24}
-                  className="object-contain"
-                />
+                <Image src="/images/contact-us/icons/phone.svg" alt="Location" width={24} height={24} className="object-contain" />
                 <p className="font-light text-sm leading-[1.52] text-primary">
                   800 BEAM (2326)
                 </p>
@@ -65,17 +57,8 @@ const ContactForm: React.FC = () => {
 
               {/* Second row */}
               <div className="flex items-center gap-[20px]">
-                <Image
-                  src="/images/contact-us/icons/email.svg"
-                  alt="Mail"
-                  width={24}
-                  height={24}
-                  className="object-contain"
-                />
-                <a
-                  href="mailto:enquiries@beam.co.ae"
-                  className="text-primary font-light text-sm leading-[1.52]"
-                >
+                <Image src="/images/contact-us/icons/email.svg" alt="Mail" width={24} height={24} className="object-contain" />
+                <a href="mailto:enquiries@beam.co.ae" className="text-primary font-light text-sm leading-[1.52]" >
                   enquiries@beam.co.ae
                 </a>
               </div>
@@ -95,17 +78,13 @@ const ContactForm: React.FC = () => {
         </div>
 
         {/* Right form */}
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="lg:w-[68%] lg:space-y-[70px]"
-        >
+        <form onSubmit={handleSubmit(onSubmit)} className="lg:w-[68%] lg:space-y-[70px]" >
           <div className="flex flex-col lg:flex-row lg:gap-[54px]">
             <div className="w-full lg:w-1/2">
-              <input
-                type="text"
+              <input type="text"
                 placeholder="Enter Your First Name"
                 {...register("firstName")}
-                className="w-full border-b border-colorpara py-[23px] focus:outline-none placeholder:text-colorpara text-sm"
+                className="w-full border-b border-colorpara py-2 xl:py-[23px] focus:outline-none placeholder:text-colorpara text-sm"
               />
               <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
                 {errors.firstName?.message || ""}
@@ -117,7 +96,7 @@ const ContactForm: React.FC = () => {
                 type="text"
                 placeholder="Enter Second Name"
                 {...register("lastName")}
-                className="w-full border-b border-colorpara py-[23px] focus:outline-none placeholder:text-colorpara text-sm"
+                className="w-full border-b border-colorpara py-2 xl:py-[23px] focus:outline-none placeholder:text-colorpara text-sm"
               />
               <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
                 {errors.lastName?.message || ""}
@@ -131,7 +110,7 @@ const ContactForm: React.FC = () => {
                 type="email"
                 placeholder="Enter Your Email ID"
                 {...register("email")}
-                className="w-full border-b border-colorpara py-[23px] focus:outline-none placeholder:text-colorpara text-sm"
+                className="w-full border-b border-colorpara py-2 xl:py-[23px] focus:outline-none placeholder:text-colorpara text-sm"
               />
               <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
                 {errors.email?.message || ""}
@@ -143,7 +122,7 @@ const ContactForm: React.FC = () => {
                 type="text"
                 placeholder="Enter Your Phone Number"
                 {...register("phone")}
-                className="w-full border-b border-colorpara py-[23px] focus:outline-none placeholder:text-colorpara text-sm"
+                className="w-full border-b border-colorpara py-2 xl:py-[23px] focus:outline-none placeholder:text-colorpara text-sm"
               />
               <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
                 {errors.phone?.message || ""}
@@ -154,7 +133,7 @@ const ContactForm: React.FC = () => {
           <div className="relative w-full">
             <select
               {...register("purpose")}
-              className="w-full border-b border-colorpara py-[23px] pr-10 focus:outline-none bg-white text-colorpara text-sm appearance-none"
+              className="w-full border-b border-colorpara py-2 xl:py-[23px] pr-10 focus:outline-none bg-white text-colorpara text-sm appearance-none"
             >
               <option value="">Purpose of enquiry</option>
               <option value="admission">Admission</option>
@@ -164,12 +143,7 @@ const ContactForm: React.FC = () => {
 
             {/* Custom arrow icon */}
             <span className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none">
-              <Image
-                src="/images/arrow-down.svg"
-                width={24}
-                height={24}
-                alt="dropdown arrow"
-              />
+              <Image src="/images/arrow-down.svg" width={24} height={24} alt="dropdown arrow" />
             </span>
 
             {errors.purpose && (
@@ -180,11 +154,7 @@ const ContactForm: React.FC = () => {
           </div>
 
           <div>
-            <textarea
-              rows={4}
-              placeholder="Tell us more"
-              {...register("message")}
-              className="w-full border-b border-colorpara py-[23px] focus:outline-none resize-none placeholder:text-colorpara text-sm"
+            <textarea rows={4} placeholder="Tell us more" {...register("message")} className="w-full border-b border-colorpara py-8 xl:py-[23px] focus:outline-none resize-none placeholder:text-colorpara text-sm"
             />
             {errors.message && (
               <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
@@ -192,7 +162,7 @@ const ContactForm: React.FC = () => {
               </p>
             )}
           </div>
-          <div className="relative inline-block rounded-[50px] p-[1px] bg-gradient-to-r from-[#42BADC] to-[#12586C]">
+          <div className="relative inline-block rounded-[50px] p-[1px] bg-gradient-to-r from-[#42BADC] to-[#12586C] mt-5 2xl:mt-0">
             <button
               type="submit"
               className="group flex items-center justify-center gap-[10px] px-[20px] py-[11px] w-full h-full text-black bg-white rounded-[50px] text-xs font-light overflow-hidden"
@@ -200,13 +170,7 @@ const ContactForm: React.FC = () => {
               SEND MESSAGE
               {/* Arrow circle */}
               <span className="flex items-center justify-center w-[27px] h-[27px] bg-primary rounded-full transition-transform duration-300 group-hover:translate-x-2">
-                <Image
-                  src="/images/arrow-black.svg"
-                  alt="Arrow"
-                  width={8}
-                  height={8}
-                  className="object-contain"
-                />
+                <Image src="/images/arrow-black.svg" alt="Arrow" width={8} height={8} className="object-contain" />
               </span>
             </button>
           </div>
