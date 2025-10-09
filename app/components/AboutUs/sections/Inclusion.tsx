@@ -14,9 +14,9 @@ interface InclusionSectionProps {
 
 const InclusionSection: React.FC<InclusionSectionProps> = ({ data }) => {
   return (
-    <section className="py-12 md:py-20 2xl:py-[135px]">
+    <section className="py-10 xl:py-20 2xl:py-[135px]">
       <div className="container">
-        <div className="relative h-[638px] rounded-[12px] overflow-hidden">
+        <div className="relative h-[500px] 2xl:h-[638px] rounded-[12px] overflow-hidden">
           {/* Background Image inside container */}
           <Image
             src={data.bgImage}
@@ -35,10 +35,10 @@ const InclusionSection: React.FC<InclusionSectionProps> = ({ data }) => {
           ></div>
           {/* Content pinned bottom-left */}
           <div className="absolute bottom-0 left-0 z-10 p-6 xl:p-[60px]">
-            <h2 className="text-3xl 2xl:text-4xl font-light mb-4 leading-[1.111111] text-white">
+            <h2 className="text-xl xl:text-3xl 2xl:text-4xl font-light mb-4 leading-[1.111111] text-white">
               {data.title}
             </h2>
-            <p className="text-sm font-light leading-[1.52] text-white w-[91ch]">
+            <p className="text-sm font-light leading-[1.52] text-white max-w-[91ch]">
               {data.description}
             </p>
           </div>

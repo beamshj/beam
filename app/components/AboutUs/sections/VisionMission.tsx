@@ -31,12 +31,12 @@ const VisionMissionSection = ({
   );
 
   return (
-    <section className="pt-[50px] xl:pt-[70px] 2xl:pt-[90px]">
+    <section className="pt-10 xl:pt-[70px] 2xl:pt-[90px]">
       <div className="container">
         <div className="grid md:grid-cols-2 gap-8">
           {/* Left Content */}
           <div>
-            <h2 className="text-2xl 2xl:text-4xl font-light leading-[1.111111111] text-black mb-[30px] xl:mb-[40px] 2xl:mb-[50px]">
+            <h2 className="text-lg lg:text-xl xl:text-2xl 2xl:text-4xl font-light leading-[1.111111111] text-black mb-3 xl:mb-[40px] 2xl:mb-[50px]">
               {visionMissionItems.mainTitle}
             </h2>
             <p className="text-foreground text-sm leading-[1.526315789473684] mb-[30px]">
@@ -45,21 +45,11 @@ const VisionMissionSection = ({
             {/* Cards */}
             <div className="space-y-[20px] xl:space-y-[25px] 2xl:space-y-[30px]">
               {visionMissionItems.VMItems.map((item) => (
-                <div
-                  key={item.id}
-                  className="flex items-stretch gap-4 cursor-pointer"
-                  onMouseEnter={() => setActive(item.id)}
-                >
+                <div key={item.id} className="flex items-stretch xl:gap-4 cursor-pointer" onMouseEnter={() => setActive(item.id)} >
                   {/* Left icon box - fixed width, stretched height */}
-                  <div
-                    className={`flex-shrink-0 w-[125px] flex items-center justify-center rounded-[12px] transition-colors duration-300 bg-[#F5EBFF] hover:bg-[#DDF7FF] group`}
+                  <div className={`flex-shrink-0 w-fit xl:w-[125px] flex items-center justify-center rounded-[12px] transition-colors duration-300 bg-[#F5EBFF] hover:bg-[#DDF7FF] group p-5 xl:py-0`}
                   >
-                    <Image
-                      src={item.icon}
-                      alt={item.title}
-                      width={70}
-                      height={70}
-                    />
+                    <Image src={item.icon} alt={item.title} width={70} height={70} className="w-auto h-8  xl:h-[70px]" />
                   </div>
 
                   {/* Right content - natural height */}
@@ -76,13 +66,9 @@ const VisionMissionSection = ({
             </div>
           </div>
           {/* Right Image */}
-          <div className="relative w-full h-[250px] md:h-auto rounded-[12px] overflow-hidden">
+          <div className="relative w-full h-[300px] xl:h-[250px] md:h-auto rounded-[12px] overflow-hidden">
             {activeItem && (
-              <Image
-                src={activeItem.image}
-                alt={activeItem.title}
-                fill
-                className="object-cover transition-all duration-500"
+              <Image src={activeItem.image} alt={activeItem.title} fill className="object-cover  transition-all duration-500"
               />
             )}
             <motion.div
