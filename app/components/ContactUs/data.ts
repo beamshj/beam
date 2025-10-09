@@ -11,22 +11,27 @@ export const OurSchoolsData = {
     {
       title: "ASCS Maliha",
       location: "Maliha Road, Sharjah",
-      img: "",
+      img: "/images/contact-us/our-schools/1.jpg",
     },
     {
       title: "ASCS Al Ittihad",
       location: "Al Ittihad Road, Sharjah",
-      img: "",
+      img: "/images/contact-us/our-schools/2.jpg",
     },
     {
       title: "ASCS Al Ittihad",
       location: "Al Ittihad Road, Sharjah",
-      img: "",
+      img: "/images/contact-us/our-schools/3.jpg",
     },
     {
       title: "ASCS Al Ittihad",
       location: "Al Ittihad Road, Sharjah",
-      img: "",
+      img: "/images/contact-us/our-schools/4.jpg",
+    },
+    {
+      title: "ASCS Al Ittihad",
+      location: "Al Ittihad Road, Sharjah",
+      img: "/images/contact-us/our-schools/5.jpg",
     },
   ],
 };
