@@ -19,13 +19,13 @@ export default function ValuesGrid({ values }: Props) {
 
   return (
     <section className="container">
-      <div className="pt-12 md:pt-20 2xl:pt-[135px]">
-        <h2 className="text-xl font-light mb-[30px] xl:mb-[40px] 2xl:mb-[50px] leading-[1.2] text-black">
+      <div className="pt-10 md:pt-20 2xl:pt-[135px]">
+        <h2 className="text-xl font-light mb-3 lg:mb-6 xl:mb-[40px] 2xl:mb-[50px] leading-[1.2] text-black">
           Our Values
         </h2>
-        <div className="grid grid-cols-5 gap-[11px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-[11px]">
           {values?.map((item, index) => (
-            <div key={index} className="flex flex-col">
+            <div key={index} className="flex flex-col w-full">
               {/* Number ABOVE card */}
               <div
                 className={`text-lg font-light mb-2 transition-all duration-300 ${
@@ -39,14 +39,14 @@ export default function ValuesGrid({ values }: Props) {
               <div
                 onMouseEnter={() => setHovered(index)}
                 onMouseLeave={() => setHovered(null)}
-                className="relative h-[400px] xl:h-[500px] 2xl:h-[729px] max-w-[295px] overflow-hidden rounded-[12px] transition-all duration-300 group cursor-pointer"
+                className="relative h-[280px] lg:h-[400px] xl:h-[500px] 2xl:h-[729px] w-full xl:max-w-[295px] overflow-hidden rounded-[12px] transition-all duration-300 group cursor-pointer"
               >
                 {/* Background image */}
                 <Image
                   src={item.image}
                   alt={item.title}
                   fill
-                  className={`object-cover transition-all duration-300 group-hover:scale-105 ${
+                  className={`object-cover w-full transition-all duration-300 group-hover:scale-105 ${
                     hovered === index
                       ? "brightness-100"
                       : "brightness-75 grayscale"
@@ -66,9 +66,9 @@ export default function ValuesGrid({ values }: Props) {
                   {/* Content */}
                   <div className="relative z-10 h-full w-full">
                     {/* Title that moves */}
-                    <div
+                    <h3
                       className={`
-                        absolute rounded-[22px] 2xl:w-[220px] px-2 2xl:px-4 text-lg 3xl:text-xl font-light transition-all duration-500 flex items-center justify-center
+                        absolute rounded-[22px] 2xl:w-[220px] px-4 py-2 2xl:px-4 text-sm 3xl:text-xl font-light transition-all duration-500 flex items-center justify-center
                         ${
                           hovered === index
                             ? "top-3 left-3 text-left border-none bg-[linear-gradient(131deg,rgba(66,186,220,1)_0%,rgba(126,90,163,1)_100%)]"
@@ -77,7 +77,7 @@ export default function ValuesGrid({ values }: Props) {
                       `}
                     >
                       {item.title}
-                    </div>
+                    </h3>
 
                     {/* Points (only show on hover) */}
                     {hovered === index && (

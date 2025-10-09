@@ -1,14 +1,16 @@
 import InnerBanner from "@/app/components/Common/InnerBanner";
-import { BannerData } from "./data";
+import { BannerData, OurSchoolsData } from "./data";
 import ContactForm from "./sections/ContactUs";
 import RegisterInterest from "./sections/RegisterInterest";
+import OurSchools from "./sections/OurSchools";
 
 const Index = () => {
   return (
     <>
       <InnerBanner BannerData={BannerData} />
       <ContactForm />
-      <RegisterInterest />  
+      <OurSchools data={OurSchoolsData} />
+      <RegisterInterest />
     </>
   );
 };
