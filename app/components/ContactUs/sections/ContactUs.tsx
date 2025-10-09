@@ -30,10 +30,8 @@ const ContactForm: React.FC = () => {
     console.log("Submitted data:", data);
   };
 
-
-
   return (
-    <section className="container py-10 md:py-20 xl:py-[135px]">
+    <section className="container py-10 lg:py-15 xl:py-[135px]">
       <div className="flex flex-col lg:flex-row gap-5 lg:gap-10 xl:gap-20 2xl:gap-[103px]">
         {/* Left section */}
         <div className="lg:w-[34%]">
@@ -51,13 +49,7 @@ const ContactForm: React.FC = () => {
             <div className="space-y-[17px] mt-[17px]">
               {/* First row */}
               <div className="flex items-center gap-[20px]">
-                <Image
-                  src="/images/contact-us/icons/phone.svg"
-                  alt="Location"
-                  width={24}
-                  height={24}
-                  className="object-contain"
-                />
+                <Image src="/images/contact-us/icons/phone.svg" alt="Location" width={24} height={24} className="object-contain" />
                 <p className="font-light text-sm leading-[1.52] text-primary">
                   800 BEAM (2326)
                 </p>
@@ -65,17 +57,8 @@ const ContactForm: React.FC = () => {
 
               {/* Second row */}
               <div className="flex items-center gap-[20px]">
-                <Image
-                  src="/images/contact-us/icons/email.svg"
-                  alt="Mail"
-                  width={24}
-                  height={24}
-                  className="object-contain"
-                />
-                <a
-                  href="mailto:enquiries@beam.co.ae"
-                  className="text-primary font-light text-sm leading-[1.52]"
-                >
+                <Image src="/images/contact-us/icons/email.svg" alt="Mail" width={24} height={24} className="object-contain" />
+                <a href="mailto:enquiries@beam.co.ae" className="text-primary font-light text-sm leading-[1.52]" >
                   enquiries@beam.co.ae
                 </a>
               </div>
@@ -171,11 +154,7 @@ const ContactForm: React.FC = () => {
           </div>
 
           <div>
-            <textarea
-              rows={4}
-              placeholder="Tell us more"
-              {...register("message")}
-              className="w-full border-b border-colorpara py-8 xl:py-[23px] focus:outline-none resize-none placeholder:text-colorpara text-sm"
+            <textarea rows={4} placeholder="Tell us more" {...register("message")} className="w-full border-b border-colorpara py-8 xl:py-[23px] focus:outline-none resize-none placeholder:text-colorpara text-sm"
             />
             {errors.message && (
               <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
@@ -191,13 +170,7 @@ const ContactForm: React.FC = () => {
               SEND MESSAGE
               {/* Arrow circle */}
               <span className="flex items-center justify-center w-[27px] h-[27px] bg-primary rounded-full transition-transform duration-300 group-hover:translate-x-2">
-                <Image
-                  src="/images/arrow-black.svg"
-                  alt="Arrow"
-                  width={8}
-                  height={8}
-                  className="object-contain"
-                />
+                <Image src="/images/arrow-black.svg" alt="Arrow" width={8} height={8} className="object-contain" />
               </span>
             </button>
           </div>

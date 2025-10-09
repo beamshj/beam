@@ -31,7 +31,7 @@ const RegisterInterest: React.FC = () => {
   };
 
   return (
-    <div className="pb-12 md:pb-20 xl:pb-[135px]">
+    <div className="pb-0 lg:pb-20 xl:pb-[135px]">
       <div
         className="relative w-full max-w-[1920px] h-auto py-12 2xl:py-0 2xl:h-[736px] bg-cover bg-center flex justify-center items-center"
         style={{
@@ -39,16 +39,16 @@ const RegisterInterest: React.FC = () => {
         }}
       >
         <div className="absolute inset-0 bg-black/78"></div>
-        <div className="relative z-10 container flex flex-col lg:flex-row gap-[30px] lg:gap-[117px]">
+        <div className="relative z-10 container flex flex-col lg:flex-row gap-0 lg:gap-[117px]">
           {/* Left section */}
           <div className="lg:w-[36%]">
-            <h1 className="text-3xl xl:text-4xl text-white font-light leading-[1.111] lettersp-4">
+            <h1 className="lg:text-2xl xl:text-3xl 2xl:text-4xl text-white font-light leading-[1.111] lettersp-4">
               Register Your Interest
             </h1>
-            <p className="text-white text-xl leading-[1.2] mt-[27px]">
+            <p className="text-white text-xl leading-[1.2] mt-4 xl:mt-[27px]">
               Take the first step
             </p>
-            <div className="mt-[27px] text-sm leading-[1.52] font-light">
+            <div className="mt-4 xl:mt-[27px] text-sm leading-[1.52] font-light">
               <p className="text-white">
                 Register your interest at BEAM’s Creative Science Schools to be
                 contacted by our Registrations team.
@@ -58,7 +58,7 @@ const RegisterInterest: React.FC = () => {
           {/* Right form */}
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="lg:w-[68%] lg:space-y-[70px]"
+            className="lg:w-[68%] lg:space-y-[70px] mt-10 xl:mt-0"
           >
             <div className="flex flex-col lg:flex-row lg:gap-[54px]">
               <div className="w-full lg:w-1/2">
