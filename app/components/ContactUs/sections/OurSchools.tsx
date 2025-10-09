@@ -22,11 +22,11 @@ export default function OurSchools({ data }: { data: OurSchoolsProps }) {
     <section className="pb-12 md:pb-20 xl:pb-[135px]">
       <div className="container overflow-hidden">
         {/* Title + Description */}
-        <div className="mb-[30px]">
-          <h2 className="text-4xl font-light text-black leading-[1.1111]">
+        <div className="mb-5 xl:mb-[30px]">
+          <h2 className="text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl font-light text-black leading-[1.1111]">
             {title}
           </h2>
-          <p className="text-colorpara text-sm leading-[1.52] mt-[50px]">
+          <p className="text-colorpara text-sm leading-[1.52] mt-3 xl:mt-[50px]">
             {description}
           </p>
         </div>
@@ -49,7 +49,7 @@ export default function OurSchools({ data }: { data: OurSchoolsProps }) {
                   duration: 0.6,
                   ease: "easeInOut",
                 }}
-                className={`relative rounded-[12px] overflow-hidden h-[544px] cursor-pointer flex-shrink-0 md:flex-shrink-0 ${
+                className={`relative rounded-[12px] overflow-hidden h-[350px] xl:h-[544px] cursor-pointer flex-shrink-0 schl ${
                   isActive ? "z-20" : "z-10"
                 }`}
               >
