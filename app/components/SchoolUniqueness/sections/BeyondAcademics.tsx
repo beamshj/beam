@@ -1,0 +1,129 @@
+"use client";
+  
+
+import Image from "next/image";
+import { useState } from "react";
+export interface VMItem {
+  image:string;
+  title:string;
+  description:string;
+  list:string[];
+}
+
+export interface academicsData {
+  title: string;
+  description: string; 
+  items: VMItem[];
+}
+
+const BeyondAcademics = ({
+  academicsData,
+}: {
+  academicsData: academicsData;
+}) => { 
+const [activeIndex, setActiveIndex] = useState<number | null>(0);
+  return (
+    <section className="pb-8 md:pb-12 lg:pb-20 2xl:pb-[135px] ">
+      <div className="container ">
+        <div> 
+          <div>
+            <h2 className="text-2xl 2xl:text-4xl  font-light leading-[1.111111111] text-black mb-4 md:mb-6 xl:mb-8 2xl:mb-8">
+              {academicsData.title}
+            </h2> 
+              <p className=" text-sm leading-[1.526315789473684] max-w-[70ch] mb-6 lg:mb-7 last:lg:mb-13 font-light  text-colorpara">{academicsData.description}</p>
+         
+          
+          </div>
+          <div className="flex flex-col md:flex-row gap-8 md:gap-7 mb-8 md:mb-0">
+   
+          {academicsData.items.map((item, index) => {
+  const isActive = index === activeIndex; // <-- make sure this is defined in your component
+
+  return (
+    <div
+      key={index}
+      className={`
+        relative h-[549px] rounded-[12px] flex flex-col p-4 md:p-0 overflow-hidden
+        transition-all duration-500 ease-in-out
+        ${isActive ? "w-full md:w-[50%]" : "w-full  md:w-[25%]"}
+        group
+      `}
+      style={{
+        background: `url(${item.image}) center/cover no-repeat`,
+      }}
+      onMouseEnter={() => setActiveIndex(index)} // change active on hover
+    >
+      {/* Overlay */}
+      <div
+        className={`absolute top-0 left-0 w-full h-full rounded-[12px] transition-all duration-500  ${
+          isActive ? "bg-[#42BADC9C]" : "bg-[linear-gradient(180deg,rgba(0,0,0,0)_0%,rgba(0,0,0,0.6)_100%)]"
+        }`}
+      ></div>
+      <div className={`absolute    transition-all duration-300 top-5 right-5 p-2 bg-primary   
+      rounded-full w-[75px] h-[75px] flex items-center justify-center   ${
+          isActive ? "bg-white" : ""
+        }  `}>
+                                <Image
+                                  src="/images/home/arrow-top.svg"
+                                  alt={'ad'}
+                                  width={24}
+                                  className={`brightness-0 invert  ${
+                                    isActive ? "invert-0 brightness-100" : ""
+                                  }`}
+                                  height={24}
+                                />
+                              </div>
+
+      {/* Content Wrapper */}
+      <div className="absolute inset-0 flex flex-col justify-end p-5 2xl:p-10 z-10 transition-all duration-500">
+        {/* Title */}
+        <h3
+          className={`
+            text-[23px]  lg:text-[26px] xl:text-lg 2xl:text-xl font-light text-white leading-[1.2] max-w-[12ch]
+            transition-all duration-500 ease-in-out 
+            transform
+            ${isActive ? "-translate-y-[20px]" : ""}
+          `}
+        >
+          {item.title}
+        </h3>
+
+        {/* Description */}
+        <div
+          className={`
+            transition-all duration-500 ease-in-out overflow-hidden
+            ${isActive ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"}
+          `}
+        >
+          <div>
+            <p className="text-[#E0E0E0] font-light max-w-[30ch]">{item.description}</p>
+            <ul className="mt-3 space-y-1 ml-5 list-disc">
+              {item.list.map((listItem, i) => (
+                <li key={i} className="text-[#E0E0E0] font-light">
+                  {listItem}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+})}
+
+    </div>
+
+         
+          
+
+         
+        </div>
+        <div className="pt-8 md:pt-12 lg:pt-20 2xl:pt-[135px]">
+        <hr />
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default BeyondAcademics;
