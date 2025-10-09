@@ -1,12 +1,12 @@
 export const BannerData = {
   BannerTitle: "Founders' Message",
-  BannerImg: "/images/founderMessage/Banner.jpg",
+  BannerImg: "/images/FounderMessage/Banner.jpg",
 };
 
 export const founderMessageData = {
   title: `Founders’
   Message`,
-  photo: "/images/founderMessage/founder.png",
+  photo: "/images/FounderMessage/founder.png",
   name: "Salah A. Bukhatir",
   designation: "Founder & Chairman BEAM",
   description: `It gives me great pleasure to welcome you to Bukhatir Education Advancement and Management (BEAM), a unique environment that sets new standards in the education sector, built on the profound trust posed in us by parents, students, staff and the tremendous success achieved over the last two decades.
