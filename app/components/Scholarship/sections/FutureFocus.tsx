@@ -22,7 +22,7 @@ const FutureFocus = ({
         <div className="grid md:grid-cols-2 gap-6 md:gap-10 xl:gap-18">
           {/* Left Content */}
           <div>
-            <h2 className="text-2xl 2xl:text-4xl max-w-[10ch] font-light leading-[1.111111111] text-black mb-4 md:mb-6 xl:mb-8 2xl:mb-12">
+            <h2 className="text-lg xl:text-2xl 2xl:text-4xl 2xl:max-w-[10ch] font-light leading-[1.111111111] text-black mb-4 md:mb-6 xl:mb-8 2xl:mb-12">
               {focusData.title}
             </h2>
             <p className=" text-sm leading-[1.526315789473684]  font-light  text-colorpara">
