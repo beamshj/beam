@@ -163,11 +163,11 @@ const ContactForm: React.FC = () => {
             </select>
 
             {/* Custom arrow icon */}
-            <span className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+            <span className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none">
               <Image
                 src="/images/arrow-down.svg"
-                width={16}
-                height={8}
+                width={24}
+                height={24}
                 alt="dropdown arrow"
               />
             </span>

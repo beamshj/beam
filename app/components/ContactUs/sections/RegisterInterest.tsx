@@ -85,7 +85,7 @@ const RegisterInterest: React.FC = () => {
               </div>
             </div>
             <div className="flex flex-col lg:flex-row lg:gap-[54px]">
-              <div className="w-full lg:w-1/2">
+              <div className="w-full lg:w-1/2 relative">
                 <input
                   type="text"
                   placeholder="Enter Your Phone Number"
@@ -96,26 +96,27 @@ const RegisterInterest: React.FC = () => {
                   {errors.phone?.message || ""}
                 </p>
               </div>
-              <div className="w-full lg:w-1/2">
+              <div className="w-full lg:w-1/2 relative">
                 <select
                   {...register("findUs")}
                   className="w-full border-b border-white py-[23px] pr-10 focus:outline-none text-white text-sm appearance-none"
                 >
-                  <option value="">Purpose of enquiry</option>
-                  <option value="admission">Admission</option>
-                  <option value="career">Career</option>
-                  <option value="general">General</option>
+                  <option value="">Where did you find us ?</option>
+                  <option value="instagram">Instagram</option>
+                  <option value="website">Website</option>
+                  <option value="friends">Friends</option>
                 </select>
                 {/* Custom arrow icon */}
-                <span className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-                  {/* Replace below with your own icon component or img */}
+                <span className="absolute top-1/3 right-0 -translate-y-1/2 pointer-events-none">
                   <Image
                     src="/images/arrow-down.svg"
-                    width={16}
-                    height={8}
+                    width={24}
+                    height={24}
                     alt="dropdown arrow"
+                    className="filter invert brightness-0 saturate-0 contrast-[2000%]"
                   />
                 </span>
+
                 {errors.findUs && (
                   <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
                     {errors.findUs.message}
@@ -124,52 +125,54 @@ const RegisterInterest: React.FC = () => {
               </div>
             </div>
             <div className="flex flex-col lg:flex-row lg:gap-[55px]">
-              <div className="w-full lg:w-1/2">
+              <div className="w-full lg:w-1/2 relative">
                 <select
                   {...register("selectSchool")}
                   className="w-full border-b border-white py-[23px] pr-10 focus:outline-none text-white text-sm appearance-none"
                 >
-                  <option value="">Purpose of enquiry</option>
+                  <option value="">Select School</option>
                   <option value="admission">Admission</option>
                   <option value="career">Career</option>
                   <option value="general">General</option>
                 </select>
                 {/* Custom arrow icon */}
-                <span className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-                  {/* Replace below with your own icon component or img */}
+                <span className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none">
                   <Image
                     src="/images/arrow-down.svg"
-                    width={16}
-                    height={8}
+                    width={24}
+                    height={24}
                     alt="dropdown arrow"
+                    className="filter invert brightness-0 saturate-0 contrast-[2000%]"
                   />
                 </span>
+
                 {errors.selectSchool && (
                   <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
                     {errors.selectSchool.message}
                   </p>
                 )}
               </div>
-              <div className="w-full lg:w-1/2">
+              <div className="relative w-full lg:w-1/2">
                 <select
                   {...register("selectGrade")}
                   className="w-full border-b border-white py-[23px] pr-10 focus:outline-none text-white text-sm appearance-none"
                 >
-                  <option value="">Purpose of enquiry</option>
+                  <option value="">Select Grade</option>
                   <option value="admission">Admission</option>
                   <option value="career">Career</option>
                   <option value="general">General</option>
                 </select>
                 {/* Custom arrow icon */}
-                <span className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-                  {/* Replace below with your own icon component or img */}
+                <span className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none">
                   <Image
                     src="/images/arrow-down.svg"
-                    width={16}
-                    height={8}
+                    width={24}
+                    height={24}
                     alt="dropdown arrow"
+                    className="filter invert brightness-0 saturate-0 contrast-[2000%]"
                   />
                 </span>
+
                 {errors.selectGrade && (
                   <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
                     {errors.selectGrade.message}
