@@ -36,7 +36,7 @@ const InnerBanner = ({ BannerData }: PageBnrProps) => {
             initial={{ opacity: 0, x: -30, clipPath: "inset(0 100% 0 0)" }}
             animate={{ opacity: 1, x: 0, clipPath: "inset(0 0% 0 0)" }}
             transition={{ duration: 1.3, ease: "easeOut" }}
-            className="text-white text-xl xl:text-2xl 2xl:text-3xl leading-[1.125] mb-[25px] md:mb-[30px] xl:mb-[40px] font-light"
+            className="text-white text-xl md:text-2xl xl:text-2xl 2xl:text-3xl leading-[1.125] mb-[25px] md:mb-[30px] xl:mb-[40px] font-light"
           >
             {(() => {
               const title = BannerData.BannerTitle || "";

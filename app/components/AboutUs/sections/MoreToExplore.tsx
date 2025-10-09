@@ -37,10 +37,10 @@ export default function MoreToExplore({ data }: CardsProps) {
   }, []);
 
   return (
-    <section className="py-12 md:py-20 2xl:py-[135px]">
+    <section className="pt-10 pb-0 xl:py-20 2xl:py-[135px]">
       <div>
         <div ref={headingRef} className="container">
-          <h2 className="text-4xl font-light mb-[50px]">{title}</h2>
+          <h2 className="text-lg xl:text-2xl 2xl:text-4xl font-light mb-4 xl:mb-8 2xl:mb-[50px]">{title}</h2>
         </div>
         <div style={{ paddingLeft: `${leftOffset}px`, paddingRight: 0 }}>
           <Swiper
@@ -59,7 +59,7 @@ export default function MoreToExplore({ data }: CardsProps) {
           >
             {items.map((card, idx) => (
               <SwiperSlide key={idx}>
-                <div className="relative group h-[468px] max-w-[428px] overflow-hidden cursor-pointer rounded-[12px]">
+                <div className="relative group h-[300px] 2xl:h-[468px] max-w-[428px] overflow-hidden cursor-pointer rounded-[12px]">
                   <Image
                     src={card.image}
                     alt={card.title}
@@ -109,7 +109,7 @@ export default function MoreToExplore({ data }: CardsProps) {
           `}</style>
         </div>
       </div>
-      <div className="container border-b border-[#D3D3D3] pb-12 md:pb-20 2xl:pb-[135px]"></div>
+      <div className="container border-b border-[#D3D3D3] pb-5 xl:pb-20 2xl:pb-[135px]"></div>
     </section>
   );
 }
