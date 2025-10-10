@@ -144,7 +144,7 @@ Secondary education in the UAE lasts three years and plays a vital role in shapi
               </li>
             </ul>
             <p className="text-colorpara text-sm font-light mb-3 lg:mb-7"> The UAE has a diverse range of schools that offer different cultural and educational programs. These include music, drama, arts, science, and various career-oriented activities. </p>
-            <p className="text-colorpara text-sm font-light mb-3 lg:mb-7"> Try to get an idea of what kind of extra-curricular activities the school offer and how these can help your child’s future. Ensure the availability of clubs and programs that contribute to your child's interests.</p>
+            <p className="text-colorpara text-sm font-light mb-3 lg:mb-7"> Try to get an idea of what kind of extra-curricular activities the school offer and how these can help your child&apos;s future. Ensure the availability of clubs and programs that contribute to your child&apos;s interests.</p>
             </div>
           <div>
             <ul className="list-disc pl-5 pb-3">
@@ -161,7 +161,7 @@ Secondary education in the UAE lasts three years and plays a vital role in shapi
               Keep Long-Term Goals In Mind
               </li>
             </ul>
-            <p className="text-colorpara text-sm font-light "> Choose a school that matches your child's strengths and supports their future goals.
+            <p className="text-colorpara text-sm font-light "> Choose a school that matches your child&apos;s strengths and supports their future goals.
             BEAM schools offer academic excellence, personal growth, and career-focused learning for a well-rounded education.</p>
            </div>
         </div> 
