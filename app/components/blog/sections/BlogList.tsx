@@ -5,6 +5,7 @@ import Image from "next/image";
 import Select from "react-select";
 import { motion } from "framer-motion";
 import Pagination from "../../Common/Pagination";
+import { moveUp } from "../../motionVarients";
 
 interface BlogItem {
   image: string;
@@ -51,15 +52,15 @@ export default function BlogList({ data }: { data: BlogItem[] }) {
   return (
     <section className="pb-10 xl:pb-20 2xl:pb-[135px]">
       <div className="container">
-        <div className="w-full flex justify-between items-center border-b border-bdrcolor">
+        <div className="w-full flex justify-between items-center border-b border-bdrcolor mb-5 xl:mb-[30px] 2xl:mb-[50px]">
           {/* Header */}
-          <motion.h1 className="text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl lg:leading-[1.111] font-light mb-[30px] xl:mb-[50px] text-black">
+          <motion.h1 variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl lg:leading-[1.111] font-light mb-3 xl:mb-[30px] 2xl:mb-[50px] text-black">
             Blog
           </motion.h1>
           {/* Category Tabs */}
           <div className="hidden lg:flex gap-3">
-            {categories.map((cat) => (
-              <button
+            {categories.map((cat,index) => (
+              <motion.button variants={moveUp(index * 0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}
                 key={cat}
                 onClick={() => {
                   setSelectedCategory(cat);
@@ -73,7 +74,7 @@ export default function BlogList({ data }: { data: BlogItem[] }) {
             }`}
               >
                 {cat.charAt(0).toUpperCase() + cat.slice(1)}
-              </button>
+              </motion.button>
             ))}
           </div>
         </div>
@@ -109,9 +110,9 @@ export default function BlogList({ data }: { data: BlogItem[] }) {
           />
         </div>
         {/* Blog Grid */}
-        <motion.div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-[22px] gap-y-[22px] xl:gap-x-[33px] xl:gap-y-[33px] mt-[65px]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-[22px] gap-y-[22px] xl:gap-x-[33px] xl:gap-y-[33px] mt-5 xl:mt-[65px]">
           {currentBlogs.map((blog, index) => (
-            <motion.div
+            <motion.div variants={moveUp(index * 0.1)} initial="hidden" whileInView="show" viewport={{ once: false, amount: 0.2 }}
               key={index}
               className="rounded-[12px] relative overflow-hidden h-[350px] xl:h-[480px] 2xl:h-[551px] border border-bdrcolor flex flex-col group"
             >
@@ -172,7 +173,7 @@ export default function BlogList({ data }: { data: BlogItem[] }) {
               </div>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
 
         {/* Pagination */}
         <Pagination
