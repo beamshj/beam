@@ -118,7 +118,7 @@ const NewsArea = () => {
                 Emotional and Social Development
               </li>
             </ul>
-            <p>
+            <p className="text-colorpara text-sm font-light">
               Due to the pandemic, children lacked social interaction and did
               more solo work during online classes. Returning to school in 2022,
               many faced stress from lifestyle changes, loss, and disrupted
@@ -132,7 +132,7 @@ const NewsArea = () => {
                 Dependence on Technology
               </li>
             </ul>
-            <p>
+            <p className="text-colorpara text-sm font-light">
               With increased virtual learning, elementary students rely more on
               gadgets for schoolwork. While technology aids learning, it can
               isolate them from the real world. Parents and teachers should
@@ -146,7 +146,7 @@ const NewsArea = () => {
                 Prioritize Mental Health And Well-Being
               </li>
             </ul>
-            <p>
+            <p className="text-colorpara text-sm font-light">
               Virtual learning made young students tech-dependent. While
               helpful, it can lead to disconnection from real life. Parents and
               teachers should promote healthy tech habits and offline

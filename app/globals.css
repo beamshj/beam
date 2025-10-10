@@ -273,3 +273,6 @@ body {
     max-width: 100%!important;
   }
 }
+.finsd .chklast:last-child .linediv{
+  display: none;
+}
