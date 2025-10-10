@@ -399,7 +399,7 @@ body {
 }
 
 .tab-btn span {
-  @apply px-5 py-[11px] text-base font-light block leading-[1.6875] text-[#666666] border border-[#D3D3D3] rounded-full overflow-hidden cursor-pointer relative bg-white transition-all duration-300 ease-in-out;
+  @apply px-5 py-[11px] text-base font-light block leading-[1.6875] text-[#666666] border border-[#D3D3D3] rounded-full overflow-hidden cursor-pointer relative bg-white transition-all duration-300 ease-in-out uppercase;
 }
 
 .tab-btn:hover span {
