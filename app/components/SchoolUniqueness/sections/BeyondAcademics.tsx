@@ -37,7 +37,7 @@ const [activeIndex, setActiveIndex] = useState<number | null>(0);
           <div className="flex flex-col md:flex-row gap-8 md:gap-7 mb-8 md:mb-0">
    
           {academicsData.items.map((item, index) => {
-  const isActive = index === activeIndex; // <-- make sure this is defined in your component
+  const isActive = index === activeIndex;  
 
   return (
     <div
@@ -51,7 +51,7 @@ const [activeIndex, setActiveIndex] = useState<number | null>(0);
       style={{
         background: `url(${item.image}) center/cover no-repeat`,
       }}
-      onMouseEnter={() => setActiveIndex(index)} // change active on hover
+      onMouseEnter={() => setActiveIndex(index)}  
     >
       {/* Overlay */}
       <div
