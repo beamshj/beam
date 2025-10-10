@@ -26,7 +26,7 @@ const SchoolAchievements: React.FC<SchoolAchievementsProps> = ({ data }) => {
           <h2 className="text-xl md:text-2xl xl:text-3xl 2xl:text-4xl font-light lettersp-4 mb-[50px]">
             {title}
           </h2>
-          <p className="text-sm font-light text-colorpara leading-[1.52]">
+          <p className="text-sm font-light text-colorpara leading-[1.52] max-w-[63%]">
             {subtitle}
           </p>
         </div>
