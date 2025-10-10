@@ -1,0 +1,295 @@
+"use client";
+
+import React, { useState } from "react";
+import { ChevronDown } from "lucide-react";
+import Image from "next/image";
+
+interface CampusStats {
+  students: string;
+  nationalities: string;
+  teachers: string;
+}
+
+interface SchoolCard {
+  id: string;
+  name: string;
+  logo: string;
+  location: string;
+  image: string;
+  curriculum: string;
+  stats: CampusStats;
+}
+
+interface SchoolCardsPageProps {
+  title: string;
+  description: string;
+  campuses: SchoolCard[];
+}
+
+const SchoolCards = ({ schoolData }: { schoolData: SchoolCardsPageProps }) => {
+  const { title, description, campuses } = schoolData;
+
+  // Default selections
+  const [selectedCurriculum, setSelectedCurriculum] =
+    useState<string>("american");
+  const [selectedLocation, setSelectedLocation] = useState<string>("Dubai");
+
+  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [activeCard, setActiveCard] = useState<string | null>(null);
+
+  // Extract unique locations (last word of location string)
+  const locations = Array.from(
+    new Set(
+      campuses.map((campus) => {
+        const parts = campus.location.split(",");
+        return parts[parts.length - 1].trim();
+      })
+    )
+  );
+
+  // Filter by selected curriculum & location
+  const filteredCampuses = campuses.filter((campus) => {
+    const matchesCurriculum =
+      campus.curriculum.toLowerCase() === selectedCurriculum.toLowerCase();
+
+    const campusLocation = campus.location.split(",").pop()?.trim();
+    const matchesLocation =
+      campusLocation?.toLowerCase() === selectedLocation.toLowerCase();
+
+    return matchesCurriculum && matchesLocation;
+  });
+
+  const handleCardClick = (id: string) => {
+    if (typeof window !== "undefined" && window.innerWidth < 768) {
+      if (activeCard === id) {
+        setActiveCard(null);
+      } else {
+        setActiveCard(id);
+      }
+    }
+  };
+
+  return (
+    <section className="py-10 xl:py-20 2xl:py-[135px]">
+      <div className="container">
+        {/* Title and Description */}
+        <div className="mb-[50px]">
+          <h1 className="text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl lg:leading-[1.111] font-light mb-[30px] xl:mb-[50px] text-black max-w-[91%] lettersp-2">
+            {title}
+          </h1>
+          <p className="text-sm text-light leading-[1.52] text-colorpara max-w-[89%]">
+            {description}
+          </p>
+        </div>
+
+        {/* Filters */}
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-[65px] pb-[30px] border-b border-bdrcolor">
+          {/* Left Buttons */}
+          <div className="flex gap-3">
+            <button
+              onClick={() => setSelectedCurriculum("british")}
+              className={`px-[20px] py-[11px] border rounded-[50px] text-xs font-light transition-all uppercase  ${
+                selectedCurriculum === "british"
+                  ? "bg-[#C9F3FF] text-black border-[#12586C]"
+                  : "bg-white text-[#666666] hover:bg-gray-200 border-bdrcolor"
+              }`}
+            >
+              BRITISH CURRICULUM
+            </button>
+            <button
+              onClick={() => setSelectedCurriculum("american")}
+              className={`px-[20px] py-[11px] border rounded-[50px] text-xs font-light transition-all uppercase ${
+                selectedCurriculum === "american"
+                  ? "bg-[#C9F3FF] text-black border-[#12586C]"
+                  : "bg-white text-[#666666] hover:bg-gray-200 border-bdrcolor"
+              }`}
+            >
+              AMERICAN CURRICULUM
+            </button>
+          </div>
+
+          {/* Right Dropdown */}
+          <div className="relative">
+            <button
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              className="flex items-center px-[20px] py-[11px] border border-[#12586C] bg-[#C9F3FF] rounded-[50px] text-[#626262] text-xs font-light transition-all min-w-[180px] justify-between"
+            >
+              <span>{selectedLocation}</span>
+              <ChevronDown
+                className={`w-[28px] h-[28px] transition-transform font-light text-[#42BADC] ${
+                  isDropdownOpen ? "rotate-180" : ""
+                }`}
+              />
+            </button>
+
+            {isDropdownOpen && (
+              <div className="absolute top-full mt-1 right-0 bg-white border border-gray-200 rounded-[12px] shadow-lg min-w-[180px] z-10 overflow-hidden transition-colors duration-300">
+                {locations.map((location) => (
+                  <button
+                    key={location}
+                    onClick={() => {
+                      setSelectedLocation(location);
+                      setIsDropdownOpen(false);
+                    }}
+                    className="w-full text-left px-4 py-2.5 hover:bg-gray-50 text-sm text-black hover:text-primary font-light rounded-[12px] transition-colors duration-300"
+                  >
+                    {location}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Campus Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[33px]">
+          {filteredCampuses.map((campus) => (
+            <div
+              key={campus.id}
+              onMouseEnter={() => setHoveredCard(campus.id)}
+              onMouseLeave={() => setHoveredCard(null)}
+              onClick={() => handleCardClick(campus.id)}
+              className="relative rounded-[12px] overflow-hidden cursor-pointer w-full h-[480px] 2xl:h-[551px] 2xl:w-[485px] mx-auto group"
+            >
+              {/* Background Image */}
+              <div
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+                style={{ backgroundImage: `url(${campus.image})` }}
+              >
+                <div className="absolute left-0 bottom-0 right-0 h-[50%] bg-gradient-to-t from-black to-black/0"></div>
+              </div>
+
+              {/* Location & arrow */}
+              <div className="absolute top-[22px] left-[22px] right-[22px] xl:top-[32px] xl:left-[33px] xl:right-[33px] flex items-start justify-between">
+                <div className="flex items-center gap-x-2 bg-[#E6F7FF] backdrop-blur-sm px-[25px] py-[11px] rounded-[50px]">
+                  <Image
+                    src="/images/contact-us/icons/location.svg"
+                    alt="map-icon"
+                    width={24}
+                    height={24}
+                  />
+                  <span className="text-xs font-light text-black">
+                    {campus.location}
+                  </span>
+                </div>
+                {/* Arrow Icon */}
+                <div className="bg-transparent group-hover:bg-primary border-white group-hover:border-primary border xl:w-[75px] xl:h-[75px] w-[55px] h-[55px] rounded-[50px] flex items-center justify-center transition-colors duration-300">
+                  <Image
+                    src="/images/arrow-right-up.svg"
+                    alt="arrow"
+                    width={24}
+                    height={24}
+                  />
+                </div>
+              </div>
+
+              {/* Stats Box */}
+              <div
+                className={`absolute bottom-0 left-0 right-0 transition-all duration-300 ${
+                  hoveredCard === campus.id
+                    ? "translate-y-0 opacity-100"
+                    : "translate-y-full opacity-0"
+                }`}
+              >
+                <div className="bg-[#DDF7FF] backdrop-blur-sm m-[6px] rounded-[12px] px-[19px] py-[18px] space-y-[13px]">
+                  <div
+                    style={{
+                      background:
+                        "linear-gradient(90deg, #42BADC 0%, rgba(126, 90, 163, 0.1) 100%)",
+                    }}
+                    className="flex items-center justify-between px-[15px] py-[14px] rounded-[12px]"
+                  >
+                    <div className="flex items-center justify-center gap-[23px] flex-shrink-0">
+                      <Image
+                        src="/images/beam-schools/icons/1.svg"
+                        alt="map-icon"
+                        width={32}
+                        height={32}
+                      />
+                      <div className="text-md font-light text-black leading-[1.4]">
+                        {campus.stats.students}
+                      </div>
+                    </div>
+                    <div className="text-sm font-light text-colorpara leading-[1.52]">
+                      Active Students
+                    </div>
+                  </div>
+
+                  <div
+                    style={{
+                      background:
+                        "linear-gradient(90deg, #42BADC 0%, rgba(126, 90, 163, 0.1) 100%)",
+                    }}
+                    className="flex items-center justify-between px-[15px] py-[14px] rounded-[12px]"
+                  >
+                    <div className="flex items-center justify-center gap-[23px] flex-shrink-0">
+                      <Image
+                        src="/images/beam-schools/icons/2.svg"
+                        alt="map-icon"
+                        width={32}
+                        height={32}
+                      />
+                      <div className="text-md font-light text-black leading-[1.4]">
+                        {campus.stats.nationalities}
+                      </div>
+                    </div>
+                    <div className="text-sm font-light text-colorpara leading-[1.52]">
+                      Nationalities
+                    </div>
+                  </div>
+
+                  <div
+                    style={{
+                      background:
+                        "linear-gradient(90deg, #42BADC 0%, rgba(126, 90, 163, 0.1) 100%)",
+                    }}
+                    className="flex items-center justify-between px-[15px] py-[14px] rounded-[12px]"
+                  >
+                    <div className="flex items-center justify-center gap-[23px] flex-shrink-0">
+                      <Image
+                        src="/images/beam-schools/icons/3.svg"
+                        alt="map-icon"
+                        width={32}
+                        height={32}
+                      />
+                      <div className="text-md font-light text-black leading-[1.4]">
+                        {campus.stats.teachers}
+                      </div>
+                    </div>
+                    <div className="text-xs font-light text-colorpara">
+                      Teachers
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Campus Name & logo */}
+              <div
+                className={`absolute bottom-[34px] left-[38px] transition-all duration-500 ease-in-out
+  ${
+    hoveredCard === campus.id || activeCard === campus.id
+      ? "opacity-0 translate-y-5"
+      : "opacity-100 translate-y-0"
+  }`}
+              >
+                <Image
+                  src={campus.logo}
+                  alt={campus.name}
+                  width={500}
+                  height={500}
+                  className="w-[104px] h-[56px] object-contain"
+                />
+                <h3 className="text-white text-xl font-light leading-[1.2] mt-[11px]">
+                  {campus.name}
+                </h3>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default SchoolCards;
