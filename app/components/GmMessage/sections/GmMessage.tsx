@@ -1,7 +1,9 @@
 "use client";
 
 import Image from "next/image";
-
+import SplitText from "@/components/SplitText";
+import { motion } from "framer-motion";
+import { moveUp, moveRight } from "../../motionVarients";
 interface GmMessageProps {
   title: string;
   photo: string;
@@ -20,22 +22,49 @@ export default function GmMessage({ data }: { data: GmMessageProps }) {
         {/* Left Column */}
         <div className="w-full xl:max-w-[54%]">
           <h2 className="text-lg md:text-xl xl:text-3xl 2xl:text-4xl leading-[1.1111] font-light text-black mb-3 xl:mb-[50px]">
-            {" "}
+            {/* {" "}
             {title.split("\n").map((line, idx) => (
               <span key={idx} className="xl:flex">
                 {" "}
                 {line}{" "}
               </span>
-            ))}{" "}
+            ))}{" "} */}
+            <SplitText
+              tag="span"
+              text={title}
+              className=""
+              delay={100}
+              duration={1}
+              ease="power3.out"
+              splitType="words"
+              from={{ opacity: 0, y: 40 }}
+              to={{ opacity: 1, y: 0 }}
+              threshold={0.1}
+              rootMargin="-10px"
+              textAlign="left"
+            />
           </h2>
 
           <div className="text-colorpara font-light text-sm leading-[1.526] space-y-3 2xl:space-y-7">
             {intro.split("\n").map(
               (line, idx) =>
                 line.trim() && (
-                  <p key={idx} className="whitespace-pre-line ">
-                    {line}
-                  </p>
+                  <div key={idx} className="whitespace-pre-line ">
+                    <SplitText
+                      tag="span"
+                      text={line}
+                      className=""
+                      delay={100}
+                      duration={1}
+                      ease="power3.out"
+                      splitType="lines"
+                      from={{ opacity: 0, y: 40 }}
+                      to={{ opacity: 1, y: 0 }}
+                      threshold={0.1}
+                      rootMargin="-10px"
+                      textAlign="left"
+                    />
+                  </div>
                 )
             )}
           </div>
@@ -51,14 +80,7 @@ export default function GmMessage({ data }: { data: GmMessageProps }) {
           {/* For small screens, simplified stacked structure */}
           <div className="relative xl:hidden w-full h-[300px] xl:h-full rounded-[12px] overflow-hidden bg-[#F6F6F6]">
             <div className="absolute inset-0 rounded-[12px] bg-[linear-gradient(163.29deg,rgba(66,186,220,0)_53.09%,#00C7FF_109.87%)] opacity-60 z-10 pointer-events-none" />
-            <Image
-              src={photo}
-              alt={name}
-              height={540}           
-              width={616}
-              className="object-contain xl:object-cover h-[300px] xl:h-[540px] z-0 rounded-[12px]"
-            />
-
+            <Image  src={photo} alt={name} height={540}  width={616} className="object-contain xl:object-cover h-[300px] xl:h-[540px] z-0 rounded-[12px]" />
             {/* Info Box (mobile version) */}
             <div
               className="absolute z-20 bottom-6 w-[90%] sm:w-[70%] xl:w-[60%] rounded-[12px] p-[18px] 
@@ -87,12 +109,11 @@ export default function GmMessage({ data }: { data: GmMessageProps }) {
           </div>
 
           {/* Original desktop design — unchanged */}
-          <div className="hidden xl:block absolute right-0 left-[44px] z-10 bottom-0 h-full xl:w-[567px] rounded-[12px] overflow-hidden">
+          <motion.div variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="hidden xl:block absolute right-0 left-[44px] z-10 bottom-0 h-full xl:w-[567px] rounded-[12px] overflow-hidden">
             <Image src={photo} alt={name} fill className="object-cover" />
-          </div>
+          </motion.div>
 
-          <div
-            className="hidden xl:block absolute z-30 left-0 bottom-[58px] rounded-[12px] py-[25px] px-[27px] 
+          <motion.div variants={moveRight(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="hidden xl:block absolute z-30 left-0 bottom-[58px] rounded-[12px] py-[25px] px-[27px] 
             xl:w-[445px] md:w-[300px] shadow-[0px_4px_66px_0px_rgba(0,0,0,0.16)]"
             style={{
               background: "linear-gradient(90deg, #F5EBFF 0%, #C9F3FF 100%)",
@@ -116,16 +137,29 @@ export default function GmMessage({ data }: { data: GmMessageProps }) {
                 );
               })()}
             </p>
-          </div>
+          </motion.div>
         </div>
       </div>
       <div className="container mt-[50px] text-colorpara font-light text-sm leading-[1.526] space-y-3 xl:space-y-7">
         {description.split("\n").map(
           (line, idx) =>
             line.trim() && (
-              <p key={idx} className="whitespace-pre-line">
-                {line}
-              </p>
+              <div key={idx} className="whitespace-pre-line">
+                <SplitText
+                  tag="span"
+                  text={line}
+                  className=""
+                  delay={100}
+                  duration={1}
+                  ease="power3.out"
+                  splitType="lines"
+                  from={{ opacity: 0, y: 40 }}
+                  to={{ opacity: 1, y: 0 }}
+                  threshold={0.1}
+                  rootMargin="-10px"
+                  textAlign="left"
+                />
+              </div>
             )
         )}
       </div>
