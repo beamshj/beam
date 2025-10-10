@@ -30,7 +30,7 @@ const ProudMoments: React.FC<ProudMomentsProps> = ({ data }) => {
   return (
     <div className="container py-10 xl:py-20 2xl:py-[135px] border-b border-bdrcolor overflow-hidden">
       <motion.div
-        className="relative w-full h-[450px] xl:h-[600px] 2xl:h-[739px] overflow-hidden rounded-[12px]"
+        className="relative w-full h-[300px]  md:h-[450px] xl:h-[600px] 2xl:h-[739px] overflow-hidden rounded-[12px]"
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: "easeInOut" }}
@@ -48,7 +48,7 @@ const ProudMoments: React.FC<ProudMomentsProps> = ({ data }) => {
         <div className="absolute top-0 left-0 w-full h-full z-20 bg-[linear-gradient(90deg,_rgba(0,0,0,0.9)_9%,_rgba(0,0,0,0)_84%)]"></div>
 
         {/* Content */}
-        <div className="relative z-30 h-full flex items-end left-[97px] bottom-[74px]">
+        <div className="relative z-30 h-full flex items-end left-10 xl:left-[97px] bottom-10  xl:bottom-[74px]">
           <motion.div
             className="flex flex-col w-full"
             variants={container}
@@ -60,11 +60,11 @@ const ProudMoments: React.FC<ProudMomentsProps> = ({ data }) => {
               <SplitText
                 tag="span"
                 text={title}
-                className="text-xl md:text-2xl xl:text-3xl 2xl:text-4xl leading-[1.2] w-full md:w-[65%] font-light tracking-[0.04em] text-center md:text-left lettersp-4"
+                className="text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl leading-[1.2] w-full md:max-w-[65%] font-light tracking-[0.04em] text-center md:text-left lettersp-4"
                 delay={60}
                 duration={0.3}
                 ease="power3.out"
-                splitType="chars"
+                splitType="words"
                 from={{ opacity: 0, y: 40 }}
                 to={{ opacity: 1, y: 0 }}
                 threshold={0.1}
@@ -74,7 +74,7 @@ const ProudMoments: React.FC<ProudMomentsProps> = ({ data }) => {
             </h2>
 
             <motion.div
-              className="w-full md:w-3/4 h-[1px] bg-gradient-to-r from-white to-transparent origin-left mt-[49px] mb-[68px]"
+              className="w-full md:w-3/4 h-[1px] bg-gradient-to-r from-white to-transparent origin-left mt-5 xl:mt-[49px] mb-5 xl:mb-[68px]"
               variants={lineFade}
             />
 
@@ -89,7 +89,7 @@ const ProudMoments: React.FC<ProudMomentsProps> = ({ data }) => {
                 width={95}
                 height={95}
                 onClick={openPopup}
-                className="cursor-pointer transition-transform duration-300 hover:scale-105"
+                className="cursor-pointer w-15 h-15 xl:w-[95px] xl:h-[95px] transition-transform duration-300 hover:scale-105"
               />
               <span>Here</span>
             </motion.div>
