@@ -1,7 +1,12 @@
 "use client";
 
 import Image from "next/image";
-
+import { motion } from "framer-motion";
+import { moveUp } from "@/app/components/motionVarients";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEffect } from "react";
+gsap.registerPlugin(ScrollTrigger);
 interface InclusionData {
   bgImage: string;
   title: string;
@@ -13,10 +18,30 @@ interface InclusionSectionProps {
 }
 
 const InclusionSection: React.FC<InclusionSectionProps> = ({ data }) => {
+
+  useEffect(() => {
+    gsap.from(".inclusion-section", {
+      scrollTrigger: {
+        trigger: ".inclusion-section",
+        start: "center center",
+        end: "bottom 50%",
+        scrub: 1,
+        toggleActions: "play none none reverse",
+      },
+      y: 150,
+      rotationX: 75, // tilt as if lying on the floor
+      transformOrigin: "top center", // pivot from bottom edge
+      opacity: 0,
+      duration: 1.2,
+      ease: "power3.out",
+      perspective: 800, // adds depth
+    });
+  }, []);
+
   return (
-    <section className="py-10 xl:py-20 2xl:py-[135px]">
+    <section className="py-10 xl:py-20 2xl:py-[135px] ">
       <div className="container">
-        <div className="relative h-[500px] 2xl:h-[638px] rounded-[12px] overflow-hidden">
+        <div className="relative h-[500px] 2xl:h-[638px] rounded-[12px] overflow-hidden ">
           {/* Background Image inside container */}
           <Image
             src={data.bgImage}
@@ -35,12 +60,12 @@ const InclusionSection: React.FC<InclusionSectionProps> = ({ data }) => {
           ></div>
           {/* Content pinned bottom-left */}
           <div className="absolute bottom-0 left-0 z-10 p-6 xl:p-[60px]">
-            <h2 className="text-xl xl:text-3xl 2xl:text-4xl font-light mb-4 leading-[1.111111] text-white">
+            <motion.h2 variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="text-xl xl:text-3xl 2xl:text-4xl font-light mb-4 leading-[1.111111] text-white">
               {data.title}
-            </h2>
-            <p className="text-sm font-light leading-[1.52] text-white max-w-[91ch]">
+            </motion.h2>
+            <motion.p variants={moveUp(0.4)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="text-sm font-light leading-[1.52] text-white max-w-[91ch]">
               {data.description}
-            </p>
+            </motion.p>
           </div>
         </div>
       </div>
