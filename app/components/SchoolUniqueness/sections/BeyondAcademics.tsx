@@ -33,30 +33,44 @@ const BeyondAcademics = ({
             <p className=" text-sm leading-[1.526315789473684] max-w-[70ch] mb-6 lg:mb-7 last:lg:mb-13 font-light  text-colorpara">{academicsData.description}</p>
           </div>
           <div className="flex flex-col md:flex-row gap-8 md:gap-7 mb-8 md:mb-0">
-            {academicsData.items.map((item, index) => {
-              const isActive = index === activeIndex; // <-- make sure this is defined in your component
-              return (
-                <div key={index}
-                  className={`relative h-[549px] rounded-[12px] flex flex-col p-4 md:p-0 overflow-hidden transition-all duration-500 ease-in-out
-        ${isActive ? "w-full md:w-[50%]" : "w-full  md:w-[25%]"} group `}
-                  style={{
-                    background: `url(${item.image}) center/cover no-repeat`,
-                  }}
-                  onMouseEnter={() => setActiveIndex(index)} // change active on hover
-                >
-                  {/* Overlay */}
-                  <div
-                    className={`absolute top-0 left-0 w-full h-full rounded-[12px] transition-all duration-500  ${isActive ? "bg-[#42BADC9C]" : "bg-[linear-gradient(180deg,rgba(0,0,0,0)_0%,rgba(0,0,0,0.6)_100%)]"
-                      }`}
-                  ></div>
-                  <div className={`absolute transition-all duration-300 top-5 right-5 p-4 xl:p-2 bg-primary rounded-full xl:w-[75px] xl:h-[75px] flex items-center justify-center   ${isActive ? "bg-white" : ""
-                    }  `}>
-                    <Image src="/images/home/arrow-top.svg" alt={'ad'} width={24}
-                      className={`brightness-0 invert w-auto h-3 xl:h-[24px]  ${isActive ? "invert-0 brightness-100" : ""
-                        }`}
-                      height={24}
-                    />
-                  </div>
+   
+          {academicsData.items.map((item, index) => {
+  const isActive = index === activeIndex;  
+
+  return (
+    <div
+      key={index}
+      className={`
+        relative h-[549px] rounded-[12px] flex flex-col p-4 md:p-0 overflow-hidden
+        transition-all duration-500 ease-in-out
+        ${isActive ? "w-full md:w-[50%]" : "w-full  md:w-[25%]"}
+        group
+      `}
+      style={{
+        background: `url(${item.image}) center/cover no-repeat`,
+      }}
+      onMouseEnter={() => setActiveIndex(index)}  
+    >
+      {/* Overlay */}
+      <div
+        className={`absolute top-0 left-0 w-full h-full rounded-[12px] transition-all duration-500  ${
+          isActive ? "bg-[#42BADC9C]" : "bg-[linear-gradient(180deg,rgba(0,0,0,0)_0%,rgba(0,0,0,0.6)_100%)]"
+        }`}
+      ></div>
+      <div className={`absolute    transition-all duration-300 top-5 right-5 p-2 bg-primary   
+      rounded-full w-[75px] h-[75px] flex items-center justify-center   ${
+          isActive ? "bg-white" : ""
+        }  `}>
+                                <Image
+                                  src="/images/home/arrow-top.svg"
+                                  alt={'ad'}
+                                  width={24}
+                                  className={`brightness-0 invert  ${
+                                    isActive ? "invert-0 brightness-100" : ""
+                                  }`}
+                                  height={24}
+                                />
+                              </div>
 
                   {/* Content Wrapper */}
                   <div className="absolute inset-0 flex flex-col justify-end p-5 2xl:p-10 z-10 transition-all duration-500">
