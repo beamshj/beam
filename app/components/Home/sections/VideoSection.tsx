@@ -15,9 +15,9 @@ const VideoSection = () => {
   return (
     <motion.section
       className="w-full relative max-w-[1920px] mx-auto overflow-hidden 2xl:h-screen py-10 md:py-28 2xl:py-0"
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: "easeInOut" }}
+      initial={{ opacity: 0, scale: 0.9, rotate: -4, x: -100 }}
+      whileInView={{ opacity: 1, scale: 1, rotate: 0, x: 0 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
       viewport={{ once: true }}
     >
       <Image
@@ -35,21 +35,21 @@ const VideoSection = () => {
           whileInView="show"
           viewport={{ once: true, amount: 0.2 }}
         >
-          <h2> 
-          <SplitText
-          tag="span"
+          <h2>
+            <SplitText
+              tag="span"
               text={"Get to Know Our School!"}
               className="text-xl md:text-2xl xl:text-3xl 2xl:text-4xl leading-[1.2] text-white w-full md:w-3/4 font-light lettersp-4 text-center md:text-left"
-          delay={100}
-          duration={0.6}
-          ease="power3.out"
-          splitType="chars"
-          from={{ opacity: 0, y: 40 }}
-          to={{ opacity: 1, y: 0 }}
-          threshold={0.1}
-          rootMargin="-100px"
-          textAlign="left"
-        />
+              delay={100}
+              duration={0.6}
+              ease="power3.out"
+              splitType="chars"
+              from={{ opacity: 0, y: 40 }}
+              to={{ opacity: 1, y: 0 }}
+              threshold={0.1}
+              rootMargin="-100px"
+              textAlign="left"
+            />
           </h2>
 
           <motion.div
