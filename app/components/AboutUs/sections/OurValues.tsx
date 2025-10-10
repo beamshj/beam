@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import { useState } from "react";
-
+import { motion } from "framer-motion";
+import { moveUp } from "../../motionVarients";
 export interface ValueItem {
   number: string;
   title: string;
@@ -20,26 +21,26 @@ export default function ValuesGrid({ values }: Props) {
   return (
     <section className="container">
       <div className="pt-10 md:pt-20 2xl:pt-[135px]">
-        <h2 className="text-xl font-light mb-3 lg:mb-6 xl:mb-[40px] 2xl:mb-[50px] leading-[1.2] text-black">
+        <motion.h2 variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="text-xl font-light mb-3 lg:mb-6 xl:mb-[40px] 2xl:mb-[50px] leading-[1.2] text-black">
           Our Values
-        </h2>
+        </motion.h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-[11px]">
           {values?.map((item, index) => (
-            <div key={index} className="flex flex-col w-full">
+            <motion.div variants={moveUp(index * 0.1)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} key={index} className="flex flex-col w-full">
               {/* Number ABOVE card */}
-              <div
-                className={`text-lg font-light mb-2 transition-all duration-300 ${
+              <motion.div variants={moveUp(index * 0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}
+                className={`text-lg font-light mb-2 ${
                   hovered === index ? "text-black" : "text-bdrcolor"
                 }`}
               >
                 {item.number}
-              </div>
+              </motion.div>
 
               {/* Card */}
-              <div
+              <motion.div variants={moveUp(index * 0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}
                 onMouseEnter={() => setHovered(index)}
                 onMouseLeave={() => setHovered(null)}
-                className="relative h-[280px] lg:h-[400px] xl:h-[500px] 2xl:h-[729px] w-full xl:max-w-[295px] overflow-hidden rounded-[12px] transition-all duration-300 group cursor-pointer"
+                className="relative h-[280px] lg:h-[400px] xl:h-[500px] 2xl:h-[729px] w-full xl:max-w-[295px] overflow-hidden rounded-[12px]  group cursor-pointer"
               >
                 {/* Background image */}
                 <Image
@@ -95,8 +96,8 @@ export default function ValuesGrid({ values }: Props) {
                     )}
                   </div>
                 </div>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           ))}
         </div>
       </div>

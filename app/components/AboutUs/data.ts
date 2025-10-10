@@ -35,7 +35,7 @@ export const visionMissionItems = {
       description:
         "We aim to inspire a love for learning by building an inclusive community that promotes values, innovation, and excellence.",
       iconBg: "bg-purple-100",
-      image: "/images/about-us/visionMission/mission.jpg",
+      image: "/images/about-us/visionMission/vision.jpg",
     },
   ],
 };
@@ -164,8 +164,8 @@ export const cards = {
       image: "/images/about-us/MoreToExplore/4.jpg",
     },
     {
-      title: "",
-      image: "/images/about-us/MoreToExplore/2.jpg",
+      title: "Bukhatir Group",
+      image: "/images/about-us/MoreToExplore/1.jpg",
     },
   ],
 };

@@ -36,7 +36,7 @@ const DataTab = () => {
                 <div className="flex flex-col h-full justify-between relative z-30">
                   <div className="mb-4 flex flex-col relative overflow-hidden">
                     <div className="group-hover:opacity-100 group-hover:-translate-y-full transition-all duration-300">
-                      <Image src={item.logo} alt="" width={1920} height={1280} className="object-contain w-auto h-[64px] group-hover:-translate-y-full transition-all duration-300" />
+                      <Image src={item.logo} alt="" width={1920} height={1280} className="object-contain w-auto h-12 xl:h-[64px] 2xl:w-auto 2xl:h-auto group-hover:-translate-y-full transition-all duration-300" />
                     </div>
                     <div className="opacity-0 group-hover:opacity-100 group-hover:-translate-y-full mt-6 transition-all duration-300">
                       <h3 className="text-lg xl:text-xl font-light text-white leading-[1.2]">{item.title}</h3>
