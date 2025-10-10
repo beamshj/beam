@@ -1,6 +1,8 @@
 "use client";
 import Image from "next/image";
-
+import SplitText from "@/components/SplitText";
+import { motion } from "framer-motion";
+import { moveLeft } from "../../motionVarients";
 interface ProgramProps {
   title: string;
   subtitle?: string;
@@ -18,33 +20,67 @@ export default function PLProgram({ data }: { data: ProgramProps }) {
           {/* Left Content */}
           <div className="xl:w-[49%] w-full  order-2 xl:order-1">
             <h2 className="text-lg lg:text-xl xl:text-2xl 2xl:text-4xl font-light leading-[1.111] mb-3 2xl:mb-[50px] lettersp-2">
-              {title}
+              <SplitText
+                tag="span"
+                text={title}
+                className=""
+                delay={200}
+                duration={0.6}
+                ease="power3.out"
+                splitType="words"
+                from={{ opacity: 0, y: 40 }}
+                to={{ opacity: 1, y: 0 }}
+                threshold={0.1}
+                rootMargin="-10px"
+                textAlign="left"
+              />
             </h2>
             {subtitle && (
               <h3 className="text-md mb-2 xl:text-lg 2xl:text-xl text-black leading-[1.262857142857143] font-light lettersp-2">
-                {subtitle}
+               <SplitText
+                tag="span"
+                text={subtitle}
+                className=""
+                delay={200}
+                duration={0.6}
+                ease="power3.out"
+                splitType="lines"
+                from={{ opacity: 0, y: 40 }}
+                to={{ opacity: 1, y: 0 }}
+                threshold={0.1}
+                rootMargin="-10px"
+                textAlign="left"
+              />
               </h3>
             )}
             <div className="text-colorpara w-65ch]">
-              {description.split("\n").map(
-                (line, idx) =>
-                  line.trim() && (
-                    <p key={idx} className="whitespace-pre-line">
-                      <span dangerouslySetInnerHTML={{ __html: line }} />
-                    </p>
-                  )
-              )}
+              {description.split("\n").map((line, idx) => {
+                console.log('Line:', line.replace(/<[^>]*>/g, '')); // Debug
+
+                return line.trim() && (
+                  <div key={idx} className="whitespace-pre-line">
+                    <SplitText
+                      tag="span"
+                      text={line.replace(/<[^>]*>/g, '')}
+                      delay={100}
+                      duration={0.6}
+                      ease="power3.out"
+                      splitType="lines"
+                      from={{ opacity: 0, y: 40 }}
+                      to={{ opacity: 1, y: 0 }}
+                      threshold={0.1}
+                      rootMargin="-100px"
+                      textAlign="left"
+                    />
+                  </div>
+                );
+              })}
             </div>
           </div>
 
           {/* Right Image */}
-          <div className="relative min-h-40 md:min-h-[300px] 2xl:w-[749px] w-full rounded-[12px] overflow-hidden shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] order-1 xl:order-2">
-            <Image
-              src={photo}
-              alt={title}
-              fill
-              className="object-cover rounded-[12px]"
-            />
+          <motion.div variants={moveLeft(2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="relative min-h-40 md:min-h-[300px] 2xl:w-[749px] w-full rounded-[12px] overflow-hidden shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] order-1 xl:order-2">
+            <Image src={photo} alt={title}  fill className="object-cover rounded-[12px]" />
             <div
               style={{
                 background:
@@ -52,7 +88,7 @@ export default function PLProgram({ data }: { data: ProgramProps }) {
               }}
               className="absolute inset-0"
             />
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

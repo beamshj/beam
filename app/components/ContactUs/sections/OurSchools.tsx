@@ -3,6 +3,9 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import SplitText from "@/components/SplitText";
+import { moveUp } from "../../motionVarients";
+
 
 interface OurSchoolsProps {
   title: string;
@@ -24,15 +27,27 @@ export default function OurSchools({ data }: { data: OurSchoolsProps }) {
         {/* Title + Description */}
         <div className="mb-5 md:mb-8 xl:mb-[30px]">
           <h2 className="text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl font-light text-black leading-[1.1111]">
-            {title}
+           <SplitText
+             tag="span"
+             text={title}
+             delay={100}
+             duration={0.6}
+             ease="power3.out"
+             splitType="words"
+             from={{ opacity: 0, y: 40 }}
+             to={{ opacity: 1, y: 0 }}
+             threshold={0.1}
+             rootMargin="-10px"
+             textAlign="left"
+           /> 
           </h2>
-          <p className="text-colorpara text-sm leading-[1.52] mt-3 xl:mt-[50px]">
+          <motion.p variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="text-colorpara text-sm leading-[1.52] mt-3 xl:mt-[50px]">
             {description}
-          </p>
+          </motion.p>
         </div>
 
         {/* Cards */}
-        <div className="flex flex-wrap xl:flex-row gap-[19px] justify-between">
+        <motion.div variants={moveUp(0.4)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="flex flex-wrap xl:flex-row gap-[19px] justify-between">
           {schools.map((school, i) => {
             const isActive = activeIndex === i;
 
@@ -126,7 +141,7 @@ export default function OurSchools({ data }: { data: OurSchoolsProps }) {
               </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
