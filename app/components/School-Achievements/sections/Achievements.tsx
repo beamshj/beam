@@ -36,7 +36,7 @@ const SchoolAchievements: React.FC<SchoolAchievementsProps> = ({ data }) => {
           {achievements.map((achievement) => (
             <div
               key={achievement.id}
-              className="group relative border border-bdrcolor rounded-2xl overflow-hidden transition-colors duration-300 hover:shadow-xl 2xl:w-[356px] 2xl:h-[287px] flex flex-col items-center justify-center p-[40px]"
+              className="group relative border border-bdrcolor rounded-2xl overflow-hidden transition-colors duration-300 2xl:w-[356px] 2xl:h-[287px] flex flex-col items-center justify-center p-[40px]"
             >
               {/* Default State - Logo and Title */}
               <div className="flex flex-col items-center justify-center transition-opacity duration-300 group-hover:opacity-0">
@@ -55,13 +55,13 @@ const SchoolAchievements: React.FC<SchoolAchievementsProps> = ({ data }) => {
 
               {/* Hover State - Gradient Background and Description */}
               <div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-6 md:p-8"
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-[40px]"
                 style={{
                   background:
                     "linear-gradient(211deg, #42BADC 54.06%, rgba(126, 90, 163, 0.1) 122.85%)",
                 }}
               >
-                <p className="text-white text-sm md:text-base leading-[1.52]">
+                <p className="text-white text-sm leading-[1.52]">
                   {achievement.description}
                 </p>
               </div>
