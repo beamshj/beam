@@ -20,7 +20,7 @@ export default function ValuesGrid({ values }: Props) {
 
   return (
     <section className="container">
-      <div className="pt-10 md:pt-20 2xl:pt-[135px]">
+      <div className="py-10 md:py-20 2xl:py-[135px]">
         <motion.h2 variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="text-xl font-light mb-3 lg:mb-6 xl:mb-[40px] 2xl:mb-[50px] leading-[1.2] text-black">
           Our Values
         </motion.h2>
