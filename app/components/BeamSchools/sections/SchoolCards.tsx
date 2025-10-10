@@ -3,6 +3,9 @@
 import React, { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import Image from "next/image";
+import SplitText from "@/components/SplitText";
+import { motion } from "framer-motion";
+import { moveUp } from "../../motionVarients";
 
 interface CampusStats {
   students: string;
@@ -76,44 +79,68 @@ const SchoolCards = ({ schoolData }: { schoolData: SchoolCardsPageProps }) => {
         {/* Title and Description */}
         <div className="mb-[50px]">
           <h1 className="text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl lg:leading-[1.111] font-light mb-[30px] xl:mb-[50px] text-black max-w-[91%] lettersp-2">
-            {title}
+            <SplitText
+             tag="span"
+             text={title}
+             delay={100}
+             duration={0.6}
+             ease="power3.out"
+             splitType="words"
+             from={{ opacity: 0, y: 40 }}
+             to={{ opacity: 1, y: 0 }}
+             threshold={0.1}
+             rootMargin="-10px"
+             textAlign="left"
+           /> 
           </h1>
-          <p className="text-sm text-light leading-[1.52] text-colorpara max-w-[89%]">
-            {description}
-          </p>
+          <div className="text-sm text-light leading-[1.52] text-colorpara max-w-[89%]">
+            <SplitText
+             tag="span"
+             text={description}
+             delay={100}
+             duration={0.6}
+             ease="power3.out"
+             splitType="lines"
+             from={{ opacity: 0, y: 40 }}
+             to={{ opacity: 1, y: 0 }}
+             threshold={0.1}
+             rootMargin="-10px"
+             textAlign="left"
+           /> 
+          </div>
         </div>
 
         {/* Filters */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-[65px] pb-[30px] border-b border-bdrcolor">
           {/* Left Buttons */}
           <div className="flex gap-3">
-            <button
+            <motion.button variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}
               onClick={() => setSelectedCurriculum("british")}
-              className={`px-[20px] py-[11px] border rounded-[50px] text-xs font-light transition-all uppercase  ${
+              className={`px-[20px] py-[11px] border rounded-[50px] text-xs font-light  uppercase  ${
                 selectedCurriculum === "british"
                   ? "bg-[#C9F3FF] text-black border-[#12586C]"
                   : "bg-white text-[#666666] hover:bg-gray-200 border-bdrcolor"
               }`}
             >
               BRITISH CURRICULUM
-            </button>
-            <button
+            </motion.button>
+            <motion.button variants={moveUp(0.4)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}
               onClick={() => setSelectedCurriculum("american")}
-              className={`px-[20px] py-[11px] border rounded-[50px] text-xs font-light transition-all uppercase ${
+              className={`px-[20px] py-[11px] border rounded-[50px] text-xs font-light uppercase ${
                 selectedCurriculum === "american"
                   ? "bg-[#C9F3FF] text-black border-[#12586C]"
                   : "bg-white text-[#666666] hover:bg-gray-200 border-bdrcolor"
               }`}
             >
               AMERICAN CURRICULUM
-            </button>
+            </motion.button>
           </div>
 
           {/* Right Dropdown */}
           <div className="relative">
-            <button
+            <motion.button variants={moveUp(0.6)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              className="flex items-center px-[20px] py-[11px] border border-[#12586C] bg-[#C9F3FF] rounded-[50px] text-[#626262] text-xs font-light transition-all min-w-[180px] justify-between"
+              className="flex items-center px-[20px] py-[11px] border border-[#12586C] bg-[#C9F3FF] rounded-[50px] text-[#626262] text-xs font-light min-w-[180px] justify-between"
             >
               <span>{selectedLocation}</span>
               <ChevronDown
@@ -121,12 +148,12 @@ const SchoolCards = ({ schoolData }: { schoolData: SchoolCardsPageProps }) => {
                   isDropdownOpen ? "rotate-180" : ""
                 }`}
               />
-            </button>
+            </motion.button>
 
             {isDropdownOpen && (
               <div className="absolute top-full mt-1 right-0 bg-white border border-gray-200 rounded-[12px] shadow-lg min-w-[180px] z-10 overflow-hidden transition-colors duration-300">
                 {locations.map((location) => (
-                  <button
+                  <motion.button variants={moveUp(0.6)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}
                     key={location}
                     onClick={() => {
                       setSelectedLocation(location);
@@ -135,7 +162,7 @@ const SchoolCards = ({ schoolData }: { schoolData: SchoolCardsPageProps }) => {
                     className="w-full text-left px-4 py-2.5 hover:bg-gray-50 text-sm text-black hover:text-primary font-light rounded-[12px] transition-colors duration-300"
                   >
                     {location}
-                  </button>
+                  </motion.button>
                 ))}
               </div>
             )}
@@ -144,8 +171,8 @@ const SchoolCards = ({ schoolData }: { schoolData: SchoolCardsPageProps }) => {
 
         {/* Campus Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[33px]">
-          {filteredCampuses.map((campus) => (
-            <div
+          {filteredCampuses.map((campus,index) => (
+            <motion.div variants={moveUp(index * 0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}
               key={campus.id}
               onMouseEnter={() => setHoveredCard(campus.id)}
               onMouseLeave={() => setHoveredCard(null)}
@@ -284,7 +311,7 @@ const SchoolCards = ({ schoolData }: { schoolData: SchoolCardsPageProps }) => {
                   {campus.name}
                 </h3>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

@@ -3,6 +3,9 @@
 import { useState } from "react";
 import Image from "next/image";
 import GalleryModal from "./GalleryModal";
+import SplitText from "@/components/SplitText";
+import { moveUp } from "../../motionVarients";
+import { motion } from "framer-motion";
 
 const filters = ["all", "school", "alumni"];
 
@@ -34,13 +37,25 @@ export default function GalleryList({ data }: { data: GalleryList }) {
         {/* Header */}
         <div className="flex flex-col lg:flex-row justify-between lg:items-center pb-5 2xl:pb-[31px] mb-10 2xl:mb-[65px] border-b border-bdrcolor">
           <h2 className="text-lg md:text-xl xl:text-3xl 2xl:text-4xl font-light text-black leading-[1.1111] mb-6 lg:mb-0">
-            {data.title}
+            <SplitText
+             tag="span"
+             text={data.title}
+             delay={100}
+             duration={0.6}
+             ease="power3.out"
+             splitType="words"
+             from={{ opacity: 0, y: 40 }}
+             to={{ opacity: 1, y: 0 }}
+             threshold={0.1}
+             rootMargin="-10px"
+             textAlign="left"
+           /> 
           </h2>
 
           {/* Filters */}
           <div className="flex gap-3">
-            {filters.map((f) => (
-              <button
+            {filters.map((f,index) => (
+              <motion.button variants={moveUp(index * 0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}
                 key={f}
                 className={`px-[20px] py-[11px] text-xs text-black rounded-[50px] border border-bdrcolor font-light ${
                   activeFilter === f ? "bg-[#C9F3FF]" : "bg-white"
@@ -48,7 +63,7 @@ export default function GalleryList({ data }: { data: GalleryList }) {
                 onClick={() => setActiveFilter(f)}
               >
                 {f.charAt(0).toUpperCase() + f.slice(1)}
-              </button>
+              </motion.button>
             ))}
           </div>
         </div>
@@ -56,8 +71,7 @@ export default function GalleryList({ data }: { data: GalleryList }) {
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[20px] 2xl:gap-[33px]">
           {filteredItems.map((item, idx) => (
-            <div
-              key={idx}
+            <motion.div key={idx} variants={moveUp(idx * 0.1)} initial="hidden" whileInView="show" viewport={{ once: false, amount: 0.2 }}
               className="relative w-full 2xl:w-[485px] h-[380px] xl:h-[480px] 2xl:h-[551px] rounded-[12px] overflow-hidden cursor-pointer group"
               onClick={() => setSelectedItem(item)}
             >
@@ -118,7 +132,7 @@ export default function GalleryList({ data }: { data: GalleryList }) {
                   })}
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
