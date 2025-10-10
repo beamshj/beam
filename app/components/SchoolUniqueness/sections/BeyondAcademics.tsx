@@ -1,18 +1,18 @@
 "use client";
-  
+
 
 import Image from "next/image";
 import { useState } from "react";
 export interface VMItem {
-  image:string;
-  title:string;
-  description:string;
-  list:string[];
+  image: string;
+  title: string;
+  description: string;
+  list: string[];
 }
 
 export interface academicsData {
   title: string;
-  description: string; 
+  description: string;
   items: VMItem[];
 }
 
@@ -20,19 +20,17 @@ const BeyondAcademics = ({
   academicsData,
 }: {
   academicsData: academicsData;
-}) => { 
-const [activeIndex, setActiveIndex] = useState<number | null>(0);
+}) => {
+  const [activeIndex, setActiveIndex] = useState<number | null>(0);
   return (
-    <section className="pb-8 md:pb-12 lg:pb-20 2xl:pb-[135px] ">
+    <section className="pb-0 md:pb-12 lg:pb-20 2xl:pb-[135px] ">
       <div className="container ">
-        <div> 
+        <div>
           <div>
-            <h2 className="text-2xl 2xl:text-4xl  font-light leading-[1.111111111] text-black mb-4 md:mb-6 xl:mb-8 2xl:mb-8">
+            <h2 className="text-lg lg:text-xl xl:text-2xl 2xl:text-4xl  font-light leading-[1.111111111] text-black mb-4 md:mb-6 xl:mb-8 2xl:mb-8">
               {academicsData.title}
-            </h2> 
-              <p className=" text-sm leading-[1.526315789473684] max-w-[70ch] mb-6 lg:mb-7 last:lg:mb-13 font-light  text-colorpara">{academicsData.description}</p>
-         
-          
+            </h2>
+            <p className=" text-sm leading-[1.526315789473684] max-w-[70ch] mb-6 lg:mb-7 last:lg:mb-13 font-light  text-colorpara">{academicsData.description}</p>
           </div>
           <div className="flex flex-col md:flex-row gap-8 md:gap-7 mb-8 md:mb-0">
    
@@ -74,52 +72,47 @@ const [activeIndex, setActiveIndex] = useState<number | null>(0);
                                 />
                               </div>
 
-      {/* Content Wrapper */}
-      <div className="absolute inset-0 flex flex-col justify-end p-5 2xl:p-10 z-10 transition-all duration-500">
-        {/* Title */}
-        <h3
-          className={`
+                  {/* Content Wrapper */}
+                  <div className="absolute inset-0 flex flex-col justify-end p-5 2xl:p-10 z-10 transition-all duration-500">
+                    {/* Title */}
+                    <h3
+                      className={`
             text-[23px]  lg:text-[26px] xl:text-lg 2xl:text-xl font-light text-white leading-[1.2] max-w-[12ch]
             transition-all duration-500 ease-in-out 
             transform
             ${isActive ? "-translate-y-[20px]" : ""}
           `}
-        >
-          {item.title}
-        </h3>
+                    >
+                      {item.title}
+                    </h3>
 
-        {/* Description */}
-        <div
-          className={`
+                    {/* Description */}
+                    <div
+                      className={`
             transition-all duration-500 ease-in-out overflow-hidden
             ${isActive ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"}
           `}
-        >
-          <div>
-            <p className="text-[#E0E0E0] font-light max-w-[30ch]">{item.description}</p>
-            <ul className="mt-3 space-y-1 ml-5 list-disc">
-              {item.list.map((listItem, i) => (
-                <li key={i} className="text-[#E0E0E0] font-light">
-                  {listItem}
-                </li>
-              ))}
-            </ul>
+                    >
+                      <div>
+                        <p className="text-[#E0E0E0] font-light max-w-[30ch]">{item.description}</p>
+                        <ul className="mt-3 space-y-1 ml-5 list-disc">
+                          {item.list.map((listItem, i) => (
+                            <li key={i} className="text-[#E0E0E0] font-light">
+                              {listItem}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+
           </div>
         </div>
-      </div>
-    </div>
-  );
-})}
-
-    </div>
-
-         
-          
-
-         
-        </div>
-        <div className="pt-8 md:pt-12 lg:pt-20 2xl:pt-[135px]">
-        <hr />
+        <div className="pt-0 md:pt-12 lg:pt-20 2xl:pt-[135px]">
+          <hr />
         </div>
       </div>
     </section>

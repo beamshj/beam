@@ -81,7 +81,7 @@ const OurSchools = () => {
                       <select
                         value={selected}
                         onChange={(e) => setSelected(e.target.value)}
-                        className="appearance-none border border-bdrcolor cursor-pointer rounded-full pl-2 md:pl-4 pr-10 py-2 md:py-3 smtext10 text-xs focus:outline-none focus:ring-0 w-auto"
+                        className="appearance-none border  border-bdrcolor cursor-pointer rounded-full pl-2 md:pl-4 pr-10 py-2 md:py-3 smtext10 text-xs focus:outline-none focus:ring-0 w-auto lg:w-full"
                       >
                         <option value="">Location</option>
                         {schoolData.schools.map((option) => (
