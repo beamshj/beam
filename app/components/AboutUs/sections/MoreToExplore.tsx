@@ -6,6 +6,9 @@ import "swiper/css";
 import "swiper/css/pagination";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import SplitText from "@/components/SplitText";
+import { motion } from "framer-motion";
+import { moveUp } from "@/app/components/motionVarients";
 
 type CardItem = {
   title: string;
@@ -40,7 +43,22 @@ export default function MoreToExplore({ data }: CardsProps) {
     <section className="pt-10 pb-0 xl:py-20 2xl:py-[135px]">
       <div>
         <div ref={headingRef} className="container">
-          <h2 className="text-lg xl:text-2xl 2xl:text-4xl font-light mb-4 xl:mb-8 2xl:mb-[50px]">{title}</h2>
+          <h2 className="text-lg xl:text-2xl 2xl:text-4xl font-light mb-4 xl:mb-8 2xl:mb-[50px]">
+            <SplitText
+              tag="span"
+              text={title}
+              className=""
+              delay={100}
+              duration={0.6}
+              ease="power3.out"
+              splitType="chars"
+              from={{ opacity: 0, y: 40 }}
+              to={{ opacity: 1, y: 0 }}
+              threshold={0.1}
+              rootMargin="-10px"
+              textAlign="left"
+            />
+          </h2>
         </div>
         <div style={{ paddingLeft: `${leftOffset}px`, paddingRight: 0 }}>
           <Swiper
@@ -59,7 +77,7 @@ export default function MoreToExplore({ data }: CardsProps) {
           >
             {items.map((card, idx) => (
               <SwiperSlide key={idx}>
-                <div className="relative group h-[300px] 2xl:h-[468px] max-w-[428px] overflow-hidden cursor-pointer rounded-[12px]">
+                <motion.div variants={moveUp(idx * 0.1)} initial="hidden" animate="show" viewport={{ once: false, amount: 0.7 }} className="relative group h-[300px] 2xl:h-[468px] max-w-[428px] overflow-hidden cursor-pointer rounded-[12px]">
                   <Image
                     src={card.image}
                     alt={card.title}
@@ -71,9 +89,9 @@ export default function MoreToExplore({ data }: CardsProps) {
                   <div className="absolute bottom-0 left-0 right-0 h-[70%] bg-gradient-to-t from-black to-transparent z-10"></div>
                   {/* Title */}
                   {card.title && (
-                    <div className="absolute bottom-[40px] left-[40px] z-20 leading-[1.2] text-white text-xl font-light">
+                    <motion.div variants={moveUp(0.1)} initial="hidden" whileInView="show" viewport={{ once: false, amount: 0.7 }} className="absolute bottom-[40px] left-[40px] z-20 leading-[1.2] text-white text-xl font-light">
                       {card.title}
-                    </div>
+                    </motion.div>
                   )}
                   {/* Hover overlay */}
                   <div className="absolute inset-0 bg-[rgba(63,34,92,0.94)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-30">
@@ -87,7 +105,7 @@ export default function MoreToExplore({ data }: CardsProps) {
                       />
                     </div>
                   </div>
-                </div>
+                </motion.div>
               </SwiperSlide>
             ))}
           </Swiper>

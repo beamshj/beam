@@ -450,3 +450,25 @@ body {
 .finsd .chklast:last-child .linediv{
   display: none;
 }
+.inclusion-wrapper {
+  perspective: 1000px;
+}
+.testimonialslider .swiper-wrapper, .storyslide .swiper-wrapper{
+  align-items: stretch !important; 
+}
+.testimonialslider .swiper-slide, .storyslide .swiper-slide {
+  display: flex !important;
+  height: auto !important;
+}
+.commentpagination .swiper-pagination-bullet{
+  width: 100px;
+  height: 3px;
+  margin: 0px !important;
+  border-radius: 5px;
+  background: #D3D3D3 !important;
+}
+.commentpagination .swiper-pagination-bullet-active{
+ background: linear-gradient(180deg, #42BADC 0%, #7E5AA3 100%) !important; 
+ 
+ border-radius: 5px;
+} 
