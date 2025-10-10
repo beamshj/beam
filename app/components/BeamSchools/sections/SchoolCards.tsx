@@ -3,6 +3,9 @@
 import React, { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import Image from "next/image";
+import SplitText from "@/components/SplitText";
+import { motion } from "framer-motion";
+import { moveUp } from "../../motionVarients";
 
 interface CampusStats {
   students: string;
@@ -74,46 +77,70 @@ const SchoolCards = ({ schoolData }: { schoolData: SchoolCardsPageProps }) => {
     <section className="py-10 xl:py-20 2xl:py-[135px]">
       <div className="container">
         {/* Title and Description */}
-        <div className="mb-[50px]">
-          <h1 className="text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl lg:leading-[1.111] font-light mb-[30px] xl:mb-[50px] text-black max-w-[91%] lettersp-2">
-            {title}
+        <div className="mb-5 lg:mb-10 xl:mb-[50px]">
+          <h1 className="text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl lg:leading-[1.111] font-light mb-0 xl:mb-[30px] 2xl:mb-[50px] text-black max-w-[91%] lettersp-2">
+            <SplitText
+             tag="span"
+             text={title}
+             delay={100}
+             duration={0.6}
+             ease="power3.out"
+             splitType="words"
+             from={{ opacity: 0, y: 40 }}
+             to={{ opacity: 1, y: 0 }}
+             threshold={0.1}
+             rootMargin="-10px"
+             textAlign="left"
+           /> 
           </h1>
-          <p className="text-sm text-light leading-[1.52] text-colorpara max-w-[89%]">
-            {description}
-          </p>
+          <span className="text-sm text-light leading-[1.52] text-colorpara xl:max-w-[89%]">
+            <SplitText
+             tag="span"
+             text={description}
+             delay={100}
+             duration={0.6}
+             ease="power3.out"
+             splitType="lines"
+             from={{ opacity: 0, y: 40 }}
+             to={{ opacity: 1, y: 0 }}
+             threshold={0.1}
+             rootMargin="-10px"
+             textAlign="left"
+           /> 
+          </span>
         </div>
 
         {/* Filters */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-[65px] pb-[30px] border-b border-bdrcolor">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-5 lg:mb-10 xl:mb-[65px] pb-5 xl:pb-[30px] border-b border-bdrcolor">
           {/* Left Buttons */}
           <div className="flex gap-3">
-            <button
+            <motion.button variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}
               onClick={() => setSelectedCurriculum("british")}
-              className={`px-[20px] py-[11px] border rounded-[50px] text-xs font-light transition-all uppercase  ${
+              className={`px-[20px] py-[11px] border rounded-[50px] text-xs font-light  uppercase  ${
                 selectedCurriculum === "british"
                   ? "bg-[#C9F3FF] text-black border-[#12586C]"
                   : "bg-white text-[#666666] hover:bg-gray-200 border-bdrcolor"
               }`}
             >
               BRITISH CURRICULUM
-            </button>
-            <button
+            </motion.button>
+            <motion.button variants={moveUp(0.4)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}
               onClick={() => setSelectedCurriculum("american")}
-              className={`px-[20px] py-[11px] border rounded-[50px] text-xs font-light transition-all uppercase ${
+              className={`px-[20px] py-[11px] border rounded-[50px] text-xs font-light uppercase ${
                 selectedCurriculum === "american"
                   ? "bg-[#C9F3FF] text-black border-[#12586C]"
                   : "bg-white text-[#666666] hover:bg-gray-200 border-bdrcolor"
               }`}
             >
               AMERICAN CURRICULUM
-            </button>
+            </motion.button>
           </div>
 
           {/* Right Dropdown */}
           <div className="relative">
-            <button
+            <motion.button variants={moveUp(0.6)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              className="flex items-center px-[20px] py-[11px] border border-[#12586C] bg-[#C9F3FF] rounded-[50px] text-[#626262] text-xs font-light transition-all min-w-[180px] justify-between"
+              className="flex items-center px-[20px] py-[11px] border border-[#12586C] bg-[#C9F3FF] rounded-[50px] text-[#626262] text-xs font-light min-w-[180px] justify-between"
             >
               <span>{selectedLocation}</span>
               <ChevronDown
@@ -121,12 +148,12 @@ const SchoolCards = ({ schoolData }: { schoolData: SchoolCardsPageProps }) => {
                   isDropdownOpen ? "rotate-180" : ""
                 }`}
               />
-            </button>
+            </motion.button>
 
             {isDropdownOpen && (
               <div className="absolute top-full mt-1 right-0 bg-white border border-gray-200 rounded-[12px] shadow-lg min-w-[180px] z-10 overflow-hidden transition-colors duration-300">
                 {locations.map((location) => (
-                  <button
+                  <motion.button variants={moveUp(0.6)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}
                     key={location}
                     onClick={() => {
                       setSelectedLocation(location);
@@ -135,7 +162,7 @@ const SchoolCards = ({ schoolData }: { schoolData: SchoolCardsPageProps }) => {
                     className="w-full text-left px-4 py-2.5 hover:bg-gray-50 text-sm text-black hover:text-primary font-light rounded-[12px] transition-colors duration-300"
                   >
                     {location}
-                  </button>
+                  </motion.button>
                 ))}
               </div>
             )}
@@ -144,17 +171,16 @@ const SchoolCards = ({ schoolData }: { schoolData: SchoolCardsPageProps }) => {
 
         {/* Campus Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[33px]">
-          {filteredCampuses.map((campus) => (
-            <div
+          {filteredCampuses.map((campus,index) => (
+            <motion.div variants={moveUp(index * 0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}
               key={campus.id}
               onMouseEnter={() => setHoveredCard(campus.id)}
               onMouseLeave={() => setHoveredCard(null)}
               onClick={() => handleCardClick(campus.id)}
-              className="relative rounded-[12px] overflow-hidden cursor-pointer w-full h-[480px] 2xl:h-[551px] 2xl:w-[485px] mx-auto group"
+              className="relative rounded-[12px] overflow-hidden cursor-pointer w-full h-[300px] lg:h-[350px] xl:h-[480px] 2xl:h-[551px] 2xl:w-[485px] mx-auto group"
             >
               {/* Background Image */}
-              <div
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+              <div className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
                 style={{ backgroundImage: `url(${campus.image})` }}
               >
                 <div className="absolute left-0 bottom-0 right-0 h-[50%] bg-gradient-to-t from-black to-black/0"></div>
@@ -163,24 +189,14 @@ const SchoolCards = ({ schoolData }: { schoolData: SchoolCardsPageProps }) => {
               {/* Location & arrow */}
               <div className="absolute top-[22px] left-[22px] right-[22px] xl:top-[32px] xl:left-[33px] xl:right-[33px] flex items-start justify-between">
                 <div className="flex items-center gap-x-2 bg-[#E6F7FF] backdrop-blur-sm px-[25px] py-[11px] rounded-[50px]">
-                  <Image
-                    src="/images/contact-us/icons/location.svg"
-                    alt="map-icon"
-                    width={24}
-                    height={24}
-                  />
+                  <Image src="/images/contact-us/icons/location.svg" alt="map-icon" width={24} height={24} />
                   <span className="text-xs font-light text-black">
                     {campus.location}
                   </span>
                 </div>
                 {/* Arrow Icon */}
                 <div className="bg-transparent group-hover:bg-primary border-white group-hover:border-primary border xl:w-[75px] xl:h-[75px] w-[55px] h-[55px] rounded-[50px] flex items-center justify-center transition-colors duration-300">
-                  <Image
-                    src="/images/arrow-right-up.svg"
-                    alt="arrow"
-                    width={24}
-                    height={24}
-                  />
+                  <Image src="/images/arrow-right-up.svg" alt="arrow" width={24} height={24} />
                 </div>
               </div>
 
@@ -192,26 +208,21 @@ const SchoolCards = ({ schoolData }: { schoolData: SchoolCardsPageProps }) => {
                     : "translate-y-full opacity-0"
                 }`}
               >
-                <div className="bg-[#DDF7FF] backdrop-blur-sm m-[6px] rounded-[12px] px-[19px] py-[18px] space-y-[13px]">
-                  <div
-                    style={{
-                      background:
-                        "linear-gradient(90deg, #42BADC 0%, rgba(126, 90, 163, 0.1) 100%)",
-                    }}
-                    className="flex items-center justify-between px-[15px] py-[14px] rounded-[12px]"
-                  >
+                <div className="bg-[#DDF7FF] backdrop-blur-sm xl:m-[6px] m-[2px] rounded-[12px] xl:px-[19px] xl:py-[18px] px-2 py-2 space-y-2  xl:space-y-[13px]">
+                  <div style={{ background: "linear-gradient(90deg, #42BADC 0%, rgba(126, 90, 163, 0.1) 100%)", }}
+                    className="flex items-center justify-between px-[15px] py-[14px] rounded-[12px]" >
                     <div className="flex items-center justify-center gap-[23px] flex-shrink-0">
                       <Image
                         src="/images/beam-schools/icons/1.svg"
                         alt="map-icon"
                         width={32}
-                        height={32}
+                        height={32} className="xl:h-[32px] w-auto h-6"
                       />
-                      <div className="text-md font-light text-black leading-[1.4]">
+                      <div className="text-sm xl:text-md font-light text-black leading-[1.4]">
                         {campus.stats.students}
                       </div>
                     </div>
-                    <div className="text-sm font-light text-colorpara leading-[1.52]">
+                    <div className="text-sm xl:text-md font-light text-colorpara leading-[1.52]">
                       Active Students
                     </div>
                   </div>
@@ -228,13 +239,13 @@ const SchoolCards = ({ schoolData }: { schoolData: SchoolCardsPageProps }) => {
                         src="/images/beam-schools/icons/2.svg"
                         alt="map-icon"
                         width={32}
-                        height={32}
+                        height={32} className="xl:h-[32px] w-auto h-6"
                       />
-                      <div className="text-md font-light text-black leading-[1.4]">
+                      <div className="xs:text-sm xl:text-md font-light text-black leading-[1.4]">
                         {campus.stats.nationalities}
                       </div>
                     </div>
-                    <div className="text-sm font-light text-colorpara leading-[1.52]">
+                    <div className="xs:text-sm xl:text-md font-light text-colorpara leading-[1.52]">
                       Nationalities
                     </div>
                   </div>
@@ -251,13 +262,13 @@ const SchoolCards = ({ schoolData }: { schoolData: SchoolCardsPageProps }) => {
                         src="/images/beam-schools/icons/3.svg"
                         alt="map-icon"
                         width={32}
-                        height={32}
+                        height={32} className="xl:h-[32px] w-auto h-6"
                       />
-                      <div className="text-md font-light text-black leading-[1.4]">
+                      <div className="xs:text-sm xl:text-md font-light text-black leading-[1.4]">
                         {campus.stats.teachers}
                       </div>
                     </div>
-                    <div className="text-xs font-light text-colorpara">
+                    <div className="xs:text-sm xl:text-md font-light text-colorpara">
                       Teachers
                     </div>
                   </div>
@@ -265,8 +276,7 @@ const SchoolCards = ({ schoolData }: { schoolData: SchoolCardsPageProps }) => {
               </div>
 
               {/* Campus Name & logo */}
-              <div
-                className={`absolute bottom-[34px] left-[38px] transition-all duration-500 ease-in-out
+              <div className={`absolute bottom-[34px] left-[38px] transition-all duration-500 ease-in-out
   ${
     hoveredCard === campus.id || activeCard === campus.id
       ? "opacity-0 translate-y-5"
@@ -280,11 +290,11 @@ const SchoolCards = ({ schoolData }: { schoolData: SchoolCardsPageProps }) => {
                   height={500}
                   className="w-[104px] h-[56px] object-contain"
                 />
-                <h3 className="text-white text-xl font-light leading-[1.2] mt-[11px]">
+                <h3 className="text-white text-md max-w-[80%] xl:max-w-[100%] md:text-lg xl:text-xl font-light leading-[1.2] mt-[11px]">
                   {campus.name}
                 </h3>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

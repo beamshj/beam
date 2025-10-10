@@ -1,7 +1,9 @@
 "use client";
 
+import SplitText from "@/components/SplitText";
 import Image from "next/image";
-
+import { motion } from "framer-motion";
+import { moveUp } from "../../motionVarients";
 interface BlogItem {
   image: string;
   title: string;
@@ -21,15 +23,28 @@ export default function LatestBlogs({ data }: { data: BlogItem[] }) {
   return (
     <section className="pt-10 xl:pt-20 2xl:pt-[135px]">
       <div className="container">
-        <h2 className="text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl font-light text-black leading-[1.1111] mb-[50px]">
-          Latest Blogs
+        <h2 className="text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl font-light text-black leading-[1.1111] mb-5 xl:mb-[30px] 2xl:mb-[50px]">
+          <SplitText
+            tag="span"
+            text="Latest Blogs"
+            className=""
+            delay={200}
+            duration={0.6}
+            ease="power3.out"
+            splitType="words"
+            from={{ opacity: 0, y: 40 }}
+            to={{ opacity: 1, y: 0 }}
+            threshold={0.1}
+            rootMargin="-10px"
+            textAlign="left"
+          />
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-[20px] 2xl:gap-[33px] border-b border-bdrcolor pb-[50px] mb-[50px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 xl:gap-[20px] 2xl:gap-[33px] border-b border-bdrcolor pb-[50px] mb-[50px]">
           {displayItems.map((item, idx) => (
-            <div
+            <motion.div variants={moveUp(idx * 0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}
               key={idx}
-              className="relative w-full h-[380px] xl:h-[470px] 2xl:h-[511px] 2xl:w-[743px] rounded-[12px] overflow-hidden cursor-pointer group"
+              className="relative w-full h-[280px] md:h-[380px] xl:h-[470px] 2xl:h-[511px] 2xl:w-[743px] rounded-[12px] overflow-hidden cursor-pointer group"
             >
               {/* Main Image */}
               <Image
@@ -72,7 +87,7 @@ export default function LatestBlogs({ data }: { data: BlogItem[] }) {
                 <p className="text-sm opacity-80 leading-[1.52] text-[#D3D3D3]">
                   {item.date}
                 </p>
-                <h3 className="text-xl text-white font-light leading-[1.2] mt-[10px] max-w-[80%]">
+                <h3 className="text-md md:text-lg xl:text-xl text-white font-light leading-[1.2] mt-[10px] max-w-[80%]">
                   {item.title}
                 </h3>
                 <div>
@@ -86,7 +101,7 @@ export default function LatestBlogs({ data }: { data: BlogItem[] }) {
                   </button>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

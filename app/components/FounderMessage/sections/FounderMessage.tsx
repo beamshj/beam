@@ -1,7 +1,9 @@
 "use client";
 
 import Image from "next/image";
-
+import SplitText from "@/components/SplitText";
+import { motion } from "framer-motion";
+import { moveRight, moveUp } from "../../motionVarients";
 interface FounderMessageProps {
   title: string;
   photo: string;
@@ -23,22 +25,44 @@ export default function FounderMessage({
         {/* Left Column */}
         <div className="w-full xl:max-w-[55%] order-2 xl:order-1">
           <h2 className="text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl leading-[1.1111] font-light text-black mb-3 xl:mb-[30px] 2xl:mb-[50px]">
-            {" "}
             {title.split("\n").map((line, idx) => (
               <span key={idx} className="xl:flex">
-                {" "}
-                {line}{" "}
+                <SplitText
+                  tag="span"
+                  text={line}
+                  delay={100 + (idx * 50)} // Optional: stagger each line
+                  duration={0.6}
+                  ease="power3.out"
+                  splitType="chars"
+                  from={{ opacity: 0, y: 40 }}
+                  to={{ opacity: 1, y: 0 }}
+                  threshold={0.1}
+                  rootMargin="-100px"
+                  textAlign="center"
+                />
               </span>
-            ))}{" "}
+            ))}
           </h2>
 
           <div className="text-colorpara font-light text-sm leading-[1.526] space-y-2 xl:space-y-6">
             {description.split("\n").map(
               (line, idx) =>
                 line.trim() && (
-                  <p key={idx} className="whitespace-pre-line">
-                    {line}
-                  </p>
+                  <div key={idx} className="whitespace-pre-line">
+                    <SplitText
+                      tag="span"
+                      text={line}
+                      delay={100}
+                      duration={0.6}
+                      ease="power3.out"
+                      splitType="lines"
+                      from={{ opacity: 0, y: 40 }}
+                      to={{ opacity: 1, y: 0 }}
+                      threshold={0.1}
+                      rootMargin="-100px"
+                      textAlign="left"
+                    />
+                  </div>
                 )
             )}
           </div>
@@ -82,11 +106,11 @@ export default function FounderMessage({
           </div>
 
           {/* Original desktop design — unchanged */}
-          <div className="hidden xl:block absolute right-0 left-[44px] z-10 bottom-0 h-full w-full xl:w-[567px] rounded-[12px] overflow-hidden">
+          <motion.div variants={moveUp(2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="hidden xl:block absolute right-0 left-[44px] z-10 bottom-0 h-full w-full xl:w-[567px] rounded-[12px] overflow-hidden">
             <Image src={photo} alt={name} fill className="object-cover w-full" />
-          </div>
+          </motion.div>
 
-          <div  className="hidden xl:block absolute z-30 left-0 bottom-[58px] rounded-[12px] py-[25px] px-[27px] 
+          <motion.div variants={moveRight(2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="hidden xl:block absolute z-30 left-0 bottom-[58px] rounded-[12px] py-[25px] px-[27px] 
             xl:w-[445px] md:w-[300px] shadow-[0px_4px_66px_0px_rgba(0,0,0,0.16)]"
             style={{
               background: "linear-gradient(90deg, #F5EBFF 0%, #C9F3FF 100%)",
@@ -110,7 +134,7 @@ export default function FounderMessage({
                 );
               })()}
             </p>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
