@@ -467,8 +467,19 @@ body {
   border-radius: 5px;
   background: #D3D3D3 !important;
 }
+.commentpagination.cstss .swiper-pagination-bullet{
+  width: 38px;  
+}
 .commentpagination .swiper-pagination-bullet-active{
  background: linear-gradient(180deg, #42BADC 0%, #7E5AA3 100%) !important; 
  
  border-radius: 5px;
 } 
+.vhidden {visibility: hidden;}
+.swiper-slide-active .vhidden {visibility: visible;}
+.yrmn {background: #F5EBFF;}
+.swiper-slide-active .yrmn {background: #DDF7FF;}
+.bgseta {border:none;}
+.swiper-slide-active .bgseta {border:1px solid #23ABD2;}
+.bgactive {background: black;}
+.swiper-slide-active .bgactive {background: #23ABD2;}

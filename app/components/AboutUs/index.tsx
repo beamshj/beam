@@ -3,6 +3,7 @@ import {
   BannerData,
   ourStory,
   visionMissionItems,
+  items,
   valuesData,
   inclusionData,
   healthSafetyData,
@@ -14,6 +15,7 @@ import ValuesGrid from "./sections/OurValues";
 import InclusionSection from "./sections/Inclusion";
 import HealthSafety from "./sections/HealthandSafety";
 import MoreToExplore from "./sections/MoreToExplore";
+import Milestones from "./sections/Milestones";
 
 const Index = () => {
   return (
@@ -22,6 +24,7 @@ const Index = () => {
       <OurStorySection data={ourStory} />
       <VisionMissionSection visionMissionItems={visionMissionItems} />
       <ValuesGrid values={valuesData} />
+      <Milestones items={items} />
       <InclusionSection data={inclusionData} />
       <HealthSafety data={healthSafetyData} />
       <MoreToExplore data={cards} />

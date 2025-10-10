@@ -169,3 +169,26 @@ export const cards = {
     },
   ],
 };
+
+
+export const  items = [
+  {
+    year: "2002",
+    title: "ISCS Muwaileh",
+    description: "British Curriculum Pre-K / FS 1 to Grade 13 with a full capacity of more than 4,500",
+    image: "/images/about-us/slider1.jpg",
+  },
+  {
+    year: "2008",
+    title: "ISCS Dubai",
+    description: "Another campus description goes here for the slider content.",
+    image: "/images/about-us/slider1.jpg",
+  },
+  {
+    year: "2015",
+    title: "ISCS Sharjah",
+    description: "Another campus description goes here for the slider content.",
+    image: "/images/about-us/slider1.jpg",
+  },
+];
+ 
