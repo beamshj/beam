@@ -56,14 +56,14 @@ const InclusionSection: React.FC<InclusionSectionProps> = ({ data }) => {
               background:
                 "linear-gradient(270deg, rgba(0, 0, 0, 0) 0%, #066B7F 100%)",
             }}
-            className="absolute left-0 w-[90%] h-full"
+            className="absolute left-0 w-[83%] h-full"
           ></div>
           {/* Content pinned bottom-left */}
           <div className="absolute bottom-0 left-0 z-10 p-6 xl:p-[60px]">
-            <motion.h2 variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="text-xl xl:text-3xl 2xl:text-4xl font-light mb-4 leading-[1.111111] text-white">
+            <motion.h2 variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="text-xl xl:text-3xl 2xl:text-4xl font-light mb-2 leading-[1.111111] text-white">
               {data.title}
             </motion.h2>
-            <motion.p variants={moveUp(0.4)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="text-sm font-light leading-[1.52] text-white max-w-[91ch]">
+            <motion.p variants={moveUp(0.4)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="text-sm font-light leading-[1.52] text-white max-w-[83ch]">
               {data.description}
             </motion.p>
           </div>

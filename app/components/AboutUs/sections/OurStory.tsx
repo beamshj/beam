@@ -38,7 +38,7 @@ const OurStorySection: React.FC<OurStorySectionProps> = ({ data }) => {
   return (
     <section className="pt-10 xl:pt-20 2xl:pt-[135px]">
       <div className="container">
-        <div className="mb-3 md:mb-6 xl:mb-15 2xl:mb-[70px]">
+        <div className="mb-3 md:mb-6 xl:mb-15 2xl:mb-[50px]">
           <h1 className="text-lg md:text-xl xl:text-3xl 2xl:text-4xl font-light leading-[1.111111111] text-black"> 
           <SplitText
             tag="span"
@@ -75,7 +75,7 @@ const OurStorySection: React.FC<OurStorySectionProps> = ({ data }) => {
               {" "}
               {/* paragraph spacing */}
               {para.split("\n").map((line, i) => (
-                <motion.span variants={moveUp(i * 0.1)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} key={i} className="block mb-[14px] xl:mb-6 last:mb-0">
+                <motion.span variants={moveUp(i * 0.1)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} key={i} className="text-colorpara block mb-[14px] xl:mb-6 last:mb-0">
                   {" "}
                   {/* line spacing */}
                   {line}

@@ -16,7 +16,7 @@ interface Props {
 }
 
 export default function ValuesGrid({ values }: Props) {
-  const [hovered, setHovered] = useState<number | null>(null);
+  const [hovered, setHovered] = useState<number | null>(0);
 
   return (
     <section className="container">
@@ -39,7 +39,7 @@ export default function ValuesGrid({ values }: Props) {
               {/* Card */}
               <motion.div variants={moveUp(index * 0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}
                 onMouseEnter={() => setHovered(index)}
-                onMouseLeave={() => setHovered(null)}
+                onMouseLeave={() => setHovered(index)}
                 className="relative h-[280px] lg:h-[400px] xl:h-[500px] 2xl:h-[729px] w-full xl:max-w-[295px] overflow-hidden rounded-[12px]  group cursor-pointer"
               >
                 {/* Background image */}
@@ -69,10 +69,10 @@ export default function ValuesGrid({ values }: Props) {
                     {/* Title that moves */}
                     <h3
                       className={`
-                        absolute rounded-[22px] 2xl:w-[220px] px-4 py-2 2xl:px-4 text-sm 3xl:text-xl font-light transition-all duration-500 flex items-center justify-center
+                        absolute rounded-full 2xl:w-[250px]  py-2   text-[1.3rem] md:text-md xl:text-lg 2xl:text-xl  font-light transition-all duration-500 flex items-center justify-center
                         ${
                           hovered === index
-                            ? "top-3 left-3 text-left border-none bg-[linear-gradient(131deg,rgba(66,186,220,1)_0%,rgba(126,90,163,1)_100%)]"
+                            ? "top-3 left-1/2 -translate-x-1/2  text-left border-none bg-[linear-gradient(131deg,rgba(66,186,220,1)_0%,rgba(126,90,163,1)_100%)]"
                             : "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center border border-white"
                         }
                       `}
