@@ -117,10 +117,10 @@ export default function GalleryList({ data }: { data: GalleryList }) {
                         key={idx}
                         className="relative w-[33px] h-[33px] rounded-full overflow-hidden border-[1.1px] border-white"
                       >
-                        <img
+                        <Image width={50} height={50}
                           src={img}
                           alt={`thumb-${idx}`}
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-cover" 
                         />
                         {isLast && (
                           <div className="absolute inset-0 bg-primary flex items-center justify-center text-xs md:text-sm font-medium">

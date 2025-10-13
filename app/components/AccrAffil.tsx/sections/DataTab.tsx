@@ -1,19 +1,20 @@
 "use client";
 import { useState } from "react";
 import { accrData } from "../data";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence} from "framer-motion";
+import { moveUp } from "../../motionVarients";
 import Image from "next/image";
 const DataTab = () => {
   const [activeTab, setActiveTab] = useState<'affiliation' | 'accreditations'>('affiliation');
 
   const currentData = activeTab === 'affiliation' ? accrData.affiliation : accrData.accrediations;
-  return ( 
+  return (
     <section className="pb-10 lg:pb-20 xl:pb-25 2xl:pb-[135px]">
       <div className="container">
         <div className="flex items-center gap-5 border-b border-bdrcolor pb-[31px] mb-10 xl:mb-[65px]">
-          <button className={activeTab === 'affiliation' ? 'tab-btn active' : 'tab-btn'} onClick={() => setActiveTab('affiliation')} ><span>Affiliation</span></button>
-           <button className={activeTab === 'accreditations' ? 'tab-btn active' : 'tab-btn'} onClick={() => setActiveTab('accreditations')}><span>Accreditation</span></button>
-        </div> 
+          <motion.button variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ amount: 0.1, once: false }} className={activeTab === 'affiliation' ? 'tab-btn active' : 'tab-btn'} onClick={() => setActiveTab('affiliation')} ><span>Affiliation</span></motion.button>
+          <motion.button variants={moveUp(0.4)} initial="hidden" whileInView="show" viewport={{ amount: 0.1, once: false }} className={activeTab === 'accreditations' ? 'tab-btn active' : 'tab-btn'} onClick={() => setActiveTab('accreditations')}><span>Accreditation</span></motion.button>
+        </div>
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}
@@ -29,7 +30,7 @@ const DataTab = () => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: index * 0.05, duration: 0.3 }}
-                className="tab-pan xl:min-h-[428px] flex flex-col justify-between bg-white hover:shadow-xl transition-shadow duration-300 p-6 relative group"
+                className="tab-pan xl:min-h-[428px] flex flex-col justify-between bg-white hover:shadow-xl transition-shadow duration-300 p-6 relative group hover:rounded-tr-3xl overflow-hidden"
               >
                 <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-white/0 to-[#E6F7FF] z-10"></div>
                 <div className="absolute bottom-0 left-0 w-full h-0 group-hover:h-full transition-all duration-300 bg-gradient-to-b from-[#42BADC] to-[#7E5AA3]/76 z-10"></div>
@@ -57,7 +58,7 @@ const DataTab = () => {
         </AnimatePresence>
       </div>
     </section>
-   );
+  );
 }
- 
+
 export default DataTab;
