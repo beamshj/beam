@@ -1,17 +1,43 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
 import {
   container,
   lineFade,
   playFadeUp,
 } from "@/public/assets/FramerAnimation/animation";
 import SplitText from "@/components/SplitText";
+gsap.registerPlugin(ScrollTrigger);
 const VideoSection = () => {
   const [isOpen, setIsOpen] = useState(false);
   const openPopup = () => setIsOpen(true);
   const closePopup = () => setIsOpen(false);
+  const imgRef = useRef<HTMLImageElement | null>(null);
+
+  useEffect(() => {
+    if (!imgRef.current) return;
+
+    const ctx = gsap.context(() => {
+      gsap.to(imgRef.current, {
+        scale: 1.8, // zoom in slightly
+        xPercent: -5, // subtle pan left
+        yPercent: -3, // subtle pan up
+        ease: "none",
+        scrollTrigger: {
+          trigger: imgRef.current,
+          start: "top bottom", // start when entering viewport
+          end: "bottom top", // end when leaving
+          scrub: true, // smooth sync with scroll
+        },
+      });
+    });
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <motion.section
       className="w-full relative max-w-[1920px] mx-auto overflow-hidden 2xl:h-screen py-10 md:py-28 2xl:py-0"
@@ -20,13 +46,8 @@ const VideoSection = () => {
       transition={{ duration: 0.8, ease: "easeOut" }}
       viewport={{ once: true }}
     >
-      <Image
-        src="/assets/home/video-poster.jpg"
-        alt="Video"
-        width={1920}
-        height={950}
-        className="w-full h-full object-cover absolute z-10 top-0"
-      />
+
+      <Image src="/assets/home/video-poster.jpg" ref={imgRef} alt="Video" width={1920} height={950} className="w-full h-full object-cover absolute z-10 top-0 right-0" />
       <div className="container flex items-center h-full">
         <motion.div
           className="relative z-30 flex flex-col gap-10"
@@ -35,22 +56,20 @@ const VideoSection = () => {
           whileInView="show"
           viewport={{ once: true, amount: 0.2 }}
         >
-          <h2>
-            <SplitText
-              tag="span"
-              text={"Get to Know Our School!"}
-              className="text-xl md:text-2xl xl:text-3xl 2xl:text-4xl leading-[1.2] text-white w-full md:w-3/4 font-light lettersp-4 text-center md:text-left"
-              delay={100}
-              duration={0.6}
-              ease="power3.out"
-              splitType="chars"
-              from={{ opacity: 0, y: 40 }}
-              to={{ opacity: 1, y: 0 }}
-              threshold={0.1}
-              rootMargin="-100px"
-              textAlign="left"
-            />
-          </h2>
+          <SplitText
+            tag="h2"
+            text={"Get to Know Our School!"}
+            className="text-xl md:text-2xl xl:text-3xl 2xl:text-4xl leading-[1.2] text-white w-full md:w-3/4 font-light lettersp-4 text-center md:text-left"
+            delay={100}
+            duration={0.6}
+            ease="power3.out"
+            splitType="chars"
+            from={{ opacity: 0, y: 40 }}
+            to={{ opacity: 1, y: 0 }}
+            threshold={0.1}
+            rootMargin="-100px"
+            textAlign="left"
+          />
 
           <motion.div
             className="w-full md:w-3/4 h-px bg-gradient-to-r from-white to-transparent origin-left"
@@ -60,6 +79,7 @@ const VideoSection = () => {
             className="text-md md:text-lg 2xl:text-xl font-light justify-center md:justify-start flex text-white gap-5 items-center"
             variants={playFadeUp}
           >
+
             <span>Play</span>
             <Image
               src="/assets/home/play-icon.svg"
