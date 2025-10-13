@@ -2,8 +2,6 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { moveUp } from "../../motionVarients";
-import { motion } from "framer-motion";
 import SplitText from "@/components/SplitText";
 export interface VMItem {
   image: string;
