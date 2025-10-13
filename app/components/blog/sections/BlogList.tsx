@@ -86,7 +86,7 @@ export default function BlogList({ data }: { data: BlogItem[] }) {
                       setSelectedCategory(cat);
                       setCurrentPage(1);
                     }}
-                    className={`px-[20px] py-[11px] text-xs rounded-[50px] font-light w-full transition-colors duration-200 ${
+                    className={`px-[20px] py-[11px] text-xs rounded-[50px] font-light w-full transition-colors duration-200 uppercase ${
                       isSelected
                         ? "bg-[#C9F3FF] text-black"
                         : "bg-white text-black hover:bg-[#F5F5F5]"
@@ -111,7 +111,7 @@ export default function BlogList({ data }: { data: BlogItem[] }) {
                 setCurrentPage(1);
               }
             }}
-            className="text-19 font-light"
+            className="text-19 font-light uppercase"
             classNamePrefix="react-select"
             styles={{
               control: (base) => ({
@@ -139,7 +139,7 @@ export default function BlogList({ data }: { data: BlogItem[] }) {
               whileInView="show"
               viewport={{ once: false, amount: 0.2 }}
               key={index}
-              className="rounded-[12px] relative overflow-hidden h-[350px] xl:h-[480px] 2xl:h-[551px] border border-bdrcolor flex flex-col group"
+              className="rounded-[12px] relative overflow-hidden h-full xl:h-[500px] 2xl:h-[551px] border border-bdrcolor flex flex-col group"
             >
               {/* Sliding Gradient from bottom */}
               <div className="absolute inset-0 -z-10 overflow-hidden">
@@ -171,7 +171,7 @@ export default function BlogList({ data }: { data: BlogItem[] }) {
               </div>
 
               {/* Content Section */}
-              <div className="flex-1 flex flex-col justify-center px-[40px]">
+              <div className="flex-1 flex flex-col justify-center px-[20px] xl:px-[40px] py-[20px] 2xl:py-[0px]">
                 <div className="flex text-colorpara justify-between items-center text-sm font-light leading-[1.7] mb-[15px]">
                   <span>
                     {new Date(blog.date).toLocaleDateString("en-US", {

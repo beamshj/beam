@@ -65,7 +65,7 @@ export const blogs = [
     category: "Technology",
   },
   {
-    image: "/images/blog/blog-list/12.jpg",
+    image: "/images/blog/blog-list/10.jpg",
     title: "Everything You Need to Know About American...",
     date: "10/07/2025",
     category: "curriculum",
