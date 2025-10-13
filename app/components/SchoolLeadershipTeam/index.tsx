@@ -1,12 +1,12 @@
 import InnerBanner from "../Common/InnerBanner";
-import { BannerData } from "./data";
+import { BannerData, sliderData } from "./data";
 import LeadershipTeam from "./sections/LeadershipTeam";
 
 const Index = () => {
   return (
     <>
       <InnerBanner BannerData={BannerData} />
-      <LeadershipTeam />
+      <LeadershipTeam data={sliderData} />
     </>
   );
 };
