@@ -97,7 +97,7 @@ const VisionMissionSection = ({
               {visionMissionItems.VMItems.map((item,index) => (
                 <div key={item.id} className="flex items-stretch xl:gap-4 cursor-pointer group" onMouseEnter={() => setActive(item.id)} >
                   {/* Left icon box - fixed width, stretched height */}
-                  <motion.div variants={moveUp(index * 0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className={`flex-shrink-0 w-fit xl:w-[125px] flex items-center justify-center rounded-[12px] transition-colors duration-300 bg-[#F5EBFF]  group-hover:bg-[#DDF7FF] group p-5 xl:py-0`}
+                  <motion.div variants={moveUp(index * 0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className={`flex-shrink-0 w-fit xl:w-[125px] flex items-center justify-center rounded-[12px] transition-colors duration-300  ${index === 0 ? 'bg-[#DDF7FF]' : 'bg-[#F5EBFF]'} group p-5 xl:py-0`}
                   >
                     <Image src={item.icon} alt={item.title} width={70} height={70} className="w-auto h-8  xl:h-[70px]" />
                   </motion.div>

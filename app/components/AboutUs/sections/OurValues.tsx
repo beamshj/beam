@@ -85,7 +85,7 @@ export default function ValuesGrid({ values }: Props) {
                       <div
                         className="absolute bottom-0 left-0 w-full 
                bg-gradient-to-t from-black/100 to-black/0
-               px-3 pt-4 pb-3"
+               px-3 pt-4 pb-5"
                       >
                         <ul className="list-disc list-outside pl-4 xl:pl-9 space-y-1 text-sm text-white font-light">
                           {item.points.map((point, i) => (
