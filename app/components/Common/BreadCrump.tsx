@@ -108,12 +108,12 @@ const Breadcrump = () => {
     label.length > 8 ? label.slice(0, 8) + "…" : label;
 
   return (
-    <ul className="flex items-center gap-2 text-sm font-light capitalize text-[#D2D2D2]">
+    <ul className="flex items-center gap-[4px] text-sm font-light capitalize text-[#D2D2D2]">
       <motion.li
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2, duration: 0.6 }}
-        className="flex items-center gap-2 text-15 leading-[1.2] font-light group"
+        className="flex items-center gap-[4px] text-15 leading-[1.2] font-light group"
       >
         <Link href="/" className="hover:underline">
           Home
@@ -122,9 +122,10 @@ const Breadcrump = () => {
           <span>
             <Image
               src="/images/about-us/arrow-right.svg"
+              
               alt="arrow-right"
-              width={15}
-              height={14}
+              width={18}
+              height={18}
             />
           </span>
         )}
@@ -161,8 +162,8 @@ const Breadcrump = () => {
                 <Image
                   src="/images/about-us/arrow-right.svg"
                   alt="arrow-right"
-                  width={15}
-                  height={14}
+                  width={18}
+                  height={18}
                 />
               </span>
             )}
