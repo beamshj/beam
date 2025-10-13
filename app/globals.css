@@ -107,6 +107,7 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  --animate-spotlight: spotlight 2s ease 0.75s 1 forwards;
 }
 
 body {
@@ -483,3 +484,38 @@ body {
 .swiper-slide-active .bgseta {border:1px solid #23ABD2;}
 .bgactive {background: black;}
 .swiper-slide-active .bgactive {background: #23ABD2;}
+
+.section-scrlef1-wrp{
+  perspective: 1000px;
+}
+@theme inline {
+  --animate-meteor-effect: meteor 8s linear infinite;
+
+  @keyframes meteor {
+    0% {
+      transform: rotate(215deg) translateX(0);
+      opacity: 1;
+    }
+
+    70% {
+      opacity: 1;
+    }
+
+    100% {
+      transform: rotate(215deg) translateX(-500px);
+      opacity: 0;
+    }
+  }
+}
+
+@keyframes spotlight {
+  0% {
+    opacity: 0;
+    transform: translate(-72%, -62%) scale(0.5);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -40%) scale(1);
+  }
+}
