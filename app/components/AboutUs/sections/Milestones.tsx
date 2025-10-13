@@ -75,7 +75,7 @@ export default function MoreToExplore({ items }: Props) {
             onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
             modules={[Navigation, Pagination,Autoplay]}
             autoplay={{ delay: 6000, disableOnInteraction: false }}
-            className="md:!overflow-visible"
+            className="md:!overflow-visible aboutslide"
           >
             {items.map((item, index) => (
               <SwiperSlide key={index} className="relative">
@@ -120,7 +120,7 @@ export default function MoreToExplore({ items }: Props) {
                     initial={{ opacity: 0, scale: 0.9, y: -30 }}
                     whileInView={{ opacity: 1, scale: 1, y: -80 }}
                     viewport={{ once: false, amount: 0.3 }}
-                    transition={{ duration: 0.9, ease: "easeOut", delay: 0.1 }}
+                    transition={{ duration: 0.3, ease: "easeOut", delay: 0.1 }}
                     className="md:absolute  md:left-[40%] lg:left-[35%] z-[2] imgtrans"
                   >
                     <Image
