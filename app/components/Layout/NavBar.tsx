@@ -52,6 +52,7 @@ const NavBar = () => {
     ? sliderMenuItems
     : sliderMenuItems.slice(3);
 
+    const [hoveredMenu, setHoveredMenu] = useState<string | null>(null);
   return (
     <>
       <header
@@ -74,17 +75,61 @@ const NavBar = () => {
                 </div>
                 <div className="h-full border-r-[1px] border-[#D3D3D3]"></div>
               </div>
-              <div className="hidden lg:block py-3">
-                <ul className="flex gap-[30px] text-black">
-                  {mainMenuItems.map((item) => (
-                    <li key={item.name}>
-                      <Link href={item.href} className="text-sm font-light">
-                        {item.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <div className="hidden lg:flex h-full items-center">
+      <ul className="flex gap-[30px] text-black relative h-full items-center">
+        {mainMenuItems.map((item) => (
+          <li
+            key={item.name}
+            className="group relative  h-full flex items-center"
+            onMouseEnter={() => setHoveredMenu(item.name)}
+            onMouseLeave={() => setHoveredMenu(null)}
+          >
+            {/* Top-level Link */}
+            <Link
+              href={item.href}
+              className="text-sm font-light transition-colors duration-300 ease-in-out group-hover:text-primary group-hover:underline group-hover:underline-offset-4"
+            >
+              {item.name}
+            </Link>
+
+            {/* Submenu */}
+            {item.submenu && (
+              <AnimatePresence>
+                {hoveredMenu === item.name && (
+                  <motion.ul
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    transition={{ duration: 0.25, ease: "easeInOut" }}
+                    className="absolute left-0 top-full mt-2 w-[378px] bg-white shadow-xl rounded-lg py-3 px-4 flex flex-col  z-50"
+                  >
+                    {item.submenu.map((sub) => (
+                      <li key={sub.name} className="border-b border-[#D3D3D3] last:border-b-0 py-3 linkhrs ">
+                        <Link
+                          href={sub.href}
+                          className="flex gap-5 text-sm font-light text-black hover:text-primary transition-colors duration-200 "
+                        >
+                          <span>{sub.name}</span>
+                          <span className="bg-primary rounded-full p-2 w-[27px] h-[27px] opacity-0 blks transition-all duration-500">
+                            <Image
+                              src="/assets/arrow.svg"
+                              alt="Arrow"
+                              className="rotate-45"
+                              width={20}
+                              height={20}
+                            />
+                          </span>
+                        </Link>
+                      </li>
+                    ))}
+                  </motion.ul>
+                )}
+              </AnimatePresence>
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
             </div>
             <div className="flex gap-5">
               <div className="hidden lg:flex items-center">

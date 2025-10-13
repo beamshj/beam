@@ -31,7 +31,7 @@ export const visionMissionItems = {
     {
       id: "mission",
       title: "Our Mission",
-      icon: "/images/about-us/visionMission/missionIcon.svg",
+      icon: "/images/about-us/visionMission/missionIcon.png",
       description:
         "We aim to inspire a love for learning by building an inclusive community that promotes values, innovation, and excellence.",
       iconBg: "bg-purple-100",

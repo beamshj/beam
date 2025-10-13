@@ -468,9 +468,7 @@ body {
   border-radius: 5px;
   background: #D3D3D3 !important;
 }
-.commentpagination.cstss .swiper-pagination-bullet{
-  width: 38px;  
-}
+ 
 .commentpagination .swiper-pagination-bullet-active{
  background: linear-gradient(180deg, #42BADC 0%, #7E5AA3 100%) !important; 
  
@@ -529,3 +527,5 @@ body {
 .aboutslide .swiper-slide-active .yrmn { @apply mb-0}
 .aboutslide .imgtrans{transform: translateY(20px) !important;}
 }
+.linkhrs:hover .blks{opacity: 1;}
+h1,h2.text-lg, h2.text-xl{    letter-spacing: -4px;}
