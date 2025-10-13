@@ -35,7 +35,7 @@ export interface rsData {
               <div className="absolute inset-0 bg-[linear-gradient(180.12deg,rgba(0,0,0,0)_50%,rgba(0,0,0,0.75)_99.9%)] "></div>
               </div>
             <div className="p-5 md:p-6 xl:p-10 border-1 border-[#D3D3D3]  rounded-b-lg">
-              <div className="flex justify-between text-sm text-colorpara">
+              <div className="flex justify-between text-sm text-colorpara font-light">
                 <p>{item.date}</p>
                 <p>{item.category}</p>
               </div>
