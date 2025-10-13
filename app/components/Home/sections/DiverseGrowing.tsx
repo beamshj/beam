@@ -10,40 +10,57 @@ import "swiper/css/pagination";
 import { motion } from "framer-motion";
 import {
   fadeUp,
-  fadeInLeft,
+  // fadeInLeft,
   fadeInRight,
 } from "@/public/assets/FramerAnimation/animation";
 import Counter from "../../Common/Counter";
 import SplitText from "@/components/SplitText";
-
+import { useRef, useEffect } from "react";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 const DiverseGrowing = () => {
+  const imgRef = useRef<HTMLImageElement | null>(null);
+
+  useEffect(() => {
+    if (!imgRef.current) return;
+
+    const ctx = gsap.context(() => {
+      gsap.to(imgRef.current, {
+        xPercent: 15, // move image 15% to the right
+        ease: "none",
+        scrollTrigger: {
+          trigger: imgRef.current,
+          start: "top bottom",   // start when image enters view
+          end: "bottom top",     // finish when it leaves
+          scrub: true,           // smooth scroll-linked motion
+        },
+      });
+    });
+
+    return () => ctx.revert();
+  }, []);
   return (
     <section className="pt-8 xl:pt-20 2xl:pt-[137px]">
       <div className="relative pb-12 md:pb-15 xl:pb-[150px] max-w-[1920px] mx-auto overflow-hidden">
         <div className="container">
           <div>
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.1 }} // Trigger when only 10% of image enters viewport
-            >
-              <h2>
-                <SplitText
-                  tag="span"
-                  text={diverseGrowingData.heading}
-                  className="text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-light leading-tight text-black max-w-[20ch] lettersp-4 xl:mb-30 2xl:mb-40"
-                  delay={100}
-                  duration={0.6}
-                  ease="power3.out"
-                  splitType="words"
-                  from={{ opacity: 0, y: 40 }}
-                  to={{ opacity: 1, y: 0 }}
-                  threshold={0.1}
-                  rootMargin="-100px"
-                  textAlign="left"
-                />
-              </h2>
+            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }}  >
+
+              <SplitText
+                tag="h2"
+                text={diverseGrowingData.heading}
+                className="text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-light leading-[1.111111111] text-black max-w-[20ch] lettersp-4 xl:mb-30 2xl:mb-40"
+                delay={100}
+                duration={0.6}
+                ease="power3.out"
+                splitType="words"
+                from={{ opacity: 0, y: 40 }}
+                to={{ opacity: 1, y: 0 }}
+                threshold={0.1}
+                rootMargin="-100px"
+                textAlign="left"
+              />
             </motion.div>
             <div className="2xl:w-4/5 ml-auto mt-8 lg:mt-[140px]  xl:mt-[64px] relative">
               <motion.div
@@ -220,21 +237,17 @@ const DiverseGrowing = () => {
             </div>
           </div>
         </div>
-        <motion.div
-          variants={fadeInLeft}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }} // Trigger when only 10% of image enters viewport
+        <div
           className="absolute bottom-0 lg:left-[5%] z-[-1] responsive md:w-[50%] 2xl:w-[913px]"
         >
-          <Image
+          <Image ref={imgRef}
             src={diverseGrowingData.image}
             alt={diverseGrowingData.heading}
             width={913}
             height={944}
             className=""
           />
-        </motion.div>
+        </div>
       </div>
     </section>
   );

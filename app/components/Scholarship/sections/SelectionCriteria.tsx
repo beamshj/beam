@@ -1,7 +1,9 @@
 "use client";
 
-
+import SplitText from "@/components/SplitText";
 import Image from "next/image";
+import { motion } from "framer-motion";
+import { fadeIn } from "../../motionVarients";
 export interface VMItem {
   title: string;
   description: string;
@@ -26,28 +28,81 @@ const SelectionCriteria = ({
       <div className="container">
         <div>
           <div>
-            <h2 className="text-lg lg:text-xl xl:text-2xl 2xl:text-4xl  font-light leading-[1.111111111] text-black mb-4 md:mb-6 xl:mb-8 2xl:mb-8">
-              {criteriaData.title}
-            </h2>
-            <p className=" text-sm leading-[1.526315789473684] max-w-[55ch] mb-6 lg:mb-7 last:lg:mb-13 font-light  text-colorpara">{criteriaData.description}</p>
+            <SplitText
+              tag="h2"
+              text={criteriaData.title}
+              className="text-lg lg:text-xl xl:text-2xl 2xl:text-4xl  font-light leading-[1.111111111] text-black mb-4 md:mb-6 xl:mb-8 2xl:mb-8"
+              delay={100}
+              duration={0.6}
+              ease="power3.out"
+              splitType="words"
+              from={{ opacity: 0, y: 40 }}
+              to={{ opacity: 1, y: 0 }}
+              threshold={0.1}
+              rootMargin="-100px"
+              textAlign="left"
+            />
+            <div>
+              <SplitText
+                tag="p"
+                text={criteriaData.description}
+                className=" text-sm leading-[1.526315789473684] max-w-[55ch] mb-6 lg:mb-7 last:lg:mb-13 font-light  text-colorpara"
+                delay={100}
+                duration={0.6}
+                ease="power3.out"
+                splitType="lines"
+                from={{ opacity: 0, y: 40 }}
+                to={{ opacity: 1, y: 0 }}
+                threshold={0.1}
+                rootMargin="-100px"
+                textAlign="left"
+              />
+            </div>
           </div>
           <div className="grid grid-col-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-12 mb-8 md:mb-0">
             {criteriaData.items.map((item, index) => {
               return (
-                <div key={index} className="flex flex-col gap-3 md:gap-5 p-4 md:p-0 bg-secondary md:bg-transparent">
+                <motion.div variants={fadeIn(index*0.5)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.1 }} key={index} className="flex flex-col gap-3 md:gap-5 p-4 md:p-0 bg-secondary md:bg-transparent">
                   <Image src={item.icon} alt=" " width={52} height={52} className="w-fit h-10 xl:h-[52px]" />
                   <h3 className="text-md lg:text-xl xl:text-2xl 2xl:text-xl font-light xl:max-w-[11ch] leading-[1.2]">{item.title}</h3>
                   <hr />
                   <p className="text-colorpara font-light xl:max-w-[27ch]">{item.description}</p>
-                </div>
+                </motion.div>
               )
             })}
           </div>
           <div>
-            <h3 className="text-md xl:text-lg 2xl:text-xl font-light leading-[1.111111111] text-black my-4 md:my-6 xl:mb-8 2xl:mb-8 xl:mt-8 2xl:mt-13">
-              {criteriaData.secondtitle}
-            </h3>
-            <p className=" text-sm leading-[1.526315789473684] max-w-[81ch] mb-0 font-light  text-colorpara">{criteriaData.seconddescription}</p>
+            <SplitText
+              tag="h2"
+              text={criteriaData.secondtitle}
+              className="text-md xl:text-lg 2xl:text-xl font-light leading-[1.111111111] text-black my-4 md:my-6 xl:mb-8 2xl:mb-8 xl:mt-8 2xl:mt-13"
+              delay={100}
+              duration={0.6}
+              ease="power3.out"
+              splitType="words"
+              from={{ opacity: 0, y: 40 }}
+              to={{ opacity: 1, y: 0 }}
+              threshold={0.1}
+              rootMargin="-100px"
+              textAlign="left"
+            />
+            {/* <p className=" text-sm leading-[1.526315789473684] max-w-[81ch] mb-0 font-light  text-colorpara">{criteriaData.seconddescription}</p> */}
+            <div>
+              <SplitText
+                tag="p"
+                text={criteriaData.seconddescription}
+                className=" text-sm leading-[1.526315789473684] max-w-[81ch] mb-0 font-light  text-colorpara"
+                delay={100}
+                duration={0.6}
+                ease="power3.out"
+                splitType="lines"
+                from={{ opacity: 0, y: 40 }}
+                to={{ opacity: 1, y: 0 }}
+                threshold={0.1}
+                rootMargin="-100px"
+                textAlign="left"
+              />
+            </div>
           </div>
         </div>
       </div>
