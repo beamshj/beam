@@ -528,5 +528,7 @@ body {
 .aboutslide .imgtrans{transform: translateY(20px) !important;}
 }
 .linkhrs:hover .blks{opacity: 1;}
+@media screen and (min-width: 1300px) {
 h1,h2.text-lg, h2.text-xl{    letter-spacing: -4px;}
 h2.text-xl{    letter-spacing: -4px;}
+}
