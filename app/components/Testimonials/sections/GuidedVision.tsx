@@ -6,7 +6,8 @@ import { useState } from "react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-
+import SplitText from "@/components/SplitText";
+import { moveUp } from "../../motionVarients";
 export interface visionData {
   title: string;
   items: {
@@ -23,9 +24,20 @@ const GuidedVision = ({ visionData }: { visionData: visionData }) => {
     <section className="pb-14 md:pb-20 lg:pb-20 2xl:pb-[135px]">
       <div className="container">
         <div>
-          <h2 className="text-lg xl:text-2xl 2xl:text-4xl 2xl:max-w-[18ch] font-light leading-[1.111111111] text-black mb-4 md:mb-6 xl:mb-7 2xl:mb-12">
-            {visionData.title}
-          </h2>
+        
+          <SplitText
+            tag="h2"
+            text={visionData.title}
+            className="text-lg xl:text-2xl 2xl:text-4xl 2xl:max-w-[18ch] font-light leading-[1.111111111] text-black mb-4 md:mb-6 xl:mb-7 2xl:mb-12"
+            delay={100}
+            duration={0.6}
+            ease="power3.out"
+            splitType="words"
+            from={{ opacity: 0, y: 40 }}
+            to={{ opacity: 1, y: 0 }}
+            threshold={0.1}
+            rootMargin="-100px"
+          />
         </div>
         <div className="">
           <div>
@@ -35,7 +47,7 @@ const GuidedVision = ({ visionData }: { visionData: visionData }) => {
                   const isPlaying = activeVideoIndex === index;
 
                   return (
-                    <div key={index} className="relative w-full h-[250px] md:h-[420px] rounded-[12px] overflow-hidden flex-grow">
+                    <motion.div variants={moveUp(index * 0.2)} initial="hidden" whileInView="show" viewport={{amount: 0.1, once: true}} key={index} className="relative w-full h-[250px] md:h-[420px] rounded-[12px] overflow-hidden flex-grow">
                       {/* Background image */}
                       <Image
                         src={item.image}
@@ -92,7 +104,7 @@ const GuidedVision = ({ visionData }: { visionData: visionData }) => {
                           allowFullScreen
                         />
                       )}
-                    </div>
+                    </motion.div>
                   );
                 })}
               </div>

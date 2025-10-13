@@ -374,7 +374,7 @@ body {
 }
 
 .tab-btn {
-  @apply p-[1.1px] rounded-full overflow-hidden relative cursor-pointer transition-all duration-300 ease-in-out;
+  @apply p-[1.1px] rounded-full overflow-hidden relative cursor-pointer transition-colors duration-300 ease-in-out;
 }
 
 .tab-btn::before {
