@@ -122,7 +122,6 @@ const Breadcrump = () => {
           <span>
             <Image
               src="/images/about-us/arrow-right.svg"
-              
               alt="arrow-right"
               width={18}
               height={18}
