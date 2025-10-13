@@ -124,6 +124,13 @@ body {
   }
 }
 
+@layer utilities {
+  .font-light {
+    font-weight: 260;
+  }
+}
+
+
 .custom-pagination .swiper-pagination-bullet,
 .cus-pagination .swiper-pagination-bullet {
   display: inline-block;
