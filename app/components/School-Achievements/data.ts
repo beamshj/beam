@@ -31,9 +31,9 @@ export const achievementsData = {
     {
       id: 3,
       logo: "/images/school-achievements/logos/3.jpg",
-      title: "Finalist Top Schools Award",
+      title: "School of the Month",
       description:
-        "ASCIS Mathis Bond received the School of the Month award from BISA in December 2024 for excellence.",
+        "ASCS Maliha Road received the School of the Month award from SPEA in November 2021 for excellence.",
     },
     {
       id: 4,

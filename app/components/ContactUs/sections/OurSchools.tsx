@@ -6,7 +6,6 @@ import { useState } from "react";
 import SplitText from "@/components/SplitText";
 import { moveUp } from "../../motionVarients";
 
-
 interface OurSchoolsProps {
   title: string;
   description: string;
@@ -26,28 +25,39 @@ export default function OurSchools({ data }: { data: OurSchoolsProps }) {
       <div className="container overflow-hidden">
         {/* Title + Description */}
         <div className="mb-5 md:mb-8 xl:mb-[30px]">
-          <h2 className="text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl font-light text-black leading-[1.1111]">
-           <SplitText
-             tag="span"
-             text={title}
-             delay={100}
-             duration={0.6}
-             ease="power3.out"
-             splitType="words"
-             from={{ opacity: 0, y: 40 }}
-             to={{ opacity: 1, y: 0 }}
-             threshold={0.1}
-             rootMargin="-10px"
-             textAlign="left"
-           /> 
-          </h2>
-          <motion.p variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="text-colorpara text-sm leading-[1.52] mt-3 xl:mt-[50px]">
+          <SplitText
+            tag="h1"
+            text={title}
+            className="text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl font-light text-black leading-[1.1111]"
+            delay={100}
+            duration={0.6}
+            ease="power3.out"
+            splitType="words"
+            from={{ opacity: 0, y: 40 }}
+            to={{ opacity: 1, y: 0 }}
+            threshold={0.1}
+            rootMargin="-10px"
+            textAlign="left"
+          />
+          <motion.p
+            variants={moveUp(0.2)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+            className="text-colorpara font-light text-sm leading-[1.52] mt-3 xl:mt-[50px]"
+          >
             {description}
           </motion.p>
         </div>
 
         {/* Cards */}
-        <motion.div variants={moveUp(0.4)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="flex flex-wrap xl:flex-row gap-[19px] justify-between">
+        <motion.div
+          variants={moveUp(0.4)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
+          className="flex flex-wrap xl:flex-row gap-[19px] justify-between"
+        >
           {schools.map((school, i) => {
             const isActive = activeIndex === i;
 
@@ -69,7 +79,14 @@ export default function OurSchools({ data }: { data: OurSchoolsProps }) {
                 }`}
               >
                 {/* Image */}
-                <Image src={school.img} alt={school.title} fill className={`object-cover transition-all duration-500 ${ isActive ? "grayscale-0" : "grayscale" }`} />
+                <Image
+                  src={school.img}
+                  alt={school.title}
+                  fill
+                  className={`object-cover transition-all duration-500 ${
+                    isActive ? "grayscale-0" : "grayscale"
+                  }`}
+                />
 
                 {/* Overlay */}
                 {!isActive && (
@@ -103,7 +120,12 @@ export default function OurSchools({ data }: { data: OurSchoolsProps }) {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
                   >
-                    <Image src="/images/contact-us/icons/location.svg" alt="location" width={24} height={24} />
+                    <Image
+                      src="/images/contact-us/icons/location.svg"
+                      alt="location"
+                      width={24}
+                      height={24}
+                    />
                     {school.location}
                   </motion.div>
                 )}
@@ -113,20 +135,37 @@ export default function OurSchools({ data }: { data: OurSchoolsProps }) {
                   // ACTIVE CARD (expanded)
                   <div className="absolute bottom-[40px] left-5 xl:left-[40px] xl:right-[40px] flex flex-col xl:flex-row justify-between xl:items-end text-white z-10 gap-6 xl:gap-0">
                     {/* Left content */}
-                    <motion.div initial={{ opacity: 0, x: 80 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, ease: "easeOut" }} className="flex flex-col" >
+                    <motion.div
+                      initial={{ opacity: 0, x: 80 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.8, ease: "easeOut" }}
+                      className="flex flex-col"
+                    >
                       <h3 className="text-md lg:text-lg xl:text-xl font-light leading-[1.2]">
                         {school.title}
                       </h3>
                       <div className="mt-[15px] inline-flex items-center text-sm font-light">
                         Learn more{" "}
-                        <Image src="/images/arrow-right-tip.svg" alt="arrow" width={25} height={24} className="ml-[12px]" />
+                        <Image
+                          src="/images/arrow-right-tip.svg"
+                          alt="arrow"
+                          width={25}
+                          height={24}
+                          className="ml-[12px]"
+                        />
                       </div>
                     </motion.div>
 
                     {/* Right arrow button */}
                     <div className="mt-4 md:mt-0">
                       <span className="w-12 h-12 xl:w-[74px] xl:h-[74px] flex items-center justify-center border border-white rounded-full">
-                        <Image src="/images/arrow-primary.svg" alt="arrow" width={24} height={24} className="w-auto h-4 xl:h-[24px]" />
+                        <Image
+                          src="/images/arrow-primary.svg"
+                          alt="arrow"
+                          width={24}
+                          height={24}
+                          className="w-auto h-4 xl:h-[24px]"
+                        />
                       </span>
                     </div>
                   </div>
@@ -134,7 +173,12 @@ export default function OurSchools({ data }: { data: OurSchoolsProps }) {
                   // INACTIVE CARD: only arrow centered at bottom
                   <div className="absolute bottom-[40px] left-5 xl:left-1/2 xl:-translate-x-1/2 z-10">
                     <span className="w-[74px] h-[74px] flex items-center justify-center border border-white rounded-full">
-                      <Image src="/images/arrow-primary.svg" alt="arrow" width={24} height={24} />
+                      <Image
+                        src="/images/arrow-primary.svg"
+                        alt="arrow"
+                        width={24}
+                        height={24}
+                      />
                     </span>
                   </div>
                 )}

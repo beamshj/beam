@@ -35,10 +35,10 @@ export default function LeadershipCarousel({ data }: { data: Member[] }) {
   const sizes = {
     active: {
       "2xl": { w: 459, h: 653 },
-      xl: { w: 400, h: 580 },
-      lg: { w: 280, h: 370 },
-      md: { w: 240, h: 350 },
-      sm: { w: 220, h: 300 },
+      xl: { w: 400, h: 550 },
+      lg: { w: 280, h: 330 },
+      md: { w: 240, h: 300 },
+      sm: { w: 220, h: 280 },
     },
     nonActive: {
       "2xl": { w: 255, h: 255 },
@@ -153,7 +153,7 @@ export default function LeadershipCarousel({ data }: { data: Member[] }) {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.2 }}
-          className="text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl lg:leading-[1.111] font-light mb-3 xl:mb-[30px] 2xl:mb-[50px] text-black lettersp-4 pl-2"
+          className="text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl lg:leading-[1.111] font-light mb-3 xl:mb-[30px] 2xl:mb-[50px] text-black lettersp-4"
         >
           Schools’ Leadership Team
         </motion.h1>
@@ -162,7 +162,7 @@ export default function LeadershipCarousel({ data }: { data: Member[] }) {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.2 }}
-          className="text-sm font-light leading-[1.52] mb-3 xl:mb-[30px] 2xl:mb-[50px] text-colorpara pl-2"
+          className="text-sm font-light leading-[1.52] xl:mb-[30px] 2xl:mb-[50px] text-colorpara"
         >
           Our leadership team brings together a wealth of experience, vision,
           and passion. With a strong commitment to excellence and innovation,
@@ -198,7 +198,7 @@ export default function LeadershipCarousel({ data }: { data: Member[] }) {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, amount: 0.2 }}
-              className="text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl lg:leading-[1.111] font-light mb-3 xl:mb-[30px] 2xl:mb-[50px] text-black lettersp-4 pl-2"
+              className="text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl lg:leading-[1.111] font-light mb-3 xl:mb-[30px] 2xl:mb-[50px] text-black lettersp-4"
             >
               Schools’ Leadership Team
             </motion.h1>
@@ -207,7 +207,7 @@ export default function LeadershipCarousel({ data }: { data: Member[] }) {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, amount: 0.2 }}
-              className="text-sm font-light leading-[1.52]  text-colorpara"
+              className="text-sm font-light leading-[1.52] text-colorpara"
             >
               Our leadership team brings together a wealth of experience,
               vision, and passion. With a strong commitment to excellence and
@@ -234,7 +234,7 @@ export default function LeadershipCarousel({ data }: { data: Member[] }) {
                 alt={m.name}
                 width={Math.max(1, Math.round(m.width))}
                 height={Math.max(1, Math.round(m.height))}
-                className={`w-full h-full object-cover ${
+                className={`w-full h-full lg:object-cover object-top ${
                   !m.isActive ? "saturate-0" : ""
                 }`}
               />
@@ -249,7 +249,7 @@ export default function LeadershipCarousel({ data }: { data: Member[] }) {
           ))}
         </div>
         {/* Active Slide Content */}
-        <div className="w-fit flex flex-col justify-between mt-3 md:mt-0">
+        <div className="flex flex-col justify-between mt-3 md:mt-0 w-[320px]">
           <motion.p
             variants={moveUp(0.2)}
             initial="hidden"
@@ -275,7 +275,7 @@ export default function LeadershipCarousel({ data }: { data: Member[] }) {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, amount: 0.2 }}
-              className="text-sm text-[#666666] mt-[30px]"
+              className="text-sm text-[#666666] font-light mt-[20px] md:mt-[30px]"
             >
               {activeSlide.designation}
             </motion.p>
@@ -284,7 +284,7 @@ export default function LeadershipCarousel({ data }: { data: Member[] }) {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, amount: 0.2 }}
-              className="mt-[50px] space-y-2 text-sm text-black"
+              className="mt-[30px] md:mt-[50px] space-y-2 text-sm text-black"
             >
               {activeSlide.bullets?.map((b, i) => (
                 <motion.li
@@ -298,7 +298,7 @@ export default function LeadershipCarousel({ data }: { data: Member[] }) {
                   <span className="mt-1">
                     <Image
                       src="/images/arrow-black.svg"
-                      alt="arrow-right"
+                      alt="arrow-right-black"
                       width={14}
                       height={14}
                       className="w-[14px] h-[14px] rotate-45"
@@ -314,18 +314,18 @@ export default function LeadershipCarousel({ data }: { data: Member[] }) {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
-            className="mt-8 flex justify-start"
+            className="mt-8 flex justify-start group w-fit"
           >
             <button
               onClick={next}
-              className="w-[50px] h-[50px] 2xl:w-[75px] 2xl:h-[75px] rounded-full border border-bdrcolor flex items-center justify-center transition-all hover:scale-105"
+              className="w-[50px] h-[50px] 2xl:w-[75px] 2xl:h-[75px] rounded-full border border-bdrcolor flex items-center justify-center cursor-pointer"
             >
               <Image
                 src="/images/arrow-primary.svg"
                 alt="arrow-right"
                 width={20}
                 height={20}
-                className="w-[20px] h-[20px] rotate-45"
+                className="w-[20px] h-[20px] rotate-45 group-hover:rotate-0 transition-all duration-300"
               />
             </button>
           </motion.div>

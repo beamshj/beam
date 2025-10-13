@@ -54,28 +54,49 @@ export default function BlogList({ data }: { data: BlogItem[] }) {
       <div className="container">
         <div className="w-full flex justify-between items-center border-b border-bdrcolor mb-5 xl:mb-[30px] 2xl:mb-[50px]">
           {/* Header */}
-          <motion.h1 variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl lg:leading-[1.111] font-light mb-3 xl:mb-[30px] 2xl:mb-[50px] text-black">
+          <motion.h1
+            variants={moveUp(0.2)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+            className="text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl lg:leading-[1.111] font-light mb-3 xl:mb-[30px] 2xl:mb-[50px] text-black"
+          >
             Blog
           </motion.h1>
           {/* Category Tabs */}
-          <div className="hidden lg:flex gap-3">
-            {categories.map((cat,index) => (
-              <motion.button variants={moveUp(index * 0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}
-                key={cat}
-                onClick={() => {
-                  setSelectedCategory(cat);
-                  setCurrentPage(1);
-                }}
-                className={`px-[20px] py-[11px] text-xs rounded-[50px] border border-bdrcolor font-light transition-colors duration-200
-            ${
-              selectedCategory === cat
-                ? "bg-[#C9F3FF] text-black border-[#42BADC]"
-                : "bg-white text-black hover:bg-[#F5F5F5]"
-            }`}
-              >
-                {cat.charAt(0).toUpperCase() + cat.slice(1)}
-              </motion.button>
-            ))}
+          <div className="hidden lg:flex gap-[15px]">
+            {categories.map((cat, index) => {
+              const isSelected = selectedCategory === cat;
+
+              return (
+                <motion.div
+                  key={cat}
+                  variants={moveUp(index * 0.2)}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true, amount: 0.2 }}
+                  className={`rounded-[50px] ${
+                    isSelected
+                      ? "bg-gradient-to-r from-[#42BADC] to-[#12586C] p-[1px]" // gradient border
+                      : "border border-bdrcolor"
+                  } transition-colors duration-200`}
+                >
+                  <button
+                    onClick={() => {
+                      setSelectedCategory(cat);
+                      setCurrentPage(1);
+                    }}
+                    className={`px-[20px] py-[11px] text-xs rounded-[50px] font-light w-full transition-colors duration-200 uppercase ${
+                      isSelected
+                        ? "bg-[#C9F3FF] text-black"
+                        : "bg-white text-black hover:bg-[#F5F5F5]"
+                    }`}
+                  >
+                    {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                  </button>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
 
@@ -90,7 +111,7 @@ export default function BlogList({ data }: { data: BlogItem[] }) {
                 setCurrentPage(1);
               }
             }}
-            className="text-19 font-light"
+            className="text-19 font-light uppercase"
             classNamePrefix="react-select"
             styles={{
               control: (base) => ({
@@ -112,9 +133,13 @@ export default function BlogList({ data }: { data: BlogItem[] }) {
         {/* Blog Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-[22px] gap-y-[22px] xl:gap-x-[33px] xl:gap-y-[33px] mt-5 xl:mt-[65px]">
           {currentBlogs.map((blog, index) => (
-            <motion.div variants={moveUp(index * 0.1)} initial="hidden" whileInView="show" viewport={{ once: false, amount: 0.2 }}
+            <motion.div
+              variants={moveUp(index * 0.1)}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: false, amount: 0.2 }}
               key={index}
-              className="rounded-[12px] relative overflow-hidden h-[350px] xl:h-[480px] 2xl:h-[551px] border border-bdrcolor flex flex-col group"
+              className="rounded-[12px] relative overflow-hidden h-full xl:h-[500px] 2xl:h-[551px] border border-bdrcolor flex flex-col group"
             >
               {/* Sliding Gradient from bottom */}
               <div className="absolute inset-0 -z-10 overflow-hidden">
@@ -146,7 +171,7 @@ export default function BlogList({ data }: { data: BlogItem[] }) {
               </div>
 
               {/* Content Section */}
-              <div className="flex-1 flex flex-col justify-center px-[40px]">
+              <div className="flex-1 flex flex-col justify-center px-[20px] xl:px-[40px] py-[20px] 2xl:py-[0px]">
                 <div className="flex text-colorpara justify-between items-center text-sm font-light leading-[1.7] mb-[15px]">
                   <span>
                     {new Date(blog.date).toLocaleDateString("en-US", {

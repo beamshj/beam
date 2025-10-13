@@ -27,11 +27,10 @@ const SchoolAchievements: React.FC<SchoolAchievementsProps> = ({ data }) => {
       <div className="container">
         {/* Header Section */}
         <div className="mb-3 xl:mb-[30px]">
-          <h2 className="text-xl md:text-2xl xl:text-3xl 2xl:text-4xl font-light lettersp-4 xl:mb-[50px]">
-            <SplitText
-            tag="span"
+          <SplitText
+            tag="h2"
             text={title}
-            className=""
+            className="text-xl md:text-2xl xl:text-3xl 2xl:text-4xl font-light lettersp-4 xl:mb-[50px]"
             delay={200}
             duration={0.6}
             ease="power3.out"
@@ -42,29 +41,31 @@ const SchoolAchievements: React.FC<SchoolAchievementsProps> = ({ data }) => {
             rootMargin="-10px"
             textAlign="left"
           />
-          </h2>
-          <p className="text-sm font-light text-colorpara leading-[1.52] max-w-[63%]">
             <SplitText
-            tag="span"
-            text={subtitle}
-            className=""
-            delay={200}
-            duration={0.6}
-            ease="power3.out"
-            splitType="lines"
-            from={{ opacity: 0, y: 40 }}
-            to={{ opacity: 1, y: 0 }}
-            threshold={0.1}
-            rootMargin="-10px"
-            textAlign="left"
-          />
-          </p>
+              tag="span"
+              text={subtitle}
+              className="text-sm font-light text-colorpara leading-[1.52] max-w-[63%]"
+              delay={200}
+              duration={0.6}
+              ease="power3.out"
+              splitType="lines"
+              from={{ opacity: 0, y: 40 }}
+              to={{ opacity: 1, y: 0 }}
+              threshold={0.1}
+              rootMargin="-10px"
+              textAlign="left"
+            />
         </div>
 
         {/* Achievements Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8 justify-between">
-          {achievements.map((achievement,index) => (
-            <motion.div key={achievement.id} variants={moveUp(index * 0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}
+          {achievements.map((achievement, index) => (
+            <motion.div
+              key={achievement.id}
+              variants={moveUp(index * 0.2)}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.2 }}
               className="group relative border border-bdrcolor rounded-2xl overflow-hidden transition-colors duration-300 2xl:w-[356px] 2xl:h-[287px] flex flex-col items-center justify-center p-[40px]"
             >
               {/* Default State - Logo and Title */}

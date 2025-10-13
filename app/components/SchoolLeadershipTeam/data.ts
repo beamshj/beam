@@ -1,6 +1,6 @@
 export const BannerData = {
   BannerTitle: "Schools’ Leadership Team",
-  BannerImg: "/images/school-leadership-team/banner.jpg",
+  BannerImg: "/images/school-lead-team/banner.jpg",
 };
 
 export const sliderData = [
