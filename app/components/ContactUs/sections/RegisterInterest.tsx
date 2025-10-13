@@ -45,22 +45,21 @@ const RegisterInterest: React.FC = () => {
         <div className="relative z-10 container flex flex-col lg:flex-row gap-0 lg:gap-[117px]">
           {/* Left section */}
           <div className="lg:w-[36%]">
-            <h1 className="lg:text-2xl xl:text-3xl 2xl:text-4xl text-white font-light leading-[1.111] lettersp-4">
-             <SplitText
-             tag="span"
-             text="Register Your Interest"
-             delay={100}
-             duration={0.6}
-             ease="power3.out"
-             splitType="words"
-             from={{ opacity: 0, y: 40 }}
-             to={{ opacity: 1, y: 0 }}
-             threshold={0.1}
-             rootMargin="-10px"
-             textAlign="left"
-           /> 
-            </h1>
-            <p className="text-white text-xl leading-[1.2] mt-4 xl:mt-[27px]">
+            <SplitText
+              tag="h1"
+              text="Register Your Interest"
+              delay={100}
+              className="lg:text-2xl xl:text-3xl 2xl:text-4xl text-white font-light leading-[1.111] lettersp-4"
+              duration={0.6}
+              ease="power3.out"
+              splitType="words"
+              from={{ opacity: 0, y: 40 }}
+              to={{ opacity: 1, y: 0 }}
+              threshold={0.1}
+              rootMargin="-10px"
+              textAlign="left"
+            />
+            <p className="text-white text-xl leading-[1.2] font-light mt-4 xl:mt-[27px]">
               Take the first step
             </p>
             <div className="mt-4 xl:mt-[27px] text-sm leading-[1.52] font-light">
@@ -71,24 +70,40 @@ const RegisterInterest: React.FC = () => {
             </div>
           </div>
           {/* Right form */}
-          <form onSubmit={handleSubmit(onSubmit)} className="lg:w-[68%] lg:space-y-12 mt-10 xl:mt-0" >
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="lg:w-[68%] lg:space-y-12 mt-10 xl:mt-0"
+          >
             <div className="flex flex-col lg:flex-row lg:gap-[54px]">
-              <motion.div variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="w-full lg:w-1/2">
-                <input type="text"
+              <motion.div
+                variants={moveUp(0.2)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.2 }}
+                className="w-full lg:w-1/2"
+              >
+                <input
+                  type="text"
                   placeholder="Enter Your Full Name"
                   {...register("fullName")}
-                  className="w-full border-b border-white py-[23px] focus:outline-none placeholder:text-white text-sm"
+                  className="w-full border-b border-white py-[23px] focus:outline-none placeholder:text-white text-sm font-light"
                 />
                 <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
                   {errors.fullName?.message || ""}
                 </p>
               </motion.div>
-              <motion.div variants={moveUp(0.4)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="w-full lg:w-1/2">
+              <motion.div
+                variants={moveUp(0.4)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.2 }}
+                className="w-full lg:w-1/2"
+              >
                 <input
                   type="email"
                   placeholder="Enter Your Email ID"
                   {...register("email")}
-                  className="w-full border-b border-white py-[23px] focus:outline-none placeholder:text-white text-sm"
+                  className="w-full border-b border-white py-[23px] focus:outline-none placeholder:text-white text-sm font-light"
                 />
                 <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
                   {errors.email?.message || ""}
@@ -96,21 +111,33 @@ const RegisterInterest: React.FC = () => {
               </motion.div>
             </div>
             <div className="flex flex-col lg:flex-row lg:gap-[54px]">
-              <motion.div variants={moveUp(0.6)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="w-full lg:w-1/2 relative">
+              <motion.div
+                variants={moveUp(0.6)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.2 }}
+                className="w-full lg:w-1/2 relative"
+              >
                 <input
                   type="text"
                   placeholder="Enter Your Phone Number"
                   {...register("phone")}
-                  className="w-full border-b border-white py-[23px] focus:outline-none placeholder:text-white text-sm"
+                  className="w-full border-b border-white py-[23px] focus:outline-none placeholder:text-white text-sm font-light"
                 />
                 <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
                   {errors.phone?.message || ""}
                 </p>
               </motion.div>
-              <motion.div variants={moveUp(0.8)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="w-full lg:w-1/2 relative">
+              <motion.div
+                variants={moveUp(0.8)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.2 }}
+                className="w-full lg:w-1/2 relative"
+              >
                 <select
                   {...register("findUs")}
-                  className="w-full border-b border-white py-[23px] pr-10 focus:outline-none text-white text-sm appearance-none"
+                  className="w-full border-b border-white py-[23px] pr-10 focus:outline-none text-white text-sm font-light appearance-none"
                 >
                   <option value="">Where did you find us ?</option>
                   <option value="instagram">Instagram</option>
@@ -136,10 +163,16 @@ const RegisterInterest: React.FC = () => {
               </motion.div>
             </div>
             <div className="flex flex-col lg:flex-row lg:gap-[55px]">
-              <motion.div variants={moveUp(1)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="w-full lg:w-1/2 relative">
+              <motion.div
+                variants={moveUp(1)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.2 }}
+                className="w-full lg:w-1/2 relative"
+              >
                 <select
                   {...register("selectSchool")}
-                  className="w-full border-b border-white py-[23px] pr-10 focus:outline-none text-white text-sm appearance-none"
+                  className="w-full border-b border-white py-[23px] pr-10 focus:outline-none text-white text-sm font-light appearance-none"
                 >
                   <option value="">Select School</option>
                   <option value="admission">Admission</option>
@@ -163,10 +196,16 @@ const RegisterInterest: React.FC = () => {
                   </p>
                 )}
               </motion.div>
-              <motion.div variants={moveUp(1.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="relative w-full lg:w-1/2">
+              <motion.div
+                variants={moveUp(1.2)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.2 }}
+                className="relative w-full lg:w-1/2"
+              >
                 <select
                   {...register("selectGrade")}
-                  className="w-full border-b border-white py-[23px] pr-10 focus:outline-none text-white text-sm appearance-none"
+                  className="w-full border-b border-white py-[23px] pr-10 focus:outline-none text-white text-sm font-light appearance-none"
                 >
                   <option value="">Select Grade</option>
                   <option value="admission">Admission</option>
@@ -191,7 +230,13 @@ const RegisterInterest: React.FC = () => {
                 )}
               </motion.div>
             </div>
-            <motion.div variants={moveUp(1.4)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="relative inline-block mt-[40px] lg:mt-0">
+            <motion.div
+              variants={moveUp(1.4)}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.2 }}
+              className="relative inline-block mt-[40px] lg:mt-0"
+            >
               {/* SVG border */}
               <Image
                 src="/images/contact-us/btn-border.svg"
@@ -220,7 +265,13 @@ const RegisterInterest: React.FC = () => {
           </form>
         </div>
       </div>
-      <motion.div variants={moveUp(1.6)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="h-[1px] bg-[#D3D3D3] w-full container mt-12 md:mt-20 xl:mt-[135px]" />
+      <motion.div
+        variants={moveUp(1.6)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
+        className="h-[1px] bg-[#D3D3D3] w-full container mt-12 md:mt-20 xl:mt-[135px]"
+      />
     </div>
   );
 };
