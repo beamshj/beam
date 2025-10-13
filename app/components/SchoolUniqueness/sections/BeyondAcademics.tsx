@@ -3,6 +3,9 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { moveUp } from "../../motionVarients";
+import { motion } from "framer-motion";
+import SplitText from "@/components/SplitText";
 export interface VMItem {
   image: string;
   title: string;
@@ -27,71 +30,64 @@ const BeyondAcademics = ({
       <div className="container ">
         <div>
           <div>
-            <h2 className="text-lg lg:text-xl xl:text-2xl 2xl:text-4xl  font-light leading-[1.111111111] text-black mb-4 md:mb-6 xl:mb-8 2xl:mb-8">
-              {academicsData.title}
-            </h2>
-            <p className=" text-sm leading-[1.526315789473684] max-w-[70ch] mb-6 lg:mb-7 last:lg:mb-13 font-light  text-colorpara">{academicsData.description}</p>
+            <SplitText
+              tag="h2"
+              text={academicsData.title}
+              className="text-lg lg:text-xl xl:text-2xl 2xl:text-4xl  font-light leading-[1.111111111] text-black mb-4 md:mb-6 xl:mb-8 2xl:mb-8"
+              delay={100}
+              duration={0.6}
+              ease="power3.out"
+              splitType="words"
+              from={{ opacity: 0, y: 40 }}
+              to={{ opacity: 1, y: 0 }}
+              threshold={0.1}
+              rootMargin="-100px"
+              textAlign="left"
+            />
+            <SplitText
+              tag="p"
+              text={academicsData.description}
+              className="text-sm leading-[1.526315789473684] max-w-[70ch] mb-6 lg:mb-7 last:lg:mb-13 font-light  text-colorpara"
+              delay={100}
+              duration={0.6}
+              ease="power3.out"
+              splitType="lines"
+              from={{ opacity: 0, y: 40 }}
+              to={{ opacity: 1, y: 0 }}
+              threshold={0.1}
+              rootMargin="-100px"
+              textAlign="left"
+            />
           </div>
           <div className="flex flex-col md:flex-row gap-8 md:gap-7 mb-8 md:mb-0">
-   
-          {academicsData.items.map((item, index) => {
-  const isActive = index === activeIndex;  
 
-  return (
-    <div
-      key={index}
-      className={`
-        relative h-[549px] rounded-[12px] flex flex-col p-4 md:p-0 overflow-hidden
-        transition-all duration-500 ease-in-out
-        ${isActive ? "w-full md:w-[50%]" : "w-full  md:w-[25%]"}
-        group
-      `}
-      style={{
-        background: `url(${item.image}) center/cover no-repeat`,
-      }}
-      onMouseEnter={() => setActiveIndex(index)}  
-    >
-      {/* Overlay */}
-      <div
-        className={`absolute top-0 left-0 w-full h-full rounded-[12px] transition-all duration-500  ${
-          isActive ? "bg-[#42BADC9C]" : "bg-[linear-gradient(180deg,rgba(0,0,0,0)_0%,rgba(0,0,0,0.6)_100%)]"
-        }`}
-      ></div>
-      <div className={`absolute    transition-all duration-300 top-5 right-5 p-2 bg-primary   
-      rounded-full w-[75px] h-[75px] flex items-center justify-center   ${
-          isActive ? "bg-white" : ""
-        }  `}>
-                                <Image
-                                  src="/images/home/arrow-top.svg"
-                                  alt={'ad'}
-                                  width={24}
-                                  className={`brightness-0 invert  ${
-                                    isActive ? "invert-0 brightness-100" : ""
-                                  }`}
-                                  height={24}
-                                />
-                              </div>
+            {academicsData.items.map((item, index) => {
+              const isActive = index === activeIndex;
+
+              return (
+                <motion.div variants={moveUp(index * 0.5) } initial="hidden" whileInView="show" viewport={{amount: 0.1, once: true}}
+                  key={index} className={` relative h-[549px] rounded-[12px] flex flex-col p-4 md:p-0 overflow-hidden transition-color  ${isActive ? "w-full md:w-[50%]" : "w-full  md:w-[25%]"} group `}
+                  style={{  background: `url(${item.image}) center/cover no-repeat`, }}
+                  onMouseEnter={() => setActiveIndex(index)} >
+                  {/* Overlay */}
+                  <div
+                    className={`absolute top-0 left-0 w-full h-full rounded-[12px] transition-all duration-500  ${isActive ? "bg-[#42BADC9C]" : "bg-[linear-gradient(180deg,rgba(0,0,0,0)_0%,rgba(0,0,0,0.6)_100%)]"
+                      }`} ></div>
+                  <div className={`absolute    transition-all duration-300 top-5 right-5 p-2 bg-primary rounded-full w-[75px] h-[75px] flex items-center justify-center   ${isActive ? "bg-white" : ""
+                    }  `}>
+                    <Image src="/images/home/arrow-top.svg" alt={'ad'} width={24} className={`brightness-0 invert  ${isActive ? "invert-0 brightness-100" : "" }`} height={24} />
+                  </div>
 
                   {/* Content Wrapper */}
                   <div className="absolute inset-0 flex flex-col justify-end p-5 2xl:p-10 z-10 transition-all duration-500">
                     {/* Title */}
-                    <h3
-                      className={`
-            text-[23px]  lg:text-[26px] xl:text-lg 2xl:text-xl font-light text-white leading-[1.2] max-w-[12ch]
-            transition-all duration-500 ease-in-out 
-            transform
-            ${isActive ? "-translate-y-[20px]" : ""}
-          `}
-                    >
+                    <h3 className={`text-[23px]  lg:text-[26px] xl:text-lg 2xl:text-xl font-light text-white leading-[1.2] max-w-[12ch]
+            transition-all duration-500 ease-in-out transform ${isActive ? "-translate-y-[20px]" : ""} `} >
                       {item.title}
                     </h3>
 
                     {/* Description */}
-                    <div
-                      className={`
-            transition-all duration-500 ease-in-out overflow-hidden
-            ${isActive ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"}
-          `}
+                    <div className={`transition-all duration-500 ease-in-out overflow-hidden${isActive ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"}`}
                     >
                       <div>
                         <p className="text-[#E0E0E0] font-light max-w-[30ch]">{item.description}</p>
@@ -105,7 +101,7 @@ const BeyondAcademics = ({
                       </div>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
 
