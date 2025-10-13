@@ -8,11 +8,38 @@ import "swiper/css/pagination";
 import { motion } from "framer-motion";
 import {
   fadeUp,
-  fadeInRight,
+  // fadeInRight,
 } from "@/public/assets/FramerAnimation/animation";
 import SplitText from "@/components/SplitText";
+import { moveLeft } from "../../motionVarients";
+import { useRef, useEffect } from "react";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
+
 const AcademicCultural = () => {
   const [activeIndex, setActiveIndex] = useState(1); // 2nd item active by default
+
+  const imgRef = useRef<HTMLImageElement | null>(null);
+
+  useEffect(() => {
+    if (!imgRef.current) return;
+
+    const ctx = gsap.context(() => {
+      gsap.to(imgRef.current, {
+        xPercent: -20, // move image 15% to the right
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: imgRef.current,
+          start: "top bottom",   // start when image enters view
+          end: "bottom top",     // finish when it leaves
+          scrub: true,           // smooth scroll-linked motion
+        },
+      });
+    });
+
+    return () => ctx.revert();
+  }, []);
 
   return (
     <motion.section
@@ -25,26 +52,22 @@ const AcademicCultural = () => {
         <div className="container">
           <div>
             {/* Heading */}
-            <div >
-            <h2 className="">
-                
-             
-              <SplitText
-              tag="span"
+
+            <SplitText
+              tag="h2"
               text={academicCulturalData.heading}
-                  className="text-lg md:text-xl xl:text-2xl 2xl:text-3xl font-light leading-tight text-black max-w-[13ch] lettersp-4"
+              className="text-lg md:text-xl xl:text-2xl 2xl:text-3xl font-light leading-tight text-black max-w-[13ch] lettersp-4"
               delay={100}
               duration={0.6}
               ease="power3.out"
-              splitType="chars"
+              splitType="words"
               from={{ opacity: 0, y: 40 }}
               to={{ opacity: 1, y: 0 }}
               threshold={0.1}
               rootMargin="-100px"
               textAlign="left"
             />
-         </h2>
-            </div>
+
 
             {/* Description */}
             <motion.div
@@ -69,69 +92,66 @@ const AcademicCultural = () => {
               {academicCulturalData.accvalues.map((value, index) => {
                 const isActive = activeIndex === index;
                 return (
-                  <div
+                  <motion.div variants={moveLeft(index * 0.3)}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
                     key={index}
                     onMouseEnter={() => setActiveIndex(index)}
-                    className={`flex flex-col md:flex-row gap-2 md:gap-8 items-baseline md:items-center py-7 lg:py-10 group transition-all duration-300
-    ${
-      isActive
-        ? "bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)] border-b border-white"
-        : ""
-    }
-    ${
-      index === academicCulturalData.accvalues.length - 2
-        ? "ps-0 xl:ps-[8%] 2xl:ps-[15%]"
-        : ""
-    }
-    ${
-      index === academicCulturalData.accvalues.length - 1
-        ? "ps-0 xl:ps-[18%] 2xl:ps-[30%]"
-        : ""
-    }
+                    className={`flex flex-col md:flex-row gap-2 md:gap-8 items-baseline md:items-center py-7 lg:py-10 group transition-colors 
+    ${isActive
+                        ? "bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)] border-b border-white"
+                        : ""
+                      }
+    ${index === academicCulturalData.accvalues.length - 2
+                        ? "ps-0 xl:ps-[8%] 2xl:ps-[15%]"
+                        : ""
+                      }
+    ${index === academicCulturalData.accvalues.length - 1
+                        ? "ps-0 xl:ps-[18%] 2xl:ps-[30%]"
+                        : ""
+                      }
   `}
                     style={
                       !isActive
                         ? {
-                            borderBottomWidth: "1px",
-                            borderStyle: "solid",
-                            borderImageSlice: 1,
-                            borderImageSource:
-                              "linear-gradient(90deg, #000000 0%, rgba(0, 0, 0, 0) 100%)",
-                          }
+                          borderBottomWidth: "1px",
+                          borderStyle: "solid",
+                          borderImageSlice: 1,
+                          borderImageSource:
+                            "linear-gradient(90deg, #000000 0%, rgba(0, 0, 0, 0) 100%)",
+                        }
                         : {}
                     }
                   >
                     <div
-                      className={`transition-all duration-300 mb-3 xl:mb-0 ${
-                        isActive ? "px-2" : "group-hover:px-2"
-                      }`}
+                      className={`transition-all duration-300 mb-3 xl:mb-0 ${isActive ? "px-2" : "group-hover:px-2"
+                        }`}
                     >
                       <Image
                         src={value.img}
                         alt={value.title}
                         width={value.imgwidth}
                         height={value.imgheight}
-                        className={`transition-all duration-300 w-15 xl:w-auto h-auto ${
-                          isActive
+                        className={`transition-all duration-300 w-15 xl:w-auto h-auto ${isActive
                             ? "filter-[brightness(0)]"
                             : "group-hover:filter-[brightness(0)]"
-                        }`}
+                          }`}
                       />
                     </div>
                     <div>
                       <p
-                        className={`text-md md:text-lg 2xl:text-xl font-light text-black leading-[1.2] lettersp-1 ${
-                          index === academicCulturalData.accvalues.length - 1
+                        className={`text-md md:text-lg 2xl:text-xl font-light text-black leading-[1.2] lettersp-1 ${index === academicCulturalData.accvalues.length - 1
                             ? "max-w-[15ch]"
                             : "max-w-[18ch]"
-                        } transition-all duration-300 ${
-                          isActive ? "px-2 lg:px-0" : ""
-                        }`}
+                          } transition-all duration-300 ${isActive ? "px-2 lg:px-0" : ""
+                          }`}
                       >
                         {value.title}
                       </p>
                     </div>
-                  </div>
+                  </motion.div>
                 );
               })}
             </div>
@@ -142,20 +162,14 @@ const AcademicCultural = () => {
         </div>
 
         {/* Side Image */}
-        <motion.div
-          variants={fadeInRight}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          className="absolute bottom-0 right-0 hidden xl:block w-[640px] 2xl:w-[737px]"
-        >
-          <Image
+        <div className="absolute bottom-0 right-0 hidden xl:block w-[640px] 2xl:w-[737px]" >
+          <Image ref={imgRef}
             src={academicCulturalData.image}
             alt={academicCulturalData.heading}
             width={737}
             height={1061}
           />
-        </motion.div>
+        </div>
       </div>
     </motion.section>
   );
