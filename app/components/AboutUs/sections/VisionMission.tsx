@@ -73,13 +73,12 @@ const VisionMissionSection = ({
       <div className="container" ref={containerRef}>
         <div className="grid md:grid-cols-2 gap-8 xl:gap-[90px]">
           {/* Left Content */}
-          <div>
-            <h2 className="text-lg lg:text-xl xl:text-2xl 2xl:text-4xl font-light leading-[1.111111111] text-black mb-3 xl:mb-[40px] 2xl:mb-[30px]">
+          <div> 
              
               <SplitText
-            tag="span"
+            tag="h2"
             text={visionMissionItems.mainTitle}
-            className=""
+            className="text-lg lg:text-xl xl:text-2xl 2xl:text-4xl font-light leading-[1.111111111] text-black mb-3 xl:mb-[40px] 2xl:mb-[30px]"
             delay={100}
             duration={0.6}
             ease="power3.out"
@@ -89,8 +88,7 @@ const VisionMissionSection = ({
             threshold={0.1}
             rootMargin="-10px"
             textAlign="left"
-          />
-            </h2>
+          /> 
             <motion.p variants={moveUp(0.5)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="text-colorpara text-sm leading-[1.526315789473684] mb-[30px]">
               {visionMissionItems.mainDescription}
             </motion.p>
