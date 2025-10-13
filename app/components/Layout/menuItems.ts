@@ -1,15 +1,34 @@
 export const mainMenuItems = [
   {
     name: "About Beam",
-    href: "/about-beam",
+    href: "#",
+    submenu: [
+      { name: "About Beam", href: "#" },
+      { name: "Founder’s Message", href: "#" },
+      { name: "General Managers’  Message", href: "#" },
+      { name: "Schools’ Leadership Team", href: "#" },
+      { name: "Professional Learning Program", href: "#" }, 
+    ],
   },
   {
-    name: "Schools",
-    href: "/schools",
+    name: "Beam Schools",
+    href: "#",
+     submenu: [
+      { name: "Schools’ Uniqueness", href: "#" },
+      { name: "Schools’ Achievements", href: "#" },
+      { name: "Accreditation & Affiliation", href: "#" },
+      { name: "School Scholarship Programs", href: "#" },
+      { name: "Parents & Students Testimonials", href: "#" }, 
+    ],
   },
   {
     name: "News & Media",
-    href: "/news-media",
+    href: "#",
+    submenu: [
+      { name: "Blog", href: "#" }, 
+      { name: "Press Release", href: "#" }, 
+      { name: "Gallery", href: "#" },  
+   ],
   },
 ];
 

@@ -71,15 +71,14 @@ const VisionMissionSection = ({
   return (
     <section className="pt-10 xl:pt-[70px] 2xl:pt-[90px]">
       <div className="container" ref={containerRef}>
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 gap-8 xl:gap-[90px]">
           {/* Left Content */}
-          <div>
-            <h2 className="text-lg lg:text-xl xl:text-2xl 2xl:text-4xl font-light leading-[1.111111111] text-black mb-3 xl:mb-[40px] 2xl:mb-[50px]">
+          <div> 
              
               <SplitText
-            tag="span"
+            tag="h2"
             text={visionMissionItems.mainTitle}
-            className=""
+            className="text-lg lg:text-xl xl:text-2xl 2xl:text-4xl font-light leading-[1.111111111] text-black mb-3 xl:mb-[40px] 2xl:mb-[30px]"
             delay={100}
             duration={0.6}
             ease="power3.out"
@@ -89,17 +88,16 @@ const VisionMissionSection = ({
             threshold={0.1}
             rootMargin="-10px"
             textAlign="left"
-          />
-            </h2>
-            <motion.p variants={moveUp(0.5)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="text-foreground text-sm leading-[1.526315789473684] mb-[30px]">
+          /> 
+            <motion.p variants={moveUp(0.5)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="text-colorpara text-sm leading-[1.526315789473684] mb-[30px]">
               {visionMissionItems.mainDescription}
             </motion.p>
             {/* Cards */}
             <div className="space-y-[20px] xl:space-y-[25px] 2xl:space-y-[30px]">
               {visionMissionItems.VMItems.map((item,index) => (
-                <div key={item.id} className="flex items-stretch xl:gap-4 cursor-pointer" onMouseEnter={() => setActive(item.id)} >
+                <div key={item.id} className="flex items-stretch xl:gap-4 cursor-pointer group" onMouseEnter={() => setActive(item.id)} >
                   {/* Left icon box - fixed width, stretched height */}
-                  <motion.div variants={moveUp(index * 0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className={`flex-shrink-0 w-fit xl:w-[125px] flex items-center justify-center rounded-[12px] transition-colors duration-300 bg-[#F5EBFF] hover:bg-[#DDF7FF] group p-5 xl:py-0`}
+                  <motion.div variants={moveUp(index * 0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className={`flex-shrink-0 w-fit xl:w-[125px] flex items-center justify-center rounded-[12px] transition-colors duration-300  ${index === 0 ? 'bg-[#DDF7FF]' : 'bg-[#F5EBFF]'} group p-5 xl:py-0`}
                   >
                     <Image src={item.icon} alt={item.title} width={70} height={70} className="w-auto h-8  xl:h-[70px]" />
                   </motion.div>
@@ -109,7 +107,7 @@ const VisionMissionSection = ({
                     <h3 className="text-xl font-light text-black leading-[1.2] mb-[15px]">
                       {item.title}
                     </h3>
-                    <p className="text-[#6D6E71] text-sm leading-[1.526315789473684]">
+                    <p className="text-[#6D6E71] text-sm leading-[1.526315789473684] max-w-[39ch]">
                       {item.description}
                     </p>
                   </motion.div>

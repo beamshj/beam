@@ -161,7 +161,7 @@ export default function MoreToExplore({ items }: Props) {
               </svg>
             </button>
 
-            <div className="commentpagination cstss rounded-2xl swiper-pagination-custom !w-fit !m-auto bg-[#D3D3D3] flex justify-center gap-0"></div>
+            <div className="commentpagination  cstss rounded-2xl swiper-pagination-custom !w-[170px] md:!w-[280px] !m-auto bg-[#D3D3D3] flex justify-center gap-0"></div>
 
             <button
               className="swiper-button-next-custom transition cursor-pointer group"
