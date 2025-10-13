@@ -1,9 +1,22 @@
 <svg width="292" height="45" viewBox="0 0 292 45" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M1 35.0001C134.77 -32.916 245.216 16.2017 291.501 44.5001" stroke="url(#paint0_linear_561_6494)" stroke-dasharray="6 6"/>
-<defs>
-<linearGradient id="paint0_linear_561_6494" x1="1" y1="22.598" x2="291.501" y2="22.598" gradientUnits="userSpaceOnUse">
-<stop stop-color="#42BADC"/>
-<stop offset="1" stop-color="#12586C"/>
-</linearGradient>
-</defs>
+  <path
+    d="M1 35.0001C134.77 -32.916 245.216 16.2017 291.501 44.5001"
+    stroke="url(#paint0_linear_561_6494)"
+    stroke-width="2"
+    stroke-dasharray="6 6"
+  >
+    <animate
+      attributeName="stroke-dashoffset"
+      from="0"
+      to="-12"
+      dur="1s"
+      repeatCount="indefinite"
+    />
+  </path>
+  <defs>
+    <linearGradient id="paint0_linear_561_6494" x1="1" y1="22.598" x2="291.501" y2="22.598" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#42BADC"/>
+      <stop offset="1" stop-color="#12586C"/>
+    </linearGradient>
+  </defs>
 </svg>
