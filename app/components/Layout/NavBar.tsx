@@ -56,13 +56,14 @@ const NavBar = () => {
             <div className="flex gap-12 items-center">
               <div className="flex items-center justify-center h-full gap-4">
                 <div className="lg:py-3">
+                  <Link href="/">
                   <Image
                     src="/assets/logo.svg"
                     alt="Logo"
                     width={158}
                     height={77}
                     className="h-[58px] lg:h-full"
-                  />
+                  /></Link>
                 </div>
                 <div className="h-full border-r-[1px] border-[#D3D3D3]"></div>
               </div>
@@ -197,6 +198,7 @@ const NavBar = () => {
           <SocialMediaIcons />
           </div>
           <div className="lg:py-3 block lg:hidden ">
+                  <Link href={"/"}>
                   <Image
                     src="/assets/logo.svg"
                     alt="Logo"
@@ -204,6 +206,7 @@ const NavBar = () => {
                     height={77}
                     className="h-[58px] lg:h-full brightness-0 invert"
                   />
+                  </Link>
                 </div>
              <div className="flex items-center gap-3  lg:gap-[78px] h-full ">
              <Link href={"/contact-us"} className="hidden lg:block">
@@ -243,7 +246,7 @@ const NavBar = () => {
                 <div className="flex   overflow-y-auto h-full ">
                   {/* Menu items */}
                   <ul className="flex flex-col gap-6 justify-between h-full ">
-                    {filterMenuItems.slice(2).map((item , index) => (
+                  {filterMenuItems.slice(0, -2).map((item, index) => (
                       <li
                         key={index}
                         className="transition-all duration-300 transform hover:translate-x-1 pe-3"
