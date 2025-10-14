@@ -18,6 +18,7 @@ export const visionMissionItems = {
   mainDescription: `Our vision lights the path toward excellence, guided by faith and
             values. We are committed to nurturing a diverse community where
             students become lifelong learners and principled global citizens.`,
+            image: "/images/about-us/visionMission/vision.jpg",
   VMItems: [
     {
       id: "vision",
