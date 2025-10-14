@@ -69,7 +69,7 @@ export default function Pagination({
   };
 
   return (
-    <motion.div className="flex justify-center mt-[25px] xl:mt-[50px] items-center space-x-[2px] text-sm font-light">
+    <motion.div className="flex justify-center mt-[25px] xl:mt-[50px] items-center space-x-[2px] text-sm font-light removeMt">
       {/* Prev Button */}
       {currentPage > 1 && (
         <button
