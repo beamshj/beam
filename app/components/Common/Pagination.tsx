@@ -56,9 +56,9 @@ export default function Pagination({
         <button
           key={page}
           onClick={() => onPageChange(page as number)}
-          className={`rounded-full text-19 font-light w-[40px] lg:w-[50px] h-[40px] lg:h-[50px] cursor-pointer ${
+          className={`rounded-full text-sm leading-[1.52] font-light w-[40px] lg:w-[50px] h-[40px] lg:h-[50px] cursor-pointer ${
             currentPage === page
-              ? "bg-primary text-white hover:bg-primary/90 transition-all duration-300"
+              ? "bg-[#C9F3FF] text-black hover:bg-primary hover:text-white transition-all duration-300"
               : "text-black hover:bg-[#D3D3D3] transition-all duration-300"
           }`}
         >
@@ -69,7 +69,7 @@ export default function Pagination({
   };
 
   return (
-    <motion.div className="flex justify-center mt-[25px] xl:mt-[50px] items-center space-x-[10px] lg:space-x-[15px] text-19 font-light">
+    <motion.div className="flex justify-center mt-[25px] xl:mt-[50px] items-center space-x-[2px] text-sm font-light">
       {/* Prev Button */}
       {currentPage > 1 && (
         <button
