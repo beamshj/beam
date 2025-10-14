@@ -2,16 +2,10 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { mainMenuItems } from "./menuItems";
-import { sliderMenuItems } from "./menuItems";
-import {
-  FaFacebookF,
-  FaInstagram,
-  FaLinkedinIn,
-  FaYoutube,
-} from "react-icons/fa";
+import { mainMenuItems } from "./menuItems"; 
+import { filterMenuItems } from "./menuItems";
+import SocialMediaIcons from "../Common/SocialMediaIcons";
 import { AnimatePresence, motion } from "framer-motion";
-import { FaXTwitter } from "react-icons/fa6";
 
 const NavBar = () => {
   const [isSticky, setIsSticky] = useState(false);
@@ -47,10 +41,7 @@ const NavBar = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // filter menu based on device
-  const filteredSliderMenuItems = isMobile
-    ? sliderMenuItems
-    : sliderMenuItems.slice(3);
+ 
 
     const [hoveredMenu, setHoveredMenu] = useState<string | null>(null);
   return (
@@ -133,6 +124,7 @@ const NavBar = () => {
             </div>
             <div className="flex gap-5">
               <div className="hidden lg:flex items-center">
+                <Link href={"/contact-us"}>
                 <button className="uppercase border-primary border-[1px] px-3 py-1 flex items-center gap-2 rounded-[50px] text-xs font-light cursor-pointer">
                   Register Interest
                   <span className="bg-primary rounded-full p-2 w-[27px] h-[27px]">
@@ -143,7 +135,7 @@ const NavBar = () => {
                       height={20}
                     />
                   </span>
-                </button>
+                </button></Link>
               </div>
               <div
                 className={`transition-all duration-300 ${
@@ -192,69 +184,168 @@ const NavBar = () => {
 
       {/* Sliding Drawer */}
       <div
-        className={`fixed top-0 right-0 bottom-0 h-full w-[300px] xl:w-[400px] 2xl:w-[430px] bg-white z-50 transform transition-transform duration-400 ${
+        className={`fixed top-0 right-0 bottom-0 h-full w-[300px] lg:w-full   z-50 transform transition-transform duration-400 ${
           isMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
+        style={{ background: "linear-gradient(251.6deg, #42BADC -12.46%, #005871 100.42%)" }}
       >
+        <div className="container h-full">
         <div className="relative flex flex-col h-full">
           {/* Header */}
-          <div className="flex items-start justify-between px-6 py-4">
-            <Image src="/assets/logo.svg" alt="Logo" width={140} height={60} />
-            <button onClick={() => setIsMenuOpen(false)}>
-              <span className="text-base font-bold text-black hover:text-primary transition-colors duration-300 cursor-pointer">
-                ✕
-              </span>
-            </button>
+          <div className="flex justify-between  lg:pt-15 lg:pb-12 pt-8 pb-8 items-end lg:items-center gap-3">
+          <div className="hidden lg:block">
+          <SocialMediaIcons />
           </div>
+          <div className="lg:py-3 block lg:hidden ">
+                  <Image
+                    src="/assets/logo.svg"
+                    alt="Logo"
+                    width={158}
+                    height={77}
+                    className="h-[58px] lg:h-full brightness-0 invert"
+                  />
+                </div>
+             <div className="flex items-center gap-3  lg:gap-[78px] h-full ">
+             <Link href={"/contact-us"} className="hidden lg:block">
+                <button className="uppercase text-xs border-white text-white border-[1px] ps-5 pe-[12px] py-[11px] flex items-center gap-2 rounded-[50px]  font-light cursor-pointer">
+                  Register Interest
+                  <span className="bg-primary rounded-full p-2 w-[27px] h-[27px]">
+                    <Image
+                      src="/assets/arrow.svg"
+                      alt="Arrow"
+                      width={20}
+                      height={20}
+                    />
+                  </span>
+                </button></Link>
+            <button onClick={() => setIsMenuOpen(false)}>
+             <div className="flex items-center gap-3 pe-0 lg:pe-8 cursor-pointer"> 
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="18" viewBox="0 0 19 18" fill="none">
+                <line x1="0.646447" y1="17.6463" x2="17.617" y2="0.675762" stroke="white"/>
+                <line x1="1.35033" y1="0.64313" x2="18.4742" y2="17.4589" stroke="white"/>
+                </svg> 
+              <span className="text-sm font-light text-white   ">
+              MENU
+              </span>
+             </div>
+            </button>
+             </div>
+          </div>
+          
 
           {/* Gradient Divider */}
-          <div className="h-[2px] w-full bg-gradient-to-r from-primary to-transparent" />
+          <div className="h-[1px] w-full bg-[#D3D3D3]" />
 
           {/* Menu + Social */}
-          <div className="flex flex-col flex-1 overflow-y-auto">
-            {/* Menu items */}
-            <ul className="flex flex-col gap-6 p-6 xl:pt-10">
-              {filteredSliderMenuItems.map((item) => (
-                <li
-                  key={item.name}
-                  className="transition-all duration-300 transform hover:translate-x-1"
-                >
-                  <Link
-                    href={item.href}
-                    onClick={() => setIsMenuOpen(false)}
-                    className="text-base xl:text-sm font-light text-black cursor-pointer hover:text-primary"
-                  >
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-
-            {/* Social Icons + Divider at top */}
-            <div className="mt-auto">
-              {/* Divider right above icons */}
-              <div className="h-[2px] w-full bg-gradient-to-r from-primary to-transparent" />
-
-              {/* Icons */}
-              <div className="flex gap-[7px] p-6">
-                <Link href="https://www.facebook.com/beamedusocial/" target="_blank" className="rounded-full xl:w-[46px] xl:h-[46px] w-[36px] h-[36px] border border-black/35 hover:border-transparent flex items-center justify-center hover:bg-primary cursor-pointer transition-colors duration-300">
-                  <FaFacebookF className="text-sm" />
-                </Link>
-                <Link href="https://x.com/beamedusocial" target="_blank" className="rounded-full xl:w-[46px] xl:h-[46px] w-[36px] h-[36px] border border-black/35 hover:border-transparent flex items-center justify-center hover:bg-primary cursor-pointer transition-colors duration-300">
-                  <FaXTwitter className="text-sm" />
-                </Link>
-                <Link href="https://www.linkedin.com/company/bukhatireducation/" target="_blank" className="rounded-full xl:w-[46px] xl:h-[46px] w-[36px] h-[36px] border border-black/35 hover:border-transparent flex items-center justify-center hover:bg-primary cursor-pointer transition-colors duration-300">
-                  <FaLinkedinIn className="text-sm" />
-                </Link>
-                <Link href="https://www.instagram.com/beamedusocial/" target="_blank" className="rounded-full xl:w-[46px] xl:h-[46px] w-[36px] h-[36px] border border-black/35 hover:border-transparent flex items-center justify-center hover:bg-primary cursor-pointer transition-colors duration-300">
-                  <FaInstagram className="text-sm" />
-                </Link>
-                <Link href="https://www.youtube.com/c/BukhatirEducation" target="_blank" className="rounded-full xl:w-[46px] xl:h-[46px] w-[36px] h-[36px] border border-black/35 hover:border-transparent flex items-center justify-center hover:bg-primary cursor-pointer transition-colors duration-300">
-                  <FaYoutube className="text-sm" />
-                </Link>
+          <div className="py-10 lg:py-14 2xl:pt-[71px] 2xl:pb-[116px] h-full">
+          <div className="md:flex  justify-baseline lg:h-full">
+              <div className="hidden lg:flex gap-6 lg:gap-[164px]">
+                <div className="flex   overflow-y-auto h-full ">
+                  {/* Menu items */}
+                  <ul className="flex flex-col gap-6 justify-between h-full ">
+                    {filterMenuItems.slice(2).map((item , index) => (
+                      <li
+                        key={index}
+                        className="transition-all duration-300 transform hover:translate-x-1 pe-3"
+                      >
+                      <Link
+                          href={item.href}
+                          onClick={() => setIsMenuOpen(false)}
+                          className="flex items-center gap-5 text-sm font-light text-black hover:text-primary transition-colors duration-200 group"
+                        >
+                        <p className="text-md md:text-lg 2xl:text-xl font-[200]   leading-[1.2] lettersp-1  transition-all duration-300  text-white/50 hover:text-white cursor-pointer ">  {item.name}</p>
+                        <span className="bg-white rounded-full  flex items-center justify-center w-[27px] h-[27px] opacity-0 blks transition-all duration-500 group-hover:opacity-100">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 16 15" fill="none">
+                        <path d="M9.93799 3.7063L13.7317 7.50005L9.93799 11.2938" stroke="#42BADC" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M3.10791 7.49988H13.6267" stroke="#42BADC" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                                </span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul> 
+                </div>
+                <div className="flex flex-col flex-1 overflow-y-auto h-full">
+                  {/* Menu items */}
+                  <ul className="flex flex-col gap-6 justify-end h-full ">
+                    {filterMenuItems.slice(-2).map((item , index) => (
+                      <li
+                        key={index}
+                        className="transition-all duration-300 transform hover:translate-x-1 pe-5"
+                      >
+                        <Link
+                          href={item.href}
+                          onClick={() => setIsMenuOpen(false)}
+                          className="flex items-center gap-5 text-sm font-light text-black hover:text-primary transition-colors duration-200 group"
+                        >
+                        <p className="text-md md:text-lg 2xl:text-xl font-[200]   leading-[1.2] lettersp-1  transition-all duration-300  text-white/50 hover:text-white cursor-pointer ">  {item.name}</p>
+                        <span className="bg-white rounded-full  flex items-center justify-center w-[27px] h-[27px] opacity-0 blks transition-all duration-500 group-hover:opacity-100">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 16 15" fill="none">
+                        <path d="M9.93799 3.7063L13.7317 7.50005L9.93799 11.2938" stroke="#42BADC" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M3.10791 7.49988H13.6267" stroke="#42BADC" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                                </span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul> 
+                </div>
               </div>
+              <div className="block lg:hidden  w-full">
+                <ul className="flex flex-col gap-4">
+                  {mainMenuItems.map((item) => (
+                    <li key={item.name}>
+                      <div
+                        onClick={() =>
+                          setHoveredMenu(hoveredMenu === item.name ? null : item.name)
+                        }
+                        className="flex justify-between items-center text-md font-light text-white/80 hover:text-[#23ABD2] cursor-pointer"
+                      >
+                        {item.name}
+                        <span
+                          className={`transform transition-transform duration-300 ${
+                            hoveredMenu === item.name ? "rotate-90" : ""
+                          }`}
+                        >
+                          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" className="rotate-180" viewBox="0 0 24 24" fill="none" ><path d="M15.0901 19.9201L8.57009 13.4001C7.80009 12.6301 7.80009 11.3701 8.57009 10.6001L15.0901 4.08008" stroke="#ffffff" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                        </span>
+                      </div>
+
+                      <AnimatePresence>
+                        {hoveredMenu === item.name && item.submenu && (
+                          <motion.ul
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.3 }}
+                            className="mt-2 pl-4 border-l border-[#23ABD2]/30"
+                          >
+                            {item.submenu.map((sub) => (
+                              <li key={sub.name} className="py-2">
+                                <Link
+                                  href={sub.href}
+                                  onClick={() => setIsMenuOpen(false)}
+                                  className="flex items-center gap-3 text-sm text-white/70 hover:text-[#23ABD2] transition-colors duration-200"
+                                >
+                                  <span>{sub.name}</span>
+                                  
+                                </Link>
+                              </li>
+                            ))}
+                          </motion.ul>
+                        )}
+                      </AnimatePresence>
+                    </li>
+                  ))}
+                </ul>
+              </div> 
+            </div>
+
+            <div className="block lg:hidden pb-10 absolute bottom-0">
+            <SocialMediaIcons />
             </div>
           </div>
+        </div>
         </div>
       </div>
     </>

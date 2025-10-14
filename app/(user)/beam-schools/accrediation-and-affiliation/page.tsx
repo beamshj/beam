@@ -1,4 +1,4 @@
-import Index from "@/app/components/AccrAffil.tsx";
+import Index from "@/app/components/AccrAffil";
 
 const Page = () => {
   return ( 

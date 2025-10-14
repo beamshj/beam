@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { moveUp } from "../../motionVarients";
+import Link from "next/link";
 
 export interface RecentNewsData {
   title: string;
@@ -34,6 +35,7 @@ const PopularNews = ({ data }: { data: RecentNewsData }) => {
           key={index}
           className="chklast"
         >
+          <Link href={`/news-&-media/news`}>
           <div className="flex gap-5">
             <div className="w-[130px] md:w-[171px]">
               <div className="relative h-full">
@@ -73,6 +75,7 @@ const PopularNews = ({ data }: { data: RecentNewsData }) => {
           <div className="py-3 lg:py-7 linediv">
             <div className="bg-[#D3D3D3] h-[1px] w-full"></div>
           </div>
+          </Link>
         </motion.div>
       ))}
     </div>

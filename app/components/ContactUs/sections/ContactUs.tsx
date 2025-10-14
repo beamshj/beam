@@ -286,7 +286,7 @@ const ContactForm: React.FC = () => {
           >
             <button
               type="submit"
-              className="group flex items-center justify-center gap-[10px] px-[20px] py-[11px] w-full h-full text-black bg-white rounded-[50px] text-xs font-light overflow-hidden"
+              className="group cursor-pointer flex items-center justify-center gap-[10px] px-[20px] py-[11px] w-full h-full text-black bg-white rounded-[50px] text-xs font-light overflow-hidden"
             >
               SEND MESSAGE
               {/* Arrow circle */}
