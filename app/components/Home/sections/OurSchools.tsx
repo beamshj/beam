@@ -4,7 +4,7 @@ import { schoolData } from "@/app/data/ourSchools";
 import Image from "next/image";
 import "swiper/css";
 import "swiper/css/navigation";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -13,11 +13,44 @@ import { motion } from "framer-motion";
 // Optional: Add modules if needed
 import { Navigation, Pagination } from "swiper/modules";
 import SplitText from "@/components/SplitText";
-import { fadeUp, cardVariants, } from "@/public/assets/FramerAnimation/animation";
+import {
+  fadeUp,
+  cardVariants,
+} from "@/public/assets/FramerAnimation/animation";
 import { moveUp } from "../../motionVarients";
 
 const OurSchools = () => {
-  const [selected, setSelected] = useState("");
+  const [selectedCurriculum, setSelectedCurriculum] = useState("all");
+  const [selectedLocation, setSelectedLocation] = useState("");
+
+  // locations
+  const locations = Array.from(
+    new Set(
+      schoolData.schools.map((campus) => {
+        const parts = campus.location.split(",");
+        return parts[parts.length - 1].trim();
+      })
+    )
+  );
+
+  // curiculums
+  const curriculums = Array.from(
+    new Set(schoolData.schools.map((school) => school.curriculum))
+  );
+
+  const filteredSchools = useMemo(() => {
+    return schoolData.schools.filter((school) => {
+      const curriculumMatch =
+        selectedCurriculum === "all" ||
+        school.curriculum.toLowerCase() === selectedCurriculum.toLowerCase();
+
+      const locationMatch =
+        !selectedLocation ||
+        school.location.toLowerCase().includes(selectedLocation.toLowerCase());
+
+      return curriculumMatch && locationMatch;
+    });
+  }, [selectedCurriculum, selectedLocation]);
 
   return (
     <section className="py-8 xl:pt-20 xl:pb-25 2xl:pt-[133px] 2xl:pb-[160px] ">
@@ -29,10 +62,10 @@ const OurSchools = () => {
       >
         <div className="container">
           <div className="mb-5 xl:mb-7  2xl:mb-[53px]">
-              <SplitText
+            <SplitText
               tag="h2"
               text={schoolData.heading}
-                className="text-xl md:text-2xl xl:text-3xl 2xl:text-4xl font-light leading-[1.111111111111111] text-black lettersp-4"
+              className="text-xl md:text-2xl xl:text-3xl 2xl:text-4xl font-light leading-[1.111111111111111] text-black lettersp-4"
               delay={100}
               duration={0.6}
               ease="power3.out"
@@ -46,56 +79,105 @@ const OurSchools = () => {
           </div>
           <div className="pb-5 md:pb-7 border-b border-bdrcolor">
             <div className="flex-col md:flex-row flex justify-start md:justify-between items-start md:items-center gap-4 md:gap-0">
+              {/* ---------- Left Buttons ---------- */}
               <div className="flex gap-3 items-center">
-                <motion.div variants={moveUp(0.2)} custom={1} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="p-[1px] group  bg-[linear-gradient(90deg,_#42BADC_0%,_#12586C_100%)] rounded-full ">
-                  <div className="cursor-pointer  px-2 md:px-3 xl:px-5 py-2 md:py-3 xl:py-3 bg-white rounded-full">
-                    <p className="text-black smtext10 text-xs font-light  uppercase ">
+                {/* "All" button first */}
+                <motion.div
+                  variants={moveUp(0.2)}
+                  custom={1}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true, amount: 0.2 }}
+                  onClick={() => setSelectedCurriculum("all")}
+                  className={`p-[1px] group rounded-full cursor-pointer ${
+                    selectedCurriculum === "all"
+                      ? "bg-[linear-gradient(90deg,_#42BADC_0%,_#12586C_100%)] "
+                      : "bg-bdrcolor hover:bg-[linear-gradient(90deg,_#42BADC_0%,_#12586C_100%)]"
+                  }`}
+                >
+                  <div className="px-4 xl:px-5 py-2 md:py-2 xl:py-3 bg-white rounded-full">
+                    <p
+                      className={`smtext10 text-xs font-light uppercase ${
+                        selectedCurriculum === "all"
+                          ? "text-black"
+                          : "text-foreground group-hover:text-black"
+                      }`}
+                    >
                       All
                     </p>
                   </div>
                 </motion.div>
 
-                <motion.div variants={moveUp(0.3)} custom={2} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="p-[1px] group h-fit transition-color  bg-bdrcolor hover:bg-[linear-gradient(90deg,_#42BADC_0%,_#12586C_100%)] rounded-full ">
-                  <div className="cursor-pointer px-2 md:px-4 xl:px-5 py-2 md:py-2 xl:py-3 bg-white rounded-full">
-                    <p className="group-hover:text-black smtext10 text-xs font-light text-foreground uppercase ">
-                      British Curriculum
-                    </p>
-                  </div>
-                </motion.div>
-                <motion.div variants={moveUp(0.4)} custom={3} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="p-[1px] group h-fit  bg-bdrcolor hover:bg-[linear-gradient(90deg,_#42BADC_0%,_#12586C_100%)] rounded-full ">
-                  <div className="cursor-pointer px-2 md:px-4 xl:px-5 py-2 md:py-2 xl:py-3 bg-white rounded-full">
-                    <p className="group-hover:text-black smtext10 text-xs font-light text-foreground uppercase ">
-                      American Curriculum
-                    </p>
-                  </div>
-                </motion.div>
-              </div>
-              <div>
-                <div className="">
-                  <div className="w-full">
-                    <motion.div variants={moveUp(0.5)} custom={4} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="relative inline-block min-w-[120px] lg:min-w-[348px]">
-                      <select value={selected}
-                        onChange={(e) => setSelected(e.target.value)}
-                        className="appearance-none border  border-bdrcolor cursor-pointer rounded-full pl-2 md:pl-4 pr-10 py-2 md:py-3 smtext10 text-xs focus:outline-none focus:ring-0 w-auto lg:w-full"
+                {/* Dynamically render curriculum buttons */}
+                {curriculums.map((curriculum, index) => (
+                  <motion.div
+                    key={curriculum}
+                    variants={moveUp(0.3 + index * 0.1)}
+                    custom={index}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: true, amount: 0.2 }}
+                    onClick={() => setSelectedCurriculum(curriculum)}
+                    className={`p-[1px] group rounded-full cursor-pointer ${
+                      selectedCurriculum === curriculum
+                        ? "bg-[linear-gradient(90deg,_#42BADC_0%,_#12586C_100%)]"
+                        : "bg-bdrcolor hover:bg-[linear-gradient(90deg,_#42BADC_0%,_#12586C_100%)]"
+                    }`}
+                  >
+                    <div className="px-2 md:px-4 xl:px-5 py-2 md:py-2 xl:py-3 bg-white rounded-full">
+                      <p
+                        className={`smtext10 text-xs font-light uppercase ${
+                          selectedCurriculum === curriculum
+                            ? "text-black"
+                            : "text-foreground group-hover:text-black"
+                        }`}
                       >
-                        <option value="">Location</option>
-                        {schoolData.schools.map((option) => (
-                          <option key={option.location} value={option.location}>
-                            {option.location}
-                          </option>
-                        ))}
-                      </select>
-
-                      {/* Custom arrow icon */}
-                      <div className="pointer-events-none absolute inset-y-0 right-4 flex items-center">
-                        <svg className="w-4 h-4 text-foreground" fill="none" stroke="#42BADC" strokeWidth="2" viewBox="0 0 24 24" >
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                        </svg>
-                      </div>
-                    </motion.div>
-                  </div>
-                </div>
+                        {curriculum}
+                      </p>
+                    </div>
+                  </motion.div>
+                ))}
               </div>
+
+              {/* ---------- Right Dropdown ---------- */}
+              <motion.div
+                variants={moveUp(0.5)}
+                custom={4}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.2 }}
+                className="relative inline-block min-w-[150px] lg:min-w-[348px]"
+              >
+                <select
+                  value={selectedLocation}
+                  onChange={(e) => setSelectedLocation(e.target.value)}
+                  className="appearance-none border border-bdrcolor cursor-pointer rounded-full pl-2 md:pl-4 pr-10 py-2 md:py-3 smtext10 font-light text-xs focus:outline-none focus:ring-0 w-full"
+                >
+                  <option value="">Location</option>
+                  {locations.map((location) => (
+                    <option key={location} value={location}>
+                      {location}
+                    </option>
+                  ))}
+                </select>
+
+                {/* Custom arrow icon */}
+                <div className="pointer-events-none absolute inset-y-0 right-3 xl:right-4 flex items-center">
+                  <svg
+                    className="w-4 h-4 text-foreground"
+                    fill="none"
+                    stroke="#42BADC"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </div>
+              </motion.div>
             </div>
           </div>
           <div>
@@ -117,7 +199,7 @@ const OurSchools = () => {
               }}
               className="mt-5 md:mt-8 2xl:mt-15"
             >
-              {schoolData.schools.map((school, index) => (
+              {filteredSchools.map((school, index) => (
                 <SwiperSlide key={index}>
                   <motion.div
                     className="bg-[#F5F5F5] rounded-[15px] p-1 hover:bg-[#F0F0F0] transition-color group"
@@ -129,12 +211,27 @@ const OurSchools = () => {
                   >
                     <div className="bg-[#F5F5F5] rounded-[15px] p-1 hover:bg-[#F0F0F0] transition-all duration-300 group">
                       <div className="rounded-xl overflow-hidden relative">
-                        <Image src={school.img} alt={school.title} width={500} height={500} />
+                        <Image
+                          src={school.img}
+                          alt={school.title}
+                          width={500}
+                          height={500}
+                        />
                         <div className="absolute opacity-0 delay-200 group-hover:-translate-y-2 group-hover:opacity-100 transition-all duration-300 top-5 right-5 p-2 bg-white/30 backdrop-blur-md  rounded-full w-[75px] h-[75px] flex items-center justify-center border border-[#42BADC]">
-                          <Image src="/images/home/arrow-top.svg"alt={school.title}width={15}height={15}/>
+                          <Image
+                            src="/images/home/arrow-top.svg"
+                            alt={school.title}
+                            width={15}
+                            height={15}
+                          />
                         </div>
                         <div className="absolute bottom-2 left-2 p-2 bg-white rounded-md w-fit">
-                          <Image src={school.logo} alt={school.title} width={109} height={45} />
+                          <Image
+                            src={school.logo}
+                            alt={school.title}
+                            width={109}
+                            height={45}
+                          />
                         </div>
                       </div>
                       <div className="p-2 md:p-3 xl:p-6 2xl:p-10">
