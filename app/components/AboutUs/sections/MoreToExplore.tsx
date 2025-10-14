@@ -77,7 +77,13 @@ export default function MoreToExplore({ data }: CardsProps) {
           >
             {items.map((card, idx) => (
               <SwiperSlide key={idx}>
-                <motion.div variants={moveUp(idx * 0.1)} initial="hidden" animate="show" viewport={{ once: false, amount: 0.7 }} className="relative group h-[300px] 2xl:h-[468px] max-w-[428px] overflow-hidden cursor-pointer rounded-[12px]">
+                <motion.div
+                  variants={moveUp(idx * 0.1)}
+                  initial="hidden"
+                  animate="show"
+                  viewport={{ once: false, amount: 0.7 }}
+                  className="relative group h-[300px] 2xl:h-[468px] max-w-[428px] overflow-hidden cursor-pointer rounded-[12px]"
+                >
                   <Image
                     src={card.image}
                     alt={card.title}
@@ -89,7 +95,13 @@ export default function MoreToExplore({ data }: CardsProps) {
                   <div className="absolute bottom-0 left-0 right-0 h-[70%] bg-gradient-to-t from-black to-transparent z-10"></div>
                   {/* Title */}
                   {card.title && (
-                    <motion.div variants={moveUp(0.1)} initial="hidden" whileInView="show" viewport={{ once: false, amount: 0.7 }} className="absolute bottom-[40px] left-[40px] z-20 leading-[1.2] text-white text-xl font-light">
+                    <motion.div
+                      variants={moveUp(0.1)}
+                      initial="hidden"
+                      whileInView="show"
+                      viewport={{ once: false, amount: 0.7 }}
+                      className="absolute bottom-[15px] left-[15px] right-[15px] xl:bottom-[40px] xl:left-[40px] xl:right-[40px] z-20 leading-[1.2] text-white text-lg xl:text-xl font-light"
+                    >
                       {card.title}
                     </motion.div>
                   )}

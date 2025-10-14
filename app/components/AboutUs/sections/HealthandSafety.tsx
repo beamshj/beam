@@ -21,12 +21,11 @@ export default function HealthSafety({ data }: { data: HealthSafetyProps }) {
 
   return (
     <section>
-     <div className="container">
+      <div className="container">
         <div className="grid xl:grid-cols-2 gap-10">
           {/* LEFT COLUMN */}
           <div className="flex flex-col justify-center">
             <h2 className="text-lg lg:text-xl xl:text-3xl 2xl:text-4xl font-light text-black mb-3 xl:mb-10 2xl:mb-[50px]">
-              
               <SplitText
                 tag="span"
                 text={title}
@@ -41,26 +40,47 @@ export default function HealthSafety({ data }: { data: HealthSafetyProps }) {
                 rootMargin="-10px"
                 textAlign="left"
               />
-              
-              </h2>
-            <motion.p variants={moveUp(0.4)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="text-[#626262] text-sm mb-[50px] leading-[1.52] md:max-w-[55ch]">
+            </h2>
+            <motion.p
+              variants={moveUp(0.4)}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.2 }}
+              className="text-[#626262] text-sm mb-[50px] leading-[1.52] md:max-w-[55ch]"
+            >
               {description}
             </motion.p>
 
-            <div className="xl:hidden mb-10 rounded-xl overflow-hidden w-fit xl:w-auto">
+            <div className="xl:hidden mb-10 rounded-xl overflow-hidden">
               {/* <Image src={items[active].image} alt={items[active].title} fill className="object-cover object-center" /> */}
-              <Image src={items[active].image} alt={items[active].title} width={300} height={300} className="object-contain xl:object-cover w-full h-[250px] object-top-left" />
+              <Image
+                src={items[active].image}
+                alt={items[active].title}
+                width={300}
+                height={300}
+                className="xl:object-contain object-cover w-full h-[250px] xl:object-top-left"
+              />
             </div>
 
             <ul className="group space-y-[30px] order-3">
               {items.map((item, index) => (
-                <motion.li key={item.id} variants={moveUp(index * 0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}
-                  className={`flex text-xl xl:items-center border-bdrcolor border-b justify-between pb-2 xl:pb-5 cursor-pointer group ${active === index ? "text-primary font-medium" : "text-black"
-                    }`}
+                <motion.li
+                  key={item.id}
+                  variants={moveUp(index * 0.2)}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true, amount: 0.2 }}
+                  className={`flex text-xl xl:items-center border-bdrcolor border-b justify-between pb-2 xl:pb-5 cursor-pointer group ${
+                    active === index ? "text-primary font-medium" : "text-black"
+                  }`}
                   onMouseEnter={() => setActive(index)}
                 >
                   <div className="flex items-center gap-3 font-light">
-                    <span className={`text-sm mt-2 hover:text-primary transition-all duration-300 ${active === index ? "text-black" : "text-[#626262]"}`} >
+                    <span
+                      className={`text-sm mt-2 hover:text-primary transition-all duration-300 ${
+                        active === index ? "text-black" : "text-[#626262]"
+                      }`}
+                    >
                       {String(item.id).padStart(2, "0")}
                     </span>
                     <span className="text-[1.2rem] xl:text-lg 2xl:text-xl font-light leading-[1.2] hover:text-primary transition-all duration-300">
@@ -85,7 +105,13 @@ export default function HealthSafety({ data }: { data: HealthSafetyProps }) {
           </div>
 
           {/* RIGHT COLUMN */}
-          <motion.div variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="relative justify-center items-center hidden xl:flex">
+          <motion.div
+            variants={moveUp(0.2)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+            className="relative justify-center items-center hidden xl:flex"
+          >
             <div className="relative w-full h-[400px] md:h-[500px] xl:h-[600px] 2xl:h-[743px] rounded-[12px] overflow-hidden">
               <AnimatePresence mode="wait">
                 <motion.div
@@ -110,7 +136,7 @@ export default function HealthSafety({ data }: { data: HealthSafetyProps }) {
             </div>
           </motion.div>
         </div>
-     </div>
+      </div>
     </section>
   );
 }
