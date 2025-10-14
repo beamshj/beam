@@ -81,7 +81,7 @@ export default function PLProgram({ data }: { data: ProgramProps }) {
             <div
               style={{
                 background:
-                  "linear-gradient(183.56deg, rgba(66, 186, 220, 0) 43.99%, #7E5AA3 116.63%);",
+                  "linear-gradient(183.56deg, rgba(66, 186, 220, 0) 43.99%, #7E5AA3 116.63%)",
               }}
               className="absolute  w-full h-[50%] bottom-0"
             />

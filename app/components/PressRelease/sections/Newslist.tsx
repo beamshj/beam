@@ -5,6 +5,7 @@ import Image from "next/image";
 import { moveUp } from "../../motionVarients";
 import Pagination from "../../Common/Pagination";
 import { useState, useEffect } from "react";
+import Link from "next/link";
 
 export interface RecentNewsData {
   title: string;
@@ -36,8 +37,8 @@ const Newslist = ({ data }: { data: RecentNewsData }) => {
 
   return (
     <div>
-      {currentNews.map((item, index) => (
-        <motion.div
+      {currentNews.map((item, index) => ( 
+            <motion.div
           variants={moveUp(index * 0.2)}
           initial="hidden"
           whileInView="show"
@@ -45,6 +46,8 @@ const Newslist = ({ data }: { data: RecentNewsData }) => {
           key={index}
           className="mb-[25px] xl:mb-[50px] last:mb-0"
         >
+          <Link href={`/news-&-media/news`}>
+        
           <div className="relative">
             <Image
               src={item.image}
@@ -74,6 +77,7 @@ const Newslist = ({ data }: { data: RecentNewsData }) => {
               />
             </div>
           </div>
+          </Link> 
         </motion.div>
       ))}
       {/* Pagination */}
