@@ -1,21 +1,12 @@
- 
-import { 
-  BannerData, 
-  RecentNewsData
-} from "./data";  
+import { BannerData, RecentNewsData } from "./data";
 import InnerBanner from "../Common/InnerBanner";
 import RecentNews from "./sections/RecentNews";
 
-
-
-
-
 const Index = () => {
   return (
-    <> 
-      <InnerBanner BannerData={BannerData} /> 
+    <>
+      <InnerBanner BannerData={BannerData} />
       <RecentNews RecentNewsData={RecentNewsData} />
-     
     </>
   );
 };
