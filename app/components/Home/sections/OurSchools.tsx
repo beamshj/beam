@@ -18,6 +18,7 @@ import {
   cardVariants,
 } from "@/public/assets/FramerAnimation/animation";
 import { moveUp } from "../../motionVarients";
+import Select from "react-select";
 
 const OurSchools = () => {
   const [selectedCurriculum, setSelectedCurriculum] = useState("all");
@@ -51,6 +52,43 @@ const OurSchools = () => {
       return curriculumMatch && locationMatch;
     });
   }, [selectedCurriculum, selectedLocation]);
+
+  // Convert your locations to react-select format
+  const locationOptions = locations.map((loc) => ({
+    value: loc,
+    label: loc,
+  }));
+
+  const customStyles = {
+    control: (provided: any) => ({
+      ...provided,
+      borderRadius: "50px",
+      borderColor: "#d1d5db",
+      padding: "2px 8px",
+      minHeight: "40px",
+    }),
+    option: (provided: any, state: any) => ({
+      ...provided,
+      backgroundColor: state.isFocused ? "#42BADC" : "white",
+      color: state.isFocused ? "white" : "black",
+      fontWeight: 300,
+      cursor: "pointer",
+    }),
+    dropdownIndicator: (provided: any) => ({
+      ...provided,
+      padding: 4,
+    }),
+    indicatorSeparator: () => ({ display: "none" }),
+    menu: (provided: any) => ({
+      ...provided,
+      borderRadius: "12px",
+      overflow: "hidden",
+    }),
+    menuList: (provided: any) => ({
+      ...provided,
+      padding: "0px",
+    }),
+  };
 
   return (
     <section className="py-8 xl:pt-20 xl:pb-25 2xl:pt-[133px] 2xl:pb-[160px] ">
@@ -146,37 +184,17 @@ const OurSchools = () => {
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true, amount: 0.2 }}
-                className="relative inline-block min-w-[150px] lg:min-w-[348px]"
+                className="w-full lg:max-w-[348px] z-10"
               >
-                <select
-                  value={selectedLocation}
-                  onChange={(e) => setSelectedLocation(e.target.value)}
-                  className="appearance-none border border-bdrcolor cursor-pointer rounded-full pl-2 md:pl-4 pr-10 py-2 md:py-3 smtext10 font-light text-xs focus:outline-none focus:ring-0 w-full"
-                >
-                  <option value="">Location</option>
-                  {locations.map((location) => (
-                    <option key={location} value={location}>
-                      {location}
-                    </option>
-                  ))}
-                </select>
-
-                {/* Custom arrow icon */}
-                <div className="pointer-events-none absolute inset-y-0 right-3 xl:right-4 flex items-center">
-                  <svg
-                    className="w-4 h-4 text-foreground"
-                    fill="none"
-                    stroke="#42BADC"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M19 9l-7 7-7-7"
-                    />
-                  </svg>
-                </div>
+                <Select
+                  value={locationOptions.find(
+                    (option) => option.value === selectedLocation
+                  )}
+                  onChange={(option: any) => setSelectedLocation(option.value)}
+                  options={locationOptions}
+                  styles={customStyles}
+                  placeholder="Select Location"
+                />
               </motion.div>
             </div>
           </div>
