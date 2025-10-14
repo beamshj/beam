@@ -27,7 +27,7 @@ export const schoolData = {
       {
          id: 2,
          img: '/images/home/sc2.jpg',
-         logo: '/images/beam-schools/logo/home/iscs-nas.svg',
+         logo: '/images/beam-schools/logo/iscs-nas.svg',
          title: 'International School of Creative Science',
          curriculum: 'British Curriculum',
          location: 'Nad Al Sheba, Dubai',
