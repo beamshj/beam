@@ -81,7 +81,7 @@ const BeyondAcademics = ({
                   ></div>
 
                   <div
-                    className={`absolute  transition-all duration-400 top-5 right-5 p-2 bg-primary rounded-full w-[75px] h-[75px] flex items-center justify-center   ${
+                    className={`absolute  transition-all duration-400 top-[20px] right-[20px] xl:top-[40px] xl:right-[40px] p-2 bg-primary rounded-full w-[75px] h-[75px] flex items-center justify-center   ${
                       isActive ? "bg-white" : ""
                     }  `}
                   >
@@ -97,7 +97,7 @@ const BeyondAcademics = ({
                   </div>
 
                   {/* Content Wrapper */}
-                  <div className="absolute inset-0 flex flex-col justify-end p-5 2xl:p-10 z-10 transition-all duration-500">
+                  <div className="absolute inset-0 flex flex-col justify-end p-[20px] 2xl:p-[40px] z-10 transition-all duration-500">
                     {/* Title */}
                     <h3
                       className={`text-[23px]  lg:text-[26px] xl:text-lg 2xl:text-xl font-light text-white leading-[1.2] max-w-[12ch]
@@ -117,10 +117,10 @@ const BeyondAcademics = ({
                       }}
                     >
                       <div>
-                        <p className="text-[#E0E0E0] font-light max-w-[30ch]">
+                        <p className="text-[#E0E0E0] leading-[1.526315789473684] font-light max-w-[30ch]">
                           {item.description}
                         </p>
-                        <ul className="mt-3 space-y-1 ml-5 list-disc">
+                        <ul className="mt-[20px] space-y-1 ml-5 list-disc">
                           {item.list.map((listItem, i) => (
                             <li key={i} className="text-[#E0E0E0] font-light">
                               {listItem}
