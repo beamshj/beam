@@ -26,7 +26,7 @@ const FutureFocus = ({
             <SplitText
               tag="h2"
               text={focusData.title}
-              className=" text-lg xl:text-2xl 2xl:text-4xl 2xl:max-w-[10ch] font-light leading-[1.111111111] text-black mb-4 md:mb-6 xl:mb-8 2xl:mb-12"
+              className=" text-lg xl:text-2xl 2xl:text-4xl 2xl:max-w-[8ch] font-light leading-[1.111111111] text-black mb-4 md:mb-6 xl:mb-8 2xl:mb-12"
               delay={100}
               duration={0.6}
               ease="power3.out"

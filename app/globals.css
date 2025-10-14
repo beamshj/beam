@@ -126,7 +126,7 @@ body {
 
 @layer utilities {
   .font-light {
-    font-weight: 260;
+    font-weight: 280;
   }
 }
 
@@ -293,7 +293,7 @@ body {
   content: url(/images/scholarship/svg8.svg);
   position: absolute;
   bottom: 0;
-  right: -170px;
+  right: -150px;
   top: 43px;
   overflow: hidden;
   z-index: -1;

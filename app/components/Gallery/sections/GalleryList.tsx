@@ -55,15 +55,28 @@ export default function GalleryList({ data }: { data: GalleryList }) {
           {/* Filters */}
           <div className="flex gap-3">
             {filters.map((f,index) => (
+                <motion.div
+                                key={f}
+                                variants={moveUp(index * 0.2)}
+                                initial="hidden"
+                                whileInView="show"
+                                viewport={{ once: true, amount: 0.2 }}
+                                className={`rounded-[50px] ${
+                                  activeFilter === f
+                                    ? "bg-gradient-to-r from-[#42BADC] to-[#12586C] p-[1px]" // gradient border
+                                    : "border border-bdrcolor"
+                                } transition-colors duration-200 `}
+                              > 
               <motion.button variants={moveUp(index * 0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}
                 key={f}
-                className={`px-[20px] py-[11px] text-xs text-black rounded-[50px] border border-bdrcolor font-light ${
-                  activeFilter === f ? "bg-[#C9F3FF]" : "bg-white"
+                className={`px-[20px] py-[11px] text-xs text-black rounded-[50px] cursor-pointer font-light ${
+                  activeFilter === f ? "bg-[#C9F3FF] text-black" : "bg-white text-black hover:bg-[#F5F5F5]"
                 }`}
                 onClick={() => setActiveFilter(f)}
               >
                 {f.charAt(0).toUpperCase() + f.slice(1)}
               </motion.button>
+              </motion.div>
             ))}
           </div>
         </div>

@@ -42,12 +42,12 @@ const GuidedVision = ({ visionData }: { visionData: visionData }) => {
         <div className="">
           <div>
             <div className="relative storyslide">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 xl:gap-18 items-center">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 xl:gap-10 items-center">
                 {visionData.items.map((item, index) => {
                   const isPlaying = activeVideoIndex === index;
 
                   return (
-                    <motion.div variants={moveUp(index * 0.2)} initial="hidden" whileInView="show" viewport={{amount: 0.1, once: true}} key={index} className="relative w-full h-[250px] md:h-[420px] rounded-[12px] overflow-hidden flex-grow">
+                    <motion.div variants={moveUp(index * 0.2)} initial="hidden" whileInView="show" viewport={{amount: 0.1, once: true}} key={index} className="relative w-full h-[250px] md:h-[480px] rounded-[12px] overflow-hidden flex-grow">
                       {/* Background image */}
                       <Image
                         src={item.image}

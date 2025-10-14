@@ -43,14 +43,14 @@ const WeOffer = ({
             ))}
           </div>
           <div className="mt-8 lg:mt-0" >
-            <div className="relative grid grid-cols-1 md:grid-cols-5 justify-between  gap-4 md:gap-10">
+            <div className="relative grid grid-cols-1 md:grid-cols-5 justify-between  gap-4 md:gap-10 2xl:gap-0">
               {offerData.items.map((item, index) => (
                 <motion.div variants={fadeIn(index*0.5)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.1 }} className={`relative z-10 flex gap-4 md:gap-0 flex-row md:flex-col items-center aftercontent${index + 1}`} key={index}>
                   <div className="w-10 h-10 min-w-max lg:w-18 lg:h-18 flex items-center justify-center rounded-full bg-sky-200 border border-sky-400 text-xl font-semibold">
                     <p className="text-sm font-light leading-[1.526315789473684] mb-0">{index + 1}</p>
                   </div>
-                  <div className="md:mt-5 lg:mt-8 2xl:mt-17">
-                    <p className="text-sm  lg:text-md xl:text-center font-light leading-[1.526315789473684] mb-0">{item.title}</p></div>
+                  <div className="md:mt-5 lg:mt-7 2xl:mt-[45px]">
+                    <p className="text-sm  lg:text-md 2xl:text-xl md:text-center font-light leading-[1.1] mb-0 xl:tracking-[-1px] 2xl:tracking-[-2px]">{item.title}</p></div>
                 </motion.div>
               ))}
             </div>
