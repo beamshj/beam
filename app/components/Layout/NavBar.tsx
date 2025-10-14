@@ -2,18 +2,10 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { mainMenuItems } from "./menuItems";
-import { sliderMenuItems } from "./menuItems";
+import { mainMenuItems } from "./menuItems"; 
 import { filterMenuItems } from "./menuItems";
 import SocialMediaIcons from "../Common/SocialMediaIcons";
-import {
-  FaFacebookF,
-  FaInstagram,
-  FaLinkedinIn,
-  FaYoutube,
-} from "react-icons/fa";
 import { AnimatePresence, motion } from "framer-motion";
-import { FaXTwitter } from "react-icons/fa6";
 
 const NavBar = () => {
   const [isSticky, setIsSticky] = useState(false);
@@ -49,10 +41,7 @@ const NavBar = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // filter menu based on device
-  const filteredSliderMenuItems = isMobile
-    ? sliderMenuItems
-    : sliderMenuItems.slice(3);
+ 
 
     const [hoveredMenu, setHoveredMenu] = useState<string | null>(null);
   return (

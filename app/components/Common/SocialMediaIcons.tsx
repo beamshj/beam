@@ -2,10 +2,10 @@
  
 import Link from "next/link";
 import { FaFacebookF, FaXTwitter, FaLinkedinIn, FaInstagram, FaYoutube } from "react-icons/fa6";
-import Image from "next/image";
+ 
 
 
-const Counter: React.FC = () => {
+const SocialMediaIcons: React.FC = () => {
    
 
   return (
@@ -30,4 +30,4 @@ const Counter: React.FC = () => {
   )
 };
 
-export default Counter;
+export default SocialMediaIcons;
