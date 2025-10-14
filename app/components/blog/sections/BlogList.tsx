@@ -79,14 +79,14 @@ export default function BlogList({ data }: { data: BlogItem[] }) {
                     isSelected
                       ? "bg-gradient-to-r from-[#42BADC] to-[#12586C] p-[1px]" // gradient border
                       : "border border-bdrcolor"
-                  } transition-colors duration-200`}
+                  } transition-colors duration-200 `}
                 >
                   <button
                     onClick={() => {
                       setSelectedCategory(cat);
                       setCurrentPage(1);
                     }}
-                    className={`px-[20px] py-[11px] text-xs rounded-[50px] font-light w-full transition-colors duration-200 uppercase ${
+                    className={`px-[20px] py-[11px] text-xs rounded-[50px] font-light w-full transition-colors duration-200 uppercase cursor-pointer ${
                       isSelected
                         ? "bg-[#C9F3FF] text-black"
                         : "bg-white text-black hover:bg-[#F5F5F5]"

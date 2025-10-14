@@ -57,29 +57,69 @@ const Comments = ({ commentsData }: { commentsData: commentsData }) => {
           </div>
           <div className="relative">
             <div className="absolute -top-10 right-0 flex gap-3 z-10">
-              <button
-                className="swiper-button-prev-custom   transition cursor-pointer group"
+            <button
+                className="swiper-button-prev-story transition cursor-pointer group"
                 aria-label="Previous"
               >
-                <Image
-                  src="/images/icons/arrow-right.svg"
-                  alt="Prev"
-                  width={18}
-                  height={18}
-                  className="group-hover:scale-140 transition-all duration-300 brightness-44 opacity-25 group-hover:opacity-100 group-hover:brightness-100"
-                />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  className="overflow-visible"
+                > 
+                  <path
+                    d="M9.57031 5.92993L3.50031 11.9999L9.57031 18.0699"
+                    stroke="#D3D3D3"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="transition-all duration-300 group-hover:stroke-[#23ABD2]"
+                  />
+              
+                  <path
+                    d="M20.5 12H3.67"
+                    stroke="#D3D3D3"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="origin-left transition-transform duration-500 group-hover:scale-x-[1.5] group-hover:stroke-[#23ABD2]"
+                  />
+                </svg>
               </button>
+
+
               <button
-                className="swiper-button-next-custom transition cursor-pointer group"
+                className="swiper-button-next-story transition cursor-pointer group"
                 aria-label="Next"
               >
-                <Image
-                  src="/images/icons/arrow-right.svg"
-                  alt="Next"
-                  width={18}
-                  height={18}
-                  className="rotate-180 group-hover:scale-140 transition-all duration-300 brightness-44 opacity-25 group-hover:opacity-100 group-hover:brightness-100"
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                className="overflow-visible"
+              > 
+                <path
+                  d="M14.43 5.92993L20.5 11.9999L14.43 18.0699"
+                  stroke="#D3D3D3"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="transition-all duration-300 group-hover:stroke-[#23ABD2]"
+                /> 
+                <path
+                  d="M3.5 12H20.33"
+                  stroke="#D3D3D3"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="origin-right transition-transform duration-500 group-hover:scale-x-[1.5] group-hover:stroke-[#23ABD2]"
                 />
+              </svg>
+
               </button>
             </div>
           </div>

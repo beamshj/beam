@@ -63,6 +63,7 @@ export default function MoreToExplore({ items }: Props) {
               1600: { slidesPerView: 1.05 },
             }}
             loop={true}
+            speed={600}
             navigation={{
               nextEl: ".swiper-button-next-custom",
               prevEl: ".swiper-button-prev-custom",
