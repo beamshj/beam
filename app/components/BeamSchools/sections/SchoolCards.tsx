@@ -208,7 +208,7 @@ const SchoolCards = ({ schoolData }: { schoolData: SchoolCardsPageProps }) => {
               </div>
 
               {/* Location & arrow */}
-              <div className="absolute top-[22px] left-[22px] right-[22px] xl:top-[32px] xl:left-[33px] xl:right-[33px] flex items-start justify-between">
+              <div className="absolute top-[14px] left-[14px] right-[14px] xl:top-[32px] xl:left-[33px] xl:right-[33px] flex items-start justify-between">
                 <div className="flex items-center gap-x-2 bg-[#E6F7FF] backdrop-blur-sm px-[25px] py-[11px] rounded-[50px]">
                   <Image
                     src="/images/contact-us/icons/location.svg"
@@ -221,12 +221,13 @@ const SchoolCards = ({ schoolData }: { schoolData: SchoolCardsPageProps }) => {
                   </span>
                 </div>
                 {/* Arrow Icon */}
-                <div className="bg-transparent group-hover:bg-primary border-white group-hover:border-primary border xl:w-[75px] xl:h-[75px] w-[55px] h-[55px] rounded-[50px] flex items-center justify-center transition-colors duration-300">
+                <div className="bg-transparent group-hover:bg-primary border-white group-hover:border-primary border xl:w-[75px] xl:h-[75px] w-[50px] h-[50px] rounded-[50px] flex items-center justify-center transition-colors duration-300">
                   <Image
                     src="/images/arrow-right-up.svg"
                     alt="arrow"
                     width={24}
                     height={24}
+                    className="w-[18px] h-[18px] xl:w-[24px] xl:h-[24px]"
                   />
                 </div>
               </div>
@@ -239,7 +240,7 @@ const SchoolCards = ({ schoolData }: { schoolData: SchoolCardsPageProps }) => {
                     : "translate-y-full opacity-0"
                 }`}
               >
-                <div className="bg-[#DDF7FF] backdrop-blur-sm xl:m-[6px] m-[2px] rounded-[12px] xl:px-[19px] xl:py-[18px] px-2 py-2 space-y-2  xl:space-y-[13px]">
+                <div className="bg-[#DDF7FF] backdrop-blur-sm xl:m-[6px] m-[2px] rounded-[12px] xl:px-[19px] xl:py-[18px] px-2 py-2 space-y-[5px] xl:space-y-[13px]">
                   <div
                     style={{
                       background:
@@ -316,7 +317,7 @@ const SchoolCards = ({ schoolData }: { schoolData: SchoolCardsPageProps }) => {
 
               {/* Campus Name & logo */}
               <div
-                className={`absolute bottom-[34px] left-[38px] transition-all duration-500 ease-in-out
+                className={`absolute xl:bottom-[34px] xl:left-[38px] xl:right-[38px] bottom-[22px] left-[22px] right-[22px] transition-all duration-500 ease-in-out
   ${
     hoveredCard === campus.id || activeCard === campus.id
       ? "opacity-0 translate-y-5"
