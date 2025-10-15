@@ -164,18 +164,18 @@ const SchoolCards = ({ schoolData }: { schoolData: SchoolCardsPageProps }) => {
 
             {isDropdownOpen && (
               <div className="absolute top-full mt-1 right-0 bg-white border border-gray-200 rounded-[12px] shadow-lg min-w-[180px] z-10 overflow-hidden transition-colors duration-300">
-                {locations.map((location) => (
+                {locations.map((location, idx) => (
                   <motion.button
-                    variants={moveUp(0.6)}
+                    variants={moveUp(idx * 0.05)}
                     initial="hidden"
                     whileInView="show"
-                    viewport={{ once: true, amount: 0.2 }}
+                    viewport={{ once: true }}
                     key={location}
                     onClick={() => {
                       setSelectedLocation(location);
                       setIsDropdownOpen(false);
                     }}
-                    className="w-full text-left px-4 py-2.5 hover:bg-gray-50 text-sm text-black hover:text-primary font-light rounded-[12px] transition-colors duration-300"
+                    className="w-full text-left px-4 py-3.5 hover:bg-primary text-sm text-black hover:text-white font-light rounded-[12px] transition-colors duration-300"
                   >
                     {location}
                   </motion.button>
