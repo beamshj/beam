@@ -87,7 +87,7 @@ export default function LatestBlogs({ data }: { data: BlogItem[] }) {
               </div>
 
               {/* Title & Date */}
-              <div className="absolute bottom-[22px] left-[22px] rihgt-[22px] lg:bottom-[39px] lg:left-[39px] lg:right-[39px] z-10">
+              <div className="absolute bottom-[22px] left-0 px-5 lg:px-10 lg:bottom-[39px]  z-10">
                 <div className="flex justify-between">
                   <p className="text-sm opacity-80 leading-[1.52] text-[#D3D3D3]">
                     {item.date}
@@ -96,7 +96,7 @@ export default function LatestBlogs({ data }: { data: BlogItem[] }) {
                     {item.category}
                   </p>
                 </div>
-                <h3 className="text-md md:text-lg xl:text-xl text-white font-light leading-[1.2] mt-[10px] max-w-[80%]">
+                <h3 className="text-md lg:text-lg xl:text-xl text-white font-light leading-[1.2] mt-[10px] max-w-[26ch] lettersp-1">
                   {item.title}
                 </h3>
                 <div>

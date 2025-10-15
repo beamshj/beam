@@ -37,7 +37,7 @@ export default function PLProgram({ data }: { data: ProgramProps }) {
                <SplitText
                 tag="h3"
                 text={subtitle}
-                className="text-md mb-1 xl:text-lg 2xl:text-xl text-black leading-[1.4] font-light lettersp-2"
+                className="text-md mb-1 xl:text-lg 2xl:text-xl text-black leading-[1.4] font-light  "
                 delay={200}
                 duration={0.6}
                 ease="power3.out"

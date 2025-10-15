@@ -40,17 +40,17 @@ const UpcomingEvents = ({ data }: { data: RecentNewsData }) => {
           whileInView="show"
           viewport={{ amount: 0.1, once: true }}
           key={index}
-          className="chklast"
+          className="chklast group"
         >
           <Link href={`/news-&-media/news`}>
           <div className="flex gap-5">
             <div className="w-[100px] md:w-[171px]">
-              <div className="relative h-full bg-[#C9F3FF] rounded-xl">
+              <div className="relative h-full bg-[#C9F3FF] rounded-xl group-hover:bg-white transition-colors duration-300">
                 <div className="bg-[#42BADC] rounded-t-xl text-sm py-2 md:py-4 font-light  text-white text-center">
                   <p>{item.date}</p>
                 </div>
                 <div className="flex items-center justify-center">
-                  <p className="text-xl text-black pt-4 lg:pt-5">{item.day}</p>
+                  <p className="text-xl text-black pt-4 lg:pt-5 group-hover:text-primary transition-colors duration-300">{item.day}</p>
                 </div>
               </div>
             </div>
@@ -64,8 +64,8 @@ const UpcomingEvents = ({ data }: { data: RecentNewsData }) => {
                 </p>
               </div>
               <div
-                className="mt-2 md:mt-4 p-1 flex items-center justify-center bg-primary w-[27px] h-[27px] rounded-full transition-transform
-                                 duration-300  rotate-45"
+                className="mt-2 md:mt-4 p-1 flex items-center justify-center bg-primary w-[27px] h-[27px] rounded-full 
+               group-hover:translate-x-1 transition-transform  duration-300  rotate-45"
               >
                 <Image
                   src="/assets/arrow.svg"

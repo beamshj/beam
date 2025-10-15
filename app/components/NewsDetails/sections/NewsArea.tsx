@@ -103,7 +103,7 @@ const NewsArea = () => {
               alt=""
               width={1360}
               height={535}
-              className="rounded-sm w-full object-cover"
+              className="rounded-sm w-full object-cover min-h-[250px]"
             />
           </motion.div>
           <div>

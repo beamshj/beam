@@ -219,7 +219,7 @@ export default function LeadershipCarousel({ data }: { data: Member[] }) {
           {slides.map((m) => (
             <motion.div
               key={m.id}
-              className="absolute bottom-0 rounded-[12px] overflow-hidden cursor-pointer"
+              className="md:absolute bottom-0 rounded-[12px] overflow-hidden cursor-pointer"
               animate={{
                 left: m.left,
                 width: m.width,
@@ -255,9 +255,9 @@ export default function LeadershipCarousel({ data }: { data: Member[] }) {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
-            className="text-sm text-[#666666] font-light"
+            className="text-sm text-black font-light"
           >
-            <span className="text-black">{"0" + n}</span>/
+            <span className="text-[#666666]">{"0" + n}</span>/
             {"0" + (activeIndex + 1)}
           </motion.p>
           <div>
@@ -296,13 +296,10 @@ export default function LeadershipCarousel({ data }: { data: Member[] }) {
                   className="flex items-start gap-[13px]"
                 >
                   <span className="mt-1">
-                    <Image
-                      src="/images/arrow-black.svg"
-                      alt="arrow-right-black"
-                      width={14}
-                      height={14}
-                      className="w-[14px] h-[14px] rotate-45"
-                    />
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
+<path d="M8.99121 3.7063L12.7731 7.50005L8.99121 11.2938" stroke="#292D32" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M2.18066 7.5H12.6666" stroke="#292D32" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
                   </span>
                   <span>{b}</span>
                 </motion.li>
@@ -318,14 +315,14 @@ export default function LeadershipCarousel({ data }: { data: Member[] }) {
           >
             <button
               onClick={next}
-              className="w-[50px] h-[50px] 2xl:w-[75px] 2xl:h-[75px] rounded-full border border-bdrcolor flex items-center justify-center cursor-pointer"
+              className="group-hover:translate-x-1 transition-all duration-300 w-[50px] h-[50px] 2xl:w-[75px] 2xl:h-[75px] rounded-full border border-bdrcolor flex items-center justify-center cursor-pointer"
             >
               <Image
                 src="/images/arrow-primary.svg"
                 alt="arrow-right"
                 width={20}
                 height={20}
-                className="w-[20px] h-[20px] rotate-45 group-hover:rotate-0 transition-all duration-300"
+                className="w-[20px] h-[20px] rotate-45 "
               />
             </button>
           </motion.div>

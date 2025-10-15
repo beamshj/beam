@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import SplitText from "@/components/SplitText";
 import { motion } from "framer-motion";
@@ -19,14 +19,15 @@ interface SchoolAchievementsProps {
     achievements: Achievement[];
   };
 }
-
 const SchoolAchievements: React.FC<SchoolAchievementsProps> = ({ data }) => {
   const { title, subtitle, achievements } = data;
+  
+const [isActive, setIsActive] = useState<number | null>(null);
   return (
     <div className="py-10 xl:py-20 2xl:py-[135px]">
       <div className="container">
         {/* Header Section */}
-        <div className="mb-3 xl:mb-[30px]">
+        <div className="mb-5 xl:mb-[30px]">
           <SplitText
             tag="h2"
             text={title}
@@ -66,6 +67,9 @@ const SchoolAchievements: React.FC<SchoolAchievementsProps> = ({ data }) => {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, amount: 0.2 }}
+               onClick={() => setIsActive(index)}  
+               onMouseEnter={() => setIsActive(index)}
+               onMouseLeave={() => setIsActive(null)}
               className="group relative border border-bdrcolor rounded-2xl overflow-hidden transition-colors duration-300 2xl:w-[356px] 2xl:h-[287px] flex flex-col items-center justify-center p-[40px]"
             >
               {/* Default State - Logo and Title */}
@@ -85,19 +89,21 @@ const SchoolAchievements: React.FC<SchoolAchievementsProps> = ({ data }) => {
               </div>
 
               {/* Hover State - Gradient Background and Description */}
-              <div
-                className="absolute  inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-[40px]"
-                style={{
-                  background:
-                    "linear-gradient(211deg, #42BADC 54.06%, rgba(126, 90, 163, 0.1) 122.85%)",
-                }}
-              >
-                <div className="flex h-full items-end">
-                  <p className="text-white text-sm leading-[1.52]">
-                  {achievement.description}
-                </p>
-                </div>
-              </div>
+             <div
+        className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-[40px] ${
+          isActive === index ? "opacity-100" : ""
+        }`}
+        style={{
+          background:
+            "linear-gradient(211deg, #42BADC 46.06%, #ccb1e9 122.85%)",
+        }}
+      >
+        <div className="flex h-full items-end">
+          <p className="text-white text-sm leading-[1.52]">
+            {achievement.description}
+          </p>
+        </div>
+      </div>
             </motion.div>
           ))}
         </div>

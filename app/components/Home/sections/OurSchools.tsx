@@ -317,9 +317,11 @@ const OurSchools = () => {
                         </div>
 
                         <div className="my-4 2xl:mt-6 2xl:mb-8">
-                          <h3 className="text-[1.3rem] md:text-md xl:text-lg 2xl:text-xl font-light text-black leading-[1.18] lettersp-1">
+                          <h3 className="text-[1.3rem] md:text-md xl:text-lg 2xl:text-xl font-light text-black leading-[1.18] lettersp-1 
+  overflow-hidden text-ellipsis line-clamp-2 min-h-[2.6em]">
                             {school.title}
                           </h3>
+                          
                         </div>
 
                         <div>
@@ -361,7 +363,7 @@ const OurSchools = () => {
                 </SwiperSlide>
               ))}
             </Swiper>
-            <div className="cus-pagination   flex justify-end gap-2"></div>
+            <div className="cus-pagination   flex justify-end gap-2 mx-auto !w-fit"></div>
           </div>
         </div>
       </motion.div>

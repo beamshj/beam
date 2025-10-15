@@ -6,6 +6,9 @@ import { mainMenuItems } from "./menuItems";
 import { filterMenuItems } from "./menuItems";
 import SocialMediaIcons from "../Common/SocialMediaIcons";
 import { AnimatePresence, motion } from "framer-motion";
+ 
+ 
+ 
 
 const NavBar = () => {
   const [isSticky, setIsSticky] = useState(false);
@@ -40,7 +43,14 @@ const NavBar = () => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+ 
 
+  useEffect(() => {
+    const checkWidth = () => setIsMobile(window.innerWidth < 1024);
+    checkWidth();
+    window.addEventListener("resize", checkWidth);
+    return () => window.removeEventListener("resize", checkWidth);
+  }, []);
  
 
     const [hoveredMenu, setHoveredMenu] = useState<string | null>(null);
@@ -215,17 +225,16 @@ const NavBar = () => {
   {isMenuOpen && (
     <motion.div
       key="menu-panel"
-      initial={{ y: "-100%", opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      exit={{ y: "-100%", opacity: 0 }}
+      initial={isMobile ? { x: "100%", opacity: 0 } : { y: "-100%", opacity: 0 }}
+      animate={{ x: 0, y: 0, opacity: 1 }}
+      exit={isMobile ? { x: "100%", opacity: 0 } : { y: "-100%", opacity: 0 }}
       transition={{
         duration: 0.6,
-        ease: [0.25, 1, 0.5, 1], // smooth spring-like ease
+        ease: [0.25, 1, 0.5, 1],
       }}
-      className="fixed top-0 lg:left-0 right-0 bottom-0 h-full w-[300px] md:w-[500px] lg:w-full z-50"
+      className="fixed top-0 right-0 bottom-0 lg:left-0 h-full w-[300px] md:w-[500px] lg:w-full z-50"
       style={{
-        background:
-          "linear-gradient(251.6deg, #42BADC -12.46%, #005871 100.42%)",
+        background: "linear-gradient(251.6deg, #42BADC -12.46%, #005871 100.42%)",
       }}
     >
       <div className="container h-full">
