@@ -19,7 +19,7 @@ const FosteringStrong = ({ fsData }: { fsData: fsData }) => {
   return (
     <section className="py-8 md:py-12 lg:py-20 2xl:py-[135px]">
       <div className="container">
-        <div className="grid lg:grid-cols-[57%_40%] gap-[3%] ">
+        <div className="grid lg:grid-cols-[56%_39%] gap-[5%] ">
           {/* Left Content */}
           <div>
             <div>
@@ -53,13 +53,13 @@ const FosteringStrong = ({ fsData }: { fsData: fsData }) => {
               />
             </div>
             <div className="mt-4 md:mt-6 xl:mt-8 2xl:mt-12">
-              <div className="xl:hidden mt-10 rounded-xl overflow-hidden xl:w-auto w-fit">
+              <div className="lg:hidden mt-10 rounded-xl overflow-hidden lg:w-auto w-full">
                 <Image
                   src={fsData.image}
                   alt={fsData.title}
                   width={300}
                   height={300}
-                  className="object-contain xl:object-cover w-full h-[250px] object-top-left"
+                  className="object-contain xl:object-cover w-full h-[350px] lg:h-full object-cover lg:object-top-left"
                 />
               </div>
               {fsData.items.map((item, index) => {
@@ -98,7 +98,7 @@ const FosteringStrong = ({ fsData }: { fsData: fsData }) => {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.1 }}
-            className="relative w-full h-[250px] lg:h-auto rounded-[12px] overflow-hidden lg:ms-10 hidden xl:block"
+            className="relative w-full h-[250px] lg:h-auto rounded-[12px] overflow-hidden   hidden lg:block"
           >
             <Image
               src={fsData.image}

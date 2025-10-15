@@ -23,49 +23,49 @@ export const achievementsData = {
     },
     {
       id: 2,
-      logo: "/images/school-achievements/logos/2.jpg",
+      logo: "/images/school-achievements/logos/sa2.png",
       title: "School Excellence Award",
       description:
         "Awarded for outstanding performance in educational quality and innovation.",
     },
     {
       id: 3,
-      logo: "/images/school-achievements/logos/3.jpg",
+      logo: "/images/school-achievements/logos/sa3.png",
       title: "School of the Month",
       description:
         "ASCS Maliha Road received the School of the Month award from SPEA in November 2021 for excellence.",
     },
     {
       id: 4,
-      logo: "/images/school-achievements/logos/4.jpg",
+      logo: "/images/school-achievements/logos/sa4.png",
       title: "Finalist Top Schools Award",
       description:
         "Selected as a finalist for the prestigious Top Schools Award.",
     },
     {
       id: 5,
-      logo: "/images/school-achievements/logos/5.jpg",
+      logo: "/images/school-achievements/logos/sa5.png",
       title: "Child-Friendly School",
       description:
         "Certified as a child-friendly institution providing safe and nurturing environment.",
     },
     {
       id: 6,
-      logo: "/images/school-achievements/logos/6.jpg",
+      logo: "/images/school-achievements/logos/sa6.png",
       title: "Outstanding in Health & Safety",
       description:
         "Recognized for exceptional health and safety standards and practices.",
     },
     {
       id: 7,
-      logo: "/images/school-achievements/logos/7.jpg",
+      logo: "/images/school-achievements/logos/sa7.png",
       title: "Excellence in Education Award",
       description:
         "Honored for excellence in educational delivery and student outcomes.",
     },
     {
       id: 8,
-      logo: "/images/school-achievements/logos/8.jpg",
+      logo: "/images/school-achievements/logos/sa8.png",
       title: "Sharjah Noble Quran & Sunnah",
       description:
         "Awarded for outstanding Islamic education and Quran teaching programs.",
