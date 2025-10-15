@@ -1,6 +1,5 @@
 "use client";
-
-import { useState } from "react";
+ 
 import Image from "next/image";
 import { motion } from "framer-motion";
 import SplitText from "@/components/SplitText";
@@ -21,6 +20,7 @@ export interface VMItem {
 export interface VisionMissionData {
   mainTitle: string;
   mainDescription: string;
+  image: string;
   VMItems: VMItem[];
 }
 
@@ -28,12 +28,9 @@ const VisionMissionSection = ({
   visionMissionItems,
 }: {
   visionMissionItems: VisionMissionData;
-}) => {
-  const [active, setActive] = useState(visionMissionItems.VMItems[0]?.id);
+}) => { 
 
-  const activeItem = visionMissionItems.VMItems.find(
-    (item) => item.id === active
-  );
+ 
 
   const containerRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
@@ -66,7 +63,7 @@ const VisionMissionSection = ({
     return () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
-  }, [activeItem]);
+  }, []);
 
   return (
     <section className="pt-10 xl:pt-[70px] 2xl:pt-[90px]">
@@ -95,7 +92,7 @@ const VisionMissionSection = ({
             {/* Cards */}
             <div className="space-y-[20px] xl:space-y-[25px] 2xl:space-y-[30px]">
               {visionMissionItems.VMItems.map((item,index) => (
-                <div key={item.id} className="flex items-stretch xl:gap-4 cursor-pointer group" onMouseEnter={() => setActive(item.id)} >
+                <div key={item.id} className="flex items-stretch xl:gap-4 cursor-pointer  " >
                   {/* Left icon box - fixed width, stretched height */}
                   <motion.div variants={moveUp(index * 0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className={`flex-shrink-0 w-fit xl:w-[125px] flex items-center justify-center rounded-[12px] transition-colors duration-300  ${index === 0 ? 'bg-[#DDF7FF]' : 'bg-[#F5EBFF]'} group p-5 xl:py-0`}
                   >
@@ -117,15 +114,15 @@ const VisionMissionSection = ({
           </div>
           {/* Right Image */}
           <div className="relative w-full h-[300px]  md:h-auto rounded-[12px] overflow-hidden" ref={imageRef}>
-            {activeItem && (
-              <Image src={activeItem.image} alt={activeItem.title} fill className="object-cover  transition-all duration-500"/>
-            )}
+          
+              <Image src={visionMissionItems.image} alt={'visionMissionItems.title'} fill className="object-cover  transition-all duration-500"/>
+          
             <motion.div ref={overlayRef}
               className="absolute bottom-0 w-full h-[60%] bg-gradient-to-b from-black/0 to-[#42BADCC9]/79"
               initial={{ y: "100%" }}
               animate={{ y: "0%" }}
               transition={{ duration: 0.4, ease: "easeInOut" }}
-              key={active}
+            
             />
           </div>
         </div>

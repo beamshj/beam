@@ -6,6 +6,7 @@ import Select from "react-select";
 import { motion } from "framer-motion";
 import Pagination from "../../Common/Pagination";
 import { moveUp } from "../../motionVarients";
+import Link from "next/link";
 
 interface BlogItem {
   image: string;
@@ -133,12 +134,14 @@ export default function BlogList({ data }: { data: BlogItem[] }) {
         {/* Blog Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-[22px] gap-y-[22px] xl:gap-x-[33px] xl:gap-y-[33px] mt-5 xl:mt-[65px]">
           {currentBlogs.map((blog, index) => (
-            <motion.div
+          
+          <div key={index}>
+      <Link href={`/news-&-media/blog/blog-details`}>
+              <motion.div
               variants={moveUp(index * 0.1)}
               initial="hidden"
               whileInView="show"
-              viewport={{ once: false, amount: 0.2 }}
-              key={index}
+              viewport={{ once: false, amount: 0.2 }} 
               className="rounded-[12px] relative overflow-hidden h-full xl:h-[500px] 2xl:h-[551px] border border-bdrcolor flex flex-col group"
             >
               {/* Sliding Gradient from bottom */}
@@ -197,6 +200,8 @@ export default function BlogList({ data }: { data: BlogItem[] }) {
                 </div>
               </div>
             </motion.div>
+            </Link>
+          </div>
           ))}
         </div>
 

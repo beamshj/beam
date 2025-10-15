@@ -1,7 +1,7 @@
 import InnerBanner from "../Common/InnerBanner";
-import Main from "./sections/Main";
+import Main from "../AccrAffil/sections/Main";
 import { accrData } from "./data";
-import DataTab from "./sections/DataTab";
+import DataTab from "../AccrAffil/sections/DataTab";
 const AccrAffil = () => {
   return ( 
    <>

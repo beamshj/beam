@@ -46,6 +46,7 @@ const Comments = ({ commentsData }: { commentsData: commentsData }) => {
                     to={{ opacity: 1, y: 0 }}
                     threshold={0.1}
                     rootMargin="-100px"
+                    textAlign="left"
                   />
                   {index < commentsData.title.split(/<br\s*\/?>/gi).length - 1 && <br />}
                 </div>

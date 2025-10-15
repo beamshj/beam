@@ -47,7 +47,7 @@ const GuidedVision = ({ visionData }: { visionData: visionData }) => {
                   const isPlaying = activeVideoIndex === index;
 
                   return (
-                    <motion.div variants={moveUp(index * 0.2)} initial="hidden" whileInView="show" viewport={{amount: 0.1, once: true}} key={index} className="relative w-full h-[250px] md:h-[480px] rounded-[12px] overflow-hidden flex-grow">
+                    <motion.div variants={moveUp(index * 0.2)} initial="hidden" whileInView="show" viewport={{amount: 0.1, once: true}} key={index} className="relative w-full h-[300px] md:h-[480px] rounded-[12px] overflow-hidden flex-grow">
                       {/* Background image */}
                       <Image
                         src={item.image}
@@ -71,7 +71,7 @@ const GuidedVision = ({ visionData }: { visionData: visionData }) => {
                         animate={{ y: "0%" }}
                         transition={{ duration: 0.4, ease: "easeInOut" }}
                     >
-                     <div className="absolute bottom-7 left-7  flex flex-col gap-2 ">
+                     <div className="absolute bottom-4 md:bottom-7 px-4 md:px-7  flex flex-col gap-2 ">
                      <p className="text-white text-[1.3rem] md:text-md xl:text-lg 2xl:text-xl font-light  leading-[1.18] lettersp-1">{visionData.items[index].name}</p>
                      <p className="text-[#E0E0E0]">{visionData.items[index].designation}</p>
                      </div>
@@ -83,7 +83,7 @@ const GuidedVision = ({ visionData }: { visionData: visionData }) => {
                           initial={{ scale: 0 }}
                           animate={{ scale: 1 }}
                           transition={{ duration: 0.4, ease: "easeInOut" }}
-                          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer z-10"
+                          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer z-10 w-10 h-10 md:w-16 md:h-16   xl:w-[90px] xl:h-[90px]"
                           onClick={() => setActiveVideoIndex(index)}
                         >
                           <Image

@@ -4,6 +4,7 @@ import SplitText from "@/components/SplitText";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { moveUp } from "../../motionVarients";
+import Link from "next/link";
 interface BlogItem {
   image: string;
   title: string;
@@ -48,6 +49,7 @@ export default function LatestBlogs({ data }: { data: BlogItem[] }) {
               key={idx}
               className="relative w-full h-[280px] md:h-[380px] xl:h-[470px] 2xl:h-[511px] 2xl:w-[743px] rounded-[12px] overflow-hidden cursor-pointer group"
             >
+            <Link href={`/news-&-media/blog/blog-details`}>
               {/* Main Image */}
               <Image
                 src={item.image || "/images/fallback.jpg"}
@@ -108,6 +110,7 @@ export default function LatestBlogs({ data }: { data: BlogItem[] }) {
                   </button>
                 </div>
               </div>
+            </Link>
             </motion.div>
           ))}
         </div>
