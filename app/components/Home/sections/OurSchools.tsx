@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { schoolData } from "@/app/data/ourSchools";
 import Image from "next/image";
 import "swiper/css";
@@ -30,6 +30,17 @@ const Select = dynamic<SelectProps<OptionType, false, GroupBase<OptionType>>>(
 type OptionType = { value: string; label: string };
 
 const OurSchools = () => {
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 1024); // lg breakpoint = 1024px
+    };
+    handleResize(); // run once
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const [selectedCurriculum, setSelectedCurriculum] = useState("all");
   const [selectedLocation, setSelectedLocation] = useState("");
 
@@ -72,12 +83,18 @@ const OurSchools = () => {
   ];
 
   const customStyles: StylesConfig<OptionType, false> = {
-    control: (provided) => ({
+    control: (provided, state) => ({
       ...provided,
       borderRadius: "50px",
-      borderColor: "#d1d5db",
-      padding: "2px 8px",
-      minHeight: "40px",
+      borderColor: state.isFocused ? "#12586C" : "#d1d5db",
+      boxShadow: state.isFocused ? "0 0 0 1px #12586C" : "none",
+      "&:hover": {
+        borderColor: "#12586C",
+      },
+      letterSpacing: isSmallScreen ? "-0.1px" : "0px",
+      fontSize: isSmallScreen ? "12px" : "18px",
+      fontWeight: 300,
+      padding: isSmallScreen ? "0px 4px" : "3px 12px",
     }),
     option: (provided, state) => ({
       ...provided,
@@ -86,9 +103,21 @@ const OurSchools = () => {
       fontWeight: 300,
       cursor: "pointer",
     }),
+    singleValue: (provided) => ({
+      ...provided,
+      fontWeight: 300,
+    }),
+    placeholder: (provided) => ({
+      ...provided,
+      fontWeight: 300,
+    }),
     dropdownIndicator: (provided) => ({
       ...provided,
-      padding: 4,
+      padding: 1,
+      width: "20px",
+      height: "20px",
+      color: "#42BADC",
+      fontWeight: 300,
     }),
     indicatorSeparator: () => ({ display: "none" }),
     menu: (provided) => ({
@@ -196,7 +225,7 @@ const OurSchools = () => {
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true, amount: 0.2 }}
-                className="w-full lg:max-w-[348px] z-10"
+                className="w-[160px] lg:w-[248px] 2xl:w-[348px] z-10"
               >
                 <Select
                   value={
