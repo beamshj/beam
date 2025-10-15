@@ -49,7 +49,7 @@ const ProudMoments: React.FC<ProudMomentsProps> = ({ data }) => {
         <div className="absolute top-0 left-0 w-full h-full z-20 bg-[linear-gradient(90deg,_rgba(0,0,0,0.9)_9%,_rgba(0,0,0,0)_84%)]"></div>
 
         {/* Content */}
-        <div className="relative z-30 h-full flex items-end left-10 xl:left-[97px] bottom-10  xl:bottom-[74px]">
+        <div className="relative z-30 h-full flex items-end px-5 md:px-10 xl:px-[97px] bottom-5 md:bottom-10  xl:bottom-[74px]">
           <motion.div
             className="flex flex-col w-full"
             variants={container}
@@ -80,7 +80,7 @@ const ProudMoments: React.FC<ProudMomentsProps> = ({ data }) => {
             />
 
             <motion.div
-              className="flex items-center gap-5 text-white text-md md:text-lg 2xl:text-xl font-light justify-center md:justify-start"
+              className="flex items-center gap-3 md:gap-5 text-white text-md md:text-lg 2xl:text-xl font-light justify-start"
               variants={playFadeUp}
             >
               <span>Play</span>
@@ -90,7 +90,7 @@ const ProudMoments: React.FC<ProudMomentsProps> = ({ data }) => {
                 width={95}
                 height={95}
                 onClick={openPopup}
-                className="cursor-pointer w-15 h-15 xl:w-[95px] xl:h-[95px] transition-transform duration-300 hover:scale-105"
+                className="cursor-pointer w-10 h-10 md:w-15 md:h-15 xl:w-[95px] xl:h-[95px] transition-transform duration-300 hover:scale-105"
               />
               <span>Here</span>
             </motion.div>

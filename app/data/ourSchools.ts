@@ -70,74 +70,7 @@ export const schoolData = {
          ]
 
       },
-      {
-         id: 4,
-         img: '/images/beam-schools/ascs-maliha.png',
-         logo: '/images/beam-schools/logo/ascs-maliha.png',
-         title: 'American School of Creative Science',
-         curriculum: 'American Curriculum',
-         location: 'Maliha Road, Sharjah',
-         labels: [
-            {
-               label: 'Active Students', 
-               count: '4750', 
-            },
-            {
-               label: 'Nationalities',
-               count: '68',
-            },
-            {
-               label: 'Teachers',
-               count: '85',
-            }
-         ]
-
-      },
-      {
-         id: 5,
-         img: '/images/beam-schools/ascs-nas.png',
-         logo: '/images/beam-schools/logo/ascs-nas.svg',
-         title: 'American School of Creative Science',
-         curriculum: 'American Curriculum',
-         location: 'Nad Al Sheba, Dubai',
-         labels: [
-            {
-               label: 'Active Students', 
-               count: '3200', 
-            },
-            {
-               label: 'Nationalities',
-               count: '55',
-            },
-            {
-               label: 'Teachers',
-               count: '72',
-            }
-         ]
-
-      },
-      {
-         id: 6,
-         img: '/images/beam-schools/ascs-layyah.png',
-         logo: '/images/beam-schools/logo/ascs-layyah-logo.png',
-         title: 'American School of Creative Science',
-         curriculum: 'American Curriculum',
-         location: 'Al Layyah, Sharjah',
-         labels: [
-            {
-               label: 'Active Students', 
-               count: '2800', 
-            },
-            {
-               label: 'Nationalities',
-               count: '48',
-            },
-            {
-               label: 'Teachers',
-               count: '65',
-            }
-         ]
-
-      },
+       
+     
    ],
 }

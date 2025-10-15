@@ -84,7 +84,11 @@ const ContactForm: React.FC = () => {
             </motion.p>
             <div className="space-y-[17px] mt-[17px]">
               {/* First row */}
-              <div className="flex items-center gap-[20px]">
+              <motion.div className="flex items-center gap-[20px]"
+               variants={moveUp(0.5)}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true, amount: 0.2 }}>
                 <Image
                   src="/images/contact-us/icons/phone.svg"
                   alt="Location"
@@ -101,10 +105,14 @@ const ContactForm: React.FC = () => {
                 >
                   800 BEAM (2326)
                 </motion.p>
-              </div>
+              </motion.div>
 
               {/* Second row */}
-              <div className="flex items-center gap-[20px]">
+              <motion.div className="flex items-center gap-[20px]"
+               variants={moveUp(0.6)}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true, amount: 0.2 }}>
                 <Image
                   src="/images/contact-us/icons/email.svg"
                   alt="Mail"
@@ -122,7 +130,7 @@ const ContactForm: React.FC = () => {
                 >
                   enquiries@beam.co.ae
                 </motion.a>
-              </div>
+              </motion.div>
             </div>
           </div>
           <motion.div

@@ -63,7 +63,7 @@ const BeyondAcademics = ({
               return (
                 <div
                   key={index}
-                  className={` relative h-[549px] rounded-[12px] flex flex-col p-4 md:p-0 overflow-hidden transition-all ease-in-out duration-400  ${
+                  className={` relative h-[400px] lgh-[549px] rounded-[12px] flex flex-col p-4 md:p-0 overflow-hidden transition-all ease-in-out duration-400  ${
                     isActive ? "w-full md:w-[50%]" : "w-full  md:w-[25%]"
                   } group `}
                   style={{
@@ -81,7 +81,7 @@ const BeyondAcademics = ({
                   ></div>
 
                   <div
-                    className={`absolute  transition-all duration-400 top-[20px] right-[20px] xl:top-[40px] xl:right-[40px] p-2 bg-primary rounded-full w-[75px] h-[75px] flex items-center justify-center   ${
+                    className={`absolute  transition-all duration-400 top-[20px] right-[20px] xl:top-[40px] xl:right-[40px] p-2 bg-primary rounded-full w-12 h-12 lg:w-[75px] lg:h-[75px] flex items-center justify-center   ${
                       isActive ? "bg-white" : ""
                     }  `}
                   >

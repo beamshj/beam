@@ -17,7 +17,7 @@ export default function GmMessage({ data }: { data: GmMessageProps }) {
   const { title, intro, photo, name, designation, description } = data;
 
   return (
-    <section className="pb-12 md:pb-20 xl:pb-[135px] pt-10 xl:pt-25">
+    <section className="pb-12 md:pb-20 xl:pb-[135px] pt-12  md:pt-20 xl:pt-25">
       <div className="container mx-auto flex flex-col xl:flex-row xl:items-center justify-between gap-4 md:gap-12 xl:gap-[91px]">
         {/* Left Column */}
         <div className="w-full xl:max-w-[54%]">
@@ -31,7 +31,7 @@ export default function GmMessage({ data }: { data: GmMessageProps }) {
           <SplitText
             tag="h2"
             text={title}
-            className="text-lg md:text-xl xl:text-3xl 2xl:text-4xl leading-[1.1111] font-light text-black mb-3 xl:mb-[50px]"
+            className="text-lg md:text-xl xl:text-3xl 2xl:text-4xl leading-[1.1111] font-light text-black mb-6 xl:mb-[30px] 2xl:mb-[50px]"
             delay={100}
             duration={1}
             ease="power3.out"
@@ -81,7 +81,7 @@ export default function GmMessage({ data }: { data: GmMessageProps }) {
             </div>
           </div>
 
-          <div className="text-colorpara font-light text-sm leading-[1.526] space-y-3 2xl:space-y-7">
+          <div className="text-colorpara font-light text-sm leading-[1.526] space-y-3 2xl:space-y-7 mt-7 lg:mt-0">
             {intro.split("\n").map(
               (line, idx) =>
                 line.trim() && (

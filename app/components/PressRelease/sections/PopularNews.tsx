@@ -36,15 +36,15 @@ const PopularNews = ({ data }: { data: RecentNewsData }) => {
           className="chklast"
         >
           <Link href={`/news-&-media/news`}>
-          <div className="flex gap-5">
-            <div className="w-[130px] md:w-[171px]">
-              <div className="relative h-full">
+          <div className="flex gap-5 group">
+            <div className="w-[130px] md:w-[171px] ">
+              <div className="relative h-full rounded-lg overflow-hidden">
                 <Image
                   src={item.image}
                   alt=""
                   width={486}
                   height={301}
-                  className="rounded-lg img-fluid object-cover w-full h-full max-h-[171px]"
+                  className=" img-fluid object-cover w-full h-full max-h-[171px] group-hover:scale-105 transition-transform duration-500 ease-in-out"
                 />
                 <div className="absolute inset-0 rounded-lg bg-[linear-gradient(180.12deg,rgba(0,0,0,0)_50%,rgba(0,0,0,0.75)_99.9%)] "></div>
               </div>
@@ -61,7 +61,7 @@ const PopularNews = ({ data }: { data: RecentNewsData }) => {
               </div>
               <div
                 className="mt-4 p-1 flex items-center justify-center bg-primary w-[27px] h-[27px] rounded-full transition-transform
-                                 duration-300  rotate-45"
+                              group-hover:translate-x-1    duration-300  rotate-45"
               >
                 <Image
                   src="/assets/arrow.svg"

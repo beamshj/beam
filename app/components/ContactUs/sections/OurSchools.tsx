@@ -56,7 +56,7 @@ export default function OurSchools({ data }: { data: OurSchoolsProps }) {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.2 }}
-          className="flex flex-wrap xl:flex-row gap-[19px] justify-between"
+          className="flex flex-wrap lg:flex-row gap-6 lg:gap-[1%] justify-between"
         >
           {schools.map((school, i) => {
             const isActive = activeIndex === i;
@@ -68,7 +68,7 @@ export default function OurSchools({ data }: { data: OurSchoolsProps }) {
                 onMouseLeave={() => setActiveIndex(0)}
                 animate={{
                   width: "100%",
-                  maxWidth: isActive ? "850px" : "144px",
+                  maxWidth: isActive ? "56%" : "10%",
                 }}
                 transition={{
                   duration: 0.6,
@@ -133,7 +133,7 @@ export default function OurSchools({ data }: { data: OurSchoolsProps }) {
                 {/* Active / Inactive Content */}
                 {isActive ? (
                   // ACTIVE CARD (expanded)
-                  <div className="absolute bottom-[40px] left-5 xl:left-[40px] xl:right-[40px] flex flex-col xl:flex-row justify-between xl:items-end text-white z-10 gap-6 xl:gap-0">
+                  <div className="absolute w-full bottom-5 xl:bottom-10 px-5  xl:px-10 flex flex-row items-end justify-between xl:items-end text-white z-10 gap-2  md:gap-6 xl:gap-0">
                     {/* Left content */}
                     <motion.div
                       initial={{ opacity: 0, x: 80 }}
@@ -157,8 +157,8 @@ export default function OurSchools({ data }: { data: OurSchoolsProps }) {
                     </motion.div>
 
                     {/* Right arrow button */}
-                    <div className="mt-4 md:mt-0">
-                      <span className="w-12 h-12 xl:w-[74px] xl:h-[74px] flex items-center justify-center border border-white rounded-full">
+                    <div className="">
+                      <span className="w-8 h-8 md:w-12 md:h-12 xl:w-[74px] xl:h-[74px] flex items-center justify-center border border-white rounded-full">
                         <Image
                           src="/images/arrow-primary.svg"
                           alt="arrow"
@@ -172,7 +172,7 @@ export default function OurSchools({ data }: { data: OurSchoolsProps }) {
                 ) : (
                   // INACTIVE CARD: only arrow centered at bottom
                   <div className="absolute bottom-[40px] left-5 xl:left-1/2 xl:-translate-x-1/2 z-10">
-                    <span className="w-[74px] h-[74px] flex items-center justify-center border border-white rounded-full">
+                    <span className="w-14 h-14 xl:w-[74px] xl:h-[74px] flex items-center justify-center border border-white rounded-full">
                       <Image
                         src="/images/arrow-primary.svg"
                         alt="arrow"

@@ -20,11 +20,11 @@ export default function FounderMessage({
   const { title, description, photo, name, designation } = data;
 
   return (
-    <section className="pb-12 md:pb-20 xl:pb-[135px] pt-10 xl:pt-0">
+    <section className="pb-12 md:pb-20 xl:pb-[135px] pt-12 md:pt-20 xl:pt-0">
       <div className="container mx-auto flex flex-col md:flex-row md:items-center justify-between xl:gap-[91px]">
         {/* Left Column */}
         <div className="w-full xl:max-w-[55%] order-2 xl:order-1">
-          <h2 className="text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl leading-[1.1111] font-light text-black mb-3 xl:mb-[30px] 2xl:mb-[50px]">
+          <h2 className="text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl leading-[1.1111] font-light text-black mb-6 xl:mb-[30px] 2xl:mb-[50px]">
             {title.split("\n").map((line, idx) => (
               <span key={idx} className="xl:flex">
                 <SplitText
