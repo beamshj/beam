@@ -18,7 +18,16 @@ import {
   cardVariants,
 } from "@/public/assets/FramerAnimation/animation";
 import { moveUp } from "../../motionVarients";
-import Select from "react-select";
+import { StylesConfig } from "react-select";
+import dynamic from "next/dynamic";
+import type { Props as SelectProps } from "react-select";
+import { GroupBase } from "react-select";
+
+const Select = dynamic<SelectProps<OptionType, false, GroupBase<OptionType>>>(
+  () => import("react-select"),
+  { ssr: false }
+);
+type OptionType = { value: string; label: string };
 
 const OurSchools = () => {
   const [selectedCurriculum, setSelectedCurriculum] = useState("all");
@@ -53,40 +62,43 @@ const OurSchools = () => {
     });
   }, [selectedCurriculum, selectedLocation]);
 
-  // Convert your locations to react-select format
-  const locationOptions = locations.map((loc) => ({
-    value: loc,
-    label: loc,
-  }));
+  // locations
+  const locationOptions: OptionType[] = [
+    { value: "", label: "Location" },
+    ...locations.map((loc) => ({
+      value: loc,
+      label: loc,
+    })),
+  ];
 
-  const customStyles = {
-    control: (provided: any) => ({
+  const customStyles: StylesConfig<OptionType, false> = {
+    control: (provided) => ({
       ...provided,
       borderRadius: "50px",
       borderColor: "#d1d5db",
       padding: "2px 8px",
       minHeight: "40px",
     }),
-    option: (provided: any, state: any) => ({
+    option: (provided, state) => ({
       ...provided,
       backgroundColor: state.isFocused ? "#42BADC" : "white",
       color: state.isFocused ? "white" : "black",
       fontWeight: 300,
       cursor: "pointer",
     }),
-    dropdownIndicator: (provided: any) => ({
+    dropdownIndicator: (provided) => ({
       ...provided,
       padding: 4,
     }),
     indicatorSeparator: () => ({ display: "none" }),
-    menu: (provided: any) => ({
+    menu: (provided) => ({
       ...provided,
       borderRadius: "12px",
       overflow: "hidden",
     }),
-    menuList: (provided: any) => ({
+    menuList: (provided) => ({
       ...provided,
-      padding: "0px",
+      padding: 0,
     }),
   };
 
@@ -187,13 +199,17 @@ const OurSchools = () => {
                 className="w-full lg:max-w-[348px] z-10"
               >
                 <Select
-                  value={locationOptions.find(
-                    (option) => option.value === selectedLocation
-                  )}
-                  onChange={(option: any) => setSelectedLocation(option.value)}
+                  value={
+                    locationOptions.find(
+                      (option) => option.value === selectedLocation
+                    ) ?? locationOptions[0]
+                  }
+                  onChange={(option) =>
+                    setSelectedLocation(option?.value ?? "")
+                  }
                   options={locationOptions}
                   styles={customStyles}
-                  placeholder="Select Location"
+                  placeholder="Location"
                 />
               </motion.div>
             </div>
