@@ -78,7 +78,8 @@ const SchoolCards = ({ schoolData }: { schoolData: SchoolCardsPageProps }) => {
       <div className="container">
         {/* Title and Description */}
         <div className="mb-5 lg:mb-10 xl:mb-[50px]">
-          <h1 className="text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl leading-[1.25] lg:leading-[1.111] font-light mb-2 xl:mb-[30px] 2xl:mb-[50px] text-black max-w-[91%] lettersp-2">
+          <h1 className="text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl leading-[1.25] lg:leading-[1.111] font-light mb-2 xl:mb-[30px] 2xl:mb-[50px] text-black
+           max-w-[91ch] lettersp-2">
             <SplitText
               tag="span"
               text={title}
@@ -92,12 +93,12 @@ const SchoolCards = ({ schoolData }: { schoolData: SchoolCardsPageProps }) => {
               rootMargin="-10px"
               textAlign="left"
             />
-          </h1>
-          <span className="text-sm text-light leading-[1.52] text-colorpara xl:max-w-[89%]">
+          </h1> 
             <SplitText
-              tag="span"
+              tag="p"
               text={description}
               delay={100}
+              className="text-sm font-light leading-[1.52] text-colorpara xl:max-w-[93ch]"
               duration={0.6}
               ease="power3.out"
               splitType="lines"
@@ -106,8 +107,7 @@ const SchoolCards = ({ schoolData }: { schoolData: SchoolCardsPageProps }) => {
               threshold={0.1}
               rootMargin="-10px"
               textAlign="left"
-            />
-          </span>
+            /> 
         </div>
 
         {/* Filters */}
@@ -120,7 +120,7 @@ const SchoolCards = ({ schoolData }: { schoolData: SchoolCardsPageProps }) => {
               whileInView="show"
               viewport={{ once: true, amount: 0.2 }}
               onClick={() => setSelectedCurriculum("british")}
-              className={`px-[20px] py-[11px] border rounded-[50px] text-xs font-light  uppercase  ${
+              className={`px-[20px] py-[13px] border rounded-[50px] text-xs font-light cursor-pointer uppercase  ${
                 selectedCurriculum === "british"
                   ? "bg-[#C9F3FF] text-black border-[#12586C]"
                   : "bg-white text-[#666666] hover:bg-gray-200 border-bdrcolor"
@@ -134,7 +134,7 @@ const SchoolCards = ({ schoolData }: { schoolData: SchoolCardsPageProps }) => {
               whileInView="show"
               viewport={{ once: true, amount: 0.2 }}
               onClick={() => setSelectedCurriculum("american")}
-              className={`px-[20px] py-[11px] border rounded-[50px] text-xs font-light uppercase ${
+              className={`px-[20px] py-[13px] border rounded-[50px] text-xs cursor-pointer font-light uppercase ${
                 selectedCurriculum === "american"
                   ? "bg-[#C9F3FF] text-black border-[#12586C]"
                   : "bg-white text-[#666666] hover:bg-gray-200 border-bdrcolor"
@@ -145,14 +145,14 @@ const SchoolCards = ({ schoolData }: { schoolData: SchoolCardsPageProps }) => {
           </div>
 
           {/* Right Dropdown */}
-          <div className="relative">
+          <div className="relative w-full md:w-fit">
             <motion.button
               variants={moveUp(0.6)}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, amount: 0.2 }}
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              className="flex items-center px-[20px] py-[11px] border border-[#12586C] bg-[#C9F3FF] rounded-[50px] text-[#626262] text-xs font-light min-w-[180px] justify-between"
+              className="w-full md:w-fit flex items-center px-[20px] py-[10px] border border-[#12586C] bg-[#C9F3FF] rounded-[50px] text-[#626262] text-sm font-light min-w-[180px] justify-between"
             >
               <span>{selectedLocation}</span>
               <ChevronDown
@@ -163,23 +163,30 @@ const SchoolCards = ({ schoolData }: { schoolData: SchoolCardsPageProps }) => {
             </motion.button>
 
             {isDropdownOpen && (
-              <div className="absolute top-full mt-1 right-0 bg-white border border-gray-200 rounded-[12px] shadow-lg min-w-[180px] z-10 overflow-hidden transition-colors duration-300">
-                {locations.map((location, idx) => (
-                  <motion.button
-                    variants={moveUp(idx * 0.05)}
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ once: true }}
-                    key={location}
-                    onClick={() => {
-                      setSelectedLocation(location);
-                      setIsDropdownOpen(false);
-                    }}
-                    className="w-full text-left px-4 py-3.5 hover:bg-primary text-sm text-black hover:text-white font-light rounded-[12px] transition-colors duration-300"
-                  >
-                    {location}
-                  </motion.button>
-                ))}
+              <div className="absolute top-full mt-1 right-0 bg-white border border-gray-200 rounded-[12px] shadow-lg min-w-full lg:min-w-[180px] z-10 overflow-hidden transition-colors duration-300">
+              
+                <div className="flex flex-col gap-1">
+      {locations.map((location, idx) => (
+        <motion.div
+          key={idx}
+          variants={moveUp(idx * 0.05)} // small stagger
+          initial="hidden"
+          animate="show"
+        >
+          <button
+            onClick={() => {
+              setSelectedLocation(location);
+              setIsDropdownOpen(false);
+            }}
+            className="w-full text-left px-3 py-2 text-sm font-light rounded-[12px]
+                       text-black hover:text-white hover:bg-primary
+                       transition-all duration-300 ease-in-out"
+          >
+            {location}
+          </button>
+        </motion.div>
+      ))}
+    </div>
               </div>
             )}
           </div>

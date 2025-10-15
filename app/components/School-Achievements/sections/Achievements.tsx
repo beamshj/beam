@@ -44,7 +44,7 @@ const SchoolAchievements: React.FC<SchoolAchievementsProps> = ({ data }) => {
             <SplitText
               tag="span"
               text={subtitle}
-              className="text-sm font-light text-colorpara leading-[1.52] max-w-[63%]"
+              className="text-sm font-light text-colorpara leading-[1.52] max-w-[72ch]"
               delay={200}
               duration={0.6}
               ease="power3.out"
@@ -58,7 +58,7 @@ const SchoolAchievements: React.FC<SchoolAchievementsProps> = ({ data }) => {
         </div>
 
         {/* Achievements Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8 justify-between">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8 justify-between">
           {achievements.map((achievement, index) => (
             <motion.div
               key={achievement.id}
@@ -70,12 +70,13 @@ const SchoolAchievements: React.FC<SchoolAchievementsProps> = ({ data }) => {
             >
               {/* Default State - Logo and Title */}
               <div className="flex flex-col items-center justify-center transition-opacity duration-300 group-hover:opacity-0">
-                <div className="mb-[20px] relative w-15 h-15 xl:w-[290px] xl:h-[108px]">
+                <div className="mb-[20px] relative  ">
                   <Image
                     src={achievement.logo}
-                    alt={achievement.title}
-                    fill
-                    className="object-contain w-15 h-auto"
+                    alt={achievement.title} 
+                   width={290}
+                   height={108}
+                    className="object-contain w-full h-auto"
                   />
                 </div>
                 <h3 className="text-md md:text-lg xl:text-xl font-light leading-[1.2] text-black lettersp-1">
@@ -85,15 +86,17 @@ const SchoolAchievements: React.FC<SchoolAchievementsProps> = ({ data }) => {
 
               {/* Hover State - Gradient Background and Description */}
               <div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-[40px]"
+                className="absolute  inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-[40px]"
                 style={{
                   background:
                     "linear-gradient(211deg, #42BADC 54.06%, rgba(126, 90, 163, 0.1) 122.85%)",
                 }}
               >
-                <p className="text-white text-sm leading-[1.52]">
+                <div className="flex h-full items-end">
+                  <p className="text-white text-sm leading-[1.52]">
                   {achievement.description}
                 </p>
+                </div>
               </div>
             </motion.div>
           ))}

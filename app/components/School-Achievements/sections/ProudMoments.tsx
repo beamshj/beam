@@ -28,8 +28,9 @@ const ProudMoments: React.FC<ProudMomentsProps> = ({ data }) => {
   const closePopup = () => setIsOpen(false);
 
   return (
-    <div className="container py-10 xl:py-20 2xl:py-[135px] border-b border-bdrcolor overflow-hidden">
-      <motion.div
+    <div className="container  overflow-hidden">
+      <div className="border-b border-bdrcolor py-10 xl:py-20 2xl:py-[135px] ">
+        <motion.div
         className="relative w-full h-[300px]  md:h-[450px] xl:h-[600px] 2xl:h-[739px] overflow-hidden rounded-[12px]"
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -134,6 +135,7 @@ const ProudMoments: React.FC<ProudMomentsProps> = ({ data }) => {
           )}
         </AnimatePresence>
       </motion.div>
+      </div>
     </div>
   );
 };
