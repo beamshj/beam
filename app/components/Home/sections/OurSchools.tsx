@@ -11,7 +11,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { motion } from "framer-motion";
 // Optional: Add modules if needed
-import { Navigation, Pagination } from "swiper/modules";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import SplitText from "@/components/SplitText";
 import {
   fadeUp,
@@ -245,10 +245,14 @@ const OurSchools = () => {
           </div>
           <div>
             <Swiper
-              modules={[Navigation, Pagination]}
+              modules={[Navigation,Autoplay, Pagination]}
               // spaceBetween={20}
               slidesPerView={1}
               // navigation
+              autoplay={{
+                          delay: 3000,
+                          disableOnInteraction: false,
+                        }}
               pagination={{
                 clickable: true,
                 el: ".cus-pagination",
