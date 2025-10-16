@@ -169,7 +169,7 @@ const ContactForm: React.FC = () => {
                 type="text"
                 placeholder="Enter Your First Name"
                 {...register("firstName")}
-                className="w-full border-b border-colorpara py-2 xl:py-[23px] focus:outline-none placeholder:text-colorpara text-sm font-light"
+                className="w-full border-b text-colorpara border-colorpara py-2 xl:py-[23px] focus:outline-none placeholder:text-colorpara text-sm font-light"
               />
               <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
                 {errors.firstName?.message || ""}
@@ -187,7 +187,7 @@ const ContactForm: React.FC = () => {
                 type="text"
                 placeholder="Enter Second Name"
                 {...register("lastName")}
-                className="w-full border-b border-colorpara py-2 xl:py-[23px] focus:outline-none placeholder:text-colorpara text-sm font-light"
+                className="w-full border-b text-colorpara border-colorpara py-2 xl:py-[23px] focus:outline-none placeholder:text-colorpara text-sm font-light"
               />
               <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
                 {errors.lastName?.message || ""}
@@ -207,7 +207,7 @@ const ContactForm: React.FC = () => {
                 type="email"
                 placeholder="Enter Your Email ID"
                 {...register("email")}
-                className="w-full border-b border-colorpara py-2 xl:py-[23px] focus:outline-none placeholder:text-colorpara text-sm font-light"
+                className="w-full border-b text-colorpara border-colorpara py-2 xl:py-[23px] focus:outline-none placeholder:text-colorpara text-sm font-light"
               />
               <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
                 {errors.email?.message || ""}
@@ -225,7 +225,7 @@ const ContactForm: React.FC = () => {
                 type="text"
                 placeholder="Enter Your Phone Number"
                 {...register("phone")}
-                className="w-full border-b border-colorpara py-2 xl:py-[23px] focus:outline-none placeholder:text-colorpara text-sm font-light"
+                className="w-full border-b text-colorpara border-colorpara py-2 xl:py-[23px] focus:outline-none placeholder:text-colorpara text-sm font-light"
               />
               <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
                 {errors.phone?.message || ""}
@@ -242,7 +242,7 @@ const ContactForm: React.FC = () => {
           >
             <select
               {...register("purpose")}
-              className="w-full border-b border-colorpara py-2 xl:py-[23px] pr-10 focus:outline-none bg-white text-colorpara text-sm font-light appearance-none"
+              className="w-full border-b text-colorpara border-colorpara py-2 xl:py-[23px] pr-10 focus:outline-none bg-white text-colorpara text-sm font-light appearance-none"
             >
               <option value="">Purpose of enquiry</option>
               <option value="admission">Admission</option>
@@ -277,7 +277,7 @@ const ContactForm: React.FC = () => {
               rows={4}
               placeholder="Tell us more"
               {...register("message")}
-              className="w-full border-b border-colorpara py-8 xl:py-[23px] focus:outline-none resize-none placeholder:text-colorpara text-sm font-light"
+              className="w-full border-b text-colorpara border-colorpara py-8 xl:py-[23px] focus:outline-none resize-none placeholder:text-colorpara text-sm font-light"
             />
             {errors.message && (
               <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
