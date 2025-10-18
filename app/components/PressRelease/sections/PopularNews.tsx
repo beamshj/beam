@@ -23,10 +23,16 @@ export interface RecentNewsData {
   }[];
 }
 
-const PopularNews = ({ data }: { data: RecentNewsData }) => {
-  return (
+const PopularNews = ({ data, selectedCategory }: { data: RecentNewsData; selectedCategory: string }) => {
+
+ const filteredPopularnews = data.popularnews.filter(
+    (popularnews) => popularnews.category === selectedCategory
+  );
+    return (
+    <>
+    {filteredPopularnews.length > 0 ? (
     <div className="finsd">
-      {data.popularnews.slice(0, 3).map((item, index) => (
+      {filteredPopularnews.slice(0, 3).map((item, index) => (
         <motion.div
           variants={moveUp(index * 0.2)}
           initial="hidden"
@@ -79,6 +85,10 @@ const PopularNews = ({ data }: { data: RecentNewsData }) => {
         </motion.div>
       ))}
     </div>
+    ) : (
+      <p className="text-center text-[14px] font-light text-colorpara">No popular news found for the selected category.</p>
+    )}
+    </>
   );
 };
 

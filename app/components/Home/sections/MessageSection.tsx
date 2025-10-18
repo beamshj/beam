@@ -25,7 +25,7 @@ const MessageSection = () => {
           <h2>
             <SplitText
             tag="span" text={messageSectionData.heading}
-              className="text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl text-black  font-light "
+              className="text-md lg:text-2xl xl:text-3xl 2xl:text-4xl text-black  font-light "
             delay={100}
             duration={0.6}
             ease="power3.out"
@@ -60,7 +60,7 @@ const MessageSection = () => {
       </div>
       <div className="container">
         <div className="grid grid-cols-1 lg:grid-cols-2  ">
-          <div className="py-8 md:py-15 xl:py-[120px] 2xl:py-[142px]">
+          <div className="py-8 lg:py-15 xl:py-[120px] 2xl:py-[142px]">
             <motion.div
               className="flex flex-col justify-center"
               variants={containerVariants}
@@ -73,19 +73,19 @@ const MessageSection = () => {
                 className="border-b border-[#D3D3D3] pb-5 hidden lg:block w-[80%] lg:w-[75%]"
                 variants={fadeSide}
               >
-                <h2 className="text-lg 2xl:text-xl font-light">
+                <h2 className="text-md 2xl:text-xl font-light">
                   {messageSectionData.heading}
                 </h2>
               </motion.div>
 
               {/* h1 */}
               <motion.div
-                className="pt-0 pb-4 xl:py-7 2xl:pt-[56px] 2xl:pb-[44px]"
+                className="lg:pt-4 pb-4 xl:py-7 2xl:pt-[56px] 2xl:pb-[44px]"
                 variants={fadeTop}
               >
-                <h2>
+                <div>
                  <SplitText
-                 tag="span" text={messageSectionData.title}
+                 tag="h2" text={messageSectionData.title}
                  className="text-xl xl:text-2xl 2xl:text-4xl text-black leading-[1.2] xl:leading-[1.1] font-light 2xl:max-w-[82%] lettersp-4"
                  delay={100}
                  duration={0.6}
@@ -97,7 +97,7 @@ const MessageSection = () => {
                  rootMargin="-100px"
                  textAlign="left"
                />
-                </h2>
+                </div>
               </motion.div>
 
               {/* paragraphs */}

@@ -8,22 +8,27 @@ export const BannerData = {
 export const fsData = {
   title: "Fostering Strong Morals Through Faith",
   description: `Creative Science Schools blend global curricula with a strong focus on Arabic, Islamic Studies, Quran programs, and social responsibility.`,
-  image: "/images/school-uniqueness/main.jpg",
+ 
   items:[
     { 
-      title:"BEAM hosts Quran and inter-school competitions." 
+      title:"BEAM hosts Quran and inter-school competitions." ,
+      image: "/images/school-uniqueness/main.jpg",
     }, 
     { 
-      title:"Recitation workshops for students" 
+      title:"Recitation workshops for students" ,
+      image: "/images/school-uniqueness/main2.jpg",
     }, 
     { 
-      title:"Quran memorization scholarships" 
+      title:"Quran memorization scholarships" ,
+      image: "/images/school-uniqueness/main3.jpg",
     }, 
     { 
-      title:"Red Crescent students drive community service." 
+      title:"Red Crescent students drive community service." ,
+      image: "/images/school-uniqueness/main4.jpg",
     }, 
     { 
-      title:"Awarded by Sharjah Quran & Sunnah Est." 
+      title:"Awarded by Sharjah Quran & Sunnah Est." ,
+      image: "/images/school-uniqueness/main5.jpg",
     }, 
 
     

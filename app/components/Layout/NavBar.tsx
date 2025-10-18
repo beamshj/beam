@@ -133,19 +133,19 @@ const NavBar = () => {
       </ul>
     </div>
             </div>
-            <div className="flex gap-5">
-              <div className="hidden lg:flex items-center">
+            <div className="flex gap-2  sm:gap-5">
+              <div className="flex items-center">
                 <Link href={"/contact-us"}>
                     <button
                       className="uppercase border-primary border-[1px] px-3 py-1 flex items-center gap-2 rounded-[50px]
-                                text-xs font-light cursor-pointer text-black transition-all duration-300 group
+                                text-[10px] sm:text-xs font-light cursor-pointer text-black transition-all duration-300 group
                                 hover:bg-primary hover:text-white"
                     >
                       <span className="transition-transform duration-300 group-hover:translate-x-1">
                         Register Interest
                       </span>
                       <span
-                        className="bg-primary rounded-full p-2 w-[27px] h-[27px] flex items-center justify-center
+                        className="hidden sm:flex bg-primary rounded-full p-2 w-[27px] h-[27px]  items-center justify-center
                                   transition-all duration-300 group-hover:bg-white"
                       >
                         <Image
@@ -167,7 +167,7 @@ const NavBar = () => {
               >
                 <div
   onClick={() => setIsMenuOpen(true)}
-  className="rounded-[10px] bg-[#42BADC] h-full flex items-center justify-center px-[30px] xl:px-[35px] gap-3 cursor-pointer 
+  className="rounded-[10px] bg-[#42BADC] h-full flex items-center justify-center px-3 sm:px-[30px] xl:px-[35px] gap-3 cursor-pointer 
              transition-all duration-300 hover:bg-[#23ABD2] group"
 >
   <div className="flex gap-[6px] flex-col w-[24px] relative transition-all duration-300">

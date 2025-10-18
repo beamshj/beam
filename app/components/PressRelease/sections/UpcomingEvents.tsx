@@ -30,10 +30,15 @@ export interface RecentNewsData {
   }[];
 }
 
-const UpcomingEvents = ({ data }: { data: RecentNewsData }) => {
-  return (
+const UpcomingEvents = ({ data, selectedCategory }: { data: RecentNewsData; selectedCategory: string }) => {
+ const filteredEvents = data.upcomingData.filter(
+    (event) => event.category === selectedCategory
+  );
+   return (
+    <>
+    {filteredEvents.length > 0 ? (
     <div className="finsd">
-      {data.upcomingData.slice(0, 3).map((item, index) => (
+      {filteredEvents.slice(0, 3).map((item, index) => (
         <motion.div
           variants={moveUp(index * 0.2)}
           initial="hidden"
@@ -83,6 +88,10 @@ const UpcomingEvents = ({ data }: { data: RecentNewsData }) => {
         </motion.div>
       ))}
     </div>
+    ) : (
+      <p className="text-center text-[14px] font-light text-colorpara">No upcoming events found for the selected category.</p>
+    )}
+    </>
   );
 };
 

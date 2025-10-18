@@ -1,21 +1,28 @@
 "use client";
 
-import Image from "next/image";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion, easeIn, easeOut, easeInOut } from "framer-motion";
 import SplitText from "@/components/SplitText";
 import { moveUp } from "../../motionVarients";
+import { useState } from "react";
 
 export interface VMItem {
   title: string;
+  image: string;
 }
+
 export interface fsData {
   title: string;
   description: string;
-  image: string;
   items: VMItem[];
 }
 
 const FosteringStrong = ({ fsData }: { fsData: fsData }) => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const imageVariants = {
+    hidden: { opacity: 0, y: 30 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: easeOut } },
+    exit: { opacity: 0, y: -30, transition: { duration: 0.4, ease: easeIn } },
+  };
   return (
     <section className="py-8 md:py-12 lg:py-20 2xl:py-[135px]">
       <div className="container">
@@ -54,42 +61,77 @@ const FosteringStrong = ({ fsData }: { fsData: fsData }) => {
             </div>
             <div className="mt-4 md:mt-6 xl:mt-8 2xl:mt-12">
               <div className="lg:hidden mt-10 rounded-xl overflow-hidden lg:w-auto w-full">
-                <Image
-                  src={fsData.image}
-                  alt={fsData.title}
+                
+           
+              <motion.div
+            variants={moveUp(1.25)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.1 }}
+           >
+            <AnimatePresence mode="wait">
+            
+             
+            <motion.img
+            key={fsData.items[activeIndex].image}
+            src={fsData.items[activeIndex].image}
+            alt={fsData.items[activeIndex].title}
+            variants={imageVariants}
+            initial="hidden"
+            
                   width={300}
                   height={300}
-                  className="object-contain xl:object-cover w-full h-[350px] lg:h-full object-cover lg:object-top-left"
-                />
+            animate="show"
+            exit="exit"
+            className="  xl:object-cover w-full h-[350px] lg:h-full object-cover lg:object-top-left"
+          />
+            </AnimatePresence>
+            
+          </motion.div>
+
               </div>
-              {fsData.items.map((item, index) => {
-                return (
-                  <motion.div
-                    variants={moveUp(index * 0.2)}
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ amount: 0.1, once: true }}
-                    className="flex gap-3 border-b border-[#D3D3D3]"
-                    key={index}
-                  >
-                    <motion.div
-                      variants={moveUp(0.5)}
-                      initial="hidden"
-                      whileInView="show"
-                      viewport={{ amount: 0.1, once: true }}
-                      key={index}
-                      className="flex  items-center gap-3 pt-7 pb-5 group cursor-pointer"
-                    >
-                      <p className="text-sm font-light  leading-[1.2] text-colorpara group-hover:text-black transition-colors duration-300">
-                        0{index + 1}
-                      </p>
-                      <p className="text-[1.2rem] md:text-md xl:text-lg 2xl:text-xl font-light   leading-[1.2] group-hover:text-primary transition-colors duration-300">
-                        {item.title}
-                      </p>
-                    </motion.div>
-                  </motion.div>
-                );
-              })}
+                 {fsData.items.map((item, index) => {
+        const isActive = activeIndex === index;
+
+        return (
+           <motion.div
+              variants={moveUp(index * 0.2)}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ amount: 0.1, once: true }}
+              className={`flex gap-3 border-b border-[#D3D3D3] transition-colors duration-300`}
+              key={index}
+              onClick={() => setActiveIndex(index)} // 
+            >
+              <motion.div
+                variants={moveUp(0.5)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ amount: 0.1, once: true }}
+                className="flex items-center gap-3 pt-7 pb-5 group cursor-pointer"
+              >
+                <p
+                  className={`text-sm font-light leading-[1.2] transition-colors duration-300 ${
+                    isActive
+                      ? "text-black"
+                      : "text-colorpara group-hover:text-black"
+                  }`}
+                >
+                  0{index + 1}
+                </p>
+                <p
+                  className={`text-[1.2rem] md:text-md xl:text-lg 2xl:text-xl font-light leading-[1.2] transition-colors duration-300 ${
+                    isActive
+                      ? "text-primary"
+                      : "group-hover:text-primary"
+                  }`}
+                >
+                  {item.title}
+                </p>
+              </motion.div>
+            </motion.div>
+        );
+      })}
             </div>
           </div>
           {/* Right Image */}
@@ -100,17 +142,25 @@ const FosteringStrong = ({ fsData }: { fsData: fsData }) => {
             viewport={{ once: true, amount: 0.1 }}
             className="relative w-full h-[250px] lg:h-auto rounded-[12px] overflow-hidden   hidden lg:block"
           >
-            <Image
-              src={fsData.image}
-              alt={fsData.title}
-              fill
-              className="object-cover transition-all duration-500 img-fluid"
-            />
+            <AnimatePresence mode="wait">
+            
+             
+            <motion.img
+            key={fsData.items[activeIndex].image}
+            src={fsData.items[activeIndex].image}
+            alt={fsData.items[activeIndex].title}
+            variants={imageVariants}
+            initial="hidden"
+            animate="show"
+            exit="exit"
+            className="object-cover h-full img-fluid"
+          />
+            </AnimatePresence>
             <motion.div
               className="absolute bottom-0 w-full h-[60%] bg-gradient-to-b from-black/0 to-[#42BADCC9]/79"
               initial={{ y: "100%" }}
               animate={{ y: "0%" }}
-              transition={{ duration: 0.4, ease: "easeInOut" }}
+              transition={{ duration: 0.4, ease: easeInOut }}
             />
           </motion.div>
         </div>

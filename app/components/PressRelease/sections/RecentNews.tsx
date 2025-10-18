@@ -34,10 +34,15 @@ export interface RecentNewsData {
 }
 
 const RecentNews = ({ RecentNewsData }: { RecentNewsData: RecentNewsData }) => {
-  const [activeIndex, setActiveIndex] = useState<number | null>(1);
+  const [activeIndex, setActiveIndex] = useState<number>(0);
+
+  // Get currently selected category name
+  const selectedCategory = RecentNewsData.category[activeIndex];
+
   return (
     <section className="py-8 md:py-12 lg:py-20 2xl:py-[135px]">
       <div className="container">
+        {/* Header section */}
         <div className="flex flex-col md:flex-row justify-between w-full md:items-center pb-4 md:pb-6 xl:pb-8 2xl:pb-12 mb-4 md:mb-6 xl:mb-8 2xl:mb-16 border-b border-bdrcolor gap-5 lg:gap-0">
           <SplitText
             tag="h2"
@@ -54,6 +59,7 @@ const RecentNews = ({ RecentNewsData }: { RecentNewsData: RecentNewsData }) => {
             textAlign="left"
           ></SplitText>
 
+          {/* Category Tabs */}
           <div className="flex gap-3 items-center">
             {RecentNewsData.category.map((item, index) => (
               <motion.div
@@ -62,7 +68,7 @@ const RecentNews = ({ RecentNewsData }: { RecentNewsData: RecentNewsData }) => {
                 whileInView="show"
                 viewport={{ amount: 0.1, once: true }}
                 key={index}
-                className={`p-[1px] group transition-colors duration-300 group rounded-full hover:bg-[linear-gradient(90deg,_#42BADC_0%,_#12586C_100%)] 
+                className={`p-[1px] group transition-colors duration-300 rounded-full hover:bg-[linear-gradient(90deg,_#42BADC_0%,_#12586C_100%)] 
                 ${
                   index === activeIndex
                     ? "bg-[linear-gradient(90deg,_#42BADC_0%,_#12586C_100%)]"
@@ -75,10 +81,10 @@ const RecentNews = ({ RecentNewsData }: { RecentNewsData: RecentNewsData }) => {
                  ${
                    index === activeIndex
                      ? "bg-[#C9F3FF] text-black"
-                     : "bg-white text-[#666666] "
+                     : "bg-white text-[#666666]"
                  }`}
                 >
-                  <p className="smtext10 text-xs font-light  uppercase ">
+                  <p className="smtext10 text-xs font-light uppercase">
                     {item}
                   </p>
                 </div>
@@ -86,6 +92,8 @@ const RecentNews = ({ RecentNewsData }: { RecentNewsData: RecentNewsData }) => {
             ))}
           </div>
         </div>
+
+        {/* News + Sidebar layout */}
         <div className="lg:flex gap-12">
           <div className="lg:w-3/5">
             <motion.div
@@ -95,10 +103,11 @@ const RecentNews = ({ RecentNewsData }: { RecentNewsData: RecentNewsData }) => {
               viewport={{ amount: 0.1, once: true }}
               className="pb-4 md:pb-6 xl:pb-8 2xl:pb-12 text-colorpara text-sm font-light"
             >
-              {" "}
               <p>{RecentNewsData.description}</p>
             </motion.div>
-            <Newslist data={RecentNewsData} />
+
+            {/* ✅ Pass selectedCategory to Newslist */}
+            <Newslist data={RecentNewsData} selectedCategory={selectedCategory} />
           </div>
           <div className="lg:w-2/5">
             <motion.div
@@ -111,14 +120,14 @@ const RecentNews = ({ RecentNewsData }: { RecentNewsData: RecentNewsData }) => {
               <p className="text-sm font-light text-colorpara mb-5">
                 Popular News
               </p>
-              <PopularNews data={RecentNewsData} />
+              <PopularNews data={RecentNewsData}  selectedCategory={selectedCategory}/>
             </motion.div>
 
             <div className="p-4 md:p-6 xl:p-10 bg-[#F6F6F6] rounded-xl">
               <p className="text-sm font-light text-colorpara mb-5">
                 Up coming Events
               </p>
-              <UpcomingEvents data={RecentNewsData} />
+              <UpcomingEvents data={RecentNewsData} selectedCategory={selectedCategory}/>
             </div>
           </div>
         </div>

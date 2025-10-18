@@ -24,7 +24,7 @@ export interface commentsData {
 
 const Comments = ({ commentsData }: { commentsData: commentsData }) => {
   return (
-    <section className="pt-8 md:pt-12 lg:pt-20 2xl:pt-[135px] pb-4 md:pb-5 lg:pb-10 2xl:pb-[40px] overflow-hidden ">
+    <section className="pt-8 md:pt-12 lg:pt-20 2xl:pt-[135px] pb-10 md:pb-10 lg:pb-10 2xl:pb-[40px] overflow-hidden ">
       <div className="container">
         <div>
           <div>
@@ -127,10 +127,10 @@ const Comments = ({ commentsData }: { commentsData: commentsData }) => {
           <div className="">
             <div className="relative testimonialslider">
               <Swiper
-                spaceBetween={20}
-                slidesPerView={1.2}
+                spaceBetween={10}
+                slidesPerView={1}
                 breakpoints={{
-                  768: { slidesPerView: 1.5 },
+                  768: { slidesPerView: 1 },
                   1024: { slidesPerView: 1.7 },
                 }}
                 navigation={{
