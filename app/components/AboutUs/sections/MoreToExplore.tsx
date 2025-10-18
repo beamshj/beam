@@ -60,9 +60,9 @@ export default function MoreToExplore({ data }: CardsProps) {
             />
           </h2>
         </div>
-        <div style={{ paddingLeft: `${leftOffset}px`, paddingRight: 0 }}>
+        <div style={{ paddingLeft: `${leftOffset}px` }} className="pr-3 sm:pr-0">
           <Swiper
-            slidesPerView={1.2}
+            slidesPerView={1}
             spaceBetween={11}
             pagination={{
               clickable: true,
@@ -82,14 +82,14 @@ export default function MoreToExplore({ data }: CardsProps) {
                   initial="hidden"
                   animate="show"
                   viewport={{ once: false, amount: 0.7 }}
-                  className="relative group h-[300px] 2xl:h-[468px] max-w-[428px] overflow-hidden cursor-pointer rounded-[12px]"
+                  className="relative group h-[350px] 2xl:h-[468px] sm:max-w-[428px] overflow-hidden cursor-pointer rounded-[12px]"
                 >
                   <Image
                     src={card.image}
                     alt={card.title}
                     layout="fill"
                     objectFit="cover"
-                    className="transition-transform rounded-[12px] duration-300 scale-100 group-hover:scale-105"
+                    className="transition-transform rounded-[12px] duration-300 scale-100 group-hover:scale-105 object-cover object-top"
                   />
                   {/* Gradient overlay at bottom */}
                   <div className="absolute bottom-0 left-0 right-0 h-[70%] bg-gradient-to-t from-black to-transparent z-10"></div>

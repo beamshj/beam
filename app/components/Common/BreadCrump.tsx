@@ -237,7 +237,10 @@ const Breadcrumb = () => {
         const isLast = index === pathParts.length - 1;
         const fullLabel = formatLabel(part);
         const truncatedLabel = truncateLabel(fullLabel);
-        const href = buildHref(index);
+        let href = buildHref(index);
+        if (href === "/about-us") {
+          href ="/about-us/our-story"
+        }
 
         return (
           <motion.li

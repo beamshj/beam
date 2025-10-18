@@ -225,7 +225,7 @@ const OurSchools = () => {
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true, amount: 0.2 }}
-                className="w-[160px] lg:w-[248px] 2xl:w-[348px] z-10"
+                className="w-full md:w-[160px] lg:w-[248px] 2xl:w-[348px] z-10"
               >
                 <Select
                   value={
