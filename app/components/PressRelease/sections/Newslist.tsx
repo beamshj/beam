@@ -19,7 +19,7 @@ export interface RecentNewsData {
   }[];
 }
 
-const Newslist = ({ data }: { data: RecentNewsData }) => {
+const Newslist = ({ data, selectedCategory }: { data: RecentNewsData; selectedCategory: string }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
@@ -35,9 +35,12 @@ const Newslist = ({ data }: { data: RecentNewsData }) => {
     currentPage * itemsPerPage
   );
 
+  const filteredNews = currentNews.filter(
+    (news) => news.category === selectedCategory
+  );
   return (
     <div>
-      {currentNews.map((item, index) => ( 
+      {filteredNews.map((item, index) => ( 
             <motion.div
           variants={moveUp(index * 0.2)}
           initial="hidden"
@@ -48,6 +51,7 @@ const Newslist = ({ data }: { data: RecentNewsData }) => {
   bg-white hover:bg-[linear-gradient(180deg,#FFFFFF_0%,#E2F5FF_100%)] 
   transition-all duration-500 ease-in-out"
         >
+          {selectedCategory === item.category && (
           <Link href={`/news-&-media/news`}>
         
           <div className="relative ">
@@ -82,16 +86,19 @@ const Newslist = ({ data }: { data: RecentNewsData }) => {
             </div>
           </div>
           </Link> 
+          )}
         </motion.div>
       ))}
       {/* Pagination */}
-      <div className="absolute w-full left-0 removeMtmain">
+      {filteredNews.length > 0 && (
+      <div className="absolute w-full left-0 removeMtmain flex justify-center align-center">
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
           onPageChange={setCurrentPage}
         />
       </div>
+      )}
     </div>
   );
 };

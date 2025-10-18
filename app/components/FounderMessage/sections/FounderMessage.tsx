@@ -45,22 +45,22 @@ export default function FounderMessage({
           </h2>
 
           {/* For small screens, simplified stacked structure */}
-          <div className="relative xl:hidden w-full h-[340px] md:h-auto  xl:h-full rounded-[12px] overflow-hidden bg-[#F6F6F6] mb-[20px]">
-            <div className="absolute inset-0 rounded-[12px] bg-[linear-gradient(163.29deg,rgba(66,186,220,0)_53.09%,#00C7FF_109.87%)] opacity-60 z-10 pointer-events-none" />
+          <div className="relative xl:hidden w-full h-[440px] md:h-auto  xl:h-full rounded-[12px] overflow-hidden bg-[#F6F6F6] mb-[20px]">
+            <div className="absolute inset-0 rounded-[12px]  bg-[linear-gradient(163.29deg,rgba(66,186,220,0)_53.09%,#00C7FF_109.87%)] opacity-60 z-10 pointer-events-none" />
             <Image
               src={photo}
               alt={name}
               height={540}
               width={616}
-              className="object-contain xl:object-cover w-full md:w-[547px] h-[540px] z-0 rounded-[12px]"
+              className="object-contain xl:object-cover w-fit xl:w-[547px] h-[540px] z-0 rounded-[12px]  absolute right-0 md:relative"
             />
             {/* Info Box (mobile version) */}
             <div
-              className="absolute z-20 bottom-2 md:bottom-6 w-full lg:w-[70%] xl:w-[60%] rounded-[12px] p-[15px] 
-              shadow-[0px_4px_66px_0px_rgba(0,0,0,0.16)] 
+              className="absolute right-[5%] md:right-4 bottom-4 z-20 md:min-h-[250px]  md:bottom-6 w-[90%] md:w-[60%] lg:w-[70%] xl:w-[60%] rounded-[12px] p-[15px] 
+              shadow-[0px_4px_66px_0px_rgba(0,0,0,0.16)] flex flex-col justify-center
               bg-gradient-to-r from-[#F5EBFF] to-[#C9F3FF]"
             >
-              <p className="text-md xl:text-xl leading-[1.2] font-light text-black mb-[6px]">
+              <p className="text-md md:text-xl leading-[1.2] font-light text-black mb-[6px]">
                 {name}
               </p>
               <p className="text-sm xl:text-base leading-[1.31] font-light text-[#666666]">

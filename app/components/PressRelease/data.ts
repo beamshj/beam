@@ -18,7 +18,7 @@ export const RecentNewsData = {
     {
       image: "/images/press-release/pr2.jpg",
       date: "July 14, 2025",
-      category: "Curriculum",
+      category: "Technology",
       description: "Challenges Faced by Elementary School Students in 2022",
     },
     {
@@ -39,7 +39,7 @@ export const RecentNewsData = {
     {
       image: "/images/press-release/pn2.jpg",
       date: "July 14, 2025",
-      category: "Curriculum",
+      category: "Technology",
       description: "Challenges Faced by Elementary School Students in 2022",
     },
     {
@@ -61,7 +61,7 @@ export const RecentNewsData = {
       image: "/images/press-release/pn2.jpg",
       date: "July, 2025",
       day: 15,
-      category: "Curriculum",
+      category: "Technology",
       description: "Challenges Faced by Elementary School Students in 2022",
     },
     {
