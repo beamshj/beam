@@ -19,28 +19,33 @@ export interface RecentNewsData {
   }[];
 }
 
-const Newslist = ({ data, selectedCategory }: { data: RecentNewsData; selectedCategory: string }) => {
+const Newslist = ({ data, selectedCategory, reset }: { data: RecentNewsData; selectedCategory: string; reset?: boolean }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
   const itemsPerPage = 3;
-
-  useEffect(() => {
-    setTotalPages(Math.ceil(data.recentnews.length / itemsPerPage));
-  }, [data.recentnews.length]);
+const filteredNews = data.recentnews.filter(
+    (item) => item.category === selectedCategory
+  );
+  
+  useEffect(() => { 
+    if (reset) {
+      setCurrentPage(1);
+    }
+    setTotalPages(Math.ceil(filteredNews.length / itemsPerPage));
+  }, [filteredNews.length, itemsPerPage, reset]);
 
   // get the items for the current page
-  const currentNews = data.recentnews.slice(
+  const currentNews = filteredNews.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
 
-  const filteredNews = currentNews.filter(
-    (news) => news.category === selectedCategory
-  );
+ 
+ 
   return (
     <div>
-      {filteredNews.map((item, index) => ( 
+      {currentNews.map((item, index) => ( 
             <motion.div
           variants={moveUp(index * 0.2)}
           initial="hidden"
@@ -50,8 +55,7 @@ const Newslist = ({ data, selectedCategory }: { data: RecentNewsData; selectedCa
           className="mb-[25px] xl:mb-[50px] last:mb-0 group overflow-hidden
   bg-white hover:bg-[linear-gradient(180deg,#FFFFFF_0%,#E2F5FF_100%)] 
   transition-all duration-500 ease-in-out"
-        >
-          {selectedCategory === item.category && (
+        > 
           <Link href={`/news-&-media/news`}>
         
           <div className="relative ">
@@ -85,13 +89,13 @@ const Newslist = ({ data, selectedCategory }: { data: RecentNewsData; selectedCa
               />
             </div>
           </div>
-          </Link> 
-          )}
+          </Link>  
         </motion.div>
       ))}
       {/* Pagination */}
-      {filteredNews.length > 0 && (
-      <div className="absolute w-full left-0 removeMtmain flex justify-center align-center">
+      {currentNews.length > 0 && (
+        
+      <div className=" w-full left-0 removeMtmain flex justify-center align-center">
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}

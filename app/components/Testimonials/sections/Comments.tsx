@@ -59,7 +59,7 @@ const Comments = ({ commentsData }: { commentsData: commentsData }) => {
           <div className="relative">
             <div className="absolute -top-10 right-0 flex gap-3 z-10">
             <button
-                className="swiper-button-prev-story transition cursor-pointer group"
+                className="swiper-button-prev-custom transition cursor-pointer group"
                 aria-label="Previous"
               >
                 <svg
@@ -92,7 +92,7 @@ const Comments = ({ commentsData }: { commentsData: commentsData }) => {
 
 
               <button
-                className="swiper-button-next-story transition cursor-pointer group"
+                className="swiper-button-next-custom transition cursor-pointer group"
                 aria-label="Next"
               >
               <svg

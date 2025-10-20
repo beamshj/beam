@@ -18,17 +18,26 @@ export interface fsData {
 
 const FosteringStrong = ({ fsData }: { fsData: fsData }) => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [openAccordion, setOpenAccordion] = useState<number | null>(0);
+
   const imageVariants = {
     hidden: { opacity: 0, y: 30 },
     show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: easeOut } },
     exit: { opacity: 0, y: -30, transition: { duration: 0.4, ease: easeIn } },
   };
+
+  const toggleAccordion = (index: number) => {
+    setOpenAccordion((prev) => (prev === index ? null : index));
+    setActiveIndex(index);
+  };
+
   return (
     <section className="py-8 md:py-12 lg:py-20 2xl:py-[135px]">
       <div className="container">
-        <div className="grid lg:grid-cols-[56%_39%] gap-[5%] ">
+        <div className="grid lg:grid-cols-[56%_39%] gap-[5%]">
           {/* Left Content */}
           <div>
+            {/* Title + Description */}
             <div>
               <SplitText
                 tag="h2"
@@ -59,103 +68,132 @@ const FosteringStrong = ({ fsData }: { fsData: fsData }) => {
                 textAlign="left"
               />
             </div>
+
+            {/* Accordion / List */}
             <div className="mt-4 md:mt-6 xl:mt-8 2xl:mt-12">
-              <div className="lg:hidden mt-10 rounded-xl overflow-hidden lg:w-auto w-full">
-                
-           
-              <motion.div
-            variants={moveUp(1.25)}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.1 }}
-           >
-            <AnimatePresence mode="wait">
-            
-             
-            <motion.img
-            key={fsData.items[activeIndex].image}
-            src={fsData.items[activeIndex].image}
-            alt={fsData.items[activeIndex].title}
-            variants={imageVariants}
-            initial="hidden"
-            
-                  width={300}
-                  height={300}
-            animate="show"
-            exit="exit"
-            className="  xl:object-cover w-full h-[350px] lg:h-full object-cover lg:object-top-left"
-          />
-            </AnimatePresence>
-            
-          </motion.div>
+              {fsData.items.map((item, index) => {
+                const isActive = activeIndex === index;
+                const isOpen = openAccordion === index;
 
-              </div>
-                 {fsData.items.map((item, index) => {
-        const isActive = activeIndex === index;
+                return (
+                  <motion.div
+                    key={index}
+                    variants={moveUp(index * 0.2)}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ amount: 0.1, once: true }}
+                    className="border-b border-[#D3D3D3] transition-colors duration-300"
+                  >
+                    {/* Header */}
+                    <button
+                      onClick={() => toggleAccordion(index)}
+                      className="flex justify-between items-center w-full text-left pt-7 pb-5  cursor-pointer group"
+                    >
+                      <div className="flex items-center gap-3">
+                        <p
+                          className={`text-sm font-light leading-[1.2] transition-colors duration-300 ${
+                            isActive
+                              ? "text-black"
+                              : "text-colorpara group-hover:text-black"
+                          }`}
+                        >
+                          0{index + 1}
+                        </p>
+                        <p
+                          className={`text-[1.2rem] md:text-md xl:text-lg 2xl:text-xl font-light leading-[1.2] transition-colors duration-300 ${
+                            isActive
+                              ? "text-primary"
+                              : "group-hover:text-primary"
+                          }`}
+                        >
+                          {item.title}
+                        </p>
+                      </div>
+                      {/* Accordion icon for mobile */}
+                      <span className="lg:hidden transition-transform duration-300">
+                        {isOpen ? (
+                          <svg
+                            className="w-4 h-4 transform rotate-180"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M19 9l-7 7-7-7"
+                            />
+                          </svg>
+                        ) : (
+                          <svg
+                            className="w-4 h-4"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M19 9l-7 7-7-7"
+                            />
+                          </svg>
+                        )}
+                      </span>
+                    </button>
 
-        return (
-           <motion.div
-              variants={moveUp(index * 0.2)}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ amount: 0.1, once: true }}
-              className={`flex gap-3 border-b border-[#D3D3D3] transition-colors duration-300`}
-              key={index}
-              onClick={() => setActiveIndex(index)} // 
-            >
-              <motion.div
-                variants={moveUp(0.5)}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ amount: 0.1, once: true }}
-                className="flex items-center gap-3 pt-7 pb-5 group cursor-pointer"
-              >
-                <p
-                  className={`text-sm font-light leading-[1.2] transition-colors duration-300 ${
-                    isActive
-                      ? "text-black"
-                      : "text-colorpara group-hover:text-black"
-                  }`}
-                >
-                  0{index + 1}
-                </p>
-                <p
-                  className={`text-[1.2rem] md:text-md xl:text-lg 2xl:text-xl font-light leading-[1.2] transition-colors duration-300 ${
-                    isActive
-                      ? "text-primary"
-                      : "group-hover:text-primary"
-                  }`}
-                >
-                  {item.title}
-                </p>
-              </motion.div>
-            </motion.div>
-        );
-      })}
+                    {/* Accordion Content (Mobile Only) */}
+                    <AnimatePresence>
+                      {isOpen && (
+                        <motion.div
+                          key={`accordion-${index}`}
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.4, ease: easeInOut }}
+                          className="overflow-hidden lg:hidden"
+                        >
+                          <motion.img
+                            key={item.image}
+                            src={item.image}
+                            alt={item.title}
+                            variants={imageVariants}
+                            initial="hidden"
+                            animate="show"
+                            exit="exit"
+                            className="w-full h-[250px] object-cover rounded-xl mb-4"
+                          />
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
-          {/* Right Image */}
+
+          {/* Right Image (Desktop only) */}
           <motion.div
             variants={moveUp(1.25)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.1 }}
-            className="relative w-full h-[250px] lg:h-auto rounded-[12px] overflow-hidden   hidden lg:block"
+            className="relative w-full h-[250px] lg:h-auto rounded-[12px] overflow-hidden hidden lg:block"
           >
             <AnimatePresence mode="wait">
-            
-             
-            <motion.img
-            key={fsData.items[activeIndex].image}
-            src={fsData.items[activeIndex].image}
-            alt={fsData.items[activeIndex].title}
-            variants={imageVariants}
-            initial="hidden"
-            animate="show"
-            exit="exit"
-            className="object-cover h-full img-fluid"
-          />
+              <motion.img
+                key={fsData.items[activeIndex].image}
+                src={fsData.items[activeIndex].image}
+                alt={fsData.items[activeIndex].title}
+                variants={imageVariants}
+                initial="hidden"
+                animate="show"
+                exit="exit"
+                className="object-cover h-full w-full"
+              />
             </AnimatePresence>
+
             <motion.div
               className="absolute bottom-0 w-full h-[60%] bg-gradient-to-b from-black/0 to-[#42BADCC9]/79"
               initial={{ y: "100%" }}

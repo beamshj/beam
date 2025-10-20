@@ -107,7 +107,7 @@ const RecentNews = ({ RecentNewsData }: { RecentNewsData: RecentNewsData }) => {
             </motion.div>
 
             {/* ✅ Pass selectedCategory to Newslist */}
-            <Newslist data={RecentNewsData} selectedCategory={selectedCategory} />
+            <Newslist data={RecentNewsData} selectedCategory={selectedCategory} reset={true} />
           </div>
           <div className="lg:w-2/5">
             <motion.div

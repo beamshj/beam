@@ -241,6 +241,9 @@ const Breadcrumb = () => {
         if (href === "/about-us") {
           href ="/about-us/our-story"
         }
+         if (href === "/news-&-media") {
+          href ="/news-&-media/blog"
+        }
 
         return (
           <motion.li
