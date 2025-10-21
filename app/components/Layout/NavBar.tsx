@@ -75,7 +75,7 @@ const NavBar = () => {
                     className="h-[58px] lg:h-full"
                   /></Link>
                 </div>
-                <div className="h-full border-r-[1px] border-[#D3D3D3]"></div>
+                <div className=" hidden lg:block h-full border-r-[1px] border-[#D3D3D3]"></div>
               </div>
               <div className="hidden lg:flex h-full items-center">
       <ul className="flex gap-[30px] text-black relative h-full items-center">

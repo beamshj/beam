@@ -27,6 +27,330 @@ export const RecentNewsData = {
       category: "Curriculum",
       description: "What’s it Really Like to Live and Work in the Middle East?",
     },
+     {
+      image: "/images/press-release/pr1.jpg",
+      date: "July 14, 2025",
+      category: "Curriculum",
+      description:
+        "How to Choose the Right School for Secondary Education in the UAE",
+    },
+    {
+      image: "/images/press-release/pr2.jpg",
+      date: "July 14, 2025",
+      category: "Curriculum",
+      description: "Challenges Faced by Elementary School Students in 2022",
+    },
+    {
+      image: "/images/press-release/pr3.jpg",
+      date: "July 14, 2025",
+      category: "Technology",
+      description: "What’s it Really Like to Live and Work in the Middle East?",
+    },
+    {
+      image: "/images/press-release/pr1.jpg",
+      date: "July 14, 2025",
+      category: "Curriculum",
+      description:
+        "How to Choose the Right School for Secondary Education in the UAE",
+    },
+    {
+      image: "/images/press-release/pr2.jpg",
+      date: "July 14, 2025",
+      category: "Technology",
+      description: "Challenges Faced by Elementary School Students in 2022",
+    },
+    {
+      image: "/images/press-release/pr3.jpg",
+      date: "July 14, 2025",
+      category: "Curriculum",
+      description: "What’s it Really Like to Live and Work in the Middle East?",
+    },
+     {
+      image: "/images/press-release/pr1.jpg",
+      date: "July 14, 2025",
+      category: "Curriculum",
+      description:
+        "How to Choose the Right School for Secondary Education in the UAE",
+    },
+    {
+      image: "/images/press-release/pr2.jpg",
+      date: "July 14, 2025",
+      category: "Curriculum",
+      description: "Challenges Faced by Elementary School Students in 2022",
+    },
+    {
+      image: "/images/press-release/pr3.jpg",
+      date: "July 14, 2025",
+      category: "Technology",
+      description: "What’s it Really Like to Live and Work in the Middle East?",
+    },
+    {
+      image: "/images/press-release/pr1.jpg",
+      date: "July 14, 2025",
+      category: "Curriculum",
+      description:
+        "How to Choose the Right School for Secondary Education in the UAE",
+    },
+    {
+      image: "/images/press-release/pr2.jpg",
+      date: "July 14, 2025",
+      category: "Technology",
+      description: "Challenges Faced by Elementary School Students in 2022",
+    },
+    {
+      image: "/images/press-release/pr3.jpg",
+      date: "July 14, 2025",
+      category: "Curriculum",
+      description: "What’s it Really Like to Live and Work in the Middle East?",
+    },
+     {
+      image: "/images/press-release/pr1.jpg",
+      date: "July 14, 2025",
+      category: "Curriculum",
+      description:
+        "How to Choose the Right School for Secondary Education in the UAE",
+    },
+    {
+      image: "/images/press-release/pr2.jpg",
+      date: "July 14, 2025",
+      category: "Curriculum",
+      description: "Challenges Faced by Elementary School Students in 2022",
+    },
+    {
+      image: "/images/press-release/pr3.jpg",
+      date: "July 14, 2025",
+      category: "Technology",
+      description: "What’s it Really Like to Live and Work in the Middle East?",
+    },
+       {
+      image: "/images/press-release/pr1.jpg",
+      date: "July 14, 2025",
+      category: "Curriculum",
+      description:
+        "How to Choose the Right School for Secondary Education in the UAE",
+    },
+    {
+      image: "/images/press-release/pr2.jpg",
+      date: "July 14, 2025",
+      category: "Technology",
+      description: "Challenges Faced by Elementary School Students in 2022",
+    },
+    {
+      image: "/images/press-release/pr3.jpg",
+      date: "July 14, 2025",
+      category: "Curriculum",
+      description: "What’s it Really Like to Live and Work in the Middle East?",
+    },
+     {
+      image: "/images/press-release/pr1.jpg",
+      date: "July 14, 2025",
+      category: "Curriculum",
+      description:
+        "How to Choose the Right School for Secondary Education in the UAE",
+    },
+    {
+      image: "/images/press-release/pr2.jpg",
+      date: "July 14, 2025",
+      category: "Curriculum",
+      description: "Challenges Faced by Elementary School Students in 2022",
+    },
+    {
+      image: "/images/press-release/pr3.jpg",
+      date: "July 14, 2025",
+      category: "Technology",
+      description: "What’s it Really Like to Live and Work in the Middle East?",
+    },
+    {
+      image: "/images/press-release/pr1.jpg",
+      date: "July 14, 2025",
+      category: "Curriculum",
+      description:
+        "How to Choose the Right School for Secondary Education in the UAE",
+    },
+    {
+      image: "/images/press-release/pr2.jpg",
+      date: "July 14, 2025",
+      category: "Technology",
+      description: "Challenges Faced by Elementary School Students in 2022",
+    },
+    {
+      image: "/images/press-release/pr3.jpg",
+      date: "July 14, 2025",
+      category: "Curriculum",
+      description: "What’s it Really Like to Live and Work in the Middle East?",
+    },
+     {
+      image: "/images/press-release/pr1.jpg",
+      date: "July 14, 2025",
+      category: "Curriculum",
+      description:
+        "How to Choose the Right School for Secondary Education in the UAE",
+    },
+    {
+      image: "/images/press-release/pr2.jpg",
+      date: "July 14, 2025",
+      category: "Curriculum",
+      description: "Challenges Faced by Elementary School Students in 2022",
+    },
+    {
+      image: "/images/press-release/pr3.jpg",
+      date: "July 14, 2025",
+      category: "Technology",
+      description: "What’s it Really Like to Live and Work in the Middle East?",
+    },
+    {
+      image: "/images/press-release/pr1.jpg",
+      date: "July 14, 2025",
+      category: "Curriculum",
+      description:
+        "How to Choose the Right School for Secondary Education in the UAE",
+    },
+    {
+      image: "/images/press-release/pr2.jpg",
+      date: "July 14, 2025",
+      category: "Technology",
+      description: "Challenges Faced by Elementary School Students in 2022",
+    },
+    {
+      image: "/images/press-release/pr3.jpg",
+      date: "July 14, 2025",
+      category: "Curriculum",
+      description: "What’s it Really Like to Live and Work in the Middle East?",
+    },
+     {
+      image: "/images/press-release/pr1.jpg",
+      date: "July 14, 2025",
+      category: "Curriculum",
+      description:
+        "How to Choose the Right School for Secondary Education in the UAE",
+    },
+    {
+      image: "/images/press-release/pr2.jpg",
+      date: "July 14, 2025",
+      category: "Curriculum",
+      description: "Challenges Faced by Elementary School Students in 2022",
+    },
+    {
+      image: "/images/press-release/pr3.jpg",
+      date: "July 14, 2025",
+      category: "Technology",
+      description: "What’s it Really Like to Live and Work in the Middle East?",
+    },
+       {
+      image: "/images/press-release/pr1.jpg",
+      date: "July 14, 2025",
+      category: "Curriculum",
+      description:
+        "How to Choose the Right School for Secondary Education in the UAE",
+    },
+    {
+      image: "/images/press-release/pr2.jpg",
+      date: "July 14, 2025",
+      category: "Technology",
+      description: "Challenges Faced by Elementary School Students in 2022",
+    },
+    {
+      image: "/images/press-release/pr3.jpg",
+      date: "July 14, 2025",
+      category: "Curriculum",
+      description: "What’s it Really Like to Live and Work in the Middle East?",
+    },
+     {
+      image: "/images/press-release/pr1.jpg",
+      date: "July 14, 2025",
+      category: "Curriculum",
+      description:
+        "How to Choose the Right School for Secondary Education in the UAE",
+    },
+    {
+      image: "/images/press-release/pr2.jpg",
+      date: "July 14, 2025",
+      category: "Curriculum",
+      description: "Challenges Faced by Elementary School Students in 2022",
+    },
+    {
+      image: "/images/press-release/pr3.jpg",
+      date: "July 14, 2025",
+      category: "Technology",
+      description: "What’s it Really Like to Live and Work in the Middle East?",
+    },
+    {
+      image: "/images/press-release/pr1.jpg",
+      date: "July 14, 2025",
+      category: "Curriculum",
+      description:
+        "How to Choose the Right School for Secondary Education in the UAE",
+    },
+    {
+      image: "/images/press-release/pr2.jpg",
+      date: "July 14, 2025",
+      category: "Technology",
+      description: "Challenges Faced by Elementary School Students in 2022",
+    },
+    {
+      image: "/images/press-release/pr3.jpg",
+      date: "July 14, 2025",
+      category: "Curriculum",
+      description: "What’s it Really Like to Live and Work in the Middle East?",
+    },
+     {
+      image: "/images/press-release/pr1.jpg",
+      date: "July 14, 2025",
+      category: "Curriculum",
+      description:
+        "How to Choose the Right School for Secondary Education in the UAE",
+    },
+    {
+      image: "/images/press-release/pr2.jpg",
+      date: "July 14, 2025",
+      category: "Curriculum",
+      description: "Challenges Faced by Elementary School Students in 2022",
+    },
+    {
+      image: "/images/press-release/pr3.jpg",
+      date: "July 14, 2025",
+      category: "Technology",
+      description: "What’s it Really Like to Live and Work in the Middle East?",
+    },
+    {
+      image: "/images/press-release/pr1.jpg",
+      date: "July 14, 2025",
+      category: "Curriculum",
+      description:
+        "How to Choose the Right School for Secondary Education in the UAE",
+    },
+    {
+      image: "/images/press-release/pr2.jpg",
+      date: "July 14, 2025",
+      category: "Technology",
+      description: "Challenges Faced by Elementary School Students in 2022",
+    },
+    {
+      image: "/images/press-release/pr3.jpg",
+      date: "July 14, 2025",
+      category: "Curriculum",
+      description: "What’s it Really Like to Live and Work in the Middle East?",
+    },
+     {
+      image: "/images/press-release/pr1.jpg",
+      date: "July 14, 2025",
+      category: "Curriculum",
+      description:
+        "How to Choose the Right School for Secondary Education in the UAE",
+    },
+    {
+      image: "/images/press-release/pr2.jpg",
+      date: "July 14, 2025",
+      category: "Curriculum",
+      description: "Challenges Faced by Elementary School Students in 2022",
+    },
+    {
+      image: "/images/press-release/pr3.jpg",
+      date: "July 14, 2025",
+      category: "Technology",
+      description: "What’s it Really Like to Live and Work in the Middle East?",
+    },
+    
   ],
   popularnews: [
     {

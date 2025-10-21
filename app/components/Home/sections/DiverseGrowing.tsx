@@ -48,7 +48,7 @@ const DiverseGrowing = () => {
   };
   return (
     <section className="pt-8 xl:pt-20 2xl:pt-[137px]">
-      <div className="relative pb-12 md:pb-15 xl:pb-[150px] max-w-[1920px] mx-auto overflow-hidden">
+      <div className="relative pb-0 lg:pb-12 xl:pb-[150px] max-w-[1920px] mx-auto overflow-hidden">
         <div className="container">
           <div>
             <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }}  >
@@ -254,7 +254,7 @@ const DiverseGrowing = () => {
           </div>
         </div>
         <div
-          className="absolute bottom-0 lg:left-[5%] z-[-1] responsive md:w-[50%] 2xl:w-[913px]"
+          className="relative pt-5 lg:pt-0 left-0 lg:absolute bottom-0 lg:left-[5%] z-[-1] responsive md:w-[50%] 2xl:w-[913px]"
         >
           <Image ref={imgRef}
             src={diverseGrowingData.image}

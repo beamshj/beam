@@ -137,10 +137,11 @@ const OurSchools = () => {
         variants={fadeUp}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
+        viewport={{ once: true, amount: 0 }}
       >
         <div className="container">
           <div className="mb-5 xl:mb-7  2xl:mb-[53px]">
+           
             <SplitText
               tag="h2"
               text={schoolData.heading}
@@ -151,8 +152,9 @@ const OurSchools = () => {
               splitType="chars"
               from={{ opacity: 0, y: 40 }}
               to={{ opacity: 1, y: 0 }}
-              threshold={0.1}
-              rootMargin="-100px"
+               threshold={0} // 50% of element must be visible
+
+  rootMargin="0"
               textAlign="left"
             />
           </div>

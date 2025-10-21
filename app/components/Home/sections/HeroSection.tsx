@@ -45,7 +45,7 @@ const HeroSection = () => {
 
 
   return (
-    <section className="h-screen relative overflow-hidden max-w-[1920px] mx-auto" ref={triggerRef} suppressHydrationWarning>
+    <section className="lg:h-screen h-[85dvh] relative overflow-hidden max-w-[1920px] mx-auto" ref={triggerRef} suppressHydrationWarning>
       <div className="prject-sec h-full flex flex-wrap" style={{ width: `${4 * 100}vw` }} ref={sectionRef} >
         <Swiper
           modules={[Autoplay, EffectFade]}
@@ -116,7 +116,7 @@ const HeroSection = () => {
                             initial={{ opacity: 0, y: 40 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 1, ease: "easeOut" }}
-                            className="text-[2.8rem] md:text-2xl lg:text-3xl 2xl:text-4xl text-white leading-[1.2] 2xl:leading-[1.1] font-custom font-light lettersp-4 mb-15 md:mb-0 xl:mb-0 md:max-w-[80%] xl:max-w-none"
+                            className="text-[2.8rem] md:text-2xl lg:text-3xl 2xl:text-4xl text-white leading-[1.2] 2xl:leading-[1.1] font-custom font-light lettersp-4 mb-0 md:mb-0 xl:mb-0 md:max-w-[80%] xl:max-w-none"
                           >
                             {slide.titleblue} {slide.titlewhite}
                           </motion.h2>
