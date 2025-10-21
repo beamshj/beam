@@ -3,7 +3,7 @@ export const mainMenuItems = [
     name: "About Beam",
     href: "#",
     submenu: [
-      { name: "Our Story", href: "/about-us/our-story" },
+      { name: "Overview", href: "/about-us/our-story" },
       { name: "Founder’s Message", href: "/about-us/founders-message" },
       { name: "General Managers’  Message", href: "/about-us/general-managers-message" },
       { name: "Schools’ Leadership Team", href: "/about-us/school-leadership-team" },

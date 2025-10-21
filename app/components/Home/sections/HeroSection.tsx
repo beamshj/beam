@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { BannerSliderData } from "@/app/data/BannerSlider";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade } from "swiper/modules";
@@ -42,10 +42,17 @@ const HeroSection = () => {
       },
     },
   };
+  const [isDesktop, setIsDesktop] = useState(false);
 
+  useEffect(() => {
+    const checkScreen = () => setIsDesktop(window.innerWidth > 768);
+    checkScreen();
+    window.addEventListener("resize", checkScreen);
+    return () => window.removeEventListener("resize", checkScreen);
+  }, []);
 
   return (
-    <section className="lg:h-screen h-[85dvh] relative overflow-hidden max-w-[1920px] mx-auto" ref={triggerRef} suppressHydrationWarning>
+    <section className="lg:h-screen h-[65dvh] md:h-[85dvh] relative overflow-hidden max-w-[1920px] mx-auto" ref={triggerRef} suppressHydrationWarning>
       <div className="prject-sec h-full flex flex-wrap" style={{ width: `${4 * 100}vw` }} ref={sectionRef} >
         <Swiper
           modules={[Autoplay, EffectFade]}
@@ -75,25 +82,25 @@ const HeroSection = () => {
                 className="slide h-full w-screen relative overflow-hidden text-white"
               >
                 <figure className="h-full w-full absolute -z-50 overflow-hidden">
-                  <motion.div
-                    key={`kenburns-${index}-${textVersion}`}
-                    variants={kenBurnsVariants}
-                    initial="initial"
-                    animate="animate"
-                    className="h-full w-full relative"
-                    style={{
-                      willChange: 'transform, opacity',
-                    }}
-                  >
-                    <Image
-                      className="h-full w-full object-cover object-center"
-                      src={slide?.img}
-                      alt={"slide1"}
-                      width={1920}
-                      height={1280}
-                      priority={index === 0}
-                    />
-                  </motion.div>
+                      <motion.div
+      key={`kenburns-${index}-${textVersion}`}
+      variants={isDesktop ? kenBurnsVariants : {}}
+      initial={isDesktop ? "initial" : false}
+      animate={isDesktop ? "animate" : false}
+      className="h-full w-full relative"
+      style={{
+        willChange: "transform, opacity",
+      }}
+    >
+      <Image
+        className="h-full w-full object-cover object-center"
+        src={slide?.img}
+        alt="slide1"
+        width={1920}
+        height={1280}
+        priority={index === 0}
+      />
+    </motion.div>
                 </figure>
                 <div key={`${index}-${textVersion}`}
                   className="h-full w-full -z-40 absolute bg-[linear-gradient(180deg,_rgba(0,0,0,0)_21.7%,_rgba(0,0,0,0.6)_63.57%,_rgba(0,0,0,0.8)_100%)]"
@@ -103,7 +110,7 @@ const HeroSection = () => {
                   <div className="container h-full">
                     <div className="h-full relative w-full overflow-hidden">
                       <div
-                        className="title absolute bottom-[80px] lg:bottom-[50px] transition-all ease-in-out grid grid-cols-1 2xl:grid-cols-7 items-end gap-2"
+                        className="title absolute bottom-10 lg:bottom-[50px] transition-all ease-in-out grid grid-cols-1 2xl:grid-cols-7 items-end gap-2"
                         key={`${index}-${textVersion}`}
                       >
                         <motion.div
@@ -116,7 +123,7 @@ const HeroSection = () => {
                             initial={{ opacity: 0, y: 40 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 1, ease: "easeOut" }}
-                            className="text-[2.8rem] md:text-2xl lg:text-3xl 2xl:text-4xl text-white leading-[1.2] 2xl:leading-[1.1] font-custom font-light lettersp-4 mb-0 md:mb-0 xl:mb-0 md:max-w-[80%] xl:max-w-none"
+                            className="text-[1.8rem] md:text-2xl lg:text-3xl 2xl:text-4xl text-white leading-[1.2] 2xl:leading-[1.1] font-custom font-light lettersp-4 mb-0 md:mb-0 xl:mb-0 md:max-w-[80%] xl:max-w-none"
                           >
                             {slide.titleblue} {slide.titlewhite}
                           </motion.h2>

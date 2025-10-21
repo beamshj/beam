@@ -68,7 +68,7 @@ export default function OurSchools({ data }: { data: OurSchoolsProps }) {
                 onMouseLeave={() => setActiveIndex(0)}
                 animate={{
                   width: "100%",
-                  maxWidth: isActive ? "56%" : "10%",
+                  maxWidth: isActive ? "45%" : "10%",
                 }}
                 transition={{
                   duration: 0.6,

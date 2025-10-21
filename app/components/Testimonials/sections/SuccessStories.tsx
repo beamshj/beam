@@ -26,11 +26,11 @@ const SuccessStories = ({
   const [activeVideoIndex, setActiveVideoIndex] = useState<number | null>(null);
   return (
     <section className="py-14 md:py-20 lg:py-20 2xl:py-[135px]">
-      <div className="container">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 xl:gap-18 items-center">
+      <div className="container  relative">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 xl:gap-18 items-center ">
 
           <div>
-            <div className="relative storyslide">
+            <div className=" storyslide">
               <Swiper
                 spaceBetween={20}
                 slidesPerView={1}
@@ -88,6 +88,76 @@ const SuccessStories = ({
                   );
                 })}
               </Swiper>
+                <div className=" pt-7 lg:pt-22 2xl:pt-[135px] w-full md:absolute border-b  border-[#D3D3D3]">
+              <div className="  absolute bottom-0  ">
+                <div className="flex gap-3 z-10 pb-5 md:pb-7 ">
+                  <button
+                    className="swiper-button-prev-story transition cursor-pointer group"
+                    aria-label="Previous"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      className="overflow-visible"
+                    > 
+                      <path
+                        d="M9.57031 5.92993L3.50031 11.9999L9.57031 18.0699"
+                        stroke="#D3D3D3"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="transition-all duration-300 group-hover:stroke-[#23ABD2]"
+                      />
+                  
+                      <path
+                        d="M20.5 12H3.67"
+                        stroke="#D3D3D3"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="origin-left transition-transform duration-500 group-hover:scale-x-[1.5] group-hover:stroke-[#23ABD2]"
+                      />
+                    </svg>
+                  </button> 
+
+                  <button
+                    className="swiper-button-next-story transition cursor-pointer group"
+                    aria-label="Next"
+                  >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    className="overflow-visible"
+                  > 
+                    <path
+                      d="M14.43 5.92993L20.5 11.9999L14.43 18.0699"
+                      stroke="#D3D3D3"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="transition-all duration-300 group-hover:stroke-[#23ABD2]"
+                    /> 
+                    <path
+                      d="M3.5 12H20.33"
+                      stroke="#D3D3D3"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="origin-right transition-transform duration-500 group-hover:scale-x-[1.5] group-hover:stroke-[#23ABD2]"
+                    />
+                  </svg>
+
+                  </button>
+                </div>
+
+                </div>
+                </div>
             </div>
           </div>
           <div>
@@ -100,78 +170,9 @@ const SuccessStories = ({
 
           </div>
         </div>
-
-        <div className="pt-8 md:pt-12 lg:pt-20 2xl:pt-[135px]">
-          <div className="pt-5 lg:pt-7 border-t border-[#D3D3D3]">
-            <div className=" flex gap-3 z-10">
-            <button
-                className="swiper-button-prev-story transition cursor-pointer group"
-                aria-label="Previous"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  className="overflow-visible"
-                > 
-                  <path
-                    d="M9.57031 5.92993L3.50031 11.9999L9.57031 18.0699"
-                    stroke="#D3D3D3"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="transition-all duration-300 group-hover:stroke-[#23ABD2]"
-                  />
-              
-                  <path
-                    d="M20.5 12H3.67"
-                    stroke="#D3D3D3"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="origin-left transition-transform duration-500 group-hover:scale-x-[1.5] group-hover:stroke-[#23ABD2]"
-                  />
-                </svg>
-              </button>
-
-
-              <button
-                className="swiper-button-next-story transition cursor-pointer group"
-                aria-label="Next"
-              >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                className="overflow-visible"
-              > 
-                <path
-                  d="M14.43 5.92993L20.5 11.9999L14.43 18.0699"
-                  stroke="#D3D3D3"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="transition-all duration-300 group-hover:stroke-[#23ABD2]"
-                /> 
-                <path
-                  d="M3.5 12H20.33"
-                  stroke="#D3D3D3"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="origin-right transition-transform duration-500 group-hover:scale-x-[1.5] group-hover:stroke-[#23ABD2]"
-                />
-              </svg>
-
-              </button>
-
-            </div>
-          </div>
-        </div>
+       
+ 
+            
       </div>
     </section>
   );
