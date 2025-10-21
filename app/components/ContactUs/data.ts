@@ -9,29 +9,34 @@ export const OurSchoolsData = {
     "Explore our expanding network of schools and stay updated on key developments.",
   schools: [
     {
-      title: "ASCS Maliha",
+      title: "International School of Creative Science",
+      location: "Muwaileh, Sharjah",
+      img: "/images/home/sc1.jpg",
+    },
+    {
+      title: "International School of Creative Science",
+      location: "Nad Al Sheba, Dubai",
+      img: "/images/home/sc2.jpg",
+    },
+    {
+      title: "International School of Creative Science",
+      location: "Al Riffa, Bahrain",
+      img: "/images/home/sc3.jpg",
+    },
+    {
+      title: "American School of Creative Science",
       location: "Maliha Road, Sharjah",
-      img: "/images/contact-us/our-schools/1.jpg",
+      img: "/images/beam-schools/ascs-maliha.png",
     },
     {
-      title: "ASCS Al Ittihad",
-      location: "Al Ittihad Road, Sharjah",
-      img: "/images/contact-us/our-schools/2.jpg",
+      title: "American School of Creative Science",
+      location: "Nad Al Sheba, Dubai",
+      img: "/images/beam-schools/ascs-nas.png",
     },
     {
-      title: "ASCS Al Ittihad",
-      location: "Al Ittihad Road, Sharjah",
-      img: "/images/contact-us/our-schools/3.jpg",
+      title: "American School of Creative Science",
+      location: "Al Layyah, Sharjah",
+      img: "/images/beam-schools/ascs-layyah.png",
     },
-    {
-      title: "ASCS Al Ittihad",
-      location: "Al Ittihad Road, Sharjah",
-      img: "/images/contact-us/our-schools/4.jpg",
-    },
-    {
-      title: "ASCS Al Ittihad",
-      location: "Al Ittihad Road, Sharjah",
-      img: "/images/contact-us/our-schools/5.jpg",
-    },
-  ],
+      ],
 };
