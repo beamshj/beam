@@ -54,26 +54,25 @@ export const academicsData = {
     }, 
     {
       image:"/images/school-uniqueness/ba2.jpg",
-      title:"Transcending the Curriculum",
-      description:"Consistent top academic performance over multiple years",
+      title:"Future Focus",
+      description:"Understanding the dynamic nature of the world, the Creative Science Schools have introduced new offerings to facilitate current and future trends:",
       list:[
-        "Consistent top academic performance over multiple years",
-        "Consistent top academic performance over multiple years",
-        "Consistent top academic performance over multiple years",
-        "Consistent top academic performance over multiple years",
-        "Consistent top academic performance over multiple years",
+        "Advanced Coding / Artificial Intelligence / Ethical Hacking",
+        "Advance Placement (AP) Courses",
+        "Communication Skills",
+        "Students Leadership",
+        "Digital Media / Design and Technology",
+        "Islamic Banking",
       ] 
     }, 
     {
       image:"/images/school-uniqueness/ba3.jpg",
-      title:"Transcending the Curriculum",
-      description:"Consistent top academic performance over multiple years",
+      title:"Family Oriented Approach",
+      description:"The schools cater to the entire family, by offering various discounts and personal development programs for parents such as:",
       list:[
-        "Consistent top academic performance over multiple years",
-        "Consistent top academic performance over multiple years",
-        "Consistent top academic performance over multiple years",
-        "Consistent top academic performance over multiple years",
-        "Consistent top academic performance over multiple years",
+        "Discounts for siblings and referrals",
+        "Quran memorization and recitation workshops for parents",
+        "Parental guidance webinars on supporting children with studies, wellbeing counseling, mental health awareness and more",
       ] 
     }, 
   ]
