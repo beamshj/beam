@@ -3,15 +3,22 @@
 import Image from "next/image";
 import Breadcrump from "./BreadCrump";
 import { motion } from "framer-motion";
+import { usePathname } from "next/navigation";
 
 interface PageBnrProps {
-  BannerData: {
+  BannerData?: {
     BannerTitle: string;
     BannerImg: string;
   };
+  banner?: string;
+  bannerAlt?: string;
+  pageTitle?: string;
 }
 
-const InnerBanner = ({ BannerData }: PageBnrProps) => {
+const InnerBanner = ({ BannerData, banner, bannerAlt, pageTitle }: PageBnrProps) => {
+  const pathname = usePathname();
+
+  const lastWordPrimaryColor = pathname.includes("/general-managers-message") ? true : false;
   return (
     <section className="relative h-[320px] md:h-[380px] xl:h-[470px] 2xl:h-[635px] flex flex-col justify-end pb-[25px] md:pb-[30px] xl:pb-[35px]">
       <motion.div
@@ -21,8 +28,8 @@ const InnerBanner = ({ BannerData }: PageBnrProps) => {
         className="absolute top-0 left-0 w-full h-full z-0"
       >
         <Image
-          src={BannerData.BannerImg}
-          alt=""
+          src={banner || BannerData?.BannerImg || ""}
+          alt={bannerAlt || BannerData?.BannerTitle || ""}
           width={1920}
           height={800}
           className="w-full h-full object-cover"
@@ -38,8 +45,8 @@ const InnerBanner = ({ BannerData }: PageBnrProps) => {
             transition={{ duration: 1.3, ease: "easeOut" }}
             className="text-white text-xl md:text-2xl xl:text-2xl 2xl:text-3xl leading-[1.125] mb-[25px] md:mb-[30px] xl:mb-[40px]  2xl:mb-[50px] font-light"
           >
-            {(() => {
-              const title = BannerData.BannerTitle || "";
+            {!lastWordPrimaryColor ? (() => {
+              const title = pageTitle || BannerData?.BannerTitle || "";
               const [firstWord, ...rest] = title.split(" ");
               return (
                 <>
@@ -49,7 +56,24 @@ const InnerBanner = ({ BannerData }: PageBnrProps) => {
                   )}
                 </>
               );
-            })()}
+            })() 
+            
+            :
+
+              (() => {
+                const title = pageTitle || BannerData?.BannerTitle || "";
+                const words = title.trim().split(" ");
+                const lastWord = words.pop(); // removes and returns last word
+                const rest = words.join(" ");
+
+                return (
+                  <>
+                    {rest && <>{rest} </>}
+                    <span className="text-primary">{lastWord}</span>
+                  </>
+                );
+              })()
+            }
           </motion.h2>
         </div>
         <div className="h-[1px] w-[60%] bg-gradient-to-r from-white to-transparent mb-[15px] md:mb-[20px] xl:mb-[25px]"></div>

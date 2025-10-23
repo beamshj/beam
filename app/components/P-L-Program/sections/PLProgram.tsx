@@ -3,15 +3,10 @@ import Image from "next/image";
 import SplitText from "@/components/SplitText";
 import { motion } from "framer-motion";
 import { moveLeft } from "../../motionVarients";
-interface ProgramProps {
-  title: string;
-  subtitle?: string;
-  description: string;
-  photo: string;
-}
+import { PLProgramProps } from "../type";
 
-export default function PLProgram({ data }: { data: ProgramProps }) {
-  const { title, subtitle, photo, description } = data;
+export default function PLProgram({ data }: { data: PLProgramProps['firstSection'] }) {
+  
 
   return (
     <section className="py-10 md:py-20 xl:py-[135px]">
@@ -21,7 +16,7 @@ export default function PLProgram({ data }: { data: ProgramProps }) {
           <div className="xl:w-[85%]  2xl:w-[49%] w-full  order-2 xl:order-1"> 
               <SplitText
                 tag="h2"
-                text={title}
+                text={data.mainTitle}
                 className="text-lg lg:text-xl xl:text-2xl 2xl:text-4xl font-light leading-[1.111] mb-3 2xl:mb-[43px] lettersp-2"
                 delay={200}
                 duration={0.6}
@@ -33,10 +28,10 @@ export default function PLProgram({ data }: { data: ProgramProps }) {
                 rootMargin="-10px"
                 textAlign="left"
               /> 
-            {subtitle && ( 
+            
                <SplitText
                 tag="h3"
-                text={subtitle}
+                text={data.subTitle}
                 className="text-md mb-1 xl:text-lg 2xl:text-xl text-black leading-[1.4] font-light  "
                 delay={200}
                 duration={0.6}
@@ -48,9 +43,9 @@ export default function PLProgram({ data }: { data: ProgramProps }) {
                 rootMargin="-10px"
                 textAlign="left"
               /> 
-            )}
+            
             <div className="">
-              {description.split("\n").map((line, idx) => {
+              {data.description.split("\n").map((line, idx) => {
                 console.log('Line:', line.replace(/<[^>]*>/g, '')); // Debug
 
                 return line.trim() && (
@@ -77,7 +72,7 @@ export default function PLProgram({ data }: { data: ProgramProps }) {
 
           {/* Right Image */}
           <motion.div variants={moveLeft(2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="relative min-h-[300px] md:min-h-[300px] 2xl:w-[749px] w-full rounded-[12px] overflow-hidden  order-1 xl:order-2">
-            <Image src={photo} alt={title}  fill className="object-cover rounded-[12px]" />
+            <Image src={data.image} alt={data.imageAlt}  fill className="object-cover rounded-[12px]" />
             <div
               style={{
                 background:

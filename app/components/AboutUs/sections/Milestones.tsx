@@ -8,20 +8,15 @@ import { motion } from "framer-motion";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination"; 
+import { AboutProps } from "../type";
 
-export interface ValueItem {
-  year: string;
-  title: string;
-  description: string;
-  image: string;
-}
 
 interface Props {
-  items: ValueItem[];
+  data: AboutProps['historySection'];
 }
 
 
-export default function MoreToExplore({ items }: Props) {
+export default function MoreToExplore({ data }: Props) {
   
   const [activeIndex, setActiveIndex] = useState(0);
    
@@ -44,7 +39,7 @@ export default function MoreToExplore({ items }: Props) {
     <section className="pt-10 xl:pt-20 2xl:pt-[135px] pb-[80px] xl:pb-[100px] 2xl:pb-[165px] bg-[#F6F6F6] overflow-hidden">
       <div className="container " ref={containerRef}>
         <h2 className="text-lg xl:text-2xl 2xl:text-4xl font-light md:mb-4 xl:mb-8 2xl:mb-[50px]">
-          Building Milestones
+          {data.title}
         </h2>
         </div>
 
@@ -78,7 +73,7 @@ export default function MoreToExplore({ items }: Props) {
             autoplay={{ delay: 6000, disableOnInteraction: false }}
             className="md:!overflow-visible aboutslide"
           >
-            {items.map((item, index) => (
+            {data.items.map((item, index) => (
               <SwiperSlide key={index} className="relative">
                 <motion.div className="mb-9 flex flex-col items-start" 
                   key={activeIndex}
@@ -126,7 +121,7 @@ export default function MoreToExplore({ items }: Props) {
                   >
                     <Image
                       src={item.image}
-                      alt={item.title}
+                      alt={item.imageAlt}
                       width={500}
                       height={500}
                       className="object-cover rounded-[12px] h-[300px] w-full lg:h-[380px] xl:h-[428px] md:w-[85%] lg:w-[85%] 2xl:w-[100%]"

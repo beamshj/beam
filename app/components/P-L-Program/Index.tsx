@@ -1,12 +1,13 @@
 import InnerBanner from "@/app/components/Common/InnerBanner";
-import { BannerData, plProgramData } from "./data";
+import { BannerData } from "./data";
 import PLProgram from "./sections/PLProgram";
+import { PLProgramProps } from "./type";
 
-const Index = () => {
+const Index = ({data}: {data: PLProgramProps}) => {
   return (
     <>
-      <InnerBanner BannerData={BannerData} />
-      <PLProgram data={plProgramData} />
+      <InnerBanner BannerData={BannerData} banner={data.banner} bannerAlt={data.bannerAlt} pageTitle={data.pageTitle}/>
+      <PLProgram data={data.firstSection} />
     </>
   );
 };

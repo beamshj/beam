@@ -7,14 +7,10 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect } from "react";
 gsap.registerPlugin(ScrollTrigger);
-interface InclusionData {
-  bgImage: string;
-  title: string;
-  description: string;
-}
+import { AboutProps } from "../type";
 
 interface InclusionSectionProps {
-  data: InclusionData;
+  data: AboutProps['fifthSection'];
 }
 
 const InclusionSection: React.FC<InclusionSectionProps> = ({ data }) => {
@@ -44,8 +40,8 @@ const InclusionSection: React.FC<InclusionSectionProps> = ({ data }) => {
         <div className="relative h-[500px] 2xl:h-[638px] rounded-[12px] overflow-hidden ">
           {/* Background Image inside container */}
           <Image
-            src={data.bgImage}
-            alt={data.title}
+            src={data.image}
+            alt={data.imageAlt}
             fill
             className="object-cover"
           />
