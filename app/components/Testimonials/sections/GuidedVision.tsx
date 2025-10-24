@@ -21,7 +21,7 @@ export interface visionData {
 const GuidedVision = ({ visionData }: { visionData: visionData }) => { 
   const [activeVideoIndex, setActiveVideoIndex] = useState<number | null>(null);
   return (
-    <section className="pb-14 md:pb-20 lg:pb-20 2xl:pb-[135px]">
+    <section className="py-14 md:py-20 lg:py-20 2xl:py-[135px]">
       <div className="container">
         <div>
         
