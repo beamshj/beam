@@ -12,7 +12,7 @@ export async function GET(request: NextRequest) {
             return NextResponse.json({ message: "School not found" }, { status: 404 });
         }
         if(id){
-            const foundSchool = school.schools.find((school: any) => school._id.toString() === id);
+            const foundSchool = school.schools.find((school: { _id: string; }) => school._id.toString() === id);
             if (!foundSchool) {
                 return NextResponse.json({ message: "School not found" }, { status: 404 });
             }
@@ -39,7 +39,7 @@ export async function PATCH(request: NextRequest) {
             if (!school) {
                 return NextResponse.json({ message: "School not found" }, { status: 404 });
             }
-            school.schools = school.schools.map((school: any) => {
+            school.schools = school.schools.map((school: { _id: string; }) => {
                 if (school._id.toString() === id) {
                     return body;
                 }

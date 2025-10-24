@@ -20,7 +20,7 @@ import { useForm, Controller } from "react-hook-form";
 import { ImageUploader } from '@/components/ui/image-uploader'
 
 
-interface BlogsPageProps {
+interface NewsPageProps {
   metaTitle: string;
   metaDescription: string;
   banner:string;
@@ -34,21 +34,21 @@ interface BlogsPageProps {
 
 
 
-export default function Blogs() {
+export default function News() {
 
   const [category, setCategory] = useState<string>("");
-  const [blogList, setBlogList] = useState<{_id:string,title:string}[]>([]);
+  const [newsList, setNewsList] = useState<{_id:string,title:string}[]>([]);
   const [categoryList, setCategoryList] = useState<{ _id: string, name: string }[]>([]);
 
   const router = useRouter();
 
-  const { register, handleSubmit, setValue, control, formState: { errors } } = useForm<BlogsPageProps>();
+  const { register, handleSubmit, setValue, control, formState: { errors } } = useForm<NewsPageProps>();
 
 
 
   const handleAddCategory = async () => {
     try {
-      const response = await fetch("/api/admin/blogs/category", {
+      const response = await fetch("/api/admin/news/category", {
         method: "POST",
         body: JSON.stringify({ name: category }),
       });
@@ -69,7 +69,7 @@ export default function Blogs() {
 
   const handleFetchCategory = async () => {
     try {
-      const response = await fetch("/api/admin/blogs/category");
+      const response = await fetch("/api/admin/news/category");
       if (response.ok) {
         const data = await response.json();
         setCategoryList(data.data);
@@ -84,7 +84,7 @@ export default function Blogs() {
 
   const handleEditCategory = async (id: string) => {
     try {
-      const response = await fetch(`/api/admin/blogs/category?id=${id}`, {
+      const response = await fetch(`/api/admin/news/category?id=${id}`, {
         method: "PATCH",
         body: JSON.stringify({ name: category }),
       });
@@ -104,7 +104,7 @@ export default function Blogs() {
 
   const handleDeleteCategory = async (id: string) => {
     try {
-      const response = await fetch(`/api/admin/blogs/category?id=${id}`, {
+      const response = await fetch(`/api/admin/news/category?id=${id}`, {
         method: "DELETE",
       });
       if (response.ok) {
@@ -122,27 +122,27 @@ export default function Blogs() {
 
 
 
-  const handleDeleteBlog = async (id: string) => {
+  const handleDeleteNews = async (id: string) => {
     try {
-      const response = await fetch(`/api/admin/blogs?id=${id}`, {
+      const response = await fetch(`/api/admin/news?id=${id}`, {
         method: "DELETE",
       });
       if (response.ok) {
         const data = await response.json();
         alert(data.message);
-        handleFetchBlogs();
+        handleFetchNews();
       } else {
         const data = await response.json();
         alert(data.message);
       }
     } catch (error) {
-      console.log("Error deleting blog", error);
+      console.log("Error deleting news", error);
     }
   }
 
-  const onSubmit = async (data: BlogsPageProps) => {
+  const onSubmit = async (data: NewsPageProps) => {
     try {
-        const response = await fetch(`/api/admin/blogs`, {
+        const response = await fetch(`/api/admin/news`, {
             method: "PATCH",
             body: JSON.stringify(data),
         });
@@ -156,9 +156,9 @@ export default function Blogs() {
     }
 }
 
-  const handleFetchBlogs = async() => {
+  const handleFetchNews = async() => {
     try {
-      const response = await fetch("/api/admin/blogs");
+      const response = await fetch("/api/admin/news");
       if(response.ok) {
         const data = await response.json();
         setValue("metaTitle", data.data.metaTitle);
@@ -166,19 +166,19 @@ export default function Blogs() {
         setValue("banner", data.data.banner);
         setValue("bannerAlt", data.data.bannerAlt);
         setValue("pageTitle", data.data.pageTitle);
-        setBlogList(data.data.categories.flatMap((category: { blogs: { _id: string; }[]; }) => category.blogs));
+        setNewsList(data.data.categories.flatMap((category: { news: { _id: string; }[]; }) => category.news));
       }else{
         const data = await response.json();
         alert(data.message);
       }
     } catch (error) {
-      console.log("Error fetching blog details", error);
+      console.log("Error fetching news details", error);
     }
   }
 
   useEffect(() => {
     handleFetchCategory();
-    handleFetchBlogs();
+    handleFetchNews();
   }, [])
 
 
@@ -307,17 +307,17 @@ export default function Blogs() {
 
         <div className="h-screen w-full p-5 shadow-md border-gray-300 rounded-md overflow-y-hidden bg-white">
           <div className="flex justify-between border-b-2 pb-2">
-            <Label className="text-sm font-bold">Blogs</Label>
-            <Button onClick={() => router.push("/admin/blogs/add")}>Add Blog</Button>
+            <Label className="text-sm font-bold">News</Label>
+            <Button onClick={() => router.push("/admin/news/add")}>Add News</Button>
           </div>
           <div className="mt-2 flex flex-col gap-2 overflow-y-scroll h-[90%]">
-            {blogList.map((item) => (
+            {newsList.map((item) => (
               <div className="flex justify-between border p-2 items-center rounded-md shadow-md hover:shadow-lg transition-all duration-300" key={item._id}>
                 <div className="text-[16px]">
                   {item.title}
                 </div>
                 <div className="flex gap-5">
-                  <MdEdit onClick={() => router.push(`/admin/blogs/edit/${item._id}`)} />
+                  <MdEdit onClick={() => router.push(`/admin/news/edit/${item._id}`)} />
 
                   <Dialog>
                     <DialogTrigger><MdDelete /></DialogTrigger>
@@ -327,7 +327,7 @@ export default function Blogs() {
                       </DialogHeader>
                       <div className="flex gap-2">
                         <DialogClose className="bg-black text-white px-2 py-1 rounded-md">No</DialogClose>
-                        <DialogClose className="bg-black text-white px-2 py-1 rounded-md" onClick={() => handleDeleteBlog(item._id)}>Yes</DialogClose>
+                        <DialogClose className="bg-black text-white px-2 py-1 rounded-md" onClick={() => handleDeleteNews(item._id)}>Yes</DialogClose>
                       </div>
 
                     </DialogContent>

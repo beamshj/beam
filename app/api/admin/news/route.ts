@@ -1,25 +1,25 @@
 import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/lib/mongodb";
 import { verifyAdmin } from "@/lib/verifyAdmin";
-import Blog from "@/app/models/Blog";
+import News from "@/app/models/News";
 
 export async function GET(request: NextRequest) {
     try {
         await connectDB();
         const id = request.nextUrl.searchParams.get("id");
-        const blog = await Blog.findOne({});
-        if (!blog) {
-            return NextResponse.json({ message: "Blog not found" }, { status: 404 });
+        const news = await News.findOne({});
+        if (!news) {
+            return NextResponse.json({ message: "News not found" }, { status: 404 });
         }
         if(id){
-            const foundBlog = blog.categories.flatMap((category: { blogs: { _id: string; }; }) => category.blogs).find((blog: { _id: string; }) => blog._id.toString() === id);
-            console.log(foundBlog);
-            if (!foundBlog) {
-                return NextResponse.json({ message: "Blog not found" }, { status: 404 });
+            const foundNews = news.categories.flatMap((category: { news: { _id: string; }; }) => category.news).find((news: { _id: string; }) => news._id.toString() === id);
+            console.log(foundNews);
+            if (!foundNews) {
+                return NextResponse.json({ message: "News not found" }, { status: 404 });
             }
-            return NextResponse.json({data:foundBlog,message:"Blog fetched successfully"}, { status: 200 });
+            return NextResponse.json({data:foundNews,message:"News fetched successfully"}, { status: 200 });
         }
-        return NextResponse.json({data:blog,message:"Blog fetched successfully"}, { status: 200 });
+        return NextResponse.json({data:news,message:"News fetched successfully"}, { status: 200 });
     } catch (error) {
         console.log(error);
         return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
@@ -36,13 +36,13 @@ export async function PATCH(request: NextRequest) {
         }
         await connectDB();
         if(id){
-            const blog = await Blog.findOne({});
-            if (!blog) {
-                return NextResponse.json({ message: "Blog not found" }, { status: 404 });
+            const news = await News.findOne({});
+            if (!news) {
+                return NextResponse.json({ message: "News not found" }, { status: 404 });
             }
-            const toUpdate = blog.categories.flatMap((category: { blogs: { _id: string; }; }) => category.blogs).find((blog: { _id: string; }) => blog._id.toString() === id);
+            const toUpdate = news.categories.flatMap((category: { news: { _id: string; }; }) => category.news).find((news: { _id: string; }) => news._id.toString() === id);
             if (!toUpdate) {
-                return NextResponse.json({ message: "Blog not found" }, { status: 404 });
+                return NextResponse.json({ message: "News not found" }, { status: 404 });
             }
             toUpdate.title = body.title;
             toUpdate.slug = body.slug;
@@ -55,14 +55,14 @@ export async function PATCH(request: NextRequest) {
             toUpdate.content = body.content;
             toUpdate.metaTitle = body.metaTitle;
             toUpdate.metaDescription = body.metaDescription;
-            await blog.save();
-            return NextResponse.json({data:blog,message:"Blog updated successfully"}, { status: 200 });
+            await news.save();
+            return NextResponse.json({data:news,message:"News updated successfully"}, { status: 200 });
         }
-        const blog = await Blog.findOneAndUpdate({},body,{upsert:true,new:true});
-        if (!blog) {
-            return NextResponse.json({ message: "Blog not found" }, { status: 404 });
+        const news = await News.findOneAndUpdate({},body,{upsert:true,new:true});
+        if (!news) {
+            return NextResponse.json({ message: "News not found" }, { status: 404 });
         }
-        return NextResponse.json({data:blog,message:"Blog updated successfully"}, { status: 200 });
+        return NextResponse.json({data:news,message:"News updated successfully"}, { status: 200 });
     } catch (error) {
         console.log(error);
         return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
@@ -78,18 +78,18 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
         }
         await connectDB();
-        const blog = await Blog.findOne({});
-        if (!blog) {
-            return NextResponse.json({ message: "Blog not found" }, { status: 404 });
+        const news = await News.findOne({});
+        if (!news) {
+            return NextResponse.json({ message: "News not found" }, { status: 404 });
         }
-        const category = blog.categories.find((category: { name: string; }) => category.name === body.category);
+        const category = news.categories.find((category: { name: string; }) => category.name === body.category);
         console.log(category);
         if (!category) {
             return NextResponse.json({ message: "Category not found" }, { status: 404 });
         }
-        category.blogs.push(body);
-        await blog.save();
-        return NextResponse.json({message:"Blog added successfully"}, { status: 200 });
+        category.news.push(body);
+        await news.save();
+        return NextResponse.json({message:"News added successfully"}, { status: 200 });
     } catch (error) {
         console.log(error);
         return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
@@ -98,7 +98,7 @@ export async function POST(request: NextRequest) {
 
 export async function DELETE(request: NextRequest) {
   try {
-    const blogId = request.nextUrl.searchParams.get("id"); // ✅ this is the blog _id
+    const newsId = request.nextUrl.searchParams.get("id"); // ✅ this is the blog _id
     const isAdmin = await verifyAdmin(request);
 
     if (!isAdmin) {
@@ -106,38 +106,38 @@ export async function DELETE(request: NextRequest) {
     }
 
     await connectDB();
-    const blogDoc = await Blog.findOne({});
-    if (!blogDoc) {
-      return NextResponse.json({ message: "Blog document not found" }, { status: 404 });
+    const newsDoc = await News.findOne({});
+    if (!newsDoc) {
+      return NextResponse.json({ message: "News document not found" }, { status: 404 });
     }
 
-    let blogDeleted = false;
+    let newsDeleted = false;
 
     // Loop through categories and remove the blog with given id
-    blogDoc.categories = blogDoc.categories.map((category: { blogs: { _id: string; }[]; }) => {
-      const hasBlog = category.blogs.some((b: { _id: string; }) => b._id.toString() === blogId);
-      if (hasBlog) {
-        blogDeleted = true;
+    newsDoc.categories = newsDoc.categories.map((category: { news: { _id: string; }[]; }) => {
+      const hasNews = category.news.some((n: { _id: string; }) => n._id.toString() === newsId);
+      if (hasNews) {
+        newsDeleted = true;
         return {
           ...category,
-          blogs: category.blogs.filter((b: { _id: string; }) => b._id.toString() !== blogId),
+          news: category.news.filter((n: { _id: string; }) => n._id.toString() !== newsId),
         };
       }
       return category;
     });
 
-    if (!blogDeleted) {
-      return NextResponse.json({ message: "Blog not found" }, { status: 404 });
+    if (!newsDeleted) {
+      return NextResponse.json({ message: "News not found" }, { status: 404 });
     }
 
-    await blogDoc.save();
+    await newsDoc.save();
 
     return NextResponse.json(
-      { message: "Blog deleted successfully" },
+      { message: "News deleted successfully" },
       { status: 200 }
     );
   } catch (error) {
-    console.error("Error deleting blog:", error);
+    console.error("Error deleting news:", error);
     return NextResponse.json(
       { message: "Internal Server Error" },
       { status: 500 }

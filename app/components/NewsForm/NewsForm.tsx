@@ -21,7 +21,7 @@ const ReactQuill = dynamic(() => import('react-quill-new'), { ssr: false })
 import 'react-quill-new/dist/quill.snow.css';
 import dynamic from 'next/dynamic'
 
-interface BlogFormProps {
+interface NewsFormProps {
     
 title:string;
 slug:string;
@@ -36,33 +36,33 @@ metaTitle:string;
 metaDescription:string;
 }
 
-const BlogFormPage = ({editMode}: {editMode?: boolean}) => {
+const NewsFormPage = ({editMode}: {editMode?: boolean}) => {
 
 const {id} = useParams();
 const router = useRouter();
-    const { register, handleSubmit, setValue, control, formState: { errors }, watch } = useForm<BlogFormProps>();
+    const { register, handleSubmit, setValue, control, formState: { errors }, watch } = useForm<NewsFormProps>();
     const [categoryList, setCategoryList] = useState<{ _id: string, name: string }[]>([]);
 
 
-    const handleAddBlog = async (data: BlogFormProps) => {
+    const handleAddNews = async (data: NewsFormProps) => {
         try {
-            const response = await fetch(editMode ? `/api/admin/blogs?id=${id}` : `/api/admin/blogs`, {
+            const response = await fetch(editMode ? `/api/admin/news?id=${id}` : `/api/admin/news`, {
                 method: editMode ? "PATCH" : "POST",
                 body: JSON.stringify(data),
             });
             if (response.ok) {
                 const data = await response.json();
                 alert(data.message);
-                router.push("/admin/blogs");
+                router.push("/admin/news");
             }
         } catch (error) {
-            console.log("Error in adding blog", error);
+            console.log("Error in adding news", error);
         }
     }
 
-    const fetchBlogData = async () => {
+    const fetchNewsData = async () => {
         try {
-            const response = await fetch(`/api/admin/blogs?id=${id}`);
+            const response = await fetch(`/api/admin/news?id=${id}`);
             if (response.ok) {
                 const data = await response.json();
                 console.log(data);
@@ -83,7 +83,7 @@ const router = useRouter();
                 alert(data.message);
             }
         } catch (error) {
-            console.log("Error in fetching blog data", error);
+            console.log("Error in fetching news data", error);
         }
     }
 
@@ -91,7 +91,7 @@ const router = useRouter();
 
     const handleFetchCategory = async() => {
         try {
-            const response = await fetch("/api/admin/blogs/category");
+            const response = await fetch("/api/admin/news/category");
             if(response.ok) {
                 const data = await response.json();
                 setCategoryList(data.data);
@@ -103,7 +103,7 @@ const router = useRouter();
 
     useEffect(() => {
         if (editMode) {
-             handleFetchCategory().then(() => fetchBlogData());
+             handleFetchCategory().then(() => fetchNewsData());
         } else {
             handleFetchCategory();
         }
@@ -130,7 +130,7 @@ const router = useRouter();
 
     return (
         <div className='flex flex-col gap-5'>
-            <form className='flex flex-col gap-5' onSubmit={handleSubmit(handleAddBlog)}>
+            <form className='flex flex-col gap-5' onSubmit={handleSubmit(handleAddNews)}>
 
 
                 <AdminItemContainer>
@@ -268,4 +268,4 @@ const router = useRouter();
     )
 }
 
-export default BlogFormPage
+export default NewsFormPage
