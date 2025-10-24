@@ -1,12 +1,13 @@
 import InnerBanner from "@/app/components/Common/InnerBanner";
-import { BannerData, gmMessageData } from "./data";
+import { BannerData } from "./data";
 import GmMessage from "./sections/GmMessage";
+import { GmMessageProps } from "./type";
 
-const Index = () => {
+const Index = ({data}: {data: GmMessageProps}) => {
   return (
     <>
-      <InnerBanner BannerData={BannerData} />
-      <GmMessage data={gmMessageData} />
+      <InnerBanner BannerData={BannerData} pageTitle={data.pageTitle} banner={data.banner} bannerAlt={data.bannerAlt}/>
+      <GmMessage data={data.firstSection} />
     </>
   );
 };

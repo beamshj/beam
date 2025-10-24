@@ -4,18 +4,14 @@ import Image from "next/image";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { moveUp } from "../../motionVarients";
-export interface ValueItem {
-  number: string;
-  title: string;
-  points: string[];
-  image: string;
-}
+import { AboutProps } from "../type";
+
 
 interface Props {
-  values: ValueItem[];
+  data: AboutProps['thirdSection'];
 }
 
-export default function ValuesGrid({ values }: Props) {
+export default function ValuesGrid({data }: Props) {
   const [hovered, setHovered] = useState<number | null>(0);
 
   return (
@@ -28,10 +24,10 @@ export default function ValuesGrid({ values }: Props) {
           viewport={{ once: true, amount: 0.2 }}
           className="text-xl font-light mb-3 lg:mb-6 xl:mb-[40px] 2xl:mb-[50px] leading-[1.2] text-black"
         >
-          Our Values
+          {data.title}
         </motion.h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-[11px]">
-          {values?.map((item, index) => (
+          {data.items?.map((item, index) => (
             <motion.div
               variants={moveUp(index * 0.1)}
               initial="hidden"
@@ -50,7 +46,7 @@ export default function ValuesGrid({ values }: Props) {
                   hovered === index ? "text-black" : "text-bdrcolor"
                 }`}
               >
-                {item.number}
+                {index < 9 ? "0" + (index + 1) : index + 1}
               </motion.div>
 
               {/* Card */}
@@ -66,7 +62,7 @@ export default function ValuesGrid({ values }: Props) {
                 {/* Background image */}
                 <Image
                   src={item.image}
-                  alt={item.title}
+                  alt={item.imageAlt}
                   fill
                   className={`object-cover w-full transition-all duration-300 group-hover:scale-105 ${
                     hovered === index
@@ -106,13 +102,14 @@ export default function ValuesGrid({ values }: Props) {
                       <div
                         className="absolute bottom-0 left-0 w-full 
                bg-gradient-to-t from-black/100 to-black/0
-               px-3 pt-4 pb-5"
+               px-3 pt-4 pb-5 values-description-about" dangerouslySetInnerHTML={{__html: item.description}}
                       >
-                        <ul className="list-disc list-outside pl-4 xl:pl-9 space-y-1 text-sm text-white font-light">
+                        {/* <ul className="list-disc list-outside pl-4 xl:pl-9 space-y-1 text-sm text-white font-light">
                           {item.points.map((point, i) => (
                             <li key={i}>{point}</li>
                           ))}
-                        </ul>
+                        </ul> */}
+                        {/* {item.description} */}
                       </div>
                     )}
                   </div>

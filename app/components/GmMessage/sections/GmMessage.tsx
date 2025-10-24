@@ -4,17 +4,12 @@ import Image from "next/image";
 import SplitText from "@/components/SplitText";
 import { motion } from "framer-motion";
 import { moveUp, moveRight } from "../../motionVarients";
-interface GmMessageProps {
-  title: string;
-  photo: string;
-  name: string;
-  designation: string;
-  intro: string;
-  description: string;
-}
+import { GmMessageProps } from "../type";
 
-export default function GmMessage({ data }: { data: GmMessageProps }) {
-  const { title, intro, photo, name, designation, description } = data;
+
+
+export default function GmMessage({ data }: { data: GmMessageProps['firstSection'] }) {
+  // const { title, intro, photo, name, designation, description } = data;
 
   return (
     <section className="pb-12 md:pb-20 xl:pb-[135px] pt-12  md:pt-20 xl:pt-25">
@@ -30,7 +25,7 @@ export default function GmMessage({ data }: { data: GmMessageProps }) {
             ))}{" "} */}
           <SplitText
             tag="h2"
-            text={title}
+            text={data.title}
             className="text-lg md:text-xl xl:text-3xl 2xl:text-4xl leading-[1.1111] font-light text-black mb-6 xl:mb-[30px] 2xl:mb-[50px]"
             delay={100}
             duration={1}
@@ -47,8 +42,8 @@ export default function GmMessage({ data }: { data: GmMessageProps }) {
            <div className="relative xl:hidden w-full h-[440px] md:h-auto  xl:h-full rounded-[12px] overflow-hidden bg-[#F6F6F6] mb-[20px]">
                      <div className="absolute inset-0 rounded-[12px]  bg-[linear-gradient(163.29deg,rgba(66,186,220,0)_53.09%,#00C7FF_109.87%)] opacity-60 z-10 pointer-events-none" />
                      <Image
-                       src={photo}
-                       alt={name}
+                       src={data.image}
+                       alt={data.imageAlt}
                        height={540}
                        width={616}
                        className="object-contain xl:object-cover w-fit xl:w-[547px] h-[540px] z-0 rounded-[12px]  absolute right-0 md:relative"
@@ -60,12 +55,12 @@ export default function GmMessage({ data }: { data: GmMessageProps }) {
                        bg-gradient-to-r from-[#F5EBFF] to-[#C9F3FF]"
                      >
                        <p className="text-md md:text-xl leading-[1.2] font-light text-black mb-[6px]">
-                         {name}
+                         {data.name}
                        </p>
                        <p className="text-sm xl:text-base leading-[1.31] font-light text-[#666666]">
                          {(() => {
-                           const words = designation.trim().split(" ");
-                           if (words.length <= 1) return designation;
+                           const words = data.designation.trim().split(" ");
+                           if (words.length <= 1) return data.designation;
                            const lastWord = words.pop();
                            const firstPart = words.join(" ");
                            return (
@@ -81,7 +76,7 @@ export default function GmMessage({ data }: { data: GmMessageProps }) {
                    </div>
 
           <div className="text-colorpara font-light text-sm leading-[1.526] space-y-3 2xl:space-y-7 mt-7 lg:mt-0">
-            {intro.split("\n").map(
+            {data.firstDescription.split("\n").map(
               (line, idx) =>
                 line.trim() && (
                   <div key={idx} className="whitespace-pre-line ">
@@ -120,7 +115,7 @@ export default function GmMessage({ data }: { data: GmMessageProps }) {
             viewport={{ once: true, amount: 0.2 }}
             className="hidden xl:block absolute right-0 left-[44px] z-10 bottom-0 h-full xl:w-[567px] rounded-[12px] overflow-hidden"
           >
-            <Image src={photo} alt={name} fill className="object-cover" />
+            <Image src={data.image} alt={data.imageAlt} fill className="object-cover" />
           </motion.div>
 
           <motion.div
@@ -135,12 +130,12 @@ export default function GmMessage({ data }: { data: GmMessageProps }) {
             }}
           >
             <p className="text-xl leading-[1.2] font-light text-black mb-[6px]">
-              {name}
+              {data.name}
             </p>
             <p className="text-sm leading-[1.31] font-light text-[#666666]">
               {(() => {
-                const words = designation.trim().split(" ");
-                if (words.length <= 1) return designation;
+                const words = data.designation.trim().split(" ");
+                if (words.length <= 1) return data.designation;
                 const lastWord = words.pop();
                 const firstPart = words.join(" ");
                 return (
@@ -156,7 +151,7 @@ export default function GmMessage({ data }: { data: GmMessageProps }) {
         </div>
       </div>
       <div className="container mt-0 xl:mt-[50px] text-colorpara font-light text-sm leading-[1.526] space-y-3 xl:space-y-7">
-        {description.split("\n").map(
+        {data.secondDescription.split("\n").map(
           (line, idx) =>
             line.trim() && (
               <div key={idx} className="whitespace-pre-line">

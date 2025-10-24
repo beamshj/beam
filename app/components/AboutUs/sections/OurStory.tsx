@@ -6,21 +6,18 @@ import { moveUp } from "../../motionVarients";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { AboutProps } from "../type";
+
 gsap.registerPlugin(ScrollTrigger);
-interface OurStoryData {
-  title: string;
-  imageTitle: string;
-  highlight: string;
-  description: string;
-  imageUrl: string;
-}
+
 
 interface OurStorySectionProps {
-  data: OurStoryData;
+  data: AboutProps['firstSection'];
 }
 
 const OurStorySection: React.FC<OurStorySectionProps> = ({ data }) => {
   const imageRef = useRef<HTMLImageElement>(null);
+
 
   useEffect(() => {
     if (imageRef.current) {
@@ -42,7 +39,7 @@ const OurStorySection: React.FC<OurStorySectionProps> = ({ data }) => {
           <h1 className="text-lg md:text-xl xl:text-3xl 2xl:text-4xl font-light leading-[1.111111111] text-black"> 
           <SplitText
             tag="span"
-            text={data.title}
+            text={data.mainTitle}
             className=""
             delay={100}
             duration={0.6}
@@ -58,11 +55,11 @@ const OurStorySection: React.FC<OurStorySectionProps> = ({ data }) => {
         </div>
         {/* Title + Image */}
         <div className="relative rounded-[12px] overflow-hidden">
-          <Image src={data.imageUrl} alt="Our Story Background" width={1200} height={500} className="w-full h-50 md:h-[300px] lg:h-[455px] xl:h-[500px] 2xl:h-[605px] object-cover" ref={imageRef} />
+          <Image src={data.image} alt={data.imageAlt} width={1200} height={500} className="w-full h-50 md:h-[300px] lg:h-[455px] xl:h-[500px] 2xl:h-[605px] object-cover" ref={imageRef} />
           {/* Gradient overlay */}
           <div className="absolute bottom-0 w-full h-[60%] bg-gradient-to-t from-black to-transparent"></div>
           <motion.h2 variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="absolute left-[20px] bottom-[20px] right-[20px] lg:right-0  xl:left-[50px] xl:bottom-[40px] 2xl:left-[60px] 2xl:bottom-[50px] text-white text-md md:text-lg max-w-[20ch] xl:max--w-0 xl:text-xl 2xl:text-4xl font-light leading-[1.111111111]">
-            {data.imageTitle}{" "}
+            {data.subTitle}{" "}
             <span className="text-primary">{data.highlight}</span>
           </motion.h2>
           

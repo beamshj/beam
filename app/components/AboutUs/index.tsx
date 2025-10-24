@@ -1,12 +1,5 @@
 import InnerBanner from "@/app/components/Common/InnerBanner";
 import {
-  BannerData,
-  ourStory,
-  visionMissionItems,
-  items,
-  valuesData,
-  inclusionData,
-  healthSafetyData,
   cards,
 } from "./data";
 import OurStorySection from "./sections/OurStory";
@@ -16,17 +9,18 @@ import InclusionSection from "./sections/Inclusion";
 import HealthSafety from "./sections/HealthandSafety";
 import MoreToExplore from "./sections/MoreToExplore";
 import Milestones from "./sections/Milestones";
+import { AboutProps } from "./type";
 
-const Index = () => {
+const Index = ({ data }: { data: AboutProps }) => {
   return (
     <>
-      <InnerBanner BannerData={BannerData} />
-      <OurStorySection data={ourStory} />
-      <VisionMissionSection visionMissionItems={visionMissionItems} />
-      <ValuesGrid values={valuesData} />
-      <Milestones items={items} />
-      <InclusionSection data={inclusionData} />
-      <HealthSafety data={healthSafetyData} />
+      <InnerBanner banner={data.banner} bannerAlt={data.bannerAlt} pageTitle={data.pageTitle}/>
+      <OurStorySection data={data.firstSection} />
+      <VisionMissionSection data={data.secondSection}/>
+      <ValuesGrid data={data.thirdSection}/>
+      <Milestones data={data.historySection}/>
+      <InclusionSection data={data.fifthSection} />
+      <HealthSafety data={data.sixthSection} />
       <MoreToExplore data={cards} />
     </>
   );

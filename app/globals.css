@@ -539,3 +539,12 @@ body {
 h1, h2.text-xl{    letter-spacing: -4px;}
 h2.text-xl{    letter-spacing: -4px;}
 }
+
+
+.values-description-about {
+
+  ol {
+    @apply list-disc list-outside pl-4 xl:pl-9 space-y-1 text-sm text-white font-light;
+
+  }
+}

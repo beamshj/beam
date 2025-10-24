@@ -4,20 +4,13 @@ import Image from "next/image";
 import SplitText from "@/components/SplitText";
 import { motion } from "framer-motion";
 import { moveRight, moveUp } from "../../motionVarients";
-interface FounderMessageProps {
-  title: string;
-  photo: string;
-  name: string;
-  designation: string;
-  description: string;
-}
+import { FounderMessageProps } from "../type";
 
 export default function FounderMessage({
   data,
 }: {
-  data: FounderMessageProps;
+  data: FounderMessageProps['firstSection'];
 }) {
-  const { title, description, photo, name, designation } = data;
 
   return (
     <section className="pb-12 md:pb-20 xl:pb-[135px] pt-12 md:pt-20 xl:pt-0">
@@ -25,7 +18,7 @@ export default function FounderMessage({
         {/* Left Column */}
         <div className="w-full xl:max-w-[55%] order-2 xl:order-1">
           <h2 className="text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl leading-[1.1111] font-light text-black mb-6 xl:mb-[30px] 2xl:mb-[50px]">
-            {title.split("\n").map((line, idx) => (
+            {data.title.split("\n").map((line, idx) => (
               <span key={idx} className="xl:flex">
                 <SplitText
                   tag="span"
@@ -48,8 +41,8 @@ export default function FounderMessage({
           <div className="relative xl:hidden w-full h-[440px] md:h-auto  xl:h-full rounded-[12px] overflow-hidden bg-[#F6F6F6] mb-[20px]">
             <div className="absolute inset-0 rounded-[12px]  bg-[linear-gradient(163.29deg,rgba(66,186,220,0)_53.09%,#00C7FF_109.87%)] opacity-60 z-10 pointer-events-none" />
             <Image
-              src={photo}
-              alt={name}
+              src={data.image}
+              alt={data.imageAlt}
               height={540}
               width={616}
               className="object-contain xl:object-cover w-fit xl:w-[547px] h-[540px] z-0 rounded-[12px]  absolute right-0 md:relative"
@@ -61,12 +54,12 @@ export default function FounderMessage({
               bg-gradient-to-r from-[#F5EBFF] to-[#C9F3FF]"
             >
               <p className="text-md md:text-xl leading-[1.2] font-light text-black mb-[6px]">
-                {name}
+                {data.name}
               </p>
               <p className="text-sm xl:text-base leading-[1.31] font-light text-[#666666]">
                 {(() => {
-                  const words = designation.trim().split(" ");
-                  if (words.length <= 1) return designation;
+                  const words = data.designation.trim().split(" ");
+                  if (words.length <= 1) return data.designation;
                   const lastWord = words.pop();
                   const firstPart = words.join(" ");
                   return (
@@ -82,7 +75,7 @@ export default function FounderMessage({
           </div>
 
           <div className="text-colorpara font-light text-sm leading-[1.526] space-y-2 xl:space-y-6">
-            {description.split("\n").map(
+            {data.description.split("\n").map(
               (line, idx) =>
                 line.trim() && (
                   <div key={idx} className="whitespace-pre-line">
@@ -121,8 +114,8 @@ export default function FounderMessage({
             className="hidden xl:block absolute right-0 left-[44px] z-10 bottom-0 h-full w-full xl:w-[567px] rounded-[12px] overflow-hidden"
           >
             <Image
-              src={photo}
-              alt={name}
+              src={data.image}
+              alt={data.imageAlt}
               fill
               className="object-cover w-full"
             />
@@ -140,12 +133,12 @@ export default function FounderMessage({
             }}
           >
             <p className="text-xl leading-[1.2] font-light text-black mb-[6px]">
-              {name}
+              {data.name}
             </p>
             <p className="text-sm leading-[1.31] font-light text-[#666666]">
               {(() => {
-                const words = designation.trim().split(" ");
-                if (words.length <= 1) return designation;
+                const words = data.designation.trim().split(" ");
+                if (words.length <= 1) return data.designation;
                 const lastWord = words.pop();
                 const firstPart = words.join(" ");
                 return (

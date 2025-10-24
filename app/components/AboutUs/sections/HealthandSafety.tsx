@@ -5,19 +5,11 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { moveUp } from "../../motionVarients";
 import SplitText from "@/components/SplitText";
-interface HealthSafetyProps {
-  title: string;
-  description: string;
-  items: {
-    id: number;
-    title: string;
-    image: string;
-  }[];
-}
+import { AboutProps } from "../type";
 
-export default function HealthSafety({ data }: { data: HealthSafetyProps }) {
+
+export default function HealthSafety({ data }: { data:AboutProps['sixthSection']  }) {
   const [active, setActive] = useState(0);
-  const { title, description, items } = data;
 
   return (
     <section>
@@ -28,7 +20,7 @@ export default function HealthSafety({ data }: { data: HealthSafetyProps }) {
             <h2 className="text-lg lg:text-xl xl:text-3xl 2xl:text-4xl font-light text-black mb-3 xl:mb-10 2xl:mb-[50px]">
               <SplitText
                 tag="span"
-                text={title}
+                text={data.title}
                 className=""
                 delay={100}
                 duration={0.6}
@@ -48,14 +40,14 @@ export default function HealthSafety({ data }: { data: HealthSafetyProps }) {
               viewport={{ once: true, amount: 0.2 }}
               className="text-[#626262] text-sm mb-[50px] leading-[1.52] md:max-w-[55ch]"
             >
-              {description}
+              {data.description}
             </motion.p>
 
             <div className="xl:hidden mb-10 rounded-xl overflow-hidden">
               {/* <Image src={items[active].image} alt={items[active].title} fill className="object-cover object-center" /> */}
               <Image
-                src={items[active].image}
-                alt={items[active].title}
+                src={data.items[active].image}
+                alt={data.items[active].title}
                 width={300}
                 height={300}
                 className="xl:object-contain object-cover w-full h-[250px] xl:object-top-left"
@@ -63,9 +55,9 @@ export default function HealthSafety({ data }: { data: HealthSafetyProps }) {
             </div>
 
             <ul className="group space-y-[30px] order-3">
-              {items.map((item, index) => (
+              {data.items.map((item, index) => (
                 <motion.li
-                  key={item.id}
+                  key={index}
                   variants={moveUp(index * 0.2)}
                   initial="hidden"
                   whileInView="show"
@@ -81,7 +73,7 @@ export default function HealthSafety({ data }: { data: HealthSafetyProps }) {
                         active === index ? "text-black" : "text-[#626262]"
                       }`}
                     >
-                      {String(item.id).padStart(2, "0")}
+                      {String(index+1).padStart(2, "0")}
                     </span>
                     <span className="text-[1.2rem] xl:text-lg 2xl:text-xl font-light leading-[1.2] hover:text-primary transition-all duration-300">
                       {item.title}
@@ -115,12 +107,12 @@ export default function HealthSafety({ data }: { data: HealthSafetyProps }) {
             <div className="relative w-full h-[400px] md:h-[500px] xl:h-[600px] 2xl:h-[743px] rounded-[12px] overflow-hidden">
               <AnimatePresence mode="wait">
                 <motion.div
-                  key={items[active].image}
+                  key={data.items[active].image}
                   className="absolute inset-0"
                 >
                   <Image
-                    src={items[active].image}
-                    alt={items[active].title}
+                    src={data.items[active].image}
+                    alt={data.items[active].title}
                     fill
                     className="object-cover object-center"
                   />
