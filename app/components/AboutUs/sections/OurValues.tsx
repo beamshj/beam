@@ -25,7 +25,7 @@ export default function ValuesGrid({ data }: Props) {
         >
           {data.title}
         </motion.h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-[11px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-4 xl:gap-5 2xl:gap-[11px]">
           {data.items?.map((item, index) => (
             <motion.div
               variants={moveUp(index * 0.1)}
@@ -56,7 +56,7 @@ export default function ValuesGrid({ data }: Props) {
                 viewport={{ once: true, amount: 0.2 }}
                 onMouseEnter={() => setHovered(index)}
                 onMouseLeave={() => setHovered(index)}
-                className="relative h-[400px] lg:h-[430px] xl:h-[500px] 2xl:h-[729px] w-full xl:max-w-[295px] overflow-hidden rounded-[12px]  group cursor-pointer"
+                className="relative h-[400px] lg:h-[430px] xl:h-[500px] 2xl:h-[729px] w-full 2xl:max-w-[295px] overflow-hidden rounded-[12px]  group cursor-pointer"
               >
                 {/* Background image */}
                 <Image
