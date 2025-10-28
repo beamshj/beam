@@ -3,12 +3,15 @@
 import ClientSideLink from '@/app/(admin)/admin/client-side-link';
 import React, { useState } from 'react'
 import {
+  BriefcaseIcon,
     NewspaperIcon,
     UserGroupIcon,
   } from "@heroicons/react/24/outline";
-import {BookA, GalleryThumbnails, InfoIcon, LucideSword, PhoneIcon,Share2Icon, Workflow } from 'lucide-react';
+import {BookA, GalleryThumbnails, InfoIcon, LucideSword, PhoneIcon,Share2Icon, Workflow, AwardIcon,HomeIcon } from 'lucide-react';
 // import { useRefetchServices } from '@/app/contexts/refetchServices';
 import { MdManageAccounts, MdReviews } from 'react-icons/md';
+import { TbBellStar } from 'react-icons/tb';
+import { FaMoneyBill } from 'react-icons/fa6';
 
 
 
@@ -29,7 +32,7 @@ const AdminNavbar = () => {
   // }
 
     const navItems = [
-        // { name: "Home", href: "/admin/home", icon: HomeIcon },
+        { name: "Home", href: "/admin/home", icon: HomeIcon },
         { name: "About", href: "/admin/about", icon: InfoIcon },
         { name: "Founder's Message", href: "/admin/founders-message", icon: LucideSword },
         { name: "Manager's Message", href: "/admin/managers-message", icon: MdManageAccounts },
@@ -44,6 +47,10 @@ const AdminNavbar = () => {
         { name: "Blogs", href: "/admin/blogs", icon: Share2Icon },
         { name: "News", href: "/admin/news", icon: NewspaperIcon },
         { name: "Gallery", href: "/admin/gallery", icon: GalleryThumbnails },
+        { name: "Accreditations", href: "/admin/accreditations", icon: AwardIcon },
+         { name: "School Uniqueness", href: "/admin/school-uniqueness", icon: TbBellStar },
+         { name: "School Achievements", href: "/admin/school-achievements", icon: BriefcaseIcon },
+         { name: "Scholarship Programs", href: "/admin/scholarship-programs", icon: FaMoneyBill },
         // { name: "Our Team", href: "/admin/team", icon: UserGroupIcon },
         // { name: "Group Company", href: "/admin/group-company", icon: GroupIcon },
         // { name: "Awards", href: "/admin/awards", icon: AwardIcon },
