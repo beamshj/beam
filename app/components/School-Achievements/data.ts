@@ -6,7 +6,7 @@ export const BannerData = {
 export const proudMomentsData = {
   title: "Proud Moments Watch the Highlights",
   photo: "/images/school-achievements/proud.jpg",
-  vdoLink: "https://www.youtube.com/embed/x5XZnj6Cu0c?autoplay=1",
+  vdoLink: "/video/video.mp4",
 };
 
 export const achievementsData = {
@@ -19,56 +19,54 @@ export const achievementsData = {
       logo: "/images/school-achievements/logos/1.jpg",
       title: "Highest Attainment Award",
       description:
-        "Recognized for exceptional academic excellence and student achievement across all grade levels.",
+        "ASCS Nad Al Sheba, awarded School With The Highest Attainment award for Arabic as a first language, by A.B.T., the international benchmark test for Arabic and Islamic Studies, Jun 2022.",
     },
     {
       id: 2,
       logo: "/images/school-achievements/logos/sa2.png",
       title: "School Excellence Award",
       description:
-        "Awarded for outstanding performance in educational quality and innovation.",
+        "ISCS Muwaileh, nominated for a School Excellence Award, organized by the Arab Bureau of Education for the Gulf States, March 2022",
     },
     {
       id: 3,
       logo: "/images/school-achievements/logos/sa3.png",
       title: "School of the Month",
-      description:
-        "ASCS Maliha Road received the School of the Month award from SPEA in November 2021 for excellence.",
+      description: "ASCS Maliha Road, School of the Month, SPEA, Nov 2021.",
     },
     {
       id: 4,
       logo: "/images/school-achievements/logos/sa4.png",
       title: "Finalist Top Schools Award",
       description:
-        "Selected as a finalist for the prestigious Top Schools Award.",
+        "ASCS NAS, Finalist for Top Schools Award, Best Arabic Blended Curriculum, SchoolsCompared.com, Nov 2021",
     },
     {
       id: 5,
       logo: "/images/school-achievements/logos/sa5.png",
       title: "Child-Friendly School",
-      description:
-        "Certified as a child-friendly institution providing safe and nurturing environment.",
+      description: "ISCS Muwaileh, Child-Friendly School, SPEA, Jun 2021",
     },
     {
       id: 6,
       logo: "/images/school-achievements/logos/sa6.png",
       title: "Outstanding in Health & Safety",
       description:
-        "Recognized for exceptional health and safety standards and practices.",
+        "ISCS Nad Al Sheba, Outstanding in Health & Safety by the KHDA.",
     },
     {
       id: 7,
       logo: "/images/school-achievements/logos/sa7.png",
       title: "Excellence in Education Award",
       description:
-        "Honored for excellence in educational delivery and student outcomes.",
+        "Excellence in Education, with accolades for Distinguished School in UAE and Distinguished Teacher in Sharjah, SEC.",
     },
     {
       id: 8,
       logo: "/images/school-achievements/logos/sa8.png",
       title: "Sharjah Noble Quran & Sunnah",
       description:
-        "Awarded for outstanding Islamic education and Quran teaching programs.",
+        "Awarded by the Sharjah Noble Quran & Sunnah Est. for efforts in motivating students to memorize the Holy Quran.",
     },
   ],
 };

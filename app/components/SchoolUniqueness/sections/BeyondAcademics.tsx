@@ -63,7 +63,7 @@ const BeyondAcademics = ({
               return (
                 <div
                   key={index}
-                  className={` relative h-[400px] md:h-[500px]  lg:h-[549px]  2xl:h-[549px] rounded-[12px] flex flex-col p-4 md:p-0 overflow-hidden transition-all ease-in-out duration-400  ${
+                  className={` relative h-[450px] md:h-[500px]  lg:h-[549px]  2xl:h-[549px] rounded-[12px] flex flex-col p-4 md:p-0 overflow-hidden transition-all ease-in-out duration-400  ${
                     isActive ? "w-full md:w-[50%]" : "w-full  md:w-[25%]"
                   } group `}
                   style={{
@@ -110,7 +110,7 @@ const BeyondAcademics = ({
 
                     {/* Description */}
                     <div
-                      className={`transition-all duration-600 ease-in-out overflow-hidden`}
+                      className={`transition-all duration-600 ease-in-out overflow-y-auto lg:overflow-y-hidden`}
                       style={{
                         maxHeight: isActive ? 310 : 0, // animate between 0 and 500px
                         opacity: isActive ? 1 : 0, // optional fade effect
