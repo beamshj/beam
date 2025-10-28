@@ -6,22 +6,12 @@ export const BannerData = {
 export const OurSchoolsData = {
   title: "Our Schools",
   description:
-    "Explore our expanding network of schools and stay updated on key developments.",
+    "BEAM’s Creative Science Schools are located in key communities of Dubai and Sharjah, such as Nad Al Sheba, Maliha, and Muwaileh",
   schools: [
     {
-      title: "International School of Creative Science",
-      location: "Muwaileh, Sharjah",
+      title: "City Gate Tower",
+      location: "Al Ittihad St, Sharjah",
       img: "/images/home/sc1.jpg",
-    },
-    {
-      title: "International School of Creative Science",
-      location: "Nad Al Sheba, Dubai",
-      img: "/images/home/sc2.jpg",
-    },
-    {
-      title: "International School of Creative Science",
-      location: "Al Riffa, Bahrain",
-      img: "/images/home/sc3.jpg",
     },
     {
       title: "American School of Creative Science",
@@ -30,13 +20,23 @@ export const OurSchoolsData = {
     },
     {
       title: "American School of Creative Science",
+      location: "Al Layyah, Sharjah",
+      img: "/images/beam-schools/ascs-layyah.png",
+    },
+    {
+      title: "International School of Creative Science",
+      location: "Muwaileh, Sharjah",
+      img: "/images/home/sc1.jpg",
+    },
+    {
+      title: "American School of Creative Science",
       location: "Nad Al Sheba, Dubai",
       img: "/images/beam-schools/ascs-nas.png",
     },
     {
-      title: "American School of Creative Science",
-      location: "Al Layyah, Sharjah",
-      img: "/images/beam-schools/ascs-layyah.png",
+      title: "International School of Creative Science",
+      location: "Nad Al Sheba, Dubai",
+      img: "/images/home/sc2.jpg",
     },
-      ],
+  ],
 };

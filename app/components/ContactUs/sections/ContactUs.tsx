@@ -59,7 +59,7 @@ const ContactForm: React.FC = () => {
             viewport={{ once: true, amount: 0.2 }}
             className="text-colorpara font-light text-sm leading-[1.52] mt-[13px]"
           >
-            Together, we can manage smarter and learn further.
+            We are here to answer any question you may have.
           </motion.p>
           <div className="mt-[13px] text-sm leading-[1.52] font-light">
             <motion.h2
@@ -84,11 +84,13 @@ const ContactForm: React.FC = () => {
             </motion.p>
             <div className="space-y-[17px] mt-[17px]">
               {/* First row */}
-              <motion.div className="flex items-center gap-[20px]"
-               variants={moveUp(0.5)}
-                  initial="hidden"
-                  whileInView="show"
-                  viewport={{ once: true, amount: 0.2 }}>
+              <motion.div
+                className="flex items-center gap-[20px]"
+                variants={moveUp(0.5)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.2 }}
+              >
                 <Image
                   src="/images/contact-us/icons/phone.svg"
                   alt="Location"
@@ -108,11 +110,13 @@ const ContactForm: React.FC = () => {
               </motion.div>
 
               {/* Second row */}
-              <motion.div className="flex items-center gap-[20px]"
-               variants={moveUp(0.6)}
-                  initial="hidden"
-                  whileInView="show"
-                  viewport={{ once: true, amount: 0.2 }}>
+              <motion.div
+                className="flex items-center gap-[20px]"
+                variants={moveUp(0.6)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.2 }}
+              >
                 <Image
                   src="/images/contact-us/icons/email.svg"
                   alt="Mail"
