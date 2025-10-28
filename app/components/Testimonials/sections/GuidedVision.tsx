@@ -238,9 +238,10 @@ const GuidedVision = ({ visionData }: { visionData: visionData }) => {
                     {/* Video iframe (YouTube embed) */}
                     {isPlaying && (
                       <iframe
-                        src={`${getEmbedUrl(
-                          item.videos
-                        )}?autoplay=1&controls=1&rel=0&modestbranding=1`}
+                        src={`${getEmbedUrl(item.videos).replace(
+                          "youtube.com",
+                          "youtube-nocookie.com"
+                        )}?autoplay=1&controls=1&modestbranding=1&rel=0&fs=1`}
                         className="absolute inset-0 w-full h-full rounded-[12px]"
                         allow="autoplay; fullscreen"
                         allowFullScreen
