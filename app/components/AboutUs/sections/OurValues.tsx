@@ -6,12 +6,11 @@ import { motion } from "framer-motion";
 import { moveUp } from "../../motionVarients";
 import { AboutProps } from "../type";
 
-
 interface Props {
-  data: AboutProps['thirdSection'];
+  data: AboutProps["thirdSection"];
 }
 
-export default function ValuesGrid({data }: Props) {
+export default function ValuesGrid({ data }: Props) {
   const [hovered, setHovered] = useState<number | null>(0);
 
   return (
@@ -100,9 +99,10 @@ export default function ValuesGrid({data }: Props) {
                     {/* Points (only show on hover) */}
                     {hovered === index && (
                       <div
-                        className="absolute bottom-0 left-0 w-full 
+                        className="absolute bottom-0 left-0 w-full
                bg-gradient-to-t from-black/100 to-black/0
-               px-3 pt-4 pb-5 values-description-about" dangerouslySetInnerHTML={{__html: item.description}}
+               px-3 pt-4 pb-5 values-description-about"
+                        dangerouslySetInnerHTML={{ __html: item.description }}
                       >
                         {/* <ul className="list-disc list-outside pl-4 xl:pl-9 space-y-1 text-sm text-white font-light">
                           {item.points.map((point, i) => (

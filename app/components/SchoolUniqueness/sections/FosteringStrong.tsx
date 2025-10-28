@@ -1,6 +1,12 @@
 "use client";
 
-import { AnimatePresence, motion, easeIn, easeOut, easeInOut } from "framer-motion";
+import {
+  AnimatePresence,
+  motion,
+  easeIn,
+  easeOut,
+  easeInOut,
+} from "framer-motion";
 import SplitText from "@/components/SplitText";
 import { moveUp } from "../../motionVarients";
 import { useState } from "react";
@@ -89,9 +95,9 @@ const FosteringStrong = ({ fsData }: { fsData: fsData }) => {
                       onClick={() => toggleAccordion(index)}
                       className="flex justify-between items-center w-full text-left pt-7 pb-5  cursor-pointer group"
                     >
-                      <div className="flex items-center gap-3">
+                      <div className="flex items-cente gap-3">
                         <p
-                          className={`text-sm font-light leading-[1.2] transition-colors duration-300 ${
+                          className={`text-sm font-light leading-[1.2] transition-colors duration-300 mt-[5px] ${
                             isActive
                               ? "text-black"
                               : "text-colorpara group-hover:text-black"
@@ -100,7 +106,7 @@ const FosteringStrong = ({ fsData }: { fsData: fsData }) => {
                           0{index + 1}
                         </p>
                         <p
-                          className={`text-[1.2rem] md:text-md xl:text-lg 2xl:text-xl font-light leading-[1.2] transition-colors duration-300 ${
+                          className={`text-[1.2rem] md:text-md xl:text-lg font-light leading-[1.2] transition-colors duration-300 ${
                             isActive
                               ? "text-primary"
                               : "group-hover:text-primary"
