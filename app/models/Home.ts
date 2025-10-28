@@ -1,13 +1,6 @@
 import mongoose from "mongoose";
 
-const aboutSchema = new mongoose.Schema({
-    banner: {
-        type: String,
-        required: true
-    },
-    bannerAlt: {
-        type: String,
-    },
+const homeSchema = new mongoose.Schema({
     metaTitle: {
         type: String,
         required: true
@@ -16,36 +9,32 @@ const aboutSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    pageTitle: {
-        type: String,
-        required: true
-    },
-    firstSection: {
-        mainTitle: {
-            type: String,
-            required: true
-        },
-        subTitle: {
-            type: String,
-            required: true
-        },
-        highlight: {
-            type: String,
-            required: true
-        },
-        description: {
-            type: String,
-            required: true
-        },
-        image: {
-            type: String,
-            required: true
-        },
-        imageAlt: {
-            type: String,
-        },
+    bannerSection:{
+        items:[{
+            image: {
+                type: String,
+                required: true
+            },
+            imageAlt: {
+                type: String,
+            },
+            title: {
+                type: String,
+                required: true
+            },
+            highlightText: {
+                type: String,
+                required: true
+            }
+        }]
     },
     secondSection: {
+        title: {
+            type: String,
+            required: true
+        },
+    },
+    thirdSection: {
         title: {
             type: String,
             required: true
@@ -72,65 +61,62 @@ const aboutSchema = new mongoose.Schema({
             title: {
                 type: String,
                 required: true
-            },
-            description: {
-                type: String,
-                required: true
             }
         }]
     },
-    thirdSection: {
+    fourthSection: {
         title: {
             type: String,
             required: true
         },
-        items: [{
-            image: {
-                type: String,
-                required: true
-            },
-            imageAlt: {
-                type: String,
-            },
-            title: {
-                type: String,
-                required: true
-            },
-            description: {
-                type: String,
-                required: true
-            }
-        }]
-    },
-    historySection: {
-        title: {
+        image: {
             type: String,
             required: true
         },
-        items: [{
-            year: {
-                type: String,
-                required: true
-            },
-            title: {
-                type: String,
-                required: true
-            },
-            description: {
-                type: String,
-                required: true
-            },
-            image: {
-                type: String,
-                required: true
-            },
-            imageAlt: {
-                type: String,
-            }
-        }]
+        imageAlt: {
+            type: String,
+        },
+        videoLink: {
+            type: String,
+            required: true
+        }
     },
     fifthSection: {
         title: {
+            type: String,
+            required: true
+        },
+        image: {
+            type: String,
+            required: true
+        },
+        imageAlt: {
+            type: String,
+        },
+        items:[{
+            logo: {
+                type: String,
+                required: true
+            },
+            logoAlt: {
+                type: String,
+            },
+            number: {
+                type: String,
+                required: true
+            },
+            value: {
+                type: String,
+                required: true
+            }
+        }]
+    },
+    sixthSection: {
+        mainTitle: {
+            type: String,
+            required: true
+        },
+        subTitle: {
             type: String,
             required: true
         },
@@ -145,35 +131,24 @@ const aboutSchema = new mongoose.Schema({
         imageAlt: {
             type: String,
         },
-    },
-    sixthSection: {
-        title: {
+        name: {
             type: String,
             required: true
         },
-        description: {
+        designation: {
             type: String,
             required: true
-        },
-        items: [{
-            image: {
-                type: String,
-                required: true
-            },
-            imageAlt: {
-                type: String,
-            },
-            title: {
-                type: String,
-                required: true
-            }
-        }]
+        }
     },
     seventhSection: {
         title: {
             type: String,
             required: true
         },
+        buttonText: {
+            type: String,
+            required: true
+        },
         items: [{
             image: {
                 type: String,
@@ -182,16 +157,54 @@ const aboutSchema = new mongoose.Schema({
             imageAlt: {
                 type: String,
             },
-            title: {
+            name: {
                 type: String,
                 required: true
             },
-            link: {
+            course: {
                 type: String,
                 required: true
             }
         }]
+    },
+    eighthSection:{
+        title:{
+            type: String,
+            required: true
+        }
+    },
+    ninethSection:{
+        items:[{
+            image: {
+                type: String,
+                required: true
+            },
+            imageAlt: {
+                type: String,
+            }
+        }]
+    },
+    tenthSection:{
+        title:{
+            type: String,
+            required: true
+        },
+        description:{
+            type: String,
+            required: true
+        },
+        image:{
+            type: String,
+            required: true
+        },
+        imageAlt:{
+            type: String,
+        },
+        buttonText:{
+            type: String,
+            required: true
+        }
     }
 })
 
-export default mongoose.models.About || mongoose.model("About", aboutSchema);
+export default mongoose.models.Home || mongoose.model("Home", homeSchema);

@@ -74,6 +74,15 @@ interface AboutFormProps {
             title: string;
         }[];
     };
+    seventhSection: {
+        title: string;
+        items: {
+            image: string;
+            imageAlt: string;
+            title: string;
+            link: string;
+        }[];
+    };
 }
 
 const AboutPage = () => {
@@ -101,6 +110,11 @@ const AboutPage = () => {
     const { fields: sixthSectionItems, append: sixthSectionAppend, remove: sixthSectionRemove } = useFieldArray({
         control,
         name: "sixthSection.items"
+    });
+
+    const { fields: seventhSectionItems, append: seventhSectionAppend, remove: seventhSectionRemove } = useFieldArray({
+        control,
+        name: "seventhSection.items"
     });
 
 
@@ -140,6 +154,8 @@ const AboutPage = () => {
                 setValue("sixthSection.items", data.data.sixthSection.items);
                 setValue("historySection", data.data.historySection);
                 setValue("historySection.items", data.data.historySection.items);
+                setValue("seventhSection", data.data.seventhSection);
+                setValue("seventhSection.items", data.data.seventhSection.items);
             } else {
                 const data = await response.json();
                 alert(data.message);
@@ -681,7 +697,74 @@ const AboutPage = () => {
                 </AdminItemContainer>
 
 
+<AdminItemContainer>
+                    <Label main>Seventh Section</Label>
 
+                <div className='p-5 rounded-md flex flex-col gap-5'>
+                <div className='flex flex-col gap-2'>
+                                <div className='flex flex-col gap-2'>
+                                    <Label className='font-bold'>Title</Label>
+                                    <Input type='text' placeholder='Title' {...register(`seventhSection.title`, {
+                                        required: "Value is required"
+                                    })} />
+                                    {errors.seventhSection?.title && <p className='text-red-500'>{errors.seventhSection?.title.message}</p>}
+                                </div>
+                            </div>
+
+                    <Label>Items</Label>
+                    <div className='border p-2 rounded-md'>
+                    {seventhSectionItems.map((field, index) => (
+                        <div key={field.id} className='grid grid-cols-2 gap-2 relative border-b pb-2 last:border-b-0'>
+                            <div className='absolute top-2 right-2'>
+                                <RiDeleteBinLine onClick={() => seventhSectionRemove(index)} className='cursor-pointer text-red-600' />
+                            </div>
+                            <div className='flex flex-col gap-2'>
+                                <div className='flex flex-col gap-2'>
+                                    <Label className='font-bold'>Image</Label>
+                                    <Controller
+                                        name={`seventhSection.items.${index}.image`}
+                                        control={control}
+                                        rules={{ required: "Image is required" }}
+                                        render={({ field }) => (
+                                            <ImageUploader
+                                                value={field.value}
+                                                onChange={field.onChange}
+                                            />
+                                        )}
+                                    />
+                                    {errors.seventhSection?.items?.[index]?.image && <p className='text-red-500'>{errors.seventhSection?.items?.[index]?.image.message}</p>}
+                                </div>
+                                <div className='flex flex-col gap-2'>
+                                    <Label className='font-bold'>Alt Tag</Label>
+                                    <Input type='text' placeholder='Alt Tag' {...register(`seventhSection.items.${index}.imageAlt`)} />
+                                </div>
+                                
+                            </div>
+
+                            <div className='flex flex-col gap-2'>
+                                <div className='flex flex-col gap-2'>
+                                    <Label className='font-bold'>Title</Label>
+                                    <Input type='text' placeholder='Title' {...register(`seventhSection.items.${index}.title`)} />
+                                </div>
+                                
+                                <div className='flex flex-col gap-2'>
+                                    <Label className='font-bold'>Link</Label>
+                                    <Input type='text' placeholder='Link' {...register(`seventhSection.items.${index}.link`)} />
+                                </div>
+                            </div>
+
+
+                        </div>
+                    ))}
+                    
+                    </div>
+                    <div className='flex justify-end mt-2'>
+                        <Button type='button' addItem onClick={() => seventhSectionAppend({ image: "", imageAlt: "", title: "", link: "" })}>Add Item</Button>
+                    </div>
+                    
+
+                </div>
+                </AdminItemContainer>
 
 
                 <div className='flex flex-col gap-2'>
