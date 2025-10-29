@@ -28,7 +28,7 @@ coverImage:string;
 coverImageAlt:string;
 thumbnail:string;
 thumbnailAlt:string;
-date:string;
+date?:string;
 content:string;
 metaTitle:string;
 metaDescription:string;
