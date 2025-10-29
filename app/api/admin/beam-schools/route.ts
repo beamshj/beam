@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/lib/mongodb";
 import { verifyAdmin } from "@/lib/verifyAdmin";
 import School from "@/app/models/School";
+import "@/app/models/Location";
+import "@/app/models/Category";
 
 export async function GET(request: NextRequest) {
     try {
