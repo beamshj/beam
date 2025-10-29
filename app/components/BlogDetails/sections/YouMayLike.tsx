@@ -31,11 +31,13 @@ const YouMayLike = ({
               </div>
               <div className="p-5 md:p-6 xl:p-10 border-1 border-[#D3D3D3]  rounded-b-lg">
                 <div className="flex justify-between text-sm text-colorpara font-light">
-                  {new Date(item?.date).toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "numeric",
-                    day: "numeric",
-                  })}
+                  {item.date
+                    ? new Date(item.date).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "numeric",
+                        day: "numeric",
+                      })
+                    : "Date not available"}
                   <p>{item?.category}</p>
                 </div>
                 <div className="mt-3">

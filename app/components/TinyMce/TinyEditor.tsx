@@ -214,9 +214,146 @@
 //   );
 // }
 
+// import { Dispatch, SetStateAction, useRef } from "react";
+// import { Editor } from "@tinymce/tinymce-react";
+// import type { Editor as TinyMCEEditor, EditorEvent } from "tinymce";
+
+// type TinyMceNodeChangeEvent = {
+//   element: HTMLElement | null;
+// };
+
+// export default function TinyEditor({
+//   setNewsContent,
+//   newsContent,
+// }: {
+//   newsContent?: string | boolean;
+//   setNewsContent: Dispatch<SetStateAction<string>>;
+// }) {
+//   const editorRef = useRef<TinyMCEEditor | null>(null);
+
+//   const handleEditorChange = (content: string) => {
+//     setNewsContent(content);
+//   };
+
+//   return (
+//     <>
+//       <Editor
+//         apiKey={process.env.NEXT_PUBLIC_TINY_MCE_KEY}
+//         onInit={(_evt, editor) => {
+//           editorRef.current = editor;
+//         }}
+//         initialValue={
+//           newsContent && typeof newsContent === "string"
+//             ? newsContent
+//             : "<p>This is the initial content of the editor.</p>"
+//         }
+//         init={{
+//           height: 500,
+//           menubar: false,
+//           theme: "silver",
+//           image_title: true,
+//           automatic_uploads: true,
+//           file_picker_types: "image",
+//           content_css:
+//             "https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css",
+//           content_style: `
+//             body { padding: 10px; font-family: 'Inter', sans-serif; }
+//             p:not(:last-child) { margin-bottom: 12px; }
+//             span[data-highlight] {
+//               background-color: #ffeb3b !important;
+//               color: #000 !important;
+//               padding: 0 3px !important;
+//               border-radius: 2px;
+//             }
+//           `,
+
+//           plugins: [
+//             "advlist",
+//             "autolink",
+//             "lists",
+//             "link",
+//             "image",
+//             "charmap",
+//             "preview",
+//             "anchor",
+//             "searchreplace",
+//             "visualblocks",
+//             "code",
+//             "fullscreen",
+//             "insertdatetime",
+//             "media",
+//             "table",
+//             "help",
+//             "wordcount",
+//           ],
+
+//           toolbar:
+//             "undo redo | blocks | bold italic forecolor | " +
+//             "alignleft aligncenter alignright alignjustify | " +
+//             "bullist numlist outdent indent | removeformat | code | image | highlight",
+
+//           setup: (editor) => {
+//             // 🔆 Register the custom Highlight toggle button
+//             editor.ui.registry.addToggleButton("highlight", {
+//               text: "Highlight",
+//               tooltip: "Toggle highlight for selected text",
+//               icon: "highlight-bg-color",
+//               onAction: () => {
+//                 const node = editor.selection.getNode();
+
+//                 // If inside highlighted span → remove highlight
+//                 if (
+//                   node &&
+//                   node.nodeName === "SPAN" &&
+//                   node.dataset.highlight !== undefined
+//                 ) {
+//                   editor.dom.remove(node, true); // unwrap span but keep text
+//                 } else {
+//                   const selectedText = editor.selection.getContent({
+//                     format: "html",
+//                   });
+//                   if (selectedText) {
+//                     editor.selection.setContent(
+//                       `<span data-highlight style="background-color:#ffff00; color:#000; padding:0 3px;">${selectedText}</span>`
+//                     );
+//                   }
+//                 }
+//               },
+//               onSetup: (api) => {
+//                 const nodeChangeHandler = (
+//                   e: EditorEvent<TinyMceNodeChangeEvent>
+//                 ) => {
+//                   const element = e.element;
+//                   const isHighlighted =
+//                     element?.nodeName === "SPAN" &&
+//                     element.dataset?.highlight !== undefined;
+//                   api.setActive(!!isHighlighted);
+//                 };
+
+//                 editor.on("NodeChange", nodeChangeHandler);
+//                 return () => editor.off("NodeChange", nodeChangeHandler);
+//               },
+//             });
+
+//             // Update content on change
+//             editor.on("change", () => {
+//               handleEditorChange(editorRef.current?.getContent() || "");
+//             });
+//           },
+//         }}
+//       />
+//     </>
+//   );
+// }
+
 import { Dispatch, SetStateAction, useRef } from "react";
 import { Editor } from "@tinymce/tinymce-react";
-import { Editor as TinyMCEEditor } from "tinymce";
+import type { Editor as TinyMCEEditor, EditorEvent } from "tinymce";
+
+// Define type for NodeChange event payload
+type NodeChangePayload = {
+  element: Element | null;
+};
 
 export default function TinyEditor({
   setNewsContent,
@@ -232,110 +369,103 @@ export default function TinyEditor({
   };
 
   return (
-    <>
-      <Editor
-        apiKey={process.env.NEXT_PUBLIC_TINY_MCE_KEY}
-        onInit={(_evt, editor) => {
-          editorRef.current = editor;
-        }}
-        initialValue={
-          newsContent && typeof newsContent === "string"
-            ? newsContent
-            : "<p>This is the initial content of the editor.</p>"
-        }
-        init={{
-          height: 500,
-          menubar: false,
-          theme: "silver",
-          image_title: true,
-          automatic_uploads: true,
-          file_picker_types: "image",
-          content_css:
-            "https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css",
-          content_style: `
-            body { padding: 10px; font-family: 'Inter', sans-serif; }
-            p:not(:last-child) { margin-bottom: 12px; }
-            span[data-highlight] {
-              background-color: #ffeb3b !important;
-              color: #000 !important;
-              padding: 0 3px !important;
-              border-radius: 2px;
-            }
-          `,
+    <Editor
+      apiKey={process.env.NEXT_PUBLIC_TINY_MCE_KEY}
+      onInit={(_evt, editor) => {
+        editorRef.current = editor;
+      }}
+      initialValue={
+        newsContent && typeof newsContent === "string"
+          ? newsContent
+          : "<p>This is the initial content of the editor.</p>"
+      }
+      init={{
+        height: 500,
+        menubar: false,
+        theme: "silver",
+        image_title: true,
+        automatic_uploads: true,
+        file_picker_types: "image",
+        content_css:
+          "https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css",
+        content_style: `
+          body { padding: 10px; font-family: 'Inter', sans-serif; }
+          p:not(:last-child) { margin-bottom: 12px; }
+          span[data-highlight] {
+            background-color: #ffeb3b !important;
+            color: #000 !important;
+            padding: 0 3px !important;
+            border-radius: 2px;
+          }
+        `,
+        plugins: [
+          "advlist",
+          "autolink",
+          "lists",
+          "link",
+          "image",
+          "charmap",
+          "preview",
+          "anchor",
+          "searchreplace",
+          "visualblocks",
+          "code",
+          "fullscreen",
+          "insertdatetime",
+          "media",
+          "table",
+          "help",
+          "wordcount",
+        ],
+        toolbar:
+          "undo redo | blocks | bold italic forecolor | " +
+          "alignleft aligncenter alignright alignjustify | " +
+          "bullist numlist outdent indent | removeformat | code | image | highlight",
+        setup: (editor) => {
+          // Highlight toggle button
+          editor.ui.registry.addToggleButton("highlight", {
+            text: "Highlight",
+            tooltip: "Toggle highlight for selected text",
+            icon: "highlight-bg-color",
+            onAction: () => {
+              const node = editor.selection.getNode();
 
-          plugins: [
-            "advlist",
-            "autolink",
-            "lists",
-            "link",
-            "image",
-            "charmap",
-            "preview",
-            "anchor",
-            "searchreplace",
-            "visualblocks",
-            "code",
-            "fullscreen",
-            "insertdatetime",
-            "media",
-            "table",
-            "help",
-            "wordcount",
-          ],
-
-          toolbar:
-            "undo redo | blocks | bold italic forecolor | " +
-            "alignleft aligncenter alignright alignjustify | " +
-            "bullist numlist outdent indent | removeformat | code | image | highlight",
-
-          setup: (editor) => {
-            // 🔆 Register the custom Highlight toggle button
-            editor.ui.registry.addToggleButton("highlight", {
-              text: "Highlight",
-              tooltip: "Toggle highlight for selected text",
-              icon: "highlight-bg-color",
-              onAction: () => {
-                const node = editor.selection.getNode();
-
-                // If inside highlighted span → remove highlight
-                if (
-                  node &&
-                  node.nodeName === "SPAN" &&
-                  node.dataset.highlight !== undefined
-                ) {
-                  editor.dom.remove(node, true); // unwrap span but keep text
-                } else {
-                  const selectedText = editor.selection.getContent({
-                    format: "html",
-                  });
-                  if (selectedText) {
-                    editor.selection.setContent(
-                      `<span data-highlight style="background-color:#ffff00; color:#000; padding:0 3px;">${selectedText}</span>`
-                    );
-                  }
+              if (
+                node &&
+                node.nodeName === "SPAN" &&
+                (node as HTMLElement).dataset.highlight !== undefined
+              ) {
+                editor.dom.remove(node, true); // unwrap
+              } else {
+                const selectedText = editor.selection.getContent({
+                  format: "html",
+                });
+                if (selectedText) {
+                  editor.selection.setContent(
+                    `<span data-highlight style="background-color:#ffff00; color:#000; padding:0 3px;">${selectedText}</span>`
+                  );
                 }
-              },
-              onSetup: (api) => {
-                // 🔁 Update button active state when moving cursor
-                const nodeChangeHandler = (e: any) => {
-                  const isHighlighted =
-                    e.element &&
-                    e.element.nodeName === "SPAN" &&
-                    e.element.dataset.highlight !== undefined;
-                  api.setActive(isHighlighted);
-                };
-                editor.on("NodeChange", nodeChangeHandler);
-                return () => editor.off("NodeChange", nodeChangeHandler);
-              },
-            });
+              }
+            },
+            onSetup: (api) => {
+              const nodeChangeHandler = (e: EditorEvent<NodeChangePayload>) => {
+                const element = e.element;
+                const isHighlighted =
+                  element?.nodeName === "SPAN" &&
+                  (element as HTMLElement).dataset.highlight !== undefined;
+                api.setActive(!!isHighlighted);
+              };
 
-            // Update content on change
-            editor.on("change", () => {
-              handleEditorChange(editorRef.current?.getContent() || "");
-            });
-          },
-        }}
-      />
-    </>
+              editor.on("NodeChange", nodeChangeHandler);
+              return () => editor.off("NodeChange", nodeChangeHandler);
+            },
+          });
+
+          editor.on("change", () => {
+            handleEditorChange(editorRef.current?.getContent() || "");
+          });
+        },
+      }}
+    />
   );
 }
