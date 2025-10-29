@@ -629,3 +629,15 @@ body {
     /* make sure other text tags also stay white */
   }
 }
+
+@media (min-width: 1813px) {
+  .ios\:block {
+    display: block !important;
+  }
+}
+
+@media (min-width: 1813px) {
+  .ios\:hidden {
+    display: none !important;
+  }
+}
