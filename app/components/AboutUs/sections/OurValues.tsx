@@ -6,12 +6,11 @@ import { motion } from "framer-motion";
 import { moveUp } from "../../motionVarients";
 import { AboutProps } from "../type";
 
-
 interface Props {
-  data: AboutProps['thirdSection'];
+  data: AboutProps["thirdSection"];
 }
 
-export default function ValuesGrid({data }: Props) {
+export default function ValuesGrid({ data }: Props) {
   const [hovered, setHovered] = useState<number | null>(0);
 
   return (
@@ -26,7 +25,7 @@ export default function ValuesGrid({data }: Props) {
         >
           {data.title}
         </motion.h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-[11px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-4 xl:gap-5 2xl:gap-[11px]">
           {data.items?.map((item, index) => (
             <motion.div
               variants={moveUp(index * 0.1)}
@@ -57,7 +56,7 @@ export default function ValuesGrid({data }: Props) {
                 viewport={{ once: true, amount: 0.2 }}
                 onMouseEnter={() => setHovered(index)}
                 onMouseLeave={() => setHovered(index)}
-                className="relative h-[400px] lg:h-[430px] xl:h-[500px] 2xl:h-[729px] w-full xl:max-w-[295px] overflow-hidden rounded-[12px]  group cursor-pointer"
+                className="relative h-[400px] lg:h-[430px] xl:h-[500px] 2xl:h-[729px] w-full 2xl:max-w-[295px] overflow-hidden rounded-[12px]  group cursor-pointer"
               >
                 {/* Background image */}
                 <Image
@@ -100,9 +99,10 @@ export default function ValuesGrid({data }: Props) {
                     {/* Points (only show on hover) */}
                     {hovered === index && (
                       <div
-                        className="absolute bottom-0 left-0 w-full 
+                        className="absolute bottom-0 left-0 w-full
                bg-gradient-to-t from-black/100 to-black/0
-               px-3 pt-4 pb-5 values-description-about" dangerouslySetInnerHTML={{__html: item.description}}
+               px-3 pt-4 pb-5 values-description-about"
+                        dangerouslySetInnerHTML={{ __html: item.description }}
                       >
                         {/* <ul className="list-disc list-outside pl-4 xl:pl-9 space-y-1 text-sm text-white font-light">
                           {item.points.map((point, i) => (

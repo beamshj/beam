@@ -18,7 +18,7 @@ export const visionMissionItems = {
   mainDescription: `Our vision lights the path toward excellence, guided by faith and
             values. We are committed to nurturing a diverse community where
             students become lifelong learners and principled global citizens.`,
-            image: "/images/about-us/visionMission/vision.jpg",
+  image: "/images/about-us/visionMission/vision.jpg",
   VMItems: [
     {
       id: "vision",
@@ -151,45 +151,46 @@ export const cards = {
     {
       title: "Bukhatir Group",
       image: "/images/about-us/MoreToExplore/1.jpg",
+      link: "#",
     },
     {
       title: "Founder's Message",
       image: "/images/about-us/MoreToExplore/2.jpg",
+      link: "/about-us/founders-message",
     },
     {
       title: "General Manager’s Message",
       image: "/images/about-us/MoreToExplore/3.jpg",
+      link: "/about-us/general-managers-message",
     },
     {
       title: "Schools’ Leadership Team",
       image: "/images/about-us/MoreToExplore/4.jpg",
-    },
-    {
-      title: "Bukhatir Group",
-      image: "/images/about-us/MoreToExplore/1.jpg",
+      link: "/about-us/school-leadership-team",
     },
   ],
 };
 
-
-export const  items = [
+export const items = [
   {
     year: "2002",
     title: "ISCS Muwaileh",
-    description: "British Curriculum <br> Pre-K / FS 1 to Grade 13 with a full capacity of more than 4,500",
+    description:
+      "British Curriculum <br> Pre-K / FS 1 to Grade 13 with a full capacity of more than 4,500",
     image: "/images/about-us/slider1.jpg",
   },
   {
     year: "2008",
     title: "ISCS Dubai",
-    description: "British Curriculum <br> Pre-K / FS 1 to Grade 13 with a full capacity of more than 4,500.",
+    description:
+      "British Curriculum <br> Pre-K / FS 1 to Grade 13 with a full capacity of more than 4,500.",
     image: "/images/about-us/slider1.jpg",
   },
   {
     year: "2015",
     title: "ISCS Sharjah",
-    description: "British Curriculum <br> Pre-K / FS 1 to Grade 13 with a full capacity of more than 4,500.",
+    description:
+      "British Curriculum <br> Pre-K / FS 1 to Grade 13 with a full capacity of more than 4,500.",
     image: "/images/about-us/slider1.jpg",
   },
 ];
- 

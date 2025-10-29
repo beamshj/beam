@@ -9,10 +9,12 @@ import { useEffect, useRef, useState } from "react";
 import SplitText from "@/components/SplitText";
 import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVarients";
+import Link from "next/link";
 
 type CardItem = {
   title: string;
   image: string;
+  link: string;
 };
 
 type CardsProps = {
@@ -60,7 +62,10 @@ export default function MoreToExplore({ data }: CardsProps) {
             />
           </h2>
         </div>
-        <div style={{ paddingLeft: `${leftOffset}px` }} className="pr-3 sm:pr-0">
+        <div
+          style={{ paddingLeft: `${leftOffset}px` }}
+          className="pr-3 sm:pr-0"
+        >
           <Swiper
             slidesPerView={1}
             spaceBetween={11}
@@ -77,47 +82,49 @@ export default function MoreToExplore({ data }: CardsProps) {
           >
             {items.map((card, idx) => (
               <SwiperSlide key={idx}>
-                <motion.div
-                  variants={moveUp(idx * 0.1)}
-                  initial="hidden"
-                  animate="show"
-                  viewport={{ once: false, amount: 0.7 }}
-                  className="relative group h-[350px] 2xl:h-[468px] sm:max-w-[428px] overflow-hidden cursor-pointer rounded-[12px]"
-                >
-                  <Image
-                    src={card.image}
-                    alt={card.title}
-                    layout="fill"
-                    objectFit="cover"
-                    className="transition-transform rounded-[12px] duration-300 scale-100 group-hover:scale-105 object-cover object-top"
-                  />
-                  {/* Gradient overlay at bottom */}
-                  <div className="absolute bottom-0 left-0 right-0 h-[70%] bg-gradient-to-t from-black to-transparent z-10"></div>
-                  {/* Title */}
-                  {card.title && (
-                    <motion.div
-                      variants={moveUp(0.1)}
-                      initial="hidden"
-                      whileInView="show"
-                      viewport={{ once: false, amount: 0.7 }}
-                      className="absolute bottom-[15px] left-[15px] right-[15px] xl:bottom-[40px] xl:left-[40px] xl:right-[40px] z-20 leading-[1.2] text-white text-lg xl:text-xl font-light"
-                    >
-                      {card.title}
-                    </motion.div>
-                  )}
-                  {/* Hover overlay */}
-                  <div className="absolute inset-0 bg-[rgba(63,34,92,0.94)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-30">
-                    <div className="w-[75px] h-[75px] border border-white rounded-full flex items-center justify-center text-white">
-                      <Image
-                        src="/images/arrow-primary.svg"
-                        alt="arrow-right-tip"
-                        width={15}
-                        height={15}
-                        className="w-[15px] h-[15px]"
-                      />
+                <Link href={card.link}>
+                  <motion.div
+                    variants={moveUp(idx * 0.1)}
+                    initial="hidden"
+                    animate="show"
+                    viewport={{ once: false, amount: 0.7 }}
+                    className="relative group h-[350px] 2xl:h-[468px] sm:max-w-[428px] overflow-hidden cursor-pointer rounded-[12px]"
+                  >
+                    <Image
+                      src={card.image}
+                      alt={card.title}
+                      layout="fill"
+                      objectFit="cover"
+                      className="transition-transform rounded-[12px] duration-300 scale-100 group-hover:scale-105 object-cover object-top"
+                    />
+                    {/* Gradient overlay at bottom */}
+                    <div className="absolute bottom-0 left-0 right-0 h-[70%] bg-gradient-to-t from-black to-transparent z-10"></div>
+                    {/* Title */}
+                    {card.title && (
+                      <motion.div
+                        variants={moveUp(0.1)}
+                        initial="hidden"
+                        whileInView="show"
+                        viewport={{ once: false, amount: 0.7 }}
+                        className="absolute bottom-[15px] left-[15px] right-[15px] xl:bottom-[40px] xl:left-[40px] xl:right-[40px] z-20 leading-[1.2] text-white text-lg xl:text-xl font-light"
+                      >
+                        {card.title}
+                      </motion.div>
+                    )}
+                    {/* Hover overlay */}
+                    <div className="absolute inset-0 bg-[rgba(63,34,92,0.94)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-30">
+                      <div className="w-[75px] h-[75px] border border-white rounded-full flex items-center justify-center text-white">
+                        <Image
+                          src="/images/arrow-primary.svg"
+                          alt="arrow-right-tip"
+                          width={15}
+                          height={15}
+                          className="w-[15px] h-[15px]"
+                        />
+                      </div>
                     </div>
-                  </div>
-                </motion.div>
+                  </motion.div>
+                </Link>
               </SwiperSlide>
             ))}
           </Swiper>
