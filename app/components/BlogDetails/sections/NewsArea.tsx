@@ -4,7 +4,11 @@ import Image from "next/image";
 import SplitText from "@/components/SplitText";
 import { motion, Variants } from "framer-motion";
 import { moveUp } from "../../motionVarients";
-const NewsArea = () => {
+import moment from "moment";
+
+const NewsArea = ({data}: {data: any}) => {
+
+  console.log(data);
   // Define variants with proper typing
   const contentTags: Variants = {
     hidden: { opacity: 0, y: 40 },
@@ -75,7 +79,7 @@ const NewsArea = () => {
           <div className="mt-4 md:mt-6 xl:mt-8 2xl:mt-12 mb-4 md:mb-6 xl:mb-8 2xl:mb-8">
             <SplitText
               tag="h2"
-              text="How to Choose the Right School for Secondary Education in the UAE"
+              text={data.title}
               className="text-xl md:text-2xl xl:text-3xl 2xl:text-4xl font-light leading-tight text-black lettersp-4"
               delay={100}
               duration={0.6}
@@ -91,9 +95,9 @@ const NewsArea = () => {
           <div className="flex justify-between pl-5 items-center">
             <div>
               <ul className="list-disc lg:flex gap-10  text-colorpara text-sm font-light">
-                <li>Published in&nbsp;Blog&nbsp;on&nbsp;July 14, 2025</li>
+                <li>Published in&nbsp;Blog&nbsp;on&nbsp;{moment(data.date).format('LL')}</li>
                 <li>10 mins read</li>
-                <li>Curriculum</li>
+                <li>{data.category}</li>
               </ul>
             </div>
             <motion.div
@@ -118,8 +122,8 @@ const NewsArea = () => {
             className="py-4 md:py-6 xl:py-8 2xl:py-12"
           >
             <Image
-              src="/images/newsdetails/blogbanner.jpg"
-              alt=""
+              src={data.coverImage}
+              alt={data.coverImageAlt}
               width={1360}
               height={535}
               className="rounded-sm w-full object-cover min-h-[250px]"
@@ -131,8 +135,8 @@ const NewsArea = () => {
             whileInView="show"
             viewport={{ amount: 0.1, once: false }}
           >
-            <motion.div variants={contentTags}>
-              <p className="text-colorpara text-sm font-light mb-3 lg:mb-7">
+            <motion.div variants={contentTags} dangerouslySetInnerHTML={{ __html: data.content }}>
+              {/* <p className="text-colorpara text-sm font-light mb-3 lg:mb-7">
                 Confused about picking the right school for your child? With
                 many great options, it can be tough. This blog covers key
                 factors to help you choose the best fit for your child’s growth
@@ -270,7 +274,7 @@ const NewsArea = () => {
                   excellence, personal growth, and career-focused learning for a
                   well-rounded education.
                 </p>
-              </div>
+              </div> */}
             </motion.div>
           </motion.div>
 

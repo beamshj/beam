@@ -7,12 +7,21 @@ export async function GET(request: NextRequest) {
     try {
         await connectDB();
         const id = request.nextUrl.searchParams.get("id");
+        const slug = request.nextUrl.searchParams.get("slug");
         const blog = await Blog.findOne({});
         if (!blog) {
             return NextResponse.json({ message: "Blog not found" }, { status: 404 });
         }
         if(id){
             const foundBlog = blog.categories.flatMap((category: { blogs: { _id: string; }; }) => category.blogs).find((blog: { _id: string; }) => blog._id.toString() === id);
+            console.log(foundBlog);
+            if (!foundBlog) {
+                return NextResponse.json({ message: "Blog not found" }, { status: 404 });
+            }
+            return NextResponse.json({data:foundBlog,message:"Blog fetched successfully"}, { status: 200 });
+        }
+        else if(slug){
+            const foundBlog = blog.categories.flatMap((category: { blogs: { _id: string; slug: string; }; }) => category.blogs).find((blog: { slug: string; }) => blog.slug === slug);
             console.log(foundBlog);
             if (!foundBlog) {
                 return NextResponse.json({ message: "Blog not found" }, { status: 404 });

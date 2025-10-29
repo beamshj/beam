@@ -21,6 +21,8 @@ const schoolSchema = new mongoose.Schema({
         category:{type:mongoose.Schema.Types.ObjectId,required:true,ref:"Category"},
         image:{type:String,required:true},
         imageAlt:{type:String,required:true},
+        logo:{type:String,required:true},
+        logoAlt:{type:String,required:true},
         link:{type:String,required:true},
         specifications:[{
             number:{type:String,required:true},

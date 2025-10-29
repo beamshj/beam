@@ -20,6 +20,7 @@ import { RiAiGenerateText } from 'react-icons/ri'
 const ReactQuill = dynamic(() => import('react-quill-new'), { ssr: false })
 import 'react-quill-new/dist/quill.snow.css';
 import dynamic from 'next/dynamic'
+import TinyEditor from "@/app/components/TinyMce/TinyEditor";
 
 interface BlogFormProps {
     
@@ -242,7 +243,7 @@ const router = useRouter();
 <div className='flex flex-col gap-2'>
                     <Label className=''>Content</Label>
                     <Controller name="content" control={control} rules={{ required: "Content is required" }} render={({ field }) => {
-                        return <ReactQuill theme="snow" value={field.value} onChange={field.onChange} />
+                        return <TinyEditor setNewsContent={field.onChange} newsContent={field.value} />
                     }} />
                     {errors.content && <p className='text-red-500'>{errors.content.message}</p>}
                 </div>

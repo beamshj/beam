@@ -26,6 +26,8 @@ address:string;
 category:string;
 image:string;
 imageAlt:string;
+logo:string;
+logoAlt:string;
 link:string;
 specifications:{
     number:string;
@@ -74,6 +76,8 @@ const router = useRouter();
                 setValue("category", data.data.category._id);
                 setValue("image", data.data.image);
                 setValue("imageAlt", data.data.imageAlt);
+                setValue("logo", data.data.logo);
+                setValue("logoAlt", data.data.logoAlt);
                 setValue("link", data.data.link);
                 setValue("specifications", data.data.specifications);
             } else {
@@ -201,6 +205,7 @@ const router = useRouter();
                 </div>
 
 
+<div className="grid grid-cols-2 gap-2">
                     <div className='flex flex-col gap-1'>
                             <Label className='font-bold'>Image</Label>
                             <Controller
@@ -219,6 +224,28 @@ const router = useRouter();
                             )}
                             <Label className='font-bold'>Alt Tag</Label>
                             <Input type='text' placeholder='Alt Tag' {...register("imageAlt")} />
+                        </div>
+
+                        <div className='flex flex-col gap-1'>
+                            <Label className='font-bold'>Logo</Label>
+                            <Controller
+                                name="logo"
+                                control={control}
+                                rules={{ required: "Logo is required" }}
+                                render={({ field }) => (
+                                    <ImageUploader
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                    />
+                                )}
+                            />
+                            {errors.logo && (
+                                <p className="text-red-500">{errors.logo.message}</p>
+                            )}
+                            <Label className='font-bold'>Alt Tag</Label>
+                            <Input type='text' placeholder='Alt Tag' {...register("logoAlt")} />
+                        </div>
+
                         </div>
 
                         <div className='flex flex-col gap-1'>

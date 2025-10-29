@@ -4,13 +4,14 @@ import {
 } from "./data"; 
 import NewsArea from "./sections/NewsArea";  
 import YouMayLike from "./sections/YouMayLike";  
+import { BlogType } from "../blog/type"; 
 
 
-const Index = () => {
+const Index = ({data,allBlogData}: {data: BlogType['categories'][number]['blogs'][number], allBlogData: BlogType}) => {
   return (
     <> 
-      <NewsArea  />   
-      <YouMayLike rsData ={rsData} />
+      <NewsArea  data={data}/>   
+      <YouMayLike rsData ={allBlogData.categories.flatMap((category) => category.blogs)} />
     </>
   );
 };

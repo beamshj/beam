@@ -7,18 +7,15 @@ import { motion } from "framer-motion";
 import Pagination from "../../Common/Pagination";
 import { moveUp } from "../../motionVarients";
 import Link from "next/link";
+import { BlogType } from "../type";
 
-interface BlogItem {
-  image: string;
-  title: string;
-  date: string;
-  category: string;
-}
 
-export default function BlogList({ data }: { data: BlogItem[] }) {
-  const categories = [
-    ...Array.from(new Set(data.map((blog) => blog.category))),
+export default function BlogList({ data,categories }: { data: BlogType['categories'][number]['blogs'] ,categories: {name:string}[]}) {
+  const uniqueCategories = [
+    ...Array.from(new Set(categories.map((category) => category.name))),
   ];
+
+  console.log(uniqueCategories);
 
   const [selectedCategory, setSelectedCategory] = useState("curriculum");
   const [currentPage, setCurrentPage] = useState(1);
@@ -43,6 +40,8 @@ export default function BlogList({ data }: { data: BlogItem[] }) {
       ? data
       : data.filter((blog) => blog.category === selectedCategory);
 
+      console.log(filteredBlogs);
+
   const totalPages = Math.ceil(filteredBlogs.length / blogsPerPage);
   const startIndex = (currentPage - 1) * blogsPerPage;
   const currentBlogs = filteredBlogs.slice(
@@ -66,7 +65,7 @@ export default function BlogList({ data }: { data: BlogItem[] }) {
           </motion.h1>
           {/* Category Tabs */}
           <div className="hidden lg:flex gap-[15px]">
-            {categories.map((cat, index) => {
+            {uniqueCategories.map((cat, index) => {
               const isSelected = selectedCategory === cat;
 
               return (
@@ -104,7 +103,7 @@ export default function BlogList({ data }: { data: BlogItem[] }) {
         <div className="block lg:hidden">
           <Select
             instanceId="category-select"
-            options={categories.map((cat) => ({ value: cat, label: cat }))}
+            options={categories.map((cat) => ({ value: cat.name, label: cat.name }))}
             value={{ value: selectedCategory, label: selectedCategory }}
             onChange={(option) => {
               if (option) {
@@ -136,7 +135,7 @@ export default function BlogList({ data }: { data: BlogItem[] }) {
           {currentBlogs.map((blog, index) => (
           
           <div key={index}>
-      <Link href={`/news-&-media/blog/blog-details`}>
+      <Link href={`/news-&-media/blog/blog-details/${blog.slug}`}>
               <motion.div
               variants={moveUp(index * 0.1)}
               initial="hidden"
@@ -152,8 +151,8 @@ export default function BlogList({ data }: { data: BlogItem[] }) {
               {/* Image Section */}
               <div className="relative w-full h-[301px] rounded-t-[12px] overflow-hidden flex-shrink-0">
                 <Image
-                  src={blog.image || "/images/fallback.jpg"}
-                  alt={blog.title}
+                  src={blog.thumbnail || "/images/fallback.jpg"}
+                  alt={blog.thumbnailAlt}
                   fill
                   className="object-cover"
                 />
@@ -186,7 +185,7 @@ export default function BlogList({ data }: { data: BlogItem[] }) {
                   <span className="capitalize">{blog.category}</span>
                 </div>
                 <h3 className="text-lg leading-[1.2] font-light text-black">
-                  {blog.title}
+                  {blog.title.split(" ").slice(0, 6).join(" ") + "..."}
                 </h3>
                 <div>
                   <button className="bg-primary text-white w-[27px] h-[27px] rounded-full flex items-center justify-center mt-[15px]">
