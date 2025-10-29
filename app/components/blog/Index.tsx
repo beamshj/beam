@@ -1,14 +1,16 @@
 import InnerBanner from "@/app/components/Common/InnerBanner";
-import { BannerData, blogs } from "./data";
+import { BannerData } from "./data";
 import LatestBlogs from "./sections/LatestBlog";
 import BlogList from "./sections/BlogList";
+import { BlogType } from "./type";
 
-const Index = () => {
+const Index = ({data}: {data: BlogType}) => {
+  console.log(data);
   return (
     <>
-      <InnerBanner BannerData={BannerData} />
-      <LatestBlogs data={blogs} />
-      <BlogList data={blogs} />
+      <InnerBanner BannerData={BannerData} banner={data.banner} bannerAlt={data.bannerAlt} pageTitle={data.pageTitle}/>
+      <LatestBlogs data={data.categories.flatMap((category) => category.blogs)} />
+      <BlogList data={data.categories.flatMap((category) => category.blogs)} categories={data.categories}/>
     </>
   );
 };

@@ -5,14 +5,9 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { moveUp } from "../../motionVarients";
 import Link from "next/link";
-interface BlogItem {
-  image: string;
-  title: string;
-  date: string;
-  category: string;
-}
+import { BlogType } from "../type";
 
-export default function LatestBlogs({ data }: { data: BlogItem[] }) {
+export default function LatestBlogs({ data }: { data: BlogType['categories'][number]['blogs'] }) {
   const displayItems = [...data]
     .sort((a, b) => {
       const dateA = new Date(a.date.split("/").reverse().join("-")).getTime();
@@ -49,68 +44,70 @@ export default function LatestBlogs({ data }: { data: BlogItem[] }) {
               key={idx}
               className="relative w-full h-[280px] md:h-[380px] xl:h-[470px] 2xl:h-[511px] 2xl:w-[743px] rounded-[12px] overflow-hidden cursor-pointer group"
             >
-            <Link href={`/news-&-media/blog/blog-details`}>
-              {/* Main Image */}
-              <Image
-                src={item.image || "/images/fallback.jpg"}
-                alt={item.title}
-                fill
-                className="object-cover"
-              />
+              <Link href={`/news-&-media/blog/blog-details/${item.slug}`}>
+                {/* Main Image */}
+                <Image
+                  src={item.thumbnail || "/images/fallback.jpg"}
+                  alt={item.thumbnailAlt}
+                  fill
+                  className="object-cover"
+                />
 
-              {/* Black Gradient (always visible) */}
-              <div
-                className="absolute inset-0 pointer-events-none"
-                style={{
-                  background: `linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.75) 100%)`,
-                }}
-              />
+                {/* Black Gradient (always visible) */}
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background: `linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.75) 100%)`,
+                  }}
+                />
 
-              {/* Blue Gradient (hover - slides from bottom) */}
-              <div
-                className="absolute inset-0 pointer-events-none transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out"
-                style={{
-                  background: `linear-gradient(180.09deg, rgba(0,0,0,0) 50.09%, rgba(66,186,220,0.75) 99.92%)`,
-                }}
-              />
+                {/* Blue Gradient (hover - slides from bottom) */}
+                <div
+                  className="absolute inset-0 pointer-events-none transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out"
+                  style={{
+                    background: `linear-gradient(180.09deg, rgba(0,0,0,0) 50.09%, rgba(66,186,220,0.75) 99.92%)`,
+                  }}
+                />
 
-              {/* Hover Arrow */}
-              <div className="absolute top-[30px] right-[30px] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <button className="bg-primary text-white w-[74px] h-[74px] rounded-full flex items-center justify-center">
-                  <Image
-                    src="/images/arrow-right-up.svg"
-                    alt="arrow"
-                    width={24}
-                    height={24}
-                  />
-                </button>
-              </div>
-
-              {/* Title & Date */}
-              <div className="absolute bottom-[22px] left-0 px-5 lg:px-10 lg:bottom-[39px]  z-10">
-                <div className="flex justify-between">
-                  <p className="text-sm opacity-80 leading-[1.52] text-[#D3D3D3]">
-                    {item.date}
-                  </p>
-                  <p className="text-sm opacity-80 leading-[1.52] text-[#D3D3D3] capitalize">
-                    {item.category}
-                  </p>
-                </div>
-                <h3 className="text-md lg:text-lg xl:text-xl text-white font-light leading-[1.2] mt-[10px] max-w-[26ch] lettersp-1">
-                  {item.title}
-                </h3>
-                <div>
-                  <button className="bg-primary text-white w-[27px] h-[27px] rounded-full flex items-center justify-center mt-[15px]">
+                {/* Hover Arrow */}
+                <div className="absolute top-[30px] right-[30px] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <button className="bg-primary text-white w-[74px] h-[74px] rounded-full flex items-center justify-center">
                     <Image
-                      src="/images/arrow-right-tip.svg"
+                      src="/images/arrow-right-up.svg"
                       alt="arrow"
-                      width={15}
-                      height={15}
+                      width={24}
+                      height={24}
                     />
                   </button>
                 </div>
-              </div>
-            </Link>
+
+                {/* Title & Date */}
+                <div className="absolute bottom-[22px] left-0 px-5 lg:px-10 lg:bottom-[39px]  z-10">
+                  <div className="flex justify-between">
+                    <p className="text-sm opacity-80 leading-[1.52] text-[#D3D3D3]">
+                      {(item.date ? new Date(item.date) : new Date(item.createdAt))
+                        .toLocaleDateString("en-GB")
+                        .replace(/\//g, "/")}
+                    </p>
+                    <p className="text-sm opacity-80 leading-[1.52] text-[#D3D3D3] capitalize">
+                      {item.category}
+                    </p>
+                  </div>
+                  <h3 className="text-md lg:text-lg xl:text-xl text-white font-light leading-[1.2] mt-[10px] max-w-[26ch] lettersp-1">
+                    {item.title}
+                  </h3>
+                  <div>
+                    <button className="bg-primary text-white w-[27px] h-[27px] rounded-full flex items-center justify-center mt-[15px]">
+                      <Image
+                        src="/images/arrow-right-tip.svg"
+                        alt="arrow"
+                        width={15}
+                        height={15}
+                      />
+                    </button>
+                  </div>
+                </div>
+              </Link>
             </motion.div>
           ))}
         </div>

@@ -1,0 +1,24 @@
+export type BlogType = {
+    metaTitle:string,
+    metaDescription:string,
+    banner:string,
+    bannerAlt:string,
+    pageTitle:string,
+    categories:{
+        name:string,
+        blogs:{
+            title:string,
+            slug:string,
+            category:string,
+            coverImage:string,
+            coverImageAlt:string,
+            thumbnail:string,
+            thumbnailAlt:string,
+            date:string,
+            content:string,
+            createdAt:string,
+            metaTitle:string,
+            metaDescription:string,
+        }[]
+    }[]
+}
