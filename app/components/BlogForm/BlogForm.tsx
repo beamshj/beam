@@ -23,7 +23,7 @@ interface BlogFormProps {
     
 title:string;
 slug:string;
-category:string;
+category?:string;
 coverImage:string;
 coverImageAlt:string;
 thumbnail:string;
@@ -165,7 +165,7 @@ const router = useRouter();
                     <Controller
                         name={`category`}
                         control={control}
-                        rules={{ required: "Category is required" }}
+                        
                         render={({ field }) => (
                             <Select
                                 onValueChange={field.onChange}
