@@ -29,7 +29,7 @@ interface SchoolCardsPageProps {
   campuses: SchoolCard[];
 }
 
-const SchoolCards = ({ schoolData,categoryData,locationData,data }: { schoolData: SchoolCardsPageProps,categoryData: any,locationData: any,data: any }) => {
+const SchoolCards = ({ schoolData }: { schoolData: SchoolCardsPageProps }) => {
   const { title, description, campuses } = schoolData;
 
   // Default selections
@@ -42,22 +42,21 @@ const SchoolCards = ({ schoolData,categoryData,locationData,data }: { schoolData
   const [activeCard, setActiveCard] = useState<string | null>(null);
 
   // Extract unique locations (last word of location string)
-  // const locations = Array.from(
-  //   new Set(
-  //     campuses.map((campus) => {
-  //       const parts = campus.location.split(",");
-  //       return parts[parts.length - 1].trim();
-  //     })
-  //   )
-  // );
+  const locations = Array.from(
+    new Set(
+      campuses.map((campus) => {
+        const parts = campus.location.split(",");
+        return parts[parts.length - 1].trim();
+      })
+    )
+  );
 
   // Filter by selected curriculum & location
-  const filteredCampuses = data.schools.filter((campus) => {
-    console.log(campus);
+  const filteredCampuses = campuses.filter((campus) => {
     const matchesCurriculum =
-      campus.category.name.toLowerCase() === selectedCurriculum.toLowerCase();
+      campus.curriculum.toLowerCase() === selectedCurriculum.toLowerCase();
 
-    const campusLocation = campus.location.name.split(",").pop()?.trim();
+    const campusLocation = campus.location.split(",").pop()?.trim();
     const matchesLocation =
       campusLocation?.toLowerCase() === selectedLocation.toLowerCase();
 
@@ -83,7 +82,7 @@ const SchoolCards = ({ schoolData,categoryData,locationData,data }: { schoolData
            max-w-[91ch] lettersp-2">
             <SplitText
               tag="span"
-              text={data.firstSection.title}
+              text={title}
               delay={100}
               duration={0.6}
               ease="power3.out"
@@ -97,7 +96,7 @@ const SchoolCards = ({ schoolData,categoryData,locationData,data }: { schoolData
           </h1> 
             <SplitText
               tag="p"
-              text={data.firstSection.description}
+              text={description}
               delay={100}
               className="text-sm font-light leading-[1.52] text-colorpara xl:max-w-[93ch]"
               duration={0.6}
@@ -115,24 +114,7 @@ const SchoolCards = ({ schoolData,categoryData,locationData,data }: { schoolData
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-5 lg:mb-10 xl:mb-[65px] pb-5 xl:pb-[30px] border-b border-bdrcolor">
           {/* Left Buttons */}
           <div className="flex gap-3">
-            {categoryData.map((category: { _id: string; name: string; }) => (
-              <motion.button
-                key={category._id}
-                variants={moveUp(0.2)}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, amount: 0.2 }}
-                onClick={() => setSelectedCurriculum(category.name)}
-                className={`px-[20px] py-[13px] border rounded-[50px] text-xs font-light cursor-pointer uppercase  ${
-                  selectedCurriculum === category.name
-                    ? "bg-[#C9F3FF] text-black border-[#12586C]"
-                    : "bg-white text-[#666666] hover:bg-gray-200 border-bdrcolor"
-                }`}
-              >
-                {category.name}
-              </motion.button>
-            ))}
-            {/* <motion.button
+            <motion.button
               variants={moveUp(0.2)}
               initial="hidden"
               whileInView="show"
@@ -159,7 +141,7 @@ const SchoolCards = ({ schoolData,categoryData,locationData,data }: { schoolData
               }`}
             >
               AMERICAN CURRICULUM
-            </motion.button> */}
+            </motion.button>
           </div>
 
           {/* Right Dropdown */}
@@ -184,7 +166,7 @@ const SchoolCards = ({ schoolData,categoryData,locationData,data }: { schoolData
               <div className="absolute top-full mt-1 right-0 bg-white border border-gray-200 rounded-[12px] shadow-lg min-w-full lg:min-w-[180px] z-10 overflow-hidden transition-colors duration-300">
               
                 <div className="flex flex-col gap-1">
-      {locationData.map((location, idx) => (
+      {locations.map((location, idx) => (
         <motion.div
           key={idx}
           variants={moveUp(idx * 0.05)} // small stagger
@@ -193,14 +175,14 @@ const SchoolCards = ({ schoolData,categoryData,locationData,data }: { schoolData
         >
           <button
             onClick={() => {
-              setSelectedLocation(location.name);
+              setSelectedLocation(location);
               setIsDropdownOpen(false);
             }}
             className="w-full text-left px-3 py-2 text-sm font-light rounded-[12px]
                        text-black hover:text-white hover:bg-primary
                        transition-all duration-300 ease-in-out"
           >
-            {location.name}
+            {location}
           </button>
         </motion.div>
       ))}
@@ -242,7 +224,7 @@ const SchoolCards = ({ schoolData,categoryData,locationData,data }: { schoolData
                     height={24}
                   />
                   <span className="text-xs font-light text-black">
-                    {campus.address}
+                    {campus.location}
                   </span>
                 </div>
                 {/* Arrow Icon */}
@@ -273,7 +255,7 @@ const SchoolCards = ({ schoolData,categoryData,locationData,data }: { schoolData
                     }}
                     className="flex items-center justify-between px-[15px] py-[14px] rounded-[12px]"
                   >
-                    {/* <div className="flex items-center justify-center gap-[23px] flex-shrink-0">
+                    <div className="flex items-center justify-center gap-[23px] flex-shrink-0">
                       <Image
                         src="/images/beam-schools/icons/1.svg"
                         alt="map-icon"
@@ -284,7 +266,7 @@ const SchoolCards = ({ schoolData,categoryData,locationData,data }: { schoolData
                       <div className="text-sm xl:text-md font-light text-black leading-[1.4]">
                         {campus.stats.students}
                       </div>
-                    </div> */}
+                    </div>
                     <div className="text-sm xl:text-md font-light text-colorpara leading-[1.52]">
                       Active Students
                     </div>
@@ -297,7 +279,7 @@ const SchoolCards = ({ schoolData,categoryData,locationData,data }: { schoolData
                     }}
                     className="flex items-center justify-between px-[15px] py-[14px] rounded-[12px]"
                   >
-                    {/* <div className="flex items-center justify-center gap-[23px] flex-shrink-0">
+                    <div className="flex items-center justify-center gap-[23px] flex-shrink-0">
                       <Image
                         src="/images/beam-schools/icons/2.svg"
                         alt="map-icon"
@@ -308,7 +290,7 @@ const SchoolCards = ({ schoolData,categoryData,locationData,data }: { schoolData
                       <div className="xs:text-sm xl:text-md font-light text-black leading-[1.4]">
                         {campus.stats.nationalities}
                       </div>
-                    </div> */}
+                    </div>
                     <div className="xs:text-sm xl:text-md font-light text-colorpara leading-[1.52]">
                       Nationalities
                     </div>
@@ -321,7 +303,7 @@ const SchoolCards = ({ schoolData,categoryData,locationData,data }: { schoolData
                     }}
                     className="flex items-center justify-between px-[15px] py-[14px] rounded-[12px]"
                   >
-                    {/* <div className="flex items-center justify-center gap-[23px] flex-shrink-0">
+                    <div className="flex items-center justify-center gap-[23px] flex-shrink-0">
                       <Image
                         src="/images/beam-schools/icons/3.svg"
                         alt="map-icon"
@@ -332,7 +314,7 @@ const SchoolCards = ({ schoolData,categoryData,locationData,data }: { schoolData
                       <div className="xs:text-sm xl:text-md font-light text-black leading-[1.4]">
                         {campus.stats.teachers}
                       </div>
-                    </div> */}
+                    </div>
                     <div className="xs:text-sm xl:text-md font-light text-colorpara">
                       Teachers
                     </div>

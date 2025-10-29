@@ -5,8 +5,9 @@ import SplitText from "@/components/SplitText";
 import { motion, Variants } from "framer-motion";
 import { moveUp } from "../../motionVarients";
 import moment from "moment";
+import { BlogType } from "../../blog/type";
 
-const NewsArea = ({data}: {data: any}) => {
+const NewsArea = ({data}: {data: BlogType['categories'][number]['blogs'][number]}) => {
 
   console.log(data);
   // Define variants with proper typing

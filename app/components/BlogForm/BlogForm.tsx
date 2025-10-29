@@ -17,9 +17,6 @@ import {
 } from "@/components/ui/select"
 import { useParams, useRouter } from 'next/navigation';
 import { RiAiGenerateText } from 'react-icons/ri'
-const ReactQuill = dynamic(() => import('react-quill-new'), { ssr: false })
-import 'react-quill-new/dist/quill.snow.css';
-import dynamic from 'next/dynamic'
 import TinyEditor from "@/app/components/TinyMce/TinyEditor";
 
 interface BlogFormProps {
