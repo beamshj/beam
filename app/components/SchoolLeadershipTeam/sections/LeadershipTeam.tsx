@@ -169,7 +169,7 @@ export default function LeadershipCarousel({ data }: { data: Member[] }) {
     return <div className="h-[400px] w-full bg-gray-100 rounded-[12px]" />;
   }
   return (
-    <section className="overflow-hidden mx-auto max-w-[1920px] py-10 xl:py-20 2xl:py-[135px] ">
+    <section className="overflow-hidden mx-auto max-w-[1920px] py-10 xl:py-20 2xl:py-[135px]">
       <div className="container flex flex-col ios:hidden h-full mb-[30px] lg:mb-[35px]">
         <motion.h1
           variants={moveUp(0.2)}

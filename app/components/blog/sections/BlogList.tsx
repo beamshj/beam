@@ -131,7 +131,7 @@ export default function BlogList({ data,categories }: { data: BlogType['categori
           />
         </div>
         {/* Blog Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-[22px] gap-y-[22px] xl:gap-x-[33px] xl:gap-y-[33px] mt-5 xl:mt-[65px]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-[22px] gap-y-[22px] xl:gap-x-[33px] xl:gap-y-[33px] mt-5 xl:mt-[65px] mb-[30px] xl:mb-[50px]">
           {currentBlogs.map((blog, index) => (
           
           <div key={index}>
