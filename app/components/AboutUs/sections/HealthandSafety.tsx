@@ -7,8 +7,11 @@ import { moveUp } from "../../motionVarients";
 import SplitText from "@/components/SplitText";
 import { AboutProps } from "../type";
 
-
-export default function HealthSafety({ data }: { data:AboutProps['sixthSection']  }) {
+export default function HealthSafety({
+  data,
+}: {
+  data: AboutProps["sixthSection"];
+}) {
   const [active, setActive] = useState(0);
 
   return (
@@ -73,7 +76,7 @@ export default function HealthSafety({ data }: { data:AboutProps['sixthSection']
                         active === index ? "text-black" : "text-[#626262]"
                       }`}
                     >
-                      {String(index+1).padStart(2, "0")}
+                      {String(index + 1).padStart(2, "0")}
                     </span>
                     <span className="text-[1.2rem] xl:text-lg 2xl:text-xl font-light leading-[1.2] hover:text-primary transition-all duration-300">
                       {item.title}
@@ -108,6 +111,10 @@ export default function HealthSafety({ data }: { data:AboutProps['sixthSection']
               <AnimatePresence mode="wait">
                 <motion.div
                   key={data.items[active].image}
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ duration: 0.6 }}
+                  viewport={{ once: true }}
                   className="absolute inset-0"
                 >
                   <Image
