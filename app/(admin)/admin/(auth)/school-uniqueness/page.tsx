@@ -157,7 +157,7 @@ const SchoolUniquenessPage = () => {
                         
                         <div className='flex flex-col gap-1'>
                             <Label className='font-bold'>Description</Label>
-                            <Controller name="secondSection.description" control={control} render={({ field }) => {
+                            <Controller name="firstSection.description" control={control} render={({ field }) => {
                                 return <Textarea value={field.value} onChange={field.onChange} />
                             }} />
                         </div>

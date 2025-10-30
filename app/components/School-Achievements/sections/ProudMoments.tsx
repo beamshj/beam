@@ -9,19 +9,12 @@ import {
   playFadeUp,
 } from "@/public/assets/FramerAnimation/animation";
 import SplitText from "@/components/SplitText";
+import { SchoolAchievementsProps } from "../type";
 
-interface ProudMomentsData {
-  title: string;
-  photo: string;
-  vdoLink: string;
-}
 
-interface ProudMomentsProps {
-  data: ProudMomentsData;
-}
 
-const ProudMoments: React.FC<ProudMomentsProps> = ({ data }) => {
-  const { title, vdoLink, photo } = data;
+const ProudMoments: React.FC<{data: SchoolAchievementsProps['firstSection']}> = ({ data }) => {
+  // const { title, vdoLink, photo } = data;
   const [isOpen, setIsOpen] = useState(false);
 
   const openPopup = () => setIsOpen(true);
@@ -39,8 +32,8 @@ const ProudMoments: React.FC<ProudMomentsProps> = ({ data }) => {
       >
         {/* Background Image */}
         <Image
-          src={photo}
-          alt="Proud Moments"
+          src={data.image}
+          alt={data.imageAlt}
           fill
           className="object-cover absolute top-0 left-0 z-10 rounded-[12px]"
         />
@@ -60,7 +53,7 @@ const ProudMoments: React.FC<ProudMomentsProps> = ({ data }) => {
             <h2 className="text-white">
               <SplitText
                 tag="span"
-                text={title}
+                text={data.title}
                 className="text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl leading-[1.2] w-full md:max-w-[65%] font-light tracking-[0.04em] text-center md:text-left lettersp-4"
                 delay={60}
                 duration={0.3}
@@ -123,7 +116,7 @@ const ProudMoments: React.FC<ProudMomentsProps> = ({ data }) => {
 
                 {/* YouTube Embed */}
                 <iframe
-                  src={vdoLink}
+                  src={data.videoLink}
                   title="Video"
                   className="w-full h-full"
                   frameBorder="0"
