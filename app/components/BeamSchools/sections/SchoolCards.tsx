@@ -8,13 +8,22 @@ import { motion } from "framer-motion";
 import { moveUp } from "../../motionVarients";
 import { BeamSchoolType, CategoryType, LocationType } from "../type";
 
-
-const SchoolCards = ({ data, categorydata, locationdata }: { data: BeamSchoolType, categorydata: CategoryType[], locationdata: LocationType[] }) => {
-  
+const SchoolCards = ({
+  data,
+  categorydata,
+  locationdata,
+}: {
+  data: BeamSchoolType;
+  categorydata: CategoryType[];
+  locationdata: LocationType[];
+}) => {
   // Default selections
-  const [selectedCurriculum, setSelectedCurriculum] =
-    useState<string>(categorydata[0].name);
-  const [selectedLocation, setSelectedLocation] = useState<string>(locationdata[0].name);
+  const [selectedCurriculum, setSelectedCurriculum] = useState<string>(
+    categorydata[0].name
+  );
+  const [selectedLocation, setSelectedLocation] = useState<string>(
+    locationdata[0].name
+  );
 
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -57,8 +66,10 @@ const SchoolCards = ({ data, categorydata, locationdata }: { data: BeamSchoolTyp
       <div className="container">
         {/* Title and Description */}
         <div className="mb-5 lg:mb-10 xl:mb-[50px]">
-          <h1 className="text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl leading-[1.25] lg:leading-[1.111] font-light mb-2 xl:mb-[30px] 2xl:mb-[50px] text-black
-           max-w-[91ch] lettersp-2">
+          <h1
+            className="text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl leading-[1.25] lg:leading-[1.111] font-light mb-2 xl:mb-[30px] 2xl:mb-[50px] text-black
+           max-w-[91ch] lettersp-2"
+          >
             <SplitText
               tag="span"
               text={data.firstSection.title}
@@ -72,21 +83,21 @@ const SchoolCards = ({ data, categorydata, locationdata }: { data: BeamSchoolTyp
               rootMargin="-10px"
               textAlign="left"
             />
-          </h1> 
-            <SplitText
-              tag="p"
-              text={data.firstSection.description}
-              delay={100}
-              className="text-sm font-light leading-[1.52] text-colorpara xl:max-w-[93ch]"
-              duration={0.6}
-              ease="power3.out"
-              splitType="lines"
-              from={{ opacity: 0, y: 40 }}
-              to={{ opacity: 1, y: 0 }}
-              threshold={0.1}
-              rootMargin="-10px"
-              textAlign="left"
-            /> 
+          </h1>
+          <SplitText
+            tag="p"
+            text={data.firstSection.description}
+            delay={100}
+            className="text-sm font-light leading-[1.52] text-colorpara xl:max-w-[93ch]"
+            duration={0.6}
+            ease="power3.out"
+            splitType="lines"
+            from={{ opacity: 0, y: 40 }}
+            to={{ opacity: 1, y: 0 }}
+            threshold={0.1}
+            rootMargin="-10px"
+            textAlign="left"
+          />
         </div>
 
         {/* Filters */}
@@ -160,29 +171,28 @@ const SchoolCards = ({ data, categorydata, locationdata }: { data: BeamSchoolTyp
 
             {isDropdownOpen && (
               <div className="absolute top-full mt-1 right-0 bg-white border border-gray-200 rounded-[12px] shadow-lg min-w-full lg:min-w-[180px] z-10 overflow-hidden transition-colors duration-300">
-              
                 <div className="flex flex-col gap-1">
-      {locationdata.map((location, idx) => (
-        <motion.div
-          key={idx}
-          variants={moveUp(idx * 0.05)} // small stagger
-          initial="hidden"
-          animate="show"
-        >
-          <button
-            onClick={() => {
-              setSelectedLocation(location.name);
-              setIsDropdownOpen(false);
-            }}
-            className="w-full text-left px-3 py-2 text-sm font-light rounded-[12px]
+                  {locationdata.map((location, idx) => (
+                    <motion.div
+                      key={idx}
+                      variants={moveUp(idx * 0.05)} // small stagger
+                      initial="hidden"
+                      animate="show"
+                    >
+                      <button
+                        onClick={() => {
+                          setSelectedLocation(location.name);
+                          setIsDropdownOpen(false);
+                        }}
+                        className="w-full text-left px-3 py-2 text-sm font-light rounded-[12px]
                        text-black hover:text-white hover:bg-primary
                        transition-all duration-300 ease-in-out"
-          >
-            {location.name}
-          </button>
-        </motion.div>
-      ))}
-    </div>
+                      >
+                        {location.name}
+                      </button>
+                    </motion.div>
+                  ))}
+                </div>
               </div>
             )}
           </div>
@@ -246,29 +256,29 @@ const SchoolCards = ({ data, categorydata, locationdata }: { data: BeamSchoolTyp
                 <div className="bg-[#DDF7FF] backdrop-blur-sm xl:m-[6px] m-[2px] rounded-[12px] xl:px-[19px] xl:py-[18px] px-2 py-2 space-y-[5px] xl:space-y-[13px]">
                   {campus.specifications.map((specification, index) => (
                     <div
-                    key={index}
-                    style={{
-                      background:
-                        "linear-gradient(90deg, #42BADC 0%, rgba(126, 90, 163, 0.1) 100%)",
-                    }}
-                    className="flex items-center justify-between px-[15px] py-[14px] rounded-[12px]"
-                  >
-                    <div className="flex items-center justify-center gap-[23px] flex-shrink-0">
-                      <Image
-                        src="/images/beam-schools/icons/1.svg"
-                        alt="map-icon"
-                        width={32}
-                        height={32}
-                        className="xl:h-[32px] w-auto h-6"
-                      />
-                      <div className="text-sm xl:text-md font-light text-black leading-[1.4]">
-                        {specification.number}
+                      key={index}
+                      style={{
+                        background:
+                          "linear-gradient(90deg, #42BADC 0%, rgba(126, 90, 163, 0.1) 100%)",
+                      }}
+                      className="flex items-center justify-between px-[15px] py-[14px] rounded-[12px] hover:scale-[1.03] transition-all duration-300 ease-in-out"
+                    >
+                      <div className="flex items-center justify-center gap-[23px] flex-shrink-0">
+                        <Image
+                          src="/images/beam-schools/icons/1.svg"
+                          alt="map-icon"
+                          width={32}
+                          height={32}
+                          className="xl:h-[32px] w-auto h-6"
+                        />
+                        <div className="text-sm xl:text-md font-light text-black leading-[1.4]">
+                          {specification.number}+
+                        </div>
+                      </div>
+                      <div className="text-sm xl:text-md font-light text-colorpara leading-[1.52]">
+                        {specification.value}
                       </div>
                     </div>
-                    <div className="text-sm xl:text-md font-light text-colorpara leading-[1.52]">
-                      {specification.value}
-                    </div>
-                  </div>
                   ))}
                   {/* <div
                     style={{
