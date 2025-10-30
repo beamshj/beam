@@ -9,20 +9,10 @@ import Image from "next/image";
 import SplitText from "@/components/SplitText";
 import { motion } from "framer-motion";
 import { moveUp } from "../../motionVarients";
-export interface VMItem {
-  details: string[];
-  name: string;
-  designation: string;
-  icon: string;
-}
+import { TestimonialsProps } from "../type";
 
-export interface commentsData {
-  title: string;
-  description: string;
-  items: VMItem[];
-}
 
-const Comments = ({ commentsData }: { commentsData: commentsData }) => {
+const Comments = ({ data }: { data: TestimonialsProps['firstSection'] }) => {
   return (
     <section className="pt-8 md:pt-12 lg:pt-20 2xl:pt-[135px] pb-10 md:pb-10 lg:pb-10 2xl:pb-[40px] overflow-hidden ">
       <div className="container">
@@ -32,7 +22,7 @@ const Comments = ({ commentsData }: { commentsData: commentsData }) => {
               dangerouslySetInnerHTML={{ __html: commentsData.title }}
             /> */}
             <div className="mb-4 md:mb-6 xl:mb-8 2xl:mb-8">
-              {commentsData.title.split(/<br\s*\/?>/gi).map((part, index) => (
+              {data.title.split("\n").map((part, index) => (
                 <div key={index} className="">
                   <SplitText
                     tag="h2"
@@ -48,12 +38,12 @@ const Comments = ({ commentsData }: { commentsData: commentsData }) => {
                     rootMargin="-100px"
                     textAlign="left"
                   />
-                  {index < commentsData.title.split(/<br\s*\/?>/gi).length - 1 && <br />}
+                  {index < data.title.split(/<br\s*\/?>/gi).length - 1 && <br />}
                 </div>
               ))}
             </div>
             <p className=" text-sm leading-[1.526315789473684] max-w-[85ch] mb-6 font-light  text-colorpara">
-              {commentsData.description}
+              {data.description}
             </p>
           </div>
           <div className="relative">
@@ -144,7 +134,7 @@ const Comments = ({ commentsData }: { commentsData: commentsData }) => {
                 modules={[Navigation, Pagination]}
                 className="!overflow-visible mt-5"
               >
-                {commentsData.items.map((item, index) => (
+                {data.items.map((item, index) => (
                   <SwiperSlide key={index} className="flex items-stretch">
                     <motion.div variants={moveUp(index * 0.2)} initial="hidden" whileInView="show" viewport={{amount: 0.1, once: true}} className={`flex flex-col justify-between w-full p-5 lg:p-6 xl:p-10 rounded-2xl ${index % 2 === 0 ? "bg-[#F5EBFF]" : " bg-[#E6F7FF]"} `}
                     >
@@ -156,21 +146,21 @@ const Comments = ({ commentsData }: { commentsData: commentsData }) => {
 
                       {/* 💬 Content */}
                       <p className="flex-grow text-sm leading-[1.5263] font-light text-colorpara">
-                        {item.details}
+                        {item.description}
                       </p>
 
                       {/* 👤 Profile */}
                       <div className="flex gap-2 lg:gap-4 md:w-[80%] border-t border-black pt-5 mt-8">
                         <Image
-                          src={item.icon}
-                          alt={item.name}
+                          src={"/images/testimonials/user.png"}
+                          alt={item.title}
                           width={90}
                           height={90}
                           className="rounded-full w-[30px] h-[30px] lg:w-[90px] lg:h-[90px]"
                         />
                         <div>
                           <p className="text-[1.3rem] md:text-md xl:text-lg 2xl:text-xl font-light text-black leading-[1.18] mb-2 lg:mb-3">
-                            {item.name}
+                            {item.title}
                           </p>
                           <p className="text-sm leading-[1.5263] font-light text-colorpara">
                             {item.designation}

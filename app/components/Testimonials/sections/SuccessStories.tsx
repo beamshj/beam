@@ -9,18 +9,12 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { moveUp } from "../../motionVarients";
-
-export interface FocusData {
-  title: string;
-  description: string;
-  image: string;
-  videos: string[];
-}
+import { TestimonialsProps } from "../type"
 
 const SuccessStories = ({
-  focusData,
+  data
 }: {
-  focusData: FocusData;
+  data: TestimonialsProps['secondSection'];
 }) => {
 
   const [activeVideoIndex, setActiveVideoIndex] = useState<number | null>(null);
@@ -45,14 +39,14 @@ const SuccessStories = ({
                 modules={[Navigation]}
 
               >
-                {focusData.videos.map((video, index) => {
+                {data.items.map((video, index) => {
                   const isPlaying = activeVideoIndex === index;
 
                   return (
                     <SwiperSlide key={index} className="flex items-stretch">
                       <motion.div variants={moveUp(index * 0.2)} initial="hidden" whileInView="show" viewport={{amount: 0.1, once: true}} className="relative w-full h-[250px] md:h-[480px] rounded-[12px] overflow-hidden flex-grow">
                         {/* Background image */}
-                        <Image src={focusData.image} alt={focusData.title} fill className={`object-cover transition-all duration-500 ${isPlaying ? "blur-sm" : ""}`} />
+                        <Image src={video.poster} alt={video.poster} fill className={`object-cover transition-all duration-500 ${isPlaying ? "blur-sm" : ""}`} />
                         {/* Gradient overlay */}
                         <motion.div
                           className="absolute bottom-0 w-full h-full rounded-xl bg-[linear-gradient(0deg,rgba(0,0,0,0.2),rgba(0,0,0,0.2)),linear-gradient(180deg,rgba(0,0,0,0),rgba(126,90,163,0.6))]"
@@ -77,7 +71,7 @@ const SuccessStories = ({
                         {/* Video iframe (YouTube) */}
                         {isPlaying && (
                           <iframe
-                            src={`${video}?autoplay=1&controls=1&rel=0&modestbranding=1`}
+                            src={`${video.video}?autoplay=1&controls=1&rel=0&modestbranding=1`}
                             className="absolute inset-0 w-full h-full rounded-[12px]"
                             allow="autoplay; fullscreen"
                             allowFullScreen
@@ -162,10 +156,10 @@ const SuccessStories = ({
           </div>
           <div>
             <motion.h2 variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{amount: 0.1, once: false}} className="text-lg xl:text-2xl 2xl:text-4xl 2xl:max-w-[18ch] font-light leading-[1.111111111] text-black mb-4 md:mb-6 xl:mb-7">
-              {focusData.title}
+              {data.title}
             </motion.h2>
             <motion.p variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{amount: 0.1, once: false}} className=" text-sm leading-[1.526315789473684]  font-light  text-colorpara">
-              {focusData.description}
+              {data.description}
             </motion.p>
 
           </div>
