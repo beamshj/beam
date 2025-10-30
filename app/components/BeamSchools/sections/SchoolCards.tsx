@@ -93,7 +93,7 @@ const SchoolCards = ({ data, categorydata, locationdata }: { data: BeamSchoolTyp
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-5 lg:mb-10 xl:mb-[65px] pb-5 xl:pb-[30px] border-b border-bdrcolor">
           {/* Left Buttons */}
           <div className="flex gap-3">
-            {categorydata.map((category: any) => (
+            {categorydata.map((category: CategoryType) => (
               <motion.button
                 variants={moveUp(0.2)}
                 key={category._id}
