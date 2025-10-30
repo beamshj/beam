@@ -10,22 +10,12 @@ import SplitText from "@/components/SplitText";
 import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVarients";
 import Link from "next/link";
+import { AboutProps } from "../type";
 
-type CardItem = {
-  title: string;
-  image: string;
-  link: string;
-};
 
-type CardsProps = {
-  data: {
-    title: string;
-    items: CardItem[];
-  };
-};
 
-export default function MoreToExplore({ data }: CardsProps) {
-  const { title, items } = data;
+export default function MoreToExplore({ data }: {data: AboutProps['seventhSection']}) {
+  // const { title, items } = data;
   const headingRef = useRef<HTMLHeadingElement>(null);
   const [leftOffset, setLeftOffset] = useState(0);
 
@@ -48,7 +38,7 @@ export default function MoreToExplore({ data }: CardsProps) {
           <h2 className="text-lg xl:text-2xl 2xl:text-4xl font-light mb-4 xl:mb-8 2xl:mb-[50px]">
             <SplitText
               tag="span"
-              text={title}
+              text={data.title}
               className=""
               delay={100}
               duration={0.6}
@@ -80,7 +70,7 @@ export default function MoreToExplore({ data }: CardsProps) {
             modules={[Pagination]}
             className="!pb-[60px]"
           >
-            {items.map((card, idx) => (
+            {data.items.map((card, idx) => (
               <SwiperSlide key={idx}>
                 <Link href={card.link}>
                   <motion.div
