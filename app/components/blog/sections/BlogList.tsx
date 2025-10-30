@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import Select from "react-select";
+// import Select from "react-select";
 import { motion } from "framer-motion";
 import Pagination from "../../Common/Pagination";
 import { moveUp } from "../../motionVarients";
@@ -16,11 +16,9 @@ export default function BlogList({
   data: BlogType["categories"][number]["blogs"];
   categories: { name: string }[];
 }) {
-  const uniqueCategories = [
-    ...Array.from(new Set(categories.map((category) => category.name))),
-  ];
-
-  console.log(uniqueCategories);
+  // const uniqueCategories = [
+  //   ...Array.from(new Set(categories.map((category) => category.name))),
+  // ];
 
   const [selectedCategory, setSelectedCategory] = useState("curriculum");
   const [currentPage, setCurrentPage] = useState(1);
@@ -45,8 +43,6 @@ export default function BlogList({
       ? data
       : data.filter((blog) => blog.category === selectedCategory);
 
-  console.log(filteredBlogs);
-
   const totalPages = Math.ceil(filteredBlogs.length / blogsPerPage);
   const startIndex = (currentPage - 1) * blogsPerPage;
   const currentBlogs = filteredBlogs.slice(
@@ -69,7 +65,7 @@ export default function BlogList({
             Blog
           </motion.h1>
           {/* Category Tabs */}
-          <div className="hidden lg:flex gap-[15px]">
+          {/* <div className="hidden lg:flex gap-[15px]">
             {uniqueCategories.map((cat, index) => {
               const isSelected = selectedCategory === cat;
 
@@ -102,10 +98,10 @@ export default function BlogList({
                 </motion.div>
               );
             })}
-          </div>
+          </div> */}
         </div>
 
-        <div className="block lg:hidden">
+        {/* <div className="block lg:hidden">
           <Select
             instanceId="category-select"
             options={categories.map((cat) => ({
@@ -137,7 +133,7 @@ export default function BlogList({
               }),
             }}
           />
-        </div>
+        </div> */}
         {/* Blog Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-[22px] gap-y-[22px] xl:gap-x-[33px] xl:gap-y-[33px] mt-5 xl:mt-[65px] mb-[30px] xl:mb-[50px]">
           {currentBlogs.map((blog, index) => (
@@ -181,7 +177,7 @@ export default function BlogList({
 
                   {/* Content Section */}
                   <div className="flex-1 flex flex-col justify-center px-[20px] xl:px-[40px] py-[20px] 2xl:py-[0px]">
-                    <div className="flex text-colorpara justify-between items-center text-sm font-light leading-[1.7] mb-[15px]">
+                    {/* <div className="flex text-colorpara justify-between items-center text-sm font-light leading-[1.7] mb-[15px]">
                       <span>
                         {blog.date
                           ? new Date(blog.date).toLocaleDateString("en-US", {
@@ -192,7 +188,7 @@ export default function BlogList({
                           : "Date not available"}
                       </span>
                       <span className="capitalize">{blog.category}</span>
-                    </div>
+                    </div> */}
                     <h3 className="text-lg leading-[1.2] font-light text-black">
                       {blog.title.split(" ").slice(0, 6).join(" ") + "..."}
                     </h3>
