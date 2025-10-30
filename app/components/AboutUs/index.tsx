@@ -1,7 +1,4 @@
 import InnerBanner from "@/app/components/Common/InnerBanner";
-import {
-  cards,
-} from "./data";
 import OurStorySection from "./sections/OurStory";
 import VisionMissionSection from "./sections/VisionMission";
 import ValuesGrid from "./sections/OurValues";
