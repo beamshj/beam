@@ -7,11 +7,21 @@ import { moveUp } from "../../motionVarients";
 import Link from "next/link";
 import { BlogType } from "../type";
 
-export default function LatestBlogs({ data }: { data: BlogType['categories'][number]['blogs'] }) {
+export default function LatestBlogs({
+  data,
+}: {
+  data: BlogType["categories"][number]["blogs"];
+}) {
   const displayItems = [...data]
     .sort((a, b) => {
-      const dateA = new Date(a.date.split("/").reverse().join("-")).getTime();
-      const dateB = new Date(b.date.split("/").reverse().join("-")).getTime();
+      const dateA = a.date
+        ? new Date(a.date.split("/").reverse().join("-")).getTime()
+        : 0; // fallback to 0 or some default
+
+      const dateB = b.date
+        ? new Date(b.date.split("/").reverse().join("-")).getTime()
+        : 0;
+
       return dateB - dateA;
     })
     .slice(0, 2);
@@ -85,12 +95,15 @@ export default function LatestBlogs({ data }: { data: BlogType['categories'][num
                 <div className="absolute bottom-[22px] left-0 px-5 lg:px-10 lg:bottom-[39px]  z-10">
                   <div className="flex justify-between">
                     <p className="text-sm opacity-80 leading-[1.52] text-[#D3D3D3]">
-                      {(item.date ? new Date(item.date) : new Date(item.createdAt))
+                      {/* {(item.date
+                        ? new Date(item.date)
+                        : new Date(item.createdAt)
+                      )
                         .toLocaleDateString("en-GB")
-                        .replace(/\//g, "/")}
+                        .replace(/\//g, "/")} */}
                     </p>
                     <p className="text-sm opacity-80 leading-[1.52] text-[#D3D3D3] capitalize">
-                      {item.category}
+                      {/* {item.category} */}
                     </p>
                   </div>
                   <h3 className="text-md lg:text-lg xl:text-xl text-white font-light leading-[1.2] mt-[10px] max-w-[26ch] lettersp-1">

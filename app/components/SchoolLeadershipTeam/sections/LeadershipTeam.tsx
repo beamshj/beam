@@ -30,18 +30,39 @@ export default function LeadershipCarousel({ data }: { data: Member[] }) {
   const [containerPaddingRight, setContainerPaddingRight] = useState(0);
 
   const n = data.length;
-  const gap = 40;
+  // const gap = 40;
+
+  const gapValues = {
+    "2xl":40,
+    xl: 28,
+    lg: 20,
+    md: 18,
+    sm: 15
+  };
+
+  // Dynamically choose gap based on current window width
+  const getDynamicGap = () => {
+    if (windowWidth >= 1536) return gapValues["2xl"];
+    if (windowWidth >= 1280) return gapValues.xl;
+    if (windowWidth >= 1024) return gapValues.lg;
+    if (windowWidth >= 768) return gapValues.md;
+    return gapValues.sm;
+  };
+
+  const gap = getDynamicGap();
 
   const sizes = {
     active: {
-      "2xl": { w: 459, h: 653 },
-      xl: { w: 400, h: 550 },
-      lg: { w: 280, h: 330 },
-      md: { w: 240, h: 300 },
-      sm: { w: 220, h: 280 },
+      "3xl": { w: 459, h: 653 },
+      "2xl": { w: 370, h: 480 },
+      xl: { w: 370, h: 490 },
+      lg: { w: 280, h: 300 },
+      md: { w: 240, h: 380 },
+      sm: { w: 220, h: 260 },
     },
     nonActive: {
-      "2xl": { w: 255, h: 255 },
+      "3xl": { w: 255, h: 255 },
+      "2xl": { w: 220, h: 220 },
       xl: { w: 220, h: 220 },
       lg: { w: 160, h: 160 },
       md: { w: 140, h: 140 },
@@ -58,6 +79,7 @@ export default function LeadershipCarousel({ data }: { data: Member[] }) {
 
   // Safe size getters
   const getSafeActiveSize = () => {
+    if (windowWidth >= 1615) return sizes.active["3xl"];
     if (windowWidth >= 1536) return sizes.active["2xl"];
     if (windowWidth >= 1280) return sizes.active.xl;
     if (windowWidth >= 1024) return sizes.active.lg;
@@ -66,6 +88,7 @@ export default function LeadershipCarousel({ data }: { data: Member[] }) {
   };
 
   const getSafeNonActiveSize = () => {
+    if (windowWidth >= 1615) return sizes.nonActive["3xl"];
     if (windowWidth >= 1536) return sizes.nonActive["2xl"];
     if (windowWidth >= 1280) return sizes.nonActive.xl;
     if (windowWidth >= 1024) return sizes.nonActive.lg;
@@ -77,7 +100,7 @@ export default function LeadershipCarousel({ data }: { data: Member[] }) {
   const nonActiveSize = getSafeNonActiveSize();
 
   const getMaxNonActive = () => {
-    if (windowWidth >= 1536) return 3;
+    if (windowWidth >= 1813) return 3;
     if (windowWidth >= 1024) return 2;
     if (windowWidth >= 768) return 1;
     return 0; // tablet/mobile shows only active
@@ -146,8 +169,8 @@ export default function LeadershipCarousel({ data }: { data: Member[] }) {
     return <div className="h-[400px] w-full bg-gray-100 rounded-[12px]" />;
   }
   return (
-    <section className="overflow-hidden mx-auto max-w-[1920px] py-10 xl:py-20 2xl:py-[135px] ">
-      <div className="container flex flex-col 2xl:hidden h-full mb-[30px] lg:mb-[35px]">
+    <section className="overflow-hidden mx-auto max-w-[1920px] py-10 xl:py-20 2xl:py-[135px]">
+      <div className="container flex flex-col ios:hidden h-full mb-[30px] lg:mb-[35px]">
         <motion.h1
           variants={moveUp(0.2)}
           initial="hidden"
@@ -174,7 +197,9 @@ export default function LeadershipCarousel({ data }: { data: Member[] }) {
         className={`flex flex-col md:flex-row gap-[15px] md:gap-[36px] lg:gap-[56px] items-stretch ${
           windowWidth < 1024 ? "container" : ""
         }`}
-        style={{ paddingRight: windowWidth < 1024 ? 0 : containerPaddingRight }}
+        style={{
+          paddingRight: windowWidth < 1024 ? 15 : containerPaddingRight,
+        }}
       >
         {/* Slides container */}
         <div
@@ -191,7 +216,7 @@ export default function LeadershipCarousel({ data }: { data: Member[] }) {
             style={{
               marginLeft: containerPaddingRight,
             }}
-            className="hidden 2xl:block absolute top-0 left-0 max-w-[50%] h-full"
+            className="hidden ios:block absolute top-0 left-0 max-w-[50%] h-full"
           >
             <motion.h1
               variants={moveUp(0.2)}
@@ -296,10 +321,28 @@ export default function LeadershipCarousel({ data }: { data: Member[] }) {
                   className="flex items-start gap-[13px]"
                 >
                   <span className="mt-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
-<path d="M8.99121 3.7063L12.7731 7.50005L8.99121 11.2938" stroke="#292D32" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M2.18066 7.5H12.6666" stroke="#292D32" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="15"
+                      height="15"
+                      viewBox="0 0 15 15"
+                      fill="none"
+                    >
+                      <path
+                        d="M8.99121 3.7063L12.7731 7.50005L8.99121 11.2938"
+                        stroke="#292D32"
+                        strokeMiterlimit="10"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M2.18066 7.5H12.6666"
+                        stroke="#292D32"
+                        strokeMiterlimit="10"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
                   </span>
                   <span>{b}</span>
                 </motion.li>

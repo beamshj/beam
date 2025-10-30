@@ -4,13 +4,22 @@ import LatestBlogs from "./sections/LatestBlog";
 import BlogList from "./sections/BlogList";
 import { BlogType } from "./type";
 
-const Index = ({data}: {data: BlogType}) => {
-  console.log(data);
+const Index = ({ data }: { data: BlogType }) => {
   return (
     <>
-      <InnerBanner BannerData={BannerData} banner={data.banner} bannerAlt={data.bannerAlt} pageTitle={data.pageTitle}/>
-      <LatestBlogs data={data.categories.flatMap((category) => category.blogs)} />
-      <BlogList data={data.categories.flatMap((category) => category.blogs)} categories={data.categories}/>
+      <InnerBanner
+        BannerData={BannerData}
+        banner={data.banner}
+        bannerAlt={data.bannerAlt}
+        pageTitle={data.pageTitle}
+      />
+      <LatestBlogs
+        data={data.categories.flatMap((category) => category.blogs)}
+      />
+      <BlogList
+        data={data.categories.flatMap((category) => category.blogs)}
+        // categories={data.categories}
+      />
     </>
   );
 };
