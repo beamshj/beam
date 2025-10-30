@@ -5,14 +5,40 @@ import { moveRight, moveUp } from "../../motionVarients";
 import SplitText from "@/components/SplitText";
 import { AccreditationProps } from "../type";
 
-const Main = ({data}: {data: AccreditationProps['firstSection']}) => {
-  return ( 
-    <section className="pt-10 xl:pt-25 2xl:pt-[135px] pb-6 xl:pb-12 2xl:pb-[50px]">
+const Main = ({ data }: { data: AccreditationProps["firstSection"] }) => {
+  return (
+    <section className="pt-10 xl:pt-25 2xl:pt-[135px] pb-8 xl:pb-14 2xl:pb-[75px]">
       <div className="container">
-        <motion.div variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ amount: 0.1, once: false, margin: `-250px 0px -250px 0px`, }} className="relative overflow-hidden rounded-xl p-5 md:p-10 xl:p-15 2xl:min-h-[635px] flex items-end">
+        <motion.div
+          variants={moveUp(0.2)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{
+            amount: 0.1,
+            once: true,
+            margin: `-250px 0px -250px 0px`,
+          }}
+          className="relative overflow-hidden rounded-xl p-5 md:p-10 xl:p-15 2xl:min-h-[635px] flex items-end"
+        >
           <div className="absolute top-0 left-0 w-full h-full bg-black/40 z-10"></div>
-          <motion.div variants={moveRight(0.2)} initial="hidden" whileInView="show" viewport={{ amount: 0.1, once: false, margin: `-250px 0px -250px 0px`, }} className="absolute top-0 left-0 w-[90%] h-full bg-gradient-to-r from-[#066B7F] to-black/0 z-10 opacity-95"></motion.div>
-          <Image src={data.image} alt="" width={1920} height={1280} className="absolute top-0 left-0 z-0 h-full object-cover" />
+          <motion.div
+            variants={moveRight(0.3)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{
+              amount: 0.1,
+              once: true,
+              margin: `-250px 0px -250px 0px`,
+            }}
+            className="absolute top-0 left-0 w-[90%] h-full bg-gradient-to-r from-[#066B7F] to-black/0 z-10 opacity-95"
+          ></motion.div>
+          <Image
+            src={data.image}
+            alt=""
+            width={1920}
+            height={1280}
+            className="absolute top-0 left-0 z-0 h-full object-cover"
+          />
           <div className="relative z-30 text-white">
             <SplitText
               tag="h2"
@@ -46,7 +72,7 @@ const Main = ({data}: {data: AccreditationProps['firstSection']}) => {
         </motion.div>
       </div>
     </section>
-   );
-}
- 
+  );
+};
+
 export default Main;
