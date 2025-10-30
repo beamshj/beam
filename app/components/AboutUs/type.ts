@@ -57,5 +57,14 @@ export type AboutProps = {
             imageAlt:string;
             title:string
         }[]
+    },
+    seventhSection:{
+        title:string;
+        items:{
+            image:string;
+            imageAlt:string;
+            title:string;
+            link:string
+        }[]
     }
 }

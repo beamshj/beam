@@ -1,7 +1,4 @@
 import InnerBanner from "@/app/components/Common/InnerBanner";
-import {
-  cards,
-} from "./data";
 import OurStorySection from "./sections/OurStory";
 import VisionMissionSection from "./sections/VisionMission";
 import ValuesGrid from "./sections/OurValues";
@@ -21,7 +18,7 @@ const Index = ({ data }: { data: AboutProps }) => {
       <Milestones data={data.historySection}/>
       <InclusionSection data={data.fifthSection} />
       <HealthSafety data={data.sixthSection} />
-      <MoreToExplore data={cards} />
+      <MoreToExplore data={data.seventhSection}/>
     </>
   );
 };
