@@ -34,7 +34,7 @@ const Main = ({ data }: { data: AccreditationProps["firstSection"] }) => {
           ></motion.div>
           <Image
             src={data.image}
-            alt=""
+            alt={data.imageAlt}
             width={1920}
             height={1280}
             className="absolute top-0 left-0 z-0 h-full object-cover"

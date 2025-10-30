@@ -115,7 +115,7 @@ const SchoolCards = ({
                 className={`px-[20px] py-[13px] border rounded-[50px] text-xs font-light cursor-pointer uppercase  ${
                   selectedCurriculum === category.name
                     ? "bg-[#C9F3FF] text-black border-[#12586C]"
-                    : "bg-white text-[#666666] hover:bg-gray-200 border-bdrcolor"
+                    : "bg-white text-[#666666] hover:bg-gray-200 border-bdrcolor transition-colors duration-300"
                 }`}
               >
                 {category.name}
@@ -159,7 +159,7 @@ const SchoolCards = ({
               whileInView="show"
               viewport={{ once: true, amount: 0.2 }}
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              className="w-full md:w-fit flex items-center px-[20px] py-[10px] border border-[#12586C] bg-[#C9F3FF] rounded-[50px] text-[#626262] text-sm font-light min-w-[180px] justify-between"
+              className="w-full cursor-pointer md:w-fit flex items-center px-[20px] py-[10px] border border-[#12586C] bg-[#C9F3FF] rounded-[50px] text-[#626262] text-sm font-light min-w-[180px] justify-between"
             >
               <span>{selectedLocation}</span>
               <ChevronDown
@@ -175,7 +175,7 @@ const SchoolCards = ({
                   {locationdata.map((location, idx) => (
                     <motion.div
                       key={idx}
-                      variants={moveUp(idx * 0.05)} // small stagger
+                      variants={moveUp(idx * 0.05)}
                       initial="hidden"
                       animate="show"
                     >
@@ -234,7 +234,7 @@ const SchoolCards = ({
                   </span>
                 </div>
                 {/* Arrow Icon */}
-                <div className="bg-transparent group-hover:bg-primary border-white group-hover:border-primary border xl:w-[75px] xl:h-[75px] w-[50px] h-[50px] rounded-[50px] flex items-center justify-center transition-colors duration-300">
+                <div className="bg-transparent group-hover:bg-primary border-white group-hover:border-primary border xl:w-[75px] xl:h-[75px] w-[50px] h-[50px] rounded-[50px] flex items-center justify-center transition-colors duration-400">
                   <Image
                     src="/images/arrow-right-up.svg"
                     alt="arrow"
