@@ -81,13 +81,16 @@ export default function LatestBlogs({
 
                 {/* Hover Arrow */}
                 <div className="absolute top-[30px] right-[30px] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <button className="bg-primary text-white w-[74px] h-[74px] rounded-full flex items-center justify-center">
-                    <Image
-                      src="/images/arrow-right-up.svg"
-                      alt="arrow"
-                      width={24}
-                      height={24}
-                    />
+                  <button className="bg-primary text-white w-[74px] h-[74px] rounded-full flex items-center justify-center overflow-hidden cursor-pointer">
+                    <span className="transition-all duration-400 translate-y-3 -translate-x-3 group-hover:-translate-y-0 group-hover:translate-x-0 block">
+                      <Image
+                        src="/images/arrow-right-up.svg"
+                        alt="arrow"
+                        width={24}
+                        height={24}
+                        className="object-contain"
+                      />
+                    </span>
                   </button>
                 </div>
 
@@ -110,7 +113,7 @@ export default function LatestBlogs({
                     {item.title}
                   </h3>
                   <div>
-                    <button className="bg-primary text-white w-[27px] h-[27px] rounded-full flex items-center justify-center mt-[15px]">
+                    <button className="bg-primary text-white w-[27px] h-[27px] rounded-full flex items-center justify-center mt-[15px] cursor-pointer">
                       <Image
                         src="/images/arrow-right-tip.svg"
                         alt="arrow"

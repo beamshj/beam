@@ -285,8 +285,8 @@ export default function BlogList({
                   variants={moveUp(index * 0.1)}
                   initial="hidden"
                   whileInView="show"
-                  viewport={{ once: false, amount: 0.2 }}
-                  className="rounded-[12px] relative overflow-hidden h-full xl:h-[500px] 2xl:h-[551px] border border-bdrcolor flex flex-col group"
+                  viewport={{ once: true, amount: 0.2 }}
+                  className="rounded-[12px] relative overflow-hidden h-full xl:h-[495px] border border-bdrcolor flex flex-col group"
                 >
                   {/* Sliding Gradient from bottom */}
                   <div className="absolute inset-0 -z-10 overflow-hidden">
@@ -306,13 +306,16 @@ export default function BlogList({
 
                     {/* Hover Arrow */}
                     <div className="absolute top-[30px] right-[30px] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <button className="bg-primary text-white w-[74px] h-[74px] rounded-full flex items-center justify-center">
-                        <Image
-                          src="/images/arrow-right-up.svg"
-                          alt="arrow"
-                          width={24}
-                          height={24}
-                        />
+                      <button className="bg-primary text-white w-[74px] h-[74px] rounded-full flex items-center justify-center overflow-hidden cursor-pointer">
+                        <span className="transition-all duration-400 translate-y-2 -translate-x-2 group-hover:-translate-y-0 group-hover:translate-x-0 block">
+                          <Image
+                            src="/images/arrow-right-up.svg"
+                            alt="arrow"
+                            width={24}
+                            height={24}
+                            className="object-contain"
+                          />
+                        </span>
                       </button>
                     </div>
                   </div>
@@ -331,11 +334,12 @@ export default function BlogList({
                       </span>
                       <span className="capitalize">{blog.category}</span>
                     </div> */}
-                    <h3 className="text-lg leading-[1.2] font-light text-black">
-                      {blog.title.split(" ").slice(0, 6).join(" ") + "..."}
+                    <h3 className="text-lg leading-[1.2] font-light text-black capitalize line-clamp-2">
+                      {/* {blog.title.split(" ").slice(0, 6).join(" ") + "..."} */}
+                      {blog.title.toLowerCase()}
                     </h3>
                     <div>
-                      <button className="bg-primary text-white w-[27px] h-[27px] rounded-full flex items-center justify-center mt-[15px]">
+                      <button className="bg-primary text-white w-[27px] h-[27px] rounded-full flex items-center justify-center mt-[15px] cursor-pointer">
                         <Image
                           src="/images/arrow-right-tip.svg"
                           alt="arrow"
