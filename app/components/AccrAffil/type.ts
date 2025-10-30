@@ -1,0 +1,23 @@
+export type AccreditationProps = {
+    metaTitle:string,
+    metaDescription:string,
+    banner:string,
+    bannerAlt:string,
+    pageTitle:string,
+    firstSection:{
+        title:string,
+        description:string,
+        image:string,
+        imageAlt:string,
+    },
+    categories:{
+        name:string,
+        accreditations:{
+            title:string,
+            description:string,
+            image:string,
+            imageAlt:string,
+            category:string,
+        }[]
+    }[]
+}

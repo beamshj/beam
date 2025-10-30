@@ -1,34 +1,39 @@
 "use client";
 import { useState } from "react";
-import { accrData } from "../data";
 import { motion, AnimatePresence } from "framer-motion";
 import { moveUp } from "../../motionVarients";
 import Image from "next/image";
-const DataTab = () => {
-  const [activeTab, setActiveTab] = useState<"affiliation" | "accreditations">(
-    "affiliation"
+import { AccreditationProps } from "../type";
+const DataTab = ({awards, categories}: {awards: AccreditationProps['categories'][number]['accreditations'], categories: string[]}) => {
+  console.log(awards, categories);
+  const [activeTab, setActiveTab] = useState(
+    categories[0]
   );
 
   const currentData =
-    activeTab === "affiliation" ? accrData.affiliation : accrData.accrediations;
+    awards.filter((award) => award.category === activeTab);
   const [isActive, setIsActive] = useState<number | null>(null);
   return (
     <section className="pb-10 lg:pb-20 xl:pb-25 2xl:pb-[135px]">
       <div className="container">
         <div className="flex items-center gap-5 border-b border-bdrcolor pb-[31px] mb-10 xl:mb-[65px]">
-          <motion.button
+          {categories.map((category,index)=>(
+            <motion.button
             variants={moveUp(0.2)}
+            key={index}
             initial="hidden"
             whileInView="show"
             viewport={{ amount: 0.1, once: false }}
             className={
-              activeTab === "affiliation" ? "tab-btn active" : "tab-btn"
+              activeTab === category ? "tab-btn active" : "tab-btn"
             }
-            onClick={() => setActiveTab("affiliation")}
+            onClick={() => setActiveTab(category)}
           >
-            <span>Affiliation</span>
+            <span>{category}</span>
           </motion.button>
-          <motion.button
+          ))}
+          
+          {/* <motion.button
             variants={moveUp(0.4)}
             initial="hidden"
             whileInView="show"
@@ -39,7 +44,7 @@ const DataTab = () => {
             onClick={() => setActiveTab("accreditations")}
           >
             <span>Accreditation</span>
-          </motion.button>
+          </motion.button> */}
         </div>
         <AnimatePresence mode="wait">
           <motion.div
@@ -50,7 +55,7 @@ const DataTab = () => {
             transition={{ duration: 0.3 }}
             className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 grid-bdr"
           >
-            {currentData.items.map((item, index) => (
+            {currentData.map((item, index) => (
               <motion.div
                 key={`${activeTab}-${index}`}
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -77,8 +82,8 @@ const DataTab = () => {
                       }  group-hover:opacity-100 group-hover:-translate-y-full   transition-all duration-300`}
                     >
                       <Image
-                        src={item.logo}
-                        alt={item.title}
+                        src={item.image}
+                        alt={item.imageAlt}
                         width={1920}
                         height={1280}
                         className="object-contain w-auto h-12 xl:h-[64px] 2xl:w-auto 2xl:h-auto group-hover:-translate-y-full transition-all duration-300"
@@ -114,7 +119,7 @@ const DataTab = () => {
                       } group-hover:opacity-100 group-hover:translate-y-0 absolute bottom-0 left-0 w-full  transition-all duration-300`}
                     >
                       <p className="text-sm font-light text-white leading-relaxed max-w-[30ch]">
-                        {item.desc}
+                        {item.description}
                       </p>
                     </div>
                   </div>
