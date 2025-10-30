@@ -642,6 +642,19 @@ body {
   }
 }
 
+.school-uniqueness-second-section{
+  p{
+    @apply text-[#E0E0E0] leading-[1.526315789473684] font-light max-w-[50ch];
+  }
+  ol{
+    @apply mt-[20px] space-y-1 ml-5 list-disc
+  }
+  
+  li{
+      @apply text-[#E0E0E0] font-light
+  }
+}
+
 
 
 .blog-content {

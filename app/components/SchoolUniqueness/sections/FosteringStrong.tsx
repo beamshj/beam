@@ -10,19 +10,12 @@ import {
 import SplitText from "@/components/SplitText";
 import { moveUp } from "../../motionVarients";
 import { useState } from "react";
+import { SchoolUniquenessProps } from "../type";
 
-export interface VMItem {
-  title: string;
-  image: string;
-}
 
-export interface fsData {
-  title: string;
-  description: string;
-  items: VMItem[];
-}
+const FosteringStrong = ({data }: { data: SchoolUniquenessProps['firstSection'] }) => {
 
-const FosteringStrong = ({ fsData }: { fsData: fsData }) => {
+  console.log(data);
   const [activeIndex, setActiveIndex] = useState(0);
   const [openAccordion, setOpenAccordion] = useState<number | null>(0);
 
@@ -47,7 +40,7 @@ const FosteringStrong = ({ fsData }: { fsData: fsData }) => {
             <div>
               <SplitText
                 tag="h2"
-                text={fsData.title}
+                text={data.title}
                 className="text-lg lg:text-xl xl:text-2xl 2xl:text-4xl max-w-[50ch] font-light leading-[1.111111111] text-black mb-4 md:mb-6 xl:mb-8 2xl:mb-12"
                 delay={100}
                 duration={0.6}
@@ -61,7 +54,7 @@ const FosteringStrong = ({ fsData }: { fsData: fsData }) => {
               />
               <SplitText
                 tag="p"
-                text={fsData.description}
+                text={data.description}
                 className="text-sm leading-[1.526315789473684] font-light text-colorpara max-w-[54ch]"
                 delay={100}
                 duration={0.6}
@@ -77,7 +70,7 @@ const FosteringStrong = ({ fsData }: { fsData: fsData }) => {
 
             {/* Accordion / List */}
             <div className="mt-4 md:mt-6 xl:mt-8 2xl:mt-12">
-              {fsData.items.map((item, index) => {
+              {data.items.map((item, index) => {
                 const isActive = activeIndex === index;
                 const isOpen = openAccordion === index;
 
@@ -161,9 +154,9 @@ const FosteringStrong = ({ fsData }: { fsData: fsData }) => {
                           className="overflow-hidden lg:hidden"
                         >
                           <motion.img
-                            key={item.image}
+                            key={index}
                             src={item.image}
-                            alt={item.title}
+                            alt={item.imageAlt}
                             variants={imageVariants}
                             initial="hidden"
                             animate="show"
@@ -189,9 +182,9 @@ const FosteringStrong = ({ fsData }: { fsData: fsData }) => {
           >
             <AnimatePresence mode="wait">
               <motion.img
-                key={fsData.items[activeIndex].image}
-                src={fsData.items[activeIndex].image}
-                alt={fsData.items[activeIndex].title}
+                key={data.items[activeIndex].image}
+                src={data.items[activeIndex].image}
+                alt={data.items[activeIndex].imageAlt}
                 variants={imageVariants}
                 initial="hidden"
                 animate="show"

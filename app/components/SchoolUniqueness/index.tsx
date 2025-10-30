@@ -1,18 +1,17 @@
 import InnerBanner from "../Common/InnerBanner";
 import {
   BannerData, 
-  fsData, 
-  academicsData 
 } from "./data"; 
 import FosteringStrong from "./sections/FosteringStrong";  
 import BeyondAcademics from "./sections/BeyondAcademics"; 
+import { SchoolUniquenessProps } from "./type";
 
-const Index = () => {
+const Index = ({data}: {data: SchoolUniquenessProps}) => {
   return (
     <>
-      <InnerBanner BannerData={BannerData} /> 
-      <FosteringStrong fsData={fsData} />  
-      <BeyondAcademics academicsData={academicsData} />  
+      <InnerBanner BannerData={BannerData} banner={data.banner} bannerAlt={data.bannerAlt} pageTitle={data.pageTitle} /> 
+      <FosteringStrong data={data.firstSection}/>  
+      <BeyondAcademics data={data.secondSection}/>  
     </>
   );
 };

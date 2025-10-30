@@ -3,23 +3,13 @@
 import Image from "next/image";
 import { useState } from "react";
 import SplitText from "@/components/SplitText";
-export interface VMItem {
-  image: string;
-  title: string;
-  description: string;
-  list: string[];
-}
+import { SchoolUniquenessProps } from "../type";
 
-export interface academicsData {
-  title: string;
-  description: string;
-  items: VMItem[];
-}
 
 const BeyondAcademics = ({
-  academicsData,
+  data,
 }: {
-  academicsData: academicsData;
+  data: SchoolUniquenessProps['secondSection'];
 }) => {
   const [activeIndex, setActiveIndex] = useState<number | null>(0);
   return (
@@ -29,7 +19,7 @@ const BeyondAcademics = ({
           <div>
             <SplitText
               tag="h2"
-              text={academicsData.title}
+              text={data.title}
               className="text-lg lg:text-xl xl:text-2xl 2xl:text-4xl  font-light leading-[1.111111111] text-black mb-4 md:mb-6 xl:mb-8 2xl:mb-8"
               delay={100}
               duration={0.6}
@@ -43,7 +33,7 @@ const BeyondAcademics = ({
             />
             <SplitText
               tag="p"
-              text={academicsData.description}
+              text={data.description}
               className="text-sm leading-[1.526315789473684] max-w-[70ch] mb-6 lg:mb-7 last:lg:mb-13 font-light  text-colorpara"
               delay={100}
               duration={0.6}
@@ -57,7 +47,7 @@ const BeyondAcademics = ({
             />
           </div>
           <div className="flex flex-col md:flex-row gap-8 md:gap-7 mb-8 md:mb-0">
-            {academicsData.items.map((item, index) => {
+            {data.items.map((item, index) => {
               const isActive = index === activeIndex;
 
               return (
@@ -116,8 +106,8 @@ const BeyondAcademics = ({
                         opacity: isActive ? 1 : 0, // optional fade effect
                       }}
                     >
-                      <div>
-                        <p className="text-[#E0E0E0] leading-[1.526315789473684] font-light max-w-[50ch]">
+                      <div dangerouslySetInnerHTML={{ __html: item.description }} className="school-uniqueness-second-section">
+                        {/* <p className="text-[#E0E0E0] leading-[1.526315789473684] font-light max-w-[50ch]">
                           {item.description}
                         </p>
                         <ul className="mt-[20px] space-y-1 ml-5 list-disc">
@@ -126,7 +116,7 @@ const BeyondAcademics = ({
                               {listItem}
                             </li>
                           ))}
-                        </ul>
+                        </ul> */}
                       </div>
                     </div>
                   </div>
