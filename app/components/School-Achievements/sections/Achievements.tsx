@@ -4,23 +4,10 @@ import Image from "next/image";
 import SplitText from "@/components/SplitText";
 import { motion } from "framer-motion";
 import { moveUp } from "../../motionVarients";
+import { SchoolAchievementsProps } from "../type";
 
-interface Achievement {
-  id: number;
-  logo: string;
-  title: string;
-  description: string;
-}
-
-interface SchoolAchievementsProps {
-  data: {
-    title: string;
-    subtitle: string;
-    achievements: Achievement[];
-  };
-}
-const SchoolAchievements: React.FC<SchoolAchievementsProps> = ({ data }) => {
-  const { title, subtitle, achievements } = data;
+const SchoolAchievements: React.FC<{data: SchoolAchievementsProps['secondSection']}> = ({ data }) => {
+  // const { title, subtitle, achievements } = data;
   
 const [isActive, setIsActive] = useState<number | null>(null);
   return (
@@ -30,7 +17,7 @@ const [isActive, setIsActive] = useState<number | null>(null);
         <div className="mb-5 xl:mb-[30px]">
           <SplitText
             tag="h2"
-            text={title}
+            text={data.title}
             className="text-xl md:text-2xl xl:text-3xl 2xl:text-4xl font-light lettersp-4 xl:mb-[50px]"
             delay={200}
             duration={0.6}
@@ -44,7 +31,7 @@ const [isActive, setIsActive] = useState<number | null>(null);
           />
             <SplitText
               tag="span"
-              text={subtitle}
+              text={data.description}
               className="text-sm font-light text-colorpara leading-[1.52] max-w-[72ch]"
               delay={200}
               duration={0.6}
@@ -60,9 +47,9 @@ const [isActive, setIsActive] = useState<number | null>(null);
 
         {/* Achievements Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8 justify-between">
-          {achievements.map((achievement, index) => (
+          {data.items.map((achievement, index) => (
             <motion.div
-              key={achievement.id}
+              key={index}
               variants={moveUp(index * 0.2)}
               initial="hidden"
               whileInView="show"
@@ -76,8 +63,8 @@ const [isActive, setIsActive] = useState<number | null>(null);
               <div className="flex flex-col items-center justify-center transition-opacity duration-300 group-hover:opacity-0">
                 <div className="mb-[20px] relative  ">
                   <Image
-                    src={achievement.logo}
-                    alt={achievement.title} 
+                    src={achievement.image}
+                    alt={achievement.imageAlt} 
                    width={290}
                    height={108}
                     className="object-contain w-full h-auto"
