@@ -4,35 +4,36 @@ import { motion, AnimatePresence } from "framer-motion";
 import { moveUp } from "../../motionVarients";
 import Image from "next/image";
 import { AccreditationProps } from "../type";
-const DataTab = ({awards, categories}: {awards: AccreditationProps['categories'][number]['accreditations'], categories: string[]}) => {
+const DataTab = ({
+  awards,
+  categories,
+}: {
+  awards: AccreditationProps["categories"][number]["accreditations"];
+  categories: string[];
+}) => {
   console.log(awards, categories);
-  const [activeTab, setActiveTab] = useState(
-    categories[0]
-  );
+  const [activeTab, setActiveTab] = useState(categories[0]);
 
-  const currentData =
-    awards.filter((award) => award.category === activeTab);
+  const currentData = awards.filter((award) => award.category === activeTab);
   const [isActive, setIsActive] = useState<number | null>(null);
   return (
     <section className="pb-10 lg:pb-20 xl:pb-25 2xl:pb-[135px]">
       <div className="container">
         <div className="flex items-center gap-5 border-b border-bdrcolor pb-[31px] mb-10 xl:mb-[65px]">
-          {categories.map((category,index)=>(
+          {categories.map((category, index) => (
             <motion.button
-            variants={moveUp(0.2)}
-            key={index}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ amount: 0.1, once: false }}
-            className={
-              activeTab === category ? "tab-btn active" : "tab-btn"
-            }
-            onClick={() => setActiveTab(category)}
-          >
-            <span>{category}</span>
-          </motion.button>
+              variants={moveUp(0.2)}
+              key={index}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ amount: 0.1, once: false }}
+              className={activeTab === category ? "tab-btn active" : "tab-btn"}
+              onClick={() => setActiveTab(category)}
+            >
+              <span>{category}</span>
+            </motion.button>
           ))}
-          
+
           {/* <motion.button
             variants={moveUp(0.4)}
             initial="hidden"
@@ -64,7 +65,7 @@ const DataTab = ({awards, categories}: {awards: AccreditationProps['categories']
                 onClick={() => setIsActive(index)}
                 onMouseEnter={() => setIsActive(index)}
                 onMouseLeave={() => setIsActive(null)}
-                className="tab-pan xl:min-h-[428px] flex flex-col justify-between bg-white hover:shadow-xl transition-shadow duration-300 p-6 relative group hover:rounded-tr-3xl overflow-hidden"
+                className="tab-pan min-h-[375px] xl:min-h-[428px] flex flex-col justify-between bg-white hover:shadow-xl transition-shadow duration-300 p-6 relative group hover:rounded-tr-3xl overflow-hidden"
               >
                 <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-white/0 to-[#E6F7FF] z-10"></div>
                 <div
@@ -86,7 +87,7 @@ const DataTab = ({awards, categories}: {awards: AccreditationProps['categories']
                         alt={item.imageAlt}
                         width={1920}
                         height={1280}
-                        className="object-contain w-auto h-12 xl:h-[64px] 2xl:w-auto 2xl:h-auto group-hover:-translate-y-full transition-all duration-300"
+                        className="object-contain w-auto h-12 xl:h-[64px] 2xl:w-auto 2xl:h-auto max-h-[110px] group-hover:-translate-y-full transition-all duration-300"
                       />
                     </div>
                     {/* <div
