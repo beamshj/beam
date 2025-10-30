@@ -1,0 +1,33 @@
+export type TestimonialsProps = {
+    banner:string;
+    bannerAlt:string;
+    metaTitle:string;
+    metaDescription:string;
+    pageTitle:string;
+    firstSection:{
+        title:string;
+        description:string;
+        items:[{
+            title:string;
+            description:string;
+            designation:string;
+        }]
+    },
+    secondSection:{
+        title:string;
+        description:string;
+        items:[{
+            video:string;
+            poster:string;
+        }]
+    },
+    thirdSection:{
+        title:string;
+        items:[{
+            video:string;
+            poster:string;
+            name:string;
+            designation:string;
+        }]
+    }
+}

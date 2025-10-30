@@ -129,18 +129,11 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import SplitText from "@/components/SplitText";
 import { moveUp } from "../../motionVarients";
+import { TestimonialsProps } from "../type";
 
-export interface visionData {
-  title: string;
-  items: {
-    image: string;
-    videos: string;
-    name: string;
-    designation: string;
-  }[];
-}
 
-const GuidedVision = ({ visionData }: { visionData: visionData }) => {
+
+const GuidedVision = ({ data }: { data: TestimonialsProps['thirdSection'] }) => {
   const [activeVideoIndex, setActiveVideoIndex] = useState<number | null>(null);
 
   // helper to convert normal YT link to embed format
@@ -157,7 +150,7 @@ const GuidedVision = ({ visionData }: { visionData: visionData }) => {
         <div>
           <SplitText
             tag="h2"
-            text={visionData.title}
+            text={data.title}
             className="text-lg xl:text-2xl 2xl:text-4xl 2xl:max-w-[18ch] font-light leading-[1.111111111] text-black mb-4 md:mb-6 xl:mb-7 2xl:mb-12"
             delay={100}
             duration={0.6}
@@ -172,7 +165,7 @@ const GuidedVision = ({ visionData }: { visionData: visionData }) => {
         <div>
           <div className="relative storyslide">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 xl:gap-10 items-center">
-              {visionData.items.map((item, index) => {
+              {data.items.map((item, index) => {
                 const isPlaying = activeVideoIndex === index;
 
                 return (
@@ -186,7 +179,7 @@ const GuidedVision = ({ visionData }: { visionData: visionData }) => {
                   >
                     {/* Background image */}
                     <Image
-                      src={item.image}
+                      src={item.poster}
                       alt=""
                       fill
                       className={`object-cover transition-all duration-500 ${
@@ -209,10 +202,10 @@ const GuidedVision = ({ visionData }: { visionData: visionData }) => {
                     >
                       <div className="absolute bottom-4 md:bottom-7 px-4 md:px-7 flex flex-col gap-2">
                         <p className="text-white text-[1.3rem] md:text-md xl:text-lg 2xl:text-xl font-light leading-[1.18] lettersp-1">
-                          {visionData.items[index].name}
+                          {item.name}
                         </p>
                         <p className="text-[#E0E0E0]">
-                          {visionData.items[index].designation}
+                          {item.designation}
                         </p>
                       </div>
                     </motion.div>
@@ -238,7 +231,7 @@ const GuidedVision = ({ visionData }: { visionData: visionData }) => {
                     {/* Video iframe (YouTube embed) */}
                     {isPlaying && (
                       <iframe
-                        src={`${getEmbedUrl(item.videos).replace(
+                        src={`${getEmbedUrl(item.video).replace(
                           "youtube.com",
                           "youtube-nocookie.com"
                         )}?autoplay=1&controls=1&modestbranding=1&rel=0&fs=1`}

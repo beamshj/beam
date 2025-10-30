@@ -159,7 +159,7 @@ const TestimonialsPage = () => {
                         <div className='flex flex-col gap-2'>
                             <div className='flex flex-col gap-1'>
                                 <Label className='font-bold'>Title</Label>
-                                <Input type='text' placeholder='Title' {...register("firstSection.title", {
+                                <Textarea placeholder='Title' {...register("firstSection.title", {
                                     required: "Title is required"
                                 })} />
                                 {errors.firstSection?.title && <p className='text-red-500'>{errors.firstSection?.title.message}</p>}
@@ -342,17 +342,9 @@ const TestimonialsPage = () => {
                                                 <div>
                                                     <div className='flex flex-col gap-2'>
                                                         <Label className='font-bold'>Video</Label>
-                                                        <Controller
-                                                            name={`thirdSection.items.${index}.video`}
-                                                            control={control}
-                                                            rules={{ required: "Video is required" }}
-                                                            render={({ field }) => (
-                                                                <VideoUploader
-                                                                    value={field.value}
-                                                                    onChange={field.onChange}
-                                                                />
-                                                            )}
-                                                        />
+                                                        <Input type='text' placeholder='Title' {...register(`thirdSection.items.${index}.video`, {
+                                    required: "Video is required"
+                                })} />
                                                         {errors.thirdSection?.items?.[index]?.video && (
                                                             <p className="text-red-500">{errors.thirdSection?.items?.[index]?.video.message}</p>
                                                         )}
