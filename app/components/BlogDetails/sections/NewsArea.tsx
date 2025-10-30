@@ -56,6 +56,26 @@ const NewsArea = ({
     });
   }, [data.content]);
 
+  // used to remove yellow highlighted parts
+  useEffect(() => {
+    const elements = document.querySelectorAll<HTMLElement>(
+      '[style*="background-color"][style*="color"]'
+    );
+
+    elements.forEach((el) => {
+      const bg = el.style.backgroundColor?.replace(/\s+/g, "").toLowerCase();
+      const color = el.style.color?.replace(/\s+/g, "").toLowerCase();
+
+      if (
+        (bg === "#ffff00" || bg === "rgb(255,255,0)") &&
+        (color === "#000" || color === "black" || color === "rgb(0,0,0)")
+      ) {
+        el.style.backgroundColor = "#ffffff";
+        el.style.color = "#626262";
+      }
+    });
+  }, []);
+
   return (
     <section className="pb-8 md:pb-12 lg:pb-20 2xl:pb-[135px] pt-[135px] lg:pt-[198px] 2xl:pt-[193px]">
       <div className="container">
