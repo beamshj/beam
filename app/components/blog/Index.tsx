@@ -18,7 +18,7 @@ const Index = ({ data }: { data: BlogType }) => {
       />
       <BlogList
         data={data.categories.flatMap((category) => category.blogs)}
-        categories={data.categories}
+        // categories={data.categories}
       />
     </>
   );
