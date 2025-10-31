@@ -9,7 +9,7 @@ import { motion, AnimatePresence } from "framer-motion";
 interface GalleryItem {
   title: string;
   gallery: string[];
-  description:string;
+  description: string;
 }
 
 interface GalleryModalProps {
@@ -92,35 +92,32 @@ const GalleryModal: React.FC<GalleryModalProps> = ({ item, onClose }) => {
 
             {/* Image */}
             <div className="relative mt-14 lg:mt-0 w-full lg:w-[800px] rounded-[12px] xl:w-[1000px] 2xl:w-[1264px] h-[350px] 2xl:h-[640px] max-h-[640px] flex items-center justify-center overflow-hidden">
-  <AnimatePresence mode="wait">
-    <motion.div
-      key={item.gallery[currentIndex]}
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.9 }}
-      transition={{ duration: 0.4, ease: "easeInOut" }}
-      className="absolute inset-0"
-    >
-      <Image
-        src={item.gallery[currentIndex]}
-        alt={`slide-${currentIndex}`}
-        fill
-        className="object-cover rounded-[12px]"
-        sizes="(max-width: 768px) 100vw, 80vw"
-      />
-    </motion.div>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={item.gallery[currentIndex]}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.4, ease: "easeInOut" }}
+                  className="absolute inset-0"
+                >
+                  <Image
+                    src={item.gallery[currentIndex]}
+                    alt={`slide-${currentIndex}`}
+                    fill
+                    className="object-cover rounded-[12px]"
+                    sizes="(max-width: 768px) 100vw, 80vw"
+                  />
+                </motion.div>
 
-    {/* Overlay background (auto height) */}
-    <div className="absolute bottom-0 left-0 w-full bg-black/75 rounded-b-[12px] px-6 py-4">
-      <p className="text-white text-xs max-sm:text-[10px] sm:text-base font-medium leading-tight text-center whitespace-pre-line">
-        {item.description}
-      </p>
-    </div>
-  </AnimatePresence>
-</div>
-
-
-
+                {/* Overlay background (auto height) */}
+                <div className="absolute bottom-0 left-0 w-full bg-black/54 rounded-b-[12px] p-[14px] md:p-[24px] xl:p-[30px]">
+                  <p className="text-white text-[13px] md:text-xs font-light leading-[1.526315789473684] text-center">
+                    {item.description}
+                  </p>
+                </div>
+              </AnimatePresence>
+            </div>
 
             {/* Next */}
             <div
@@ -153,7 +150,6 @@ const GalleryModal: React.FC<GalleryModalProps> = ({ item, onClose }) => {
                       <div className="absolute inset-0 bg-primary/50 rounded-[12px] pointer-events-none transition-opacity duration-200" />
                     )}
                   </div>
-                  
                 </div>
               );
             })}
