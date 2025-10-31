@@ -6,30 +6,27 @@ import GalleryModal from "./GalleryModal";
 import SplitText from "@/components/SplitText";
 import { moveUp } from "../../motionVarients";
 import { motion } from "framer-motion";
+import { GalleryProps } from "../type";
 
-const filters = ["all", "school", "alumni"];
 
-export interface GalleryItem {
-  category: string;
-  title: string;
-  images: string[];
-}
-
-export interface GalleryList {
-  title: string;
-  items: GalleryItem[];
-}
-
-export default function GalleryList({ data }: { data: GalleryList }) {
+export default function GalleryList({ data }: { data: GalleryProps }) {
   const [activeFilter, setActiveFilter] = useState<string>("all");
-  const [selectedItem, setSelectedItem] = useState<GalleryItem | null>(null);
+  const [selectedItem, setSelectedItem] = useState<GalleryProps['gallery'][number]['categories'][number] | null>(null);
 
-  const filteredItems =
-    activeFilter === "all"
-      ? data.items
-      : data.items.filter(
-          (item) => item.category.toLowerCase() === activeFilter
-        );
+  const filters = ["all", ...data.gallery.map((item) => item.title)];
+
+  console.log(filters);
+
+console.log(data);
+
+const filteredItems =
+  activeFilter === "all"
+    ? data.gallery.flatMap((item) => item.categories)
+    : data.gallery
+        .find(
+          (gallery) => gallery.title.toLowerCase() === activeFilter.toLowerCase()
+        )
+        ?.categories || [];
 
   return (
     <section className="py-10 xl:py-20 2xl:py-[135px]">
@@ -39,7 +36,7 @@ export default function GalleryList({ data }: { data: GalleryList }) {
           <h2 className="text-lg md:text-xl xl:text-3xl 2xl:text-4xl font-light text-black leading-[1.1111] mb-6 lg:mb-0">
             <SplitText
              tag="span"
-             text={data.title}
+             text={data.firstSection.title}
              delay={100}
              duration={0.6}
              ease="power3.out"
@@ -154,7 +151,8 @@ export default function GalleryList({ data }: { data: GalleryList }) {
         <GalleryModal
           item={{
             title: selectedItem.title,
-            gallery: selectedItem.images, // map images → gallery
+            gallery: selectedItem.images,
+            description:selectedItem.description // map images → gallery
           }}
           onClose={() => setSelectedItem(null)}
         />

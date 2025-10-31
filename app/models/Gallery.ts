@@ -10,10 +10,14 @@ const gallerySchema = new mongoose.Schema({
     banner:{type:String},
     bannerAlt:{type:String},
     pageTitle:{type:String},
+    firstSection:{
+        title:{type:String}
+    },
     gallery:[{
         title:{type:String},
         categories:[{
             title:{type:String},
+            description:{type:String},
             images:[{type:String}]
         }]
     }]

@@ -36,6 +36,7 @@ export async function PATCH(request: NextRequest) {
         gallery.pageTitle = body.pageTitle;
         gallery.metaTitle = body.metaTitle;
         gallery.metaDescription = body.metaDescription;
+        gallery.firstSection = body.firstSection;
         await gallery.save();
         return NextResponse.json({message:"Gallery updated successfully"}, { status: 200 });
     } catch (error) {
