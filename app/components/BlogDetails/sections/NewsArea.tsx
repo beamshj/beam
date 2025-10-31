@@ -8,6 +8,7 @@ import { BlogType } from "../../blog/type";
 import { useEffect, useMemo } from "react";
 import { getReadingTimeFromHTML } from "@/app/(user)/utils/getReadingTime";
 import { shareBlog } from "@/app/(user)/utils/linkShare";
+import Link from "next/link";
 
 const NewsArea = ({
   data,
@@ -88,7 +89,7 @@ const NewsArea = ({
           <div>
             <ul className="flex items-center gap-[3px] text-colorpara text-sm font-light">
               <li>
-                <a href="/">Home</a>
+                <Link href="/">Home</Link>
               </li>
               <li>
                 <svg
@@ -108,7 +109,7 @@ const NewsArea = ({
                 </svg>
               </li>
               <li>
-                <a href="/news-&-media/blog">News & Media</a>
+                <Link href="/news-&-media/blog">News & Media</Link>
               </li>
               <li>
                 <svg
