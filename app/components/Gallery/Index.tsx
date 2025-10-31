@@ -1,12 +1,14 @@
 import InnerBanner from "@/app/components/Common/InnerBanner";
-import { BannerData, galleryList } from "./data";
+import { BannerData } from "./data";
 import Gallery from "./sections/GalleryList";
+import { GalleryProps } from "./type";
 
-const Index = () => {
+const Index = ({data}: {data: GalleryProps}) => {
+  console.log(data);
   return (
     <>
-      <InnerBanner BannerData={BannerData} />
-      <Gallery data={galleryList} />
+      <InnerBanner BannerData={BannerData} banner={data.banner} bannerAlt={data.bannerAlt} pageTitle={data.pageTitle}/>
+      <Gallery data={data}/>
     </>
   );
 };

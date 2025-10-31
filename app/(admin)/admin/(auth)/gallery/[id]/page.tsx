@@ -19,13 +19,15 @@ import Link from 'next/link';
 import { FaEdit } from "react-icons/fa";
 import { IoIosImages } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
+import { Textarea } from '@/components/ui/textarea';
 
 
 
 const IndiGallery = () => {
     const { id } = useParams();
     const [category, setCategory] = useState<string>("")
-    const [categoryList, setCategoryList] = useState<{_id: string, title: string}[]>([])
+    const [description, setDescription] = useState<string>("")
+    const [categoryList, setCategoryList] = useState<{_id: string, title: string, description: string}[]>([])
 
 
     const fetchGalleryData = async () => {
@@ -51,11 +53,12 @@ const IndiGallery = () => {
             try {
                 const response = await fetch(`/api/admin/gallery/inside/category?id=${id}`,{
                     method: "POST",
-                    body: JSON.stringify({ name: category }),
+                    body: JSON.stringify({ name: category, description: description }),
                 });
                 if(response.ok) {
                     const data = await response.json();
                     setCategory("");
+                    setDescription("");
                     alert(data.message);
                     fetchGalleryData();
                 }else{
@@ -72,7 +75,7 @@ const IndiGallery = () => {
                 try {
                     const response = await fetch(`/api/admin/gallery/inside/category?id=${categoryId}`,{
                         method: "PATCH",
-                        body: JSON.stringify({ name: category, galleryId: id }),
+                        body: JSON.stringify({ name: category, description: description, galleryId: id }),
                     });
                     if(response.ok) {
                         const data = await response.json();
@@ -125,7 +128,10 @@ const IndiGallery = () => {
                             <DialogHeader>
                                 <DialogTitle>Add Item</DialogTitle>
                                 <DialogDescription>
+                                    <Label className="block text-sm">Title</Label>
                                     <Input type="text" value={category} onChange={(e) => setCategory(e.target.value)} />
+                                    <Label className="block text-sm">Description</Label>
+                                    <Textarea value={description} onChange={(e) => setDescription(e.target.value)} />
                                 </DialogDescription>
                             </DialogHeader>
                             <DialogClose className="bg-black text-white px-2 py-1 rounded-md" onClick={handleAddCategory}>Save</DialogClose>
@@ -141,12 +147,15 @@ const IndiGallery = () => {
                     </div>
                     <div className='flex gap-8 items-center'>
                         <Dialog>
-                            <DialogTrigger onClick={()=>setCategory(item.title)}><FaEdit className='text-lg cursor-pointer' /></DialogTrigger>
+                            <DialogTrigger onClick={()=>{setCategory(item.title);setDescription(item.description)}}><FaEdit className='text-lg cursor-pointer' /></DialogTrigger>
                             <DialogContent>
                                 <DialogHeader>
                                     <DialogTitle>Edit Item</DialogTitle>
                                     <DialogDescription>
+                                        <Label className="block text-sm">Title</Label>
                                         <Input type="text" value={category} onChange={(e) => setCategory(e.target.value)} />
+                                        <Label className="block text-sm">Description</Label>
+                                        <Textarea value={description} onChange={(e) => setDescription(e.target.value)} />
                                     </DialogDescription>
                                 </DialogHeader>
                                 <DialogClose className="bg-black text-white px-2 py-1 rounded-md" onClick={()=>handleEditCategory(item._id)}>Save</DialogClose>

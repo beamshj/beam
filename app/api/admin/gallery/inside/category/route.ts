@@ -44,7 +44,7 @@ export async function POST(request: NextRequest) {
             if (!toUpdateGallery) {
                 return NextResponse.json({message:"Gallery not found"}, { status: 404 });
             }
-            toUpdateGallery.categories.push({title:body.name,images:[]})
+            toUpdateGallery.categories.push({title:body.name,description:body.description,images:[]})
             await gallery.save();
             return NextResponse.json({message:"Gallery item updated successfully"}, { status: 200 });
         }
@@ -77,6 +77,7 @@ export async function PATCH(request: NextRequest) {
             return NextResponse.json({message:"Category not found"}, { status: 404 });
         }
         toUpdateCategory.title = body.name;
+        toUpdateCategory.description = body.description;
         await gallery.save();
         return NextResponse.json({message:"Category updated successfully"}, { status: 200 });
     } catch (error) {

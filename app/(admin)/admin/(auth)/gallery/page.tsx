@@ -27,6 +27,9 @@ interface GalleryPageProps {
     banner: string;
     bannerAlt: string;
     pageTitle: string;
+    firstSection:{
+        title:string;
+    }
   }
 
 const AdminGallery = () => {
@@ -105,6 +108,7 @@ const AdminGallery = () => {
                 setValue("banner", data.data.banner);
                 setValue("bannerAlt", data.data.bannerAlt);
                 setValue("pageTitle", data.data.pageTitle);
+                setValue("firstSection", data.data.firstSection);
                 setCategoryList(data.data.gallery);
             } else {
                 const data = await response.json();
@@ -186,6 +190,29 @@ const AdminGallery = () => {
                                                   required: "Value is required"
                                               })} />
                                               {errors.pageTitle && <p className='text-red-500'>{errors.pageTitle.message}</p>}
+                                          </div>
+                                      </div>
+                                  </div>
+      
+                              </div>
+                          </div>
+                      </AdminItemContainer>
+
+
+                      <AdminItemContainer>
+                          <Label className='' main>First Section</Label>
+                          <div className='p-5 rounded-md flex flex-col gap-5'>
+                              <div className='grid grid-cols-2 gap-2 relative pb-5'>
+    
+      
+                                  <div className='flex flex-col gap-2'>
+                                      <div className='flex flex-col gap-2'>
+                                          <div className='flex flex-col gap-2'>
+                                              <Label className='font-bold'>Title</Label>
+                                              <Input type='text' placeholder='Title' {...register(`firstSection.title`, {
+                                                  required: "Title is required"
+                                              })} />
+                                              {errors.firstSection?.title && <p className='text-red-500'>{errors.firstSection.title.message}</p>}
                                           </div>
                                       </div>
                                   </div>
