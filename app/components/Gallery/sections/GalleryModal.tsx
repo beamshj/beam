@@ -74,7 +74,7 @@ const GalleryModal: React.FC<GalleryModalProps> = ({ item, onClose }) => {
 
             <button
               onClick={onClose}
-              className="ml-auto mr-1 text-white text-[60px] font-extralight z-20 cursor-pointer"
+              className="ml-auto mr-1 text-white text-[60px] font-extralight z-20 cursor-pointer hover:scale-110 hover:text-primary transition-all duration-300"
             >
               &times;
             </button>
