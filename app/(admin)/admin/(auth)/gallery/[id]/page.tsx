@@ -123,7 +123,7 @@ const IndiGallery = () => {
                 <div className='flex justify-between items-center'>
             <Label className="block text-sm">Categories</Label>
             <Dialog>
-                        <DialogTrigger className='bg-primary text-white px-3 py-1 rounded-md font-semibold' onClick={()=>setCategory("")}>Add Item</DialogTrigger>
+                        <DialogTrigger className='bg-primary text-white px-3 py-1 rounded-md font-semibold' onClick={()=>{setCategory("");setDescription("")}}>Add Item</DialogTrigger>
                         <DialogContent>
                             <DialogHeader>
                                 <DialogTitle>Add Item</DialogTitle>
