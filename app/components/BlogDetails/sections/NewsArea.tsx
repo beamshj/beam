@@ -4,9 +4,11 @@ import Image from "next/image";
 import SplitText from "@/components/SplitText";
 import { motion, Variants } from "framer-motion";
 import { moveUp } from "../../motionVarients";
-import moment from "moment";
 import { BlogType } from "../../blog/type";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
+import { getReadingTimeFromHTML } from "@/app/(user)/utils/getReadingTime";
+import { shareBlog } from "@/app/(user)/utils/linkShare";
+import Link from "next/link";
 
 const NewsArea = ({
   data,
@@ -76,13 +78,19 @@ const NewsArea = ({
     });
   }, []);
 
+  const readingTime = useMemo(() => {
+    return getReadingTimeFromHTML(data.content);
+  }, [data.content]);
+
   return (
     <section className="pb-8 md:pb-12 lg:pb-20 2xl:pb-[135px] pt-[135px] lg:pt-[198px] 2xl:pt-[193px]">
       <div className="container">
         <div className="md:px-3 lg:px-[66px]">
           <div>
             <ul className="flex items-center gap-[3px] text-colorpara text-sm font-light">
-              <li>Home</li>
+              <li>
+                <Link href="/">Home</Link>
+              </li>
               <li>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -101,7 +109,7 @@ const NewsArea = ({
                 </svg>
               </li>
               <li>
-                <a href="#">News & Media</a>
+                <Link href="/news-&-media/blog">News & Media</Link>
               </li>
               <li>
                 <svg
@@ -139,31 +147,39 @@ const NewsArea = ({
               textAlign="left"
             />
           </div>
-          <div className="flex justify-between pl-5 items-center">
-            <div>
+          {/* <div className="flex justify-between pl-5 items-center"> */}
+          {/* <div>
               <ul className="list-disc lg:flex gap-10  text-colorpara text-sm font-light">
                 <li>
                   Published in&nbsp;Blog&nbsp;on&nbsp;
                   {moment(data?.date).format("LL")}
                 </li>
-                <li>10 mins read</li>
+                <li>{readingTime} mins read</li>
                 <li>{data?.category}</li>
               </ul>
-            </div>
-            <motion.div
-              variants={moveUp(0.2)}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ amount: 0.1, once: false }}
-            >
-              <Image
-                src="/images/newsdetails/share.svg"
-                alt=""
-                width={19}
-                height={22}
-              />
-            </motion.div>
-          </div>
+            </div> */}
+          <motion.div
+            variants={moveUp(0.3)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ amount: 0.1, once: true }}
+            className="w-full flex justify-end gap-10"
+          >
+            <li className="text-black text-sm font-light list-disc">
+              {readingTime} mins read
+            </li>
+            <Image
+              src="/images/newsdetails/share.svg"
+              alt=""
+              width={19}
+              height={22}
+              className="cursor-pointer"
+              onClick={() =>
+                shareBlog({ title: data.title, url: window.location.href })
+              }
+            />
+          </motion.div>
+          {/* </div> */}
           <motion.div
             variants={moveUp(0.2)}
             initial="hidden"

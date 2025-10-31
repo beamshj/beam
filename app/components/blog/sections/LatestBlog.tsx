@@ -109,8 +109,8 @@ export default function LatestBlogs({
                       {/* {item.category} */}
                     </p>
                   </div>
-                  <h3 className="text-md lg:text-lg xl:text-xl text-white font-light leading-[1.2] mt-[10px] max-w-[26ch] lettersp-1">
-                    {item.title}
+                  <h3 className="text-md lg:text-lg xl:text-xl text-white font-light leading-[1.2] mt-[10px] max-w-[26ch] lettersp-1 capitalize line-clamp-2">
+                    {item.title.toLowerCase()}
                   </h3>
                   <div>
                     <button className="bg-primary text-white w-[27px] h-[27px] rounded-full flex items-center justify-center mt-[15px] cursor-pointer">

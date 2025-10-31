@@ -22,7 +22,7 @@
       "@/*": ["./*"]
     },
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/(user)/utils/getReadingTime.ts"],
   "exclude": ["node_modules"],
   "ts-node": {
     "compilerOptions": {
