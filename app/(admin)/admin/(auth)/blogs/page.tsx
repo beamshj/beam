@@ -18,8 +18,12 @@ import { useRouter } from "next/navigation";
 import AdminItemContainer from "@/app/components/Common/AdminItemContainer";
 import { useForm, Controller } from "react-hook-form";
 import { ImageUploader } from "@/components/ui/image-uploader";
-import { closestCorners, DndContext, DragEndEvent } from '@dnd-kit/core'
-import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
+import { closestCorners, DndContext, DragEndEvent } from "@dnd-kit/core";
+import {
+  arrayMove,
+  SortableContext,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
 import BlogCard from "./BlogCard";
 
 interface BlogsPageProps {
@@ -186,41 +190,41 @@ export default function Blogs() {
     }
   };
 
+  const getTaskPos = (id: string) =>
+    blogList.findIndex(
+      (item: { _id: string; title: string }) => item._id == id
+    );
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
 
-   const getTaskPos = (id: string) => blogList.findIndex((item: { _id: string; title: string; }) => (item._id == id))
-        const handleDragEnd = (event: DragEndEvent) => {
-            const { active, over } = event;
-    
-            if (!over || active.id === over.id) return;
-    
-            const oldIndex = getTaskPos(active.id as string);
-            const newIndex = getTaskPos(over.id as string);
-    
-            const newPosition = arrayMove(blogList, oldIndex, newIndex);
-            setBlogList(newPosition);
-        };
+    if (!over || active.id === over.id) return;
 
+    const oldIndex = getTaskPos(active.id as string);
+    const newIndex = getTaskPos(over.id as string);
 
-const confirmPosition = async () => {
-  setReorderMode(!reorderMode);
+    const newPosition = arrayMove(blogList, oldIndex, newIndex);
+    setBlogList(newPosition);
+  };
 
-  // send only blog IDs, not full objects
-  const reorderedIds = blogList.map(blog => blog._id);
+  const confirmPosition = async () => {
+    setReorderMode(!reorderMode);
 
-  const formData = new FormData();
-  formData.append("blogs", JSON.stringify(reorderedIds));
+    // send only blog IDs, not full objects
+    const reorderedIds = blogList.map((blog) => blog._id);
 
-  const response = await fetch(`/api/admin/blogs/reorder`, {
-    method: "POST",
-    body: formData,
-  });
+    const formData = new FormData();
+    formData.append("blogs", JSON.stringify(reorderedIds));
 
-  if (response.ok) {
-    const data = await response.json();
-    alert(data.message);
-  }
-};
+    const response = await fetch(`/api/admin/blogs/reorder`, {
+      method: "POST",
+      body: formData,
+    });
 
+    if (response.ok) {
+      const data = await response.json();
+      alert(data.message);
+    }
+  };
 
   useEffect(() => {
     handleFetchCategory();
@@ -412,63 +416,84 @@ const confirmPosition = async () => {
               <p>Count: {blogList.length}</p>
             </div>
             <div className="flex gap-5">
-            <div className='flex gap-5'>
-        <Button className={`text-white text-[16px] ${reorderMode ? "bg-yellow-700" : "bg-green-700"}`} onClick={() => reorderMode ? confirmPosition() : setReorderMode(!reorderMode)}>{reorderMode ? "Done" : "Reorder"}</Button>
-        </div>
-            <Button onClick={() => router.push("/admin/blogs/add")}>
-              Add Blog
-            </Button>
+              <div className="flex gap-5">
+                <Button
+                  className={`text-white text-[16px] ${
+                    reorderMode ? "bg-yellow-700" : "bg-green-700"
+                  }`}
+                  onClick={() =>
+                    reorderMode
+                      ? confirmPosition()
+                      : setReorderMode(!reorderMode)
+                  }
+                >
+                  {reorderMode ? "Done" : "Reorder"}
+                </Button>
+              </div>
+              <Button onClick={() => router.push("/admin/blogs/add")}>
+                Add Blog
+              </Button>
             </div>
           </div>
-          {!reorderMode && <div className="mt-2 flex flex-col gap-2 overflow-y-scroll h-[90%]">
-            {blogList.map((item) => (
-              <div
-                className="flex justify-between border p-2 items-center rounded-md shadow-md hover:shadow-lg transition-all duration-300"
-                key={item._id}
-              >
-                <div className="text-[16px]">{item.title}</div>
-                <div className="flex gap-5">
-                  <MdEdit
-                    onClick={() => router.push(`/admin/blogs/edit/${item._id}`)}
-                  />
+          {!reorderMode && (
+            <div className="mt-2 flex flex-col gap-2 overflow-y-scroll h-[90%]">
+              {blogList.map((item) => (
+                <div
+                  className="flex justify-between border p-2 items-center rounded-md shadow-md hover:shadow-lg transition-all duration-300"
+                  key={item._id}
+                >
+                  <div className="text-[16px]">{item.title}</div>
+                  <div className="flex gap-5">
+                    <MdEdit
+                      onClick={() =>
+                        router.push(`/admin/blogs/edit/${item._id}`)
+                      }
+                    />
 
-                  <Dialog>
-                    <DialogTrigger>
-                      <MdDelete />
-                    </DialogTrigger>
-                    <DialogContent>
-                      <DialogHeader>
-                        <DialogTitle>Are you sure?</DialogTitle>
-                      </DialogHeader>
-                      <div className="flex gap-2">
-                        <DialogClose className="bg-black text-white px-2 py-1 rounded-md">
-                          No
-                        </DialogClose>
-                        <DialogClose
-                          className="bg-black text-white px-2 py-1 rounded-md"
-                          onClick={() => handleDeleteBlog(item._id)}
-                        >
-                          Yes
-                        </DialogClose>
-                      </div>
-                    </DialogContent>
-                  </Dialog>
+                    <Dialog>
+                      <DialogTrigger>
+                        <MdDelete />
+                      </DialogTrigger>
+                      <DialogContent>
+                        <DialogHeader>
+                          <DialogTitle>Are you sure?</DialogTitle>
+                        </DialogHeader>
+                        <div className="flex gap-2">
+                          <DialogClose className="bg-black text-white px-2 py-1 rounded-md">
+                            No
+                          </DialogClose>
+                          <DialogClose
+                            className="bg-black text-white px-2 py-1 rounded-md"
+                            onClick={() => handleDeleteBlog(item._id)}
+                          >
+                            Yes
+                          </DialogClose>
+                        </div>
+                      </DialogContent>
+                    </Dialog>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>}
+              ))}
+            </div>
+          )}
 
-
-
-          {reorderMode && <div className="mt-2 flex flex-col gap-2 overflow-y-scroll h-[90%]">
-            <DndContext collisionDetection={closestCorners} onDragEnd={handleDragEnd}>
-            <SortableContext items={blogList.map((item) => item._id)} strategy={verticalListSortingStrategy}>
-                {blogList.map((item) => (
+          {reorderMode && (
+            <div className="mt-2 flex flex-col gap-2 overflow-y-scroll h-[90%]">
+              <DndContext
+                collisionDetection={closestCorners}
+                onDragEnd={handleDragEnd}
+              >
+                <SortableContext
+                  items={blogList.map((item) => item._id)}
+                  strategy={verticalListSortingStrategy}
+                >
+                  {blogList.map((item) => (
                     <BlogCard key={item._id} title={item.title} id={item._id} />
-                ))}
-            </SortableContext>
-        </DndContext>
-          </div>}
+                  ))}
+                </SortableContext>
+              </DndContext>
+            </div>
+          )}
         </div>
       </div>
     </div>
