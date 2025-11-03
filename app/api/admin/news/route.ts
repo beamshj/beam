@@ -89,6 +89,7 @@ export async function PATCH(request: NextRequest) {
       toUpdate.popularNews = body.popularNews;
       toUpdate.coverImageAlt = body.coverImageAlt;
       toUpdate.thumbnail = body.thumbnail;
+      toUpdate.type = "News";
       toUpdate.thumbnailAlt = body.thumbnailAlt;
       toUpdate.date = body.date;
       toUpdate.content = body.content;

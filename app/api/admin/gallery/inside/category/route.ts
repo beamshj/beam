@@ -78,6 +78,7 @@ export async function PATCH(request: NextRequest) {
         }
         toUpdateCategory.title = body.name;
         toUpdateCategory.description = body.description;
+        toUpdateCategory.type = "Gallery";
         await gallery.save();
         return NextResponse.json({message:"Category updated successfully"}, { status: 200 });
     } catch (error) {
