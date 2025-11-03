@@ -12,6 +12,10 @@ const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
+  const handleRegisterClick = () => {
+    window.location.href = "/contact-us?scroll=register";
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       setIsSticky(window.scrollY > 50);
@@ -139,6 +143,7 @@ const NavBar = () => {
               <div className="flex items-center">
                 <Link href={"/contact-us"}>
                   <button
+                    onClick={handleRegisterClick}
                     className="uppercase border-primary border-[1px] px-3 py-1 flex items-center gap-2 rounded-[50px]
                                 text-[10px] sm:text-xs font-light cursor-pointer text-black transition-all duration-300 group
                                 hover:bg-primary hover:text-white"
@@ -272,8 +277,13 @@ const NavBar = () => {
                       animate={{ y: 0, opacity: 1 }}
                       transition={{ delay: 0.4, duration: 0.5 }}
                     >
-                      <Link href={"/contact-us"} className="hidden lg:block">
+                      <Link
+                        href={"/contact-us"}
+                        className="hidden lg:block"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
                         <button
+                          onClick={handleRegisterClick}
                           className="uppercase text-xs border-white text-white border-[1px] ps-5 pe-[12px] py-[11px]
                       flex items-center gap-2 rounded-[50px] font-light cursor-pointer
                       transition-all duration-300 group hover:bg-white hover:text-[#005871]"
