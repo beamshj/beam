@@ -10,7 +10,9 @@ import "swiper/css/pagination";
 import "swiper/css/effect-fade";
 import { motion } from "framer-motion";
 import { Variants } from "framer-motion";
-const HeroSection = () => {
+import { HomeProps } from "../type";
+
+const HeroSection = ({data}: {data: HomeProps['bannerSection']}) => {
   const sectionRef = useRef(null);
   const triggerRef = useRef(null);
   const swiperRef = useRef<SwiperClass | null>(null);
@@ -75,7 +77,7 @@ const HeroSection = () => {
           }}
           className="w-full h-full"
         >
-          {BannerSliderData.slides.map((slide, index) => (
+          {data.items.map((slide, index) => (
             <SwiperSlide key={index}>
               <div
                 key={index}
@@ -94,8 +96,8 @@ const HeroSection = () => {
     >
       <Image
         className="h-full w-full object-cover object-center"
-        src={slide?.img}
-        alt="slide1"
+        src={slide?.image}
+        alt={slide.imageAlt}
         width={1920}
         height={1280}
         priority={index === 0}
@@ -125,7 +127,7 @@ const HeroSection = () => {
                             transition={{ duration: 1, ease: "easeOut" }}
                             className="text-[1.8rem] md:text-2xl lg:text-3xl 2xl:text-4xl text-white leading-[1.2] 2xl:leading-[1.1] font-custom font-light lettersp-4 mb-0 md:mb-0 xl:mb-0 md:max-w-[80%] xl:max-w-none"
                           >
-                            {slide.titleblue} {slide.titlewhite}
+                            <span className="text-primary">{slide.highlightText}{" "}</span>{slide.title}
                           </motion.h2>
                         </motion.div>
                         <motion.div
@@ -144,7 +146,7 @@ const HeroSection = () => {
                                 className="cursor-pointer pl-4 pr-2 md:px-4 py-[10px] md:py-3 bg-primary rounded-full flex items-center gap-2 transition-all duration-300"
                               >
                                 <p className="group-hover:text-white text-xs font-light text-white uppercase transition-colors duration-300">
-                                  {slide.button}
+                                  Register Interest
                                 </p>
                                 <div className="p-2 flex items-center justify-center bg-white w-fit rounded-full transition-transform duration-300 group-hover:rotate-45">
                                   <svg

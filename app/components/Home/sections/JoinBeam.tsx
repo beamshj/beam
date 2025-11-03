@@ -4,7 +4,9 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { fadeUp } from "@/public/assets/FramerAnimation/animation";
 import { fadeInLeft } from "@/public/assets/FramerAnimation/animation";
-const JoinBeam = () => {
+import { HomeProps } from "../type";
+
+const JoinBeam = ({data}: {data: HomeProps['tenthSection']}) => {
   return (
     <motion.section
       className="w-full h-full relative max-w-[1920px] mx-auto overflow-hidden"
@@ -31,7 +33,7 @@ const JoinBeam = () => {
               whileInView="visible"
               viewport={{ once: true, amount: 0.2 }}
             >
-              Join the Beam Family
+              {data.title}
             </motion.h2>
             <motion.div
               variants={fadeUp}
@@ -41,8 +43,7 @@ const JoinBeam = () => {
               transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
             >
               <p className="text-base 2xl:text-lg font-light max-w-[45ch]">
-                Join Beam&apos;s dynamic team where innovation meets passion.
-                Grow your career, make an impact, and help shape tomorrow.
+                {data.description}
               </p>
             </motion.div>
           </div>
@@ -56,7 +57,7 @@ const JoinBeam = () => {
           >
             <div className="cursor-pointer px-2 md:px-5 py-2 md:py-3 bg-transparent rounded-full flex items-center gap-2 transition-all duration-300">
               <p className="text-xs font-light text-white uppercase transition-colors duration-300">
-                Work with us
+                {data.buttonText}
               </p>
               <div className="p-2 flex items-center justify-center bg-primary w-fit rounded-full transition-transform duration-300 group-hover:rotate-45">
                 <Image

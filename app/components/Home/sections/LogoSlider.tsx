@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import { logoSliderData } from "@/app/data/logoSlider";
 import Image from "next/image";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -13,8 +12,9 @@ import { Autoplay } from "swiper/modules";
 import { Pagination } from "swiper/modules";
 import { motion } from "framer-motion";
 import { fadeUp } from "@/public/assets/FramerAnimation/animation";
+import { HomeProps } from "../type";
 
-const LogoSlider = () => {
+const LogoSlider = ({data}: {data: HomeProps['ninethSection']}) => {
   return (
     <motion.section
       className="py-8 xl:py-25 2xl:py-23 max-w-[1920px] mx-auto overflow-hidden"
@@ -46,14 +46,14 @@ const LogoSlider = () => {
           }}
           className="alumni-swiper"
         >
-          {logoSliderData.logoSlider.map((value, index) => (
+          {data.items.map((value, index) => (
             <SwiperSlide key={index}>
               <div>
                 <Image
-                  src={value.img}
-                  alt={"logo"}
-                  width={value.width}
-                  height={value.height}
+                  src={value.image}
+                  alt={value.imageAlt}
+                  width={196}
+                  height={65}
                 />
               </div>
             </SwiperSlide>

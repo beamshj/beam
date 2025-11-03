@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect } from "react";
-import { schoolData } from "@/app/data/ourSchools";
 import Image from "next/image";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -22,6 +21,7 @@ import { StylesConfig } from "react-select";
 import dynamic from "next/dynamic";
 import type { Props as SelectProps } from "react-select";
 import { GroupBase } from "react-select";
+import { BeamSchoolType, CategoryType, LocationType } from "../../BeamSchools/type";
 
 const Select = dynamic<SelectProps<OptionType, false, GroupBase<OptionType>>>(
   () => import("react-select"),
@@ -29,7 +29,8 @@ const Select = dynamic<SelectProps<OptionType, false, GroupBase<OptionType>>>(
 );
 type OptionType = { value: string; label: string };
 
-const OurSchools = () => {
+const OurSchools = ({schoolData, categorydata, locationdata}: {schoolData: BeamSchoolType, categorydata: CategoryType[], locationdata: LocationType[]}) => {
+  console.log(locationdata);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   useEffect(() => {
@@ -45,29 +46,26 @@ const OurSchools = () => {
   const [selectedLocation, setSelectedLocation] = useState("");
 
   // locations
-  const locations = Array.from(
-    new Set(
-      schoolData.schools.map((campus) => {
-        const parts = campus.location.split(",");
-        return parts[parts.length - 1].trim();
-      })
-    )
-  );
+  // const locations = Array.from(
+  //   new Set(
+  //     locationdata.map((location) => location.name)
+  //   )
+  // );
 
   // curiculums
   const curriculums = Array.from(
-    new Set(schoolData.schools.map((school) => school.curriculum))
+    new Set(categorydata.map((category) => category.name))
   );
 
   const filteredSchools = useMemo(() => {
     return schoolData.schools.filter((school) => {
       const curriculumMatch =
         selectedCurriculum === "all" ||
-        school.curriculum.toLowerCase() === selectedCurriculum.toLowerCase();
+        school.category.name.toLowerCase() === selectedCurriculum.toLowerCase();
 
       const locationMatch =
         !selectedLocation ||
-        school.location.toLowerCase().includes(selectedLocation.toLowerCase());
+        school.location.name.toLowerCase().includes(selectedLocation.toLowerCase());
 
       return curriculumMatch && locationMatch;
     });
@@ -76,9 +74,9 @@ const OurSchools = () => {
   // locations
   const locationOptions: OptionType[] = [
     { value: "", label: "Location" },
-    ...locations.map((loc) => ({
-      value: loc,
-      label: loc,
+    ...locationdata.map((loc) => ({
+      value: loc.name,
+      label: loc.name,
     })),
   ];
 
@@ -144,7 +142,7 @@ const OurSchools = () => {
            
             <SplitText
               tag="h2"
-              text={schoolData.heading}
+              text="Our Schools"
               className="text-xl md:text-2xl xl:text-3xl 2xl:text-4xl font-light leading-[1.111111111111111] text-black lettersp-4"
               delay={100}
               duration={0.6}
@@ -282,8 +280,8 @@ const OurSchools = () => {
                     <div className="bg-[#F5F5F5] rounded-[15px] p-1 hover:bg-[#F0F0F0] transition-all duration-300 group">
                       <div className="rounded-xl overflow-hidden relative">
                         <Image
-                          src={school.img}
-                          alt={school.title}
+                          src={school.image}
+                          alt={school.imageAlt}
                           width={500}
                           height={500}
                         />
@@ -298,7 +296,7 @@ const OurSchools = () => {
                         <div className="absolute bottom-2 left-2 p-2 bg-white rounded-md w-fit">
                           <Image
                             src={school.logo}
-                            alt={school.title}
+                            alt={school.logoAlt}
                             width={109}
                             height={45}
                           />
@@ -307,7 +305,7 @@ const OurSchools = () => {
                       <div className="p-2 md:p-3 xl:p-6 2xl:p-10">
                         <div className="flex justify-between items-center pb-3 border-b border-bdrcolor pt-3 2xl:pt-0">
                           <p className="text-xs font-light text-foreground">
-                            {school.curriculum}
+                            {school.category.name}
                           </p>
                           <div className="flex items-center gap-2">
                             <Image
@@ -317,7 +315,7 @@ const OurSchools = () => {
                               height={16}
                             />
                             <p className="text-xs font-light text-foreground">
-                              {school.location}
+                              {school.location.name}
                             </p>
                           </div>
                         </div>
@@ -331,7 +329,7 @@ const OurSchools = () => {
                         </div>
 
                         <div>
-                          {school.labels.map((label, index) => (
+                          {school.specifications.map((label, index) => (
                             <div
                               key={index}
                               className={`relative group overflow-hidden flex justify-between items-center px-3 py-[2.5px] rounded-[10px] transition-all duration-500`}
@@ -354,10 +352,10 @@ const OurSchools = () => {
 
                               <div className="relative z-10 flex justify-between items-center w-full">
                                 <p className="xl:text-md font-light text-foreground leading-[1.8] transition-colors duration-500 group-hover:text-black">
-                                  {label.count} +
+                                  {label.number} +
                                 </p>
                                 <p className="text-sm font-light text-foreground leading-[1.8] transition-colors duration-500">
-                                  {label.label}
+                                  {label.value}
                                 </p>
                               </div>
                             </div>

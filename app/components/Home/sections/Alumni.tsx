@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import { alumniData } from "@/app/data/alumni";
 import Image from "next/image";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -17,10 +16,11 @@ import {
   containerVariants2,
   fadeUp,
 } from "@/public/assets/FramerAnimation/animation";
+import { HomeProps } from "../type";
 // Optional: Add modules if needed
 
-const Alumni = () => {
-  const textParts = alumniData.heading.split(/<br\s*\/?>/gi);
+const Alumni = ({data}: {data: HomeProps['seventhSection']}) => {
+  const textParts = data.title.split("\n");
   return (
     <motion.section
       className="py-8 xl:pt-20 xl:pb-25 2xl:pt-[135px] 2xl:pb-[126px] max-w-[1920px] mx-auto overflow-hidden"
@@ -86,7 +86,7 @@ const Alumni = () => {
             }}
             className="alumni-swiper"
           >
-            {alumniData.alumni.map((value, index) => (
+            {data.items.map((value, index) => (
               <SwiperSlide key={index}>
                 <motion.div
                   variants={cardVariants2}
@@ -96,12 +96,12 @@ const Alumni = () => {
                     {value.name}
                   </h3>
                   <p className="text-sm font-light text-[#626262] transition-all duration-300">
-                    {value.designation}
+                    {value.course}
                   </p>
                   <div className="mt-9 aluminibg transform transition-transform duration-500 group-hover:scale-105">
                     <Image
-                      src={value.img}
-                      alt={value.name}
+                      src={value.image}
+                      alt={value.imageAlt}
                       width={351}
                       height={413}
                       className="w-full h-[250px] xl:h-auto object-contain object-bottom-left"

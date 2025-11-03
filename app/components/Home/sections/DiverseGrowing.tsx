@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import { diverseGrowingData } from "@/app/data/DiverseGrowing";
 import Image from "next/image";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -18,8 +17,10 @@ import SplitText from "@/components/SplitText";
 import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import { HomeProps } from "../type";
 gsap.registerPlugin(ScrollTrigger);
-const DiverseGrowing = () => {
+
+const DiverseGrowing = ({data}: {data: HomeProps['fifthSection']}) => {
   const imgRef = useRef<HTMLImageElement | null>(null);
 
   useEffect(() => {
@@ -55,7 +56,7 @@ const DiverseGrowing = () => {
 
               <SplitText
                 tag="h2"
-                text={diverseGrowingData.heading}
+                text={data.title}
                 className="text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-light leading-[1.111111111] text-black max-w-[20ch] lettersp-4 xl:mb-30 2xl:mb-40"
                 delay={100}
                 duration={0.6}
@@ -94,20 +95,20 @@ const DiverseGrowing = () => {
                           {/* {diverseGrowingData.secvalues[0].Xcount}+  */}
                           <Counter
                             from={0}
-                            to={Number(diverseGrowingData.secvalues[0].count)}
+                            to={Number(data.items[0].number)}
                           />
                           +
                         </p>
                         <Image
                           className={`grayscale group-hover:grayscale-0 transition-all duration-400 group-hover:scale-110 ${isActive === 1 ? "grayscale-0 scale-110" : ""}`}
-                          src={diverseGrowingData.secvalues[0].img}
-                          alt={diverseGrowingData.secvalues[0].title}
+                          src={data.items[0].logo}
+                          alt={data.items[0].logoAlt}
                           width={50}
                           height={50}
                         />
                       </div>
                       <p className={`text-md 2xl:text-xl font-light text-[#626262] max-w-[9ch] group-hover:text-black group-hover:-translate-y-1 transition-all duration-500 ${isActive === 1 ? "text-black -translate-y-1" : ""}`}>
-                        {diverseGrowingData.secvalues[0].title}
+                        {data.items[0].value}
                       </p>
                     </div>
                   </div>
@@ -129,20 +130,20 @@ const DiverseGrowing = () => {
                           <p className={`text-xl 2xl:text-2xl font-light text-[#7E5AA3] group-hover:text-black  group-hover:-translate-x-3 transition-all duration-500 ${isActive === 2 ? "text-black -translate-x-3" : ""}`}>
                             <Counter
                               from={0}
-                              to={Number(diverseGrowingData.secvalues[1].count)}
+                              to={Number(data.items[1].number)}
                             />
                             +
                           </p>
                           <Image
                             className={`grayscale group-hover:grayscale-0 transition-all duration-400 group-hover:scale-110 ${isActive === 2 ? "grayscale-0 scale-110" : ""}`}
-                            src={diverseGrowingData.secvalues[1].img}
-                            alt={diverseGrowingData.secvalues[1].title}
+                            src={data.items[1].logo}
+                            alt={data.items[1].logoAlt}
                             width={50}
                             height={50}
                           />
                         </div>
                         <p className={`text-md 2xl:text-xl font-light text-[#626262] max-w-[9ch] group-hover:text-black group-hover:-translate-y-1 transition-all duration-500  ${isActive === 2 ? "text-black -translate-y-1" : ""}`}>
-                          {diverseGrowingData.secvalues[1].title}
+                          {data.items[1].value}
                         </p>
                       </div>
                     </div>
@@ -162,21 +163,21 @@ const DiverseGrowing = () => {
                               <Counter
                                 from={0}
                                 to={Number(
-                                  diverseGrowingData.secvalues[2].count
+                                  data.items[2].number
                                 )}
                               />
                               +
                             </p>
                             <Image
                               className={`grayscale group-hover:grayscale-0 transition-all duration-400 group-hover:scale-110 ${isActive === 3 ? "grayscale-0 scale-110" : ""}`}
-                              src={diverseGrowingData.secvalues[2].img}
-                              alt={diverseGrowingData.secvalues[2].title}
+                              src={data.items[2].logo}
+                              alt={data.items[2].logoAlt}
                               width={50}
                               height={50}
                             />
                           </div>
                           <p className={`text-md 2xl:text-xl font-light ${isActive === 3 ? "text-black -translate-y-1" : "text-[#626262] group-hover:text-black group-hover:-translate-y-1 transition-all duration-500 "}`}>
-                            {diverseGrowingData.secvalues[2].title}
+                            {data.items[2].value}
                           </p>
                         </div>
                       </div>
@@ -196,21 +197,21 @@ const DiverseGrowing = () => {
                               <Counter
                                 from={0}
                                 to={Number(
-                                  diverseGrowingData.secvalues[4].count
+                                  data.items[4].number
                                 )}
                               />
                               +
                             </p>
                             <Image
                               className={`grayscale group-hover:grayscale-0 transition-all duration-400 group-hover:scale-110 ${isActive === 4 ? "grayscale-0 scale-110" : ""}`}
-                              src={diverseGrowingData.secvalues[4].img}
-                              alt={diverseGrowingData.secvalues[4].title}
+                              src={data.items[4].logo}
+                              alt={data.items[4].logoAlt}
                               width={50}
                               height={50}
                             />
                           </div>
                           <p className={`text-md 2xl:text-xl font-light max-w-[9ch] group-hover:text-black group-hover:-translate-y-1 transition-all duration-500 ${isActive === 4 ? "text-black -translate-y-1" : "text-[#626262]"}`}>
-                            {diverseGrowingData.secvalues[4].title}
+                            {data.items[4].value}
                           </p>
                         </div>
                       </div>
@@ -230,20 +231,20 @@ const DiverseGrowing = () => {
                           <p className={`text-xl 2xl:text-2xl font-light transition-all duration-500 ${isActive === 5 ? "text-black -translate-x-3" : "text-[#7E5AA3] group-hover:text-black  group-hover:-translate-x-3 "}`}>
                             <Counter
                               from={0}
-                              to={Number(diverseGrowingData.secvalues[3].count)}
+                              to={Number(data.items[3].number)}
                             />
                             +
                           </p>
                           <Image
                             className={`grayscale group-hover:grayscale-0 transition-all duration-400 group-hover:scale-110 ${isActive === 5 ? "grayscale-0 scale-110" : ""}`}
-                            src={diverseGrowingData.secvalues[3].img}
-                            alt={diverseGrowingData.secvalues[3].title}
+                            src={data.items[3].logo}
+                            alt={data.items[3].logoAlt}
                             width={50}
                             height={50}
                           />
                         </div>
                         <p className={`text-md 2xl:text-xl font-light transition-all duration-500 ${isActive === 5 ? "text-black -translate-y-1" : "text-[#626262] group-hover:text-black group-hover:-translate-y-1 transition-all duration-500 "}`}>
-                          {diverseGrowingData.secvalues[3].title}
+                          {data.items[3].value}
                         </p>
                       </div>
                     </div>
@@ -257,8 +258,8 @@ const DiverseGrowing = () => {
           className="relative pt-5 lg:pt-0 left-0 lg:absolute bottom-0 lg:left-[5%] z-[-1] responsive md:w-[50%] 2xl:w-[913px]"
         >
           <Image ref={imgRef}
-            src={diverseGrowingData.image}
-            alt={diverseGrowingData.heading}
+            src={data.image}
+            alt={data.imageAlt}
             width={913}
             height={944}
             className=""
