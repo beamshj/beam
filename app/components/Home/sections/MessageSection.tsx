@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import { messageSectionData } from "@/app/data/MessageSection";
 import { motion } from "framer-motion";
 import {
   containerVariants,
@@ -11,7 +10,9 @@ import {
   fadeUp,
 } from "@/public/assets/FramerAnimation/animation";
 import SplitText from "@/components/SplitText";
-const MessageSection = () => {
+import { HomeProps } from "../type";
+
+const MessageSection = ({data}: {data: HomeProps['sixthSection']}) => {
   return (
     <motion.section
       className="relative w-full bg-[#F6F6F6] aftergd max-w-[1920px] mx-auto overflow-hidden"
@@ -24,7 +25,7 @@ const MessageSection = () => {
         <div className="container border-b border-[#D3D3D3] pb-5 pt-10 mb-10  w-[95%]">
           <h2>
             <SplitText
-            tag="span" text={messageSectionData.heading}
+            tag="span" text={data.mainTitle}
               className="text-md lg:text-2xl xl:text-3xl 2xl:text-4xl text-black  font-light "
             delay={100}
             duration={0.6}
@@ -40,7 +41,7 @@ const MessageSection = () => {
         </div>
         <div className="lg:absolute bottom-0 left-0 flex pl-[15px]">
           <Image
-            src={messageSectionData.image}
+            src={data.image}
             alt="Message"
             width={702}
             height={964}
@@ -48,13 +49,14 @@ const MessageSection = () => {
           />
           <div className="container justify-center flex flex-col gap-1      pt-10">
             <h3 className="text-black text-sm sm:text-xl font-light ">
-              {messageSectionData.founder}
+              {data.name}
             </h3>
-            <p className="text-xs sm:text-sm font-light">
-              {messageSectionData.founderTitle}
-              <br />
-              {messageSectionData.founderTitle2}
-            </p>
+            {data.designation.split("\n").map((word, index) => (
+                <span key={index} className="text-sm font-light text-foreground">
+                  {word}
+                  {index < data.designation.split("\n").length - 1 && <br />}
+                </span>
+              ))}
           </div>
         </div>
       </div>
@@ -74,7 +76,7 @@ const MessageSection = () => {
                 variants={fadeSide}
               >
                 <h2 className="text-md 2xl:text-xl font-light">
-                  {messageSectionData.heading}
+                  {data.mainTitle}
                 </h2>
               </motion.div>
 
@@ -85,7 +87,7 @@ const MessageSection = () => {
               >
                 <div>
                  <SplitText
-                 tag="h2" text={messageSectionData.title}
+                 tag="h2" text={data.subTitle}
                  className="text-xl xl:text-2xl 2xl:text-4xl text-black leading-[1.2] xl:leading-[1.1] font-light 2xl:max-w-[82%] lettersp-4"
                  delay={100}
                  duration={0.6}
@@ -105,7 +107,7 @@ const MessageSection = () => {
                 className="text-sm flex flex-col gap-3 2xl:gap-6 pe-4 xl:pe-[92px]"
                 variants={containerVariants}
               >
-                {messageSectionData.desc.map((desc, index) => (
+                {data.description.split("\n").map((desc, index) => (
                   <motion.p
                     key={index}
                     className="text-sm font-light text-foreground"
@@ -126,8 +128,8 @@ const MessageSection = () => {
               className="lg:absolute bottom-0 left-0  "
             >
               <Image
-                src={messageSectionData.image}
-                alt="Message"
+                src={data.image}
+                alt={data.imageAlt}
                 width={702}
                 height={964}
                 className="lg:w-[380px] xl:w-[460px] 2xl:w-[702px]"
@@ -141,13 +143,19 @@ const MessageSection = () => {
               className="w-full lg:ml-[55%] lg:mt-[62%] 2xl:ml-[67%] 2xl:mt-[51%] justify-center flex flex-col gap-1 z-10"
             >
               <h3 className="text-black text-xl font-light">
-                {messageSectionData.founder}
+                {data.name}
               </h3>
-              <p className="text-sm font-light text-foreground">
+              {data.designation.split("\n").map((word, index) => (
+                <span key={index} className="text-sm font-light text-foreground">
+                  {word}
+                  {index < data.designation.split("\n").length - 1 && <br />}
+                </span>
+              ))}
+              {/* <p className="text-sm font-light text-foreground">
                 {messageSectionData.founderTitle}
                 <br />
                 {messageSectionData.founderTitle2}
-              </p>
+              </p> */}
             </motion.div>
           </div>
         </div>

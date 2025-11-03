@@ -15,9 +15,10 @@ import { moveLeft } from "../../motionVarients";
 import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import { HomeProps } from "../type";
 gsap.registerPlugin(ScrollTrigger);
 
-const AcademicCultural = () => {
+const AcademicCultural = ({data}: {data: HomeProps['thirdSection']}) => {
   const [activeIndex, setActiveIndex] = useState(1); // 2nd item active by default
 
   const imgRef = useRef<HTMLImageElement | null>(null);
@@ -56,7 +57,7 @@ const AcademicCultural = () => {
 
             <SplitText
               tag="h2"
-              text={academicCulturalData.heading}
+              text={data.title}
               className="text-lg md:text-xl xl:text-2xl 2xl:text-3xl font-light leading-tight text-black max-w-[13ch] lettersp-4"
               delay={100}
               duration={0.6}
@@ -80,7 +81,7 @@ const AcademicCultural = () => {
             >
               <p
                 className="text-sm font-light text-foreground md:max-w-[68ch] 2xl:max-w-[82ch]"
-                dangerouslySetInnerHTML={{ __html: academicCulturalData.desc }}
+                dangerouslySetInnerHTML={{ __html: data.description }}
               />
             </motion.div>
 
@@ -89,7 +90,7 @@ const AcademicCultural = () => {
 
             {/* List Items */}
             <div>
-              {academicCulturalData.accvalues.map((value, index) => {
+              {data.items.map((value, index) => {
                 const isActive = activeIndex === index;
                 return (
                   <motion.div
@@ -107,12 +108,12 @@ const AcademicCultural = () => {
         : ""
     }
     ${
-      index === academicCulturalData.accvalues.length - 2
+      index === data.items.length - 2
         ? "ps-0 xl:ps-[8%] 2xl:ps-[15%]"
         : ""
     }
     ${
-      index === academicCulturalData.accvalues.length - 1
+      index === data.items.length - 1
         ? "ps-0 xl:ps-[18%] 2xl:ps-[30%]"
         : ""
     }
@@ -135,10 +136,10 @@ const AcademicCultural = () => {
                       }`}
                     >
                       <Image
-                        src={value.img}
+                        src={value.logo}
                         alt={value.title}
-                        width={value.imgwidth}
-                        height={value.imgheight}
+                        width={60}
+                        height={75}
                         className={`transition-all duration-300 w-15 xl:w-auto h-auto ${
                           isActive
                             ? "filter-[brightness(0)]"
@@ -173,8 +174,8 @@ const AcademicCultural = () => {
         <div className="absolute bottom-0 right-0 hidden xl:block w-[640px] 2xl:w-[737px]">
           <Image
             ref={imgRef}
-            src={academicCulturalData.image}
-            alt={academicCulturalData.heading}
+            src={data.image}
+            alt={data.imageAlt}
             width={737}
             height={1061}
           />

@@ -774,7 +774,7 @@ const HomePage = () => {
                     <div className='flex flex-col gap-2'>
                         <div className='flex flex-col gap-1'>
                             <Label className='font-bold'>Title</Label>
-                            <Input type='text' placeholder='Title' {...register("seventhSection.title", {
+                            <Textarea placeholder='Title' {...register("seventhSection.title", {
                                 required: "Title is required"
                             })} />
                             {errors.seventhSection?.title && <p className='text-red-500'>{errors.seventhSection?.title.message}</p>}
