@@ -1,9 +1,17 @@
 import Index from "@/app/components/SchoolLeadershipTeam";
 
-const Page = () => {
+const Page = async () => {
+  const response = await fetch(
+    `${process.env.BASE_URL}/api/admin/leadership-team`,
+    {
+      next: { revalidate: 60 },
+    }
+  );
+  const data = await response.json();
+  console.log(data, "hel");
   return (
     <>
-      <Index />
+      <Index data={data.data} />
     </>
   );
 };

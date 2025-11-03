@@ -15,10 +15,17 @@ interface PageBnrProps {
   pageTitle?: string;
 }
 
-const InnerBanner = ({ BannerData, banner, bannerAlt, pageTitle }: PageBnrProps) => {
+const InnerBanner = ({
+  BannerData,
+  banner,
+  bannerAlt,
+  pageTitle,
+}: PageBnrProps) => {
   const pathname = usePathname();
 
-  const lastWordPrimaryColor = pathname.includes("/general-managers-message") ? true : false;
+  const lastWordPrimaryColor = pathname.includes("/general-managers-message")
+    ? true
+    : false;
   return (
     <section className="relative h-[320px] md:h-[380px] xl:h-[470px] 2xl:h-[635px] flex flex-col justify-end pb-[25px] md:pb-[30px] xl:pb-[35px]">
       <motion.div
@@ -45,35 +52,32 @@ const InnerBanner = ({ BannerData, banner, bannerAlt, pageTitle }: PageBnrProps)
             transition={{ duration: 1.3, ease: "easeOut" }}
             className="text-white text-xl md:text-2xl xl:text-2xl 2xl:text-3xl leading-[1.125] mb-[25px] md:mb-[30px] xl:mb-[40px]  2xl:mb-[50px] font-light"
           >
-            {!lastWordPrimaryColor ? (() => {
-              const title = pageTitle || BannerData?.BannerTitle || "";
-              const [firstWord, ...rest] = title.split(" ");
-              return (
-                <>
-                  {firstWord}{" "}
-                  {rest.length > 0 && (
-                    <span className="text-primary">{rest.join(" ")}</span>
-                  )}
-                </>
-              );
-            })() 
-            
-            :
+            {!lastWordPrimaryColor
+              ? (() => {
+                  const title = pageTitle || BannerData?.BannerTitle || "";
+                  const [firstWord, ...rest] = title.split(" ");
+                  return (
+                    <>
+                      {firstWord}{" "}
+                      {rest.length > 0 && (
+                        <span className="text-primary">{rest.join(" ")}</span>
+                      )}
+                    </>
+                  );
+                })()
+              : (() => {
+                  const title = pageTitle || BannerData?.BannerTitle || "";
+                  const words = title.trim().split(" ");
+                  const lastWord = words.pop(); // removes and returns last word
+                  const rest = words.join(" ");
 
-              (() => {
-                const title = pageTitle || BannerData?.BannerTitle || "";
-                const words = title.trim().split(" ");
-                const lastWord = words.pop(); // removes and returns last word
-                const rest = words.join(" ");
-
-                return (
-                  <>
-                    {rest && <>{rest} </>}
-                    <span className="text-primary">{lastWord}</span>
-                  </>
-                );
-              })()
-            }
+                  return (
+                    <>
+                      {rest && <>{rest} </>}
+                      <span className="text-primary">{lastWord}</span>
+                    </>
+                  );
+                })()}
           </motion.h2>
         </div>
         <div className="h-[1px] w-[60%] bg-gradient-to-r from-white to-transparent mb-[15px] md:mb-[20px] xl:mb-[25px]"></div>

@@ -18,7 +18,8 @@ const gallerySchema = new mongoose.Schema({
         categories:[{
             title:{type:String},
             description:{type:String},
-            images:[{type:String}]
+            images:[{type:String}],
+            type:{type:String, defaul:"Gallery"}
         }]
     }]
 })
