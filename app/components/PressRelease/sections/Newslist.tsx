@@ -95,7 +95,7 @@ const Newslist = ({
       ))}
       {/* Pagination */}
       {currentNews.length > 0 && (
-        <div className=" w-full left-0 removeMtmain flex justify-center align-center">
+        <div className="absolute w-full left-0 removeMtmain flex justify-center align-center">
           <Pagination
             currentPage={currentPage}
             totalPages={totalPages}
