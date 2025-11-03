@@ -1,9 +1,13 @@
 import Index from "@/app/components/PressRelease";
 
-const Page = () => {
+const Page = async () => {
+  const response = await fetch(`${process.env.BASE_URL}/api/admin/news`, {
+    next: { revalidate: 60 },
+  });
+  const data = await response.json();
   return (
     <>
-      <Index />
+      <Index data={data.data} />
     </>
   );
 };

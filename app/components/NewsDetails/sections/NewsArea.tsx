@@ -4,8 +4,19 @@ import Image from "next/image";
 import SplitText from "@/components/SplitText";
 import { motion } from "framer-motion";
 import { moveUp } from "../../motionVarients";
+import { NewsItem } from "../../PressRelease/type";
+import { Variants } from "framer-motion";
 
-const NewsArea = () => {
+const NewsArea = ({ data }: { data: NewsItem }) => {
+    console.log(data, "nw his");
+  const contentTags: Variants = {
+    hidden: { opacity: 0, y: 40 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" },
+    },
+  };
   return (
     <section className="pb-8 md:pb-12 lg:pb-20 2xl:pb-[135px] pt-[135px] lg:pt-[198px] 2xl:pt-[193px]">
       <div className="container">
@@ -56,7 +67,7 @@ const NewsArea = () => {
           <div className="mt-4 md:mt-6 xl:mt-8 2xl:mt-12 mb-4 md:mb-6 xl:mb-8 2xl:mb-8">
             <SplitText
               tag="h2"
-              text="Challenges Faced by Elementary School Students in 2022"
+              text={data.title}
               className="text-xl md:text-2xl xl:text-3xl 2xl:text-4xl font-light leading-tight text-black lettersp-4 "
               delay={100}
               duration={0.6}
@@ -74,7 +85,7 @@ const NewsArea = () => {
               <ul className="list-disc lg:flex gap-10  text-colorpara text-sm font-light">
                 <li>Published in&nbsp;Blog&nbsp;on&nbsp;July 14, 2025</li>
                 <li>10 mins read</li>
-                <li>Curriculum</li>
+                <li>{data.category}</li>
               </ul>
             </div>
             <motion.div
@@ -99,28 +110,32 @@ const NewsArea = () => {
             className="py-4 md:py-6 xl:py-8 2xl:py-12"
           >
             <Image
-              src="/images/newsdetails/banner.jpg"
-              alt=""
+              src={data?.coverImage}
+              alt={data?.coverImageAlt}
               width={1360}
               height={535}
               className="rounded-sm w-full object-cover min-h-[250px]"
             />
           </motion.div>
           <div>
-            <motion.p
+            {/* <motion.p
               variants={moveUp(0.2)}
               initial="hidden"
               whileInView="show"
               viewport={{ amount: 0.1, once: true }}
               className="text-colorpara text-sm font-light"
             >
-              Elementary students faced many challenges after COVID-19,
-              especially with the sudden shift to online learning. Returning to
-              physical classrooms in 2022 added to their struggles, changing the
-              overall school culture. This blog explores the key challenges they
-              faced post-pandemic.
-            </motion.p>
-            <motion.h3
+              {data.content}
+            </motion.p> */}
+            <motion.div
+              variants={contentTags}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ amount: 0.1, once: true }}
+              className="blog-content"
+              dangerouslySetInnerHTML={{ __html: data.content }}
+            />
+            {/* <motion.h3
               variants={moveUp(0.4)}
               initial="hidden"
               whileInView="show"
@@ -251,14 +266,12 @@ const NewsArea = () => {
                 and teachers should promote healthy tech habits and offline
                 activities.
               </motion.p>
-            </div>
+            </div> */}
           </div>
-
-         
         </div>
         <div className="pt-8 md:pt-12 lg:pt-20 2xl:pt-[135px]">
-            <hr />
-          </div>
+          <hr />
+        </div>
       </div>
     </section>
   );
