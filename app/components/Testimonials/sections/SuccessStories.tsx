@@ -5,8 +5,6 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
-import type { Swiper as SwiperType } from "swiper"; // ✅ type import
-
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -19,7 +17,6 @@ const SuccessStories = ({
   data: TestimonialsProps["secondSection"];
 }) => {
   const [activeVideoIndex, setActiveVideoIndex] = useState<number | null>(null);
-  const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
 
@@ -42,7 +39,6 @@ const SuccessStories = ({
                 }}
                 modules={[Navigation]}
                 onSwiper={(swiper) => {
-                  setSwiperInstance(swiper);
                   setIsBeginning(swiper.isBeginning);
                   setIsEnd(swiper.isEnd);
                 }}
