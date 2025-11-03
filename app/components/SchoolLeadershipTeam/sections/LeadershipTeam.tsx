@@ -619,7 +619,7 @@ export default function LeadershipCarousel({
               {data.firstSection.description}
             </motion.p>
           </div>
-          {slides.map((m, i) => (
+          {slides.map((m) => (
             <motion.div
               key={m._id}
               className="md:absolute bottom-0 rounded-[12px] overflow-hidden cursor-pointer"
