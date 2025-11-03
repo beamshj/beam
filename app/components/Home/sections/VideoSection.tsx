@@ -10,8 +10,10 @@ import {
   playFadeUp,
 } from "@/public/assets/FramerAnimation/animation";
 import SplitText from "@/components/SplitText";
+import { HomeProps } from "../type";
+
 gsap.registerPlugin(ScrollTrigger);
-const VideoSection = () => {
+const VideoSection = ({data}: {data: HomeProps['fourthSection']}) => {
   const [isOpen, setIsOpen] = useState(false);
   const openPopup = () => setIsOpen(true);
   const closePopup = () => setIsOpen(false);
@@ -47,7 +49,7 @@ const VideoSection = () => {
       viewport={{ once: true }}
     >
 
-      <Image src="/assets/home/video-poster.jpg" ref={imgRef} alt="Video" width={1920} height={950} className="w-full h-full object-cover absolute z-10 top-0 right-0" />
+      <Image src={data.image} ref={imgRef} alt="Video" width={1920} height={950} className="w-full h-full object-cover absolute z-10 top-0 right-0" />
       <div className="container flex items-center h-full">
         <motion.div
           className="relative z-30 flex flex-col gap-10"
@@ -58,7 +60,7 @@ const VideoSection = () => {
         >
           <SplitText
             tag="h2"
-            text={"Get to Know Our School!"}
+            text={data.title}
             className="text-xl md:text-2xl xl:text-3xl 2xl:text-4xl leading-[1.2] text-white w-full md:w-3/4 font-light lettersp-4 text-center md:text-left"
             delay={100}
             duration={0.6}
@@ -118,7 +120,7 @@ const VideoSection = () => {
 
                   {/* YouTube Embed */}
                   <iframe
-                    src="https://www.youtube.com/embed/x5XZnj6Cu0c?autoplay=1"
+                    src={data.videoLink}
                     title="Video"
                     className="w-full h-full"
                     frameBorder="0"

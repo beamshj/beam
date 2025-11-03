@@ -1,6 +1,5 @@
 "use client";
-import React from "react";
-import { mediaHubData } from "@/app/data/MediaHub";
+import React, { useEffect, useState } from "react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -13,7 +12,99 @@ import { Pagination } from "swiper/modules";
 import { motion } from "framer-motion";
 import { fadeUp } from "@/public/assets/FramerAnimation/animation";
 import SplitText from "@/components/SplitText";
-const MediaHub = () => {
+import GalleryModal from "@/app/components/Gallery/sections/GalleryModal";
+import { GalleryProps } from "@/app/components/Gallery/type";
+import { BlogType } from "@/app/components/blog/type";
+import { BlogResponse } from "@/app/components/NewsDetails/type";
+import type { Swiper as SwiperType } from "swiper";
+import { useRouter } from "next/navigation";
+
+const MediaHub = ({blogdata,newsdata, gallerydata}: {blogdata: BlogType,newsdata: BlogResponse, gallerydata: GalleryProps}) => {
+   
+  const [selectedItem, setSelectedItem] = useState<{ img: string; date: string; title: string; category: string; images: string[], description: string} | null>(null);
+  const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
+const router = useRouter();
+
+const blogItems =
+  blogdata?.categories?.flatMap((category) =>
+    category.blogs?.map((blog) => ({
+      img: blog.coverImage,
+      date: new Date(blog.date || "").toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+      }).replace(/\//g, "-"),
+      title: blog.title,
+      category: "Blog",
+      images:[],
+      description:"",
+      slug:blog.slug
+    }))
+  ) || [];
+
+// ✅ Extract news
+const newsItems =
+  newsdata?.categories?.flatMap((category) =>
+    category.news?.map((news) => ({
+      img: news.coverImage,
+      date: new Date(news.date).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+      }).replace(/\//g, "-"),
+      title: news.title,
+      category: "News",
+      images:[],
+      description:"",
+      slug:news.slug
+    }))
+  ) || [];
+
+// ✅ Extract gallery items
+const galleryItems =
+  gallerydata?.gallery?.flatMap((section) =>
+    section.categories?.flatMap((cat) =>
+      cat.images?.map((image) => ({
+        img: image,
+        date: "", // optional — galleries may not have date
+        title: cat.title || section.title || "Gallery",
+        category: "Media",
+        images: cat.images,
+        description: cat.description,
+        slug:""
+      }))
+    )
+  ) || [];
+
+// ✅ Helper: Shuffle and pick N random items
+const getRandomItems = (arr:{ img: string; date: string; title: string; category: string;images: string[], description: string,slug:string }[], n: number) =>
+  arr.sort(() => 0.5 - Math.random()).slice(0, n);
+
+// ✅ Pick 3 random items from each
+const randomBlogs = getRandomItems(blogItems, 3);
+const randomNews = getRandomItems(newsItems, 3);
+const randomGallery = getRandomItems(galleryItems, 3);
+
+// ✅ Combine and shuffle again for mixed display
+const combinedItems = [...randomBlogs, ...randomNews, ...randomGallery].sort(
+  () => 0.5 - Math.random()
+);
+
+const mediaHubData = {
+  heading: "Media Hub",
+  mediaHub: combinedItems,
+};
+
+ useEffect(() => {
+    if (swiperInstance) {
+      if (selectedItem) {
+        swiperInstance.autoplay.stop(); // 🛑 pause autoplay when modal opens
+      } else {
+        swiperInstance.autoplay.start(); // ▶ resume autoplay when modal closes
+      }
+    }
+  }, [selectedItem, swiperInstance]);
+
   return (
     <motion.section
       variants={fadeUp}
@@ -52,6 +143,7 @@ const MediaHub = () => {
           <div className="container">
             <Swiper
               modules={[Autoplay, Pagination]}
+              onSwiper={(swiper) => setSwiperInstance(swiper)}
               className="!overflow-visible alumni-swiper "
               spaceBetween={10}
               slidesPerView={1}
@@ -89,6 +181,19 @@ const MediaHub = () => {
                       backgroundSize: "cover",
                       backgroundPosition: "center",
                     }}
+                    onClick={() => {
+  if (value.category === "Media") {
+    setSelectedItem({
+      ...value,
+      images: value.images ?? [],
+      description: value.description ?? ""
+    });
+  }else if(value.category === "Blog"){
+    router.push(`/news-&-media/blog/blog-details/${value.slug}`);
+  }else if(value.category === "News"){
+    router.push(`/news-&-media/press-release/${value.slug}`);
+  }
+}}
                   >
                     <div className="h-full rounded-[15px] transition-all duration-300 hdriv   ">
                       <div className="p-10">
@@ -137,6 +242,18 @@ const MediaHub = () => {
 
         <div className="container border-t border-bdrcolor"></div>
       </div>
+
+      {selectedItem && (
+        <GalleryModal
+          item={{
+            title: selectedItem.title,
+            gallery: selectedItem.images,
+            description:selectedItem.description // map images → gallery
+          }}
+          onClose={() => setSelectedItem(null)}
+        />
+      )}
+
     </motion.section>
   );
 };
