@@ -34,7 +34,7 @@ const RegisterInterest: React.FC = () => {
   };
 
   return (
-    <div className="pb-0 lg:pb-20 xl:pb-[135px]">
+    <div className="pb-0 lg:pb-20 xl:pb-[135px]" id="registerInterest">
       <div
         className="relative w-full max-w-[1920px] h-auto py-12 2xl:py-0 2xl:h-[736px] bg-cover bg-center flex justify-center items-center"
         style={{

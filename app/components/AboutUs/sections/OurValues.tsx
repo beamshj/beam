@@ -25,7 +25,7 @@ export default function ValuesGrid({ data }: Props) {
         >
           {data.title}
         </motion.h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-4 xl:gap-5 2xl:gap-[11px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-5 2xl:grid-cols-5 gap-4 xl:gap-5 2xl:gap-[11px]">
           {data.items?.map((item, index) => (
             <motion.div
               variants={moveUp(index * 0.1)}
@@ -33,7 +33,10 @@ export default function ValuesGrid({ data }: Props) {
               whileInView="show"
               viewport={{ once: true, amount: 0.2 }}
               key={index}
-              className="flex flex-col w-full"
+              className={`flex flex-col w-full
+                        ${
+                          "border-b-[1px] border-bdrcolor xl:border-none md:border-gray-300 pb-5 last:border-none"
+                        }`}
             >
               {/* Number ABOVE card */}
               <motion.div
@@ -56,7 +59,7 @@ export default function ValuesGrid({ data }: Props) {
                 viewport={{ once: true, amount: 0.2 }}
                 onMouseEnter={() => setHovered(index)}
                 onMouseLeave={() => setHovered(index)}
-                className="relative h-[400px] lg:h-[430px] xl:h-[500px] 2xl:h-[729px] w-full 2xl:max-w-[295px] overflow-hidden rounded-[12px]  group cursor-pointer"
+                className="relative h-[400px] lg:h-[430px] xl:h-[525px] 2xl:h-[729px] w-full 2xl:max-w-[295px] overflow-hidden rounded-[12px]  group cursor-pointer"
               >
                 {/* Background image */}
                 <Image
@@ -83,7 +86,7 @@ export default function ValuesGrid({ data }: Props) {
                   {/* Content */}
                   <div className="relative z-10 h-full w-full">
                     {/* Title that moves */}
-                    <h3
+                    {/* <h3
                       className={`
                         absolute rounded-full text-[1.3rem] md:text-md xl:text-lg 2xl:text-xl font-light transition-all duration-500 flex items-center justify-center
                         ${
@@ -91,6 +94,21 @@ export default function ValuesGrid({ data }: Props) {
                             ? "top-[26px] left-[26px] w-fit text-center border-none bg-[linear-gradient(131deg,rgba(66,186,220,1)_0%,rgba(126,90,163,1)_100%)] px-3"
                             : "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[190px] lg:w-[220px] 2xl:w-[250px] text-center border border-white"
                         }
+                        
+                      `}
+                    >
+                      {item.title}
+                    </h3> */}
+
+                    <h3
+                      className={`
+                        absolute rounded-full text-[1.3rem] md:text-md xl:text-lg 2xl:text-xl font-light transition-all duration-500 flex items-center justify-center
+                        ${
+                          hovered === index
+                            ? "top-[26px] left-1/2 -translate-x-1/2 w-[190px] lg:w-[220px] 2xl:w-[250px] text-center border-none bg-[linear-gradient(131deg,rgba(66,186,220,1)_0%,rgba(126,90,163,1)_100%)] px-3"
+                            : "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[190px] lg:w-[220px] 2xl:w-[250px] text-center border border-white"
+                        }
+                        
                       `}
                     >
                       {item.title}
@@ -101,7 +119,7 @@ export default function ValuesGrid({ data }: Props) {
                       <div
                         className="absolute bottom-0 left-0 w-full
                bg-gradient-to-t from-black/100 to-black/0
-               px-3 pt-4 pb-5 values-description-about"
+               px-3 xl:px-1 2xl:px-3 pt-4 pb-5 values-description-about max-h-[75%] overflow-y-auto 2xl:overflow-y-hidden"
                         dangerouslySetInnerHTML={{ __html: item.description }}
                       >
                         {/* <ul className="list-disc list-outside pl-4 xl:pl-9 space-y-1 text-sm text-white font-light">

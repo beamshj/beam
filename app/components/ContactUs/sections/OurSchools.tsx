@@ -5,19 +5,18 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import SplitText from "@/components/SplitText";
 import { moveUp } from "../../motionVarients";
+import { BeamSchoolType } from "../../BeamSchools/type";
 
-interface OurSchoolsProps {
+export default function OurSchools({
+  data,
+  title,
+  description,
+}: {
+  data: BeamSchoolType;
   title: string;
   description: string;
-  schools: {
-    title: string;
-    location: string;
-    img: string;
-  }[];
-}
-
-export default function OurSchools({ data }: { data: OurSchoolsProps }) {
-  const { title, description, schools } = data;
+}) {
+  const { schools } = data;
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
@@ -74,20 +73,22 @@ export default function OurSchools({ data }: { data: OurSchoolsProps }) {
                   duration: 0.6,
                   ease: "easeInOut",
                 }}
+                onClick={() =>
+                  window.open(school.link, "_blank", "noopener,noreferrer")
+                }
                 className={`relative rounded-[12px] overflow-hidden h-[300px] md:h-[350px] xl:h-[544px] cursor-pointer flex-shrink-0 schl ${
                   isActive ? "z-20" : "z-10"
                 }`}
               >
                 {/* Image */}
                 <Image
-                  src={school.img}
-                  alt={school.title}
+                  src={school.image}
+                  alt={school.imageAlt}
                   fill
                   className={`object-cover transition-all duration-500 ${
                     isActive ? "grayscale-0" : "grayscale"
                   }`}
                 />
-
                 {/* Overlay */}
                 {!isActive && (
                   <motion.div
@@ -111,7 +112,6 @@ export default function OurSchools({ data }: { data: OurSchoolsProps }) {
                     transition={{ duration: 0.5, ease: "easeInOut" }}
                   />
                 )}
-
                 {/* Location Pill */}
                 {isActive && school.location && (
                   <motion.div
@@ -121,15 +121,14 @@ export default function OurSchools({ data }: { data: OurSchoolsProps }) {
                     transition={{ duration: 0.8, ease: "easeOut" }}
                   >
                     <Image
-                      src="/images/contact-us/icons/location.svg"
+                      src={"/images/contact-us/icons/location.svg"}
                       alt="location"
                       width={24}
                       height={24}
                     />
-                    {school.location}
+                    {school.location.name}
                   </motion.div>
                 )}
-
                 {/* Active / Inactive Content */}
                 {isActive ? (
                   // ACTIVE CARD (expanded)
@@ -155,7 +154,6 @@ export default function OurSchools({ data }: { data: OurSchoolsProps }) {
                         />
                       </div>
                     </motion.div>
-
                     {/* Right arrow button */}
                     <div className="">
                       <span className="w-8 h-8 md:w-12 md:h-12 xl:w-[74px] xl:h-[74px] flex items-center justify-center border border-white rounded-full">

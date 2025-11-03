@@ -1,13 +1,22 @@
 "use client";
 
 import React from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import SplitText from "@/components/SplitText";
 import { motion } from "framer-motion";
 import { moveUp } from "../../motionVarients";
+import { FirstSection } from "../type";
+import { Listbox } from "@headlessui/react";
+
+const options = [
+  { value: "", label: "Purpose of enquiry" },
+  { value: "admission", label: "Admission" },
+  { value: "career", label: "Career" },
+  { value: "general", label: "General" },
+];
 
 const formSchema = z.object({
   firstName: z.string().min(1, "Required"),
@@ -20,10 +29,11 @@ const formSchema = z.object({
 
 type FormData = z.infer<typeof formSchema>;
 
-const ContactForm: React.FC = () => {
+const ContactForm: React.FC<{ data: FirstSection }> = ({ data }) => {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -59,7 +69,7 @@ const ContactForm: React.FC = () => {
             viewport={{ once: true, amount: 0.2 }}
             className="text-colorpara font-light text-sm leading-[1.52] mt-[13px]"
           >
-            We are here to answer any question you may have.
+            {data.description}
           </motion.p>
           <div className="mt-[13px] text-sm leading-[1.52] font-light">
             <motion.h2
@@ -69,18 +79,16 @@ const ContactForm: React.FC = () => {
               viewport={{ once: true, amount: 0.2 }}
               className="text-primary text-md lg:text-lg xl:text-xl leading-[1.2] font-light"
             >
-              BEAM
+              {data.subTitle}
             </motion.h2>
             <motion.p
               variants={moveUp(0.4)}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, amount: 0.2 }}
-              className="text-colorpara mt-[17px] font-light"
+              className="text-colorpara mt-[17px] font-light whitespace-pre-line"
             >
-              The City Gate, Al Ittihad Road
-              <br />
-              Sharjah, UAE. PO Box: 88
+              {data.address}
             </motion.p>
             <div className="space-y-[17px] mt-[17px]">
               {/* First row */}
@@ -105,7 +113,7 @@ const ContactForm: React.FC = () => {
                   viewport={{ once: true, amount: 0.2 }}
                   className="font-light text-sm leading-[1.52] text-primary"
                 >
-                  800 BEAM (2326)
+                  {data.phone}
                 </motion.p>
               </motion.div>
 
@@ -132,7 +140,7 @@ const ContactForm: React.FC = () => {
                   href="mailto:enquiries@beam.co.ae"
                   className="text-primary font-light text-sm leading-[1.52]"
                 >
-                  enquiries@beam.co.ae
+                  {data.email}
                 </motion.a>
               </motion.div>
             </div>
@@ -146,7 +154,7 @@ const ContactForm: React.FC = () => {
           >
             <div className="relative w-full pt-[63.35%]">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28861.219018315405!2d55.31368687406142!3d25.28227677506068!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f5b877ffa610b%3A0x45235431be0819e!2sCity%20Gate%20Tower!5e0!3m2!1sen!2sin!4v1759920246808!5m2!1sen!2sin"
+                src={data.map}
                 className="absolute inset-0 w-full h-full rounded-[12px]"
                 style={{ border: 0 }}
                 loading="lazy"
@@ -236,7 +244,6 @@ const ContactForm: React.FC = () => {
               </p>
             </motion.div>
           </div>
-
           <motion.div
             variants={moveUp(0.5)}
             initial="hidden"
@@ -244,25 +251,59 @@ const ContactForm: React.FC = () => {
             viewport={{ once: true, amount: 0.2 }}
             className="relative w-full"
           >
-            <select
-              {...register("purpose")}
-              className="w-full border-b text-colorpara border-colorpara py-2 xl:py-[23px] pr-10 focus:outline-none bg-white text-colorpara text-sm font-light appearance-none"
-            >
-              <option value="">Purpose of enquiry</option>
-              <option value="admission">Admission</option>
-              <option value="career">Career</option>
-              <option value="general">General</option>
-            </select>
+            <Controller
+              control={control}
+              name="purpose"
+              render={({ field }) => (
+                <Listbox
+                  value={
+                    options.find((o) => o.value === field.value) || options[0]
+                  }
+                  onChange={(val) => field.onChange(val.value)}
+                >
+                  {({ open }) => (
+                    <div className="relative w-full">
+                      <Listbox.Button className="w-full border-b text-colorpara cursor-pointer border-colorpara py-2 xl:py-[23px] focus:outline-none placeholder:text-colorpara text-sm font-light text-left">
+                        {options.find((o) => o.value === field.value)?.label ||
+                          "Purpose of enquiry"}
+                      </Listbox.Button>
 
-            {/* Custom arrow icon */}
-            <span className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none">
-              <Image
-                src="/images/arrow-down.svg"
-                width={24}
-                height={24}
-                alt="dropdown arrow"
-              />
-            </span>
+                      {/* Custom arrow icon */}
+                      <span
+                        className={`absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none transition-transform duration-300 ${
+                          open ? "rotate-180" : "rotate-0"
+                        }`}
+                      >
+                        <Image
+                          src="/images/arrow-down.svg"
+                          width={24}
+                          height={24}
+                          alt="dropdown arrow"
+                        />
+                      </span>
+
+                      <Listbox.Options className="absolute mt-1 w-full bg-white rounded-[12px] shadow-lg overflow-hidden border z-50">
+                        {options.map((option) => (
+                          <Listbox.Option
+                            key={option.value}
+                            value={option}
+                            className={({ active }) =>
+                              `cursor-pointer select-none py-2 px-4 font-light ${
+                                active
+                                  ? "bg-[#42BADC] text-white"
+                                  : "text-colorpara"
+                              }`
+                            }
+                          >
+                            {option.label}
+                          </Listbox.Option>
+                        ))}
+                      </Listbox.Options>
+                    </div>
+                  )}
+                </Listbox>
+              )}
+            />
 
             {errors.purpose && (
               <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
@@ -308,7 +349,7 @@ const ContactForm: React.FC = () => {
                   alt="Arrow"
                   width={8}
                   height={8}
-                  className="object-contain"
+                  className="object-contain transition-transform duration-300 group-hover:rotate-45"
                 />
               </span>
             </button>

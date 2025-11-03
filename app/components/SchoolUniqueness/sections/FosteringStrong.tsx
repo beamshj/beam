@@ -90,7 +90,7 @@ const FosteringStrong = ({data }: { data: SchoolUniquenessProps['firstSection'] 
                     >
                       <div className="flex items-cente gap-3">
                         <p
-                          className={`text-sm font-light leading-[1.2] transition-colors duration-300 mt-[5px] ${
+                          className={`text-sm font-light leading-[1.2] transition-colors duration-300 mt-[7px] ${
                             isActive
                               ? "text-black"
                               : "text-colorpara group-hover:text-black"
