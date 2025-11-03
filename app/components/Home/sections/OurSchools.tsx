@@ -21,7 +21,11 @@ import { StylesConfig } from "react-select";
 import dynamic from "next/dynamic";
 import type { Props as SelectProps } from "react-select";
 import { GroupBase } from "react-select";
-import { BeamSchoolType, CategoryType, LocationType } from "../../BeamSchools/type";
+import {
+  BeamSchoolType,
+  CategoryType,
+  LocationType,
+} from "../../BeamSchools/type";
 
 const Select = dynamic<SelectProps<OptionType, false, GroupBase<OptionType>>>(
   () => import("react-select"),
@@ -29,7 +33,15 @@ const Select = dynamic<SelectProps<OptionType, false, GroupBase<OptionType>>>(
 );
 type OptionType = { value: string; label: string };
 
-const OurSchools = ({schoolData, categorydata, locationdata}: {schoolData: BeamSchoolType, categorydata: CategoryType[], locationdata: LocationType[]}) => {
+const OurSchools = ({
+  schoolData,
+  categorydata,
+  locationdata,
+}: {
+  schoolData: BeamSchoolType;
+  categorydata: CategoryType[];
+  locationdata: LocationType[];
+}) => {
   console.log(locationdata);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
@@ -65,7 +77,9 @@ const OurSchools = ({schoolData, categorydata, locationdata}: {schoolData: BeamS
 
       const locationMatch =
         !selectedLocation ||
-        school.location.name.toLowerCase().includes(selectedLocation.toLowerCase());
+        school.location.name
+          .toLowerCase()
+          .includes(selectedLocation.toLowerCase());
 
       return curriculumMatch && locationMatch;
     });
@@ -139,7 +153,6 @@ const OurSchools = ({schoolData, categorydata, locationdata}: {schoolData: BeamS
       >
         <div className="container">
           <div className="mb-5 xl:mb-7  2xl:mb-[53px]">
-           
             <SplitText
               tag="h2"
               text="Our Schools"
@@ -150,9 +163,8 @@ const OurSchools = ({schoolData, categorydata, locationdata}: {schoolData: BeamS
               splitType="chars"
               from={{ opacity: 0, y: 40 }}
               to={{ opacity: 1, y: 0 }}
-               threshold={0} // 50% of element must be visible
-
-  rootMargin="0"
+              threshold={0} // 50% of element must be visible
+              rootMargin="0"
               textAlign="left"
             />
           </div>
@@ -245,14 +257,14 @@ const OurSchools = ({schoolData, categorydata, locationdata}: {schoolData: BeamS
           </div>
           <div>
             <Swiper
-              modules={[Navigation,Autoplay, Pagination]}
+              modules={[Navigation, Autoplay, Pagination]}
               // spaceBetween={20}
               slidesPerView={1}
               // navigation
               autoplay={{
-                          delay: 3000,
-                          disableOnInteraction: false,
-                        }}
+                delay: 3000,
+                disableOnInteraction: false,
+              }}
               pagination={{
                 clickable: true,
                 el: ".cus-pagination",
@@ -321,11 +333,12 @@ const OurSchools = ({schoolData, categorydata, locationdata}: {schoolData: BeamS
                         </div>
 
                         <div className="my-4 2xl:mt-6 2xl:mb-8">
-                          <h3 className="text-[1.3rem] md:text-md xl:text-lg 2xl:text-xl font-light text-black leading-[1.18] lettersp-1 
-  overflow-hidden text-ellipsis line-clamp-2 min-h-[2.6em]">
+                          <h3
+                            className="text-[1.3rem] md:text-md xl:text-lg 2xl:text-xl font-light text-black leading-[1.18] lettersp-1 
+  overflow-hidden text-ellipsis line-clamp-2 min-h-[2.6em]"
+                          >
                             {school.title}
                           </h3>
-                          
                         </div>
 
                         <div>
