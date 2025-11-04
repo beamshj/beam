@@ -1,7 +1,7 @@
 "use client"
 import React, { useEffect, useState } from 'react'
 
-const page = () => {
+const EnquiryPage = () => {
 
     const [enquiryList, setEnquiryList] = useState<{ _id: string, firstName: string, lastName: string, email: string, phone: string, purpose: string }[]>([]);
 
@@ -51,9 +51,9 @@ const page = () => {
             </tr>
         </thead>
         <tbody>
-            {enquiryList.map((enquiry)=>{
+            {enquiryList.map((enquiry,index)=>{
                 return(
-                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
+                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200" key={index}>
                 <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     {enquiry.firstName}
                 </th>
@@ -79,4 +79,4 @@ const page = () => {
   )
 }
 
-export default page
+export default EnquiryPage
