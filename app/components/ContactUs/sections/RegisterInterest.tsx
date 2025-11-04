@@ -139,10 +139,10 @@ const RegisterInterest: React.FC = () => {
                   {...register("findUs")}
                   className="w-full border-b border-white py-[23px] pr-10 focus:outline-none text-white text-sm font-light appearance-none"
                 >
-                  <option value="">Where did you find us ?</option>
-                  <option value="instagram">Instagram</option>
-                  <option value="website">Website</option>
-                  <option value="friends">Friends</option>
+                  <option value="" className="bg-black">Where did you find us ?</option>
+                  <option value="instagram" className="bg-black ">Instagram</option>
+                  <option value="website" className="bg-black ">Website</option>
+                  <option value="friends" className="bg-black ">Friends</option>
                 </select>
                 {/* Custom arrow icon */}
                 <span className="absolute top-1/3 right-0 -translate-y-1/2 pointer-events-none">
@@ -174,10 +174,10 @@ const RegisterInterest: React.FC = () => {
                   {...register("selectSchool")}
                   className="w-full border-b border-white py-[23px] pr-10 focus:outline-none text-white text-sm font-light appearance-none"
                 >
-                  <option value="">Select School</option>
-                  <option value="admission">Admission</option>
-                  <option value="career">Career</option>
-                  <option value="general">General</option>
+                  <option value="" className="bg-black">Select School</option>
+                  <option value="admission" className="bg-black">Admission</option>
+                  <option value="career" className="bg-black">Career</option>
+                  <option value="general" className="bg-black">General</option>
                 </select>
                 {/* Custom arrow icon */}
                 <span className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none">
@@ -207,10 +207,10 @@ const RegisterInterest: React.FC = () => {
                   {...register("selectGrade")}
                   className="w-full border-b border-white py-[23px] pr-10 focus:outline-none text-white text-sm font-light appearance-none"
                 >
-                  <option value="">Select Grade</option>
-                  <option value="admission">Admission</option>
-                  <option value="career">Career</option>
-                  <option value="general">General</option>
+                  <option value="" className="bg-black">Select Grade</option>
+                  <option value="admission" className="bg-black">Admission</option>
+                  <option value="career" className="bg-black">Career</option>
+                  <option value="general" className="bg-black">General</option>
                 </select>
                 {/* Custom arrow icon */}
                 <span className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none">
