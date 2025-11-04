@@ -25,6 +25,7 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import BlogCard from "./BlogCard";
+import { toast } from "sonner";
 
 interface BlogsPageProps {
   metaTitle: string;
@@ -68,11 +69,11 @@ export default function Blogs() {
       if (response.ok) {
         const data = await response.json();
         setCategory("");
-        alert(data.message);
+        toast.success(data.message);
         handleFetchCategory();
       } else {
         const data = await response.json();
-        alert(data.message);
+        toast.error(data.message);
       }
     } catch (error) {
       console.log("Error adding category", error);
@@ -87,7 +88,7 @@ export default function Blogs() {
         setCategoryList(data.data);
       } else {
         const data = await response.json();
-        alert(data.message);
+        toast.error(data.message);
       }
     } catch (error) {
       console.log("Error fetching category", error);
@@ -102,12 +103,12 @@ export default function Blogs() {
       });
       if (response.ok) {
         const data = await response.json();
-        alert(data.message);
+        toast.success(data.message);
         handleFetchCategory();
         setCategory("");
       } else {
         const data = await response.json();
-        alert(data.message);
+        toast.error(data.message);
       }
     } catch (error) {
       console.log("Error editing category", error);
@@ -121,11 +122,11 @@ export default function Blogs() {
       });
       if (response.ok) {
         const data = await response.json();
-        alert(data.message);
+        toast.success(data.message);
         handleFetchCategory();
       } else {
         const data = await response.json();
-        alert(data.message);
+        toast.error(data.message);
       }
     } catch (error) {
       console.log("Error deleting category", error);
@@ -139,11 +140,11 @@ export default function Blogs() {
       });
       if (response.ok) {
         const data = await response.json();
-        alert(data.message);
+        toast.success(data.message);
         handleFetchBlogs();
       } else {
         const data = await response.json();
-        alert(data.message);
+        toast.error(data.message);
       }
     } catch (error) {
       console.log("Error deleting blog", error);
@@ -158,7 +159,7 @@ export default function Blogs() {
       });
       if (response.ok) {
         const data = await response.json();
-        alert(data.message);
+        toast.success(data.message);
         // router.push("/admin/commitment");
       }
     } catch (error) {
@@ -183,7 +184,7 @@ export default function Blogs() {
         );
       } else {
         const data = await response.json();
-        alert(data.message);
+        toast.error(data.message);
       }
     } catch (error) {
       console.log("Error fetching blog details", error);
@@ -222,7 +223,7 @@ export default function Blogs() {
 
     if (response.ok) {
       const data = await response.json();
-      alert(data.message);
+      toast.success(data.message);
     }
   };
 

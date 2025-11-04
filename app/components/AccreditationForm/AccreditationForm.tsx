@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/select"
 import { useParams, useRouter } from 'next/navigation';
 import { Textarea } from '@/components/ui/textarea';
+import { toast } from 'sonner';
 
 interface AccreditationFormProps {
 title:string;
@@ -42,7 +43,7 @@ const router = useRouter();
             });
             if (response.ok) {
                 const data = await response.json();
-                alert(data.message);
+                toast.success(data.message);
                 router.push("/admin/accreditations");
             }
         } catch (error) {
@@ -63,7 +64,7 @@ const router = useRouter();
                 setValue("imageAlt", data.data.imageAlt);
             } else {
                 const data = await response.json();
-                alert(data.message);
+                toast.error(data.message);
             }
         } catch (error) {
             console.log("Error in fetching accreditation data", error);

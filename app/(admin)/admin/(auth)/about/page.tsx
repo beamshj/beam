@@ -13,6 +13,7 @@ const ReactQuill = dynamic(() => import('react-quill-new'), { ssr: false })
 import 'react-quill-new/dist/quill.snow.css';
 import dynamic from 'next/dynamic'
 import AdminItemContainer from '@/app/components/Common/AdminItemContainer';
+import { toast } from "sonner"
 
 interface AboutFormProps {
     metaTitle: string;
@@ -126,7 +127,7 @@ const AboutPage = () => {
             });
             if (response.ok) {
                 const data = await response.json();
-                alert(data.message);
+                toast.success(data.message);
                 // router.push("/admin/commitment");
             }
         } catch (error) {
@@ -158,7 +159,7 @@ const AboutPage = () => {
                 setValue("seventhSection.items", data.data.seventhSection.items);
             } else {
                 const data = await response.json();
-                alert(data.message);
+                toast.error(data.message);
             }
         } catch (error) {
             console.log("Error in fetching about data", error);
@@ -330,6 +331,7 @@ const AboutPage = () => {
                                             <ImageUploader
                                                 value={field.value}
                                                 onChange={field.onChange}
+                                                isLogo
                                             />
                                         )}
                                     />

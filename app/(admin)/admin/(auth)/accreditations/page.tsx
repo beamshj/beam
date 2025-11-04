@@ -19,6 +19,7 @@ import AdminItemContainer from '@/app/components/Common/AdminItemContainer';
 import { useForm, Controller } from "react-hook-form";
 import { ImageUploader } from '@/components/ui/image-uploader'
 import { Textarea } from "@/components/ui/textarea";
+import { toast } from 'sonner';
 
 
 interface AccreditationPageProps {
@@ -58,11 +59,11 @@ export default function Accreditation() {
       if (response.ok) {
         const data = await response.json();
         setCategory("");
-        alert(data.message);
+        toast.success(data.message);
         handleFetchCategory();
       } else {
         const data = await response.json();
-        alert(data.message);
+        toast.error(data.message);
       }
     } catch (error) {
       console.log("Error adding category", error);
@@ -78,7 +79,7 @@ export default function Accreditation() {
         setCategoryList(data.data);
       } else {
         const data = await response.json();
-        alert(data.message);
+        toast.error(data.message);
       }
     } catch (error) {
       console.log("Error fetching category", error);
@@ -93,12 +94,12 @@ export default function Accreditation() {
       });
       if (response.ok) {
         const data = await response.json();
-        alert(data.message);
+        toast.success(data.message);
         handleFetchCategory();
         setCategory("");
       } else {
         const data = await response.json();
-        alert(data.message);
+        toast.error(data.message);
       }
     } catch (error) {
       console.log("Error editing category", error);
@@ -112,11 +113,11 @@ export default function Accreditation() {
       });
       if (response.ok) {
         const data = await response.json();
-        alert(data.message);
+        toast.success(data.message);
         handleFetchCategory();
       } else {
         const data = await response.json();
-        alert(data.message);
+        toast.error(data.message);
       }
     } catch (error) {
       console.log("Error deleting category", error);
@@ -132,11 +133,11 @@ export default function Accreditation() {
       });
       if (response.ok) {
         const data = await response.json();
-        alert(data.message);
+        toast.success(data.message);
         handleFetchAccreditations();
       } else {
         const data = await response.json();
-        alert(data.message);
+        toast.error(data.message);
       }
     } catch (error) {
       console.log("Error deleting blog", error);
@@ -151,7 +152,7 @@ export default function Accreditation() {
         });
         if (response.ok) {
             const data = await response.json();
-            alert(data.message);
+            toast.success(data.message);
             // router.push("/admin/commitment");
         }
     } catch (error) {
@@ -174,7 +175,7 @@ export default function Accreditation() {
         setAccreditationsList(data.data.categories.flatMap((category: { accreditations: { _id: string; }[]; }) => category.accreditations));
       }else{
         const data = await response.json();
-        alert(data.message);
+        toast.error(data.message);
       }
     } catch (error) {
       console.log("Error fetching accreditation details", error);

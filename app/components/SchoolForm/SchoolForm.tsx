@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/select"
 import { RiDeleteBinLine } from "react-icons/ri";
 import { useParams, useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 interface SchoolFormProps {
     
@@ -56,7 +57,7 @@ const router = useRouter();
             });
             if (response.ok) {
                 const data = await response.json();
-                alert(data.message);
+                toast.success(data.message);
                 router.push("/admin/beam-schools");
             }
         } catch (error) {
@@ -82,7 +83,7 @@ const router = useRouter();
                 setValue("specifications", data.data.specifications);
             } else {
                 const data = await response.json();
-                alert(data.message);
+                toast.error(data.message);
             }
         } catch (error) {
             console.log("Error in fetching school data", error);
@@ -236,6 +237,7 @@ const router = useRouter();
                                     <ImageUploader
                                         value={field.value}
                                         onChange={field.onChange}
+                                        isLogo
                                     />
                                 )}
                             />

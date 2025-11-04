@@ -49,37 +49,6 @@ const contactSchema = new mongoose.Schema({
             type: String,
             required: true
         }
-    },
-    secondSection: {
-        title: {
-            type: String,
-            required: true
-        },
-        description: {
-            type: String,
-            required: true
-        },
-        items: [{
-            image: {
-                type: String,
-                required: true
-            },
-            imageAlt: {
-                type: String,
-            },
-            title: {
-                type: String,
-                required: true
-            },
-            location: {
-                type: String,
-                required: true
-            },
-            link: {
-                type: String,
-                required: true
-            }
-        }]
     }
 })
 

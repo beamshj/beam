@@ -18,6 +18,7 @@ import { useRouter } from "next/navigation";
 import AdminItemContainer from "@/app/components/Common/AdminItemContainer";
 import { useForm, Controller } from "react-hook-form";
 import { ImageUploader } from "@/components/ui/image-uploader";
+import { toast } from "sonner";
 
 interface NewsPageProps {
   metaTitle: string;
@@ -59,11 +60,11 @@ export default function News() {
       if (response.ok) {
         const data = await response.json();
         setCategory("");
-        alert(data.message);
+        toast.success(data.message);
         handleFetchCategory();
       } else {
         const data = await response.json();
-        alert(data.message);
+        toast.error(data.message);
       }
     } catch (error) {
       console.log("Error adding category", error);
@@ -78,7 +79,7 @@ export default function News() {
         setCategoryList(data.data);
       } else {
         const data = await response.json();
-        alert(data.message);
+        toast.error(data.message);
       }
     } catch (error) {
       console.log("Error fetching category", error);
@@ -93,12 +94,12 @@ export default function News() {
       });
       if (response.ok) {
         const data = await response.json();
-        alert(data.message);
+        toast.success(data.message);
         handleFetchCategory();
         setCategory("");
       } else {
         const data = await response.json();
-        alert(data.message);
+        toast.error(data.message);
       }
     } catch (error) {
       console.log("Error editing category", error);
@@ -112,11 +113,11 @@ export default function News() {
       });
       if (response.ok) {
         const data = await response.json();
-        alert(data.message);
+        toast.success(data.message);
         handleFetchCategory();
       } else {
         const data = await response.json();
-        alert(data.message);
+        toast.error(data.message);
       }
     } catch (error) {
       console.log("Error deleting category", error);
@@ -130,11 +131,11 @@ export default function News() {
       });
       if (response.ok) {
         const data = await response.json();
-        alert(data.message);
+        toast.success(data.message);
         handleFetchNews();
       } else {
         const data = await response.json();
-        alert(data.message);
+        toast.error(data.message);
       }
     } catch (error) {
       console.log("Error deleting news", error);
@@ -149,7 +150,7 @@ export default function News() {
       });
       if (response.ok) {
         const data = await response.json();
-        alert(data.message);
+        toast.success(data.message);
         // router.push("/admin/commitment");
       }
     } catch (error) {
@@ -174,7 +175,7 @@ export default function News() {
         );
       } else {
         const data = await response.json();
-        alert(data.message);
+        toast.error(data.message);
       }
     } catch (error) {
       console.log("Error fetching news details", error);

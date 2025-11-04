@@ -20,6 +20,8 @@ import { FaEdit } from "react-icons/fa";
 import { IoIosImages } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
 import { Textarea } from '@/components/ui/textarea';
+import { toast } from 'sonner';
+
 
 
 
@@ -39,7 +41,7 @@ const IndiGallery = () => {
                 setCategoryList(data.data.categories);
             } else {
                 const data = await response.json();
-                alert(data.message);
+                toast.error(data.message);
             }
         } catch (error) {
             console.log("Error in fetching gallery data", error);
@@ -59,11 +61,11 @@ const IndiGallery = () => {
                     const data = await response.json();
                     setCategory("");
                     setDescription("");
-                    alert(data.message);
+                    toast.success(data.message);
                     fetchGalleryData();
                 }else{
                     const data = await response.json();
-                    alert(data.message);
+                    toast.error(data.message);
                 }
             } catch (error) {
                 console.log("Error adding category", error);
@@ -79,11 +81,11 @@ const IndiGallery = () => {
                     });
                     if(response.ok) {
                         const data = await response.json();
-                        alert(data.message);
+                        toast.success(data.message);
                         fetchGalleryData();
                     }else{
                         const data = await response.json();
-                        alert(data.message);
+                        toast.error(data.message);
                     }
                 } catch (error) {
                     console.log("Error editing category", error);
@@ -98,11 +100,11 @@ const IndiGallery = () => {
                     });
                     if(response.ok) {
                         const data = await response.json();
-                        alert(data.message);
+                        toast.success(data.message);
                         fetchGalleryData();
                     }else{
                         const data = await response.json();
-                        alert(data.message);
+                        toast.error(data.message);
                     }
                 } catch (error) {
                     console.log("Error deleting category", error);
