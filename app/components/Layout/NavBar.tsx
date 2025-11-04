@@ -463,69 +463,97 @@ const NavBar = () => {
                         </ul>
                       </div>
                     </div>
-                    <div className="block lg:hidden  w-full">
+                    <div className="block lg:hidden w-full">
                       <ul className="flex flex-col gap-4">
-                        {mainMenuItems.map((item) => (
-                          <li key={item.name}>
-                            <div
-                              onClick={() =>
-                                setHoveredMenu(
-                                  hoveredMenu === item.name ? null : item.name
-                                )
-                              }
-                              className="flex justify-between items-center text-md font-light text-white/80 hover:text-[#23ABD2] cursor-pointer"
-                            >
-                              {item.name}
-                              <span
-                                className={`transform transition-transform duration-300 ${
-                                  hoveredMenu === item.name ? "rotate-90" : ""
-                                }`}
-                              >
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  width="18"
-                                  height="18"
-                                  className="rotate-180"
-                                  viewBox="0 0 24 24"
-                                  fill="none"
-                                >
-                                  <path
-                                    d="M15.0901 19.9201L8.57009 13.4001C7.80009 12.6301 7.80009 11.3701 8.57009 10.6001L15.0901 4.08008"
-                                    stroke="#ffffff"
-                                    strokeWidth="1.5"
-                                    strokeMiterlimit="10"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                  ></path>
-                                </svg>
-                              </span>
-                            </div>
+                        {mainMenuItems.map((item) => {
+                          const hasSubmenu =
+                            item.submenu && item.submenu.length > 0;
 
-                            <AnimatePresence>
-                              {hoveredMenu === item.name && item.submenu && (
-                                <motion.ul
-                                  initial={{ height: 0, opacity: 0 }}
-                                  animate={{ height: "auto", opacity: 1 }}
-                                  exit={{ height: 0, opacity: 0 }}
-                                  transition={{ duration: 0.3 }}
-                                  className="mt-2 pl-4 border-l border-[#23ABD2]/30"
-                                >
-                                  {item.submenu.map((sub) => (
-                                    <li key={sub.name} className="py-2">
-                                      <Link
-                                        href={sub.href}
-                                        onClick={() => setIsMenuOpen(false)}
-                                        className="flex items-center gap-3 text-sm text-white/70 hover:text-[#23ABD2] transition-colors duration-200"
-                                      >
-                                        <span>{sub.name}</span>
-                                      </Link>
-                                    </li>
-                                  ))}
-                                </motion.ul>
-                              )}
-                            </AnimatePresence>
-                          </li>
-                        ))}
+                          return (
+                            <li key={item.name}>
+                              <div
+                                onClick={() =>
+                                  hasSubmenu
+                                    ? setHoveredMenu(
+                                        hoveredMenu === item.name
+                                          ? null
+                                          : item.name
+                                      )
+                                    : null
+                                }
+                                className="flex justify-between items-center text-md font-light text-white/80 hover:text-[#23ABD2] cursor-pointer"
+                              >
+                                {/* If submenu available -> clickable toggle */}
+                                {/* Else -> it's a link */}
+                                {hasSubmenu ? (
+                                  <span>{item.name}</span>
+                                ) : (
+                                  <Link
+                                    href={item.href}
+                                    onClick={() => setIsMenuOpen(false)}
+                                    className="text-white/80 hover:text-[#23ABD2] transition-colors duration-200"
+                                  >
+                                    {item.name}
+                                  </Link>
+                                )}
+
+                                {/* Show arrow only if submenu exists */}
+                                {hasSubmenu && (
+                                  <span
+                                    className={`transform transition-transform duration-300 ${
+                                      hoveredMenu === item.name
+                                        ? "rotate-90"
+                                        : ""
+                                    }`}
+                                  >
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      width="18"
+                                      height="18"
+                                      className="rotate-180"
+                                      viewBox="0 0 24 24"
+                                      fill="none"
+                                    >
+                                      <path
+                                        d="M15.0901 19.9201L8.57009 13.4001C7.80009 12.6301 7.80009 11.3701 8.57009 10.6001L15.0901 4.08008"
+                                        stroke="#ffffff"
+                                        strokeWidth="1.5"
+                                        strokeMiterlimit="10"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                      ></path>
+                                    </svg>
+                                  </span>
+                                )}
+                              </div>
+
+                              {/* Submenu dropdown */}
+                              <AnimatePresence mode="wait">
+                                {hoveredMenu === item.name && hasSubmenu && (
+                                  <motion.ul
+                                    initial={{ height: 0, opacity: 0 }}
+                                    animate={{ height: "auto", opacity: 1 }}
+                                    exit={{ height: 0, opacity: 0 }}
+                                    transition={{ duration: 0.3 }}
+                                    className="mt-2 pl-4 border-l border-[#23ABD2]/30"
+                                  >
+                                    {item.submenu.map((sub) => (
+                                      <li key={sub.name} className="py-2">
+                                        <Link
+                                          href={sub.href}
+                                          onClick={() => setIsMenuOpen(false)}
+                                          className="flex items-center gap-3 text-sm text-white/70 hover:text-[#23ABD2] transition-colors duration-200"
+                                        >
+                                          <span>{sub.name}</span>
+                                        </Link>
+                                      </li>
+                                    ))}
+                                  </motion.ul>
+                                )}
+                              </AnimatePresence>
+                            </li>
+                          );
+                        })}
                       </ul>
                     </div>
                     {/* Mobile menu remains same */}
