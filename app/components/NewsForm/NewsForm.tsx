@@ -21,6 +21,7 @@ import { RiAiGenerateText } from "react-icons/ri";
 // import "react-quill-new/dist/quill.snow.css";
 // import dynamic from "next/dynamic";
 import TinyEditor from "../TinyMce/TinyEditor";
+import { toast } from "sonner";
 
 interface NewsFormProps {
   title: string;
@@ -63,7 +64,7 @@ const NewsFormPage = ({ editMode }: { editMode?: boolean }) => {
       );
       if (response.ok) {
         const data = await response.json();
-        alert(data.message);
+        toast.success(data.message);
         router.push("/admin/news");
       }
     } catch (error) {
@@ -92,7 +93,7 @@ const NewsFormPage = ({ editMode }: { editMode?: boolean }) => {
         setValue("metaDescription", data.data.metaDescription);
       } else {
         const data = await response.json();
-        alert(data.message);
+        toast.error(data.message);
       }
     } catch (error) {
       console.log("Error in fetching news data", error);

@@ -18,6 +18,7 @@ import {
 import { useParams, useRouter } from 'next/navigation';
 import { RiAiGenerateText } from 'react-icons/ri'
 import TinyEditor from "@/app/components/TinyMce/TinyEditor";
+import { toast } from "sonner";
 
 interface BlogFormProps {
     
@@ -50,7 +51,7 @@ const router = useRouter();
             });
             if (response.ok) {
                 const data = await response.json();
-                alert(data.message);
+                toast.success(data.message);
                 router.push("/admin/blogs");
             }
         } catch (error) {
@@ -78,7 +79,7 @@ const router = useRouter();
                 setValue("metaDescription", data.data.metaDescription);
             } else {
                 const data = await response.json();
-                alert(data.message);
+                toast.error(data.message);
             }
         } catch (error) {
             console.log("Error in fetching blog data", error);

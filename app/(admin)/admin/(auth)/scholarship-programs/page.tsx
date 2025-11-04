@@ -9,6 +9,7 @@ import { ImageUploader } from '@/components/ui/image-uploader'
 import { RiDeleteBinLine } from "react-icons/ri";
 import { Textarea } from '@/components/ui/textarea'
 import AdminItemContainer from '@/app/components/Common/AdminItemContainer';
+import { toast } from 'sonner';
 
 interface ScholarshipProgramsFormProps {
     metaTitle: string;
@@ -75,7 +76,7 @@ const ScholarshipProgramsPage = () => {
             });
             if (response.ok) {
                 const data = await response.json();
-                alert(data.message);
+                toast.success(data.message);
                 // router.push("/admin/commitment");
             }
         } catch (error) {
@@ -101,7 +102,7 @@ const ScholarshipProgramsPage = () => {
                 setValue("fourthSection", data.data.fourthSection);
             } else {
                 const data = await response.json();
-                alert(data.message);
+                toast.error(data.message);
             }
         } catch (error) {
             console.log("Error in fetching scholarship programs data", error);
@@ -339,6 +340,7 @@ const ScholarshipProgramsPage = () => {
                                                                     <ImageUploader
                                                                         value={field.value}
                                                                         onChange={field.onChange}
+                                                                        isLogo
                                                                     />
                                                                 )}
                                                             />

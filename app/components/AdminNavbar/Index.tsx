@@ -7,7 +7,7 @@ import {
     NewspaperIcon,
     UserGroupIcon,
   } from "@heroicons/react/24/outline";
-import {BookA, GalleryThumbnails, InfoIcon, LucideSword, PhoneIcon,Share2Icon, Workflow, AwardIcon,HomeIcon } from 'lucide-react';
+import {BookA, GalleryThumbnails, InfoIcon, LucideSword, PhoneIcon,Share2Icon, Workflow, AwardIcon,HomeIcon,SettingsIcon } from 'lucide-react';
 // import { useRefetchServices } from '@/app/contexts/refetchServices';
 import { MdManageAccounts, MdReviews } from 'react-icons/md';
 import { TbBellStar } from 'react-icons/tb';
@@ -81,7 +81,7 @@ const AdminNavbar = () => {
         // ] },
         
         // // { name: "Sustainability", href: "/admin/sustainability", icon: LeafIcon },
-        // { name: "Settings", href: "/admin/settings", icon: Settings},
+        { name: "Settings", href: "/admin/settings", icon: SettingsIcon},
       ];
 
   return (

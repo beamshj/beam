@@ -9,6 +9,7 @@ import { ImageUploader } from '@/components/ui/image-uploader'
 import { RiDeleteBinLine } from "react-icons/ri";
 import { Textarea } from '@/components/ui/textarea'
 import AdminItemContainer from '@/app/components/Common/AdminItemContainer';
+import { toast } from 'sonner';
 
 interface SchoolAchievementsFormProps {
     metaTitle: string;
@@ -54,7 +55,7 @@ const SchoolAchievementsPage = () => {
             });
             if (response.ok) {
                 const data = await response.json();
-                alert(data.message);
+                toast.success(data.message);
                 // router.push("/admin/commitment");
             }
         } catch (error) {
@@ -77,7 +78,7 @@ const SchoolAchievementsPage = () => {
                 setValue("secondSection.items", data.data.secondSection.items);
             } else {
                 const data = await response.json();
-                alert(data.message);
+                toast.error(data.message);
             }
         } catch (error) {
             console.log("Error in fetching school achievements data", error);
