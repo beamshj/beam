@@ -23,7 +23,10 @@ const formSchema = z.object({
   lastName: z.string().min(1, "Required"),
   email: z.string().email("Invalid email"),
   phone: z.string().min(5, "Enter valid number"),
-  purpose: z.string().min(1, "Please select a purpose"),
+  purpose: z.preprocess(
+        (val) => typeof val === "string" ? val : "",
+        z.string({ required_error: "Purpose is required" }).min(1, "Purpose is required")
+      ),
   message: z.string().min(1, "Message is required"),
 });
 
@@ -35,12 +38,28 @@ const ContactForm: React.FC<{ data: FirstSection }> = ({ data }) => {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<FormData>({
+    reset,
+  } = useForm({
     resolver: zodResolver(formSchema),
   });
 
-  const onSubmit = (data: FormData) => {
-    console.log("Submitted data:", data);
+  const onSubmit = async (data: FormData) => {
+    try {
+      const response = await fetch("/api/admin/contact/enquiry", {
+        method: "POST",
+        body: JSON.stringify(data)
+      })
+      const res = await response.json()
+      if (res.success) {
+        alert(res.message)
+        reset()
+      } else {
+        alert(res.message)
+      }
+    } catch (error) {
+      console.log("Error sending message", error)
+      alert("Sorry, something went wrong. Please try again later.")
+    }
   };
 
   return (
@@ -237,6 +256,10 @@ const ContactForm: React.FC<{ data: FirstSection }> = ({ data }) => {
                 type="text"
                 placeholder="Enter Your Phone Number"
                 {...register("phone")}
+                onInput={(e) => {
+                  const input = e.target as HTMLInputElement;
+                  input.value = input.value.replace(/\D/g, ""); // remove non-digits
+                }}
                 className="w-full border-b text-colorpara border-colorpara py-2 xl:py-[23px] focus:outline-none placeholder:text-colorpara text-sm font-light"
               />
               <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
@@ -270,9 +293,8 @@ const ContactForm: React.FC<{ data: FirstSection }> = ({ data }) => {
 
                       {/* Custom arrow icon */}
                       <span
-                        className={`absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none transition-transform duration-300 ${
-                          open ? "rotate-180" : "rotate-0"
-                        }`}
+                        className={`absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none transition-transform duration-300 ${open ? "rotate-180" : "rotate-0"
+                          }`}
                       >
                         <Image
                           src="/images/arrow-down.svg"
@@ -288,10 +310,9 @@ const ContactForm: React.FC<{ data: FirstSection }> = ({ data }) => {
                             key={option.value}
                             value={option}
                             className={({ active }) =>
-                              `cursor-pointer select-none py-2 px-4 font-light ${
-                                active
-                                  ? "bg-[#42BADC] text-white"
-                                  : "text-colorpara"
+                              `cursor-pointer select-none py-2 px-4 font-light ${active
+                                ? "bg-[#42BADC] text-white"
+                                : "text-colorpara"
                               }`
                             }
                           >

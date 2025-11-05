@@ -19,6 +19,7 @@ import AdminItemContainer from '@/app/components/Common/AdminItemContainer';
 import { useForm, Controller } from "react-hook-form";
 import { ImageUploader } from '@/components/ui/image-uploader'
 import { Textarea } from "@/components/ui/textarea";
+import {toast} from "sonner";
 
 
 interface CurrentOpeningsPageProps {
@@ -58,11 +59,11 @@ export default function CurrentOpenings() {
       if (response.ok) {
         const data = await response.json();
         setCategory("");
-        alert(data.message);
+        toast.success(data.message);
         handleFetchCategory();
       } else {
         const data = await response.json();
-        alert(data.message);
+        toast.error(data.message);
       }
     } catch (error) {
       console.log("Error adding project type", error);
@@ -78,7 +79,7 @@ export default function CurrentOpenings() {
         setCategoryList(data.data);
       } else {
         const data = await response.json();
-        alert(data.message);
+        toast.error(data.message);
       }
     } catch (error) {
       console.log("Error fetching sector", error);
@@ -93,12 +94,12 @@ export default function CurrentOpenings() {
       });
       if (response.ok) {
         const data = await response.json();
-        alert(data.message);
+        toast.success(data.message);
         handleFetchCategory();
         setCategory("");
       } else {
         const data = await response.json();
-        alert(data.message);
+        toast.error(data.message);
       }
     } catch (error) {
       console.log("Error editing sector", error);
@@ -112,11 +113,11 @@ export default function CurrentOpenings() {
       });
       if (response.ok) {
         const data = await response.json();
-        alert(data.message);
+        toast.success(data.message);
         handleFetchCategory();
       } else {
         const data = await response.json();
-        alert(data.message);
+        toast.error(data.message);
       }
     } catch (error) {
       console.log("Error deleting sector", error);
@@ -132,7 +133,7 @@ export default function CurrentOpenings() {
         setLocationList(data.data);
       } else {
         const data = await response.json();
-        alert(data.message);
+        toast.error(data.message);
       }
     } catch (error) {
       console.log("Error fetching location", error);
@@ -148,11 +149,11 @@ export default function CurrentOpenings() {
       if (response.ok) {
         const data = await response.json();
         setLocation("");
-        alert(data.message);
+        toast.success(data.message);
         handleFetchLocation();
       } else {
         const data = await response.json();
-        alert(data.message);
+        toast.error(data.message);
       }
     } catch (error) {
       console.log("Error adding location", error);
@@ -167,11 +168,11 @@ export default function CurrentOpenings() {
       });
       if (response.ok) {
         const data = await response.json();
-        alert(data.message);
+        toast.success(data.message);
         handleFetchLocation();
       } else {
         const data = await response.json();
-        alert(data.message);
+        toast.error(data.message);
       }
     } catch (error) {
       console.log("Error editing location", error);
@@ -185,11 +186,11 @@ export default function CurrentOpenings() {
       });
       if (response.ok) {
         const data = await response.json();
-        alert(data.message);
+        toast.success(data.message);
         handleFetchLocation();
       } else {
         const data = await response.json();
-        alert(data.message);
+        toast.error(data.message);
       }
     } catch (error) {
       console.log("Error deleting location", error);
@@ -203,11 +204,11 @@ export default function CurrentOpenings() {
       });
       if (response.ok) {
         const data = await response.json();
-        alert(data.message);
+        toast.success(data.message);
         handleFetchSchools();
       } else {
         const data = await response.json();
-        alert(data.message);
+        toast.error(data.message);
       }
     } catch (error) {
       console.log("Error deleting project", error);
@@ -222,7 +223,7 @@ export default function CurrentOpenings() {
         });
         if (response.ok) {
             const data = await response.json();
-            alert(data.message);
+            toast.success(data.message);
             // router.push("/admin/commitment");
         }
     } catch (error) {
@@ -244,7 +245,7 @@ export default function CurrentOpenings() {
         setSchoolList(data.data.schools);
       }else{
         const data = await response.json();
-        alert(data.message);
+        toast.error(data.message);
       }
     } catch (error) {
       console.log("Error fetching school details", error);

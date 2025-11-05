@@ -11,6 +11,7 @@ import { RiDeleteBinLine } from "react-icons/ri";
 import { Textarea } from '@/components/ui/textarea'
 import AdminItemContainer from '@/app/components/Common/AdminItemContainer';
 import { VideoUploader } from '@/components/ui/video-uploader';
+import {toast} from "sonner";
 
 interface TestimonialsFormProps {
     metaTitle: string;
@@ -76,7 +77,7 @@ const TestimonialsPage = () => {
             });
             if (response.ok) {
                 const data = await response.json();
-                alert(data.message);
+                toast.success(data.message);
                 // router.push("/admin/commitment");
             }
         } catch (error) {
@@ -102,7 +103,7 @@ const TestimonialsPage = () => {
                 setValue("thirdSection.items", data.data.thirdSection.items);
             } else {
                 const data = await response.json();
-                alert(data.message);
+                toast.error(data.message);
             }
         } catch (error) {
             console.log("Error in fetching testimonials data", error);

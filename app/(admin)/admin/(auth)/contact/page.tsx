@@ -4,12 +4,12 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import React, { useEffect } from 'react'
 
-import { useForm, useFieldArray, Controller } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { Button } from '@/components/ui/button'
 import { ImageUploader } from '@/components/ui/image-uploader'
-import { RiDeleteBinLine } from "react-icons/ri";
 import { Textarea } from '@/components/ui/textarea'
 import AdminItemContainer from '@/app/components/Common/AdminItemContainer';
+import { toast } from "sonner"
 
 interface ContactFormProps {
     metaTitle: string;
@@ -26,17 +26,6 @@ interface ContactFormProps {
         email: string;
         address: string;
     };
-    secondSection: {
-        title: string;
-        description: string;
-        items: {
-            image: string;
-            imageAlt: string;
-            title: string;
-            location: string;
-            link: string;
-        }[];
-    };
 }
 
 const ContactPage = () => {
@@ -45,10 +34,6 @@ const ContactPage = () => {
     const { register, handleSubmit, setValue, control, formState: { errors } } = useForm<ContactFormProps>();
 
 
-    const { fields: secondSectionItems, append: secondSectionAppend, remove: secondSectionRemove } = useFieldArray({
-        control,
-        name: "secondSection.items"
-    });
 
 
     const handleAddContact = async (data: ContactFormProps) => {
@@ -59,7 +44,7 @@ const ContactPage = () => {
             });
             if (response.ok) {
                 const data = await response.json();
-                alert(data.message);
+                toast.success(data.message);
                 // router.push("/admin/commitment");
             }
         } catch (error) {
@@ -78,11 +63,9 @@ const ContactPage = () => {
                 setValue("metaTitle", data.data.metaTitle);
                 setValue("metaDescription", data.data.metaDescription);
                 setValue("firstSection", data.data.firstSection);
-                setValue("secondSection", data.data.secondSection);
-                setValue("secondSection.items", data.data.secondSection.items);
             } else {
                 const data = await response.json();
-                alert(data.message);
+                toast.error(data.message);
             }
         } catch (error) {
             console.log("Error in fetching contact data", error);
@@ -189,110 +172,6 @@ const ContactPage = () => {
                 </div>
                 </AdminItemContainer>
 
-
-                <AdminItemContainer>
-                <Label main>Second Section</Label>
-                <div className='p-5 rounded-md flex flex-col gap-2'>
-                    <div className='flex flex-col gap-2'>
-                        <div className='flex flex-col gap-1'>
-                            <Label className='font-bold'>Title</Label>
-                            <Input type='text' placeholder='Title' {...register("secondSection.title", {
-                                required: "Title is required"
-                            })} />
-                            {errors.secondSection?.title && <p className='text-red-500'>{errors.secondSection?.title.message}</p>}
-                        </div>
-                        
-                        <div className='flex flex-col gap-1'>
-                            <Label className='font-bold'>Description</Label>
-                            <Controller name="secondSection.description" control={control} render={({ field }) => {
-                                return <Textarea value={field.value} onChange={field.onChange} />
-                            }} />
-                        </div>
-
-                        <div>
-                    <Label className='font-bold'>Items</Label>
-                <div className='border p-2 rounded-md flex flex-col gap-5'>
-
-
-                    {secondSectionItems.map((field, index) => (
-                        <div key={field.id} className='grid grid-cols-2 gap-2 relative border-b pb-5 last:border-b-0'>
-                            <div className='absolute top-2 right-2'>
-                                <RiDeleteBinLine onClick={() => secondSectionRemove(index)} className='cursor-pointer text-red-600' />
-                            </div>
-
-                            <div className='flex flex-col gap-2'>
-                                <div className='flex flex-col gap-2'>
-                                    <Label className='font-bold'>Image</Label>
-                                    <Controller
-                                        name={`secondSection.items.${index}.image`}
-                                        control={control}
-                                        rules={{ required: "Image is required" }}
-                                        render={({ field }) => (
-                                            <ImageUploader
-                                                value={field.value}
-                                                onChange={field.onChange}
-                                            />
-                                        )}
-                                    />
-                                    {errors.secondSection?.items?.[index]?.image && (
-                                        <p className="text-red-500">{errors.secondSection?.items?.[index]?.image.message}</p>
-                                    )}
-                                </div>
-
-                                <div className='flex flex-col gap-2'>
-                                <div className='flex flex-col gap-2'>
-                                    <Label className='font-bold'>Alt Tag</Label>
-                                    <Input type='text' placeholder='Alt Tag' {...register(`secondSection.items.${index}.imageAlt`, {
-                                        required: "Value is required"
-                                    })} />
-                                    {errors.secondSection?.items?.[index]?.imageAlt && <p className='text-red-500'>{errors.secondSection?.items?.[index]?.imageAlt.message}</p>}
-                                </div>
-                            </div>
-
-
-                            </div>
-
-                            <div className='flex flex-col gap-2'>
-                            <div className='flex flex-col gap-2'>
-                                <div className='flex flex-col gap-2'>
-                                    <Label className='font-bold'>Title</Label>
-                                    <Input type='text' placeholder='Title' {...register(`secondSection.items.${index}.title`, {
-                                        required: "Value is required"
-                                    })} />
-                                    {errors.secondSection?.items?.[index]?.title && <p className='text-red-500'>{errors.secondSection?.items?.[index]?.title.message}</p>}
-                                </div>
-                                <div className='flex flex-col gap-2'>
-                                    <Label className='font-bold'>Location</Label>
-                                    <Input type='text' placeholder='Location' {...register(`secondSection.items.${index}.location`, {
-                                        required: "Value is required"
-                                    })} />
-                                    {errors.secondSection?.items?.[index]?.location && <p className='text-red-500'>{errors.secondSection?.items?.[index]?.location.message}</p>}
-                                </div>
-                                <div className='flex flex-col gap-2'>
-                                    <Label className='font-bold'>Link</Label>
-                                    <Input type='text' placeholder='Link' {...register(`secondSection.items.${index}.link`, {
-                                        required: "Value is required"
-                                    })} />
-                                    {errors.secondSection?.items?.[index]?.link && <p className='text-red-500'>{errors.secondSection?.items?.[index]?.link.message}</p>}
-                                </div>
-                            </div>
-                            </div>
-
-                        </div>
-                    ))}
-
-                    
-
-                </div>
-                <div className='flex justify-end mt-2'>
-                        <Button type='button' addItem onClick={() => secondSectionAppend({ title: "", image: "", imageAlt: "", location: "", link: "" })}>Add Item</Button>
-                    </div>
-                </div>
-
-                    </div>
-
-                </div>
-                </AdminItemContainer>
 
 
                 <div className='flex flex-col gap-2'>
