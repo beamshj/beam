@@ -9,7 +9,7 @@ import {
   } from "@heroicons/react/24/outline";
 import {BookA, GalleryThumbnails, InfoIcon, LucideSword, PhoneIcon,Share2Icon, Workflow, AwardIcon,HomeIcon,SettingsIcon } from 'lucide-react';
 // import { useRefetchServices } from '@/app/contexts/refetchServices';
-import { MdManageAccounts, MdReviews } from 'react-icons/md';
+import { MdInterests, MdManageAccounts, MdReviews } from 'react-icons/md';
 import { TbBellStar } from 'react-icons/tb';
 import { FaMoneyBill } from 'react-icons/fa6';
 
@@ -42,6 +42,7 @@ const AdminNavbar = () => {
           { name: "Main Page", href: "/admin/contact" },
           {name:"Enquiries",href:"/admin/contact/enquiries"}
         ] },
+        { name: "Interests", href: "/admin/interests", icon: MdInterests },
         { name: "Testimonials", href: "/admin/testimonials", icon: MdReviews },
         { name: "Beam Schools", href: "/admin/beam-schools", icon: Workflow },
         { name: "Blogs", href: "/admin/blogs", icon: Share2Icon },

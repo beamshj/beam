@@ -8,30 +8,50 @@ import Image from "next/image";
 import SplitText from "@/components/SplitText";
 import { moveUp } from "../../motionVarients";
 import { motion } from "framer-motion";
+import { schoolData } from "../data";
 
 const formSchema = z.object({
   fullName: z.string().min(1, "Required"),
   email: z.string().email("Invalid email"),
   phone: z.string().min(5, "Enter valid number"),
-  findUs: z.string().min(1, "Please select a purpose"),
-  selectSchool: z.string().min(1, "Please select a purpose"),
-  selectGrade: z.string().min(1, "Please select a purpose"),
+  findUs: z.string().min(1, "Please select an option"),
+  selectSchool: z.string().min(1, "Please select an option"),
+  selectGrade: z.string().min(1, "Please select an option"),
 });
 
 type FormData = z.infer<typeof formSchema>;
 
-const RegisterInterest: React.FC = () => {
+const RegisterInterest = () => {
+
+  const [selectedSchool, setSelectedSchool] = React.useState("")
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
   });
 
-  const onSubmit = (data: FormData) => {
-    console.log("Submitted data:", data);
+  const onSubmit = async (data: FormData) => {
+    try {
+      const response = await fetch("/api/admin/interest", {
+        method: "POST",
+        body: JSON.stringify(data)
+      })
+      const res = await response.json()
+      if (res.success) {
+        alert(res.message)
+        reset()
+      } else {
+        alert(res.message)
+      }
+    } catch (error) {
+      console.log("Error sending message", error)
+      alert("Sorry, something went wrong. Please try again later.")
+    }
   };
+
 
   return (
     <div className="pb-0 lg:pb-20 xl:pb-[135px]" id="registerInterest">
@@ -86,7 +106,7 @@ const RegisterInterest: React.FC = () => {
                   type="text"
                   placeholder="Enter Your Full Name"
                   {...register("fullName")}
-                  className="w-full border-b border-white py-[23px] focus:outline-none placeholder:text-white text-sm font-light"
+                  className="w-full border-b border-white py-[23px] focus:outline-none placeholder:text-white text-sm font-light text-white"
                 />
                 <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
                   {errors.fullName?.message || ""}
@@ -103,7 +123,7 @@ const RegisterInterest: React.FC = () => {
                   type="email"
                   placeholder="Enter Your Email ID"
                   {...register("email")}
-                  className="w-full border-b border-white py-[23px] focus:outline-none placeholder:text-white text-sm font-light"
+                  className="w-full border-b border-white py-[23px] focus:outline-none placeholder:text-white text-sm font-light text-white"
                 />
                 <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
                   {errors.email?.message || ""}
@@ -122,7 +142,7 @@ const RegisterInterest: React.FC = () => {
                   type="text"
                   placeholder="Enter Your Phone Number"
                   {...register("phone")}
-                  className="w-full border-b border-white py-[23px] focus:outline-none placeholder:text-white text-sm font-light"
+                  className="w-full border-b border-white py-[23px] focus:outline-none placeholder:text-white text-sm font-light text-white"
                 />
                 <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
                   {errors.phone?.message || ""}
@@ -173,11 +193,16 @@ const RegisterInterest: React.FC = () => {
                 <select
                   {...register("selectSchool")}
                   className="w-full border-b border-white py-[23px] pr-10 focus:outline-none text-white text-sm font-light appearance-none"
+                onChange={(e) => setSelectedSchool(e.target.value)}
                 >
                   <option value="" className="bg-black">Select School</option>
+                  {schoolData.map((school) => (
+                    <option key={school.name} value={school.name} className="bg-black" >{school.name}</option>
+                  ))}
+                  {/* <option value="" className="bg-black">Select School</option>
                   <option value="admission" className="bg-black">Admission</option>
                   <option value="career" className="bg-black">Career</option>
-                  <option value="general" className="bg-black">General</option>
+                  <option value="general" className="bg-black">General</option> */}
                 </select>
                 {/* Custom arrow icon */}
                 <span className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none">
@@ -206,11 +231,12 @@ const RegisterInterest: React.FC = () => {
                 <select
                   {...register("selectGrade")}
                   className="w-full border-b border-white py-[23px] pr-10 focus:outline-none text-white text-sm font-light appearance-none"
+                
                 >
                   <option value="" className="bg-black">Select Grade</option>
-                  <option value="admission" className="bg-black">Admission</option>
-                  <option value="career" className="bg-black">Career</option>
-                  <option value="general" className="bg-black">General</option>
+                  {schoolData.find((school) => school.name === selectedSchool)?.grades.map((grade) => (
+                    <option key={grade} value={grade} className="bg-black">{grade}</option>
+                  ))}
                 </select>
                 {/* Custom arrow icon */}
                 <span className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none">
