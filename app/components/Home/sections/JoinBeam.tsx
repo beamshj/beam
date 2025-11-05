@@ -6,21 +6,27 @@ import { fadeUp } from "@/public/assets/FramerAnimation/animation";
 import { fadeInLeft } from "@/public/assets/FramerAnimation/animation";
 import { HomeProps } from "../type";
 
-const JoinBeam = ({data}: {data: HomeProps['tenthSection']}) => {
+const JoinBeam = ({ data }: { data: HomeProps["tenthSection"] }) => {
   return (
     <motion.section
-      className="w-full h-full relative max-w-[1920px] mx-auto overflow-hidden"
+      className="w-full lg:h-full h-[330px] relative max-w-[1920px] mx-auto overflow-hidden"
       variants={fadeUp}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
     >
-      <div className="w-full h-full absolute z-10 left-0 top-0">
+      <div className="w-full h-full absolute z-10 left-0 top-0 right-0 bottom-0">
         <Image
           src="/assets/home/joinbg.jpg"
           alt="Join Beam"
           fill
-          className="object-cover h-full w-full"
+          className="hidden md:block object-cover h-full w-full"
+        />
+        <Image
+          src="/assets/home/joinbgsmall.jpg"
+          alt="Join Beam"
+          fill
+          className="md:hidden object-cover h-full w-full"
         />
       </div>
       <div className="container h-full z-30 relative">

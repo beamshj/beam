@@ -49,7 +49,7 @@ const Newslist = ({
           key={index}
           className="mb-[25px] xl:mb-[50px] last:mb-0 group overflow-hidden
   bg-white hover:bg-[linear-gradient(180deg,#FFFFFF_0%,#E2F5FF_100%)] 
-  transition-all duration-500 ease-in-out"
+  transition-colors duration-500 ease-in-out"
         >
           <Link href={`/news-&-media/press-release/${item.slug}`}>
             <div className="relative ">
@@ -95,13 +95,19 @@ const Newslist = ({
       ))}
       {/* Pagination */}
       {currentNews.length > 0 && (
-        <div className="absolute w-full left-0 removeMtmain flex justify-center align-center">
+        <motion.div
+          variants={moveUp(0.2)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ amount: 0.1, once: true }}
+          className="absolute w-full left-0 removeMtmain flex justify-center align-center"
+        >
           <Pagination
             currentPage={currentPage}
             totalPages={totalPages}
             onPageChange={setCurrentPage}
           />
-        </div>
+        </motion.div>
       )}
     </div>
   );

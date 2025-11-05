@@ -12,7 +12,7 @@ import { motion } from "framer-motion";
 import { Variants } from "framer-motion";
 import { HomeProps } from "../type";
 
-const HeroSection = ({data}: {data: HomeProps['bannerSection']}) => {
+const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
   const sectionRef = useRef(null);
   const triggerRef = useRef(null);
   const swiperRef = useRef<SwiperClass | null>(null);
@@ -54,15 +54,22 @@ const HeroSection = ({data}: {data: HomeProps['bannerSection']}) => {
   }, []);
 
   return (
-    <section className="lg:h-screen h-[65dvh] md:h-[85dvh] relative overflow-hidden max-w-[1920px] mx-auto" ref={triggerRef} suppressHydrationWarning>
-      <div className="prject-sec h-full flex flex-wrap" style={{ width: `${4 * 100}vw` }} ref={sectionRef} >
+    <section
+      className="lg:h-screen h-[65dvh] md:h-[85dvh] relative overflow-hidden max-w-[1920px] mx-auto"
+      ref={triggerRef}
+      suppressHydrationWarning
+    >
+      <div
+        className="prject-sec h-full flex flex-wrap"
+        style={{ width: `${4 * 100}vw` }}
+        ref={sectionRef}
+      >
         <Swiper
           modules={[Autoplay, EffectFade]}
           effect="fade"
           fadeEffect={{
             crossFade: true,
           }}
-         
           autoplay={{ delay: 6000, disableOnInteraction: false }}
           speed={1800}
           slidesPerView={1}
@@ -84,27 +91,28 @@ const HeroSection = ({data}: {data: HomeProps['bannerSection']}) => {
                 className="slide h-full w-screen relative overflow-hidden text-white"
               >
                 <figure className="h-full w-full absolute -z-50 overflow-hidden">
-                      <motion.div
-      key={`kenburns-${index}-${textVersion}`}
-      variants={isDesktop ? kenBurnsVariants : {}}
-      initial={isDesktop ? "initial" : false}
-      animate={isDesktop ? "animate" : false}
-      className="h-full w-full relative"
-      style={{
-        willChange: "transform, opacity",
-      }}
-    >
-      <Image
-        className="h-full w-full object-cover object-center"
-        src={slide?.image}
-        alt={slide.imageAlt}
-        width={1920}
-        height={1280}
-        priority={index === 0}
-      />
-    </motion.div>
+                  <motion.div
+                    key={`kenburns-${index}-${textVersion}`}
+                    variants={isDesktop ? kenBurnsVariants : {}}
+                    initial={isDesktop ? "initial" : false}
+                    animate={isDesktop ? "animate" : false}
+                    className="h-full w-full relative"
+                    style={{
+                      willChange: "transform, opacity",
+                    }}
+                  >
+                    <Image
+                      className="h-full w-full object-cover object-center"
+                      src={slide?.image}
+                      alt={slide.imageAlt}
+                      width={1920}
+                      height={1280}
+                      priority={index === 0}
+                    />
+                  </motion.div>
                 </figure>
-                <div key={`${index}-${textVersion}`}
+                <div
+                  key={`${index}-${textVersion}`}
                   className="h-full w-full -z-40 absolute bg-[linear-gradient(180deg,_rgba(0,0,0,0)_21.7%,_rgba(0,0,0,0.6)_63.57%,_rgba(0,0,0,0.8)_100%)]"
                 ></div>
 
@@ -127,7 +135,10 @@ const HeroSection = ({data}: {data: HomeProps['bannerSection']}) => {
                             transition={{ duration: 1, ease: "easeOut" }}
                             className="text-[1.8rem] md:text-2xl lg:text-3xl 2xl:text-4xl text-white leading-[1.2] 2xl:leading-[1.1] font-custom font-light lettersp-4 mb-0 md:mb-0 xl:mb-0 md:max-w-[80%] xl:max-w-none"
                           >
-                            <span className="text-primary">{slide.highlightText}{" "}</span>{slide.title}
+                            <span className="text-primary">
+                              {slide.highlightText}{" "}
+                            </span>
+                            {slide.title}
                           </motion.h2>
                         </motion.div>
                         <motion.div
@@ -142,7 +153,8 @@ const HeroSection = ({data}: {data: HomeProps['bannerSection']}) => {
                         >
                           <div className="">
                             <div className="mt-5 w-fit md:mt-10 p-[1px] group transition-all duration-300 bg-bdrcolor bg-[linear-gradient(90deg,_#42BADC_0%,_#12586C_100%)] rounded-full hover:-translate-x-2 hover:shadow-[0_0_15px_rgba(66,186,220,0.5)] ">
-                              <a href={"#"}
+                              <a
+                                href={"#"}
                                 className="cursor-pointer pl-4 pr-2 md:px-4 py-[10px] md:py-3 bg-primary rounded-full flex items-center gap-2 transition-all duration-300"
                               >
                                 <p className="group-hover:text-white text-xs font-light text-white uppercase transition-colors duration-300">
@@ -194,15 +206,16 @@ const HeroSection = ({data}: {data: HomeProps['bannerSection']}) => {
           ))}
         </Swiper>
 
-        <div className="absolute bottom-[30%] md:bottom-[37%] w-full ">
+        <div className="absolute bottom-[10%] md:bottom-[37%] w-full ">
           <div className="container flex justify-end">
             <span className="text-[15px] text-white whitespace-nowrap font-light relative -right-3 md:right-2 z-10 flex flex-col items-center">
               <div className="flex flex-col rotate-180">
                 {BannerSliderData.slides.map((_, index) => (
                   <span
                     key={index}
-                    className={`font-medium w-[1px] h-[10px] mt-2 ${index === currentSlide - 1 ? "bg-primary" : "bg-white"
-                      }`}
+                    className={`font-medium w-[1px] h-[10px] mt-2 ${
+                      index === currentSlide - 1 ? "bg-primary" : "bg-white"
+                    }`}
                   ></span>
                 ))}
               </div>

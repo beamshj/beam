@@ -144,7 +144,7 @@ const OurSchools = ({
   };
 
   return (
-    <section className="py-8 xl:pt-20 xl:pb-25 2xl:pt-[133px] 2xl:pb-[160px] ">
+    <section className="py-8 xl:pt-20 xl:pb-25 2xl:pt-[133px] 2xl:pb-[160px]">
       <motion.div
         variants={fadeUp}
         initial="hidden"
@@ -152,7 +152,7 @@ const OurSchools = ({
         viewport={{ once: true, amount: 0 }}
       >
         <div className="container">
-          <div className="mb-5 xl:mb-7  2xl:mb-[53px]">
+          <div className="mb-5 xl:mb-7 2xl:mb-[53px]">
             <SplitText
               tag="h2"
               text="Our Schools"
@@ -272,6 +272,7 @@ const OurSchools = ({
                   return `<span class="${className}"></span>`;
                 },
               }}
+              autoHeight={true}
               breakpoints={{
                 768: { slidesPerView: 2 },
                 1024: { slidesPerView: 3 },
@@ -380,7 +381,7 @@ const OurSchools = ({
                 </SwiperSlide>
               ))}
             </Swiper>
-            <div className="cus-pagination   flex justify-end gap-2 mx-auto !w-fit"></div>
+            <div className="cus-pagination flex justify-end gap-2 mx-auto !w-fit"></div>
           </div>
         </div>
       </motion.div>
