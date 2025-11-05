@@ -64,13 +64,13 @@ const ContactForm: React.FC<{ data: FirstSection }> = ({ data }) => {
 
   return (
     <section className="container py-10 lg:py-15 xl:py-[135px]">
-      <div className="flex flex-col lg:flex-row gap-5 lg:gap-10 xl:gap-20 2xl:gap-[103px]">
+      <div className="flex flex-col lg:flex-row gap-5 lg:gap-10 xl:gap-20 2xl:gap-[103px] lg:items-center">
         {/* Left section */}
         <div className="lg:w-[34%]">
           <SplitText
             tag="h1"
             text="Get In Touch"
-            className="text-lg lg:text-xl xl:text-3xl 2xl:text-4xl text-black font-light leading-[1.111] lettersp-4"
+            className="text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl text-black font-light leading-[1.111] lettersp-4"
             delay={100}
             duration={0.6}
             ease="power3.out"

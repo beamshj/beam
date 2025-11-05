@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -19,88 +20,116 @@ import { BlogResponse } from "@/app/components/NewsDetails/type";
 import type { Swiper as SwiperType } from "swiper";
 import { useRouter } from "next/navigation";
 
-const MediaHub = ({blogdata,newsdata, gallerydata}: {blogdata: BlogType,newsdata: BlogResponse, gallerydata: GalleryProps}) => {
-   
-  const [selectedItem, setSelectedItem] = useState<{ img: string; date: string; title: string; category: string; images: string[], description: string} | null>(null);
+const MediaHub = ({
+  blogdata,
+  newsdata,
+  gallerydata,
+}: {
+  blogdata: BlogType;
+  newsdata: BlogResponse;
+  gallerydata: GalleryProps;
+}) => {
+  const [selectedItem, setSelectedItem] = useState<{
+    img: string;
+    date: string;
+    title: string;
+    category: string;
+    images: string[];
+    description: string;
+  } | null>(null);
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
-const router = useRouter();
+  const router = useRouter();
 
-const blogItems =
-  blogdata?.categories?.flatMap((category) =>
-    category.blogs?.map((blog) => ({
-      img: blog.coverImage,
-      date: new Date(blog.date || "").toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "numeric",
-        day: "numeric",
-      }).replace(/\//g, "-"),
-      title: blog.title,
-      category: "Blog",
-      images:[],
-      description:"",
-      slug:blog.slug
-    }))
-  ) || [];
-
-// ✅ Extract news
-const newsItems =
-  newsdata?.categories?.flatMap((category) =>
-    category.news?.map((news) => ({
-      img: news.coverImage,
-      date: new Date(news.date).toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "numeric",
-        day: "numeric",
-      }).replace(/\//g, "-"),
-      title: news.title,
-      category: "News",
-      images:[],
-      description:"",
-      slug:news.slug
-    }))
-  ) || [];
-
-// ✅ Extract gallery items
-const galleryItems =
-  gallerydata?.gallery?.flatMap((section) =>
-    section.categories?.flatMap((cat) =>
-      cat.images?.map((image) => ({
-        img: image,
-        date: "", // optional — galleries may not have date
-        title: cat.title || section.title || "Gallery",
-        category: "Media",
-        images: cat.images,
-        description: cat.description,
-        slug:""
+  const blogItems =
+    blogdata?.categories?.flatMap((category) =>
+      category.blogs?.map((blog) => ({
+        img: blog.coverImage,
+        date: new Date(blog.date || "")
+          .toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "numeric",
+            day: "numeric",
+          })
+          .replace(/\//g, "-"),
+        title: blog.title,
+        category: "Blog",
+        images: [],
+        description: "",
+        slug: blog.slug,
       }))
-    )
-  ) || [];
+    ) || [];
 
-// ✅ Helper: Shuffle and pick N random items
-const getRandomItems = (arr:{ img: string; date: string; title: string; category: string;images: string[], description: string,slug:string }[], n: number) =>
-  arr.sort(() => 0.5 - Math.random()).slice(0, n);
+  // ✅ Extract news
+  const newsItems =
+    newsdata?.categories?.flatMap((category) =>
+      category.news?.map((news) => ({
+        img: news.coverImage,
+        date: new Date(news.date)
+          .toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "numeric",
+            day: "numeric",
+          })
+          .replace(/\//g, "-"),
+        title: news.title,
+        category: "News",
+        images: [],
+        description: "",
+        slug: news.slug,
+      }))
+    ) || [];
 
-// ✅ Pick 3 random items from each
-const randomBlogs = getRandomItems(blogItems, 3);
-const randomNews = getRandomItems(newsItems, 3);
-const randomGallery = getRandomItems(galleryItems, 3);
+  // ✅ Extract gallery items
+  const galleryItems =
+    gallerydata?.gallery?.flatMap((section) =>
+      section.categories?.flatMap((cat) =>
+        cat.images?.map((image) => ({
+          img: image,
+          date: "", // optional — galleries may not have date
+          title: cat.title || section.title || "Gallery",
+          category: "Media",
+          images: cat.images,
+          description: cat.description,
+          slug: "",
+        }))
+      )
+    ) || [];
 
-// ✅ Combine and shuffle again for mixed display
-const combinedItems = [...randomBlogs, ...randomNews, ...randomGallery].sort(
-  () => 0.5 - Math.random()
-);
+  //  Helper: Shuffle and pick N random items
+  const getRandomItems = (
+    arr: {
+      img: string;
+      date: string;
+      title: string;
+      category: string;
+      images: string[];
+      description: string;
+      slug: string;
+    }[],
+    n: number
+  ) => arr.sort(() => 0.5 - Math.random()).slice(0, n);
 
-const mediaHubData = {
-  heading: "Media Hub",
-  mediaHub: combinedItems,
-};
+  //  Pick 3 random items from each
+  const randomBlogs = getRandomItems(blogItems, 3);
+  const randomNews = getRandomItems(newsItems, 3);
+  const randomGallery = getRandomItems(galleryItems, 3);
 
- useEffect(() => {
+  //  Combine and shuffle again for mixed display
+  const combinedItems = [...randomBlogs, ...randomNews, ...randomGallery].sort(
+    () => 0.5 - Math.random()
+  );
+
+  const mediaHubData = {
+    heading: "Media Hub",
+    mediaHub: combinedItems,
+  };
+
+  useEffect(() => {
     if (swiperInstance) {
       if (selectedItem) {
-        swiperInstance.autoplay.stop(); // 🛑 pause autoplay when modal opens
+        swiperInstance.autoplay.stop();
       } else {
-        swiperInstance.autoplay.start(); // ▶ resume autoplay when modal closes
+        swiperInstance.autoplay.start();
       }
     }
   }, [selectedItem, swiperInstance]);
@@ -117,12 +146,8 @@ const mediaHubData = {
         <div className="container border-t border-bdrcolor "></div>
         <div className="  pt-7 pb-12 md:pt-10 md:pb-10 xl:pt-[83px] 2xl:pb-[150px] overflow-hidden ">
           <div className="container">
-            <div
-              className="mb-5 md:mb-8 xl:mb-[52px]"
-              
-            >
+            <div className="mb-5 md:mb-8 xl:mb-[52px]">
               <h2 className="text-xl md:text-2xl 2xl:text-3xl font-light leading-tight text-black lettersp-4 ">
-              
                 <SplitText
                   text={mediaHubData.heading}
                   tag="span"
@@ -175,32 +200,39 @@ const mediaHubData = {
               {mediaHubData.mediaHub.map((value, index) => (
                 <SwiperSlide key={index}>
                   <div
-                    className="h-[350px] lg:h-[450px] xl:h-[557px] rounded-[15px] group slidegpmn"
+                    className="h-[350px] lg:h-[450px] xl:h-[557px] rounded-[15px] group slidegpmn cursor-pointer"
                     style={{
                       backgroundImage: `url(${value.img})`,
                       backgroundSize: "cover",
                       backgroundPosition: "center",
                     }}
                     onClick={() => {
-  if (value.category === "Media") {
-    setSelectedItem({
-      ...value,
-      images: value.images ?? [],
-      description: value.description ?? ""
-    });
-  }else if(value.category === "Blog"){
-    router.push(`/news-&-media/blog/blog-details/${value.slug}`);
-  }else if(value.category === "News"){
-    router.push(`/news-&-media/press-release/${value.slug}`);
-  }
-}}
+                      if (value.category === "Media") {
+                        setSelectedItem({
+                          ...value,
+                          images: value.images ?? [],
+                          description: value.description ?? "",
+                        });
+                      } else if (value.category === "Blog") {
+                        router.push(
+                          `/news-&-media/blog/blog-details/${value.slug}`
+                        );
+                      } else if (value.category === "News") {
+                        router.push(
+                          `/news-&-media/press-release/${value.slug}`
+                        );
+                      }
+                    }}
                   >
                     <div className="h-full rounded-[15px] transition-all duration-300 hdriv   ">
                       <div className="p-10">
                         <div className="group">
-                          <p className="text-white text-sm font-light opacity-0 transform translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100">
-                            {value.date}
-                          </p>
+                          {value.date ? (
+                            <p className="text-white text-sm font-light opacity-0 transform translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100">
+                              {value.date}
+                            </p>
+                          ) : null}
+
                           <p className="text-white text-xl font-light leading-[1.2] mt-6 opacity-0 transform -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 delay-300">
                             {value.title}
                           </p>
@@ -248,12 +280,11 @@ const mediaHubData = {
           item={{
             title: selectedItem.title,
             gallery: selectedItem.images,
-            description:selectedItem.description // map images → gallery
+            description: selectedItem.description, // map images → gallery
           }}
           onClose={() => setSelectedItem(null)}
         />
       )}
-
     </motion.section>
   );
 };

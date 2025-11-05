@@ -18,7 +18,7 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import { HomeProps } from "../type";
 gsap.registerPlugin(ScrollTrigger);
 
-const AcademicCultural = ({data}: {data: HomeProps['thirdSection']}) => {
+const AcademicCultural = ({ data }: { data: HomeProps["thirdSection"] }) => {
   const [activeIndex, setActiveIndex] = useState(1); // 2nd item active by default
 
   const imgRef = useRef<HTMLImageElement | null>(null);
@@ -107,16 +107,8 @@ const AcademicCultural = ({data}: {data: HomeProps['thirdSection']}) => {
         ? "bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)] border-b border-white"
         : ""
     }
-    ${
-      index === data.items.length - 2
-        ? "ps-0 xl:ps-[8%] 2xl:ps-[15%]"
-        : ""
-    }
-    ${
-      index === data.items.length - 1
-        ? "ps-0 xl:ps-[18%] 2xl:ps-[30%]"
-        : ""
-    }
+    ${index === data.items.length - 2 ? "ps-0 xl:ps-[8%] 2xl:ps-[15%]" : ""}
+    ${index === data.items.length - 1 ? "ps-0 xl:ps-[18%] 2xl:ps-[30%]" : ""}
   `}
                     style={
                       !isActive

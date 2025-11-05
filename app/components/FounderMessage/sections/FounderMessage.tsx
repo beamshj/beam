@@ -49,7 +49,7 @@ export default function FounderMessage({
             />
             {/* Info Box (mobile version) */}
             <div
-              className="absolute right-[5%] md:right-4 bottom-4 z-20 md:min-h-[250px]  md:bottom-6 w-[90%] md:w-[60%] lg:w-[70%] xl:w-[60%] rounded-[12px] p-[15px] 
+              className="absolute right-[5%] md:right-4 bottom-4 z-20 md:min-h-[250px] md:bottom-6 w-[90%] md:w-[60%] lg:w-[70%] xl:w-[60%] rounded-[12px] p-[15px] 
               shadow-[0px_4px_66px_0px_rgba(0,0,0,0.16)] flex flex-col justify-center
               bg-gradient-to-r from-[#F5EBFF] to-[#C9F3FF]"
             >

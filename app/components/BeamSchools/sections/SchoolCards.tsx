@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { ChevronDown } from "lucide-react";
 import Image from "next/image";
 import SplitText from "@/components/SplitText";
@@ -27,6 +27,7 @@ const SchoolCards = ({
 
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const [activeCard, setActiveCard] = useState<string | null>(null);
 
   // Extract unique locations (last word of location string)
@@ -60,6 +61,22 @@ const SchoolCards = ({
       }
     }
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <section className="py-10 xl:py-20 2xl:py-[135px]">
@@ -152,7 +169,7 @@ const SchoolCards = ({
           </div>
 
           {/* Right Dropdown */}
-          <div className="relative w-full md:w-fit">
+          <div className="relative w-full md:w-fit" ref={dropdownRef}>
             <motion.button
               variants={moveUp(0.6)}
               initial="hidden"
