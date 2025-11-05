@@ -54,7 +54,7 @@ const Index = ({ contactData, schooldata }: IndexProps) => {
         title={contactData.secondSection.title}
         description={contactData.secondSection.description}
       />
-      <RegisterInterest />
+      <RegisterInterest data={schooldata}/>
     </>
   );
 };

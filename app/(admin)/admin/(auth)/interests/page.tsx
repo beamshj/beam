@@ -13,16 +13,16 @@ import { Textarea } from '@/components/ui/textarea';
 import { LuMessageSquareShare } from "react-icons/lu";
 import { MdDelete } from "react-icons/md";
 
-const EnquiryPage = () => {
+const InterestsPage = () => {
 
-    const [enquiryList, setEnquiryList] = useState<{ _id: string, firstName: string, lastName: string, email: string, phone: string, purpose: string,message:string }[]>([]);
+    const [interestList, setInterestList] = useState<{ _id: string, fullName: string, email: string, phone: string, findUs: string, selectSchool: string, selectGrade: string }[]>([]);
 
-    const handleFetchEnquiry = async () => {
+    const handleFetchInterest = async () => {
         try {
-            const response = await fetch("/api/admin/contact/enquiry");
+            const response = await fetch("/api/admin/interest");
             if (response.ok) {
                 const data = await response.json();
-                setEnquiryList(data.data);
+                setInterestList(data.data);
             } else {
                 const data = await response.json();
                 alert(data.message);
@@ -34,16 +34,16 @@ const EnquiryPage = () => {
     }
 
 
-    const handleDeleteEnquiry = async (id: string) => {
+    const handleDeleteInterest = async (id: string) => {
         try {
-            const response = await fetch(`/api/admin/contact/enquiry`, {
+            const response = await fetch(`/api/admin/interest`, {
                 method: "DELETE",
                 body: JSON.stringify({ id })
             });
             if (response.ok) {
                 const data = await response.json();
                 alert(data.message);
-                handleFetchEnquiry();
+                handleFetchInterest();
             } else {
                 const data = await response.json();
                 alert(data.message);
@@ -54,7 +54,7 @@ const EnquiryPage = () => {
     }
 
     useEffect(() => {
-        handleFetchEnquiry();
+        handleFetchInterest();
     }, [])
 
 
@@ -66,10 +66,7 @@ const EnquiryPage = () => {
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" className="px-6 py-3">
-                            First Name
-                        </th>
-                        <th scope="col" className="px-6 py-3">
-                            Last Name
+                            Full Name
                         </th>
                         <th scope="col" className="px-6 py-3">
                             Email
@@ -78,10 +75,13 @@ const EnquiryPage = () => {
                             Phone
                         </th>
                         <th scope="col" className="px-6 py-3">
-                            Purpose
+                            Refer
                         </th>
                         <th scope="col" className="px-6 py-3">
-
+                            School
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                            Grade
                         </th>
                         <th scope="col" className="px-6 py-3">
 
@@ -89,41 +89,28 @@ const EnquiryPage = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {enquiryList.map((enquiry, index) => {
+                    {interestList.map((interest, index) => {
                         return (
                             <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200" key={index}>
                                 <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {enquiry.firstName}
+                                    {interest.fullName}
                                 </th>
                                 <td className="px-6 py-4">
-                                    {enquiry.lastName}
+                                    {interest.email}
                                 </td>
                                 <td className="px-6 py-4">
-                                    {enquiry.email}
+                                    {interest.phone}
                                 </td>
                                 <td className="px-6 py-4">
-                                    {enquiry.phone}
+                                    {interest.findUs}
                                 </td>
                                 <td className="px-6 py-4">
-                                    {enquiry.purpose}
+                                    {interest.selectSchool}
+                                </td>
+                                <td className="px-6 py-4">
+                                    {interest.selectGrade}
                                 </td>
 
-                                <td>
-                                    <Dialog>
-                                        <DialogTrigger className="bg-primary text-white px-2 py-1 rounded-md"><LuMessageSquareShare /></DialogTrigger>
-                                        <DialogContent>
-                                            <DialogHeader>
-                                                <DialogTitle>Message</DialogTitle>
-                                                <DialogDescription>
-                                                    <Textarea value={enquiry.message} readOnly />
-                                                </DialogDescription>
-                                            </DialogHeader>
-                                            <DialogClose className="bg-black text-white px-2 py-1 rounded-md">Close</DialogClose>
-                                        </DialogContent>
-
-                                    </Dialog>
-
-                                </td>
 
                                 <td>
 
@@ -135,7 +122,7 @@ const EnquiryPage = () => {
                                             </DialogHeader>
                                             <div className="flex gap-2">
                                                 <DialogClose className="bg-black text-white px-2 py-1 rounded-md">No</DialogClose>
-                                                <DialogClose className="bg-black text-white px-2 py-1 rounded-md" onClick={() => handleDeleteEnquiry(enquiry._id)}>Yes</DialogClose>
+                                                <DialogClose className="bg-black text-white px-2 py-1 rounded-md" onClick={() => handleDeleteInterest(interest._id)}>Yes</DialogClose>
                                             </div>
 
                                         </DialogContent>
@@ -154,4 +141,4 @@ const EnquiryPage = () => {
     )
 }
 
-export default EnquiryPage
+export default InterestsPage
