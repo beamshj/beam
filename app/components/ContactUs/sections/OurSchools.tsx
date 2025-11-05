@@ -222,7 +222,7 @@
 "use client";
 
 import Image from "next/image";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
 import SplitText from "@/components/SplitText";
 import { moveUp } from "../../motionVarients";
