@@ -70,7 +70,7 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
           fadeEffect={{
             crossFade: true,
           }}
-          // autoplay={{ delay: 6000, disableOnInteraction: false }}
+          autoplay={{ delay: 6000, disableOnInteraction: false }}
           speed={1800}
           slidesPerView={1}
           spaceBetween={0}
