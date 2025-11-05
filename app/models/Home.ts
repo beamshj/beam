@@ -149,6 +149,10 @@ const homeSchema = new mongoose.Schema({
             type: String,
             required: true
         },
+        link: {
+            type: String,
+            required: true
+        },
         items: [{
             image: {
                 type: String,

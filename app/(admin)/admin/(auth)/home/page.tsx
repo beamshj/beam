@@ -67,6 +67,7 @@ interface HomeFormProps {
     seventhSection: {
         title:string;
         buttonText:string;
+        link:string;
         items: {
             image: string;
             imageAlt: string;
@@ -788,6 +789,13 @@ const HomePage = () => {
                                 required: "Button Text is required"
                             })} />
                             {errors.seventhSection?.buttonText && <p className='text-red-500'>{errors.seventhSection?.buttonText.message}</p>}
+                        </div>
+                        <div className='flex flex-col gap-1'>
+                            <Label className='font-bold'>Link</Label>
+                            <Input type='text' placeholder='Link' {...register("seventhSection.link", {
+                                required: "Link is required"
+                            })} />
+                            {errors.seventhSection?.link && <p className='text-red-500'>{errors.seventhSection?.link.message}</p>}
                         </div>
 
 <div>
