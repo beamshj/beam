@@ -52,6 +52,7 @@ export type HomeProps = {
     seventhSection:{
         title:string;
         buttonText:string;
+        link:string;
         items:{
             image:string;
             imageAlt:string;
