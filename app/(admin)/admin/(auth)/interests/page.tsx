@@ -3,14 +3,11 @@ import React, { useEffect, useState } from 'react'
 import {
     Dialog,
     DialogContent,
-    DialogDescription,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
     DialogClose,
 } from "@/components/ui/dialog"
-import { Textarea } from '@/components/ui/textarea';
-import { LuMessageSquareShare } from "react-icons/lu";
 import { MdDelete } from "react-icons/md";
 
 const InterestsPage = () => {

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -8,7 +8,6 @@ import Image from "next/image";
 import SplitText from "@/components/SplitText";
 import { moveUp } from "../../motionVarients";
 import { motion } from "framer-motion";
-import { BeamSchoolType } from "../../BeamSchools/type";
 import { schoolData } from "../data";
 
 const formSchema = z.object({
@@ -22,7 +21,7 @@ const formSchema = z.object({
 
 type FormData = z.infer<typeof formSchema>;
 
-const RegisterInterest = ({data}: {data:BeamSchoolType}) => {
+const RegisterInterest = () => {
 
   const [selectedSchool, setSelectedSchool] = React.useState("")
   const {
