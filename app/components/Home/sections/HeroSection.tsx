@@ -120,20 +120,20 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
                   <div className="container h-full">
                     <div className="h-full relative w-full overflow-hidden">
                       <div
-                        className="title absolute bottom-10 lg:bottom-[50px] transition-all ease-in-out grid grid-cols-1 2xl:grid-cols-7 items-end gap-2"
+                        className="title absolute bottom-5 lg:bottom-[30px] xl:bottom-[20px] 2xl:bottom-[50px] transition-all ease-in-out grid grid-cols-1 2xl:grid-cols-7 items-end gap-2"
                         key={`${index}-${textVersion}`}
                       >
                         <motion.div
                           initial={{ opacity: 0, y: 40 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ duration: 0.6, ease: "easeOut" }}
-                          className="md:mb-[65px]  col-span-1 md:col-span-5"
+                          className="xl:mb-[35px] 2xl:mb-[65px] col-span-1 md:col-span-5"
                         >
                           <motion.h2
                             initial={{ opacity: 0, y: 40 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 1, ease: "easeOut" }}
-                            className="text-[1.8rem] md:text-2xl lg:text-3xl 2xl:text-4xl text-white leading-[1.2] 2xl:leading-[1.1] font-custom font-light lettersp-4 mb-0 md:mb-0 xl:mb-0 md:max-w-[80%] xl:max-w-none"
+                            className="text-[1.8rem] md:text-2xl lg:text-2xl 2xl:text-4xl text-white leading-[1.2] 2xl:leading-[1.1] font-custom font-light lettersp-4 mb-0 md:mb-0 xl:-mb-6 md:max-w-[95%] xl:max-w-[74%] 2xl:max-w-none"
                           >
                             <span className="text-primary">
                               {slide.highlightText}{" "}
@@ -149,7 +149,7 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
                             ease: "easeOut",
                             delay: 0.5,
                           }}
-                          className="md:mb-[120px] flex justify-end flex-col xl:items-end col-span-1 md:col-span-2"
+                          className="md:mb-[35px] lg:mb-[85px] xl:mb-[100px] 2xl:mb-[120px] flex justify-end flex-col xl:items-end col-span-1 md:col-span-2"
                         >
                           <div className="">
                             <div className="mt-5 w-fit md:mt-10 p-[1px] group transition-all duration-300 bg-bdrcolor bg-[linear-gradient(90deg,_#42BADC_0%,_#12586C_100%)] rounded-full hover:-translate-x-2 hover:shadow-[0_0_15px_rgba(66,186,220,0.5)] ">
