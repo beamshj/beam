@@ -30,7 +30,7 @@ const Alumni = ({ data }: { data: HomeProps["seventhSection"] }) => {
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
     >
-      <div className="container">
+      <div className="container relative">
         <motion.div
           className="mb-5 md:mb-8 xl:mb-[64px]"
           variants={fadeInLeft}
@@ -76,10 +76,10 @@ const Alumni = ({ data }: { data: HomeProps["seventhSection"] }) => {
             }}
             pagination={{
               clickable: true,
-              el: ".custom-pagination",
-              renderBullet: (index, className) => {
-                return `<span class="${className}"></span>`;
-              },
+              el: ".alumni-pagination", 
+              bulletClass: "swiper-pagination-bullet alumni-bullet",
+              bulletActiveClass:
+                "swiper-pagination-bullet-active alumni-bullet-active",
             }}
             breakpoints={{
               768: { slidesPerView: 2 },
@@ -137,7 +137,7 @@ const Alumni = ({ data }: { data: HomeProps["seventhSection"] }) => {
           </div>
         </div>
 
-        <div className="custom-pagination flex justify-center xl:justify-end gap-2 mt-8 xl:mt-0"></div>
+        <div className="alumni-pagination flex justify-center xl:justify-end gap-2 mt-10 xl:mt-0 relative z-20 pointer-events-auto"></div>
       </div>
     </motion.section>
   );
