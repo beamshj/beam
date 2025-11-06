@@ -149,6 +149,43 @@ body {
   opacity: 1;
 }
 
+.alumni-pagination {
+  position: relative;
+  z-index: 20;
+  pointer-events: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 2.5rem;
+}
+
+@media (min-width: 1280px) {
+  .alumni-pagination {
+    justify-content: flex-end;
+    margin-top: 0.5rem;
+  }
+}
+
+/* Bullets */
+.alumni-pagination .swiper-pagination-bullet {
+  display: inline-block;
+  height: 4px;
+  width: 16px;
+  background-color: #ccc;
+  border-radius: 9999px;
+  transition: all 0.3s ease-in-out;
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.alumni-pagination .swiper-pagination-bullet-active {
+  width: 35px;
+  background: linear-gradient(90deg, #42BADC 0%, #236476 100%);
+  opacity: 1;
+}
+
+
 .cus-pagination {
   margin-top: 25px;
 }
