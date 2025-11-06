@@ -94,8 +94,19 @@ const MediaHub = ({
       )
     ) || [];
 
-  const getRandomItems = (arr: any[], n: number) =>
-    arr.sort(() => 0.5 - Math.random()).slice(0, n);
+  //  Helper: Shuffle and pick N random items
+  const getRandomItems = (
+    arr: {
+      img: string;
+      date: string;
+      title: string;
+      category: string;
+      images: string[];
+      description: string;
+      slug: string;
+    }[],
+    n: number
+  ) => arr.sort(() => 0.5 - Math.random()).slice(0, n);
 
   const randomBlogs = getRandomItems(blogItems, 3);
   const randomNews = getRandomItems(newsItems, 3);
