@@ -191,7 +191,7 @@ const OurSchools = ({
                       className={`smtext10 text-xs font-light uppercase ${
                         selectedCurriculum === "all"
                           ? "text-black"
-                          : "text-foreground group-hover:text-black"
+                          : "text-colorpara group-hover:text-black"
                       }`}
                     >
                       All
@@ -317,7 +317,7 @@ const OurSchools = ({
                       </div>
                       <div className="p-2 md:p-3 xl:p-6 2xl:p-10">
                         <div className="flex justify-between items-center pb-3 border-b border-bdrcolor pt-3 2xl:pt-0">
-                          <p className="text-xs font-light text-foreground">
+                          <p className="text-xs font-light text-colorpara">
                             {school.category.name}
                           </p>
                           <div className="flex items-center gap-2">
@@ -327,7 +327,7 @@ const OurSchools = ({
                               width={12}
                               height={16}
                             />
-                            <p className="text-xs font-light text-foreground">
+                            <p className="text-xs font-light text-colorpara">
                               {school.location.name}
                             </p>
                           </div>
@@ -365,10 +365,10 @@ const OurSchools = ({
                               ></div>
 
                               <div className="relative z-10 flex justify-between items-center w-full">
-                                <p className="xl:text-md font-light text-foreground leading-[1.8] transition-colors duration-500 group-hover:text-black">
+                                <p className="xl:text-md font-light text-colorpara leading-[1.8] transition-colors duration-500 group-hover:text-black">
                                   {label.number} +
                                 </p>
-                                <p className="text-sm font-light text-foreground leading-[1.8] transition-colors duration-500">
+                                <p className="text-sm font-light text-colorpara leading-[1.8] transition-colors duration-500">
                                   {label.value}
                                 </p>
                               </div>
