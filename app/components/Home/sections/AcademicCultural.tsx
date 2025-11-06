@@ -80,7 +80,7 @@ const AcademicCultural = ({ data }: { data: HomeProps["thirdSection"] }) => {
               className="mt-5 md:mt-6 2xl:mt-[43px] mb-5 md:mb-7 2xl:mb-[93px]"
             >
               <p
-                className="text-sm font-light text-foreground md:max-w-[68ch] 2xl:max-w-[82ch]"
+                className="text-sm font-light text-colorpara md:max-w-[68ch] 2xl:max-w-[82ch]"
                 dangerouslySetInnerHTML={{ __html: data.description }}
               />
             </motion.div>

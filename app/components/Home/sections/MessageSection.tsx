@@ -53,7 +53,7 @@ const MessageSection = ({ data }: { data: HomeProps["sixthSection"] }) => {
               {data.name}
             </h3>
             {data.designation.split("\n").map((word, index) => (
-              <span key={index} className="text-xs font-light text-foreground">
+              <span key={index} className="text-xs font-light text-colorpara">
                 {word}
                 {index < data.designation.split("\n").length - 1 && <br />}
               </span>
@@ -76,7 +76,7 @@ const MessageSection = ({ data }: { data: HomeProps["sixthSection"] }) => {
                 className="border-b border-[#D3D3D3] pb-5 hidden lg:block w-[80%] lg:w-[75%]"
                 variants={fadeSide}
               >
-                <h2 className="text-md 2xl:text-xl font-light">
+                <h2 className="text-md 2xl:text-xl font-light text-colorpara">
                   {data.mainTitle}
                 </h2>
               </motion.div>
@@ -112,7 +112,7 @@ const MessageSection = ({ data }: { data: HomeProps["sixthSection"] }) => {
                 {data.description.split("\n").map((desc, index) => (
                   <motion.p
                     key={index}
-                    className="text-sm font-light text-foreground"
+                    className="text-sm font-light text-colorpara"
                     variants={fadeTop}
                   >
                     {desc}
@@ -150,7 +150,7 @@ const MessageSection = ({ data }: { data: HomeProps["sixthSection"] }) => {
               {data.designation.split("\n").map((word, index) => (
                 <span
                   key={index}
-                  className="text-sm font-light text-foreground"
+                  className="text-sm font-light text-colorpara"
                 >
                   {word}
                   {index < data.designation.split("\n").length - 1 && <br />}

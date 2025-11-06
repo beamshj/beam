@@ -160,6 +160,12 @@ body {
   margin-top: 2.5rem;
 }
 
+@media (max-width: 768px) {
+  .alumni-pagination {
+    gap: 9px;
+  }
+}
+
 @media (min-width: 1280px) {
   .alumni-pagination {
     justify-content: flex-end;
@@ -179,12 +185,23 @@ body {
   cursor: pointer;
 }
 
+@media (max-width: 768px) {
+  .alumni-pagination .swiper-pagination-bullet {
+    width: 18px;
+  }
+}
+
 .alumni-pagination .swiper-pagination-bullet-active {
   width: 35px;
   background: linear-gradient(90deg, #42BADC 0%, #236476 100%);
   opacity: 1;
 }
 
+@media (max-width: 768px) {
+  .alumni-pagination .swiper-pagination-bullet-active {
+    width: 37px;
+  }
+}
 
 .cus-pagination {
   margin-top: 25px;
@@ -213,31 +230,51 @@ body {
 
 }
 
-.swiper-slide:nth-child(odd) .slidegpmn .hdriv {
-  background: linear-gradient(180deg, rgba(66, 186, 220, 0) 61.58%, #42BADC 94.52%)
+.swiper-slide:nth-child(even) .slidegpmn .hdriv {
+  background: linear-gradient(180deg, rgba(66, 186, 220, 0) 61.58%, #42BADC 94.52%);
 }
 
-.swiper-slide:nth-child(even) .slidegpmn .hdriv {
+.swiper-slide:nth-child(odd) .slidegpmn .hdriv {
   background: linear-gradient(180deg, rgba(126, 90, 163, 0) 60.77%, #7E5AA3 92.82%);
 }
 
-.swiper-slide:nth-child(odd) .slidegpmn:hover .hdriv {
+/* Hover styles (for desktop) */
+.swiper-slide:nth-child(even) .slidegpmn:hover .hdriv {
   background: #42badbf0;
 }
 
-.swiper-slide:nth-child(even) .slidegpmn:hover .hdriv {
+.swiper-slide:nth-child(odd) .slidegpmn:hover .hdriv {
   background: #3F225CF0;
 }
 
-.swiper-slide:nth-child(odd) .slidegpmn:hover .strokclass {
-  stroke: #3F225C;
-
+/* ✅ Active styles (for mobile / active slide) */
+.swiper-slide:nth-child(even) .active-slide .hdriv {
+  background: #42badbf0;
 }
 
+.swiper-slide:nth-child(odd) .active-slide .hdriv {
+  background: #3F225CF0;
+}
+
+
+/* existing hover styles (keep as is) */
 .swiper-slide:nth-child(even) .slidegpmn:hover .strokclass {
-  stroke: #42badb;
-
+  stroke: #3F225C;
 }
+
+.swiper-slide:nth-child(odd) .slidegpmn:hover .strokclass {
+  stroke: #42badb;
+}
+
+/* ✅ same stroke colors for active slide (mobile) */
+.swiper-slide:nth-child(even) .active-slide .strokclass {
+  stroke: #3F225C;
+}
+
+.swiper-slide:nth-child(odd) .active-slide .strokclass {
+  stroke: #42badb;
+}
+
 
 .lettersp-4 {
   letter-spacing: -4px;

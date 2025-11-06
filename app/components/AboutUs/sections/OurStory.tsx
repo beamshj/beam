@@ -66,7 +66,7 @@ const OurStorySection: React.FC<OurStorySectionProps> = ({ data }) => {
         </div>
 
         {/* Description */}
-        <div className="mt-[30px] xl:mt-[40px] 2xl:mt-[50px] text-sm text-foreground font-light leading-[1.526315789473684]">
+        <div className="mt-[30px] xl:mt-[40px] 2xl:mt-[50px] text-sm text-colorpara font-light leading-[1.526315789473684]">
           {data.description.split("\n\n").map((para, idx) => (
             <p key={idx}>
               {" "}

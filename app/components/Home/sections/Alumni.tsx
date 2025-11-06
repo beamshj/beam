@@ -76,7 +76,7 @@ const Alumni = ({ data }: { data: HomeProps["seventhSection"] }) => {
             }}
             pagination={{
               clickable: true,
-              el: ".alumni-pagination", 
+              el: ".alumni-pagination",
               bulletClass: "swiper-pagination-bullet alumni-bullet",
               bulletActiveClass:
                 "swiper-pagination-bullet-active alumni-bullet-active",
@@ -120,7 +120,7 @@ const Alumni = ({ data }: { data: HomeProps["seventhSection"] }) => {
             <Link href={data.link}>
               <div className="mt-5 w-fit md:mt-10 p-[1px] group transition-all duration-300 bg-bdrcolor bg-[linear-gradient(90deg,_#42BADC_0%,_#12586C_100%)] rounded-full hover:translate-x-[5px] hover:shadow-[0_0_15px_rgba(66,186,220,0.5)]">
                 <div className="cursor-pointer pl-4 pr-2 md:px-5 py-2 md:py-3 bg-white rounded-full flex items-center gap-2 transition-all duration-300">
-                  <p className="group-hover:text-black text-xs font-light text-foreground uppercase transition-colors duration-300">
+                  <p className="group-hover:text-black text-xs font-light text-colorpara uppercase transition-colors duration-300">
                     {data.buttonText}
                   </p>
                   <div className="p-1 flex items-center justify-center bg-primary w-[27px] h-[27px] rounded-full transition-transform duration-300 group-hover:rotate-45">
