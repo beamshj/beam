@@ -61,36 +61,46 @@ const Footer = () => {
                   </motion.div>
                 </div>
                 <div className="flex gap-[7px]">
+                  <Link target="_blank" href="https://www.facebook.com/beamedusocial/">
                   <motion.div
                     variants={fadeUponeone}
                     className="rounded-full w-[46px] h-[46px] border border-white/35 hover:border-transparent flex items-center justify-center  hover:bg-primary cursor-pointer"
                   >
                     <FaFacebookF className="text-sm" />
                   </motion.div>
+                  </Link>
+                  <Link target="_blank" href="https://x.com/beamedusocial">
                   <motion.div
                     variants={fadeUponeone}
                     className="rounded-full w-[46px] h-[46px] border border-white/35 hover:border-transparent flex items-center justify-center  hover:bg-primary cursor-pointer"
                   >
                     <FaXTwitter className="text-sm" />
                   </motion.div>
+                  </Link>
+                  <Link target="_blank" href="https://www.linkedin.com/company/bukhatireducation/">
                   <motion.div
                     variants={fadeUponeone}
                     className="rounded-full w-[46px] h-[46px] border border-white/35 hover:border-transparent flex items-center justify-center  hover:bg-primary cursor-pointer"
                   >
                     <FaLinkedinIn className="text-sm" />
                   </motion.div>
+                  </Link>
+                  <Link target="_blank" href="https://www.instagram.com/accounts/login/?next=%2Fbeamedusocial%2F&source=omni_redirect">
                   <motion.div
                     variants={fadeUponeone}
                     className="rounded-full w-[46px] h-[46px] border border-white/35 hover:border-transparent flex items-center justify-center  hover:bg-primary cursor-pointer"
                   >
                     <FaInstagram className="text-sm" />
                   </motion.div>
+                  </Link>
+                  <Link target="_blank" href="https://www.youtube.com/c/BukhatirEducation">
                   <motion.div
                     variants={fadeUponeone}
                     className="rounded-full w-[46px] h-[46px] border border-white/35 hover:border-transparent flex items-center justify-center  hover:bg-primary cursor-pointer"
                   >
                     <FaYoutube className="text-sm" />
                   </motion.div>
+                  </Link>
                 </div>
               </motion.div>
             </div>
