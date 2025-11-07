@@ -11,7 +11,7 @@ import {BookA, GalleryThumbnails, InfoIcon, LucideSword, PhoneIcon,Share2Icon, W
 // import { useRefetchServices } from '@/app/contexts/refetchServices';
 import { MdInterests, MdManageAccounts, MdReviews } from 'react-icons/md';
 import { TbBellStar } from 'react-icons/tb';
-import { FaMoneyBill } from 'react-icons/fa6';
+import { FaDownLong, FaMoneyBill } from 'react-icons/fa6';
 
 
 
@@ -43,6 +43,7 @@ const AdminNavbar = () => {
           {name:"Enquiries",href:"/admin/contact/enquiries"}
         ] },
         { name: "Interests", href: "/admin/interests", icon: MdInterests },
+        { name: "Footer Enquiries", href: "/admin/footer-enquiries", icon: FaDownLong },
         { name: "Testimonials", href: "/admin/testimonials", icon: MdReviews },
         { name: "Beam Schools", href: "/admin/beam-schools", icon: Workflow },
         { name: "Blogs", href: "/admin/blogs", icon: Share2Icon },
