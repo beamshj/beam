@@ -282,7 +282,7 @@ const OurSchools = ({
             >
               {filteredSchools.map((school, index) => (
                 <SwiperSlide key={index}>
-                  <Link href={school.link}>
+                  <Link href={school.link} target="_blank">
                     <motion.div
                       key={selectedCurriculum}
                       className="bg-[#F5F5F5] rounded-[15px] p-1 hover:bg-[#F0F0F0] transition-color group"
