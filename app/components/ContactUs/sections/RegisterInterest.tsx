@@ -59,6 +59,8 @@ const RegisterInterest = () => {
     } catch (error) {
       console.log("Error sending message", error)
       alert("Sorry, something went wrong. Please try again later.")
+    }finally{
+      recaptchaRef.current?.reset()
     }
   };
 

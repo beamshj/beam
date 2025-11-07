@@ -49,7 +49,7 @@ const Footer = () => {
         return;
       }
       setError("")
-      const response = await fetch("/api/admin/contact/enquiry", {
+      const response = await fetch("/api/admin/contact/footer", {
         method: "POST",
         body: JSON.stringify(data)
       })
@@ -63,6 +63,8 @@ const Footer = () => {
     } catch (error) {
       console.log("Error sending message", error)
       alert("Sorry, something went wrong. Please try again later.")
+    }finally{
+      recaptchaRef.current?.reset()
     }
   };
 
