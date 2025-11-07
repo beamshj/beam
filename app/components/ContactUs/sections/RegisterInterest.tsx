@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -9,6 +9,7 @@ import SplitText from "@/components/SplitText";
 import { moveUp } from "../../motionVarients";
 import { motion } from "framer-motion";
 import { schoolData } from "../data";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const formSchema = z.object({
   fullName: z.string().min(1, "Required"),
@@ -33,8 +34,17 @@ const RegisterInterest = () => {
     resolver: zodResolver(formSchema),
   });
 
+   const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const [error, setError] = useState("")
+
   const onSubmit = async (data: FormData) => {
     try {
+      const captchaValue = recaptchaRef?.current?.getValue()
+      if (!captchaValue) {
+        setError("Please verify yourself to continue")
+        return;
+      }
+      setError("")
       const response = await fetch("/api/admin/interest", {
         method: "POST",
         body: JSON.stringify(data)
@@ -256,12 +266,19 @@ const RegisterInterest = () => {
                 )}
               </motion.div>
             </div>
+
+            <div>
+
+            <ReCAPTCHA sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""} ref={recaptchaRef} className='mt-5' />
+
+                  {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
+
             <motion.div
               variants={moveUp(1.4)}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, amount: 0.2 }}
-              className="relative inline-block mt-[40px] lg:mt-0"
+              className="relative inline-block mt-[40px] lg:mt-2"
             >
               {/* SVG border */}
               <Image
@@ -269,7 +286,7 @@ const RegisterInterest = () => {
                 alt="Button border"
                 fill
                 className="absolute top-0 left-0 w-full h-full object-contain"
-              />
+              />          
 
               {/* Button */}
               <button
@@ -288,6 +305,9 @@ const RegisterInterest = () => {
                 </span>
               </button>
             </motion.div>
+
+            </div>
+            
           </form>
         </div>
       </div>

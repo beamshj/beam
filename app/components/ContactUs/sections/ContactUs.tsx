@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useRef, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -10,6 +10,7 @@ import { motion } from "framer-motion";
 import { moveUp } from "../../motionVarients";
 import { FirstSection } from "../type";
 import { Listbox } from "@headlessui/react";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const options = [
   { value: "", label: "Purpose of enquiry" },
@@ -43,8 +44,17 @@ const ContactForm: React.FC<{ data: FirstSection }> = ({ data }) => {
     resolver: zodResolver(formSchema),
   });
 
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const [error, setError] = useState("")
+
   const onSubmit = async (data: FormData) => {
     try {
+      const captchaValue = recaptchaRef?.current?.getValue()
+      if (!captchaValue) {
+        setError("Please verify yourself to continue")
+        return;
+      }
+      setError("")
       const response = await fetch("/api/admin/contact/enquiry", {
         method: "POST",
         body: JSON.stringify(data)
@@ -351,6 +361,10 @@ const ContactForm: React.FC<{ data: FirstSection }> = ({ data }) => {
               </p>
             )}
           </motion.div>
+          <div>
+          <ReCAPTCHA sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""} ref={recaptchaRef} className='mt-5' />
+          
+          {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
           <motion.div
             variants={moveUp(0.7)}
             initial="hidden"
@@ -358,6 +372,7 @@ const ContactForm: React.FC<{ data: FirstSection }> = ({ data }) => {
             viewport={{ once: true, amount: 0.2 }}
             className="relative inline-block rounded-[50px] p-[1px] bg-gradient-to-r from-[#42BADC] to-[#12586C] mt-5 2xl:mt-0"
           >
+            
             <button
               type="submit"
               className="group cursor-pointer flex items-center justify-center gap-[10px] px-[20px] py-[11px] w-full h-full text-black bg-white rounded-[50px] text-xs font-light overflow-hidden"
@@ -375,6 +390,7 @@ const ContactForm: React.FC<{ data: FirstSection }> = ({ data }) => {
               </span>
             </button>
           </motion.div>
+          </div>
         </form>
       </div>
     </section>
