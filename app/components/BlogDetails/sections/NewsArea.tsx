@@ -2,13 +2,29 @@
 
 import Image from "next/image";
 import SplitText from "@/components/SplitText";
-import { motion, Variants } from "framer-motion";
+import { AnimatePresence, motion, Variants } from "framer-motion";
 import { moveUp } from "../../motionVarients";
 import { BlogType } from "../../blog/type";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { getReadingTimeFromHTML } from "@/app/(user)/utils/getReadingTime";
-import { shareBlog } from "@/app/(user)/utils/linkShare";
 import Link from "next/link";
+import {
+  FacebookShareButton,
+  TwitterShareButton,
+  LinkedinShareButton,
+  WhatsappShareButton,
+  EmailShareButton,
+  XIcon
+} from "react-share";
+import { FacebookIcon, LinkedinIcon, WhatsappIcon,EmailIcon } from "react-share";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 
 const NewsArea = ({
   data,
@@ -33,6 +49,25 @@ const NewsArea = ({
         delayChildren: 0.1,
       },
     },
+  };
+
+    const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.2,staggerDirection: -1 }, // Icons appear one by one
+    },
+    exit: {
+      opacity: 0,
+      transition: { staggerChildren: 0.1, staggerDirection: -1 }, // Reverse order on hide
+    },
+  };
+
+  // Individual icon animation
+  const itemVariants = {
+    hidden: { opacity: 0, y: -10 },
+    visible: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: -10 },
   };
 
   useEffect(() => {
@@ -81,6 +116,9 @@ const NewsArea = ({
   const readingTime = useMemo(() => {
     return getReadingTimeFromHTML(data.content);
   }, [data.content]);
+
+  const [showIcons, setShowIcons] = useState(false);
+  const shareUrl = typeof window !== "undefined" ? window.location.href : "";
 
   return (
     <section className="pb-8 md:pb-12 lg:pb-20 2xl:pb-[135px] pt-[135px] lg:pt-[198px] 2xl:pt-[193px]">
@@ -158,6 +196,7 @@ const NewsArea = ({
                 <li>{data?.category}</li>
               </ul>
             </div> */}
+            <div className="relative">
           <motion.div
             variants={moveUp(0.3)}
             initial="hidden"
@@ -168,17 +207,119 @@ const NewsArea = ({
             <li className="text-black text-sm font-light list-disc">
               {readingTime} mins read
             </li>
+
+{typeof window !== "undefined" && window.innerWidth > 824 && <div className="">
+            <AnimatePresence>
+        {showIcons &&  (
+          <motion.div
+            className="flex gap-3 md:mt-2 relative bottom-2 md:absolute mb-5 px-0 rounded-lg -right-1"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+          >
+            {[
+              { Component: EmailShareButton, Icon: EmailIcon },
+              { Component: FacebookShareButton, Icon: FacebookIcon },
+              { Component: TwitterShareButton, Icon: XIcon },
+              { Component: LinkedinShareButton, Icon: LinkedinIcon },
+              { Component: WhatsappShareButton, Icon: WhatsappIcon },
+            ].map(({ Component, Icon }, index) => (
+              <motion.div
+                key={index}
+                whileHover={{ scale: 1.2, rotate: 5 }}
+                variants={itemVariants}
+              >
+                <Component url={shareUrl} onClick={()=>{}} openShareDialogOnClick>
+                  <Icon size={32} round iconFillColor="#42BADC" style={{borderColor:"#42BADC",borderWidth:"2px",borderRadius:"50%"}} bgStyle={{fill:"none"}}/>
+                </Component>
+              </motion.div>
+            ))}
+            {/* <motion.div
+                whileHover={{ scale: 1.2, rotate: 5 }}
+                variants={itemVariants}
+              >
+              <p onClick={shareOnInstagram}   rel="noopener noreferrer">
+                <div className="bg-[#E4405F] cursor-pointer rounded-full w-[32px] h-[32px] flex align-center justify-center">
+                  <FaInstagram size={32} color="#fff" className="w-[18px]"/>
+                  </div>
+              </p>
+              </motion.div> */}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
             <Image
               src="/images/newsdetails/share.svg"
               alt=""
               width={19}
               height={22}
               className="cursor-pointer"
-              onClick={() =>
-                shareBlog({ title: data.title, url: window.location.href })
-              }
+              onClick={() => setShowIcons(!showIcons)}
             />
+            </div>}
+
+            {typeof window !== "undefined"  && window.innerWidth < 824 && <Dialog>
+                <DialogTrigger>
+                  <Image
+              src="/images/newsdetails/share.svg"
+              alt=""
+              width={19}
+              height={22}
+              className="cursor-pointer"
+              onClick={() => setShowIcons(!showIcons)}
+            />
+            </DialogTrigger>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle></DialogTitle>
+                    <DialogDescription className="flex justify-center">
+                      <motion.div
+            className="flex gap-3 md:mt-2 relative  px-0 rounded-lg"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+          >
+            {[
+              { Component: EmailShareButton, Icon: EmailIcon },
+              { Component: FacebookShareButton, Icon: FacebookIcon },
+              { Component: TwitterShareButton, Icon: XIcon },
+              { Component: LinkedinShareButton, Icon: LinkedinIcon },
+              { Component: WhatsappShareButton, Icon: WhatsappIcon },
+            ].map(({ Component, Icon }, index) => (
+              <motion.div
+                key={index}
+                whileHover={{ scale: 1.2, rotate: 5 }}
+                variants={itemVariants}
+              >
+                <Component url={shareUrl} onClick={()=>{}} openShareDialogOnClick>
+                  <Icon size={32} round iconFillColor="#42BADC" style={{borderColor:"#42BADC",borderWidth:"2px",borderRadius:"50%"}} bgStyle={{fill:"none"}}/>
+                </Component>
+              </motion.div>
+            ))}
+            {/* <motion.div
+                whileHover={{ scale: 1.2, rotate: 5 }}
+                variants={itemVariants}
+              >
+              <p onClick={shareOnInstagram}   rel="noopener noreferrer">
+                <div className="bg-[#E4405F] cursor-pointer rounded-full w-[32px] h-[32px] flex align-center justify-center">
+                  <FaInstagram size={32} color="#fff" className="w-[18px]"/>
+                  </div>
+              </p>
+              </motion.div> */}
           </motion.div>
+                    </DialogDescription>
+                  </DialogHeader>
+                </DialogContent>
+
+              </Dialog>}
+
+
+          </motion.div>
+      </div>
+
+
           {/* </div> */}
           <motion.div
             variants={moveUp(0.2)}
@@ -215,6 +356,9 @@ const NewsArea = ({
           <hr />
         </div>
       </div>
+
+      
+
     </section>
   );
 };

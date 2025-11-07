@@ -804,7 +804,7 @@ body {
 
 /* Links */
 .blog-content a {
-  @apply text-[#42BADC] hover:underline;
+  @apply text-[#42BADC] hover:underline break-words;
 }
 
 /* Tables */
