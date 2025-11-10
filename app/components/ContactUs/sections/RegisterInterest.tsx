@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, forwardRef } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -22,9 +22,8 @@ const formSchema = z.object({
 
 type FormData = z.infer<typeof formSchema>;
 
-const RegisterInterest = () => {
-
-  const [selectedSchool, setSelectedSchool] = React.useState("")
+const RegisterInterest = forwardRef<HTMLDivElement, {}>((_props, ref) => {
+  const [selectedSchool, setSelectedSchool] = React.useState("");
   const {
     register,
     handleSubmit,
@@ -34,39 +33,42 @@ const RegisterInterest = () => {
     resolver: zodResolver(formSchema),
   });
 
-   const recaptchaRef = useRef<ReCAPTCHA>(null);
-  const [error, setError] = useState("")
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const [error, setError] = useState("");
 
   const onSubmit = async (data: FormData) => {
     try {
-      const captchaValue = recaptchaRef?.current?.getValue()
+      const captchaValue = recaptchaRef?.current?.getValue();
       if (!captchaValue) {
-        setError("Please verify yourself to continue")
+        setError("Please verify yourself to continue");
         return;
       }
-      setError("")
+      setError("");
       const response = await fetch("/api/admin/interest", {
         method: "POST",
-        body: JSON.stringify(data)
-      })
-      const res = await response.json()
+        body: JSON.stringify(data),
+      });
+      const res = await response.json();
       if (res.success) {
-        alert(res.message)
-        reset()
+        alert(res.message);
+        reset();
       } else {
-        alert(res.message)
+        alert(res.message);
       }
     } catch (error) {
-      console.log("Error sending message", error)
-      alert("Sorry, something went wrong. Please try again later.")
-    }finally{
-      recaptchaRef.current?.reset()
+      console.log("Error sending message", error);
+      alert("Sorry, something went wrong. Please try again later.");
+    } finally {
+      recaptchaRef.current?.reset();
     }
   };
 
-
   return (
-    <div className="pb-0 lg:pb-20 xl:pb-[135px]" id="registerInterest">
+    <div
+      className="pb-0 lg:pb-20 xl:pb-[135px]"
+      ref={ref}
+      id="registerInterest"
+    >
       <div
         className="relative w-full max-w-[1920px] h-auto py-12 2xl:py-0 2xl:h-[736px] bg-cover bg-center flex justify-center items-center"
         style={{
@@ -171,10 +173,18 @@ const RegisterInterest = () => {
                   {...register("findUs")}
                   className="w-full border-b border-white py-[23px] pr-10 focus:outline-none text-white text-sm font-light appearance-none"
                 >
-                  <option value="" className="bg-black">Where did you find us ?</option>
-                  <option value="instagram" className="bg-black ">Instagram</option>
-                  <option value="website" className="bg-black ">Website</option>
-                  <option value="friends" className="bg-black ">Friends</option>
+                  <option value="" className="bg-black">
+                    Where did you find us ?
+                  </option>
+                  <option value="instagram" className="bg-black ">
+                    Instagram
+                  </option>
+                  <option value="website" className="bg-black ">
+                    Website
+                  </option>
+                  <option value="friends" className="bg-black ">
+                    Friends
+                  </option>
                 </select>
                 {/* Custom arrow icon */}
                 <span className="absolute top-1/3 right-0 -translate-y-1/2 pointer-events-none">
@@ -205,11 +215,19 @@ const RegisterInterest = () => {
                 <select
                   {...register("selectSchool")}
                   className="w-full border-b border-white py-[23px] pr-10 focus:outline-none text-white text-sm font-light appearance-none"
-                onChange={(e) => setSelectedSchool(e.target.value)}
+                  onChange={(e) => setSelectedSchool(e.target.value)}
                 >
-                  <option value="" className="bg-black">Select School</option>
+                  <option value="" className="bg-black">
+                    Select School
+                  </option>
                   {schoolData.map((school) => (
-                    <option key={school.name} value={school.name} className="bg-black" >{school.name}</option>
+                    <option
+                      key={school.name}
+                      value={school.name}
+                      className="bg-black"
+                    >
+                      {school.name}
+                    </option>
                   ))}
                   {/* <option value="" className="bg-black">Select School</option>
                   <option value="admission" className="bg-black">Admission</option>
@@ -243,12 +261,17 @@ const RegisterInterest = () => {
                 <select
                   {...register("selectGrade")}
                   className="w-full border-b border-white py-[23px] pr-10 focus:outline-none text-white text-sm font-light appearance-none"
-                
                 >
-                  <option value="" className="bg-black">Select Grade</option>
-                  {schoolData.find((school) => school.name === selectedSchool)?.grades.map((grade) => (
-                    <option key={grade} value={grade} className="bg-black">{grade}</option>
-                  ))}
+                  <option value="" className="bg-black">
+                    Select Grade
+                  </option>
+                  {schoolData
+                    .find((school) => school.name === selectedSchool)
+                    ?.grades.map((grade) => (
+                      <option key={grade} value={grade} className="bg-black">
+                        {grade}
+                      </option>
+                    ))}
                 </select>
                 {/* Custom arrow icon */}
                 <span className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none">
@@ -270,46 +293,47 @@ const RegisterInterest = () => {
             </div>
 
             <div>
+              <ReCAPTCHA
+                sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
+                ref={recaptchaRef}
+                className="mt-5"
+              />
 
-            <ReCAPTCHA sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""} ref={recaptchaRef} className='mt-5' />
+              {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
 
-                  {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
-
-            <motion.div
-              variants={moveUp(1.4)}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.2 }}
-              className="relative inline-block mt-[40px] lg:mt-2"
-            >
-              {/* SVG border */}
-              <Image
-                src="/images/contact-us/btn-border.svg"
-                alt="Button border"
-                fill
-                className="absolute top-0 left-0 w-full h-full object-contain"
-              />          
-
-              {/* Button */}
-              <button
-                type="submit"
-                className="relative group flex items-center uppercase justify-center gap-[10px] px-[20px] py-[11px] w-full h-full text-white bg-transparent rounded-[50px] text-xs font-light overflow-hidden"
+              <motion.div
+                variants={moveUp(1.4)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.2 }}
+                className="relative inline-block mt-[40px] lg:mt-2"
               >
-                SEND ENQUIRY
-                <span className="flex items-center justify-center w-[27px] h-[27px] bg-primary rounded-full transition-transform duration-300 group-hover:translate-x-2">
-                  <Image
-                    src="/images/arrow-black.svg"
-                    alt="Arrow"
-                    width={8}
-                    height={8}
-                    className="object-contain filter invert"
-                  />
-                </span>
-              </button>
-            </motion.div>
+                {/* SVG border */}
+                <Image
+                  src="/images/contact-us/btn-border.svg"
+                  alt="Button border"
+                  fill
+                  className="absolute top-0 left-0 w-full h-full object-contain"
+                />
 
+                {/* Button */}
+                <button
+                  type="submit"
+                  className="relative group flex items-center uppercase justify-center gap-[10px] px-[20px] py-[11px] w-full h-full text-white bg-transparent rounded-[50px] text-xs font-light overflow-hidden"
+                >
+                  SEND ENQUIRY
+                  <span className="flex items-center justify-center w-[27px] h-[27px] bg-primary rounded-full transition-transform duration-300 group-hover:translate-x-2">
+                    <Image
+                      src="/images/arrow-black.svg"
+                      alt="Arrow"
+                      width={8}
+                      height={8}
+                      className="object-contain filter invert"
+                    />
+                  </span>
+                </button>
+              </motion.div>
             </div>
-            
           </form>
         </div>
       </div>
@@ -322,6 +346,7 @@ const RegisterInterest = () => {
       />
     </div>
   );
-};
+});
 
+RegisterInterest.displayName = "RegisterInterest";
 export default RegisterInterest;
