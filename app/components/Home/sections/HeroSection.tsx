@@ -11,7 +11,6 @@ import "swiper/css/effect-fade";
 import { motion } from "framer-motion";
 import { Variants } from "framer-motion";
 import { HomeProps } from "../type";
-import Link from "next/link";
 
 const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
   const sectionRef = useRef(null);
