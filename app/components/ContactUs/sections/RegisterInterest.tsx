@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState, forwardRef } from "react";
+import React, { useEffect, useRef, useState, forwardRef } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -67,6 +67,13 @@ const RegisterInterest = forwardRef<HTMLDivElement, RegisterInterestProps>(
         recaptchaRef.current?.reset();
       }
     };
+
+    useEffect(() => {
+      const timer = setTimeout(() => {
+        window.dispatchEvent(new Event("register-interest-ready"));
+      }, 300);
+      return () => clearTimeout(timer);
+    }, []);
 
     return (
       <div
