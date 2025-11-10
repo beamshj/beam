@@ -21,6 +21,10 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
 
   const [textVersion, setTextVersion] = useState(0);
 
+  const handleRegisterClick = () => {
+    window.location.href = "/contact-us?scroll=register";
+  };
+
   // Ken Burns animation variants
   const kenBurnsVariants: Variants = {
     initial: {
@@ -149,6 +153,7 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
                             ease: "easeOut",
                             delay: 0.5,
                           }}
+                          onClick={handleRegisterClick}
                           className="md:mb-[35px] lg:mb-[85px] xl:mb-[100px] 2xl:mb-[120px] flex justify-end flex-col xl:items-end col-span-1 md:col-span-2"
                         >
                           <div className="">
