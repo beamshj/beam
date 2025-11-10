@@ -91,17 +91,40 @@ const Index = ({ contactData, schooldata }: IndexProps) => {
   const registerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (searchParams.get("scroll") === "register" && registerRef.current) {
-      const yOffset = 0;
-      const y =
-        registerRef.current.getBoundingClientRect().top +
-        window.pageYOffset +
-        yOffset;
-
-      // Wait until hydration/layout settles
-      setTimeout(() => {
+    if (searchParams.get("scroll") === "register") {
+      const attemptScroll = () => {
+        if (!registerRef.current) return;
+        const yOffset = -100;
+        const y =
+          registerRef.current.getBoundingClientRect().top +
+          window.pageYOffset +
+          yOffset;
         window.scrollTo({ top: y, behavior: "smooth" });
-      }, 300);
+      };
+
+      // safety delay for layout/hydration
+      const timeout = setTimeout(() => {
+        requestAnimationFrame(attemptScroll);
+      }, 700);
+
+      // observer for exact timing
+      const el = registerRef.current;
+      if (el) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            if (entries[0].isIntersecting) {
+              attemptScroll();
+              observer.disconnect();
+            }
+          },
+          { threshold: 0.1 }
+        );
+        observer.observe(el);
+      }
+
+      return () => {
+        clearTimeout(timeout);
+      };
     }
   }, [searchParams]);
 
