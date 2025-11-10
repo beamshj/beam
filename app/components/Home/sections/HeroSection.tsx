@@ -172,7 +172,7 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
                           ease: "easeOut",
                           delay: 0.5,
                         }}
-                        className="absolute left-[40%] bottom-[84px] w-[80%] hidden xl:block"
+                        className="absolute left-[40%] bottom-[83px] w-[80%] hidden xl:block"
                       >
                         <div className="h-[1px] w-full bg-gradient-to-r from-white via-white/30 to-transparent"></div>
                       </motion.div>
