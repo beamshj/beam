@@ -92,7 +92,7 @@ const Index = ({ contactData, schooldata }: IndexProps) => {
 
   useEffect(() => {
     if (searchParams.get("scroll") === "register") {
-      const attemptScroll = () => {
+      const scrollToRegister = () => {
         if (!registerRef.current) return;
         const yOffset = -100;
         const y =
@@ -102,28 +102,15 @@ const Index = ({ contactData, schooldata }: IndexProps) => {
         window.scrollTo({ top: y, behavior: "smooth" });
       };
 
-      // safety delay for layout/hydration
-      const timeout = setTimeout(() => {
-        requestAnimationFrame(attemptScroll);
-      }, 700);
+      // ✅ Wait for the component to announce it's ready
+      window.addEventListener("register-interest-ready", scrollToRegister);
 
-      // observer for exact timing
-      const el = registerRef.current;
-      if (el) {
-        const observer = new IntersectionObserver(
-          (entries) => {
-            if (entries[0].isIntersecting) {
-              attemptScroll();
-              observer.disconnect();
-            }
-          },
-          { threshold: 0.1 }
-        );
-        observer.observe(el);
-      }
+      // ✅ Safety fallback (just in case event doesn't fire)
+      const fallback = setTimeout(scrollToRegister, 2000);
 
       return () => {
-        clearTimeout(timeout);
+        window.removeEventListener("register-interest-ready", scrollToRegister);
+        clearTimeout(fallback);
       };
     }
   }, [searchParams]);
