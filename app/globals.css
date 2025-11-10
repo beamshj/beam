@@ -120,7 +120,7 @@ body {
 
 @media screen and (max-width: 460px) {
   .smtext10 {
-    @apply text-[10px];
+    @apply text-[11px];
   }
 }
 
