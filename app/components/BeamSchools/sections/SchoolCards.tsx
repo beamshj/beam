@@ -249,7 +249,8 @@ const SchoolCards = ({
                             className="xl:h-[32px] w-auto h-6"
                           />
                           <div className="text-sm xl:text-md font-light text-black leading-[1.4]">
-                            {specification.number}+
+                            {/* {specification.number}+ */}
+                            {specification.number}
                           </div>
                         </div>
                         <div className="text-sm xl:text-md font-light text-colorpara leading-[1.52]">
