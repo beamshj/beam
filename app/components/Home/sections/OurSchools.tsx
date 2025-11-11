@@ -364,7 +364,8 @@ const OurSchools = ({
                                 ></div>
                                 <div className="relative z-10 flex justify-between items-center w-full">
                                   <p className="xl:text-md font-light text-colorpara leading-[1.8] transition-colors duration-500 group-hover:text-black">
-                                    {label.number} +
+                                    {/* {label.number} + */}
+                                    {label.number}
                                   </p>
                                   <p className="text-sm font-light text-colorpara leading-[1.8] transition-colors duration-500">
                                     {label.value}
