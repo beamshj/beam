@@ -13,7 +13,7 @@ const NavBar = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   const handleRegisterClick = () => {
-    window.location.assign("/contact-us?scroll=register");
+    window.location.href = "/contact-us?scroll=register";
   };
 
   useEffect(() => {
@@ -160,8 +160,7 @@ const NavBar = () => {
               </div>
             </div>
             <div className="flex gap-2  sm:gap-5">
-              <div className="flex items-center">
-                <Link href={"/contact-us"}>
+              <div className="flex items-center"> 
                   <button
                     onClick={handleRegisterClick}
                     className="uppercase border-primary border-[1px] px-3 py-1 flex items-center gap-2 rounded-[50px]
@@ -184,7 +183,7 @@ const NavBar = () => {
                       />
                     </span>
                   </button>
-                </Link>
+              
               </div>
               <div
                 className={`transition-all duration-300 ${
