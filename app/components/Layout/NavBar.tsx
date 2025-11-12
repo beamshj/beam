@@ -13,7 +13,7 @@ const NavBar = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   const handleRegisterClick = () => {
-    window.location.href = "/contact-us?scroll=register";
+    window.location.assign("/contact-us?scroll=register");
   };
 
   useEffect(() => {
