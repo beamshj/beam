@@ -15,7 +15,7 @@ import { HomeProps } from "../type";
 const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
   const swiperRef = useRef<SwiperClass | null>(null);
   const [currentSlide, setCurrentSlide] = useState(1);
-  const totalSlides = BannerSliderData.slides.length;
+  const totalSlides = data.items.length;
   const [textVersion, setTextVersion] = useState(0);
   const [isDesktop, setIsDesktop] = useState(false);
 
