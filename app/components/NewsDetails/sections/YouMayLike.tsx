@@ -1,11 +1,13 @@
 "use client";
 
 import Image from "next/image"; 
+// import Link from "next/link";
 export interface VMItem { 
   date: string;
   category: string;
   description:string;
   image:string;
+  // slug:string;
 }
 
 export interface rsData {
@@ -30,6 +32,7 @@ export interface rsData {
         
        {rsData.items.map((item, index) => (
           <div key={index}>
+            {/* <Link href={`/news-&-media/press-release/${item.slug}`}> */}
             <div className="relative">
               <Image src={item.image} alt="" width={486} height={301} className="rounded-t-lg img-fluid object-cover w-full h-full" />
               <div className="absolute inset-0 bg-[linear-gradient(180.12deg,rgba(0,0,0,0)_50%,rgba(0,0,0,0.75)_99.9%)] "></div>
@@ -47,6 +50,7 @@ export interface rsData {
                                 <Image src="/assets/arrow.svg" alt="arrow" width={11} height={11} />
                               </div>
             </div>
+            {/* </Link> */}
           </div>
           ))}          
 

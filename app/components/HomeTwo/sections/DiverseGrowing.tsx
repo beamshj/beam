@@ -18,6 +18,7 @@ import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { HomeProps } from "../type";
+import { iconanimated } from "../data";
 gsap.registerPlugin(ScrollTrigger);
 
 const DiverseGrowing = ({data}: {data: HomeProps['fifthSection']}) => {
@@ -95,7 +96,7 @@ const DiverseGrowing = ({data}: {data: HomeProps['fifthSection']}) => {
                         </p>
                         <Image
                           className={`grayscale group-hover:grayscale-0 transition-all duration-400 group-hover:scale-110 ${isActive === 1 ? "grayscale-0 scale-110" : ""}`}
-                          src={data.items[0].logo}
+                          src={iconanimated.imgdata[0]}
                           alt={data.items[0].logoAlt}
                           width={50}
                           height={50}
@@ -130,7 +131,7 @@ const DiverseGrowing = ({data}: {data: HomeProps['fifthSection']}) => {
                           </p>
                           <Image
                             className={`grayscale group-hover:grayscale-0 transition-all duration-400 group-hover:scale-110 ${isActive === 2 ? "grayscale-0 scale-110" : ""}`}
-                            src={data.items[1].logo}
+                            src={iconanimated.imgdata[1]}
                             alt={data.items[1].logoAlt}
                             width={50}
                             height={50}
@@ -164,7 +165,7 @@ const DiverseGrowing = ({data}: {data: HomeProps['fifthSection']}) => {
                             </p>
                             <Image
                               className={`grayscale group-hover:grayscale-0 transition-all duration-400 group-hover:scale-110 ${isActive === 3 ? "grayscale-0 scale-110" : ""}`}
-                              src={data.items[2].logo}
+                               src={iconanimated.imgdata[2]}
                               alt={data.items[2].logoAlt}
                               width={50}
                               height={50}
@@ -198,7 +199,7 @@ const DiverseGrowing = ({data}: {data: HomeProps['fifthSection']}) => {
                             </p>
                             <Image
                               className={`grayscale group-hover:grayscale-0 transition-all duration-400 group-hover:scale-110 ${isActive === 4 ? "grayscale-0 scale-110" : ""}`}
-                              src={data.items[4].logo}
+                              src={iconanimated.imgdata[4]}
                               alt={data.items[4].logoAlt}
                               width={50}
                               height={50}
@@ -231,7 +232,7 @@ const DiverseGrowing = ({data}: {data: HomeProps['fifthSection']}) => {
                           </p>
                           <Image
                             className={`grayscale group-hover:grayscale-0 transition-all duration-400 group-hover:scale-110 ${isActive === 5 ? "grayscale-0 scale-110" : ""}`}
-                            src={data.items[3].logo}
+                             src={iconanimated.imgdata[3]}
                             alt={data.items[3].logoAlt}
                             width={50}
                             height={50}
