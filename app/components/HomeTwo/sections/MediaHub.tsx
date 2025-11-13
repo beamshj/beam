@@ -15,6 +15,7 @@ import { BlogType } from "@/app/components/blog/type";
 import { BlogResponse } from "@/app/components/NewsDetails/type";
 import type { Swiper as SwiperType } from "swiper";
 import { useRouter } from "next/navigation";
+import { moveLeft } from "../../motionVarients";
 
 const MediaHub = ({
   blogdata,
@@ -200,7 +201,11 @@ const MediaHub = ({
 
                 return (
                   <SwiperSlide key={index}>
-                    <div
+                    <motion.div
+                      variants={moveLeft(0.2*index)}
+                      initial="hidden"
+                      whileInView="show"
+                      viewport={{ once: true, amount: 0.2 }}
                       className={`h-[350px] lg:h-[450px] xl:h-[557px] rounded-[15px] group slidegpmn cursor-pointer relative ${
                         index == activeIndex ? "active-slide" : ""
                       }`}
@@ -297,7 +302,7 @@ const MediaHub = ({
                           <p>{value.category}</p>
                         </div>
                       </div>
-                    </div>
+                    </motion.div>
                   </SwiperSlide>
                 );
               })}
