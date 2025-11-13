@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { BlogType } from "../../blog/type";
-
+import Link from "next/link";
 const YouMayLike = ({
   rsData,
 }: {
@@ -19,6 +19,7 @@ const YouMayLike = ({
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pt-4 md:pt-6 xl:pt-8 2xl:pt-12 gap-7">
           {rsData.slice(0, 3).map((item, index) => (
             <div key={index}>
+              <Link href={`/news-&-media/blog/blog-details/${item.slug}`}>
               <div className="relative">
                 <Image
                   src={item.thumbnail}
@@ -57,6 +58,7 @@ const YouMayLike = ({
                   />
                 </div>
               </div>
+              </Link>
             </div>
           ))}
         </div>

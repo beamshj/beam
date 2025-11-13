@@ -1001,3 +1001,6 @@ body {
     margin-top: 39.6% !important;
   }
 }
+.blog-content h6{visibility: hidden;}
+
+.blog-content h6 img{visibility: visible !important;}
