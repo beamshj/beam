@@ -35,7 +35,7 @@ const DiverseGrowing = ({data}: {data: HomeProps['fifthSection']}) => {
           trigger: imgRef.current,
           start: "top bottom",   // start when image enters view
           end: "bottom top",     // finish when it leaves
-          scrub: true,           // smooth scroll-linked motion
+          scrub: false,           // smooth scroll-linked motion
         },
       });
     });
