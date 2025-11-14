@@ -134,7 +134,8 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
         y: 0,
         opacity: 1,
         rotationX: 0,
-        duration: 1.4,
+        duration: 3,
+        delay: 0.35,
         ease: "power4.out"
       },
       0.3
