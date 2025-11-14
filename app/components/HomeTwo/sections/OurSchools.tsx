@@ -149,14 +149,14 @@ const OurSchools = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start 0.7", "end 0.3"] // Starts a bit earlier but not too early
+    offset: ["start 0.6", "end 0.3"] // Starts a bit earlier but not too early
   });
 
   // More dramatic transformations
   // const opacity = useTransform(scrollYProgress, [0, 1, 1, 1], [0, 1, 1, 0]);
   // const scale = useTransform(scrollYProgress, [0, 0.75, 0.75, 1], [0.6, 1, 1, 0.6]); // Scales from 60% to 100%
   // const y = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [150, 0, 0, -150]); // Moves 150px
-  const rotateX = useTransform(scrollYProgress, [0, 0.20, 0.75, 1], [12, 0, 0, -12]);
+  const rotateX = useTransform(scrollYProgress, [0, 0.30, 0.75, 1], [12, 0, 0, -12]);
 
   return (
     <section className="py-8 xl:pt-20 xl:pb-25 2xl:pt-[133px] 2xl:pb-[160px]">
