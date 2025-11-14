@@ -11,6 +11,7 @@ import {
 } from "@/public/assets/FramerAnimation/animation";
 import SplitText from "@/components/SplitText";
 import { HomeProps } from "../type";
+import SectionReveal from "./SectionReveal";
 
 gsap.registerPlugin(ScrollTrigger);
 const VideoSection = ({data}: {data: HomeProps['fourthSection']}) => {
@@ -41,6 +42,7 @@ const VideoSection = ({data}: {data: HomeProps['fourthSection']}) => {
   }, []);
 
   return (
+    <SectionReveal revealType="square" className="w-full">
     <motion.section
       className="w-full relative max-w-[1920px] mx-auto overflow-hidden 2xl:h-screen py-10 md:py-28 2xl:py-0"
       initial={{ opacity: 0, scale: 0.9, rotate: -4, x: -100 }}
@@ -135,6 +137,7 @@ const VideoSection = ({data}: {data: HomeProps['fourthSection']}) => {
       </div>
       <div className="w-full h-full  bg-[linear-gradient(90deg,_rgba(0,_0,_0,_0.9)_8.98%,_rgba(0,_0,_0,_0)_83.88%)] absolute top-0 left-0 z-20"></div>
     </motion.section>
+    </SectionReveal>
   );
 };
 
