@@ -14,42 +14,73 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
   const swiperRef = useRef<SwiperClass | null>(null);
   const [currentSlide, setCurrentSlide] = useState(1);
   const totalSlides = data.items.length;
-  const imageRefs = useRef<HTMLDivElement[]>([]);
+  const slideOverlayRefs = useRef<HTMLDivElement[]>([]);
   const contentRefs = useRef<HTMLDivElement[]>([]);
-  const overlayRefs = useRef<HTMLDivElement[]>([]);
+  const imageRefs = useRef<HTMLDivElement[]>([]);
 
   const handleRegisterClick = () => {
     window.location.href = "/contact-us?scroll=register";
   };
 
-  // Modern parallax reveal effect - NO ZOOM - Different directions per slide
-  const animateImageIn = (index: number) => {
+  // Animate slide coming in by having its own image push in with notched edge
+  const animateSlideIn = (index: number) => {
+    const overlayElement = slideOverlayRefs.current[index];
     const imgElement = imageRefs.current[index];
-    const overlayElement = overlayRefs.current[index];
-    if (!imgElement) return;
+
+    if (!overlayElement || !imgElement) return;
 
     const img = imgElement.querySelector("img");
     if (!img) return;
 
-    // Kill all overlays first to prevent conflicts
-    overlayRefs.current.forEach((overlay) => {
+    // Kill all animations
+    slideOverlayRefs.current.forEach((overlay) => {
       if (overlay) gsap.killTweensOf(overlay);
     });
+    gsap.killTweensOf([overlayElement, imgElement, img]);
 
-    gsap.killTweensOf([imgElement, img, overlayElement]);
-
-    // Different reveal directions: 1: top-bottom, 2: right-left, 3: bottom-top, 4: left-right
+    // Different reveal directions with notches on the LEADING edge
+    // 1: top-bottom (notches at bottom), 2: right-left (notches at left), 
+    // 3: bottom-top (notches at top), 4: left-right (notches at right)
     const directions = [
-      { scale: "scaleY", origin: "top", movement: { y: -20, x: 0 } },      // Top to bottom
-      { scale: "scaleX", origin: "right", movement: { y: 0, x: 20 } },     // Right to left
-      { scale: "scaleY", origin: "bottom", movement: { y: 20, x: 0 } },    // Bottom to top
-      { scale: "scaleX", origin: "left", movement: { y: 0, x: -20 } },     // Left to right
+      {
+        scale: "scaleY",
+        origin: "top",
+        clipPath: 'polygon(0 0, 100% 0, 100% 100%, 80% 100%, 80% 92%, 60% 92%, 60% 100%, 40% 100%, 40% 92%, 20% 92%, 20% 100%, 0 100%)',
+        movement: { y: -20, x: 0 }
+      }, // Top to bottom - notches at BOTTOM (leading edge)
+      {
+        scale: "scaleX",
+        origin: "right",
+        clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 80%, 8% 80%, 8% 60%, 0 60%, 0 40%, 8% 40%, 8% 20%, 0 20%)',
+        movement: { y: 0, x: 20 }
+      }, // Right to left - notches at LEFT (leading edge)
+      {
+        scale: "scaleY",
+        origin: "bottom",
+        clipPath: 'polygon(0 0, 20% 0, 20% 8%, 40% 8%, 40% 0, 60% 0, 60% 8%, 80% 8%, 80% 0, 100% 0, 100% 100%, 0 100%)',
+        movement: { y: 20, x: 0 }
+      }, // Bottom to top - notches at TOP (leading edge)
+      {
+        scale: "scaleX",
+        origin: "left",
+        clipPath: 'polygon(0 0, 100% 0, 100% 20%, 92% 20%, 92% 40%, 100% 40%, 100% 60%, 92% 60%, 92% 80%, 100% 80%, 100% 100%, 0 100%)',
+        movement: { y: 0, x: -20 }
+      }, // Left to right - notches at RIGHT (leading edge)
     ];
 
     const direction = directions[index % directions.length];
     const tl = gsap.timeline();
 
-    // Image starts visible but static
+    // Overlay starts covering the slide with same image, with notched edge and collapsed
+    gsap.set(overlayElement, {
+      scaleX: direction.scale === "scaleX" ? 0 : 1,
+      scaleY: direction.scale === "scaleY" ? 0 : 1,
+      clipPath: direction.clipPath,
+      transformOrigin: direction.origin,
+      willChange: 'transform',
+      opacity: 1
+    });
+
     gsap.set(img, {
       scale: 1.05,
       opacity: 1,
@@ -57,24 +88,22 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
       y: 0
     });
 
-    // Overlay reveal effect with varying direction
-    if (overlayElement) {
-      // Reset all scale properties first
-      gsap.set(overlayElement, {
-        scaleX: 1,
-        scaleY: 1,
-        transformOrigin: direction.origin
+    // Animate overlay (which has same image) scaling in, then remove clip-path before fade
+    tl.to(overlayElement, {
+      [direction.scale]: 1,
+      duration: 1.2,
+      ease: "power3.inOut"
+    })
+      .set(overlayElement, {
+        clipPath: 'none' // Remove notched edge immediately when fully revealed
+      })
+      .to(overlayElement, {
+        opacity: 0,
+        duration: 0.4,
+        ease: "power2.out"
       });
 
-      // Then animate the correct direction
-      tl.to(overlayElement, {
-        [direction.scale]: 0,
-        duration: 1.2,
-        ease: "power3.inOut"
-      });
-    }
-
-    // Subtle parallax with directional movement
+    // Subtle parallax movement
     tl.to(img, {
       ...direction.movement,
       duration: 7,
@@ -95,7 +124,6 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
 
     const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-    // Title reveals with split effect
     tl.fromTo(
       title,
       {
@@ -113,7 +141,6 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
       0.3
     );
 
-    // Divider draws elegantly
     tl.fromTo(
       divider,
       { scaleX: 0, opacity: 0, transformOrigin: "left" },
@@ -121,7 +148,6 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
       0.6
     );
 
-    // Button slides in smoothly
     tl.fromTo(
       button,
       { x: 60, opacity: 0 },
@@ -131,14 +157,12 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
   };
 
   useEffect(() => {
-    if (imageRefs.current[0]) {
-      // First slide should show immediately without overlay animation
-      const firstOverlay = overlayRefs.current[0];
-      if (firstOverlay) {
-        gsap.set(firstOverlay, { scaleY: 0 }); // Hide overlay immediately
-      }
+    if (slideOverlayRefs.current[0]) {
+      // First slide - hide overlay immediately
+      const firstOverlay = slideOverlayRefs.current[0];
+      gsap.set(firstOverlay, { opacity: 0 });
 
-      const firstImg = imageRefs.current[0].querySelector("img");
+      const firstImg = imageRefs.current[0]?.querySelector("img");
       if (firstImg) {
         gsap.set(firstImg, {
           scale: 1.05,
@@ -147,7 +171,6 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
           y: 0
         });
 
-        // Start gentle parallax
         gsap.to(firstImg, {
           y: -20,
           duration: 7,
@@ -173,7 +196,7 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
         onSlideChange={(swiper) => {
           const realIndex = swiper.realIndex;
           setCurrentSlide(realIndex + 1);
-          animateImageIn(realIndex);
+          animateSlideIn(realIndex);
           animateContentIn(realIndex);
         }}
         className="w-full h-full"
@@ -181,7 +204,7 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
         {data.items.map((slide, index) => (
           <SwiperSlide key={index}>
             <div className="h-full w-screen relative overflow-hidden text-white">
-              {/* Background image - NO ZOOM, subtle parallax only */}
+              {/* Background image */}
               <figure className="h-full w-full absolute -z-50 overflow-hidden">
                 <div
                   ref={(el: HTMLDivElement | null) => {
@@ -203,29 +226,35 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
                     priority={index === 0}
                   />
                 </div>
-
-                {/* Reveal overlay with zigzag/notched edge - 5 large notches on leading edge */}
-                <div
-                  ref={(el: HTMLDivElement | null) => {
-                    if (el) {
-                      overlayRefs.current[index] = el;
-                    }
-                  }}
-                  className="absolute inset-0 bg-black z-10 pointer-events-none"
-                  style={{
-                    willChange: 'transform',
-                    backfaceVisibility: 'hidden',
-                    clipPath:
-                      index % 4 === 0
-                        ? 'polygon(0 0, 100% 0, 100% 100%, 80% 100%, 80% 96%, 60% 96%, 60% 100%, 40% 100%, 40% 96%, 20% 96%, 20% 100%, 0 100%)' // Top to bottom - notches at bottom
-                        : index % 4 === 1
-                          ? 'polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 80%, 4% 80%, 4% 60%, 0 60%, 0 40%, 4% 40%, 4% 20%, 0 20%)' // Right to left - notches at left
-                          : index % 4 === 2
-                            ? 'polygon(0 0, 20% 0, 20% 4%, 40% 4%, 40% 0, 60% 0, 60% 4%, 80% 4%, 80% 0, 100% 0, 100% 100%, 0 100%)' // Bottom to top - notches at top
-                            : 'polygon(0 0, 100% 0, 100% 20%, 96% 20%, 96% 40%, 100% 40%, 100% 60%, 96% 60%, 96% 80%, 100% 80%, 100% 100%, 0 100%)' // Left to right - notches at right
-                  }}
-                />
               </figure>
+
+              {/* Slide overlay with same image that animates in with notched edge */}
+              <div
+                ref={(el: HTMLDivElement | null) => {
+                  if (el) {
+                    slideOverlayRefs.current[index] = el;
+                  }
+                }}
+                className="absolute inset-0 z-50 pointer-events-none overflow-hidden"
+                style={{
+                  willChange: 'transform, opacity',
+                  backfaceVisibility: 'hidden',
+                  opacity: 0
+                }}
+              >
+                <div className="h-full w-full relative">
+                  <Image
+                    className="h-full w-full object-cover object-center"
+                    src={slide.image}
+                    alt={slide.imageAlt}
+                    width={1920}
+                    height={1280}
+                    style={{ transform: 'scale(1.05)' }}
+                  />
+                  {/* Match the gradient overlay */}
+                  <div className="absolute inset-0 bg-[linear-gradient(180deg,_rgba(0,0,0,0)_21.7%,_rgba(0,0,0,0.6)_63.57%,_rgba(0,0,0,0.8)_100%)]"></div>
+                </div>
+              </div>
 
               {/* Gradient overlay */}
               <div className="absolute inset-0 bg-[linear-gradient(180deg,_rgba(0,0,0,0)_21.7%,_rgba(0,0,0,0.6)_63.57%,_rgba(0,0,0,0.8)_100%)] -z-40"></div>
@@ -305,7 +334,7 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
       </Swiper>
 
       {/* Pagination Indicator */}
-      <div className="absolute bottom-[10%] md:bottom-[37%] w-full">
+      <div className="absolute bottom-[10%] md:bottom-[37%] w-full z-[60]">
         <div className="container flex justify-end">
           <span className="text-[15px] text-white whitespace-nowrap font-light relative -right-3 md:right-2 z-10 flex flex-col items-center">
             <div className="flex flex-col rotate-180">
