@@ -16,7 +16,6 @@ import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { HomeProps } from "../type";
-import { acdData } from "../data";
 gsap.registerPlugin(ScrollTrigger);
 
 const AcademicCultural = ({ data }: { data: HomeProps["thirdSection"] }) => {
@@ -29,15 +28,13 @@ const AcademicCultural = ({ data }: { data: HomeProps["thirdSection"] }) => {
 
     const ctx = gsap.context(() => {
       gsap.to(imgRef.current, {
-        xPercent: -40, // move image 15% to the right
+        xPercent: -20, // move image 15% to the right
         ease: "power3.out",
-        yoyo: true,
         scrollTrigger: {
           trigger: imgRef.current,
-          start: "top 40%", // start when image enters view
+          start: "top bottom", // start when image enters view
           end: "bottom top", // finish when it leaves
-           scrub: true, 
-          once: false,
+          scrub: true, // smooth scroll-linked motion
         },
       });
     });
@@ -89,7 +86,7 @@ const AcademicCultural = ({ data }: { data: HomeProps["thirdSection"] }) => {
             </motion.div>
 
             {/* Top Divider */}
-            <div className=""></div>
+            <div className="bg-[linear-gradient(90deg,_#000000_0%,_rgba(0,_0,_0,_0)_60%)] h-[1px] lg:bg-[linear-gradient(90deg,_#000000_0%,_rgba(0,_0,_0,_0)_30%)]"></div>
 
             {/* List Items */}
             <div>
@@ -104,41 +101,52 @@ const AcademicCultural = ({ data }: { data: HomeProps["thirdSection"] }) => {
                     transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
                     key={index}
                     onMouseEnter={() => setActiveIndex(index)}
-                    className={`flex flex-col md:flex-row gap-2 md:gap-8 items-baseline md:items-center py-7 lg:py-10 group transition-colors hover:border-white relative z-[2]
-                    ${isActive ? " border-b border-black" : ""}
-                    ${index === data.items.length - 2 ? "ps-0 xl:ps-[8%] 2xl:ps-[15%]" : ""}
-                    ${index === data.items.length - 1 ? "ps-0 xl:ps-[18%] 2xl:ps-[30%]" : ""}
-                  `}
+                    className={`flex flex-col md:flex-row gap-2 md:gap-8 items-baseline md:items-center py-7 lg:py-10 group transition-colors 
+    ${
+      isActive
+        ? "bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)] border-b border-white"
+        : ""
+    }
+    ${index === data.items.length - 2 ? "ps-0 xl:ps-[8%] 2xl:ps-[15%]" : ""}
+    ${index === data.items.length - 1 ? "ps-0 xl:ps-[18%] 2xl:ps-[30%]" : ""}
+  `}
                     style={
                       !isActive
                         ? {
-                          borderBottomWidth: "1px",
-                          borderStyle: "solid",
-                          borderImageSlice: 1,
-                          borderImageSource:
-                            "linear-gradient(90deg, #000000 0%, rgba(0, 0, 0, 0) 100%)",
-                        }
+                            borderBottomWidth: "1px",
+                            borderStyle: "solid",
+                            borderImageSlice: 1,
+                            borderImageSource:
+                              "linear-gradient(90deg, #000000 0%, rgba(0, 0, 0, 0) 100%)",
+                          }
                         : {}
                     }
                   >
-                    <div className={`w-0 group-hover:w-full absolute top-0 left-0 h-full bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)] ${isActive ? "bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)] transition-all duration-300 z-0 w-full" : "w-0 transition-all duration-300 z-0"}`}></div>
-                    <div className={`transition-all duration-300 mb-3 xl:mb-0 ${isActive ? "px-2" : "group-hover:px-2"}`}>
+                    <div
+                      className={`transition-all duration-300 mb-3 xl:mb-0 ${
+                        isActive ? "px-2" : "group-hover:px-2"
+                      }`}
+                    >
                       <Image
-                        src={acdData.academicCulturalDataicons[index]}
+                        src={value.logo}
                         alt={value.title}
                         width={60}
                         height={75}
-                        className={`transition-all duration-300 w-15  h-auto ${isActive
-                          ? "filter-[brightness(0)]"
-                          : "group-hover:filter-[brightness(0)]"
-                          }`}
+                        className={`transition-all duration-300 w-15 xl:w-auto h-auto ${
+                          isActive
+                            ? "filter-[brightness(0)]"
+                            : "group-hover:filter-[brightness(0)]"
+                        }`}
                       />
                     </div>
                     <div>
-                      <p className={`text-md md:text-lg 2xl:text-xl font-light text-black leading-[1.2] lettersp-1 relative z-10 ${index === academicCulturalData.accvalues.length - 1
-                        ? "max-w-[15ch]"
-                        : "max-w-[18ch]"
-                        } transition-all duration-300 ${isActive ? "px-2 lg:px-0" : ""
+                      <p
+                        className={`text-md md:text-lg 2xl:text-xl font-light text-black leading-[1.2] lettersp-1 ${
+                          index === academicCulturalData.accvalues.length - 1
+                            ? "max-w-[15ch]"
+                            : "max-w-[18ch]"
+                        } transition-all duration-300 ${
+                          isActive ? "px-2 lg:px-0" : ""
                         }`}
                       >
                         {value.title}
@@ -155,7 +163,7 @@ const AcademicCultural = ({ data }: { data: HomeProps["thirdSection"] }) => {
         </div>
 
         {/* Side Image */}
-        <div className="absolute bottom-0 right-0 xl:right-[-10%] hidden xl:block w-[640px] 2xl:w-[737px] z-20">
+        <div className="absolute bottom-0 right-0 hidden xl:block w-[640px] 2xl:w-[737px]">
           <Image
             ref={imgRef}
             src={data.image}

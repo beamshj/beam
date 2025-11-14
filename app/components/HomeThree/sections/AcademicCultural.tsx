@@ -29,15 +29,13 @@ const AcademicCultural = ({ data }: { data: HomeProps["thirdSection"] }) => {
 
     const ctx = gsap.context(() => {
       gsap.to(imgRef.current, {
-        xPercent: -40, // move image 15% to the right
+        xPercent: -20, // move image 15% to the right
         ease: "power3.out",
-        yoyo: true,
         scrollTrigger: {
           trigger: imgRef.current,
-          start: "top 40%", // start when image enters view
+          start: "top bottom", // start when image enters view
           end: "bottom top", // finish when it leaves
-           scrub: true, 
-          once: false,
+          scrub: true, // smooth scroll-linked motion
         },
       });
     });
@@ -121,7 +119,7 @@ const AcademicCultural = ({ data }: { data: HomeProps["thirdSection"] }) => {
                         : {}
                     }
                   >
-                    <div className={`w-0 group-hover:w-full absolute top-0 left-0 h-full bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)] ${isActive ? "bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)] transition-all duration-300 z-0 w-full" : "w-0 transition-all duration-300 z-0"}`}></div>
+                    <div className={`w-0 group-hover:w-full absolute top-0 left-0 h-full bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)] ${isActive ? "bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)] transition-all duration-300 z-0 w-0" : "w-0 transition-all duration-300 z-0"}`}></div>
                     <div className={`transition-all duration-300 mb-3 xl:mb-0 ${isActive ? "px-2" : "group-hover:px-2"}`}>
                       <Image
                         src={acdData.academicCulturalDataicons[index]}
@@ -155,7 +153,7 @@ const AcademicCultural = ({ data }: { data: HomeProps["thirdSection"] }) => {
         </div>
 
         {/* Side Image */}
-        <div className="absolute bottom-0 right-0 xl:right-[-10%] hidden xl:block w-[640px] 2xl:w-[737px] z-20">
+        <div className="absolute bottom-0 right-0 hidden xl:block w-[640px] 2xl:w-[737px] z-20">
           <Image
             ref={imgRef}
             src={data.image}

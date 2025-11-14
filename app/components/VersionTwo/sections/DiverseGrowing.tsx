@@ -10,15 +10,14 @@ import { motion } from "framer-motion";
 import {
   fadeUp,
   // fadeInLeft,
+  fadeInRight,
 } from "@/public/assets/FramerAnimation/animation";
-import { moveLeft, moveRight, moveUp } from "../../motionVarients";
 import Counter from "../../Common/Counter";
 import SplitText from "@/components/SplitText";
 import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { HomeProps } from "../type";
-import { iconanimated } from "../data";
 gsap.registerPlugin(ScrollTrigger);
 
 const DiverseGrowing = ({data}: {data: HomeProps['fifthSection']}) => {
@@ -29,7 +28,7 @@ const DiverseGrowing = ({data}: {data: HomeProps['fifthSection']}) => {
 
     const ctx = gsap.context(() => {
       gsap.to(imgRef.current, {
-        xPercent: 40, // move image 15% to the right
+        xPercent: 15, // move image 15% to the right
         ease: "none",
         scrollTrigger: {
           trigger: imgRef.current,
@@ -71,9 +70,15 @@ const DiverseGrowing = ({data}: {data: HomeProps['fifthSection']}) => {
               />
             </motion.div>
             <div className="2xl:w-4/5 ml-auto mt-8 lg:mt-[140px]  xl:mt-[64px] relative">
-              <div>
+              <motion.div
+                variants={fadeInRight}
+                initial="hidden"
+                whileInView="visible"
+                transition={{ delay: 0.9 }}
+                viewport={{ once: true, amount: 0.1 }} // Trigger when only 10% of image enters viewport
+              >
                 <div className="flex flex-col gap-5 lg:gap-0 xl:w-[80%] 2xl:w-fit m-auto xl:ml-auto mr-0 2xl:m-auto">
-                  <motion.div variants={moveLeft(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.1 }} onTouchStart={() => handleTouch(1)} className={`group overflow-hidden border relative 2xl:left-[50px] bg-white/30 backdrop-blur-md border-[#ccc] 
+                  <div onTouchStart={() => handleTouch(1)} className={`group overflow-hidden border relative 2xl:left-[50px] bg-white/30 backdrop-blur-md border-[#ccc] 
                     rounded-[15px] min-w-full md:min-w- lg:min-w-[250px] 2xl:min-w-[597px] px-6 pt-4 pb-5 2xl:px-10 xl:py-4 w-fit m-auto 
                     transition-all duration-500 ease-in-out
                     ${isActive === 1 ? "bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)]" : ""}`}>
@@ -96,7 +101,7 @@ const DiverseGrowing = ({data}: {data: HomeProps['fifthSection']}) => {
                         </p>
                         <Image
                           className={`grayscale group-hover:grayscale-0 transition-all duration-400 group-hover:scale-110 ${isActive === 1 ? "grayscale-0 scale-110" : ""}`}
-                          src={iconanimated.imgdata[0]}
+                          src={data.items[0].logo}
                           alt={data.items[0].logoAlt}
                           width={50}
                           height={50}
@@ -106,10 +111,10 @@ const DiverseGrowing = ({data}: {data: HomeProps['fifthSection']}) => {
                         {data.items[0].value}
                       </p>
                     </div>
-                  </motion.div>
+                  </div>
 
                   <div className="flex flex-col lg:flex-row gap-5 lg:gap-0 items-baseline">
-                    <motion.div variants={moveRight(0.4)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.1 }} onTouchStart={() => handleTouch(2)} 
+                    <div onTouchStart={() => handleTouch(2)} 
                         className={`relative group overflow-hidden border bg-white/30 backdrop-blur-md border-[#ccc] rounded-[15px] w-full 
                           transition-all duration-500 ease-in-out
                           ${isActive == 2   ? "bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)]" : ""}
@@ -131,7 +136,7 @@ const DiverseGrowing = ({data}: {data: HomeProps['fifthSection']}) => {
                           </p>
                           <Image
                             className={`grayscale group-hover:grayscale-0 transition-all duration-400 group-hover:scale-110 ${isActive === 2 ? "grayscale-0 scale-110" : ""}`}
-                            src={iconanimated.imgdata[1]}
+                            src={data.items[1].logo}
                             alt={data.items[1].logoAlt}
                             width={50}
                             height={50}
@@ -141,11 +146,11 @@ const DiverseGrowing = ({data}: {data: HomeProps['fifthSection']}) => {
                           {data.items[1].value}
                         </p>
                       </div>
-                    </motion.div>
+                    </div>
 
                     <div className="flex flex-col w-full gap-5 lg:gap-0 xl:max-w-[389px]">
                       {/* Card 1 */}
-                      <motion.div variants={moveUp(0.6)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.1 }} onTouchStart={() =>   handleTouch(3)} className={` ${isActive == 3 ? "bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)]" : ""} relative group overflow-hidden border bg-white/30  backdrop-blur-md border-[#ccc] rounded-[15px] w-full transition-all duration-500 ease-in-out`}>
+                      <div onTouchStart={() =>   handleTouch(3)} className={` ${isActive == 3 ? "bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)]" : ""} relative group overflow-hidden border bg-white/30  backdrop-blur-md border-[#ccc] rounded-[15px] w-full transition-all duration-500 ease-in-out`}>
                         {/* Gradient hover overlay */}
                         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
                           <div className="w-full h-full bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)]"></div>
@@ -165,7 +170,7 @@ const DiverseGrowing = ({data}: {data: HomeProps['fifthSection']}) => {
                             </p>
                             <Image
                               className={`grayscale group-hover:grayscale-0 transition-all duration-400 group-hover:scale-110 ${isActive === 3 ? "grayscale-0 scale-110" : ""}`}
-                               src={iconanimated.imgdata[2]}
+                              src={data.items[2].logo}
                               alt={data.items[2].logoAlt}
                               width={50}
                               height={50}
@@ -175,10 +180,10 @@ const DiverseGrowing = ({data}: {data: HomeProps['fifthSection']}) => {
                             {data.items[2].value}
                           </p>
                         </div>
-                      </motion.div>
+                      </div>
 
                       {/* Card 2 */}
-                      <motion.div variants={moveUp(0.8)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.1 }} onTouchStart={() => handleTouch(4)} className={`relative group overflow-hidden border bg-white/30 backdrop-blur-md border-[#ccc] rounded-[15px] 
+                      <div onTouchStart={() => handleTouch(4)} className={`relative group overflow-hidden border bg-white/30 backdrop-blur-md border-[#ccc] rounded-[15px] 
                         w-full transition-all duration-500 ease-in-out ${isActive === 4 ? "bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)]" : ""}`}>
                         {/* Gradient hover overlay */}
                         <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none ${isActive === 4 ? "opacity-100" : ""}`}>
@@ -199,7 +204,7 @@ const DiverseGrowing = ({data}: {data: HomeProps['fifthSection']}) => {
                             </p>
                             <Image
                               className={`grayscale group-hover:grayscale-0 transition-all duration-400 group-hover:scale-110 ${isActive === 4 ? "grayscale-0 scale-110" : ""}`}
-                              src={iconanimated.imgdata[4]}
+                              src={data.items[4].logo}
                               alt={data.items[4].logoAlt}
                               width={50}
                               height={50}
@@ -209,11 +214,11 @@ const DiverseGrowing = ({data}: {data: HomeProps['fifthSection']}) => {
                             {data.items[4].value}
                           </p>
                         </div>
-                      </motion.div>
+                      </div>
                     </div>
 
                     {/* Card with animated gradient background on hover */}
-                    <motion.div variants={moveLeft(0.4)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.1 }} onTouchStart={() => handleTouch(5)} className={`relative group overflow-hidden border bg-white/30 backdrop-blur-md border-[#ccc] rounded-[15px] w-full 
+                    <div onTouchStart={() => handleTouch(5)} className={`relative group overflow-hidden border bg-white/30 backdrop-blur-md border-[#ccc] rounded-[15px] w-full 
                       transition-all duration-500 ease-in-out ${isActive === 5 ? "bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)]" : ""}`}>
                       {/* Hover Gradient Overlay */}
                       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
@@ -232,7 +237,7 @@ const DiverseGrowing = ({data}: {data: HomeProps['fifthSection']}) => {
                           </p>
                           <Image
                             className={`grayscale group-hover:grayscale-0 transition-all duration-400 group-hover:scale-110 ${isActive === 5 ? "grayscale-0 scale-110" : ""}`}
-                             src={iconanimated.imgdata[3]}
+                            src={data.items[3].logo}
                             alt={data.items[3].logoAlt}
                             width={50}
                             height={50}
@@ -242,10 +247,10 @@ const DiverseGrowing = ({data}: {data: HomeProps['fifthSection']}) => {
                           {data.items[3].value}
                         </p>
                       </div>
-                    </motion.div>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
         </div>

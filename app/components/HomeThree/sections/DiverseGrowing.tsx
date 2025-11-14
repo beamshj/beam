@@ -29,7 +29,7 @@ const DiverseGrowing = ({data}: {data: HomeProps['fifthSection']}) => {
 
     const ctx = gsap.context(() => {
       gsap.to(imgRef.current, {
-        xPercent: 40, // move image 15% to the right
+        xPercent: 15, // move image 15% to the right
         ease: "none",
         scrollTrigger: {
           trigger: imgRef.current,
