@@ -30,7 +30,7 @@ const DiverseGrowing = ({data}: {data: HomeProps['fifthSection']}) => {
     const ctx = gsap.context(() => {
       gsap.fromTo(
   imgRef.current,
-  { xPercent: -25 },   // <-- moves image 10% left initially
+  { xPercent: -20 },   // <-- moves image 10% left initially
   {
     xPercent: 15,
     ease: "none",
