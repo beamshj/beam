@@ -3,12 +3,12 @@ import React, { useEffect } from "react";
 import Image from "next/image";
 import "swiper/css";
 import "swiper/css/navigation";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { motion } from "framer-motion";
+import { useScroll, useTransform, motion } from "framer-motion";
 // Optional: Add modules if needed
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import SplitText from "@/components/SplitText";
@@ -145,6 +145,19 @@ const OurSchools = ({
     }),
   };
 
+  // Inside your component:
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start 0.7", "end 0.3"] // Starts a bit earlier but not too early
+  });
+
+  // More dramatic transformations
+  // const opacity = useTransform(scrollYProgress, [0, 1, 1, 1], [0, 1, 1, 0]);
+  // const scale = useTransform(scrollYProgress, [0, 0.75, 0.75, 1], [0.6, 1, 1, 0.6]); // Scales from 60% to 100%
+  // const y = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [150, 0, 0, -150]); // Moves 150px
+  const rotateX = useTransform(scrollYProgress, [0, 0.20, 0.75, 1], [12, 0, 0, -12]);
+
   return (
     <section className="py-8 xl:pt-20 xl:pb-25 2xl:pt-[133px] 2xl:pb-[160px]">
       <motion.div
@@ -253,7 +266,16 @@ const OurSchools = ({
               </motion.div>
             </div>
           </div>
-          <div>
+          <motion.div
+            ref={containerRef}
+            style={{
+              // opacity,
+              // scale,
+              // y,
+              rotateX,
+              transformPerspective: 1200 // Adds 3D perspective
+            }}
+            className="container-scroll-effect">
             <Swiper
               modules={[Navigation, Autoplay, Pagination]}
               // spaceBetween={20}
@@ -381,7 +403,7 @@ const OurSchools = ({
               ))}
             </Swiper>
             <div className="cus-pagination flex justify-end gap-2 mx-auto !w-fit"></div>
-          </div>
+          </motion.div>
         </div>
       </motion.div>
     </section>
