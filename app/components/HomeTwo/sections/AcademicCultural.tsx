@@ -29,13 +29,15 @@ const AcademicCultural = ({ data }: { data: HomeProps["thirdSection"] }) => {
 
     const ctx = gsap.context(() => {
       gsap.to(imgRef.current, {
-        xPercent: -20, // move image 15% to the right
+        xPercent: -40, // move image 15% to the right
         ease: "power3.out",
+        yoyo: true,
         scrollTrigger: {
           trigger: imgRef.current,
-          start: "top bottom", // start when image enters view
+          start: "top 40%", // start when image enters view
           end: "bottom top", // finish when it leaves
-          scrub: true, // smooth scroll-linked motion
+          // scrub: true, 
+          once: false,
         },
       });
     });
@@ -153,7 +155,7 @@ const AcademicCultural = ({ data }: { data: HomeProps["thirdSection"] }) => {
         </div>
 
         {/* Side Image */}
-        <div className="absolute bottom-0 right-0 hidden xl:block w-[640px] 2xl:w-[737px] z-20">
+        <div className="absolute bottom-0 right-0 xl:right-[-10%] hidden xl:block w-[640px] 2xl:w-[737px] z-20">
           <Image
             ref={imgRef}
             src={data.image}
