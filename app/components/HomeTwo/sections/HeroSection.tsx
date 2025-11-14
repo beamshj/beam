@@ -39,44 +39,41 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
     gsap.killTweensOf([overlayElement, imgElement, img]);
 
     // Different reveal directions with notches on the LEADING edge
-    // 1: top-bottom (notches at bottom), 2: right-left (notches at left), 
-    // 3: bottom-top (notches at top), 4: left-right (notches at right)
+    // Using translate instead of scale to avoid distortion
     const directions = [
       {
-        scale: "scaleY",
-        origin: "top",
+        from: { y: '-100%', x: 0 },
+        to: { y: '0%', x: 0 },
         clipPath: 'polygon(0 0, 100% 0, 100% 100%, 80% 100%, 80% 92%, 60% 92%, 60% 100%, 40% 100%, 40% 92%, 20% 92%, 20% 100%, 0 100%)',
         movement: { y: -20, x: 0 }
-      }, // Top to bottom - notches at BOTTOM (leading edge)
+      }, // Top to bottom - notches at BOTTOM
       {
-        scale: "scaleX",
-        origin: "right",
+        from: { y: 0, x: '100%' },
+        to: { y: 0, x: '0%' },
         clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 80%, 8% 80%, 8% 60%, 0 60%, 0 40%, 8% 40%, 8% 20%, 0 20%)',
         movement: { y: 0, x: 20 }
-      }, // Right to left - notches at LEFT (leading edge)
+      }, // Right to left - notches at LEFT
       {
-        scale: "scaleY",
-        origin: "bottom",
+        from: { y: '100%', x: 0 },
+        to: { y: '0%', x: 0 },
         clipPath: 'polygon(0 0, 20% 0, 20% 8%, 40% 8%, 40% 0, 60% 0, 60% 8%, 80% 8%, 80% 0, 100% 0, 100% 100%, 0 100%)',
         movement: { y: 20, x: 0 }
-      }, // Bottom to top - notches at TOP (leading edge)
+      }, // Bottom to top - notches at TOP
       {
-        scale: "scaleX",
-        origin: "left",
+        from: { y: 0, x: '-100%' },
+        to: { y: 0, x: '0%' },
         clipPath: 'polygon(0 0, 100% 0, 100% 20%, 92% 20%, 92% 40%, 100% 40%, 100% 60%, 92% 60%, 92% 80%, 100% 80%, 100% 100%, 0 100%)',
         movement: { y: 0, x: -20 }
-      }, // Left to right - notches at RIGHT (leading edge)
+      }, // Left to right - notches at RIGHT
     ];
 
     const direction = directions[index % directions.length];
     const tl = gsap.timeline();
 
-    // Overlay starts covering the slide with same image, with notched edge and collapsed
+    // Overlay starts off-screen with notched edge
     gsap.set(overlayElement, {
-      scaleX: direction.scale === "scaleX" ? 0 : 1,
-      scaleY: direction.scale === "scaleY" ? 0 : 1,
+      ...direction.from,
       clipPath: direction.clipPath,
-      transformOrigin: direction.origin,
       willChange: 'transform',
       opacity: 1
     });
@@ -88,27 +85,29 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
       y: 0
     });
 
-    // Animate overlay (which has same image) scaling in, then remove clip-path before fade
+    // Animate overlay sliding in, then smoothly transition clip-path and fade
     tl.to(overlayElement, {
-      [direction.scale]: 1,
+      ...direction.to,
       duration: 1.2,
       ease: "power3.inOut"
     })
-      .set(overlayElement, {
-        clipPath: 'none' // Remove notched edge immediately when fully revealed
-      })
+      .to(overlayElement, {
+        clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)', // Smooth to rectangle
+        duration: 0.25,
+        ease: "power2.inOut"
+      }, "-=0.1")
       .to(overlayElement, {
         opacity: 0,
         duration: 0.4,
         ease: "power2.out"
-      });
+      }, "-=0.15");
 
-    // Subtle parallax movement
+    // Subtle parallax movement - starts AFTER overlay fades out
     tl.to(img, {
       ...direction.movement,
       duration: 7,
       ease: "power1.inOut"
-    }, 0.3);
+    }, "+=0");
   };
 
   // Smooth content reveal
@@ -237,19 +236,23 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
                 }}
                 className="absolute inset-0 z-50 pointer-events-none overflow-hidden"
                 style={{
-                  willChange: 'transform, opacity',
+                  willChange: 'clip-path, opacity',
                   backfaceVisibility: 'hidden',
                   opacity: 0
                 }}
               >
-                <div className="h-full w-full relative">
+                <div className="h-full w-full absolute inset-0">
                   <Image
-                    className="h-full w-full object-cover object-center"
+                    className="h-full w-full object-cover object-center overlay-image"
                     src={slide.image}
                     alt={slide.imageAlt}
                     width={1920}
                     height={1280}
-                    style={{ transform: 'scale(1.05)' }}
+                    style={{
+                      position: 'absolute',
+                      inset: 0,
+                      transform: 'scale(1.05)'
+                    }}
                   />
                   {/* Match the gradient overlay */}
                   <div className="absolute inset-0 bg-[linear-gradient(180deg,_rgba(0,0,0,0)_21.7%,_rgba(0,0,0,0.6)_63.57%,_rgba(0,0,0,0.8)_100%)]"></div>
