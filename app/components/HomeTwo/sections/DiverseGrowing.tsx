@@ -39,6 +39,7 @@ const DiverseGrowing = ({data}: {data: HomeProps['fifthSection']}) => {
       start: "top bottom",
       end: "bottom top",
       scrub: true,
+      
     },
   }
 );
