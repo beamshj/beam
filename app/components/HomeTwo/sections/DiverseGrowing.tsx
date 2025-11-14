@@ -28,16 +28,20 @@ const DiverseGrowing = ({data}: {data: HomeProps['fifthSection']}) => {
     if (!imgRef.current) return;
 
     const ctx = gsap.context(() => {
-      gsap.to(imgRef.current, {
-        xPercent: 40, // move image 15% to the right
-        ease: "none",
-        scrollTrigger: {
-          trigger: imgRef.current,
-          start: "top bottom",   // start when image enters view
-          end: "bottom top",     // finish when it leaves
-          scrub: true,           // smooth scroll-linked motion
-        },
-      });
+      gsap.fromTo(
+  imgRef.current,
+  { xPercent: -25 },   // <-- moves image 10% left initially
+  {
+    xPercent: 15,
+    ease: "none",
+    scrollTrigger: {
+      trigger: imgRef.current,
+      start: "top bottom",
+      end: "bottom top",
+      scrub: true,
+    },
+  }
+);
     });
 
     return () => ctx.revert();
