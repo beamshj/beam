@@ -25,6 +25,58 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
     window.location.href = "/contact-us?scroll=register";
   };
 
+  // Curtain reveal animation on initial load
+  useEffect(() => {
+    const leftCurtain = leftCurtainRef.current;
+    const rightCurtain = rightCurtainRef.current;
+
+    if (leftCurtain && rightCurtain) {
+      const t2 = gsap.timeline({
+        onComplete: () => {
+          setShowCurtains(false);
+        }
+      });
+
+      // Set initial state
+      gsap.set([leftCurtain, rightCurtain], {
+        opacity: 1,
+      });
+
+      // Animate curtains opening
+      t2.to(leftCurtain, {
+        x: '-100%',
+        duration: 1.8,
+        ease: "power3.inOut"
+      }, -0.2)
+        .to(rightCurtain, {
+          x: '100%',
+          duration: 1.8,
+          ease: "power3.inOut"
+        }, -0.2);
+
+      // Setup first slide image
+      const firstImg = imageRefs.current[0]?.querySelector("img");
+      if (firstImg) {
+        gsap.set(firstImg, {
+          scale: 1.05,
+          opacity: 1,
+          x: 0,
+          y: 0
+        });
+
+        gsap.to(firstImg, {
+          y: -20,
+          duration: 7,
+          ease: "power1.inOut"
+        });
+      }
+
+      // Animate content after curtains are 60% open
+      // setTimeout(() => {
+      //   animateContentIn(0);
+      // }, 200);
+    }
+  }, []);
   // Animate slide coming in by having its own image push in with notched edge
   const animateSlideIn = (index: number) => {
     const overlayElement = slideOverlayRefs.current[index];
@@ -124,6 +176,8 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
 
     gsap.killTweensOf([title, button, divider]);
 
+
+
     const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
     tl.fromTo(
@@ -159,58 +213,7 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
     );
   };
 
-  // Curtain reveal animation on initial load
-  useEffect(() => {
-    const leftCurtain = leftCurtainRef.current;
-    const rightCurtain = rightCurtainRef.current;
 
-    if (leftCurtain && rightCurtain) {
-      const tl = gsap.timeline({
-        onComplete: () => {
-          setShowCurtains(false);
-        }
-      });
-
-      // Set initial state
-      gsap.set([leftCurtain, rightCurtain], {
-        opacity: 1,
-      });
-
-      // Animate curtains opening
-      tl.to(leftCurtain, {
-        x: '-100%',
-        duration: 1.8,
-        ease: "power3.inOut"
-      }, 0)
-        .to(rightCurtain, {
-          x: '100%',
-          duration: 1.8,
-          ease: "power3.inOut"
-        }, 0);
-
-      // Setup first slide image
-      const firstImg = imageRefs.current[0]?.querySelector("img");
-      if (firstImg) {
-        gsap.set(firstImg, {
-          scale: 1.05,
-          opacity: 1,
-          x: 0,
-          y: 0
-        });
-
-        gsap.to(firstImg, {
-          y: -20,
-          duration: 7,
-          ease: "power1.inOut"
-        });
-      }
-
-      // Animate content after curtains are 60% open
-      setTimeout(() => {
-        animateContentIn(0);
-      }, 1000);
-    }
-  }, []);
 
   return (
     <section className="lg:h-screen h-[65dvh] md:h-[85dvh] relative overflow-hidden max-w-[1920px] mx-auto">
