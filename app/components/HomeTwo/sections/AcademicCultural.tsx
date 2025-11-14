@@ -82,6 +82,7 @@ const AcademicCultural = ({ data }: { data: HomeProps["thirdSection"] }) => {
               transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
               className="mt-5 md:mt-6 2xl:mt-[43px] mb-5 md:mb-7 2xl:mb-[93px]"
             >
+              
               <p
                 className="text-sm font-light text-colorpara md:max-w-[68ch] 2xl:max-w-[82ch]"
                 dangerouslySetInnerHTML={{ __html: data.description }}
@@ -89,7 +90,9 @@ const AcademicCultural = ({ data }: { data: HomeProps["thirdSection"] }) => {
             </motion.div>
 
             {/* Top Divider */}
-            <div className=""></div>
+            <div className="">
+              <div className="bg-[linear-gradient(90deg,_#000000_0%,_rgba(0,_0,_0,_0)_60%)] h-[1px] lg:bg-[linear-gradient(90deg,_#000000_0%,_rgba(0,_0,_0,_0)_30%)]"></div>
+            </div>
 
             {/* List Items */}
             <div>
