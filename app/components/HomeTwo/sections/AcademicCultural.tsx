@@ -119,7 +119,7 @@ const AcademicCultural = ({ data }: { data: HomeProps["thirdSection"] }) => {
                         : {}
                     }
                   >
-                    <div className={`w-0 group-hover:w-full absolute top-0 left-0 h-full bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)] ${isActive ? "bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)] transition-all duration-300 z-0 w-0" : "w-0 transition-all duration-300 z-0"}`}></div>
+                    <div className={`w-0 group-hover:w-full absolute top-0 left-0 h-full bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)] ${isActive ? "bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)] transition-all duration-300 z-0 w-full" : "w-0 transition-all duration-300 z-0"}`}></div>
                     <div className={`transition-all duration-300 mb-3 xl:mb-0 ${isActive ? "px-2" : "group-hover:px-2"}`}>
                       <Image
                         src={acdData.academicCulturalDataicons[index]}
