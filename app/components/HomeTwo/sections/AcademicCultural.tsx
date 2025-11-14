@@ -29,12 +29,12 @@ const AcademicCultural = ({ data }: { data: HomeProps["thirdSection"] }) => {
 
     const ctx = gsap.context(() => {
       gsap.to(imgRef.current, {
-        xPercent: -50, // move image 15% to the right
-        ease: "power3.out",
-        yoyo: true,
+        xPercent: -60, // move image 15% to the right
+        ease: "none",
+       // yoyo: true,
         scrollTrigger: {
           trigger: imgRef.current,
-      start: "top bottom",
+       start: "top bottom",
       end: "bottom top",
            scrub: true, 
           once: false,
