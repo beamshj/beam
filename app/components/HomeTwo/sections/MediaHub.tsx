@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -40,84 +40,112 @@ const MediaHub = ({
 
   const router = useRouter();
 
-  const blogItems =
-    blogdata?.categories?.flatMap((category) =>
-      category.blogs?.map((blog) => ({
-        img: blog.coverImage,
-        date: new Date(blog.date || "")
-          .toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "numeric",
-            day: "numeric",
-          })
-          .replace(/\//g, "-"),
-        title: blog.title,
-        category: "Blog",
-        images: [],
-        description: "",
-        slug: blog.slug,
-      }))
-    ) || [];
-
-  const newsItems =
-    newsdata?.categories?.flatMap((category) =>
-      category.news?.map((news) => ({
-        img: news.coverImage,
-        date: new Date(news.date)
-          .toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "numeric",
-            day: "numeric",
-          })
-          .replace(/\//g, "-"),
-        title: news.title,
-        category: "News",
-        images: [],
-        description: "",
-        slug: news.slug,
-      }))
-    ) || [];
-
-  const galleryItems =
-    gallerydata?.gallery?.flatMap((section) =>
-      section.categories?.flatMap((cat) =>
-        cat.images?.map((image) => ({
-          img: image,
-          date: "",
-          title: cat.title || section.title || "Gallery",
-          category: "Gallery",
-          images: cat.images,
-          description: cat.description,
-          slug: "",
+  // ✅ FIXED: Memoize blog items to prevent recreation on every render
+  const blogItems = useMemo(
+    () =>
+      blogdata?.categories?.flatMap((category) =>
+        category.blogs?.map((blog) => ({
+          img: blog.coverImage,
+          date: blog.date
+            ? new Date(blog.date)
+              .toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "numeric",
+                day: "numeric",
+              })
+              .replace(/\//g, "-")
+            : "",
+          title: blog.title,
+          category: "Blog",
+          images: [],
+          description: "",
+          slug: blog.slug,
         }))
-      )
-    ) || [];
-
-  const getRandomItems = (
-    arr: {
-      img: string;
-      date: string;
-      title: string;
-      category: string;
-      images: string[];
-      description: string;
-      slug: string;
-    }[],
-    n: number
-  ) => arr.sort(() => 0.5 - Math.random()).slice(0, n);
-
-  const randomBlogs = getRandomItems(blogItems, 3);
-  const randomNews = getRandomItems(newsItems, 3);
-  const randomGallery = getRandomItems(galleryItems, 3);
-
-  const combinedItems = [...randomBlogs, ...randomNews, ...randomGallery].sort(
-    () => 0.5 - Math.random()
+      ) || [],
+    [blogdata]
   );
 
-  const mediaHubData = {
-    heading: "Media Hub",
-    mediaHub: combinedItems,
-  };
+  // ✅ FIXED: Memoize news items to prevent recreation on every render
+  const newsItems = useMemo(
+    () =>
+      newsdata?.categories?.flatMap((category) =>
+        category.news?.map((news) => ({
+          img: news.coverImage,
+          date: news.date
+            ? new Date(news.date)
+              .toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "numeric",
+                day: "numeric",
+              })
+              .replace(/\//g, "-")
+            : "",
+          title: news.title,
+          category: "News",
+          images: [],
+          description: "",
+          slug: news.slug,
+        }))
+      ) || [],
+    [newsdata]
+  );
+
+  // ✅ FIXED: Memoize gallery items to prevent recreation on every render
+  const galleryItems = useMemo(
+    () =>
+      gallerydata?.gallery?.flatMap((section) =>
+        section.categories?.flatMap((cat) =>
+          cat.images?.map((image) => ({
+            img: image,
+            date: "",
+            title: cat.title || section.title || "Gallery",
+            category: "Gallery",
+            images: cat.images,
+            description: cat.description,
+            slug: "",
+          }))
+        )
+      ) || [],
+    [gallerydata]
+  );
+
+  // ✅ FIXED: Memoize combined items so shuffle only happens once
+  const combinedItems = useMemo(() => {
+    const getRandomItems = (
+      arr: {
+        img: string;
+        date: string;
+        title: string;
+        category: string;
+        images: string[];
+        description: string;
+        slug: string;
+      }[],
+      n: number
+    ) => {
+      // Create a copy before sorting to avoid mutating original array
+      const shuffled = [...arr].sort(() => 0.5 - Math.random());
+      return shuffled.slice(0, n);
+    };
+
+    const randomBlogs = getRandomItems(blogItems, 3);
+    const randomNews = getRandomItems(newsItems, 3);
+    const randomGallery = getRandomItems(galleryItems, 3);
+
+    // Shuffle the combined array once
+    return [...randomBlogs, ...randomNews, ...randomGallery].sort(
+      () => 0.5 - Math.random()
+    );
+  }, [blogItems, newsItems, galleryItems]);
+
+  // ✅ FIXED: Memoize mediaHubData to prevent new object creation
+  const mediaHubData = useMemo(
+    () => ({
+      heading: "Media Hub",
+      mediaHub: combinedItems,
+    }),
+    [combinedItems]
+  );
 
   useEffect(() => {
     if (swiperInstance) {
@@ -132,7 +160,7 @@ const MediaHub = ({
   // Initialize vanilla-tilt on card elements
   useEffect(() => {
     // Dynamically import vanilla-tilt
-    import('vanilla-tilt').then((VanillaTilt) => {
+    import("vanilla-tilt").then((VanillaTilt) => {
       tiltRefs.current.forEach((el) => {
         if (el) {
           VanillaTilt.default.init(el, {
@@ -149,8 +177,10 @@ const MediaHub = ({
     // Cleanup on unmount
     return () => {
       tiltRefs.current.forEach((el) => {
-        if (el && 'vanillaTilt' in el) {
-          const tiltEl = el as HTMLDivElement & { vanillaTilt: { destroy: () => void } };
+        if (el && "vanillaTilt" in el) {
+          const tiltEl = el as HTMLDivElement & {
+            vanillaTilt: { destroy: () => void };
+          };
           tiltEl.vanillaTilt?.destroy();
         }
       });
@@ -172,8 +202,8 @@ const MediaHub = ({
         duration: 0.8,
         delay: i * 0.15,
         ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number],
-      }
-    })
+      },
+    }),
   } as const;
 
   return (
@@ -260,7 +290,7 @@ const MediaHub = ({
                         backgroundSize: "cover",
                         backgroundPosition: "center",
                       }}
-                      className={`h-[350px] lg:h-[450px] xl:h-[557px] rounded-[15px] group slidegpmn cursor-pointer relative ${index == activeIndex ? "active-slide" : ""
+                      className={`h-[350px] lg:h-[450px] xl:h-[557px] rounded-[15px] group slidegpmn cursor-pointer relative ${index === activeIndex ? "active-slide" : ""
                         }`}
                       onClick={() => {
                         if (value.category === "Gallery") {
@@ -283,21 +313,23 @@ const MediaHub = ({
                       <div className="h-full rounded-[15px] transition-all duration-300 hdriv">
                         <div className="p-10">
                           {value.date ? (
-                            <p className={`text-white text-sm font-light transform transition-all duration-500 delay-100
+                            <p
+                              className={`text-white text-sm font-light transform transition-all duration-500 delay-100
                                 ${isActiveOnMobile
-                                ? "opacity-100 translate-y-0"
-                                : "opacity-0 translate-y-2 lg:group-hover:opacity-100 lg:group-hover:translate-y-0"
-                              }`}
+                                  ? "opacity-100 translate-y-0"
+                                  : "opacity-0 translate-y-2 lg:group-hover:opacity-100 lg:group-hover:translate-y-0"
+                                }`}
                             >
                               {value.date}
                             </p>
                           ) : null}
 
-                          <p className={`text-white line-clamp-2 xl:line-clamp-3 text-lg lg:text-xl font-light leading-[1.2] mt-6 transform transition-all duration-500 delay-300
+                          <p
+                            className={`text-white line-clamp-2 xl:line-clamp-3 text-lg lg:text-xl font-light leading-[1.2] mt-6 transform transition-all duration-500 delay-300
                               ${isActiveOnMobile
-                              ? "opacity-100 translate-x-0"
-                              : "opacity-0 -translate-x-4 lg:group-hover:opacity-100 lg:group-hover:translate-x-0"
-                            }`}
+                                ? "opacity-100 translate-x-0"
+                                : "opacity-0 -translate-x-4 lg:group-hover:opacity-100 lg:group-hover:translate-x-0"
+                              }`}
                           >
                             {value.title}
                           </p>
