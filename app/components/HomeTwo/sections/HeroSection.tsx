@@ -15,6 +15,7 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
   const [currentSlide, setCurrentSlide] = useState(1);
   const [showCurtains, setShowCurtains] = useState(true);
   const [isInitialLoad, setIsInitialLoad] = useState(true);
+  // const hasAnimatedFirstSlide = useRef(false);
   const totalSlides = data.items.length;
   const slideOverlayRefs = useRef<HTMLDivElement[]>([]);
   const contentRefs = useRef<HTMLDivElement[]>([]);
@@ -28,6 +29,29 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
 
   // Animate slide coming in by having its own image push in with notched edge
   const animateSlideIn = (index: number) => {
+    // Skip animation for first slide on initial load
+    if (index === 0 && isInitialLoad) {
+      // Only kill tweens on the first slide image, not curtains
+      const img = imageRefs.current[0]?.querySelector("img");
+      const overlay = slideOverlayRefs.current[0];
+
+      if (img) {
+        gsap.killTweensOf(img);
+        gsap.set(img, {
+          scale: 1,
+          opacity: 1,
+          x: 0,
+          y: 0
+        });
+      }
+
+      if (overlay) {
+        gsap.killTweensOf(overlay);
+      }
+
+      return; // Stop animation function here
+    }
+
     const overlayElement = slideOverlayRefs.current[index];
     const imgElement = imageRefs.current[index];
 
@@ -130,33 +154,31 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
     tl.fromTo(
       title,
       {
-        y: 80,
+        y: 60,
         opacity: 0,
-        rotationX: -15
       },
       {
         y: 0,
         opacity: 1,
-        rotationX: 0,
-        duration: 3,
-        delay: 0.35,
-        ease: "power4.out"
+        duration: 1.2,
+        delay: 0.2,
+        ease: "power3.out"
       },
-      0.3
+      0
     );
 
     tl.fromTo(
       divider,
       { scaleX: 0, opacity: 0, transformOrigin: "left" },
-      { scaleX: 1, opacity: 1, duration: 1.2, ease: "power2.inOut" },
-      0.6
+      { scaleX: 1, opacity: 1, duration: 0.8, ease: "power2.inOut" },
+      0.3
     );
 
     tl.fromTo(
       button,
-      { x: 60, opacity: 0 },
-      { x: 0, opacity: 1, duration: 1, ease: "power3.out" },
-      0.7
+      { x: 40, opacity: 0 },
+      { x: 0, opacity: 1, duration: 0.8, ease: "power3.out" },
+      0.4
     );
   };
 
@@ -175,39 +197,34 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
         }
       });
 
-      // Animate curtains opening from the start
+      // Faster curtain animation
       tl.to(leftCurtain, {
         x: '-100%',
-        duration: 1.2,
-        ease: "power3.inOut"
+        duration: 0.8,
+        ease: "power2.out"
       }, 0)
         .to(rightCurtain, {
           x: '100%',
-          duration: 1.2,
-          ease: "power3.inOut"
+          duration: 0.8,
+          ease: "power2.out"
         }, 0);
 
-      // Setup first slide image
+      // First slide image - NO ANIMATION, just set it visible and static
       const firstImg = imageRefs.current[0]?.querySelector("img");
       if (firstImg) {
         gsap.set(firstImg, {
-          scale: 1.05,
+          scale: 1,
           opacity: 1,
           x: 0,
           y: 0
         });
-
-        gsap.to(firstImg, {
-          y: -20,
-          duration: 7,
-          ease: "power1.inOut"
-        });
+        // NO parallax movement on first load
       }
 
-      // Animate content after curtains are 40% open (faster reveal)
+      // Show content almost immediately (300ms)
       setTimeout(() => {
         animateContentIn(0);
-      }, 500);
+      }, 300);
 
       setIsInitialLoad(false);
     }
@@ -291,7 +308,7 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
                 style={{
                   willChange: 'clip-path, opacity',
                   backfaceVisibility: 'hidden',
-                  opacity: 0
+                  opacity: index === 0 ? 0 : 0
                 }}
               >
                 <div className="h-full w-full absolute inset-0">

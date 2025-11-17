@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -15,7 +15,6 @@ import { BlogType } from "@/app/components/blog/type";
 import { BlogResponse } from "@/app/components/NewsDetails/type";
 import type { Swiper as SwiperType } from "swiper";
 import { useRouter } from "next/navigation";
-import { moveLeft } from "../../motionVarients";
 
 const MediaHub = ({
   blogdata,
@@ -36,9 +35,8 @@ const MediaHub = ({
   } | null>(null);
 
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
-
-  // ✅ track active slide index
   const [activeIndex, setActiveIndex] = useState(0);
+  const tiltRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const router = useRouter();
 
@@ -95,7 +93,6 @@ const MediaHub = ({
       )
     ) || [];
 
-  //  Helper: Shuffle and pick N random items
   const getRandomItems = (
     arr: {
       img: string;
@@ -132,6 +129,53 @@ const MediaHub = ({
     }
   }, [selectedItem, swiperInstance]);
 
+  // Initialize vanilla-tilt on card elements
+  useEffect(() => {
+    // Dynamically import vanilla-tilt
+    import('vanilla-tilt').then((VanillaTilt) => {
+      tiltRefs.current.forEach((el) => {
+        if (el) {
+          VanillaTilt.default.init(el, {
+            max: 15,
+            speed: 400,
+            glare: true,
+            "max-glare": 0.3,
+            scale: 1.05,
+          });
+        }
+      });
+    });
+
+    // Cleanup on unmount
+    return () => {
+      tiltRefs.current.forEach((el) => {
+        if (el && 'vanillaTilt' in el) {
+          const tiltEl = el as HTMLDivElement & { vanillaTilt: { destroy: () => void } };
+          tiltEl.vanillaTilt?.destroy();
+        }
+      });
+    };
+  }, [mediaHubData.mediaHub]);
+
+  // Flip animation variant
+  const flipVariant = {
+    hidden: {
+      rotateY: -90,
+      opacity: 0,
+      scale: 0.8,
+    },
+    visible: (i: number) => ({
+      rotateY: 0,
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.8,
+        delay: i * 0.15,
+        ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number],
+      }
+    })
+  } as const;
+
   return (
     <motion.section
       variants={fadeUp}
@@ -163,20 +207,19 @@ const MediaHub = ({
             </div>
           </div>
 
-          <div className="container">
+          <div className="container" style={{ perspective: "2000px" }}>
             <Swiper
               modules={[Autoplay, Pagination]}
               onSwiper={(swiper) => setSwiperInstance(swiper)}
-              onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)} // ✅ track visible slide
-              centeredSlides={true}
+              onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
+              centeredSlides={false}
               className="!overflow-visible alumni-swiper"
               spaceBetween={10}
-              slidesPerView={1}
+              slidesPerView={1.15}
               loop={true}
               speed={800}
               autoplay={{
                 delay: 3000,
-                // disableOnInteraction: true,
                 waitForTransition: true,
               }}
               pagination={{
@@ -188,32 +231,37 @@ const MediaHub = ({
               }}
               breakpoints={{
                 768: {
-                  slidesPerView: 2,
-                  slidesOffsetBefore: 30,
-                  slidesOffsetAfter: 30,
+                  slidesPerView: 2.15,
+                  spaceBetween: 10,
                 },
-                1024: { slidesPerView: 3 },
+                1024: {
+                  slidesPerView: 3.15,
+                  spaceBetween: 10,
+                },
               }}
             >
               {mediaHubData.mediaHub.map((value, index) => {
-                // ✅ detect if this slide should appear "active" on mobile
                 const isActiveOnMobile = index === activeIndex;
 
                 return (
                   <SwiperSlide key={index}>
                     <motion.div
-                      variants={moveLeft(0.2*index)}
+                      ref={(el) => {
+                        tiltRefs.current[index] = el;
+                      }}
+                      custom={index}
+                      variants={flipVariant}
                       initial="hidden"
-                      whileInView="show"
-                      viewport={{ once: true, amount: 0.2 }}
-                      className={`h-[350px] lg:h-[450px] xl:h-[557px] rounded-[15px] group slidegpmn cursor-pointer relative ${
-                        index == activeIndex ? "active-slide" : ""
-                      }`}
+                      whileInView="visible"
+                      viewport={{ once: false, amount: 0.3 }}
                       style={{
+                        transformStyle: "preserve-3d",
                         backgroundImage: `url(${value.img})`,
                         backgroundSize: "cover",
                         backgroundPosition: "center",
                       }}
+                      className={`h-[350px] lg:h-[450px] xl:h-[557px] rounded-[15px] group slidegpmn cursor-pointer relative ${index == activeIndex ? "active-slide" : ""
+                        }`}
                       onClick={() => {
                         if (value.category === "Gallery") {
                           setSelectedItem({
@@ -234,37 +282,31 @@ const MediaHub = ({
                     >
                       <div className="h-full rounded-[15px] transition-all duration-300 hdriv">
                         <div className="p-10">
-                          {/* ✅ date */}
                           {value.date ? (
                             <p className={`text-white text-sm font-light transform transition-all duration-500 delay-100
-                                ${
-                                  isActiveOnMobile
-                                    ? "opacity-100 translate-y-0"
-                                    : "opacity-0 translate-y-2 lg:group-hover:opacity-100 lg:group-hover:translate-y-0"
-                                }`}
+                                ${isActiveOnMobile
+                                ? "opacity-100 translate-y-0"
+                                : "opacity-0 translate-y-2 lg:group-hover:opacity-100 lg:group-hover:translate-y-0"
+                              }`}
                             >
                               {value.date}
                             </p>
                           ) : null}
 
-                          {/* ✅ title */}
                           <p className={`text-white line-clamp-2 xl:line-clamp-3 text-lg lg:text-xl font-light leading-[1.2] mt-6 transform transition-all duration-500 delay-300
-                              ${
-                                isActiveOnMobile
-                                  ? "opacity-100 translate-x-0"
-                                  : "opacity-0 -translate-x-4 lg:group-hover:opacity-100 lg:group-hover:translate-x-0"
-                              }`}
+                              ${isActiveOnMobile
+                              ? "opacity-100 translate-x-0"
+                              : "opacity-0 -translate-x-4 lg:group-hover:opacity-100 lg:group-hover:translate-x-0"
+                            }`}
                           >
                             {value.title}
                           </p>
 
-                          {/* ✅ arrow icon */}
                           <div
                             className={`transition-all duration-300 delay-200 top-5 right-5 p-2 mt-6 xl:mt-15 transform rounded-full w-[40px] h-[40px] lg:w-[75px] lg:h-[75px] flex items-center justify-center border border-white
-                              ${
-                                isActiveOnMobile
-                                  ? "opacity-100 -translate-y-2 delay-300"
-                                  : "opacity-0 lg:group-hover:opacity-100 lg:group-hover:-translate-y-2 lg:group-hover:delay-300"
+                              ${isActiveOnMobile
+                                ? "opacity-100 -translate-y-2 delay-300"
+                                : "opacity-0 lg:group-hover:opacity-100 lg:group-hover:-translate-y-2 lg:group-hover:delay-300"
                               }`}
                           >
                             <svg
@@ -290,13 +332,11 @@ const MediaHub = ({
                           </div>
                         </div>
 
-                        {/* ✅ category badge */}
                         <div
                           className={`transition-all duration-300 px-3 py-1 border border-white rounded-full text-white absolute bottom-5 left-5
-                            ${
-                              isActiveOnMobile
-                                ? "translate-x-2 delay-300"
-                                : "lg:group-hover:translate-x-2 lg:group-hover:delay-300"
+                            ${isActiveOnMobile
+                              ? "translate-x-2 delay-300"
+                              : "lg:group-hover:translate-x-2 lg:group-hover:delay-300"
                             }`}
                         >
                           <p>{value.category}</p>
