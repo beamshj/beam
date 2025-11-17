@@ -14,6 +14,7 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
   const swiperRef = useRef<SwiperClass | null>(null);
   const [currentSlide, setCurrentSlide] = useState(1);
   const [showCurtains, setShowCurtains] = useState(true);
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
   const totalSlides = data.items.length;
   const slideOverlayRefs = useRef<HTMLDivElement[]>([]);
   const contentRefs = useRef<HTMLDivElement[]>([]);
@@ -25,58 +26,6 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
     window.location.href = "/contact-us?scroll=register";
   };
 
-  // Curtain reveal animation on initial load
-  useEffect(() => {
-    const leftCurtain = leftCurtainRef.current;
-    const rightCurtain = rightCurtainRef.current;
-
-    if (leftCurtain && rightCurtain) {
-      const t2 = gsap.timeline({
-        onComplete: () => {
-          setShowCurtains(false);
-        }
-      });
-
-      // Set initial state
-      gsap.set([leftCurtain, rightCurtain], {
-        opacity: 1,
-      });
-
-      // Animate curtains opening
-      t2.to(leftCurtain, {
-        x: '-100%',
-        duration: 1.8,
-        ease: "power3.inOut"
-      }, -0.2)
-        .to(rightCurtain, {
-          x: '100%',
-          duration: 1.8,
-          ease: "power3.inOut"
-        }, -0.2);
-
-      // Setup first slide image
-      const firstImg = imageRefs.current[0]?.querySelector("img");
-      if (firstImg) {
-        gsap.set(firstImg, {
-          scale: 1.05,
-          opacity: 1,
-          x: 0,
-          y: 0
-        });
-
-        gsap.to(firstImg, {
-          y: -20,
-          duration: 7,
-          ease: "power1.inOut"
-        });
-      }
-
-      // Animate content after curtains are 60% open
-      // setTimeout(() => {
-      //   animateContentIn(0);
-      // }, 200);
-    }
-  }, []);
   // Animate slide coming in by having its own image push in with notched edge
   const animateSlideIn = (index: number) => {
     const overlayElement = slideOverlayRefs.current[index];
@@ -176,8 +125,6 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
 
     gsap.killTweensOf([title, button, divider]);
 
-
-
     const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
     tl.fromTo(
@@ -213,22 +160,79 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
     );
   };
 
+  // Curtain reveal animation on initial load
+  useEffect(() => {
+    if (!isInitialLoad) return;
 
+    const leftCurtain = leftCurtainRef.current;
+    const rightCurtain = rightCurtainRef.current;
+
+    if (leftCurtain && rightCurtain) {
+      // Start animation immediately without delay
+      const tl = gsap.timeline({
+        onComplete: () => {
+          setShowCurtains(false);
+        }
+      });
+
+      // Animate curtains opening from the start
+      tl.to(leftCurtain, {
+        x: '-100%',
+        duration: 1.2,
+        ease: "power3.inOut"
+      }, 0)
+        .to(rightCurtain, {
+          x: '100%',
+          duration: 1.2,
+          ease: "power3.inOut"
+        }, 0);
+
+      // Setup first slide image
+      const firstImg = imageRefs.current[0]?.querySelector("img");
+      if (firstImg) {
+        gsap.set(firstImg, {
+          scale: 1.05,
+          opacity: 1,
+          x: 0,
+          y: 0
+        });
+
+        gsap.to(firstImg, {
+          y: -20,
+          duration: 7,
+          ease: "power1.inOut"
+        });
+      }
+
+      // Animate content after curtains are 40% open (faster reveal)
+      setTimeout(() => {
+        animateContentIn(0);
+      }, 500);
+
+      setIsInitialLoad(false);
+    }
+  }, [isInitialLoad]);
 
   return (
     <section className="lg:h-screen h-[65dvh] md:h-[85dvh] relative overflow-hidden max-w-[1920px] mx-auto">
-      {/* Curtain Overlays - Only cover hero section */}
+      {/* Curtain Overlays - Start visible, animate immediately */}
       {showCurtains && (
         <>
           <div
             ref={leftCurtainRef}
             className="absolute top-0 left-0 w-1/2 h-full bg-[#0a1e28] z-10"
-            style={{ willChange: 'transform' }}
+            style={{
+              willChange: 'transform',
+              transform: 'translateX(0%)'
+            }}
           />
           <div
             ref={rightCurtainRef}
             className="absolute top-0 right-0 w-1/2 h-full bg-[#0a1e28] z-10"
-            style={{ willChange: 'transform' }}
+            style={{
+              willChange: 'transform',
+              transform: 'translateX(0%)'
+            }}
           />
         </>
       )}
@@ -386,7 +390,7 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
       </Swiper>
 
       {/* Pagination Indicator */}
-      <div className="absolute bottom-[10%] md:bottom-[37%] w-full z-1">
+      <div className="absolute bottom-[10%] md:bottom-[37%] w-full z-[60]">
         <div className="container flex justify-end">
           <span className="text-[15px] text-white whitespace-nowrap font-light relative -right-3 md:right-2 z-10 flex flex-col items-center">
             <div className="flex flex-col rotate-180">
@@ -407,7 +411,6 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
         </div>
       </div>
     </section>
-    // </section >
   );
 };
 
