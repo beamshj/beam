@@ -200,12 +200,12 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
       // Faster curtain animation
       tl.to(leftCurtain, {
         x: '-100%',
-        duration: 0.8,
+        duration: 1.2,
         ease: "power2.out"
       }, 0)
         .to(rightCurtain, {
           x: '100%',
-          duration: 0.8,
+          duration: 1.2,
           ease: "power2.out"
         }, 0);
 

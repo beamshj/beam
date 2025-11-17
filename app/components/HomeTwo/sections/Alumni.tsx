@@ -19,6 +19,7 @@ import {
 import { HomeProps } from "../type";
 import Link from "next/link";
 import SparkleCard from "./SparkleCard";
+import { moveUp } from "../../motionVarients";
 // Optional: Add modules if needed
 
 const Alumni = ({ data }: { data: HomeProps["seventhSection"] }) => {
@@ -71,6 +72,8 @@ const Alumni = ({ data }: { data: HomeProps["seventhSection"] }) => {
             modules={[Autoplay, Pagination]}
             spaceBetween={24}
             slidesPerView={1}
+            loop={true}
+            speed={800}
             autoplay={{
               delay: 3000,
               disableOnInteraction: false,
@@ -102,13 +105,9 @@ const Alumni = ({ data }: { data: HomeProps["seventhSection"] }) => {
                     {value.course}
                   </p>
                   <div className="mt-9 aluminibg transform transition-transform duration-500 group-hover:scale-105 xl:h-[378px] xl:w-[368px] 2xl:h-[438px] 2xl:w-[428px]">
-                    <Image
-                      src={value.image}
-                      alt={value.imageAlt}
-                      width={351}
-                      height={413}
-                      className="w-full h-[260px] xl:h-full object-contain object-bottom-left"
-                    />
+                    <motion.div variants={moveUp(0.2*index)} initial="hidden" whileInView="show" viewport={{ once: false, amount: 0.2 }}>
+                        <Image src={value.image} alt={value.imageAlt} width={351} height={413} className="w-full h-[260px] xl:h-full object-contain object-bottom-left" />
+                    </motion.div>
                   </div>
                 </motion.div>
                 </SparkleCard>
@@ -127,19 +126,13 @@ const Alumni = ({ data }: { data: HomeProps["seventhSection"] }) => {
                     {data.buttonText}
                   </p>
                   <div className="p-1 flex items-center justify-center bg-primary w-[27px] h-[27px] rounded-full transition-transform duration-300 group-hover:rotate-45">
-                    <Image
-                      src="/assets/arrow.svg"
-                      alt="arrow"
-                      width={11}
-                      height={11}
-                    />
+                    <Image src="/assets/arrow.svg" alt="arrow" width={11} height={11}/>
                   </div>
                 </div>
               </div>
             </Link>
           </div>
         </div>
-
         <div className="alumni-pagination flex justify-center xl:justify-end gap-2 mt-10 xl:mt-0 relative z-20 pointer-events-auto"></div>
       </div>
     </motion.section>
