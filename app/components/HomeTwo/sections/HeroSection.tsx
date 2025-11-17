@@ -15,7 +15,7 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
   const [currentSlide, setCurrentSlide] = useState(1);
   const [showCurtains, setShowCurtains] = useState(true);
   const [isInitialLoad, setIsInitialLoad] = useState(true);
-  // const hasAnimatedFirstSlide = useRef(false);
+  const hasAnimatedFirstSlide = useRef(false);
   const totalSlides = data.items.length;
   const slideOverlayRefs = useRef<HTMLDivElement[]>([]);
   const contentRefs = useRef<HTMLDivElement[]>([]);
