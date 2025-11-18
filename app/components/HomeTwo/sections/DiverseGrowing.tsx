@@ -84,9 +84,9 @@ const DiverseGrowing = ({ data }: { data: HomeProps['fifthSection'] }) => {
             ease: "power3.out",
             scrollTrigger: {
               trigger: ref.current,
-              start: "top 85%",
-              end: "top 45%",
-              scrub: 1,
+              start: "top 98%",
+              end: "top 70%",
+              scrub: 0.5,
             },
           }
         );
