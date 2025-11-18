@@ -3,23 +3,20 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination,Autoplay } from "swiper/modules";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { motion } from "framer-motion";
 import "swiper/css";
 import "swiper/css/navigation";
-import "swiper/css/pagination"; 
+import "swiper/css/pagination";
 import { AboutProps } from "../type";
 
-
 interface Props {
-  data: AboutProps['historySection'];
+  data: AboutProps["historySection"];
 }
 
-
 export default function MoreToExplore({ data }: Props) {
-  
   const [activeIndex, setActiveIndex] = useState(0);
-   
+
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [containerMarginLeft, setContainerMarginLeft] = useState(0);
   useEffect(() => {
@@ -41,20 +38,25 @@ export default function MoreToExplore({ data }: Props) {
         <h2 className="text-lg xl:text-2xl 2xl:text-4xl font-light md:mb-4 xl:mb-8 2xl:mb-[50px]">
           {data.title}
         </h2>
-        </div>
+      </div>
 
-        <div className=" relative"style={{
+      <div
+        className=" relative"
+        style={{
           paddingInline: "15px",
-              marginLeft: containerMarginLeft ? `${containerMarginLeft}px` : undefined,
-            }} >
+          marginLeft: containerMarginLeft
+            ? `${containerMarginLeft}px`
+            : undefined,
+        }}
+      >
         <div className="mt-5 md:mt-[155px] relative">
-          <Swiper 
+          <Swiper
             spaceBetween={0}
             slidesPerView={1}
             breakpoints={{
               0: { slidesPerView: 1 },
               768: { slidesPerView: 1.1 },
-              1024: { slidesPerView: 1.1 }, 
+              1024: { slidesPerView: 1.1 },
               1600: { slidesPerView: 1.05 },
             }}
             loop={true}
@@ -67,23 +69,25 @@ export default function MoreToExplore({ data }: Props) {
               el: ".swiper-pagination-custom",
               clickable: true,
             }}
-            
             onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
-            modules={[Navigation, Pagination,Autoplay]}
+            modules={[Navigation, Pagination, Autoplay]}
             autoplay={{ delay: 6000, disableOnInteraction: false }}
             className="md:!overflow-visible aboutslide"
           >
             {data.items.map((item, index) => (
               <SwiperSlide key={index} className="relative">
-                <motion.div className="mb-9 flex flex-col items-start" 
+                <motion.div
+                  className="mb-9 flex flex-col items-start"
                   key={activeIndex}
                   initial={{ opacity: 0, x: -80 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.9, ease: "easeOut" }}>
-               
+                  transition={{ duration: 0.9, ease: "easeOut" }}
+                >
                   {/* Year Badge (static) */}
                   <div className="flex items-center border border-black rounded-full px-[15px] py-[7px] w-fit yrmn relative">
-                    <p className="font-light text-black leading-[1]">{item.year}</p>
+                    <p className="font-light text-black leading-[1]">
+                      {item.year}
+                    </p>
                   </div>
 
                   {/* Timeline Dot + Line (static) */}
@@ -92,7 +96,7 @@ export default function MoreToExplore({ data }: Props) {
                       <div className="w-[24px] h-[24px] bgactive rounded-full"></div>
                     </div>
                     <div className="absolute top-[25px] left-[28px] w-full h-[1px] bg-gradient-to-r from-[#7E5AA3] to-[#23ABD2]"></div>
-                  </div> 
+                  </div>
 
                   {/* Animated Content */}
                   <motion.div
@@ -105,10 +109,11 @@ export default function MoreToExplore({ data }: Props) {
                     <p className="text-[1.3rem] md:text-md xl:text-lg 2xl:text-xl font-light text-black leading-[1.18] mb-3">
                       {item.title}
                     </p>
-                    <div
-                      className="text-sm font-light text-colorpara leading-[1.2] max-w-[24ch]"
-                      dangerouslySetInnerHTML={{ __html: item.description }}
-                    ></div>
+                    <div className="text-sm font-light text-colorpara leading-[1.3] max-w-[24ch] xl:max-w-[28ch]">
+                      {item.description.split("\n").map((line, i) => (
+                        <div key={i}>{line}</div>
+                      ))}
+                    </div>
                   </motion.div>
 
                   {/* Animated Image */}
@@ -124,7 +129,7 @@ export default function MoreToExplore({ data }: Props) {
                       alt={item.imageAlt}
                       width={500}
                       height={500}
-                      className="object-cover rounded-[12px] h-[300px] w-full lg:h-[380px] xl:h-[428px] md:w-[85%] lg:w-[85%] 2xl:w-[100%]"
+                      className="object-cover rounded-[12px] h-[300px] w-full lg:h-[380px] xl:h-[425px] md:w-[85%] lg:w-[85%] 2xl:w-[100%]"
                     />
                   </motion.div>
                 </motion.div>
@@ -132,8 +137,8 @@ export default function MoreToExplore({ data }: Props) {
             ))}
           </Swiper>
 
-          {/* Pagination + Navigation */} 
-         <div className="flex gap-9 w-fit m-auto relative top-5 lg:top-10 left-0 xl:left-12">
+          {/* Pagination + Navigation */}
+          <div className="flex gap-9 w-fit m-auto relative top-5 lg:top-10 left-0 xl:left-12">
             <button
               className="swiper-button-prev-custom transition cursor-pointer group"
               aria-label="Previous"
@@ -181,7 +186,7 @@ export default function MoreToExplore({ data }: Props) {
                 />
               </svg>
             </button>
-          </div> 
+          </div>
         </div>
       </div>
     </section>
