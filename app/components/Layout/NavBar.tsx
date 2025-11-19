@@ -68,7 +68,7 @@ const NavBar = () => {
   return (
     <>
       <header
-        className={`w-full fixed z-50 transition-all duration-300 left-0 right-0 ${
+        className={`w-full fixed z-[999] transition-all duration-300 left-0 right-0 ${
           isSticky ? "top-0 bg-white shadow-md" : "top-7"
         }`}
       >
