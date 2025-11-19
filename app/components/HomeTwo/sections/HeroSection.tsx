@@ -15,10 +15,10 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
   const [currentSlide, setCurrentSlide] = useState(1);
   const [showCurtains, setShowCurtains] = useState(true);
   const [isInitialLoad, setIsInitialLoad] = useState(true);
-  // const hasAnimatedFirstSlide = useRef(false);
+  const [showContent, setShowContent] = useState(false);
   const totalSlides = data.items.length;
   const slideOverlayRefs = useRef<HTMLDivElement[]>([]);
-  const contentRefs = useRef<HTMLDivElement[]>([]);
+  const contentRef = useRef<HTMLDivElement>(null);
   const imageRefs = useRef<HTMLDivElement[]>([]);
   const leftCurtainRef = useRef<HTMLDivElement>(null);
   const rightCurtainRef = useRef<HTMLDivElement>(null);
@@ -60,10 +60,14 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
     const img = imgElement.querySelector("img");
     if (!img) return;
 
-    // Kill all animations
+    // Kill only overlay animations on all slides
     slideOverlayRefs.current.forEach((overlay) => {
       if (overlay) gsap.killTweensOf(overlay);
     });
+
+    // DON'T touch previous slide parallax animations yet - let them continue
+    // We'll stop them AFTER the overlay transition completes
+
     gsap.killTweensOf([overlayElement, imgElement, img]);
 
     // Different reveal directions with notches on the LEADING edge
@@ -121,26 +125,46 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
     })
       .to(overlayElement, {
         clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)', // Smooth to rectangle
-        duration: 0.25,
+        duration: 0.3,
         ease: "power2.inOut"
-      }, "-=0.1")
+      }, "-=0.2")
       .to(overlayElement, {
         opacity: 0,
-        duration: 0.4,
-        ease: "power2.out"
-      }, "-=0.15");
+        duration: 0.5,
+        ease: "power2.out",
+        onComplete: () => {
+          // NOW stop previous slide parallax - after overlay transition is complete
+          imageRefs.current.forEach((imgRef, idx) => {
+            if (imgRef && idx !== index) {
+              const prevImg = imgRef.querySelector("img");
+              if (prevImg) {
+                // Smoothly animate back to center
+                gsap.to(prevImg, {
+                  x: 0,
+                  y: 0,
+                  scale: 1,
+                  duration: 0.8,
+                  ease: "power2.out",
+                  overwrite: true
+                });
+              }
+            }
+          });
+        }
+      }, "-=0.2");
 
-    // Subtle parallax movement - starts AFTER overlay fades out
-    tl.to(img, {
+    // Subtle parallax movement - match autoplay delay timing
+    gsap.to(img, {
       ...direction.movement,
       duration: 7,
-      ease: "power1.inOut"
-    }, "+=0");
+      ease: "sine.inOut",
+      delay: 0
+    });
   };
 
-  // Smooth content reveal
-  const animateContentIn = (index: number) => {
-    const contentElement = contentRefs.current[index];
+  // Smooth content reveal - only called once on initial load
+  const animateContentIn = () => {
+    const contentElement = contentRef.current;
     if (!contentElement) return;
 
     const title = contentElement.querySelector(".hero-title");
@@ -197,6 +221,9 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
         }
       });
 
+      // Show content first (before curtains open)
+      setShowContent(true);
+
       // Faster curtain animation
       tl.to(leftCurtain, {
         x: '-100%',
@@ -221,14 +248,17 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
         // NO parallax movement on first load
       }
 
-      // Show content almost immediately (300ms)
+      // Show content once (300ms after curtains start)
       setTimeout(() => {
-        animateContentIn(0);
+        animateContentIn();
       }, 300);
 
       setIsInitialLoad(false);
     }
   }, [isInitialLoad]);
+
+  // Get first slide data for static content display
+  const firstSlide = data.items[0];
 
   return (
     <section className="lg:h-screen h-[65dvh] md:h-[85dvh] relative overflow-hidden max-w-[1920px] mx-auto">
@@ -237,7 +267,7 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
         <>
           <div
             ref={leftCurtainRef}
-            className="absolute top-0 left-0 w-1/2 h-full bg-[#0a1e28] z-10"
+            className="absolute top-0 left-0 w-1/2 h-full bg-[#0a1e28] z-[60]"
             style={{
               willChange: 'transform',
               transform: 'translateX(0%)'
@@ -245,7 +275,7 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
           />
           <div
             ref={rightCurtainRef}
-            className="absolute top-0 right-0 w-1/2 h-full bg-[#0a1e28] z-10"
+            className="absolute top-0 right-0 w-1/2 h-full bg-[#0a1e28] z-[60]"
             style={{
               willChange: 'transform',
               transform: 'translateX(0%)'
@@ -253,6 +283,8 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
           />
         </>
       )}
+
+      {/* Swiper - Only for background images */}
       <Swiper
         modules={[Autoplay, EffectFade]}
         effect="fade"
@@ -266,15 +298,14 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
           const realIndex = swiper.realIndex;
           setCurrentSlide(realIndex + 1);
           animateSlideIn(realIndex);
-          animateContentIn(realIndex);
         }}
         className="w-full h-full"
       >
         {data.items.map((slide, index) => (
           <SwiperSlide key={index}>
-            <div className="h-full w-screen relative overflow-hidden text-white">
+            <div className="h-full w-screen relative overflow-hidden">
               {/* Background image */}
-              <figure className="h-full w-full absolute -z-50 overflow-hidden">
+              <figure className="h-full w-full absolute inset-0 overflow-hidden">
                 <div
                   ref={(el: HTMLDivElement | null) => {
                     if (el) {
@@ -308,7 +339,7 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
                 style={{
                   willChange: 'clip-path, opacity',
                   backfaceVisibility: 'hidden',
-                  opacity: index === 0 ? 0 : 0
+                  opacity: 0
                 }}
               >
                 <div className="h-full w-full absolute inset-0">
@@ -330,84 +361,84 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
               </div>
 
               {/* Gradient overlay */}
-              <div className="absolute inset-0 bg-[linear-gradient(180deg,_rgba(0,0,0,0)_21.7%,_rgba(0,0,0,0.6)_63.57%,_rgba(0,0,0,0.8)_100%)] -z-40"></div>
-
-              {/* Content */}
-              <div className="absolute w-full h-full">
-                <div className="container h-full">
-                  <div className="h-full relative w-full overflow-hidden">
-                    <div
-                      ref={(el: HTMLDivElement | null) => {
-                        if (el) {
-                          contentRefs.current[index] = el;
-                        }
-                      }}
-                      className="absolute bottom-5 lg:bottom-[30px] xl:bottom-[50px] grid grid-cols-1 xl:grid-cols-7 items-end gap-2"
-                    >
-                      {/* Left text */}
-                      <div className="xl:mb-[65px] col-span-1 md:col-span-5">
-                        <h2 className="hero-title text-[1.8rem] md:text-2xl 2xl:text-4xl text-white leading-[1.2] xl:leading-[1.1] font-custom font-light lettersp-4-hero mb-0 max-w-none">
-                          <span className="text-primary">
-                            {slide.highlightText}{" "}
-                          </span>
-                          {slide.title}
-                        </h2>
-                      </div>
-
-                      {/* Button */}
-                      <div
-                        onClick={handleRegisterClick}
-                        className="hero-button md:mb-[35px] lg:mb-[85px] xl:mb-[120px] flex justify-end flex-col xl:items-end col-span-1 md:col-span-2"
-                      >
-                        <div>
-                          <div className="mt-5 w-fit md:mt-10 p-[1px] group transition-all duration-300 bg-[linear-gradient(90deg,_#42BADC_0%,_#12586C_100%)] rounded-full hover:-translate-x-2 hover:shadow-[0_0_15px_rgba(66,186,220,0.5)]">
-                            <a
-                              href="#"
-                              className="cursor-pointer pl-4 pr-2 md:px-4 py-[10px] md:py-3 bg-primary rounded-full flex items-center gap-2 transition-all duration-300"
-                            >
-                              <p className="group-hover:text-white text-xs font-light text-white uppercase transition-colors duration-300">
-                                Register Interest
-                              </p>
-                              <div className="p-2 flex items-center justify-center bg-white w-fit rounded-full transition-transform duration-300 group-hover:rotate-45">
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  width="10"
-                                  height="11"
-                                  viewBox="0 0 10 11"
-                                  fill="none"
-                                >
-                                  <path
-                                    d="M8.74639 1.76178L1.12891 9.36247"
-                                    stroke="#42BADC"
-                                    strokeMiterlimit="10"
-                                  />
-                                  <path
-                                    d="M1.12891 1.76178H8.74639V9.21251"
-                                    stroke="#42BADC"
-                                    strokeMiterlimit="10"
-                                  />
-                                </svg>
-                              </div>
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Divider line */}
-                      <div className="hero-divider absolute left-[40%] bottom-[83px] w-[80%] hidden xl:block">
-                        <div className="h-[1px] w-full bg-gradient-to-r from-white via-white/30 to-transparent"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <div className="absolute inset-0 bg-[linear-gradient(180deg,_rgba(0,0,0,0)_21.7%,_rgba(0,0,0,0.6)_63.57%,_rgba(0,0,0,0.8)_100%)]"></div>
             </div>
           </SwiperSlide>
         ))}
       </Swiper>
 
+      {/* Static Content - Outside Swiper, positioned absolutely */}
+      <div className="absolute w-full h-full top-0 left-0 pointer-events-none z-[70]">
+        <div className="container h-full">
+          <div className="h-full relative w-full overflow-hidden">
+            <div
+              ref={contentRef}
+              className="absolute bottom-5 lg:bottom-[30px] xl:bottom-[50px] grid grid-cols-1 xl:grid-cols-7 items-end gap-2 pointer-events-auto"
+              style={{
+                opacity: showContent ? 1 : 0,
+                transition: 'opacity 0.3s ease-out'
+              }}
+            >
+              {/* Left text */}
+              <div className="xl:mb-[65px] col-span-1 md:col-span-5">
+                <h2 className="hero-title text-[1.8rem] md:text-2xl 2xl:text-4xl text-white leading-[1.2] xl:leading-[1.1] font-custom font-light lettersp-4-hero mb-0 max-w-none">
+                  <span className="text-primary">
+                    {firstSlide.highlightText}{" "}
+                  </span>
+                  {firstSlide.title}
+                </h2>
+              </div>
+
+              {/* Button */}
+              <div
+                onClick={handleRegisterClick}
+                className="hero-button md:mb-[35px] lg:mb-[85px] xl:mb-[120px] flex justify-end flex-col xl:items-end col-span-1 md:col-span-2"
+              >
+                <div>
+                  <div className="mt-5 w-fit md:mt-10 p-[1px] group transition-all duration-300 bg-[linear-gradient(90deg,_#42BADC_0%,_#12586C_100%)] rounded-full hover:-translate-x-2 hover:shadow-[0_0_15px_rgba(66,186,220,0.5)]">
+                    <a
+                      href="#"
+                      className="cursor-pointer pl-4 pr-2 md:px-4 py-[10px] md:py-3 bg-primary rounded-full flex items-center gap-2 transition-all duration-300"
+                    >
+                      <p className="group-hover:text-white text-xs font-light text-white uppercase transition-colors duration-300">
+                        Register Interest
+                      </p>
+                      <div className="p-2 flex items-center justify-center bg-white w-fit rounded-full transition-transform duration-300 group-hover:rotate-45">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="10"
+                          height="11"
+                          viewBox="0 0 10 11"
+                          fill="none"
+                        >
+                          <path
+                            d="M8.74639 1.76178L1.12891 9.36247"
+                            stroke="#42BADC"
+                            strokeMiterlimit="10"
+                          />
+                          <path
+                            d="M1.12891 1.76178H8.74639V9.21251"
+                            stroke="#42BADC"
+                            strokeMiterlimit="10"
+                          />
+                        </svg>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              {/* Divider line */}
+              <div className="hero-divider absolute left-[40%] bottom-[83px] w-[80%] hidden xl:block">
+                <div className="h-[1px] w-full bg-gradient-to-r from-white via-white/30 to-transparent"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Pagination Indicator */}
-      <div className="absolute bottom-[10%] md:bottom-[37%] w-full z-[60]">
+      <div className="absolute bottom-[10%] md:bottom-[37%] w-full z-[80]">
         <div className="container flex justify-end">
           <span className="text-[15px] text-white whitespace-nowrap font-light relative -right-3 md:right-2 z-10 flex flex-col items-center">
             <div className="flex flex-col rotate-180">
