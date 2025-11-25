@@ -8,6 +8,16 @@ export interface LeadershipItem {
   designation: string;
   description: string; // HTML string
 }
+export interface beamLeadershipItem {
+  id: string;
+  name: string;
+  image: string;
+  imageAlt?: string;
+  designation?: string;
+  description?: string; // HTML string
+  bullets?: string[];
+
+}
 
 export interface FirstSection {
   title: string;
