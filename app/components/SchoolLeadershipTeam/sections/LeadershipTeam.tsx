@@ -565,7 +565,7 @@ export default function LeadershipCarousel({
         >
           {data.firstSection.title}
         </motion.h1>
-        <motion.p
+        {/* <motion.p
           variants={moveUp(0.4)}
           initial="hidden"
           whileInView="show"
@@ -573,7 +573,7 @@ export default function LeadershipCarousel({
           className="text-sm font-light leading-[1.52] xl:mb-[30px] 2xl:mb-[50px] text-colorpara"
         >
           {data.firstSection.description}
-        </motion.p>
+        </motion.p> */}
       </div>
       <div
         className={`flex flex-col md:flex-row gap-[15px] md:gap-[36px] lg:gap-[56px] items-stretch ${

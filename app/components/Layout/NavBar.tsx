@@ -130,6 +130,7 @@ const NavBar = () => {
                               >
                                 {item.submenu.map((sub) => (
                                   <li
+                                  onClick={()=>setHoveredMenu(null)}
                                     key={sub.name}
                                     className="border-b border-[#D3D3D3] last:border-b-0 py-3 linkhrs "
                                   >
@@ -235,7 +236,7 @@ const NavBar = () => {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.35 }}
               id="overlay"
-              className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50"
+              className="fixed inset-0 bg-black/70 backdrop-blur-sm z-1000"
               onClick={() => setIsMenuOpen(false)}
             />
           )}
@@ -258,7 +259,7 @@ const NavBar = () => {
               duration: 0.6,
               ease: [0.25, 1, 0.5, 1],
             }}
-            className="fixed top-0 right-0 bottom-0 lg:left-0 h-screen w-[300px] md:w-[500px] lg:w-full z-50"
+            className="fixed top-0 right-0 bottom-0 lg:left-0 h-screen w-[300px] md:w-[500px] lg:w-full z-1000"
             style={{
               background:
                 "linear-gradient(251.6deg, #42BADC -12.46%, #005871 100.42%)",
