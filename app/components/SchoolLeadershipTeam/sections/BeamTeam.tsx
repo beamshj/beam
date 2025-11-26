@@ -178,7 +178,7 @@ export default function LeadershipCarousel({ beamleadersData }: { beamleadersDat
           viewport={{ once: true, amount: 0.2 }}
           className="text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl lg:leading-[1.111] font-light mb-3 xl:mb-[30px] 2xl:mb-[50px] text-black lettersp-4"
         >
-          BEAM <br></br>Leadership Team
+          BEAM Leadership Team
         </motion.h1>
         
       </div>
