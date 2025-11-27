@@ -563,7 +563,7 @@ export default function LeadershipCarousel({
           viewport={{ once: true, amount: 0.2 }}
           className="text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl lg:leading-[1.111] font-light mb-3 xl:mb-[30px] 2xl:mb-[50px] text-black lettersp-4"
         >
-          {data.firstSection.title}
+          {data.secondSection.title}
         </motion.h1>
         {/* <motion.p
           variants={moveUp(0.4)}
@@ -607,9 +607,9 @@ export default function LeadershipCarousel({
               viewport={{ once: true, amount: 0.2 }}
               className="text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl lg:leading-[1.111] font-light mb-3 xl:mb-[30px] 2xl:mb-[50px] text-black lettersp-4"
             >
-              {data.firstSection.title}
+              {data.secondSection.title}
             </motion.h1>
-            <motion.p
+            {/* <motion.p
               variants={moveUp(0.4)}
               initial="hidden"
               whileInView="show"
@@ -617,7 +617,7 @@ export default function LeadershipCarousel({
               className="text-sm font-light leading-[1.52] text-colorpara"
             >
               {data.firstSection.description}
-            </motion.p>
+            </motion.p> */}
           </div>
           {slides.map((m) => (
             <motion.div

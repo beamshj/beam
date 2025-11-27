@@ -51,6 +51,37 @@ const leadershipTeamSchema = new mongoose.Schema({
             }
         }]
     },
+    secondSection: {
+        title: {
+            type: String,
+            required: true
+        },
+        description: {
+            type: String,
+            required: true
+        },
+        items: [{
+            name: {
+                type: String,
+                required: true
+            },
+            image: {
+                type: String,
+                required: true
+            },
+            imageAlt: {
+                type: String,
+            },
+            designation: {
+                type: String,
+                required: true
+            },
+            description: {
+                type: String,
+                required: true
+            }
+        }]
+    },
 })
 
 export default mongoose.models.LeadershipTeam || mongoose.model("LeadershipTeam", leadershipTeamSchema);
