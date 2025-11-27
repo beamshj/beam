@@ -1,6 +1,7 @@
 // type.ts
 
 export interface LeadershipItem {
+  id:number;
   _id: string;
   name: string;
   image: string;
@@ -20,6 +21,7 @@ export interface beamLeadershipItem {
 }
 
 export interface FirstSection {
+  id:number;
   title: string;
   description: string;
   items: LeadershipItem[];
@@ -33,6 +35,7 @@ export interface LeadershipData {
   metaTitle: string;
   metaDescription: string;
   firstSection: FirstSection;
+  secondSection:FirstSection;
   __v: number;
 }
 
