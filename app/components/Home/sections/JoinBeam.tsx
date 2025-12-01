@@ -21,7 +21,7 @@ const JoinBeam = ({ data }: { data: HomeProps["tenthSection"] }) => {
           src={data.image}
           alt={data.imageAlt}
           fill
-          className="hidden md:block object-cover h-full w-full transform -scale-x-100"
+          className="hidden md:block object-cover h-full w-full"
         />
         <Image
           src="/assets/home/joinbgsmall.jpg"
@@ -83,7 +83,7 @@ const JoinBeam = ({ data }: { data: HomeProps["tenthSection"] }) => {
           </Link>
         </div>
       </div>
-      <div className="w-full h-full bg-gradient-to-r from-transparent via-black/20 to-black/70 absolute top-0 right-0 z-20"></div>
+      <div className="w-full h-full bg-gradient-to-l from-transparent via-black/20 to-black/70 absolute top-0 left-0 z-20"></div>
     </motion.section>
   );
 };
