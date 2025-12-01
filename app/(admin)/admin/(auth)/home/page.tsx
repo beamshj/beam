@@ -247,8 +247,6 @@ const HomePage = () => {
   return (
     <div className="w-full grid grid-cols-2 gap-10">
       <div className="flex flex-col gap-2">
-        <h2 className="font-bold text-primary">English Version</h2>
-        <div className="h-[2px] w-full bg-black/50" />
         <form
           className="flex flex-col gap-5"
           onSubmit={handleSubmit(handleAddHome)}
@@ -372,9 +370,12 @@ const HomePage = () => {
                   onClick={() =>
                     bannerSectionAppend({
                       title: "",
+                      title_ar: "",
                       image: "",
                       imageAlt: "",
+                      imageAlt_ar: "",
                       highlightText: "",
+                      highlightText_ar: "",
                     })
                   }
                 >
@@ -569,7 +570,13 @@ const HomePage = () => {
                       type="button"
                       addItem
                       onClick={() =>
-                        thirdSectionAppend({ title: "", logo: "", logoAlt: "" })
+                        thirdSectionAppend({
+                          title: "",
+                          title_ar: "",
+                          logo: "",
+                          logoAlt: "",
+                          logoAlt_ar: "",
+                        })
                       }
                     >
                       Add Item
@@ -924,9 +931,12 @@ const HomePage = () => {
                       onClick={() =>
                         fifthSectionAppend({
                           number: "",
+                          number_ar: "",
                           value: "",
+                          value_ar: "",
                           logo: "",
                           logoAlt: "",
+                          logoAlt_ar: "",
                         })
                       }
                     >
@@ -1222,8 +1232,11 @@ const HomePage = () => {
                         seventhSectionAppend({
                           image: "",
                           imageAlt: "",
+                          imageAlt_ar: "",
+                          name_ar: "",
                           name: "",
                           course: "",
+                          course_ar: "",
                         })
                       }
                     >
@@ -1330,7 +1343,11 @@ const HomePage = () => {
                       type="button"
                       addItem
                       onClick={() =>
-                        ninethSectionAppend({ image: "", imageAlt: "" })
+                        ninethSectionAppend({
+                          image: "",
+                          imageAlt: "",
+                          imageAlt_ar: "",
+                        })
                       }
                     >
                       Add Item
@@ -1456,8 +1473,6 @@ const HomePage = () => {
         </form>
       </div>
       <div className="flex flex-col gap-2">
-        <h2 className="font-bold text-primary text-right">Arabic Version</h2>
-        <div className="h-[2px] w-full bg-black/50" />
         <form
           className="flex flex-col gap-5"
           onSubmit={handleSubmit(handleAddHome)}
@@ -1581,9 +1596,12 @@ const HomePage = () => {
                   onClick={() =>
                     bannerSectionAppend({
                       title: "",
+                      title_ar: "",
                       image: "",
                       imageAlt: "",
+                      imageAlt_ar: "",
                       highlightText: "",
+                      highlightText_ar: "",
                     })
                   }
                 >
@@ -1778,7 +1796,13 @@ const HomePage = () => {
                       type="button"
                       addItem
                       onClick={() =>
-                        thirdSectionAppend({ title: "", logo: "", logoAlt: "" })
+                        thirdSectionAppend({
+                          title: "",
+                          title_ar: "",
+                          logo: "",
+                          logoAlt: "",
+                          logoAlt_ar: "",
+                        })
                       }
                     >
                       Add Item
@@ -2133,9 +2157,12 @@ const HomePage = () => {
                       onClick={() =>
                         fifthSectionAppend({
                           number: "",
+                          number_ar: "",
                           value: "",
+                          value_ar: "",
                           logo: "",
                           logoAlt: "",
+                          logoAlt_ar: "",
                         })
                       }
                     >
@@ -2431,8 +2458,11 @@ const HomePage = () => {
                         seventhSectionAppend({
                           image: "",
                           imageAlt: "",
+                          imageAlt_ar: "",
                           name: "",
+                          name_ar: "",
                           course: "",
+                          course_ar: "",
                         })
                       }
                     >
@@ -2539,7 +2569,11 @@ const HomePage = () => {
                       type="button"
                       addItem
                       onClick={() =>
-                        ninethSectionAppend({ image: "", imageAlt: "" })
+                        ninethSectionAppend({
+                          image: "",
+                          imageAlt: "",
+                          imageAlt_ar: "",
+                        })
                       }
                     >
                       Add Item
