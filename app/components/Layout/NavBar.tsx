@@ -130,7 +130,7 @@ const NavBar = () => {
                               >
                                 {item.submenu.map((sub) => (
                                   <li
-                                  onClick={()=>setHoveredMenu(null)}
+                                    onClick={() => setHoveredMenu(null)}
                                     key={sub.name}
                                     className="border-b border-[#D3D3D3] last:border-b-0 py-3 linkhrs "
                                   >
@@ -161,30 +161,29 @@ const NavBar = () => {
               </div>
             </div>
             <div className="flex gap-2  sm:gap-5">
-              <div className="flex items-center"> 
-                  <button
-                    onClick={handleRegisterClick}
-                    className="uppercase border-primary border-[1px] px-3 py-1 flex items-center gap-2 rounded-[50px]
+              <div className="flex items-center">
+                <button
+                  onClick={handleRegisterClick}
+                  className="uppercase border-primary border-[1px] px-3 py-1 flex items-center gap-2 rounded-[50px]
                                 text-[10px] sm:text-xs font-light cursor-pointer text-black transition-all duration-300 group
                                 hover:bg-primary hover:text-white"
-                  >
-                    <span className="transition-transform duration-300 group-hover:translate-x-1">
-                      Register Interest
-                    </span>
-                    <span
-                      className="hidden sm:flex bg-primary rounded-full p-2 w-[27px] h-[27px]  items-center justify-center
+                >
+                  <span className="transition-transform duration-300 group-hover:translate-x-1">
+                    Register Interest
+                  </span>
+                  <span
+                    className="hidden sm:flex bg-primary rounded-full p-2 w-[27px] h-[27px]  items-center justify-center
                                   transition-all duration-300 group-hover:bg-white"
-                    >
-                      <Image
-                        src="/assets/arrow.svg"
-                        alt="Arrow"
-                        width={20}
-                        height={20}
-                        className="transition-transform duration-300 group-hover:rotate-45 group-hover:brightness-0"
-                      />
-                    </span>
-                  </button>
-              
+                  >
+                    <Image
+                      src="/assets/arrow.svg"
+                      alt="Arrow"
+                      width={20}
+                      height={20}
+                      className="transition-transform duration-300 group-hover:rotate-45 group-hover:brightness-0"
+                    />
+                  </span>
+                </button>
               </div>
               <div
                 className={`transition-all duration-300 ${
