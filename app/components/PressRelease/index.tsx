@@ -7,9 +7,7 @@ const Index = ({ data }: { data: BlogResponse }) => {
   return (
     <>
       <InnerBanner
-        banner={data.banner}
-        bannerAlt={data.bannerAlt}
-        pageTitle={data.pageTitle}
+        data={data}
       />
       <RecentNews categories={data.categories} />
     </>

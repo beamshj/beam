@@ -122,7 +122,7 @@ const Index = ({ contactData, schooldata }: IndexProps) => {
           BannerTitle: contactData.pageTitle,
           BannerImg: contactData.banner,
         }}
-        bannerAlt={contactData.bannerAlt}
+        data={contactData}
       />
       <ContactForm data={contactData.firstSection} />
       <OurSchools

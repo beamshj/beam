@@ -4,6 +4,10 @@ export type SchoolAchievementsProps = {
     metaTitle: string;
     metaDescription: string;
     pageTitle: string;
+    bannerAlt_ar: string;
+    metaTitle_ar: string;
+    metaDescription_ar: string;
+    pageTitle_ar: string;
     firstSection: {
         title: string;
         image: string;

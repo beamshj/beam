@@ -7,7 +7,7 @@ const Index = ({data}: {data: GalleryProps}) => {
   console.log(data);
   return (
     <>
-      <InnerBanner BannerData={BannerData} banner={data.banner} bannerAlt={data.bannerAlt} pageTitle={data.pageTitle}/>
+      <InnerBanner BannerData={BannerData} data={data}/>
       <Gallery data={data}/>
     </>
   );

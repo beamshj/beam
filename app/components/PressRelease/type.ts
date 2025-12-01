@@ -26,8 +26,12 @@ export interface BlogResponse {
   __v: number;
   banner: string;
   bannerAlt: string;
+  bannerAlt_ar: string;
   categories: Category[];
   metaDescription: string;
+  metaDescription_ar: string;
   metaTitle: string;
+  metaTitle_ar: string;
   pageTitle: string;
+  pageTitle_ar: string;
 }

@@ -9,9 +9,7 @@ const Index = ({ data }: { data: BlogType }) => {
     <>
       <InnerBanner
         BannerData={BannerData}
-        banner={data.banner}
-        bannerAlt={data.bannerAlt}
-        pageTitle={data.pageTitle}
+        data={data}
       />
       <LatestBlogs
         data={data.categories.flatMap((category) => category.blogs)}

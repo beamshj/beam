@@ -10,9 +10,7 @@ const AccrAffil = ({ data }: { data: AccreditationProps }) => {
     <>
       <InnerBanner
         BannerData={accrData}
-        pageTitle={data.pageTitle}
-        banner={data.banner}
-        bannerAlt={data.bannerAlt}
+        data={data}
       />
       <Main data={data.firstSection} />
       <DataTab

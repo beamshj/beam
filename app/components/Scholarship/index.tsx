@@ -1,3 +1,5 @@
+"use client"
+
 import InnerBanner from "../Common/InnerBanner";
 import {
   BannerData, 
@@ -11,7 +13,7 @@ import { ScholarshipProps } from "./type";
 const Index = ({data}: {data: ScholarshipProps}) => {
   return (
     <>
-      <InnerBanner BannerData={BannerData} pageTitle={data.pageTitle} banner={data.banner} bannerAlt={data.bannerAlt}/> 
+      <InnerBanner BannerData={BannerData} data={data}/> 
       <FutureFocus data={data.firstSection}/> 
       <WeOffer data={data.secondSection}/> 
       <SelectionCriteria data={data.thirdSection}/> 
