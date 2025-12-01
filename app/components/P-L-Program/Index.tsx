@@ -6,7 +6,7 @@ import { PLProgramProps } from "./type";
 const Index = ({data}: {data: PLProgramProps}) => {
   return (
     <>
-      <InnerBanner BannerData={BannerData} banner={data.banner} bannerAlt={data.bannerAlt} pageTitle={data.pageTitle}/>
+      <InnerBanner BannerData={BannerData} data={data}/>
       <PLProgram data={data.firstSection} />
     </>
   );

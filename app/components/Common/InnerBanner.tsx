@@ -4,24 +4,30 @@ import Image from "next/image";
 import Breadcrump from "./BreadCrump";
 import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
+import isPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 
 interface PageBnrProps {
   BannerData?: {
     BannerTitle: string;
     BannerImg: string;
   };
-  banner?: string;
+  data:{
+    banner?: string;
   bannerAlt?: string;
+  bannerAlt_ar?: string;
   pageTitle?: string;
+  pageTitle_ar:string;
+  }
 }
 
 const InnerBanner = ({
   BannerData,
-  banner,
-  bannerAlt,
-  pageTitle,
+data
 }: PageBnrProps) => {
   const pathname = usePathname();
+  const banner = data.banner;
+  const pageTitle = isPreferredLanguageArabic() ? data.pageTitle_ar : data.pageTitle;
+  const bannerAlt = isPreferredLanguageArabic() ? data.bannerAlt_ar : data.bannerAlt;
 
   const lastWordPrimaryColor = pathname.includes("/general-managers-message")
     ? true

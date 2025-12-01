@@ -9,7 +9,7 @@ import { SchoolUniquenessProps } from "./type";
 const Index = ({data}: {data: SchoolUniquenessProps}) => {
   return (
     <>
-      <InnerBanner BannerData={BannerData} banner={data.banner} bannerAlt={data.bannerAlt} pageTitle={data.pageTitle} /> 
+      <InnerBanner BannerData={BannerData} data={data}/> 
       <FosteringStrong data={data.firstSection}/>  
       <BeyondAcademics data={data.secondSection}/>  
     </>

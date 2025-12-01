@@ -8,9 +8,7 @@ const Index = ({ data }: { data: FounderMessageProps }) => {
     <>
       <InnerBanner
         BannerData={BannerData}
-        pageTitle={data.pageTitle}
-        banner={data.banner}
-        bannerAlt={data.bannerAlt}
+        data={data}
       />
       <FounderMessage data={data.firstSection} />
     </>

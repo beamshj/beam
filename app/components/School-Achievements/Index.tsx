@@ -7,7 +7,7 @@ import { SchoolAchievementsProps } from "./type";
 const Index = ({data}: {data: SchoolAchievementsProps}) => {
   return (
     <>
-      <InnerBanner BannerData={BannerData} banner={data.banner} bannerAlt={data.bannerAlt} pageTitle={data.pageTitle}/>
+      <InnerBanner BannerData={BannerData} data={data}/>
       <ProudMoments data={data.firstSection} />
       <Achievements data={data.secondSection} />
     </>

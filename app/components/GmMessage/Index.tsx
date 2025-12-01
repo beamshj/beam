@@ -6,7 +6,7 @@ import { GmMessageProps } from "./type";
 const Index = ({data}: {data: GmMessageProps}) => {
   return (
     <>
-      <InnerBanner BannerData={BannerData} pageTitle={data.pageTitle} banner={data.banner} bannerAlt={data.bannerAlt}/>
+      <InnerBanner BannerData={BannerData} data={data}/>
       <GmMessage data={data.firstSection} />
     </>
   );
