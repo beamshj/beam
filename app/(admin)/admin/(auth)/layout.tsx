@@ -23,12 +23,13 @@ export default function AdminLayout({
               />
             </div>
           </div>
+
           <nav className="space-y-1">
             <AdminNavbar />
           </nav>
         </div>
 
-        {/* Logout Section */}
+        {/* Logout */}
         <div className="px-3 py-4 border-t border-gray-200">
           <ClientSideLink
             href="/admin/logout"
@@ -39,9 +40,18 @@ export default function AdminLayout({
         </div>
       </aside>
 
-      {/* Main content */}
-      <main className="flex-1  h-screen overflow-y-auto p-4 bg-gray-100">
-        {children}
+      {/* Main Content */}
+      <main className="flex-1 h-screen overflow-hidden">
+        {/* Fixed Top Bar */}
+        <div className="grid grid-cols-2 w-[calc(100vw-256px)]  shadow-sm py-4 px-4 fixed top-0 left-64 z-10 border-b">
+          <h2 className="font-bold text-primary">English Version</h2>
+          <h2 className="font-bold text-primary text-right">Arabic Version</h2>
+        </div>
+
+        {/* Scrollable Content */}
+        <div className="mt-[56px] h-[calc(100vh-72px)] overflow-y-auto p-4 bg-gray-100">
+          {children}
+        </div>
       </main>
     </div>
   );
