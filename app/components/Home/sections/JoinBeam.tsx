@@ -18,8 +18,8 @@ const JoinBeam = ({ data }: { data: HomeProps["tenthSection"] }) => {
     >
       <div className="w-full h-full absolute z-10 left-0 top-0 right-0 bottom-0">
         <Image
-          src="/assets/home/joinbg.jpg"
-          alt="Join Beam"
+          src={data.image}
+          alt={data.imageAlt}
           fill
           className="hidden md:block object-cover h-full w-full"
         />

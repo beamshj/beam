@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
-import "../globals.css";
+import "../../globals.css";
 import NavBar from "@/app/components/Layout/NavBar";
 import Footer from "@/app/components/Layout/Footer";
 
@@ -22,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ar" dir="rtl">
       <body className={`${dmSans.variable}  antialiased`}>
         <NavBar />
         {children}
