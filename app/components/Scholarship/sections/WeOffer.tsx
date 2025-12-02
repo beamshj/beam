@@ -4,8 +4,10 @@ import SplitText from "@/components/SplitText";
 import { motion } from "framer-motion";
 import { fadeIn, moveUp } from "../../motionVarients";
 import { ScholarshipProps } from "../type";
+// import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 
 const WeOffer = ({ data }: { data: ScholarshipProps["secondSection"] }) => {
+  // const isArabic = useIsPreferredLanguageArabic();
   return (
     <section className="py-8 md:py-12 lg:py-20 2xl:py-[135px] bg-secondary">
       <div className="container">
@@ -25,7 +27,7 @@ const WeOffer = ({ data }: { data: ScholarshipProps["secondSection"] }) => {
               rootMargin="-100px"
               textAlign="left"
             />
-            {data.description.split("\n").map((item, index) => (
+            {(data.description.split("\n")).map((item, index) => (
               <motion.p
                 variants={moveUp(index * 0.2)}
                 initial="hidden"
