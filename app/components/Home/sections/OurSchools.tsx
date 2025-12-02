@@ -27,7 +27,6 @@ import {
   LocationType,
 } from "../../BeamSchools/type";
 import Link from "next/link";
-import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 
 const Select = dynamic<SelectProps<OptionType, false, GroupBase<OptionType>>>(
   () => import("react-select"),
@@ -58,7 +57,6 @@ const OurSchools = ({
 
   const [selectedCurriculum, setSelectedCurriculum] = useState("all");
   const [selectedLocation, setSelectedLocation] = useState("");
-  const isArabic = useIsPreferredLanguageArabic();
 
   // locations
   // const locations = Array.from(

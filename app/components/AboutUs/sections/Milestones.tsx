@@ -78,7 +78,7 @@ export default function MoreToExplore({ data }: Props) {
               <SwiperSlide key={index} className="relative">
                 <motion.div
                   className="mb-9 flex flex-col items-start"
-                  // key={activeIndex}
+                  key={activeIndex}
                   // initial={{ opacity: 0, x: -80 }}
                   // animate={{ opacity: 1, x: 0 }}
                   // transition={{ duration: 0.9, ease: "easeOut" }}
