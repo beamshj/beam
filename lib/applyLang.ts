@@ -1,7 +1,11 @@
-export function applyLang<T extends Record<string, string | null | undefined>>(
-  isArabic: boolean,
-  data: T
-): T {
+"use client";
+
+import useIsPreferredLanguageArabic from "./getPreferredLanguage";
+
+export function useApplyLang<
+  T extends Record<string, string | null | undefined>
+>(data: T): T {
+  const isArabic = useIsPreferredLanguageArabic();
   const result = {} as T;
 
   for (const key in data) {
@@ -12,11 +16,9 @@ export function applyLang<T extends Record<string, string | null | undefined>>(
       const arValue = data[arKey];
       const enValue = data[baseKey];
 
-      const hasArabic =
-        typeof arValue === "string" && arValue.trim() !== "";
+      const hasArabic = typeof arValue === "string" && arValue.trim() !== "";
 
-      result[baseKey] =
-        isArabic && hasArabic ? arValue! : enValue!;
+      result[baseKey] = isArabic && hasArabic ? arValue! : enValue!;
     } else {
       result[key] = data[key];
     }
@@ -24,4 +26,3 @@ export function applyLang<T extends Record<string, string | null | undefined>>(
 
   return result;
 }
-

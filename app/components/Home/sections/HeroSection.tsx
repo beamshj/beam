@@ -11,6 +11,7 @@ import "swiper/css/effect-fade";
 import { motion } from "framer-motion";
 import { Variants } from "framer-motion";
 import { HomeProps } from "../type";
+import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 
 const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
   const swiperRef = useRef<SwiperClass | null>(null);
@@ -18,6 +19,7 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
   const totalSlides = data.items.length;
   const [textVersion, setTextVersion] = useState(0);
   const [isDesktop, setIsDesktop] = useState(false);
+  const isArabic = useIsPreferredLanguageArabic();
 
   const handleRegisterClick = () => {
     window.location.href = "/contact-us?scroll=register";
@@ -78,7 +80,7 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
                   <Image
                     className="h-full w-full object-cover object-center"
                     src={slide.image}
-                    alt={slide.imageAlt}
+                    alt={isArabic ? slide.imageAlt_ar : slide.imageAlt}
                     width={1920}
                     height={1280}
                     priority={index === 0}
@@ -111,9 +113,11 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
                           className="text-[1.8rem] md:text-2xl 2xl:text-4xl text-white leading-[1.2] xl:leading-[1.1] font-custom font-light lettersp-4-hero mb-0 max-w-none"
                         >
                           <span className="text-primary">
-                            {slide.highlightText}{" "}
+                            {isArabic
+                              ? slide.highlightText_ar
+                              : slide.highlightText}{" "}
                           </span>
-                          {slide.title}
+                          {isArabic ? slide.title_ar : slide.title}
                         </motion.h2>
                       </motion.div>
 
@@ -136,7 +140,7 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
                               className="cursor-pointer pl-4 pr-2 md:px-4 py-[10px] md:py-3 bg-primary rounded-full flex items-center gap-2 transition-all duration-300"
                             >
                               <p className="group-hover:text-white text-xs font-light text-white uppercase transition-colors duration-300">
-                                Register Interest
+                                {isArabic ? "سجل اهتمام" : "Register Interest"}
                               </p>
                               <div className="p-2 flex items-center justify-center bg-white w-fit rounded-full transition-transform duration-300 group-hover:rotate-45">
                                 <svg
@@ -172,9 +176,15 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
                           ease: "easeOut",
                           delay: 0.5,
                         }}
-                        className="absolute left-[40%] bottom-[83px] w-[80%] hidden xl:block"
+                        className={`absolute  bottom-[83px] w-[80%] hidden xl:block ${
+                          isArabic ? "right-[40%]" : "left-[40%]"
+                        }`}
                       >
-                        <div className="h-[1px] w-full bg-gradient-to-r from-white via-white/30 to-transparent"></div>
+                        <div
+                          className={`h-[1px] w-full ${
+                            isArabic ? "bg-gradient-to-l" : "bg-gradient-to-r"
+                          } from-white via-white/30 to-transparent`}
+                        ></div>
                       </motion.div>
                     </div>
                   </div>

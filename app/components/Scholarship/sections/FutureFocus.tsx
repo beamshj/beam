@@ -5,17 +5,10 @@ import { motion } from "framer-motion";
 import SplitText from "@/components/SplitText";
 import { moveUp } from "../../motionVarients";
 import { ScholarshipProps } from "../type";
-import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
-import {applyLang} from "@/lib/applyLang";
+import { useApplyLang } from "@/lib/applyLang";
 
-
-const FutureFocus = ({
-  data
-}: {
-  data: ScholarshipProps['firstSection'];
-}) => {
-  const isArabic = useIsPreferredLanguageArabic();
-  const t = applyLang(isArabic, data);
+const FutureFocus = ({ data }: { data: ScholarshipProps["firstSection"] }) => {
+  const t = useApplyLang(data);
   return (
     <section className="py-8 md:py-12 lg:py-20 2xl:py-[135px]">
       <div className="container">
@@ -51,11 +44,21 @@ const FutureFocus = ({
               rootMargin="-100px"
               textAlign="left"
             />
-
           </div>
           {/* Right Image */}
-          <motion.div variants={moveUp(1.25)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.1 }} className="relative w-full h-[250px] md:h-auto rounded-[12px] overflow-hidden">
-            <Image src={data.image} alt={t.imageAlt} fill className="object-cover transition-all duration-500" />
+          <motion.div
+            variants={moveUp(1.25)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.1 }}
+            className="relative w-full h-[250px] md:h-auto rounded-[12px] overflow-hidden"
+          >
+            <Image
+              src={data.image}
+              alt={t.imageAlt}
+              fill
+              className="object-cover transition-all duration-500"
+            />
             <motion.div
               className="absolute bottom-0 w-full h-[60%] bg-gradient-to-b from-black/0 to-[#42BADCC9]/79"
               initial={{ y: "100%" }}

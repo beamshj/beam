@@ -4,30 +4,25 @@ import Image from "next/image";
 import Breadcrump from "./BreadCrump";
 import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
-import isPreferredLanguageArabic from "@/lib/getPreferredLanguage";
+import { useApplyLang } from "@/lib/applyLang";
 
 interface PageBnrProps {
   BannerData?: {
     BannerTitle: string;
     BannerImg: string;
   };
-  data:{
+  data: {
     banner?: string;
-  bannerAlt?: string;
-  bannerAlt_ar?: string;
-  pageTitle?: string;
-  pageTitle_ar:string;
-  }
+    bannerAlt?: string;
+    bannerAlt_ar?: string;
+    pageTitle?: string;
+    pageTitle_ar: string;
+  };
 }
 
-const InnerBanner = ({
-  BannerData,
-data
-}: PageBnrProps) => {
+const InnerBanner = ({ BannerData, data }: PageBnrProps) => {
   const pathname = usePathname();
-  const banner = data.banner;
-  const pageTitle = isPreferredLanguageArabic() ? data.pageTitle_ar : data.pageTitle;
-  const bannerAlt = isPreferredLanguageArabic() ? data.bannerAlt_ar : data.bannerAlt;
+  const t = useApplyLang(data);
 
   const lastWordPrimaryColor = pathname.includes("/general-managers-message")
     ? true
@@ -41,8 +36,8 @@ data
         className="absolute top-0 left-0 w-full h-full z-0"
       >
         <Image
-          src={banner || BannerData?.BannerImg || ""}
-          alt={bannerAlt || BannerData?.BannerTitle || ""}
+          src={t.banner || BannerData?.BannerImg || ""}
+          alt={t.bannerAlt || BannerData?.BannerTitle || ""}
           width={1920}
           height={800}
           className="w-full h-full object-cover"
@@ -60,7 +55,7 @@ data
           >
             {!lastWordPrimaryColor
               ? (() => {
-                  const title = pageTitle || BannerData?.BannerTitle || "";
+                  const title = t.pageTitle || BannerData?.BannerTitle || "";
                   const [firstWord, ...rest] = title.split(" ");
                   return (
                     <>
@@ -72,7 +67,7 @@ data
                   );
                 })()
               : (() => {
-                  const title = pageTitle || BannerData?.BannerTitle || "";
+                  const title = t.pageTitle || BannerData?.BannerTitle || "";
                   const words = title.trim().split(" ");
                   const lastWord = words.pop(); // removes and returns last word
                   const rest = words.join(" ");
