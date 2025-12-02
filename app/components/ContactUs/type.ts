@@ -5,9 +5,11 @@ export interface ContactPage {
   __v: number;
   banner: string;
   bannerAlt: string;
+  bannerAlt_ar: string;
   metaDescription: string;
   metaTitle: string;
   pageTitle: string;
+  pageTitle_ar: string;
 }
 
 export interface FirstSection {

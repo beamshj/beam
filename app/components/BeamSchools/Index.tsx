@@ -6,7 +6,7 @@ import { BeamSchoolType, CategoryType, LocationType } from "./type";
 const Index = ({data, categorydata, locationdata}: {data: BeamSchoolType, categorydata: CategoryType[], locationdata: LocationType[]}) => {
   return (
     <>
-      <InnerBanner BannerData={BannerData} banner={data.banner} bannerAlt={data.bannerAlt} pageTitle={data.pageTitle} />
+      <InnerBanner BannerData={BannerData} data={data} />
       <SchoolCards data={data} categorydata={categorydata} locationdata={locationdata}/>
     </>
   );

@@ -9,9 +9,7 @@ const Index = ({ data }: { data: LeadershipData }) => {
     <>
       <InnerBanner
         BannerData={BannerData}
-        banner={data.banner}
-        bannerAlt={data.bannerAlt}
-        pageTitle={data.pageTitle}
+        data={data}
       />
       <BeamTeam beamleadersData={data.firstSection.items} data={data}/>
       <LeadershipTeam sliderData={data.secondSection.items} data={data} />

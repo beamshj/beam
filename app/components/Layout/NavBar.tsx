@@ -77,6 +77,7 @@ const NavBar = () => {
             className="bg-white flex justify-between lg:pl-3 rounded-[10px] h-[70px] lg:h-full"
             style={{ boxShadow: "0px 4px 45px 0px #0000000F" }}
           >
+
             <div className="flex gap-12 items-center">
               <div className="flex items-center justify-center h-full gap-4">
                 <div className="lg:py-3">
@@ -161,10 +162,13 @@ const NavBar = () => {
               </div>
             </div>
             <div className="flex gap-2  sm:gap-5">
-              <div className="flex items-center">
-                <button
-                  onClick={handleRegisterClick}
-                  className="uppercase border-primary border-[1px] px-3 py-1 flex items-center gap-2 rounded-[50px]
+              <div className="flex items-center relative"> 
+                              {/* <div className="absolute top-2 left-2">
+                Arabic
+              </div> */}
+                  <button
+                    onClick={handleRegisterClick}
+                    className="uppercase border-primary border-[1px] px-3 py-1 flex items-center gap-2 rounded-[50px]
                                 text-[10px] sm:text-xs font-light cursor-pointer text-black transition-all duration-300 group
                                 hover:bg-primary hover:text-white"
                 >

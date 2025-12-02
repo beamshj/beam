@@ -8,10 +8,9 @@ import SuccessStories from "./sections/SuccessStories";
 import { TestimonialsProps } from "./type";
 
 const Index = ({data}: {data: TestimonialsProps}) => {
-  console.log(data);
   return (
     <>
-      <InnerBanner BannerData={BannerData} pageTitle={data.pageTitle} bannerAlt={data.bannerAlt} banner={data.banner} /> 
+      <InnerBanner BannerData={BannerData} data={data}/> 
       <Comments data={data.firstSection}/> 
       <SuccessStories data={data.secondSection}/>   
       <GuidedVision data={data.thirdSection}/>

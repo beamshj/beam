@@ -11,7 +11,7 @@ import { AboutProps } from "./type";
 const Index = ({ data }: { data: AboutProps }) => {
   return (
     <>
-      <InnerBanner banner={data.banner} bannerAlt={data.bannerAlt} pageTitle={data.pageTitle}/>
+      <InnerBanner data={data}/>
       <OurStorySection data={data.firstSection} />
       <VisionMissionSection data={data.secondSection}/>
       <ValuesGrid data={data.thirdSection}/>
