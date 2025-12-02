@@ -60,7 +60,7 @@ export default function MoreToExplore({ data }: Props) {
               1600: { slidesPerView: 1.05 },
             }}
             loop={true}
-            speed={600}
+            speed={650}
             navigation={{
               nextEl: ".swiper-button-next-custom",
               prevEl: ".swiper-button-prev-custom",
@@ -78,10 +78,10 @@ export default function MoreToExplore({ data }: Props) {
               <SwiperSlide key={index} className="relative">
                 <motion.div
                   className="mb-9 flex flex-col items-start"
-                  key={activeIndex}
-                  initial={{ opacity: 0, x: -80 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.9, ease: "easeOut" }}
+                  // key={activeIndex}
+                  // initial={{ opacity: 0, x: -80 }}
+                  // animate={{ opacity: 1, x: 0 }}
+                  // transition={{ duration: 0.9, ease: "easeOut" }}
                 >
                   {/* Year Badge (static) */}
                   <div className="flex items-center border border-black rounded-full px-[15px] py-[7px] w-fit yrmn relative">
@@ -103,8 +103,8 @@ export default function MoreToExplore({ data }: Props) {
                     initial={{ opacity: 0, y: 50 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: false, amount: 0.3 }}
-                    transition={{ duration: 0.6, ease: "easeOut" }}
-                    className="md:mt-5 lg:mt-[71px] vhidden"
+                    transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
+                    className="md:mt-5 lg:mt-[71px] vhidden h-[200px] mb-10"
                   >
                     <p className="text-[1.3rem] md:text-md xl:text-lg 2xl:text-xl font-light text-black leading-[1.18] mb-3">
                       {item.title}
@@ -118,11 +118,11 @@ export default function MoreToExplore({ data }: Props) {
 
                   {/* Animated Image */}
                   <motion.div
-                    initial={{ opacity: 0, scale: 0.9, y: -30 }}
-                    whileInView={{ opacity: 1, scale: 1, y: -80 }}
+                    initial={{ opacity: 1, scale: 0.9, y: 0 }}
+                    whileInView={{ opacity: 1, scale: 1, y: -40 }}
                     viewport={{ once: false, amount: 0.3 }}
-                    transition={{ duration: 0.3, ease: "easeOut", delay: 0.1 }}
-                    className="md:absolute  md:left-[40%] lg:left-[35%] z-[2] imgtrans"
+                    transition={{ duration: 0.5, ease: "easeInOut" }}
+                    className="md:absolute  md:left-[40%] lg:left-[35%] z-[2] "
                   >
                     <Image
                       src={item.image}
