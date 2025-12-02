@@ -54,7 +54,7 @@ const FutureFocus = ({ data }: { data: ScholarshipProps["firstSection"] }) => {
             className="relative w-full h-[250px] md:h-auto rounded-[12px] overflow-hidden"
           >
             <Image
-              src={data.image}
+              src={t.image}
               alt={t.imageAlt}
               fill
               className="object-cover transition-all duration-500"

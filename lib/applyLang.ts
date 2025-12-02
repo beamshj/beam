@@ -2,27 +2,67 @@
 
 import useIsPreferredLanguageArabic from "./getPreferredLanguage";
 
-export function useApplyLang<
-  T extends Record<string, string | null | undefined>
->(data: T): T {
+type LangValue =
+  | string
+  | null
+  | undefined
+  | LangObject
+  | LangValue[];
+
+type LangObject = { [key: string]: LangValue };
+
+export function useApplyLang<T extends LangObject>(data: T): T {
   const isArabic = useIsPreferredLanguageArabic();
-  const result = {} as T;
 
-  for (const key in data) {
-    if (key.endsWith("_ar")) {
-      const baseKey = key.replace("_ar", "") as keyof T;
-      const arKey = key as keyof T;
+  const translate = (obj: LangObject): LangObject => {
+    const result: LangObject = {};
 
-      const arValue = data[arKey];
-      const enValue = data[baseKey];
+    for (const key in obj) {
+      const value = obj[key];
 
-      const hasArabic = typeof arValue === "string" && arValue.trim() !== "";
+      // ------------------
+      // Handle arrays
+      // ------------------
+      if (Array.isArray(value)) {
+        result[key] = value
+          .map((item) =>
+            typeof item === "object" && item !== null
+              ? translate(item as LangObject)
+              : item
+          ) as LangValue[]; // <-- IMPORTANT FIX
+        continue;
+      }
 
-      result[baseKey] = isArabic && hasArabic ? arValue! : enValue!;
-    } else {
-      result[key] = data[key];
+      // ------------------
+      // Handle nested objects
+      // ------------------
+      if (typeof value === "object" && value !== null) {
+        result[key] = translate(value as LangObject);
+        continue;
+      }
+
+      // ------------------
+      // Handle Arabic key (_ar)
+      // ------------------
+      if (key.endsWith("_ar")) {
+        const baseKey = key.replace("_ar", "");
+        const arValue = value;
+        const enValue = obj[baseKey];
+
+        const hasArabic =
+          typeof arValue === "string" && arValue.trim() !== "";
+
+        result[baseKey] =
+          isArabic && hasArabic ? arValue : enValue;
+        continue;
+      }
+
+      // Copy normal value
+      result[key] = value;
     }
-  }
 
-  return result;
+    return result;
+  };
+
+  return translate(data) as T;
 }
