@@ -9,6 +9,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { moveUp } from "../../motionVarients";
 import { AboutProps } from "../type";
+import { useApplyLang } from "@/lib/applyLang";
 
 const VisionMissionSection = ({
   data,
@@ -18,6 +19,8 @@ const VisionMissionSection = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
+  const t = useApplyLang(data);
+
   useEffect(() => {
     if (imageRef.current && overlayRef.current && containerRef.current) {
       gsap.set(imageRef.current, { clipPath: "inset(0 100% 0 0)" });
@@ -59,7 +62,7 @@ const VisionMissionSection = ({
           <div>
             <SplitText
               tag="h2"
-              text={data.title}
+              text={t.title}
               className="text-lg lg:text-xl xl:text-2xl 2xl:text-4xl font-light leading-[1.111111111] text-black mb-3 xl:mb-[40px] 2xl:mb-[30px]"
               delay={100}
               duration={0.6}
@@ -78,11 +81,11 @@ const VisionMissionSection = ({
               viewport={{ once: true, amount: 0.2 }}
               className="text-colorpara text-sm leading-[1.526315789473684] mb-[30px]"
             >
-              {data.description}
+              {t.description}
             </motion.p>
             {/* Cards */}
             <div className="space-y-[20px] xl:space-y-[25px] 2xl:space-y-[30px]">
-              {data.items.map((item, index) => (
+              {t.items.map((item, index) => (
                 <div key={index} className="flex items-stretch xl:gap-4  ">
                   {/* Left icon box - fixed width, stretched height */}
                   <motion.div
@@ -128,8 +131,8 @@ const VisionMissionSection = ({
             ref={imageRef}
           >
             <Image
-              src={data.image}
-              alt={data.imageAlt}
+              src={t.image}
+              alt={t.imageAlt}
               fill
               className="object-cover  transition-all duration-500"
             />
