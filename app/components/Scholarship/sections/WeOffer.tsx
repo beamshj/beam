@@ -4,9 +4,11 @@ import SplitText from "@/components/SplitText";
 import { motion } from "framer-motion";
 import { fadeIn, moveUp } from "../../motionVarients";
 import { ScholarshipProps } from "../type";
+import { useApplyLang } from "@/lib/applyLang";
 // import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 
 const WeOffer = ({ data }: { data: ScholarshipProps["secondSection"] }) => {
+  const t = useApplyLang(data);
   // const isArabic = useIsPreferredLanguageArabic();
   return (
     <section className="py-8 md:py-12 lg:py-20 2xl:py-[135px] bg-secondary">
@@ -15,7 +17,7 @@ const WeOffer = ({ data }: { data: ScholarshipProps["secondSection"] }) => {
           <div>
             <SplitText
               tag="h2"
-              text={data.title}
+              text={t.title}
               className="text-lg lg:text-xl xl:text-2xl 2xl:text-4xl max-w-[10ch] font-light leading-[1.111111111] text-black mb-4 md:mb-6 xl:mb-8 2xl:mb-12"
               delay={100}
               duration={0.6}
@@ -27,7 +29,7 @@ const WeOffer = ({ data }: { data: ScholarshipProps["secondSection"] }) => {
               rootMargin="-100px"
               textAlign="left"
             />
-            {(data.description.split("\n")).map((item, index) => (
+            {(t.description.split("\n")).map((item, index) => (
               <motion.p
                 variants={moveUp(index * 0.2)}
                 initial="hidden"
@@ -51,7 +53,7 @@ const WeOffer = ({ data }: { data: ScholarshipProps["secondSection"] }) => {
                 transition={{ duration: 3, ease: "easeInOut" }}
               ></motion.div>
 
-              {data.items.map((item, index) => (
+              {t.items.map((item, index) => (
                 <motion.div
                   variants={fadeIn(index * 0.5)}
                   initial="hidden"

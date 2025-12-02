@@ -14,9 +14,7 @@ interface PageBnrProps {
   data: {
     banner?: string;
     bannerAlt?: string;
-    bannerAlt_ar?: string;
     pageTitle?: string;
-    pageTitle_ar: string;
   };
 }
 
