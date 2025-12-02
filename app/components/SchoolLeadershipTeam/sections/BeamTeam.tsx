@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { moveUp } from "../../motionVarients";
 import { LeadershipData } from "../type";
+import { useApplyLang } from "@/lib/applyLang";
 
 type Member = {
   _id: string;
@@ -12,7 +13,7 @@ type Member = {
   designation: string;
   image: string;
   bullets?: string[];
-  description:string;
+  description: string;
 };
 
 type Slide = Member & {
@@ -23,13 +24,15 @@ type Slide = Member & {
   isActive: boolean;
 };
 
-export default function LeadershipCarousel({ beamleadersData,data }: { beamleadersData: Member[],data:LeadershipData }) {
+export default function LeadershipCarousel({ data }: { data: LeadershipData }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [windowWidth, setWindowWidth] = useState(
     typeof window !== "undefined" ? window.innerWidth : 1024
   ); // default for SSR
   const [mounted, setMounted] = useState(false);
   const [containerPaddingRight, setContainerPaddingRight] = useState(0);
+  const t = useApplyLang(data);
+  const beamleadersData = t.firstSection.items;
 
   const n = beamleadersData.length;
   // const gap = 40;
@@ -180,9 +183,8 @@ export default function LeadershipCarousel({ beamleadersData,data }: { beamleade
           viewport={{ once: true, amount: 0.2 }}
           className="text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl lg:leading-[1.111] font-light mb-3 xl:mb-[30px] 2xl:mb-[50px] text-black lettersp-4"
         >
-          {data.firstSection.title}
+          {t.firstSection.title}
         </motion.h1>
-        
       </div>
       <div
         className={`flex flex-col md:flex-row gap-[15px] md:gap-[36px] lg:gap-[56px] items-stretch ${
@@ -216,9 +218,8 @@ export default function LeadershipCarousel({ beamleadersData,data }: { beamleade
               viewport={{ once: true, amount: 0.2 }}
               className="text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl lg:leading-[1.111] font-light mb-3 xl:mb-[30px] 2xl:mb-[50px] text-black lettersp-4"
             >
-              {data.firstSection.title}
+              {t.firstSection.title}
             </motion.h1>
-          
           </div>
           {slides.map((m) => (
             <motion.div
@@ -232,7 +233,9 @@ export default function LeadershipCarousel({ beamleadersData,data }: { beamleade
               }}
               transition={{ duration: 0.6, ease: "easeInOut" }}
               onClick={() =>
-                setActiveIndex(beamleadersData.findIndex((d) => d._id === m._id))
+                setActiveIndex(
+                  beamleadersData.findIndex((d) => d._id === m._id)
+                )
               }
             >
               <Image
@@ -329,13 +332,13 @@ export default function LeadershipCarousel({ beamleadersData,data }: { beamleade
                 </motion.li>
               ))} */}
               <motion.div
-                            variants={moveUp(0.4)}
-                            initial="hidden"
-                            whileInView="show"
-                            viewport={{ once: true, amount: 0.2 }}
-                            className="mt-[30px] md:mt-[50px] text-sm font-light text-black school-leadership-bullets"
-                            dangerouslySetInnerHTML={{ __html: activeSlide.description }}
-                          />
+                variants={moveUp(0.4)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.2 }}
+                className="mt-[30px] md:mt-[50px] text-sm font-light text-black school-leadership-bullets"
+                dangerouslySetInnerHTML={{ __html: activeSlide.description }}
+              />
             </motion.ul>
           </div>
           <motion.div
@@ -362,4 +365,4 @@ export default function LeadershipCarousel({ beamleadersData,data }: { beamleade
       </div>
     </section>
   );
-} 
+}

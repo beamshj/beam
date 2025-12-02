@@ -11,6 +11,7 @@ import { moveUp } from "../../motionVarients";
 import { FirstSection } from "../type";
 import { Listbox } from "@headlessui/react";
 import ReCAPTCHA from "react-google-recaptcha";
+import { useApplyLang } from "@/lib/applyLang";
 
 const options = [
   { value: "", label: "Purpose of enquiry" },
@@ -25,15 +26,18 @@ const formSchema = z.object({
   email: z.string().email("Invalid email"),
   phone: z.string().min(5, "Enter valid number"),
   purpose: z.preprocess(
-        (val) => typeof val === "string" ? val : "",
-        z.string({ required_error: "Purpose is required" }).min(1, "Purpose is required")
-      ),
+    (val) => (typeof val === "string" ? val : ""),
+    z
+      .string({ required_error: "Purpose is required" })
+      .min(1, "Purpose is required")
+  ),
   message: z.string().min(1, "Message is required"),
 });
 
 type FormData = z.infer<typeof formSchema>;
 
 const ContactForm: React.FC<{ data: FirstSection }> = ({ data }) => {
+  const t = useApplyLang(data);
   const {
     register,
     handleSubmit,
@@ -45,32 +49,32 @@ const ContactForm: React.FC<{ data: FirstSection }> = ({ data }) => {
   });
 
   const recaptchaRef = useRef<ReCAPTCHA>(null);
-  const [error, setError] = useState("")
+  const [error, setError] = useState("");
 
   const onSubmit = async (data: FormData) => {
     try {
-      const captchaValue = recaptchaRef?.current?.getValue()
+      const captchaValue = recaptchaRef?.current?.getValue();
       if (!captchaValue) {
-        setError("Please verify yourself to continue")
+        setError("Please verify yourself to continue");
         return;
       }
-      setError("")
+      setError("");
       const response = await fetch("/api/admin/contact/enquiry", {
         method: "POST",
-        body: JSON.stringify(data)
-      })
-      const res = await response.json()
+        body: JSON.stringify(data),
+      });
+      const res = await response.json();
       if (res.success) {
-        alert(res.message)
-        reset()
+        alert(res.message);
+        reset();
       } else {
-        alert(res.message)
+        alert(res.message);
       }
     } catch (error) {
-      console.log("Error sending message", error)
-      alert("Sorry, something went wrong. Please try again later.")
-    }finally{
-      recaptchaRef.current?.reset()
+      console.log("Error sending message", error);
+      alert("Sorry, something went wrong. Please try again later.");
+    } finally {
+      recaptchaRef.current?.reset();
     }
   };
 
@@ -81,7 +85,7 @@ const ContactForm: React.FC<{ data: FirstSection }> = ({ data }) => {
         <div className="lg:w-[34%]">
           <SplitText
             tag="h1"
-            text="Get In Touch"
+            text={t.mainTitle}
             className="text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl text-black font-light leading-[1.111] lettersp-4"
             delay={100}
             duration={0.6}
@@ -100,7 +104,7 @@ const ContactForm: React.FC<{ data: FirstSection }> = ({ data }) => {
             viewport={{ once: true, amount: 0.2 }}
             className="text-colorpara font-light text-sm leading-[1.52] mt-[13px]"
           >
-            {data.description}
+            {t.description}
           </motion.p>
           <div className="mt-[13px] text-sm leading-[1.52] font-light">
             <motion.h2
@@ -110,7 +114,7 @@ const ContactForm: React.FC<{ data: FirstSection }> = ({ data }) => {
               viewport={{ once: true, amount: 0.2 }}
               className="text-primary text-md lg:text-lg xl:text-xl leading-[1.2] font-light"
             >
-              {data.subTitle}
+              {t.subTitle}
             </motion.h2>
             <motion.p
               variants={moveUp(0.4)}
@@ -119,7 +123,7 @@ const ContactForm: React.FC<{ data: FirstSection }> = ({ data }) => {
               viewport={{ once: true, amount: 0.2 }}
               className="text-colorpara mt-[17px] font-light whitespace-pre-line"
             >
-              {data.address}
+              {t.address}
             </motion.p>
             <div className="space-y-[17px] mt-[17px]">
               {/* First row */}
@@ -144,7 +148,7 @@ const ContactForm: React.FC<{ data: FirstSection }> = ({ data }) => {
                   viewport={{ once: true, amount: 0.2 }}
                   className="font-light text-sm leading-[1.52] text-primary"
                 >
-                  {data.phone}
+                  {t.phone}
                 </motion.p>
               </motion.div>
 
@@ -171,7 +175,7 @@ const ContactForm: React.FC<{ data: FirstSection }> = ({ data }) => {
                   href="mailto:enquiries@beam.co.ae"
                   className="text-primary font-light text-sm leading-[1.52]"
                 >
-                  {data.email}
+                  {t.email}
                 </motion.a>
               </motion.div>
             </div>
@@ -185,7 +189,7 @@ const ContactForm: React.FC<{ data: FirstSection }> = ({ data }) => {
           >
             <div className="relative w-full pt-[63.35%]">
               <iframe
-                src={data.map}
+                src={t.map}
                 className="absolute inset-0 w-full h-full rounded-[12px]"
                 style={{ border: 0 }}
                 loading="lazy"
@@ -305,8 +309,9 @@ const ContactForm: React.FC<{ data: FirstSection }> = ({ data }) => {
 
                       {/* Custom arrow icon */}
                       <span
-                        className={`absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none transition-transform duration-300 ${open ? "rotate-180" : "rotate-0"
-                          }`}
+                        className={`absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none transition-transform duration-300 ${
+                          open ? "rotate-180" : "rotate-0"
+                        }`}
                       >
                         <Image
                           src="/images/arrow-down.svg"
@@ -322,9 +327,10 @@ const ContactForm: React.FC<{ data: FirstSection }> = ({ data }) => {
                             key={option.value}
                             value={option}
                             className={({ active }) =>
-                              `cursor-pointer select-none py-2 px-4 font-light ${active
-                                ? "bg-[#42BADC] text-white"
-                                : "text-colorpara"
+                              `cursor-pointer select-none py-2 px-4 font-light ${
+                                active
+                                  ? "bg-[#42BADC] text-white"
+                                  : "text-colorpara"
                               }`
                             }
                           >
@@ -364,34 +370,37 @@ const ContactForm: React.FC<{ data: FirstSection }> = ({ data }) => {
             )}
           </motion.div>
           <div>
-          <ReCAPTCHA sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""} ref={recaptchaRef} className='mt-5' />
-          
-          {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
-          <motion.div
-            variants={moveUp(0.7)}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
-            className="relative inline-block rounded-[50px] p-[1px] bg-gradient-to-r from-[#42BADC] to-[#12586C] mt-5 2xl:mt-0"
-          >
-            
-            <button
-              type="submit"
-              className="group cursor-pointer flex items-center justify-center gap-[10px] px-[20px] py-[11px] w-full h-full text-black bg-white rounded-[50px] text-xs font-light overflow-hidden"
+            <ReCAPTCHA
+              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
+              ref={recaptchaRef}
+              className="mt-5"
+            />
+
+            {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
+            <motion.div
+              variants={moveUp(0.7)}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.2 }}
+              className="relative inline-block rounded-[50px] p-[1px] bg-gradient-to-r from-[#42BADC] to-[#12586C] mt-5 2xl:mt-0"
             >
-              SEND MESSAGE
-              {/* Arrow circle */}
-              <span className="flex items-center justify-center w-[27px] h-[27px] bg-primary rounded-full transition-transform duration-300 group-hover:translate-x-2">
-                <Image
-                  src="/images/arrow-black.svg"
-                  alt="Arrow"
-                  width={8}
-                  height={8}
-                  className="object-contain transition-transform duration-300 group-hover:rotate-45"
-                />
-              </span>
-            </button>
-          </motion.div>
+              <button
+                type="submit"
+                className="group cursor-pointer flex items-center justify-center gap-[10px] px-[20px] py-[11px] w-full h-full text-black bg-white rounded-[50px] text-xs font-light overflow-hidden"
+              >
+                SEND MESSAGE
+                {/* Arrow circle */}
+                <span className="flex items-center justify-center w-[27px] h-[27px] bg-primary rounded-full transition-transform duration-300 group-hover:translate-x-2">
+                  <Image
+                    src="/images/arrow-black.svg"
+                    alt="Arrow"
+                    width={8}
+                    height={8}
+                    className="object-contain transition-transform duration-300 group-hover:rotate-45"
+                  />
+                </span>
+              </button>
+            </motion.div>
           </div>
         </form>
       </div>

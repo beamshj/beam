@@ -1,87 +1,143 @@
 import mongoose from "mongoose";
 
 const leadershipTeamSchema = new mongoose.Schema({
-    banner: {
-        type: String,
-        required: true
+  banner: {
+    type: String,
+    required: true,
+  },
+  bannerAlt: {
+    type: String,
+  },
+  bannerAlt_ar: {
+    type: String,
+  },
+  metaTitle: {
+    type: String,
+    required: true,
+  },
+  metaTitle_ar: {
+    type: String,
+  },
+  metaDescription: {
+    type: String,
+    required: true,
+  },
+  metaDescription_ar: {
+    type: String,
+  },
+  pageTitle: {
+    type: String,
+    required: true,
+  },
+  pageTitle_ar: {
+    type: String,
+  },
+  firstSection: {
+    title: {
+      type: String,
+      required: true,
     },
-    bannerAlt: {
-        type: String,
+    title_ar: {
+      type: String,
     },
-    metaTitle: {
-        type: String,
-        required: true
+    description: {
+      type: String,
+      required: true,
     },
-    metaDescription: {
-        type: String,
-        required: true
+    description_ar: {
+      type: String,
     },
-    pageTitle: {
-        type: String,
-        required: true
-    },
-    firstSection: {
-        title: {
-            type: String,
-            required: true
+    items: [
+      {
+        name: {
+          type: String,
+          required: true,
+        },
+        name_ar: {
+          type: String,
+          required: true,
+        },
+        image: {
+          type: String,
+          required: true,
+        },
+        imageAlt: {
+          type: String,
+        },
+        imageAlt_ar: {
+          type: String,
+        },
+        designation: {
+          type: String,
+          required: true,
+        },
+        designation_ar: {
+          type: String,
+          required: true,
         },
         description: {
-            type: String,
-            required: true
+          type: String,
+          required: true,
         },
-        items: [{
-            name: {
-                type: String,
-                required: true
-            },
-            image: {
-                type: String,
-                required: true
-            },
-            imageAlt: {
-                type: String,
-            },
-            designation: {
-                type: String,
-                required: true
-            },
-            description: {
-                type: String,
-                required: true
-            }
-        }]
+        description_ar: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
+  },
+  secondSection: {
+    title: {
+      type: String,
+      required: true,
     },
-    secondSection: {
-        title: {
-            type: String,
-            required: true
+    title_ar: {
+      type: String,
+    },
+    description: {
+      type: String,
+      required: true,
+    },
+    description_ar: {
+      type: String,
+    },
+    items: [
+      {
+        name: {
+          type: String,
+          required: true,
+        },
+        name_ar: {
+          type: String,
+        },
+        image: {
+          type: String,
+          required: true,
+        },
+        imageAlt: {
+          type: String,
+        },
+        imageAlt_ar: {
+          type: String,
+        },
+        designation: {
+          type: String,
+          required: true,
+        },
+        designation_ar: {
+          type: String,
         },
         description: {
-            type: String,
-            required: true
+          type: String,
+          required: true,
         },
-        items: [{
-            name: {
-                type: String,
-                required: true
-            },
-            image: {
-                type: String,
-                required: true
-            },
-            imageAlt: {
-                type: String,
-            },
-            designation: {
-                type: String,
-                required: true
-            },
-            description: {
-                type: String,
-                required: true
-            }
-        }]
-    },
-})
+        description_ar: {
+          type: String,
+        },
+      },
+    ],
+  },
+});
 
-export default mongoose.models.LeadershipTeam || mongoose.model("LeadershipTeam", leadershipTeamSchema);
+export default mongoose.models.LeadershipTeam ||
+  mongoose.model("LeadershipTeam", leadershipTeamSchema);
