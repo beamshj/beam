@@ -187,12 +187,15 @@ const NavBar = () => {
             </div>
             <div className="flex gap-2  sm:gap-5">
               <div className="flex items-center gap-5">
-                <button
-                  onClick={switchLanguage}
-                  className="cursor-pointer hover:text-primary transition-colors duration-300"
-                >
-                  {isArabic ? "English" : "العربية"}
-                </button>
+                {process.env.NODE_ENV === "development" && (
+                  <button
+                    onClick={switchLanguage}
+                    className="cursor-pointer hover:text-primary transition-colors duration-300"
+                  >
+                    {isArabic ? "English" : "العربية"}
+                  </button>
+                )}
+
                 <button
                   onClick={handleRegisterClick}
                   className="uppercase border-primary border-[1px] px-3 py-1 flex items-center gap-2 rounded-[50px]
