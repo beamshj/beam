@@ -5,6 +5,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { moveUp } from "../../motionVarients";
 import { AboutProps } from "../type";
+import { useApplyLang } from "@/lib/applyLang";
 
 interface Props {
   data: AboutProps["thirdSection"];
@@ -12,6 +13,7 @@ interface Props {
 
 export default function ValuesGrid({ data }: Props) {
   const [hovered, setHovered] = useState<number | null>(0);
+  const t = useApplyLang(data)
 
   return (
     <section className="container">
@@ -23,10 +25,10 @@ export default function ValuesGrid({ data }: Props) {
           viewport={{ once: true, amount: 0.2 }}
           className="text-xl font-light mb-3 lg:mb-6 xl:mb-[40px] 2xl:mb-[50px] leading-[1.2] text-black"
         >
-          {data.title}
+          {t.title}
         </motion.h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-5 2xl:grid-cols-5 gap-4 xl:gap-5 2xl:gap-[11px]">
-          {data.items?.map((item, index) => (
+          {t.items?.map((item, index) => (
             <motion.div
               variants={moveUp(index * 0.1)}
               initial="hidden"
@@ -111,7 +113,7 @@ export default function ValuesGrid({ data }: Props) {
                         
                       `}
                     >
-                      {item.title}
+                      {t.title}
                     </h3>
 
                     {/* Points (only show on hover) */}

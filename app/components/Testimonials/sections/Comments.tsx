@@ -10,8 +10,10 @@ import SplitText from "@/components/SplitText";
 import { motion } from "framer-motion";
 import { moveUp } from "../../motionVarients";
 import { TestimonialsProps } from "../type";
+import { useApplyLang } from "@/lib/applyLang";
 
 const Comments = ({ data }: { data: TestimonialsProps["firstSection"] }) => {
+  const t = useApplyLang(data);
   return (
     <section className="pt-8 md:pt-12 lg:pt-20 2xl:pt-[135px] pb-10 md:pb-10 lg:pb-10 2xl:pb-[40px] overflow-hidden ">
       <div className="container">
@@ -21,7 +23,7 @@ const Comments = ({ data }: { data: TestimonialsProps["firstSection"] }) => {
               dangerouslySetInnerHTML={{ __html: commentsData.title }}
             /> */}
             <div className="mb-4 md:mb-6 xl:mb-8 2xl:mb-8">
-              {data.title.split("\n").map((part, index) => (
+              {t.title.split("\n").map((part, index) => (
                 <div key={index} className="">
                   <SplitText
                     tag="h2"
@@ -37,14 +39,12 @@ const Comments = ({ data }: { data: TestimonialsProps["firstSection"] }) => {
                     rootMargin="-100px"
                     textAlign="left"
                   />
-                  {index < data.title.split(/<br\s*\/?>/gi).length - 1 && (
-                    <br />
-                  )}
+                  {index < t.title.split(/<br\s*\/?>/gi).length - 1 && <br />}
                 </div>
               ))}
             </div>
             <p className=" text-sm leading-[1.526315789473684] max-w-[85ch] mb-14 md:mb-6 font-light  text-colorpara">
-              {data.description}
+              {t.description}
             </p>
           </div>
           <div className="relative">
@@ -133,7 +133,7 @@ const Comments = ({ data }: { data: TestimonialsProps["firstSection"] }) => {
                 modules={[Navigation, Pagination]}
                 className="!overflow-visible mt-5"
               >
-                {data.items.map((item, index) => (
+                {t.items.map((item, index) => (
                   <SwiperSlide key={index} className="flex items-stretch">
                     <motion.div
                       variants={moveUp(index * 0.2)}

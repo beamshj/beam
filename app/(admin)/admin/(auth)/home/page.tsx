@@ -1728,7 +1728,8 @@ const HomePage = () => {
                                 type="text"
                                 placeholder="Alt Tag"
                                 {...register(
-                                  `thirdSection.items.${index}.logoAlt_ar`)}
+                                  `thirdSection.items.${index}.logoAlt_ar`
+                                )}
                               />
                               {errors.thirdSection?.items?.[index]
                                 ?.logoAlt_ar && (

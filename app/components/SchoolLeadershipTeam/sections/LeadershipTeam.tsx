@@ -382,6 +382,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { moveUp } from "../../motionVarients";
 import { LeadershipData, LeadershipItem } from "../type";
+import { useApplyLang } from "@/lib/applyLang";
 
 // type Member = {
 //   id: number;
@@ -399,13 +400,7 @@ type Slide = LeadershipItem & {
   isActive: boolean;
 };
 
-export default function LeadershipCarousel({
-  sliderData,
-  data,
-}: {
-  sliderData: LeadershipItem[];
-  data: LeadershipData;
-}) {
+export default function LeadershipCarousel({ data }: { data: LeadershipData }) {
   console.log(data, "data");
   const [activeIndex, setActiveIndex] = useState(0);
   const [windowWidth, setWindowWidth] = useState(
@@ -413,6 +408,8 @@ export default function LeadershipCarousel({
   ); // default for SSR
   const [mounted, setMounted] = useState(false);
   const [containerPaddingRight, setContainerPaddingRight] = useState(0);
+  const t = useApplyLang(data);
+  const sliderData = t.firstSection.items;
 
   const n = sliderData.length;
   // const gap = 40;
