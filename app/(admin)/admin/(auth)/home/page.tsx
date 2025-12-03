@@ -130,9 +130,12 @@ interface HomeFormProps {
     title_ar: string;
     description: string;
     description_ar: string;
-    image: string;
-    imageAlt: string;
-    imageAlt_ar: string;
+    bigImage: string;
+    bigImageAlt: string;
+    bigImageAlt_ar: string;
+    smallImage: string;
+    smallImageAlt: string;
+    smallImageAlt_ar: string;
     buttonText: string;
     buttonText_ar: string;
   };
@@ -1396,7 +1399,7 @@ const HomePage = () => {
                     <div className="flex flex-col gap-2">
                       <Label className="font-bold">Image</Label>
                       <Controller
-                        name={`tenthSection.image`}
+                        name={`tenthSection.bigImage`}
                         control={control}
                         rules={{ required: "Image is required" }}
                         render={({ field }) => (
@@ -1406,9 +1409,9 @@ const HomePage = () => {
                           />
                         )}
                       />
-                      {errors.tenthSection?.image && (
+                      {errors.tenthSection?.bigImage && (
                         <p className="text-red-500">
-                          {errors.tenthSection?.image.message}
+                          {errors.tenthSection?.bigImage.message}
                         </p>
                       )}
                     </div>
@@ -1417,13 +1420,50 @@ const HomePage = () => {
                       <Input
                         type="text"
                         placeholder="Alt Tag"
-                        {...register("tenthSection.imageAlt", {
+                        {...register("tenthSection.bigImageAlt", {
                           required: "Alt Tag is required",
                         })}
                       />
-                      {errors.tenthSection?.imageAlt && (
+                      {errors.tenthSection?.bigImageAlt && (
                         <p className="text-red-500">
-                          {errors.tenthSection?.imageAlt.message}
+                          {errors.tenthSection?.bigImageAlt.message}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col gap-2">
+                    <div className="flex flex-col gap-2">
+                      <Label className="font-bold">Image</Label>
+                      <Controller
+                        name={`tenthSection.smallImage`}
+                        control={control}
+                        rules={{ required: "Image is required" }}
+                        render={({ field }) => (
+                          <ImageUploader
+                            value={field.value}
+                            onChange={field.onChange}
+                          />
+                        )}
+                      />
+                      {errors.tenthSection?.smallImage && (
+                        <p className="text-red-500">
+                          {errors.tenthSection?.smallImage.message}
+                        </p>
+                      )}
+                    </div>
+                    <div className="flex flex-col gap-1">
+                      <Label className="font-bold">Alt Tag</Label>
+                      <Input
+                        type="text"
+                        placeholder="Alt Tag"
+                        {...register("tenthSection.smallImageAlt", {
+                          required: "Alt Tag is required",
+                        })}
+                      />
+                      {errors.tenthSection?.smallImageAlt && (
+                        <p className="text-red-500">
+                          {errors.tenthSection?.smallImageAlt.message}
                         </p>
                       )}
                     </div>
@@ -2543,9 +2583,9 @@ const HomePage = () => {
                 <div className="grid grid-cols-2 gap-2">
                   <div className="flex flex-col gap-2">
                     <div className="flex flex-col gap-2">
-                      <Label className="font-bold">Image</Label>
+                      <Label className="font-bold">Big Image</Label>
                       <Controller
-                        name={`tenthSection.image`}
+                        name={`tenthSection.bigImage`}
                         control={control}
                         rules={{ required: "Image is required" }}
                         render={({ field }) => (
@@ -2555,9 +2595,9 @@ const HomePage = () => {
                           />
                         )}
                       />
-                      {errors.tenthSection?.image && (
+                      {errors.tenthSection?.bigImage && (
                         <p className="text-red-500">
-                          {errors.tenthSection?.image.message}
+                          {errors.tenthSection?.bigImage.message}
                         </p>
                       )}
                     </div>
@@ -2566,11 +2606,46 @@ const HomePage = () => {
                       <Input
                         type="text"
                         placeholder="Alt Tag"
-                        {...register("tenthSection.imageAlt_ar")}
+                        {...register("tenthSection.bigImageAlt_ar")}
                       />
-                      {errors.tenthSection?.imageAlt_ar && (
+                      {errors.tenthSection?.bigImageAlt_ar && (
                         <p className="text-red-500">
-                          {errors.tenthSection?.imageAlt_ar.message}
+                          {errors.tenthSection?.bigImageAlt_ar.message}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col gap-2">
+                    <div className="flex flex-col gap-2">
+                      <Label className="font-bold">Small Image</Label>
+                      <Controller
+                        name={`tenthSection.smallImage`}
+                        control={control}
+                        rules={{ required: "Image is required" }}
+                        render={({ field }) => (
+                          <ImageUploader
+                            value={field.value}
+                            onChange={field.onChange}
+                          />
+                        )}
+                      />
+                      {errors.tenthSection?.smallImage && (
+                        <p className="text-red-500">
+                          {errors.tenthSection?.smallImage.message}
+                        </p>
+                      )}
+                    </div>
+                    <div className="flex flex-col gap-1">
+                      <Label className="font-bold">Alt Tag</Label>
+                      <Input
+                        type="text"
+                        placeholder="Alt Tag"
+                        {...register("tenthSection.smallImageAlt_ar")}
+                      />
+                      {errors.tenthSection?.smallImageAlt_ar && (
+                        <p className="text-red-500">
+                          {errors.tenthSection?.smallImageAlt_ar.message}
                         </p>
                       )}
                     </div>

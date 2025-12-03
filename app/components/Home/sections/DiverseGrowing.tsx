@@ -18,9 +18,12 @@ import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { HomeProps } from "../type";
+import { useApplyLang } from "@/lib/applyLang";
+
 gsap.registerPlugin(ScrollTrigger);
 
 const DiverseGrowing = ({data}: {data: HomeProps['fifthSection']}) => {
+  const t = useApplyLang(data);
   const imgRef = useRef<HTMLImageElement | null>(null);
 
   useEffect(() => {
@@ -56,7 +59,7 @@ const DiverseGrowing = ({data}: {data: HomeProps['fifthSection']}) => {
 
               <SplitText
                 tag="h2"
-                text={data.title}
+                text={t.title}
                 className="text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-light leading-[1.111111111] text-black max-w-[20ch] lettersp-4 xl:mb-30 2xl:mb-40"
                 delay={100}
                 duration={0.6}
@@ -95,20 +98,20 @@ const DiverseGrowing = ({data}: {data: HomeProps['fifthSection']}) => {
                           {/* {diverseGrowingData.secvalues[0].Xcount}+  */}
                           <Counter
                             from={0}
-                            to={Number(data.items[0].number)}
+                            to={Number(t.items[0].number)}
                           />
                           +
                         </p>
                         <Image
                           className={`grayscale group-hover:grayscale-0 transition-all duration-400 group-hover:scale-110 ${isActive === 1 ? "grayscale-0 scale-110" : ""}`}
-                          src={data.items[0].logo}
-                          alt={data.items[0].logoAlt}
+                          src={t.items[0].logo}
+                          alt={t.items[0].logoAlt}
                           width={50}
                           height={50}
                         />
                       </div>
                       <p className={`text-md 2xl:text-xl font-light text-[#626262] max-w-[9ch] group-hover:text-black group-hover:-translate-y-1 transition-all duration-500 ${isActive === 1 ? "text-black -translate-y-1" : ""}`}>
-                        {data.items[0].value}
+                        {t.items[0].value}
                       </p>
                     </div>
                   </div>
@@ -130,20 +133,20 @@ const DiverseGrowing = ({data}: {data: HomeProps['fifthSection']}) => {
                           <p className={`text-xl 2xl:text-2xl font-light text-[#7E5AA3] group-hover:text-black  group-hover:-translate-x-3 transition-all duration-500 ${isActive === 2 ? "text-black -translate-x-3" : ""}`}>
                             <Counter
                               from={0}
-                              to={Number(data.items[1].number)}
+                              to={Number(t.items[1].number)}
                             />
                             +
                           </p>
                           <Image
                             className={`grayscale group-hover:grayscale-0 transition-all duration-400 group-hover:scale-110 ${isActive === 2 ? "grayscale-0 scale-110" : ""}`}
-                            src={data.items[1].logo}
-                            alt={data.items[1].logoAlt}
+                            src={t.items[1].logo}
+                            alt={t.items[1].logo}
                             width={50}
                             height={50}
                           />
                         </div>
                         <p className={`text-md 2xl:text-xl font-light text-[#626262] max-w-[9ch] group-hover:text-black group-hover:-translate-y-1 transition-all duration-500  ${isActive === 2 ? "text-black -translate-y-1" : ""}`}>
-                          {data.items[1].value}
+                          {t.items[1].value}
                         </p>
                       </div>
                     </div>
@@ -163,21 +166,21 @@ const DiverseGrowing = ({data}: {data: HomeProps['fifthSection']}) => {
                               <Counter
                                 from={0}
                                 to={Number(
-                                  data.items[2].number
+                                  t.items[2].number
                                 )}
                               />
                               +
                             </p>
                             <Image
                               className={`grayscale group-hover:grayscale-0 transition-all duration-400 group-hover:scale-110 ${isActive === 3 ? "grayscale-0 scale-110" : ""}`}
-                              src={data.items[2].logo}
-                              alt={data.items[2].logoAlt}
+                              src={t.items[2].logo}
+                              alt={t.items[2].logoAlt}
                               width={50}
                               height={50}
                             />
                           </div>
                           <p className={`text-md 2xl:text-xl font-light ${isActive === 3 ? "text-black -translate-y-1" : "text-[#626262] group-hover:text-black group-hover:-translate-y-1 transition-all duration-500 "}`}>
-                            {data.items[2].value}
+                            {t.items[2].value}
                           </p>
                         </div>
                       </div>
@@ -197,21 +200,21 @@ const DiverseGrowing = ({data}: {data: HomeProps['fifthSection']}) => {
                               <Counter
                                 from={0}
                                 to={Number(
-                                  data.items[4].number
+                                  t.items[4].number
                                 )}
                               />
                               +
                             </p>
                             <Image
                               className={`grayscale group-hover:grayscale-0 transition-all duration-400 group-hover:scale-110 ${isActive === 4 ? "grayscale-0 scale-110" : ""}`}
-                              src={data.items[4].logo}
-                              alt={data.items[4].logoAlt}
+                              src={t.items[4].logo}
+                              alt={t.items[4].logoAlt}
                               width={50}
                               height={50}
                             />
                           </div>
                           <p className={`text-md 2xl:text-xl font-light max-w-[9ch] group-hover:text-black group-hover:-translate-y-1 transition-all duration-500 ${isActive === 4 ? "text-black -translate-y-1" : "text-[#626262]"}`}>
-                            {data.items[4].value}
+                            {t.items[4].value}
                           </p>
                         </div>
                       </div>
@@ -231,20 +234,20 @@ const DiverseGrowing = ({data}: {data: HomeProps['fifthSection']}) => {
                           <p className={`text-xl 2xl:text-2xl font-light transition-all duration-500 ${isActive === 5 ? "text-black -translate-x-3" : "text-[#7E5AA3] group-hover:text-black  group-hover:-translate-x-3 "}`}>
                             <Counter
                               from={0}
-                              to={Number(data.items[3].number)}
+                              to={Number(t.items[3].number)}
                             />
                             +
                           </p>
                           <Image
                             className={`grayscale group-hover:grayscale-0 transition-all duration-400 group-hover:scale-110 ${isActive === 5 ? "grayscale-0 scale-110" : ""}`}
-                            src={data.items[3].logo}
-                            alt={data.items[3].logoAlt}
+                            src={t.items[3].logo}
+                            alt={t.items[3].logoAlt}
                             width={50}
                             height={50}
                           />
                         </div>
                         <p className={`text-md 2xl:text-xl font-light transition-all duration-500 ${isActive === 5 ? "text-black -translate-y-1" : "text-[#626262] group-hover:text-black group-hover:-translate-y-1 transition-all duration-500 "}`}>
-                          {data.items[3].value}
+                          {t.items[3].value}
                         </p>
                       </div>
                     </div>
@@ -258,11 +261,10 @@ const DiverseGrowing = ({data}: {data: HomeProps['fifthSection']}) => {
           className="relative pt-5 lg:pt-0 left-0 lg:absolute bottom-0 lg:left-[5%] z-[-1] responsive md:w-[50%] 2xl:w-[913px]"
         >
           <Image ref={imgRef}
-            src={data.image}
-            alt={data.imageAlt}
+            src={t.image}
+            alt={t.imageAlt}
             width={913}
             height={944}
-            className=""
           />
         </div>
       </div>
