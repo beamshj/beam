@@ -25,14 +25,21 @@ import { toast } from 'sonner';
 interface AccreditationPageProps {
   metaTitle: string;
   metaDescription: string;
+  metaTitle_ar: string;
+  metaDescription_ar: string;
   banner:string;
   bannerAlt:string;
+  bannerAlt_ar:string;
   pageTitle:string;
+  pageTitle_ar:string;
   firstSection: {
     title: string;
+    title_ar: string;
     description:string;
+    description_ar: string;
     image:string;
     imageAlt:string;
+    imageAlt_ar:string;
   },
 }
 
@@ -41,8 +48,9 @@ interface AccreditationPageProps {
 export default function Accreditation() {
 
   const [category, setCategory] = useState<string>("");
+  const [categoryArabic, setCategoryArabic] = useState<string>("");
   const [accreditationsList, setAccreditationsList] = useState<{_id:string,title:string}[]>([]);
-  const [categoryList, setCategoryList] = useState<{ _id: string, name: string }[]>([]);
+  const [categoryList, setCategoryList] = useState<{ _id: string, name: string,name_ar:string }[]>([]);
 
   const router = useRouter();
 
@@ -54,11 +62,12 @@ export default function Accreditation() {
     try {
       const response = await fetch("/api/admin/accreditations/category", {
         method: "POST",
-        body: JSON.stringify({ name: category }),
+        body: JSON.stringify({ name: category,name_ar: categoryArabic }),
       });
       if (response.ok) {
         const data = await response.json();
         setCategory("");
+        setCategoryArabic("");
         toast.success(data.message);
         handleFetchCategory();
       } else {
@@ -90,13 +99,14 @@ export default function Accreditation() {
     try {
       const response = await fetch(`/api/admin/accreditations/category?id=${id}`, {
         method: "PATCH",
-        body: JSON.stringify({ name: category }),
+        body: JSON.stringify({ name: category,name_ar: categoryArabic }),
       });
       if (response.ok) {
         const data = await response.json();
         toast.success(data.message);
         handleFetchCategory();
         setCategory("");
+        setCategoryArabic("");
       } else {
         const data = await response.json();
         toast.error(data.message);
@@ -190,10 +200,13 @@ export default function Accreditation() {
 
   return (
     <div className="flex flex-col gap-5">
+      
 
-<form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-5'>
+<form onSubmit={handleSubmit(onSubmit)} className='w-full grid grid-cols-2 gap-10'>
 
 
+{/*English Version */}
+<div className="flex flex-col gap-5">
 <AdminItemContainer>
                         <Label className="" main>Banner</Label>
                         <div className='p-5 rounded-md grid grid-cols-2 gap-5'>
@@ -273,7 +286,99 @@ export default function Accreditation() {
                                     <Input type='text' placeholder='Meta Description' {...register("metaDescription")} />
                                 </div>
                 
-                                <div className='flex justify-center mt-5'>
+                                {/* <div className='flex justify-center mt-5'>
+                                    <Button type='submit' className="cursor-pointer text-white text-[16px] w-full">Submit</Button>
+                                </div> */}
+
+                </div>
+
+
+                {/*Arabic Version */}
+<div className="flex flex-col gap-5">
+<AdminItemContainer>
+                        <Label className="" main>Banner</Label>
+                        <div className='p-5 rounded-md grid grid-cols-2 gap-5'>
+                    <div>
+                        <Controller
+                            name="banner"
+                            control={control}
+                            rules={{ required: "Banner is required" }}
+                            render={({ field }) => (
+                                <ImageUploader
+                                    value={field.value}
+                                    onChange={field.onChange}
+                                />
+                            )}
+                        />
+                        {errors.banner && (
+                            <p className="text-red-500">{errors.banner.message}</p>
+                        )}
+                    </div>
+                    <div className='flex flex-col gap-2'>
+                    <div className='flex flex-col gap-1'>
+                        <Label className='font-bold'>Alt Tag</Label>
+                        <Input type='text' placeholder='Alt Tag' {...register("bannerAlt_ar")} />
+                    </div>
+                    <div className='flex flex-col gap-1'>
+                        <Label className='font-bold'>Page Title</Label>
+                        <Input type='text' placeholder='Page Title' {...register("pageTitle_ar")} />
+                    </div>
+                    </div>
+                </div>
+                </AdminItemContainer>
+
+
+                <AdminItemContainer>
+                        <Label className="" main>First Section</Label>
+                        <div className='p-5 rounded-md grid grid-cols-1 gap-5'>
+                    <div>
+                        <Controller
+                            name="firstSection.image"
+                            control={control}
+                            rules={{ required: "Image is required" }}
+                            render={({ field }) => (
+                                <ImageUploader
+                                    value={field.value}
+                                    onChange={field.onChange}
+                                />
+                            )}
+                        />
+                        {errors?.firstSection?.image && (
+                            <p className="text-red-500">{errors.firstSection.image.message}</p>
+                        )}
+                    </div>
+                    <div className='flex flex-col gap-2'>
+                    <div className='flex flex-col gap-1'>
+                        <Label className='font-bold'>Alt Tag</Label>
+                        <Input type='text' placeholder='Alt Tag' {...register("firstSection.imageAlt_ar")} />
+                    </div>
+                    <div className='flex flex-col gap-1'>
+                        <Label className='font-bold'>Title</Label>
+                        <Input type='text' placeholder='Title' {...register("firstSection.title_ar")} />
+                    </div>
+                    <div className='flex flex-col gap-1'>
+                        <Label className='font-bold'>Description</Label>
+                        <Textarea placeholder='Description' {...register("firstSection.description_ar")} />
+                    </div>
+                    </div>
+                </div>
+                </AdminItemContainer>
+
+
+                <div className='flex flex-col gap-2'>
+                                    <Label className='font-bold'>Meta Title</Label>
+                                    <Input type='text' placeholder='Meta Title' {...register("metaTitle_ar")} />
+                                </div>
+                                <div className='flex flex-col gap-2'>
+                                    <Label className='font-bold'>Meta Description</Label>
+                                    <Input type='text' placeholder='Meta Description' {...register("metaDescription_ar")} />
+                                </div>
+                
+                                
+
+                </div>
+
+                <div className='w-full col-span-2'>
                                     <Button type='submit' className="cursor-pointer text-white text-[16px] w-full">Submit</Button>
                                 </div>
 
@@ -288,12 +393,17 @@ export default function Accreditation() {
             <div className="flex justify-between border-b-2 pb-2">
               <Label className="text-sm font-bold">Category</Label>
               <Dialog>
-                <DialogTrigger className="bg-black text-white px-2 py-1 rounded-md" onClick={() => setCategory("")}>Add Category</DialogTrigger>
+                <DialogTrigger className="bg-black text-white px-2 py-1 rounded-md" onClick={() => {setCategory("");setCategoryArabic("")}}>Add Category</DialogTrigger>
                 <DialogContent>
                   <DialogHeader>
                     <DialogTitle>Add Category</DialogTitle>
                     <DialogDescription>
+                      <Label>Category Name(English)</Label>
                       <Input type="text" placeholder="Category" value={category} onChange={(e) => setCategory(e.target.value)} />
+
+                      <Label>Category Name(Arabic)</Label>
+                      <Input type="text" placeholder="Category" value={categoryArabic} onChange={(e) => setCategoryArabic(e.target.value)} />
+
                     </DialogDescription>
                   </DialogHeader>
                   <DialogClose className="bg-black text-white px-2 py-1 rounded-md" onClick={handleAddCategory}>Save</DialogClose>
@@ -309,12 +419,17 @@ export default function Accreditation() {
                   </div>
                   <div className="flex gap-5">
                     <Dialog>
-                      <DialogTrigger onClick={() => { setCategory(item.name)}}><MdEdit /></DialogTrigger>
+                      <DialogTrigger onClick={() => { setCategory(item.name);setCategoryArabic(item.name_ar)}}><MdEdit /></DialogTrigger>
                       <DialogContent>
                         <DialogHeader>
                           <DialogTitle>Edit Category</DialogTitle>
                           <DialogDescription>
+                            <Label>Category Name(English)</Label>
                             <Input type="text" placeholder="Category" value={category} onChange={(e) => setCategory(e.target.value)} />
+
+                            <Label>Category Name(Arabic)</Label>
+                            <Input type="text" placeholder="Category" value={categoryArabic} onChange={(e) => setCategoryArabic(e.target.value)} />
+
                           </DialogDescription>
                         </DialogHeader>
                         <DialogClose className="bg-black text-white px-2 py-1 rounded-md" onClick={() => handleEditCategory(item._id)}>Save</DialogClose>

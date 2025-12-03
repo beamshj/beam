@@ -82,9 +82,13 @@ const SchoolAchievementsPage = () => {
                 const data = await response.json();
                 setValue("banner", data.data.banner);
                 setValue("bannerAlt", data.data.bannerAlt);
+                setValue("bannerAlt_ar", data.data.bannerAlt_ar);
                 setValue("pageTitle", data.data.pageTitle);
+                setValue("pageTitle_ar", data.data.pageTitle_ar);
                 setValue("metaTitle", data.data.metaTitle);
+                setValue("metaTitle_ar", data.data.metaTitle_ar);
                 setValue("metaDescription", data.data.metaDescription);
+                setValue("metaDescription_ar", data.data.metaDescription_ar);
                 setValue("firstSection", data.data.firstSection);
                 setValue("secondSection", data.data.secondSection);
                 setValue("secondSection.items", data.data.secondSection.items);

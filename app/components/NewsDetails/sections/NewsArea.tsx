@@ -6,9 +6,12 @@ import { motion } from "framer-motion";
 import { moveUp } from "../../motionVarients";
 import { NewsItem } from "../../PressRelease/type";
 import { Variants } from "framer-motion";
+import { useApplyLang } from "@/lib/applyLang";
+import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 
 const NewsArea = ({ data }: { data: NewsItem }) => {
-    console.log(data, "nw his");
+    const t = useApplyLang(data)
+    const isArabic = useIsPreferredLanguageArabic()
   const contentTags: Variants = {
     hidden: { opacity: 0, y: 40 },
     show: {
@@ -67,7 +70,7 @@ const NewsArea = ({ data }: { data: NewsItem }) => {
           <div className="mt-4 md:mt-6 xl:mt-8 2xl:mt-12 mb-4 md:mb-6 xl:mb-8 2xl:mb-8">
             <SplitText
               tag="h2"
-              text={data.title}
+              text={t.title}
               className="text-xl md:text-2xl xl:text-3xl 2xl:text-4xl font-light leading-tight text-black lettersp-4 "
               delay={100}
               duration={0.6}
@@ -77,7 +80,7 @@ const NewsArea = ({ data }: { data: NewsItem }) => {
               to={{ opacity: 1, y: 0 }}
               threshold={0.1}
               rootMargin="-100px"
-              textAlign="left"
+              textAlign={isArabic ? "right" : "left"}
             />
           </div>
           <div className="flex justify-between pl-5 items-center">
@@ -85,7 +88,7 @@ const NewsArea = ({ data }: { data: NewsItem }) => {
               <ul className="list-disc lg:flex gap-10  text-colorpara text-sm font-light">
                 <li>Published in&nbsp;Blog&nbsp;on&nbsp;July 14, 2025</li>
                 <li>10 mins read</li>
-                <li>{data.category}</li>
+                <li>{t.category}</li>
               </ul>
             </div>
             <motion.div
@@ -110,8 +113,8 @@ const NewsArea = ({ data }: { data: NewsItem }) => {
             className="py-4 md:py-6 xl:py-8 2xl:py-12"
           >
             <Image
-              src={data?.coverImage}
-              alt={data?.coverImageAlt}
+              src={t?.coverImage}
+              alt={t?.coverImageAlt}
               width={1360}
               height={535}
               className="rounded-sm w-full object-cover min-h-[250px]"
@@ -133,7 +136,7 @@ const NewsArea = ({ data }: { data: NewsItem }) => {
               whileInView="show"
               viewport={{ amount: 0.1, once: true }}
               className="blog-content"
-              dangerouslySetInnerHTML={{ __html: data.content }}
+              dangerouslySetInnerHTML={{ __html: t.content }}
             />
             {/* <motion.h3
               variants={moveUp(0.4)}

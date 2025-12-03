@@ -1,19 +1,19 @@
 export function getReadingTimeFromHTML(
-  html: string | null | undefined
-): number {
-  if (!html) return 0;
+  html: string | null | undefined,
+  isArabic: boolean = false
+): number | string {
+  if (!html) return isArabic ? "٠" : 0;
 
   let text = "";
 
-  // ✅ If running in browser
+  // Browser
   if (typeof window !== "undefined" && typeof document !== "undefined") {
     const div = document.createElement("div");
     div.innerHTML = html;
     text = div.textContent || div.innerText || "";
   }
-  // ✅ If running on server (Node.js / Next.js SSR)
+  // Server
   else {
-    // Use regex to strip HTML tags safely
     text = html.replace(/<[^>]*>/g, " ");
   }
 
@@ -21,5 +21,22 @@ export function getReadingTimeFromHTML(
   const wordCount = words.length;
   const wordsPerMinute = 200;
 
-  return Math.ceil(wordCount / wordsPerMinute);
+  const minutes = Math.ceil(wordCount / wordsPerMinute);
+
+  // Convert to Arabic digits if requested
+  if (isArabic) {
+    return convertToArabicNumber(minutes);
+  }
+
+  return minutes;
+}
+
+// Helper: Convert normal numbers → Arabic numerals
+function convertToArabicNumber(num: number): string {
+  const arabicDigits = ["٠","١","٢","٣","٤","٥","٦","٧","٨","٩"];
+  return num
+    .toString()
+    .split("")
+    .map((digit) => arabicDigits[Number(digit)] ?? digit)
+    .join("");
 }

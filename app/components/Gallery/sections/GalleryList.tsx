@@ -7,26 +7,36 @@ import SplitText from "@/components/SplitText";
 import { moveUp } from "../../motionVarients";
 import { motion } from "framer-motion";
 import { GalleryProps } from "../type";
+import { useApplyLang } from "@/lib/applyLang";
+import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 
 
 export default function GalleryList({ data }: { data: GalleryProps }) {
   const [activeFilter, setActiveFilter] = useState<string>("all");
   const [selectedItem, setSelectedItem] = useState<GalleryProps['gallery'][number]['categories'][number] | null>(null);
+  const t = useApplyLang(data)
+  const isArabic = useIsPreferredLanguageArabic()
 
-  const filters = ["all", ...data.gallery.map((item) => item.title)];
-
-  console.log(filters);
-
-console.log(data);
+  const filters = [(isArabic ? "الجميع" : "all"), ...t.gallery.map((item) => item.title)];
 
 const filteredItems =
-  activeFilter === "all"
-    ? data.gallery.flatMap((item) => item.categories)
-    : data.gallery
+  activeFilter === "all" || "الجميع"
+    ? t.gallery.flatMap((item) => item.categories)
+    : t.gallery
         .find(
           (gallery) => gallery.title.toLowerCase() === activeFilter.toLowerCase()
         )
         ?.categories || [];
+
+  const toArabicDigits = (num: number) => {
+  const arabicDigits = ["٠","١","٢","٣","٤","٥","٦","٧","٨","٩"];
+  return num
+    .toString()
+    .split("")
+    .map((d) => arabicDigits[Number(d)] ?? d)
+    .join("");
+};
+
 
   return (
     <section className="py-10 xl:py-20 2xl:py-[135px]">
@@ -36,7 +46,7 @@ const filteredItems =
           <h2 className="text-lg md:text-xl xl:text-3xl 2xl:text-4xl font-light text-black leading-[1.1111] mb-6 lg:mb-0">
             <SplitText
              tag="span"
-             text={data.firstSection.title}
+             text={t.firstSection.title}
              delay={100}
              duration={0.6}
              ease="power3.out"
@@ -102,19 +112,20 @@ const filteredItems =
               />
 
               {/* Hover Arrow */}
-              <div className="absolute top-[30px] right-[30px] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className={`absolute top-[30px] ${isArabic ? "left-[30px]" : "right-[30px]" } opacity-0 group-hover:opacity-100 transition-opacity duration-300`}>
                 <button className="bg-primary text-white w-[74px] h-[74px] rounded-full flex items-center justify-center">
                   <Image
                     src="/images/arrow-right-up.svg"
                     alt="arrow"
                     width={24}
                     height={24}
+                    className={`${isArabic && "-rotate-90"} object-contain`}
                   />
                 </button>
               </div>
 
               {/* Title & Thumbnails */}
-              <div className="absolute bottom-[20px] left-[20px] lg:bottom-[40px] lg:left-[40px] text-white z-10">
+              <div className={`absolute bottom-[20px] lg:bottom-[40px] ${isArabic ? "lg:right-[40px] right-[20px]" : "lg:left-[40px] left-[20px]"} text-white z-10`}>
                 <h3 className="text-md lg:text-lg xl:text-xl font-light leading-[1.2] mb-[10px]">
                   {item.title}
                 </h3>
@@ -134,7 +145,7 @@ const filteredItems =
                         />
                         {isLast && (
                           <div className="absolute inset-0 bg-primary flex items-center justify-center text-xs md:text-sm font-medium">
-                            +{item.images.length - 4}
+                            +{isArabic ? toArabicDigits(item.images.length - 4) : item.images.length - 4}
                           </div>
                         )}
                       </div>

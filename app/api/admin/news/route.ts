@@ -83,18 +83,25 @@ export async function PATCH(request: NextRequest) {
         );
       }
       toUpdate.title = body.title;
+      toUpdate.title_ar = body.title_ar;
       toUpdate.slug = body.slug;
       toUpdate.category = body.category;
+      toUpdate.category_ar = body.category_ar;
       toUpdate.coverImage = body.coverImage;
       toUpdate.popularNews = body.popularNews;
       toUpdate.coverImageAlt = body.coverImageAlt;
+      toUpdate.coverImageAlt_ar = body.coverImageAlt_ar;
       toUpdate.thumbnail = body.thumbnail;
       toUpdate.type = "News";
       toUpdate.thumbnailAlt = body.thumbnailAlt;
+      toUpdate.thumbnailAlt_ar = body.thumbnailAlt_ar;
       toUpdate.date = body.date;
       toUpdate.content = body.content;
+      toUpdate.content_ar = body.content_ar;
       toUpdate.metaTitle = body.metaTitle;
+      toUpdate.metaTitle_ar = body.metaTitle_ar;
       toUpdate.metaDescription = body.metaDescription;
+      toUpdate.metaDescription_ar = body.metaDescription_ar;
       await news.save();
       return NextResponse.json(
         { data: news, message: "News updated successfully" },

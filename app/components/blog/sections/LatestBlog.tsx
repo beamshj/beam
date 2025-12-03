@@ -6,13 +6,19 @@ import { motion } from "framer-motion";
 import { moveUp } from "../../motionVarients";
 import Link from "next/link";
 import { BlogType } from "../type";
+import { useApplyLang } from "@/lib/applyLang";
+import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 
 export default function LatestBlogs({
   data,
 }: {
   data: BlogType["categories"][number]["blogs"];
 }) {
-  const displayItems = [...data]
+
+  const t = useApplyLang(data)
+  const isArabic = useIsPreferredLanguageArabic()
+
+  const displayItems = [...t]
     .sort((a, b) => {
       const dateA = a.date
         ? new Date(a.date.split("/").reverse().join("-")).getTime()
@@ -31,7 +37,7 @@ export default function LatestBlogs({
       <div className="container">
         <SplitText
           tag="h2"
-          text="Latest Blogs"
+          text={`${isArabic ? "أحدث المدونات" : "Latest Blogs"}`}
           className="text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl font-light text-black leading-[1.1111] mb-5 xl:mb-[30px] 2xl:mb-[50px]"
           delay={200}
           duration={0.6}
@@ -80,15 +86,15 @@ export default function LatestBlogs({
                 />
 
                 {/* Hover Arrow */}
-                <div className="absolute top-[30px] right-[30px] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className={`absolute top-[30px] ${isArabic ? "left-[30px]" : "right-[30px]" } opacity-0 group-hover:opacity-100 transition-opacity duration-300`}>
                   <button className="bg-primary text-white w-[74px] h-[74px] rounded-full flex items-center justify-center overflow-hidden cursor-pointer">
-                    <span className="transition-all duration-400 translate-y-3 -translate-x-3 group-hover:-translate-y-0 group-hover:translate-x-0 block">
+                    <span className={`transition-all duration-400 translate-y-3 ${isArabic ? "translate-x-3" : "-translate-x-3" } group-hover:-translate-y-0 group-hover:translate-x-0 block`}>
                       <Image
                         src="/images/arrow-right-up.svg"
                         alt="arrow"
                         width={24}
                         height={24}
-                        className="object-contain"
+                        className={`${isArabic && "-rotate-90"} object-contain`}
                       />
                     </span>
                   </button>
@@ -119,6 +125,7 @@ export default function LatestBlogs({
                         alt="arrow"
                         width={15}
                         height={15}
+                        className={`${isArabic && "rotate-180"}`}
                       />
                     </button>
                   </div>

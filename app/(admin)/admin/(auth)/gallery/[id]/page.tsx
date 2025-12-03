@@ -8,7 +8,6 @@ import { useParams } from 'next/navigation';
 import {
     Dialog,
     DialogContent,
-    DialogDescription,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
@@ -28,8 +27,10 @@ import { toast } from 'sonner';
 const IndiGallery = () => {
     const { id } = useParams();
     const [category, setCategory] = useState<string>("")
+    const [categoryArabic, setCategoryArabic] = useState<string>("")
     const [description, setDescription] = useState<string>("")
-    const [categoryList, setCategoryList] = useState<{_id: string, title: string, description: string}[]>([])
+    const [descriptionArabic, setDescriptionArabic] = useState<string>("")
+    const [categoryList, setCategoryList] = useState<{_id: string, title: string,title_ar: string, description: string, description_ar: string}[]>([])
 
 
     const fetchGalleryData = async () => {
@@ -55,12 +56,14 @@ const IndiGallery = () => {
             try {
                 const response = await fetch(`/api/admin/gallery/inside/category?id=${id}`,{
                     method: "POST",
-                    body: JSON.stringify({ name: category, description: description }),
+                    body: JSON.stringify({ name: category,name_ar: categoryArabic, description: description, description_ar: descriptionArabic }),
                 });
                 if(response.ok) {
                     const data = await response.json();
                     setCategory("");
                     setDescription("");
+                    setCategoryArabic("");
+                    setDescriptionArabic("");
                     toast.success(data.message);
                     fetchGalleryData();
                 }else{
@@ -77,7 +80,7 @@ const IndiGallery = () => {
                 try {
                     const response = await fetch(`/api/admin/gallery/inside/category?id=${categoryId}`,{
                         method: "PATCH",
-                        body: JSON.stringify({ name: category, description: description, galleryId: id }),
+                        body: JSON.stringify({ name: category,name_ar: categoryArabic, description: description, description_ar: descriptionArabic, galleryId: id }),
                     });
                     if(response.ok) {
                         const data = await response.json();
@@ -125,16 +128,32 @@ const IndiGallery = () => {
                 <div className='flex justify-between items-center'>
             <Label className="block text-sm">Categories</Label>
             <Dialog>
-                        <DialogTrigger className='bg-primary text-white px-3 py-1 rounded-md font-semibold' onClick={()=>{setCategory("");setDescription("")}}>Add Item</DialogTrigger>
+                        <DialogTrigger className='bg-primary text-white px-3 py-1 rounded-md font-semibold' onClick={()=>{setCategory("");setCategoryArabic("");setDescription("");setDescriptionArabic("")}}>Add Item</DialogTrigger>
                         <DialogContent>
                             <DialogHeader>
                                 <DialogTitle>Add Item</DialogTitle>
-                                <DialogDescription>
+                                <div>
+                                    <div>
                                     <Label className="block text-sm">Title</Label>
                                     <Input type="text" value={category} onChange={(e) => setCategory(e.target.value)} />
+                                    </div>
+
+                                    <div>
+                                    <Label className="block text-sm">Title Arabic</Label>
+                                    <Input type="text" value={categoryArabic} onChange={(e) => setCategoryArabic(e.target.value)} />
+                                    </div>
+
+                                    <div>
                                     <Label className="block text-sm">Description</Label>
                                     <Textarea value={description} onChange={(e) => setDescription(e.target.value)} />
-                                </DialogDescription>
+                                        </div>
+
+                                        <div>
+                                        <Label className="block text-sm">Description Arabic</Label>
+                                    <Textarea value={descriptionArabic} onChange={(e) => setDescriptionArabic(e.target.value)} />
+                                        </div>
+
+                                </div>
                             </DialogHeader>
                             <DialogClose className="bg-black text-white px-2 py-1 rounded-md" onClick={handleAddCategory}>Save</DialogClose>
                         </DialogContent>
@@ -149,16 +168,32 @@ const IndiGallery = () => {
                     </div>
                     <div className='flex gap-8 items-center'>
                         <Dialog>
-                            <DialogTrigger onClick={()=>{setCategory(item.title);setDescription(item.description)}}><FaEdit className='text-lg cursor-pointer' /></DialogTrigger>
+                            <DialogTrigger onClick={()=>{setCategory(item.title);setCategoryArabic(item.title_ar);setDescription(item.description);setDescriptionArabic(item.description_ar)}}><FaEdit className='text-lg cursor-pointer' /></DialogTrigger>
                             <DialogContent>
                                 <DialogHeader>
                                     <DialogTitle>Edit Item</DialogTitle>
-                                    <DialogDescription>
+                                    <div className='flex flex-col gap-1'>
+                                        <div>
                                         <Label className="block text-sm">Title</Label>
                                         <Input type="text" value={category} onChange={(e) => setCategory(e.target.value)} />
+                                        </div>
+
+                                        <div>
+                                        <Label className="block text-sm">Title Arabic</Label>
+                                        <Input type="text" value={categoryArabic} onChange={(e) => setCategoryArabic(e.target.value)} />
+                                        </div>
+
+                                        <div>
                                         <Label className="block text-sm">Description</Label>
                                         <Textarea value={description} onChange={(e) => setDescription(e.target.value)} />
-                                    </DialogDescription>
+                                        </div>
+
+                                        <div>
+                                        <Label className="block text-sm">Description Arabic</Label>
+                                        <Textarea value={descriptionArabic} onChange={(e) => setDescriptionArabic(e.target.value)} />
+                                        </div>
+
+                                    </div>
                                 </DialogHeader>
                                 <DialogClose className="bg-black text-white px-2 py-1 rounded-md" onClick={()=>handleEditCategory(item._id)}>Save</DialogClose>
                             </DialogContent>

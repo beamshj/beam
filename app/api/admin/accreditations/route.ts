@@ -44,10 +44,14 @@ export async function PATCH(request: NextRequest) {
                 return NextResponse.json({ message: "Accreditation not found" }, { status: 404 });
             }
             toUpdate.title = body.title;
+            toUpdate.title_ar = body.title_ar;
             toUpdate.description = body.description;
+            toUpdate.description_ar = body.description_ar;
             toUpdate.image = body.image;
             toUpdate.imageAlt = body.imageAlt;
+            toUpdate.imageAlt_ar = body.imageAlt_ar;
             toUpdate.category = body.category;
+            toUpdate.category_ar = body.category_ar;
             await accreditation.save();
             return NextResponse.json({data:accreditation,message:"Accreditation updated successfully"}, { status: 200 });
         }

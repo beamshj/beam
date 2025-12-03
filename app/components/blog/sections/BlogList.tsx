@@ -233,6 +233,8 @@ import Pagination from "../../Common/Pagination";
 import { moveUp } from "../../motionVarients";
 import Link from "next/link";
 import { BlogType } from "../type";
+import { useApplyLang } from "@/lib/applyLang";
+import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 
 export default function BlogList({
   data,
@@ -241,6 +243,8 @@ export default function BlogList({
 }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [blogsPerPage, setBlogsPerPage] = useState(9);
+
+  const t = useApplyLang(data)
 
   useEffect(() => {
     const updateBlogsPerPage = () => {
@@ -256,9 +260,11 @@ export default function BlogList({
     return () => window.removeEventListener("resize", updateBlogsPerPage);
   }, []);
 
-  const totalPages = Math.ceil(data.length / blogsPerPage);
+  const totalPages = Math.ceil(t.length / blogsPerPage);
   const startIndex = (currentPage - 1) * blogsPerPage;
-  const currentBlogs = data.slice(startIndex, startIndex + blogsPerPage);
+  const currentBlogs = t.slice(startIndex, startIndex + blogsPerPage);
+
+  const isArabic = useIsPreferredLanguageArabic()
 
   return (
     <section className="pb-10 xl:pb-20 2xl:pb-[135px]">
@@ -272,7 +278,7 @@ export default function BlogList({
             viewport={{ once: true, amount: 0.2 }}
             className="text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl lg:leading-[1.111] font-light mb-3 xl:mb-[30px] 2xl:mb-[50px] text-black"
           >
-            Blog
+            {isArabic ? "مدونة" : "Blog"}
           </motion.h1>
         </div>
 
@@ -305,15 +311,15 @@ export default function BlogList({
                     <div className="absolute inset-0 bg-gradient-to-t from-black/75 to-black/0" />
 
                     {/* Hover Arrow */}
-                    <div className="absolute top-[30px] right-[30px] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className={`absolute top-[30px] ${isArabic ? "left-[30px]" : "right-[30px]"} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}>
                       <button className="bg-primary text-white w-[74px] h-[74px] rounded-full flex items-center justify-center overflow-hidden cursor-pointer">
-                        <span className="transition-all duration-400 translate-y-2 -translate-x-2 group-hover:-translate-y-0 group-hover:translate-x-0 block">
+                        <span className={`transition-all duration-400 translate-y-3 ${isArabic ? "translate-x-3" : "-translate-x-3"} group-hover:-translate-y-0 group-hover:translate-x-0 block`}>
                           <Image
                             src="/images/arrow-right-up.svg"
                             alt="arrow"
                             width={24}
                             height={24}
-                            className="object-contain"
+                            className={`${isArabic && "-rotate-90"} object-contain`}
                           />
                         </span>
                       </button>
@@ -345,6 +351,7 @@ export default function BlogList({
                           alt="arrow"
                           width={15}
                           height={15}
+                          className={`${isArabic && "rotate-180"}`}
                         />
                       </button>
                     </div>

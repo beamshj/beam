@@ -8,6 +8,8 @@ import SplitText from "@/components/SplitText";
 import { motion } from "framer-motion";
 import { moveUp } from "../../motionVarients";
 import { Category } from "../type";
+import { useApplyLang } from "@/lib/applyLang";
+import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 
 interface RecentNewsProps {
   categories: Category[];
@@ -15,10 +17,11 @@ interface RecentNewsProps {
 
 const RecentNews = ({ categories }: RecentNewsProps) => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
-  console.log(categories);
+  const t = useApplyLang(categories)
+  const isArabic = useIsPreferredLanguageArabic()
 
   // Get currently selected category name
-  const selectedCategory = categories[activeIndex];
+  const selectedCategory = t[activeIndex];
 
   const sortedNews = Array.isArray(selectedCategory.news)
     ? [...selectedCategory.news]
@@ -35,7 +38,7 @@ const RecentNews = ({ categories }: RecentNewsProps) => {
         <div className="flex flex-col md:flex-row justify-between w-full md:items-center pb-4 md:pb-6 xl:pb-8 2xl:pb-12 mb-4 md:mb-6 xl:mb-8 2xl:mb-16 border-b border-bdrcolor gap-5 lg:gap-0">
           <SplitText
             tag="h2"
-            text="Recent News"
+            text={!isArabic ? "Recent News" : "الأخبار الأخيرة"}
             className="text-lg xl:text-2xl 2xl:text-4xl 2xl:max-w-[10ch] font-light leading-[1.111111111] text-black capitalize"
             delay={100}
             duration={0.6}
@@ -50,7 +53,7 @@ const RecentNews = ({ categories }: RecentNewsProps) => {
 
           {/* Category Tabs */}
           <div className="flex gap-3 items-center">
-            {categories.map((cat, index) => (
+            {t.map((cat, index) => (
               <motion.div
                 variants={moveUp(index * 0.2)}
                 initial="hidden"
@@ -115,7 +118,7 @@ const RecentNews = ({ categories }: RecentNewsProps) => {
               className="p-4 md:p-6 xl:p-10 bg-[#F6F6F6] rounded-xl mb-5 md:mb-7 mt-25 lg:mt-0"
             >
               <p className="text-sm font-light text-colorpara mb-5">
-                Popular News
+                {isArabic ? "أخبار شعبية" : "Popular News"}
               </p>
               <PopularNews
                 data={
