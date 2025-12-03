@@ -42,6 +42,7 @@ const Index = ({
     <>
       <HeroSection data={data.bannerSection} />
       <OurSchools
+        data={data.secondSection}
         schoolData={schooldata}
         categorydata={categorydata}
         locationdata={locationdata}

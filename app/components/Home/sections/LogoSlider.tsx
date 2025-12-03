@@ -14,7 +14,7 @@ import { motion } from "framer-motion";
 import { fadeUp } from "@/public/assets/FramerAnimation/animation";
 import { HomeProps } from "../type";
 
-const LogoSlider = ({data}: {data: HomeProps['ninethSection']}) => {
+const LogoSlider = ({ data }: { data: HomeProps["ninethSection"] }) => {
   return (
     <motion.section
       className="py-8 xl:py-25 2xl:py-23 max-w-[1920px] mx-auto overflow-hidden"
@@ -40,9 +40,9 @@ const LogoSlider = ({data}: {data: HomeProps['ninethSection']}) => {
             },
           }}
           breakpoints={{
-            992: { slidesPerView: 3,spaceBetween: 20 },
-            1024: { slidesPerView: 4,spaceBetween: 20 },
-            1400: { slidesPerView: 5,spaceBetween: 10 },
+            992: { slidesPerView: 3, spaceBetween: 20 },
+            1024: { slidesPerView: 4, spaceBetween: 20 },
+            1400: { slidesPerView: 5, spaceBetween: 10 },
           }}
           className="alumni-swiper"
         >

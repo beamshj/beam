@@ -6,8 +6,11 @@ import { fadeUp } from "@/public/assets/FramerAnimation/animation";
 import { fadeInLeft } from "@/public/assets/FramerAnimation/animation";
 import { HomeProps } from "../type";
 import Link from "next/link";
+import { useApplyLang } from "@/lib/applyLang";
 
 const JoinBeam = ({ data }: { data: HomeProps["tenthSection"] }) => {
+  const t = useApplyLang(data);
+
   return (
     <motion.section
       className="w-full lg:h-full h-[330px] relative max-w-[1920px] mx-auto overflow-hidden"
@@ -18,14 +21,14 @@ const JoinBeam = ({ data }: { data: HomeProps["tenthSection"] }) => {
     >
       <div className="w-full h-full absolute z-10 left-0 top-0 right-0 bottom-0">
         <Image
-          src={data.image}
-          alt={data.imageAlt}
+          src={t.bigImage}
+          alt={t.bigImageAlt}
           fill
           className="hidden md:block object-cover h-full w-full"
         />
         <Image
-          src="/assets/home/joinbgsmall.jpg"
-          alt="Join Beam"
+          src={t.smallImage}
+          alt={t.smallImageAlt}
           fill
           className="md:hidden object-cover h-full w-full"
         />
@@ -40,7 +43,7 @@ const JoinBeam = ({ data }: { data: HomeProps["tenthSection"] }) => {
               whileInView="visible"
               viewport={{ once: true, amount: 0.2 }}
             >
-              {data.title}
+              {t.title}
             </motion.h2>
             <motion.div
               variants={fadeUp}
@@ -50,7 +53,7 @@ const JoinBeam = ({ data }: { data: HomeProps["tenthSection"] }) => {
               transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
             >
               <p className="text-base 2xl:text-lg font-light max-w-[45ch]">
-                {data.description}
+                {t.description}
               </p>
             </motion.div>
           </div>
@@ -68,7 +71,7 @@ const JoinBeam = ({ data }: { data: HomeProps["tenthSection"] }) => {
             >
               <div className="cursor-pointer px-2 md:px-5 py-2 md:py-3 bg-transparent rounded-full flex items-center gap-2 transition-all duration-300">
                 <p className="text-xs font-light text-white uppercase transition-colors duration-300">
-                  {data.buttonText}
+                  {t.buttonText}
                 </p>
                 <div className="p-2 flex items-center justify-center bg-primary w-fit rounded-full transition-transform duration-300 group-hover:rotate-45">
                   <Image

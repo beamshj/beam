@@ -105,9 +105,12 @@ export type HomeProps = {
     title_ar: string;
     description: string;
     description_ar: string;
-    image: string;
-    imageAlt: string;
-    imageAlt_ar: string;
+    bigImage: string;
+    bigImageAlt: string;
+    bigImageAlt_ar: string;
+    smallImage: string;
+    smallImageAlt: string;
+    smallImageAlt_ar: string;
     buttonText: string;
     buttonText_ar: string;
   };

@@ -8,6 +8,8 @@ import { motion } from "framer-motion";
 import { moveUp } from "../../motionVarients";
 import { BeamSchoolType, CategoryType, LocationType } from "../type";
 import Link from "next/link";
+import { useApplyLang } from "@/lib/applyLang";
+import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 
 const SchoolCards = ({
   data,
@@ -18,13 +20,26 @@ const SchoolCards = ({
   categorydata: CategoryType[];
   locationdata: LocationType[];
 }) => {
+  const tData = useApplyLang(data);
+  const tCategories = useApplyLang(categorydata);
+  const tLocations = useApplyLang(locationdata);
+  const isArabic = useIsPreferredLanguageArabic();
+
+  const ALL_TEXT = isArabic ? "الكل" : "All";
+  const LOCATION_TEXT = isArabic ? "الموقع" : "Location";
+
   // Include "All" option at start of both filters
-  const allCategories = [{ _id: "all", name: "All" }, ...categorydata];
-  const allLocations = [{ _id: "location", name: "Location" }, ...locationdata];
+  const allCategories = [{ _id: "all", name: ALL_TEXT }, ...tCategories];
+  const allLocations = [
+    { _id: "location", name: LOCATION_TEXT },
+    ...tLocations,
+  ];
 
   // Default selections
-  const [selectedCurriculum, setSelectedCurriculum] = useState<string>("All");
-  const [selectedLocation, setSelectedLocation] = useState<string>("Location");
+  const [selectedCurriculum, setSelectedCurriculum] =
+    useState<string>(ALL_TEXT);
+  const [selectedLocation, setSelectedLocation] =
+    useState<string>(LOCATION_TEXT);
 
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -32,14 +47,16 @@ const SchoolCards = ({
   const [activeCard, setActiveCard] = useState<string | null>(null);
 
   // ✅ Filter by selected curriculum & location
-  const filteredCampuses = data.schools.filter((campus) => {
+  const filteredCampuses = tData.schools.filter((campus) => {
+    // category filter
     const matchesCurriculum =
-      selectedCurriculum === "All" ||
+      selectedCurriculum === ALL_TEXT ||
       campus.category.name.toLowerCase() === selectedCurriculum.toLowerCase();
 
+    // location filter
     const campusLocation = campus.location.name.split(",").pop()?.trim();
     const matchesLocation =
-      selectedLocation === "Location" ||
+      selectedLocation === LOCATION_TEXT ||
       campusLocation?.toLowerCase() === selectedLocation.toLowerCase();
 
     return matchesCurriculum && matchesLocation;
@@ -76,7 +93,7 @@ const SchoolCards = ({
           >
             <SplitText
               tag="span"
-              text={data.firstSection.title}
+              text={tData.firstSection.title}
               delay={100}
               duration={0.6}
               ease="power3.out"
@@ -90,7 +107,7 @@ const SchoolCards = ({
           </h1>
           <SplitText
             tag="p"
-            text={data.firstSection.description}
+            text={tData.firstSection.description}
             delay={100}
             className="text-sm font-light leading-[1.52] text-colorpara xl:max-w-[93ch]"
             duration={0.6}

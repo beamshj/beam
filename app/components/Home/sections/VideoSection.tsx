@@ -11,13 +11,15 @@ import {
 } from "@/public/assets/FramerAnimation/animation";
 import SplitText from "@/components/SplitText";
 import { HomeProps } from "../type";
+import { useApplyLang } from "@/lib/applyLang";
 
 gsap.registerPlugin(ScrollTrigger);
-const VideoSection = ({data}: {data: HomeProps['fourthSection']}) => {
+const VideoSection = ({ data }: { data: HomeProps["fourthSection"] }) => {
   const [isOpen, setIsOpen] = useState(false);
   const openPopup = () => setIsOpen(true);
   const closePopup = () => setIsOpen(false);
   const imgRef = useRef<HTMLImageElement | null>(null);
+  const t = useApplyLang(data);
 
   useEffect(() => {
     if (!imgRef.current) return;
@@ -48,8 +50,14 @@ const VideoSection = ({data}: {data: HomeProps['fourthSection']}) => {
       transition={{ duration: 0.8, ease: "easeOut" }}
       viewport={{ once: true }}
     >
-
-      <Image src={data.image} ref={imgRef} alt="Video" width={1920} height={950} className="w-full h-full object-cover absolute z-10 top-0 right-0" />
+      <Image
+        src={t.image}
+        ref={imgRef}
+        alt="Video"
+        width={1920}
+        height={950}
+        className="w-full h-full object-cover absolute z-10 top-0 right-0"
+      />
       <div className="container flex items-center h-full">
         <motion.div
           className="relative z-30 flex flex-col gap-10"
@@ -60,7 +68,7 @@ const VideoSection = ({data}: {data: HomeProps['fourthSection']}) => {
         >
           <SplitText
             tag="h2"
-            text={data.title}
+            text={t.title}
             className="text-xl md:text-2xl xl:text-3xl 2xl:text-4xl leading-[1.2] text-white w-full md:w-3/4 font-light lettersp-4 text-center md:text-left"
             delay={100}
             duration={0.6}
@@ -81,7 +89,6 @@ const VideoSection = ({data}: {data: HomeProps['fourthSection']}) => {
             className="text-md md:text-lg 2xl:text-xl font-light justify-center md:justify-start flex text-white gap-5 items-center"
             variants={playFadeUp}
           >
-
             <span>Play</span>
             <Image
               src="/assets/home/play-icon.svg"
@@ -120,7 +127,7 @@ const VideoSection = ({data}: {data: HomeProps['fourthSection']}) => {
 
                   {/* YouTube Embed */}
                   <iframe
-                    src={data.videoLink}
+                    src={t.videoLink}
                     title="Video"
                     className="w-full h-full"
                     frameBorder="0"

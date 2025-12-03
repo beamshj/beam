@@ -18,10 +18,12 @@ import {
 } from "@/public/assets/FramerAnimation/animation";
 import { HomeProps } from "../type";
 import Link from "next/link";
+import { useApplyLang } from "@/lib/applyLang";
 // Optional: Add modules if needed
 
 const Alumni = ({ data }: { data: HomeProps["seventhSection"] }) => {
-  const textParts = data.title.split("\n");
+  const t = useApplyLang(data);
+  const textParts = t.title.split("\n");
   return (
     <motion.section
       className="py-8 xl:pt-20 xl:pb-25 2xl:pt-[135px] 2xl:pb-[126px] max-w-[1920px] mx-auto overflow-hidden"
@@ -87,7 +89,7 @@ const Alumni = ({ data }: { data: HomeProps["seventhSection"] }) => {
             }}
             className="alumni-swiper"
           >
-            {data.items.map((value, index) => (
+            {t.items.map((value, index) => (
               <SwiperSlide key={index}>
                 <motion.div
                   variants={cardVariants2}
@@ -99,7 +101,7 @@ const Alumni = ({ data }: { data: HomeProps["seventhSection"] }) => {
                   <p className="text-sm font-light text-[#626262] transition-all duration-300">
                     {value.course}
                   </p>
-                  <div className="mt-9 aluminibg transform transition-transform duration-500 group-hover:scale-105 xl:h-[378px] xl:w-[368px] 2xl:h-[438px] 2xl:w-[428px]">
+                  <div className="mt-9 aluminibg transform transition-transform duration-500 group-hover:scale-105 xl:h-[378px] xl:w-[368px] 2xl:h-[438px] 2xl:w-[428px] ">
                     <Image
                       src={value.image}
                       alt={value.imageAlt}
@@ -117,11 +119,11 @@ const Alumni = ({ data }: { data: HomeProps["seventhSection"] }) => {
         {/* Custom pagination container */}
         <div className="flex justify-between items-center">
           <div className="w-full">
-            <Link href={data.link}>
+            <Link href={t.link}>
               <div className="mt-5 w-fit md:mt-10 p-[1px] group transition-all duration-300 bg-bdrcolor bg-[linear-gradient(90deg,_#42BADC_0%,_#12586C_100%)] rounded-full hover:translate-x-[5px] hover:shadow-[0_0_15px_rgba(66,186,220,0.5)]">
                 <div className="cursor-pointer pl-4 pr-2 md:px-5 py-2 md:py-3 bg-white rounded-full flex items-center gap-2 transition-all duration-300">
                   <p className="group-hover:text-black text-xs font-light text-colorpara uppercase transition-colors duration-300">
-                    {data.buttonText}
+                    {t.buttonText}
                   </p>
                   <div className="p-1 flex items-center justify-center bg-primary w-[27px] h-[27px] rounded-full transition-transform duration-300 group-hover:rotate-45">
                     <Image

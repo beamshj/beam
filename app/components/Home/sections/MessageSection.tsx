@@ -11,8 +11,11 @@ import {
 } from "@/public/assets/FramerAnimation/animation";
 import SplitText from "@/components/SplitText";
 import { HomeProps } from "../type";
+import { useApplyLang } from "@/lib/applyLang";
 
 const MessageSection = ({ data }: { data: HomeProps["sixthSection"] }) => {
+  const t = useApplyLang(data);
+
   return (
     <motion.section
       className="relative w-full bg-[#F6F6F6] aftergd max-w-[1920px] mx-auto overflow-hidden"
@@ -26,7 +29,7 @@ const MessageSection = ({ data }: { data: HomeProps["sixthSection"] }) => {
           <h2>
             <SplitText
               tag="span"
-              text={data.mainTitle}
+              text={t.mainTitle}
               className="text-md lg:text-2xl xl:text-3xl 2xl:text-4xl text-black  font-light "
               delay={100}
               duration={0.6}
@@ -42,7 +45,7 @@ const MessageSection = ({ data }: { data: HomeProps["sixthSection"] }) => {
         </div>
         <div className="lg:absolute bottom-0 left-0 flex pl-[15px]">
           <Image
-            src={data.image}
+            src={t.image}
             alt="Message"
             width={702}
             height={964}
@@ -50,12 +53,12 @@ const MessageSection = ({ data }: { data: HomeProps["sixthSection"] }) => {
           />
           <div className="container justify-center flex flex-col gap-1">
             <h3 className="text-black text-sm md:text-xl font-medium ">
-              {data.name}
+              {t.name}
             </h3>
-            {data.designation.split("\n").map((word, index) => (
+            {t.designation.split("\n").map((word, index) => (
               <span key={index} className="text-xs font-light text-colorpara">
                 {word}
-                {index < data.designation.split("\n").length - 1 && <br />}
+                {index < t.designation.split("\n").length - 1 && <br />}
               </span>
             ))}
           </div>
@@ -77,7 +80,7 @@ const MessageSection = ({ data }: { data: HomeProps["sixthSection"] }) => {
                 variants={fadeSide}
               >
                 <h2 className="text-md 2xl:text-xl font-light text-colorpara">
-                  {data.mainTitle}
+                  {t.mainTitle}
                 </h2>
               </motion.div>
 
@@ -89,7 +92,7 @@ const MessageSection = ({ data }: { data: HomeProps["sixthSection"] }) => {
                 <div>
                   <SplitText
                     tag="h2"
-                    text={data.subTitle}
+                    text={t.subTitle}
                     className="text-xl xl:text-2xl 2xl:text-4xl text-black leading-[1.2] xl:leading-[1.1] font-light 2xl:max-w-[82%] lettersp-4"
                     delay={100}
                     duration={0.6}
@@ -109,7 +112,7 @@ const MessageSection = ({ data }: { data: HomeProps["sixthSection"] }) => {
                 className="text-sm flex flex-col gap-3 2xl:gap-6 pe-4 xl:pe-[92px]"
                 variants={containerVariants}
               >
-                {data.description.split("\n").map((desc, index) => (
+                {t.description.split("\n").map((desc, index) => (
                   <motion.p
                     key={index}
                     className="text-sm font-light text-colorpara"
@@ -130,8 +133,8 @@ const MessageSection = ({ data }: { data: HomeProps["sixthSection"] }) => {
               className="lg:absolute bottom-0 left-0"
             >
               <Image
-                src={data.image}
-                alt={data.imageAlt}
+                src={t.image}
+                alt={t.imageAlt}
                 width={702}
                 height={964}
                 className="lg:w-[380px] xl:w-[460px] 2xl:w-[702px]"
@@ -145,15 +148,12 @@ const MessageSection = ({ data }: { data: HomeProps["sixthSection"] }) => {
               className="w-full lg:ml-[55%] lg:mt-[62%] 2xl:ml-[67%] 2xl:mt-[51%] justify-center flex flex-col gap-1 z-10 custom-position-founder"
             >
               <h3 className="text-black text-lg xl:text-xl font-light">
-                {data.name}
+                {t.name}
               </h3>
-              {data.designation.split("\n").map((word, index) => (
-                <span
-                  key={index}
-                  className="text-sm font-light text-colorpara"
-                >
+              {t.designation.split("\n").map((word, index) => (
+                <span key={index} className="text-sm font-light text-colorpara">
                   {word}
-                  {index < data.designation.split("\n").length - 1 && <br />}
+                  {index < t.designation.split("\n").length - 1 && <br />}
                 </span>
               ))}
               {/* <p className="text-sm font-light text-foreground">

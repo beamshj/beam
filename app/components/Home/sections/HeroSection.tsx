@@ -11,6 +11,7 @@ import "swiper/css/effect-fade";
 import { motion } from "framer-motion";
 import { Variants } from "framer-motion";
 import { HomeProps } from "../type";
+import { useApplyLang } from "@/lib/applyLang";
 import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 
 const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
@@ -20,6 +21,7 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
   const [textVersion, setTextVersion] = useState(0);
   const [isDesktop, setIsDesktop] = useState(false);
   const isArabic = useIsPreferredLanguageArabic();
+  const t = useApplyLang(data);
 
   const handleRegisterClick = () => {
     window.location.href = "/contact-us?scroll=register";
@@ -64,7 +66,7 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
         }}
         className="w-full h-full"
       >
-        {data.items.map((slide, index) => (
+        {t.items.map((slide, index) => (
           <SwiperSlide key={index}>
             <div className="h-full w-screen relative overflow-hidden text-white">
               {/* Background image with Ken Burns effect */}
@@ -78,9 +80,9 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
                   style={{ willChange: "transform, opacity" }}
                 >
                   <Image
-                    className="h-full w-full object-cover object-center"
+                    className={`h-full w-full object-cover object-center}`}
                     src={slide.image}
-                    alt={isArabic ? slide.imageAlt_ar : slide.imageAlt}
+                    alt={slide.imageAlt}
                     width={1920}
                     height={1280}
                     priority={index === 0}
@@ -113,11 +115,9 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
                           className="text-[1.8rem] md:text-2xl 2xl:text-4xl text-white leading-[1.2] xl:leading-[1.1] font-custom font-light lettersp-4-hero mb-0 max-w-none"
                         >
                           <span className="text-primary">
-                            {isArabic
-                              ? slide.highlightText_ar
-                              : slide.highlightText}{" "}
+                            {slide.highlightText}
                           </span>
-                          {isArabic ? slide.title_ar : slide.title}
+                          {slide.title}
                         </motion.h2>
                       </motion.div>
 
