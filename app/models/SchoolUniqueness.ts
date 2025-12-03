@@ -8,26 +8,44 @@ const schoolUniquenessSchema = new mongoose.Schema({
     bannerAlt: {
         type: String,
     },
+    bannerAlt_ar: {
+        type: String,
+    },
     metaTitle: {
         type: String,
         required: true
+    },
+    metaTitle_ar: {
+        type: String,
     },
     metaDescription: {
         type: String,
         required: true
     },
+    metaDescription_ar: {
+        type: String,
+    },
     pageTitle: {
         type: String,
         required: true
+    },
+    pageTitle_ar: {
+        type: String,
     },
     firstSection: {
         title: {
             type: String,
             required: true
         },
+        title_ar: {
+            type: String,
+        },
         description: {
             type: String,
             required: true
+        },
+        description_ar: {
+            type: String,
         },
         items: [{
             image: {
@@ -37,10 +55,16 @@ const schoolUniquenessSchema = new mongoose.Schema({
             imageAlt: {
                 type: String,
             },
+            imageAlt_ar: {
+                type: String,
+            },
             title: {
                 type: String,
                 required: true
-            }
+            },
+            title_ar: {
+                type: String,
+            },
         }]
     },
     secondSection: {
@@ -48,9 +72,15 @@ const schoolUniquenessSchema = new mongoose.Schema({
             type: String,
             required: true
         },
+        title_ar: {
+            type: String,
+        },
         description: {
             type: String,
             required: true
+        },
+        description_ar: {
+            type: String,
         },
         items: [{
             image: {
@@ -60,13 +90,22 @@ const schoolUniquenessSchema = new mongoose.Schema({
             imageAlt: {
                 type: String,
             },
+            imageAlt_ar: {
+                type: String,
+            },
             title: {
                 type: String,
                 required: true
             },
+            title_ar: {
+                type: String,
+            },
             description: {
                 type: String,
                 required: true
+            },
+            description_ar: {
+                type: String,
             }
         }]
     }

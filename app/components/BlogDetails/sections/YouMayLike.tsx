@@ -3,21 +3,25 @@
 import Image from "next/image";
 import { BlogType } from "../../blog/type";
 import Link from "next/link";
+import { useApplyLang } from "@/lib/applyLang";
+import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 const YouMayLike = ({
   rsData,
 }: {
   rsData: BlogType["categories"][number]["blogs"][number][];
 }) => {
+  const t = useApplyLang(rsData)
+  const isArabic = useIsPreferredLanguageArabic()
   return (
     <section className="pb-8 md:pb-12 lg:pb-20 2xl:pb-[135px] ">
       <div className="container">
         <div>
           <h2 className="text-xl md:text-2xl xl:text-3xl 2xl:text-4xl font-light leading-tight text-black lettersp-4">
-            Beyond Academics
+            {!isArabic ? "Beyond Academics" : "أبعد من الأكاديميين"}
           </h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pt-4 md:pt-6 xl:pt-8 2xl:pt-12 gap-7">
-          {rsData.slice(0, 3).map((item, index) => (
+          {t.slice(0, 3).map((item, index) => (
             <div key={index}>
               <Link href={`/news-&-media/blog/blog-details/${item.slug}`}>
               <div className="relative">
@@ -55,6 +59,7 @@ const YouMayLike = ({
                     alt="arrow"
                     width={11}
                     height={11}
+                    className={`${isArabic && "rotate-180"}`}
                   />
                 </div>
               </div>

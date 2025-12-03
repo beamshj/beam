@@ -20,13 +20,13 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
     try {
-        const {name} = await request.json();
+        const {name,name_ar} = await request.json();
         const isAdmin = await verifyAdmin(request);
         if (!isAdmin) {
             return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
         }
         await connectDB();
-        const category = await Blog.findOneAndUpdate({}, { $push: { categories: { name } } }, { upsert: true, new: true });
+        const category = await Blog.findOneAndUpdate({}, { $push: { categories: { name,name_ar } } }, { upsert: true, new: true });
         if (!category) {
             return NextResponse.json({ message: "Category not found" }, { status: 404 });
         }
@@ -39,7 +39,7 @@ export async function POST(request: NextRequest) {
 
 export async function PATCH(request: NextRequest) {
   try {
-    const { name } = await request.json();
+    const { name,name_ar } = await request.json();
     const id = request.nextUrl.searchParams.get("id");
     const isAdmin = await verifyAdmin(request);
 
@@ -55,17 +55,19 @@ export async function PATCH(request: NextRequest) {
 
     let categoryFound = false;
 
-    blog.categories = blog.categories.map((category: { _id: string; name: string; blogs: { _id: string; }[]; }) => {
+    blog.categories = blog.categories.map((category: { _id: string; name: string; name_ar: string; blogs: { _id: string; }[]; }) => {
       if (category._id.toString() === id) {
         categoryFound = true;
 
         // update the category name
         category.name = name;
+        category.name_ar = name_ar;
 
         // update all blogs inside this category
         category.blogs = category.blogs.map((b: { _id: string; }) => ({
           ...b,
           category: name,
+          category_ar: name_ar,
         }));
       }
       return category;

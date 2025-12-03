@@ -141,13 +141,17 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { AccreditationProps } from "../type";
+import { useApplyLang } from "@/lib/applyLang";
+
 const DataTab = ({
   awards,
 }: {
   awards: AccreditationProps["categories"][number]["accreditations"];
 }) => {
-  const currentData = awards.filter(
-    (award) => award.category === "Accreditation"
+    const t = useApplyLang(awards)
+    console.log(t)
+  const currentData = t.filter(
+    (award) => award.category === "Accreditation" || "الاعتماد"
   );
   const [isActive, setIsActive] = useState<number | null>(null);
   return (
@@ -155,7 +159,6 @@ const DataTab = ({
       <div className="container">
         <AnimatePresence mode="wait">
           <motion.div
-            key={currentData[0].category}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}

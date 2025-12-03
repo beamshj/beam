@@ -55,7 +55,7 @@ export async function POST(request: NextRequest) {
             await gallery.save();
             return NextResponse.json({message:"Gallery item updated successfully"}, { status: 200 });
         }else{
-            gallery.gallery.push({title:body.name})
+            gallery.gallery.push({title:body.name,title_ar:body.name_ar})
             await gallery.save();
             return NextResponse.json({message:"Gallery updated successfully"}, { status: 200 });
         }
@@ -83,6 +83,7 @@ export async function PATCH(request: NextRequest) {
             return NextResponse.json({message:"Gallery not found"}, { status: 404 });
         }
         toUpdateGallery.title = body.name;
+        toUpdateGallery.title_ar = body.name_ar;
         await gallery.save();
         return NextResponse.json({message:"Gallery item updated successfully"}, { status: 200 });
     } catch (error) {

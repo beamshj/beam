@@ -1,5 +1,6 @@
 "use client";
 
+import { useApplyLang } from "@/lib/applyLang";
 import Image from "next/image"; 
 // import Link from "next/link";
 export interface VMItem { 
@@ -20,12 +21,13 @@ export interface rsData {
   }: {
     rsData: rsData;
   }) => { 
+    const t = useApplyLang(rsData)
   return (
     <section className="pb-8 md:pb-12 lg:pb-20 2xl:pb-[135px] ">
       <div className="container"> 
         <div >
           <h2 className="text-xl md:text-2xl xl:text-3xl 2xl:text-4xl font-light leading-tight text-black lettersp-4">
-          {rsData.title}
+          {t.title}
           </h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pt-4 md:pt-6 xl:pt-8 2xl:pt-12 gap-7">

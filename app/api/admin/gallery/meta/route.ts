@@ -33,9 +33,13 @@ export async function PATCH(request: NextRequest) {
         }
         gallery.banner = body.banner;
         gallery.bannerAlt = body.bannerAlt;
+        gallery.bannerAlt_ar = body.bannerAlt_ar;
         gallery.pageTitle = body.pageTitle;
+        gallery.pageTitle_ar = body.pageTitle_ar;
         gallery.metaTitle = body.metaTitle;
+        gallery.metaTitle_ar = body.metaTitle_ar;
         gallery.metaDescription = body.metaDescription;
+        gallery.metaDescription_ar = body.metaDescription_ar;
         gallery.firstSection = body.firstSection;
         await gallery.save();
         return NextResponse.json({message:"Gallery updated successfully"}, { status: 200 });
