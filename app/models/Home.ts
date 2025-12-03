@@ -321,14 +321,24 @@ const homeSchema = new mongoose.Schema({
       type: String,
       required: true,
     },
-    image: {
+    bigImage: {
       type: String,
       required: true,
     },
-    imageAlt: {
+    bigImageAlt: {
       type: String,
     },
-    imageAlt_ar: {
+    bigImageAlt_ar: {
+      type: String,
+    },
+    smallImage: {
+      type: String,
+      required: true,
+    },
+    smallImageAlt: {
+      type: String,
+    },
+    smallImageAlt_ar: {
       type: String,
     },
     buttonText: {

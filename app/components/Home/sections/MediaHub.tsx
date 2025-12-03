@@ -15,6 +15,8 @@ import { BlogType } from "@/app/components/blog/type";
 import { BlogResponse } from "@/app/components/NewsDetails/type";
 import type { Swiper as SwiperType } from "swiper";
 import { useRouter } from "next/navigation";
+import { useApplyLang } from "@/lib/applyLang";
+import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 
 const MediaHub = ({
   blogdata,
@@ -25,6 +27,11 @@ const MediaHub = ({
   newsdata: BlogResponse;
   gallerydata: GalleryProps;
 }) => {
+  const tBlogData = useApplyLang(blogdata);
+  const tNewsData = useApplyLang(newsdata);
+  const tGalleryData = useApplyLang(gallerydata);
+  const isArabic = useIsPreferredLanguageArabic();
+
   const [selectedItem, setSelectedItem] = useState<{
     img: string;
     date: string;
@@ -40,9 +47,12 @@ const MediaHub = ({
   const [activeIndex, setActiveIndex] = useState(0);
 
   const router = useRouter();
+  const BLOG_TEXT = isArabic ? "مدونة" : "Blog";
+  const NEWS_TEXT = isArabic ? "الأخبار" : "News";
+  const GALLERY_TEXT = isArabic ? "المعرض" : "Gallery";
 
   const blogItems =
-    blogdata?.categories?.flatMap((category) =>
+    tBlogData?.categories?.flatMap((category) =>
       category.blogs?.map((blog) => ({
         img: blog.coverImage,
         date: new Date(blog.date || "")
@@ -53,7 +63,7 @@ const MediaHub = ({
           })
           .replace(/\//g, "-"),
         title: blog.title,
-        category: "Blog",
+        category: BLOG_TEXT,
         images: [],
         description: "",
         slug: blog.slug,
@@ -61,7 +71,7 @@ const MediaHub = ({
     ) || [];
 
   const newsItems =
-    newsdata?.categories?.flatMap((category) =>
+    tNewsData?.categories?.flatMap((category) =>
       category.news?.map((news) => ({
         img: news.coverImage,
         date: new Date(news.date)
@@ -72,7 +82,7 @@ const MediaHub = ({
           })
           .replace(/\//g, "-"),
         title: news.title,
-        category: "News",
+        category: NEWS_TEXT,
         images: [],
         description: "",
         slug: news.slug,
@@ -80,13 +90,13 @@ const MediaHub = ({
     ) || [];
 
   const galleryItems =
-    gallerydata?.gallery?.flatMap((section) =>
+    tGalleryData?.gallery?.flatMap((section) =>
       section.categories?.flatMap((cat) =>
         cat.images?.map((image) => ({
           img: image,
           date: "",
-          title: cat.title || section.title || "Gallery",
-          category: "Gallery",
+          title: cat.title || section.title || GALLERY_TEXT,
+          category: GALLERY_TEXT,
           images: cat.images,
           description: cat.description,
           slug: "",
@@ -116,8 +126,10 @@ const MediaHub = ({
     () => 0.5 - Math.random()
   );
 
+  const HEADING = isArabic ? "مركز الوسائط" : "Media Hub";
+
   const mediaHubData = {
-    heading: "Media Hub",
+    heading: HEADING,
     mediaHub: combinedItems,
   };
 
@@ -231,7 +243,8 @@ const MediaHub = ({
                         <div className="p-10">
                           {/* ✅ date */}
                           {value.date ? (
-                            <p className={`text-white text-sm font-light transform transition-all duration-500 delay-100
+                            <p
+                              className={`text-white text-sm font-light transform transition-all duration-500 delay-100
                                 ${
                                   isActiveOnMobile
                                     ? "opacity-100 translate-y-0"
@@ -243,7 +256,8 @@ const MediaHub = ({
                           ) : null}
 
                           {/* ✅ title */}
-                          <p className={`text-white line-clamp-2 xl:line-clamp-3 text-lg lg:text-xl font-light leading-[1.2] mt-6 transform transition-all duration-500 delay-300
+                          <p
+                            className={`text-white line-clamp-2 xl:line-clamp-3 text-lg lg:text-xl font-light leading-[1.2] mt-6 transform transition-all duration-500 delay-300
                               ${
                                 isActiveOnMobile
                                   ? "opacity-100 translate-x-0"

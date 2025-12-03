@@ -6,12 +6,30 @@ import { mainMenuItems } from "./menuItems";
 import { filterMenuItems } from "./menuItems";
 import SocialMediaIcons from "../Common/SocialMediaIcons";
 import { AnimatePresence, motion } from "framer-motion";
+import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
+import { useApplyLang } from "@/lib/applyLang";
+import { usePathname, useRouter } from "next/navigation";
+import LangLink from "@/lib/LangLink";
 
 const NavBar = () => {
   const [isSticky, setIsSticky] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const isArabic = useIsPreferredLanguageArabic();
+  const tMainMenuItems = useApplyLang(mainMenuItems);
+  const pathname = usePathname();
+  const router = useRouter();
 
+  const switchLanguage = () => {
+    if (pathname.startsWith("/ar")) {
+      // going EN: remove "/ar"
+      const newPath = pathname.replace("/ar", "") || "/";
+      router.push(newPath);
+    } else {
+      // going AR: add "/ar"
+      router.push("/ar" + pathname);
+    }
+  };
   const handleRegisterClick = () => {
     window.location.href = "/contact-us?scroll=register";
   };
@@ -74,16 +92,19 @@ const NavBar = () => {
       >
         <div className="container">
           <div
-            className="bg-white flex justify-between lg:pl-3 rounded-[10px] h-[70px] lg:h-full"
+            className={`bg-white flex justify-between ${
+              isArabic ? "lg:pr-3" : "lg:pl-3"
+            } rounded-[10px] h-[70px] lg:h-full`}
             style={{ boxShadow: "0px 4px 45px 0px #0000000F" }}
           >
-
             <div className="flex gap-12 items-center">
               <div className="flex items-center justify-center h-full gap-4">
                 <div className="lg:py-3">
                   <Link href="/">
                     <Image
-                      src="/assets/logo.svg"
+                      src={
+                        isArabic ? "/assets/logo-ar.png" : "/assets/logo.svg"
+                      }
                       alt="Logo"
                       width={158}
                       height={77}
@@ -95,11 +116,14 @@ const NavBar = () => {
               </div>
               <div className="hidden lg:flex h-full items-center">
                 <ul className="flex gap-[30px] text-black relative h-full items-center">
-                  {mainMenuItems
+                  {tMainMenuItems
                     .filter(
                       (item) =>
-                        item.name !== "Careers" && item.name !== "Contact Us"
+                        item.href !== "/contact-us" &&
+                        item.href !==
+                          "https://careers.beam.co.ae/en/job-search-results/"
                     )
+
                     .map((item) => (
                       <li
                         key={item.name}
@@ -108,12 +132,12 @@ const NavBar = () => {
                         onMouseLeave={() => setHoveredMenu(null)}
                       >
                         {/* Top-level Link */}
-                        <Link
+                        <LangLink
                           href={item.href}
                           className="text-sm font-light transition-colors duration-300 ease-in-out group-hover:text-primary group-hover:underline group-hover:underline-offset-4"
                         >
                           {item.name}
-                        </Link>
+                        </LangLink>
 
                         {/* Submenu */}
                         {item.submenu && (
@@ -135,7 +159,7 @@ const NavBar = () => {
                                     key={sub.name}
                                     className="border-b border-[#D3D3D3] last:border-b-0 py-3 linkhrs "
                                   >
-                                    <Link
+                                    <LangLink
                                       href={sub.href}
                                       className="flex gap-5 text-sm font-light text-black hover:text-primary transition-colors duration-200 "
                                     >
@@ -149,7 +173,7 @@ const NavBar = () => {
                                           height={20}
                                         />
                                       </span>
-                                    </Link>
+                                    </LangLink>
                                   </li>
                                 ))}
                               </motion.ul>
@@ -162,18 +186,30 @@ const NavBar = () => {
               </div>
             </div>
             <div className="flex gap-2  sm:gap-5">
-              <div className="flex items-center relative"> 
-                              {/* <div className="absolute top-2 left-2">
-                Arabic
-              </div> */}
+              <div className="flex items-center gap-5">
+                {process.env.NODE_ENV === "development" && (
                   <button
-                    onClick={handleRegisterClick}
-                    className="uppercase border-primary border-[1px] px-3 py-1 flex items-center gap-2 rounded-[50px]
+                    onClick={switchLanguage}
+                    className="cursor-pointer hover:text-primary transition-colors duration-300"
+                  >
+                    {isArabic ? "English" : "العربية"}
+                  </button>
+                )}
+
+                <button
+                  onClick={handleRegisterClick}
+                  className="uppercase border-primary border-[1px] px-3 py-1 flex items-center gap-2 rounded-[50px]
                                 text-[10px] sm:text-xs font-light cursor-pointer text-black transition-all duration-300 group
                                 hover:bg-primary hover:text-white"
                 >
-                  <span className="transition-transform duration-300 group-hover:translate-x-1">
-                    Register Interest
+                  <span
+                    className={`transition-transform duration-300 ${
+                      isArabic
+                        ? "group-hover:-translate-x-1"
+                        : "group-hover:translate-x-1"
+                    }`}
+                  >
+                    {isArabic ? "سجل اهتمام" : "Register Interest"}
                   </span>
                   <span
                     className="hidden sm:flex bg-primary rounded-full p-2 w-[27px] h-[27px]  items-center justify-center
@@ -184,7 +220,11 @@ const NavBar = () => {
                       alt="Arrow"
                       width={20}
                       height={20}
-                      className="transition-transform duration-300 group-hover:rotate-45 group-hover:brightness-0"
+                      className={`transition-transform duration-300 group-hover:brightness-0 ${
+                        isArabic
+                          ? "-rotate-90 group-hover:-rotate-135"
+                          : "group-hover:rotate-45"
+                      }`}
                     />
                   </span>
                 </button>
@@ -218,7 +258,7 @@ const NavBar = () => {
 
                   {!isMobile && (
                     <p className="text-black text-sm font-medium transition-transform duration-300 group-hover:translate-x-1">
-                      MENU
+                      {isArabic ? "القائمة" : "MENU"}
                     </p>
                   )}
                 </div>
@@ -309,7 +349,7 @@ const NavBar = () => {
                         className="uppercase text-xs border-white text-white border-[1px] ps-5 pe-[12px] py-[11px] flex items-center gap-2 rounded-[50px] font-light cursor-pointer transition-all duration-300 group hover:bg-white hover:text-[#005871]"
                       >
                         <span className="transition-all duration-300 group-hover:translate-x-1">
-                          Register Interest
+                          {isArabic ? "سجل اهتمام" : "Register Interest"}
                         </span>
                         <span className="bg-primary rounded-full p-2 w-[27px] h-[27px] flex items-center justify-center transition-all duration-300 group-hover:translate-x-1 group-hover:bg-[#005871]">
                           <Image

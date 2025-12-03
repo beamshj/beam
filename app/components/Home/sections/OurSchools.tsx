@@ -27,6 +27,9 @@ import {
   LocationType,
 } from "../../BeamSchools/type";
 import Link from "next/link";
+import { useApplyLang } from "@/lib/applyLang";
+import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
+import { HomeProps } from "../type";
 
 const Select = dynamic<SelectProps<OptionType, false, GroupBase<OptionType>>>(
   () => import("react-select"),
@@ -35,15 +38,25 @@ const Select = dynamic<SelectProps<OptionType, false, GroupBase<OptionType>>>(
 type OptionType = { value: string; label: string };
 
 const OurSchools = ({
+  data,
   schoolData,
   categorydata,
   locationdata,
 }: {
+  data: HomeProps["secondSection"];
   schoolData: BeamSchoolType;
   categorydata: CategoryType[];
   locationdata: LocationType[];
 }) => {
-  console.log(locationdata);
+  const tData = useApplyLang(data);
+  const tSchoolData = useApplyLang(schoolData);
+  const tCategories = useApplyLang(categorydata);
+  const tLocations = useApplyLang(locationdata);
+  const isArabic = useIsPreferredLanguageArabic();
+
+  const ALL_TEXT = isArabic ? "الكل" : "All";
+  const LOCATION_TEXT = isArabic ? "الموقع" : "Location";
+
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   useEffect(() => {
@@ -55,7 +68,7 @@ const OurSchools = ({
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const [selectedCurriculum, setSelectedCurriculum] = useState("all");
+  const [selectedCurriculum, setSelectedCurriculum] = useState(ALL_TEXT);
   const [selectedLocation, setSelectedLocation] = useState("");
 
   // locations
@@ -67,13 +80,13 @@ const OurSchools = ({
 
   // curiculums
   const curriculums = Array.from(
-    new Set(categorydata.map((category) => category.name))
+    new Set(tCategories.map((category) => category.name))
   );
 
   const filteredSchools = useMemo(() => {
-    return schoolData.schools.filter((school) => {
+    return tSchoolData.schools.filter((school) => {
       const curriculumMatch =
-        selectedCurriculum === "all" ||
+        selectedCurriculum === ALL_TEXT ||
         school.category.name.toLowerCase() === selectedCurriculum.toLowerCase();
 
       const locationMatch =
@@ -84,12 +97,12 @@ const OurSchools = ({
 
       return curriculumMatch && locationMatch;
     });
-  }, [selectedCurriculum, selectedLocation]);
+  }, [selectedCurriculum, selectedLocation, tSchoolData]);
 
   // locations
   const locationOptions: OptionType[] = [
-    { value: "", label: "Location" },
-    ...locationdata.map((loc) => ({
+    { value: "", label: LOCATION_TEXT },
+    ...tLocations.map((loc) => ({
       value: loc.name,
       label: loc.name,
     })),
@@ -156,7 +169,7 @@ const OurSchools = ({
           <div className="mb-5 xl:mb-7 2xl:mb-[53px]">
             <SplitText
               tag="h2"
-              text="Our Schools"
+              text={tData.title}
               className="text-xl md:text-2xl xl:text-3xl 2xl:text-4xl font-light leading-[1.111111111111111] text-black lettersp-4"
               delay={100}
               duration={0.6}
@@ -180,9 +193,9 @@ const OurSchools = ({
                   initial="hidden"
                   whileInView="show"
                   viewport={{ once: true, amount: 0.2 }}
-                  onClick={() => setSelectedCurriculum("all")}
+                  onClick={() => setSelectedCurriculum(ALL_TEXT)}
                   className={`p-[1px] group rounded-full cursor-pointer ${
-                    selectedCurriculum === "all"
+                    selectedCurriculum === ALL_TEXT
                       ? "bg-[linear-gradient(90deg,_#42BADC_0%,_#12586C_100%)] "
                       : "bg-bdrcolor hover:bg-[linear-gradient(90deg,_#42BADC_0%,_#12586C_100%)]"
                   }`}
@@ -195,7 +208,7 @@ const OurSchools = ({
                           : "text-colorpara group-hover:text-black"
                       }`}
                     >
-                      All
+                      {ALL_TEXT}
                     </p>
                   </div>
                 </motion.div>
@@ -251,7 +264,7 @@ const OurSchools = ({
                   }
                   options={locationOptions}
                   styles={customStyles}
-                  placeholder="Location"
+                  placeholder={LOCATION_TEXT}
                 />
               </motion.div>
             </div>

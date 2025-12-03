@@ -7,12 +7,9 @@ import BeamTeam from "./sections/BeamTeam";
 const Index = ({ data }: { data: LeadershipData }) => {
   return (
     <>
-      <InnerBanner
-        BannerData={BannerData}
-        data={data}
-      />
-      <BeamTeam beamleadersData={data.firstSection.items} data={data}/>
-      <LeadershipTeam sliderData={data.secondSection.items} data={data} />
+      <InnerBanner BannerData={BannerData} data={data} />
+      <BeamTeam data={data} />
+      <LeadershipTeam data={data} />
     </>
   );
 };

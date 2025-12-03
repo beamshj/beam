@@ -36,7 +36,7 @@ const newsSchema = new mongoose.Schema({
           thumbnailAlt: { type: String },
           thumbnailAlt_ar: { type: String },
           popularNews: { type: String },
-          type:{type:String, default:"News"},
+          type: { type: String, default: "News" },
           date: { type: Date },
           content: { type: String },
           content_ar: { type: String },

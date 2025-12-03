@@ -16,9 +16,13 @@ import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { HomeProps } from "../type";
+import { useApplyLang } from "@/lib/applyLang";
+
+
 gsap.registerPlugin(ScrollTrigger);
 
 const AcademicCultural = ({ data }: { data: HomeProps["thirdSection"] }) => {
+  const t = useApplyLang(data);
   const [activeIndex, setActiveIndex] = useState(1); // 2nd item active by default
 
   const imgRef = useRef<HTMLImageElement | null>(null);
@@ -57,7 +61,7 @@ const AcademicCultural = ({ data }: { data: HomeProps["thirdSection"] }) => {
 
             <SplitText
               tag="h2"
-              text={data.title}
+              text={t.title}
               className="text-lg md:text-xl xl:text-2xl 2xl:text-3xl font-light leading-tight text-black max-w-[13ch] lettersp-4"
               delay={100}
               duration={0.6}
@@ -81,7 +85,7 @@ const AcademicCultural = ({ data }: { data: HomeProps["thirdSection"] }) => {
             >
               <p
                 className="text-sm font-light text-colorpara md:max-w-[68ch] 2xl:max-w-[82ch]"
-                dangerouslySetInnerHTML={{ __html: data.description }}
+                dangerouslySetInnerHTML={{ __html: t.description }}
               />
             </motion.div>
 
@@ -166,8 +170,8 @@ const AcademicCultural = ({ data }: { data: HomeProps["thirdSection"] }) => {
         <div className="absolute bottom-0 right-0 hidden xl:block w-[640px] 2xl:w-[737px]">
           <Image
             ref={imgRef}
-            src={data.image}
-            alt={data.imageAlt}
+            src={t.image}
+            alt={t.imageAlt}
             width={737}
             height={1061}
           />

@@ -130,11 +130,15 @@ import "swiper/css/pagination";
 import SplitText from "@/components/SplitText";
 import { moveUp } from "../../motionVarients";
 import { TestimonialsProps } from "../type";
+import { useApplyLang } from "@/lib/applyLang";
 
-
-
-const GuidedVision = ({ data }: { data: TestimonialsProps['thirdSection'] }) => {
+const GuidedVision = ({
+  data,
+}: {
+  data: TestimonialsProps["thirdSection"];
+}) => {
   const [activeVideoIndex, setActiveVideoIndex] = useState<number | null>(null);
+  const t = useApplyLang(data);
 
   // helper to convert normal YT link to embed format
   const getEmbedUrl = (url: string) => {
@@ -150,7 +154,7 @@ const GuidedVision = ({ data }: { data: TestimonialsProps['thirdSection'] }) => 
         <div>
           <SplitText
             tag="h2"
-            text={data.title}
+            text={t.title}
             className="text-lg xl:text-2xl 2xl:text-4xl 2xl:max-w-[18ch] font-light leading-[1.111111111] text-black mb-4 md:mb-6 xl:mb-7 2xl:mb-12"
             delay={100}
             duration={0.6}
@@ -165,7 +169,7 @@ const GuidedVision = ({ data }: { data: TestimonialsProps['thirdSection'] }) => 
         <div>
           <div className="relative storyslide">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 xl:gap-10 items-center">
-              {data.items.map((item, index) => {
+              {t.items.map((item, index) => {
                 const isPlaying = activeVideoIndex === index;
 
                 return (
@@ -204,9 +208,7 @@ const GuidedVision = ({ data }: { data: TestimonialsProps['thirdSection'] }) => 
                         <p className="text-white text-[1.3rem] md:text-md xl:text-lg 2xl:text-xl font-light leading-[1.18] lettersp-1">
                           {item.name}
                         </p>
-                        <p className="text-[#E0E0E0]">
-                          {item.designation}
-                        </p>
+                        <p className="text-[#E0E0E0]">{item.designation}</p>
                       </div>
                     </motion.div>
 

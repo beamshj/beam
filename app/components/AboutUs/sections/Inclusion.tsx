@@ -8,12 +8,14 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect } from "react";
 gsap.registerPlugin(ScrollTrigger);
 import { AboutProps } from "../type";
+import { useApplyLang } from "@/lib/applyLang";
 
 interface InclusionSectionProps {
-  data: AboutProps['fifthSection'];
+  data: AboutProps["fifthSection"];
 }
 
 const InclusionSection: React.FC<InclusionSectionProps> = ({ data }) => {
+  const t = useApplyLang(data);
 
   useEffect(() => {
     gsap.from(".inclusion-section", {
@@ -40,8 +42,8 @@ const InclusionSection: React.FC<InclusionSectionProps> = ({ data }) => {
         <div className="relative h-[500px] 2xl:h-[638px] rounded-[12px] overflow-hidden ">
           {/* Background Image inside container */}
           <Image
-            src={data.image}
-            alt={data.imageAlt}
+            src={t.image}
+            alt={t.imageAlt}
             fill
             className="object-cover"
           />
@@ -56,11 +58,23 @@ const InclusionSection: React.FC<InclusionSectionProps> = ({ data }) => {
           ></div>
           {/* Content pinned bottom-left */}
           <div className="absolute bottom-0 left-0 z-10 p-6 xl:p-[60px]">
-            <motion.h2 variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="text-xl xl:text-3xl 2xl:text-4xl font-light mb-2 leading-[1.111111] text-white">
-              {data.title}
+            <motion.h2
+              variants={moveUp(0.2)}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.2 }}
+              className="text-xl xl:text-3xl 2xl:text-4xl font-light mb-2 leading-[1.111111] text-white"
+            >
+              {t.title}
             </motion.h2>
-            <motion.p variants={moveUp(0.4)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="text-sm font-light leading-[1.52] text-white max-w-[83ch]">
-              {data.description}
+            <motion.p
+              variants={moveUp(0.4)}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.2 }}
+              className="text-sm font-light leading-[1.52] text-white max-w-[83ch]"
+            >
+              {t.description}
             </motion.p>
           </div>
         </div>

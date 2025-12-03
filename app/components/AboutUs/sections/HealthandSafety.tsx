@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { moveUp } from "../../motionVarients";
 import SplitText from "@/components/SplitText";
 import { AboutProps } from "../type";
+import { useApplyLang } from "@/lib/applyLang";
 
 export default function HealthSafety({
   data,
@@ -13,6 +14,7 @@ export default function HealthSafety({
   data: AboutProps["sixthSection"];
 }) {
   const [active, setActive] = useState(0);
+  const t = useApplyLang(data)
 
   return (
     <section>
@@ -23,7 +25,7 @@ export default function HealthSafety({
             <h2 className="text-lg lg:text-xl xl:text-3xl 2xl:text-4xl font-light text-black mb-3 xl:mb-10 2xl:mb-[50px]">
               <SplitText
                 tag="span"
-                text={data.title}
+                text={t.title}
                 className=""
                 delay={100}
                 duration={0.6}
@@ -43,14 +45,14 @@ export default function HealthSafety({
               viewport={{ once: true, amount: 0.2 }}
               className="text-[#626262] text-sm mb-[50px] leading-[1.52] md:max-w-[55ch]"
             >
-              {data.description}
+              {t.description}
             </motion.p>
 
             <div className="xl:hidden mb-10 rounded-xl overflow-hidden">
               {/* <Image src={items[active].image} alt={items[active].title} fill className="object-cover object-center" /> */}
               <Image
-                src={data.items[active].image}
-                alt={data.items[active].title}
+                src={t.items[active].image}
+                alt={t.items[active].title}
                 width={300}
                 height={300}
                 className="xl:object-contain object-cover w-full h-[250px] xl:object-top-left"
@@ -58,7 +60,7 @@ export default function HealthSafety({
             </div>
 
             <ul className="group space-y-[30px] order-3">
-              {data.items.map((item, index) => (
+              {t.items.map((item, index) => (
                 <motion.li
                   key={index}
                   variants={moveUp(index * 0.2)}
@@ -110,7 +112,7 @@ export default function HealthSafety({
             <div className="relative w-full h-[400px] md:h-[500px] xl:h-[600px] 2xl:h-[743px] rounded-[12px] overflow-hidden">
               <AnimatePresence mode="wait">
                 <motion.div
-                  key={data.items[active].image}
+                  key={t.items[active].image}
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
                   transition={{ duration: 0.6 }}
@@ -118,8 +120,8 @@ export default function HealthSafety({
                   className="absolute inset-0"
                 >
                   <Image
-                    src={data.items[active].image}
-                    alt={data.items[active].title}
+                    src={t.items[active].image}
+                    alt={t.items[active].imageAlt}
                     fill
                     className="object-cover object-center"
                   />

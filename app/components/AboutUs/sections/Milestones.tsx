@@ -9,6 +9,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { AboutProps } from "../type";
+import { useApplyLang } from "@/lib/applyLang";
 
 interface Props {
   data: AboutProps["historySection"];
@@ -16,6 +17,7 @@ interface Props {
 
 export default function MoreToExplore({ data }: Props) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const t = useApplyLang(data)
 
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [containerMarginLeft, setContainerMarginLeft] = useState(0);
@@ -36,7 +38,7 @@ export default function MoreToExplore({ data }: Props) {
     <section className="pt-10 xl:pt-20 2xl:pt-[135px] pb-[80px] xl:pb-[100px] 2xl:pb-[165px] bg-[#F6F6F6] overflow-hidden">
       <div className="container " ref={containerRef}>
         <h2 className="text-lg xl:text-2xl 2xl:text-4xl font-light md:mb-4 xl:mb-8 2xl:mb-[50px]">
-          {data.title}
+          {t.title}
         </h2>
       </div>
 
@@ -74,7 +76,7 @@ export default function MoreToExplore({ data }: Props) {
             autoplay={{ delay: 6000, disableOnInteraction: false }}
             className="md:!overflow-visible aboutslide"
           >
-            {data.items.map((item, index) => (
+            {t.items.map((item, index) => (
               <SwiperSlide key={index} className="relative">
                 <motion.div
                   className="mb-9 flex flex-col items-start"

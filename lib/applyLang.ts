@@ -28,7 +28,9 @@ export function useApplyLang<T extends object>(data: T): T {
     // Arrays
     if (Array.isArray(input)) {
       return input.map((item) =>
-        typeof item === "object" && item !== null ? translate(item) : (item as LangValue)
+        typeof item === "object" && item !== null
+          ? translate(item)
+          : (item as LangValue)
       );
     }
 
@@ -68,7 +70,9 @@ export function useApplyLang<T extends object>(data: T): T {
         // Arrays nested under this key
         if (Array.isArray(rawValue)) {
           result[key] = rawValue.map((item) =>
-            typeof item === "object" && item !== null ? translate(item) : (item as LangValue)
+            typeof item === "object" && item !== null
+              ? translate(item)
+              : (item as LangValue)
           );
           continue;
         }

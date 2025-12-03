@@ -11,13 +11,17 @@ import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVarients";
 import Link from "next/link";
 import { AboutProps } from "../type";
+import { useApplyLang } from "@/lib/applyLang";
 
-
-
-export default function MoreToExplore({ data }: {data: AboutProps['seventhSection']}) {
+export default function MoreToExplore({
+  data,
+}: {
+  data: AboutProps["seventhSection"];
+}) {
   // const { title, items } = data;
   const headingRef = useRef<HTMLHeadingElement>(null);
   const [leftOffset, setLeftOffset] = useState(0);
+  const t = useApplyLang(data);
 
   useEffect(() => {
     const updateOffset = () => {
@@ -38,7 +42,7 @@ export default function MoreToExplore({ data }: {data: AboutProps['seventhSectio
           <h2 className="text-lg xl:text-2xl 2xl:text-4xl font-light mb-4 xl:mb-8 2xl:mb-[50px]">
             <SplitText
               tag="span"
-              text={data.title}
+              text={t.title}
               className=""
               delay={100}
               duration={0.6}
@@ -70,7 +74,7 @@ export default function MoreToExplore({ data }: {data: AboutProps['seventhSectio
             modules={[Pagination]}
             className="!pb-[60px]"
           >
-            {data.items.map((card, idx) => (
+            {t.items.map((card, idx) => (
               <SwiperSlide key={idx}>
                 <Link href={card.link}>
                   <motion.div

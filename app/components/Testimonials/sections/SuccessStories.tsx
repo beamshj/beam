@@ -10,6 +10,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { moveUp } from "../../motionVarients";
 import { TestimonialsProps } from "../type";
+import { useApplyLang } from "@/lib/applyLang";
 
 const SuccessStories = ({
   data,
@@ -19,6 +20,7 @@ const SuccessStories = ({
   const [activeVideoIndex, setActiveVideoIndex] = useState<number | null>(null);
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
+  const t = useApplyLang(data);
 
   return (
     <section className="pt-14 pb-8 md:py-20 lg:py-20 2xl:py-[135px]">
@@ -47,7 +49,7 @@ const SuccessStories = ({
                   setIsEnd(swiper.isEnd);
                 }}
               >
-                {data.items.map((video, index) => {
+                {t.items.map((video, index) => {
                   const isPlaying = activeVideoIndex === index;
 
                   return (
@@ -114,7 +116,7 @@ const SuccessStories = ({
               viewport={{ amount: 0.1, once: false }}
               className="text-lg xl:text-2xl 2xl:text-4xl 2xl:max-w-[18ch] font-light leading-[1.111111111] text-black mb-4 md:mb-6 xl:mb-"
             >
-              {data.title}
+              {t.title}
             </motion.h2>
             <motion.p
               variants={moveUp(0.2)}
@@ -123,7 +125,7 @@ const SuccessStories = ({
               viewport={{ amount: 0.1, once: false }}
               className="text-sm leading-[1.526315789473684] font-light text-colorpara"
             >
-              {data.description}
+              {t.description}
             </motion.p>
           </div>
 
