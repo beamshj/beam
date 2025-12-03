@@ -599,6 +599,7 @@ const TestimonialsPage = () => {
           />
         </div>
       </div>
+
       {/* Arabic Version */}
       <div className="flex flex-col gap-5">
         <AdminItemContainer>
@@ -628,7 +629,7 @@ const TestimonialsPage = () => {
                 <Input
                   type="text"
                   placeholder="Alt Tag"
-                  {...register("bannerAlt")}
+                  {...register("bannerAlt_ar")}
                 />
               </div>
               <div className="flex flex-col gap-1">
@@ -636,7 +637,7 @@ const TestimonialsPage = () => {
                 <Input
                   type="text"
                   placeholder="Page Title"
-                  {...register("pageTitle")}
+                  {...register("pageTitle_ar")}
                 />
               </div>
             </div>
@@ -650,22 +651,20 @@ const TestimonialsPage = () => {
                 <Label className="font-bold">Title</Label>
                 <Textarea
                   placeholder="Title"
-                  {...register("firstSection.title", {
-                    required: "Title is required",
-                  })}
+                  {...register("firstSection.title_ar")}
                 />
-                {errors.firstSection?.title && (
+                {errors.firstSection?.title_ar && (
                   <p className="text-red-500">
-                    {errors.firstSection?.title.message}
+                    {errors.firstSection?.title_ar.message}
                   </p>
                 )}
               </div>
               <div>
                 <Label className="text-sm font-bold">Description</Label>
                 <Controller
-                  name="firstSection.description"
+                  name="firstSection.description_ar"
                   control={control}
-                  rules={{ required: "Description is required" }}
+                  //   rules={{ required: "Description is required" }}
                   render={({ field }) => {
                     return (
                       <Textarea value={field.value} onChange={field.onChange} />
@@ -695,14 +694,14 @@ const TestimonialsPage = () => {
                           <Input
                             type="text"
                             placeholder="Title"
-                            {...register(`firstSection.items.${index}.title`, {
-                              required: "Value is required",
-                            })}
+                            {...register(
+                              `firstSection.items.${index}.title_ar`
+                            )}
                           />
-                          {errors.firstSection?.items?.[index]?.title && (
+                          {errors.firstSection?.items?.[index]?.title_ar && (
                             <p className="text-red-500">
                               {
-                                errors.firstSection?.items?.[index]?.title
+                                errors.firstSection?.items?.[index]?.title_ar
                                   .message
                               }
                             </p>
@@ -714,17 +713,15 @@ const TestimonialsPage = () => {
                             type="text"
                             placeholder="Designation"
                             {...register(
-                              `firstSection.items.${index}.designation`,
-                              {
-                                required: "Value is required",
-                              }
+                              `firstSection.items.${index}.designation_ar`
                             )}
                           />
-                          {errors.firstSection?.items?.[index]?.designation && (
+                          {errors.firstSection?.items?.[index]
+                            ?.designation_ar && (
                             <p className="text-red-500">
                               {
-                                errors.firstSection?.items?.[index]?.designation
-                                  .message
+                                errors.firstSection?.items?.[index]
+                                  ?.designation_ar.message
                               }
                             </p>
                           )}
@@ -732,7 +729,7 @@ const TestimonialsPage = () => {
                         <div className="flex flex-col gap-2">
                           <Label className="font-bold">Description</Label>
                           <Controller
-                            name={`firstSection.items.${index}.description`}
+                            name={`firstSection.items.${index}.description_ar`}
                             control={control}
                             render={({ field }) => {
                               return (
@@ -779,20 +776,18 @@ const TestimonialsPage = () => {
                 <Input
                   type="text"
                   placeholder="Title"
-                  {...register("secondSection.title", {
-                    required: "Title is required",
-                  })}
+                  {...register("secondSection.title_ar")}
                 />
-                {errors.secondSection?.title && (
+                {errors.secondSection?.title_ar && (
                   <p className="text-red-500">
-                    {errors.secondSection?.title.message}
+                    {errors.secondSection?.title_ar.message}
                   </p>
                 )}
               </div>
               <div className="flex flex-col gap-1">
                 <Label className="font-bold">Description</Label>
                 <Controller
-                  name="secondSection.description"
+                  name="secondSection.description_ar"
                   control={control}
                   render={({ field }) => {
                     return (
@@ -890,13 +885,11 @@ const TestimonialsPage = () => {
                 <Input
                   type="text"
                   placeholder="Title"
-                  {...register("thirdSection.title", {
-                    required: "Title is required",
-                  })}
+                  {...register("thirdSection.title_ar")}
                 />
-                {errors.thirdSection?.title && (
+                {errors.thirdSection?.title_ar && (
                   <p className="text-red-500">
-                    {errors.thirdSection?.title.message}
+                    {errors.thirdSection?.title_ar.message}
                   </p>
                 )}
               </div>
@@ -942,14 +935,14 @@ const TestimonialsPage = () => {
                             <Input
                               type="text"
                               placeholder="Name"
-                              {...register(`thirdSection.items.${index}.name`, {
-                                required: "Name is required",
-                              })}
+                              {...register(
+                                `thirdSection.items.${index}.name_ar`
+                              )}
                             />
-                            {errors.thirdSection?.items?.[index]?.name && (
+                            {errors.thirdSection?.items?.[index]?.name_ar && (
                               <p className="text-red-500">
                                 {
-                                  errors.thirdSection?.items?.[index]?.name
+                                  errors.thirdSection?.items?.[index]?.name_ar
                                     .message
                                 }
                               </p>
@@ -987,18 +980,15 @@ const TestimonialsPage = () => {
                               type="text"
                               placeholder="Designation"
                               {...register(
-                                `thirdSection.items.${index}.designation`,
-                                {
-                                  required: "Designation is required",
-                                }
+                                `thirdSection.items.${index}.designation_ar`
                               )}
                             />
                             {errors.thirdSection?.items?.[index]
-                              ?.designation && (
+                              ?.designation_ar && (
                               <p className="text-red-500">
                                 {
                                   errors.thirdSection?.items?.[index]
-                                    ?.designation.message
+                                    ?.designation_ar.message
                                 }
                               </p>
                             )}
@@ -1035,7 +1025,7 @@ const TestimonialsPage = () => {
           <Input
             type="text"
             placeholder="Meta Title"
-            {...register("metaTitle")}
+            {...register("metaTitle_ar")}
           />
         </div>
         <div className="flex flex-col gap-2">
@@ -1043,7 +1033,7 @@ const TestimonialsPage = () => {
           <Input
             type="text"
             placeholder="Meta Description"
-            {...register("metaDescription")}
+            {...register("metaDescription_ar")}
           />
         </div>
       </div>
