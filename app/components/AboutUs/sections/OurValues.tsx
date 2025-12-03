@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { moveUp } from "../../motionVarients";
 import { AboutProps } from "../type";
 import { useApplyLang } from "@/lib/applyLang";
+import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 
 interface Props {
   data: AboutProps["thirdSection"];
@@ -13,7 +14,8 @@ interface Props {
 
 export default function ValuesGrid({ data }: Props) {
   const [hovered, setHovered] = useState<number | null>(0);
-  const t = useApplyLang(data)
+  const t = useApplyLang(data);
+  const isArabic = useIsPreferredLanguageArabic();
 
   return (
     <section className="container">
@@ -36,9 +38,7 @@ export default function ValuesGrid({ data }: Props) {
               viewport={{ once: true, amount: 0.2 }}
               key={index}
               className={`flex flex-col w-full
-                        ${
-                          "border-b-[1px] border-bdrcolor xl:border-none md:border-gray-300 pb-5 last:border-none"
-                        }`}
+                        ${"border-b-[1px] border-bdrcolor xl:border-none md:border-gray-300 pb-5 last:border-none"}`}
             >
               {/* Number ABOVE card */}
               <motion.div
@@ -113,15 +113,16 @@ export default function ValuesGrid({ data }: Props) {
                         
                       `}
                     >
-                      {t.title}
+                      {item.title}
                     </h3>
 
                     {/* Points (only show on hover) */}
                     {hovered === index && (
                       <div
-                        className="absolute bottom-0 left-0 w-full
-               bg-gradient-to-t from-black/100 to-black/0
-               px-3 xl:px-1 2xl:px-3 pt-4 pb-5 values-description-about max-h-[75%] overflow-y-auto 2xl:overflow-y-hidden"
+                        className={`absolute bottom-0 left-0 right-0 w-full
+               bg-gradient-to-t from-black/100 to-black/0 ${
+                 isArabic ? "px-10" : "px-3"
+               } pt-4 pb-5 values-description-about max-h-[75%] overflow-y-auto 2xl:overflow-y-hidden`}
                         dangerouslySetInnerHTML={{ __html: item.description }}
                       >
                         {/* <ul className="list-disc list-outside pl-4 xl:pl-9 space-y-1 text-sm text-white font-light">

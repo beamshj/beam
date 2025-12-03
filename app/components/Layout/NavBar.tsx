@@ -151,7 +151,9 @@ const NavBar = () => {
                                   duration: 0.25,
                                   ease: "easeInOut",
                                 }}
-                                className="absolute left-0 top-full mt-2 w-[378px] bg-white shadow-xl rounded-lg py-3 px-4 flex flex-col  z-50"
+                                className={`absolute ${
+                                  isArabic ? "right-0" : "left-0"
+                                } top-full mt-2 w-[378px] bg-white shadow-xl rounded-lg py-3 px-4 flex flex-col  z-50`}
                               >
                                 {item.submenu.map((sub) => (
                                   <li
@@ -161,14 +163,18 @@ const NavBar = () => {
                                   >
                                     <LangLink
                                       href={sub.href}
-                                      className="flex gap-5 text-sm font-light text-black hover:text-primary transition-colors duration-200 "
+                                      className="flex gap-5 text-sm font-light text-black hover:text-primary transition-colors duration-200"
                                     >
                                       <span>{sub.name}</span>
                                       <span className="bg-primary rounded-full p-2 w-[27px] h-[27px] opacity-0 blks transition-all duration-500">
                                         <Image
                                           src="/assets/arrow.svg"
                                           alt="Arrow"
-                                          className="rotate-45"
+                                          className={`${
+                                            isArabic
+                                              ? "-rotate-135"
+                                              : "rotate-45"
+                                          }`}
                                           width={20}
                                           height={20}
                                         />

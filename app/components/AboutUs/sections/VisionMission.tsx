@@ -10,6 +10,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { moveUp } from "../../motionVarients";
 import { AboutProps } from "../type";
 import { useApplyLang } from "@/lib/applyLang";
+import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 
 const VisionMissionSection = ({
   data,
@@ -20,6 +21,7 @@ const VisionMissionSection = ({
   const imageRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
   const t = useApplyLang(data);
+  const isArabic = useIsPreferredLanguageArabic();
 
   useEffect(() => {
     if (imageRef.current && overlayRef.current && containerRef.current) {
@@ -72,7 +74,7 @@ const VisionMissionSection = ({
               to={{ opacity: 1, y: 0 }}
               threshold={0.1}
               rootMargin="-10px"
-              textAlign="left"
+              textAlign={isArabic ? "right" : "left"}
             />
             <motion.p
               variants={moveUp(0.5)}
