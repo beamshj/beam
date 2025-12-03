@@ -5,6 +5,7 @@ import {
   MdOutlineArrowForwardIos,
 } from "react-icons/md";
 import { motion } from "framer-motion";
+import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 
 type PaginationProps = {
   currentPage: number;
@@ -68,6 +69,8 @@ export default function Pagination({
     );
   };
 
+  const isArabic = useIsPreferredLanguageArabic()
+
   return (
     <motion.div className="flex justify-center  items-center space-x-[2px] text-sm font-light removeMt">
       {/* Prev Button */}
@@ -89,7 +92,7 @@ export default function Pagination({
           onClick={() => onPageChange(currentPage + 1)}
           className="w-[35px] lg:w-[50px] h-[35px] lg:h-[50px] flex items-center justify-center cursor-pointer"
         >
-          <MdOutlineArrowForwardIos className="text-[#D3D3D3]" size={24} />
+          <MdOutlineArrowForwardIos className={`text-[#D3D3D3] ${isArabic && "rotate-180"}`} size={24} />
         </button>
       )}
     </motion.div>

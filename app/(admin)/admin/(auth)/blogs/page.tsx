@@ -29,10 +29,14 @@ import { toast } from "sonner";
 
 interface BlogsPageProps {
   metaTitle: string;
+  metaTitle_ar: string;
   metaDescription: string;
+  metaDescription_ar: string;
   banner: string;
   bannerAlt: string;
+  bannerAlt_ar: string;
   pageTitle: string;
+  pageTitle_ar: string;
   firstSection: {
     title: string;
     description: string;
@@ -41,11 +45,12 @@ interface BlogsPageProps {
 
 export default function Blogs() {
   const [category, setCategory] = useState<string>("");
+  const [categoryArabic, setCategoryArabic] = useState<string>("");
   const [blogList, setBlogList] = useState<{ _id: string; title: string }[]>(
     []
   );
   const [categoryList, setCategoryList] = useState<
-    { _id: string; name: string }[]
+    { _id: string; name: string,name_ar:string }[]
   >([]);
 
   const [reorderMode, setReorderMode] = useState(false);
@@ -64,11 +69,12 @@ export default function Blogs() {
     try {
       const response = await fetch("/api/admin/blogs/category", {
         method: "POST",
-        body: JSON.stringify({ name: category }),
+        body: JSON.stringify({ name: category,name_ar:categoryArabic }),
       });
       if (response.ok) {
         const data = await response.json();
         setCategory("");
+        setCategoryArabic("");
         toast.success(data.message);
         handleFetchCategory();
       } else {
@@ -99,13 +105,14 @@ export default function Blogs() {
     try {
       const response = await fetch(`/api/admin/blogs/category?id=${id}`, {
         method: "PATCH",
-        body: JSON.stringify({ name: category }),
+        body: JSON.stringify({ name: category,name_ar:categoryArabic }),
       });
       if (response.ok) {
         const data = await response.json();
         toast.success(data.message);
         handleFetchCategory();
         setCategory("");
+        setCategoryArabic("");
       } else {
         const data = await response.json();
         toast.error(data.message);
@@ -234,7 +241,10 @@ export default function Blogs() {
 
   return (
     <div className="flex flex-col gap-5">
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
+      <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-2 gap-10">
+
+        {/*English Version*/}
+        <div className="flex flex-col gap-5">
         <AdminItemContainer>
           <Label className="" main>
             Banner
@@ -294,7 +304,73 @@ export default function Blogs() {
           />
         </div>
 
-        <div className="flex justify-center mt-5">
+        </div>
+
+
+{/*Arabic Version*/}
+        <div className="flex flex-col gap-5">
+        <AdminItemContainer>
+          <Label className="" main>
+            Banner
+          </Label>
+          <div className="p-5 rounded-md grid grid-cols-2 gap-5">
+            <div>
+              <Controller
+                name="banner"
+                control={control}
+                rules={{ required: "Banner is required" }}
+                render={({ field }) => (
+                  <ImageUploader
+                    value={field.value}
+                    onChange={field.onChange}
+                  />
+                )}
+              />
+              {errors.banner && (
+                <p className="text-red-500">{errors.banner.message}</p>
+              )}
+            </div>
+            <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-1">
+                <Label className="font-bold">Alt Tag</Label>
+                <Input
+                  type="text"
+                  placeholder="Alt Tag"
+                  {...register("bannerAlt_ar")}
+                />
+              </div>
+              <div className="flex flex-col gap-1">
+                <Label className="font-bold">Page Title</Label>
+                <Input
+                  type="text"
+                  placeholder="Page Title"
+                  {...register("pageTitle_ar")}
+                />
+              </div>
+            </div>
+          </div>
+        </AdminItemContainer>
+
+        <div className="flex flex-col gap-2">
+          <Label className="font-bold">Meta Title</Label>
+          <Input
+            type="text"
+            placeholder="Meta Title"
+            {...register("metaTitle_ar")}
+          />
+        </div>
+        <div className="flex flex-col gap-2">
+          <Label className="font-bold">Meta Description</Label>
+          <Input
+            type="text"
+            placeholder="Meta Description"
+            {...register("metaDescription_ar")}
+          />
+        </div>
+
+        </div>
+
+        <div className="col-span-2">
           <Button
             type="submit"
             className="cursor-pointer text-white text-[16px] w-full"
@@ -317,7 +393,7 @@ export default function Blogs() {
               <Dialog>
                 <DialogTrigger
                   className="bg-black text-white px-2 py-1 rounded-md"
-                  onClick={() => setCategory("")}
+                  onClick={() => {setCategory("");setCategoryArabic("")}}
                 >
                   Add Category
                 </DialogTrigger>
@@ -325,12 +401,22 @@ export default function Blogs() {
                   <DialogHeader>
                     <DialogTitle>Add Category</DialogTitle>
                     <DialogDescription>
+                      <Label>Category Name</Label>
                       <Input
                         type="text"
                         placeholder="Category"
                         value={category}
                         onChange={(e) => setCategory(e.target.value)}
                       />
+
+                      <Label>Category Name Arabic</Label>
+                      <Input
+                        type="text"
+                        placeholder="Category"
+                        value={categoryArabic}
+                        onChange={(e) => setCategoryArabic(e.target.value)}
+                      />
+
                     </DialogDescription>
                   </DialogHeader>
                   <DialogClose
@@ -354,6 +440,7 @@ export default function Blogs() {
                       <DialogTrigger
                         onClick={() => {
                           setCategory(item.name);
+                          setCategoryArabic(item.name_ar);
                         }}
                       >
                         <MdEdit />
@@ -362,11 +449,20 @@ export default function Blogs() {
                         <DialogHeader>
                           <DialogTitle>Edit Category</DialogTitle>
                           <DialogDescription>
+                            <Label>Category Name</Label>
                             <Input
                               type="text"
                               placeholder="Category"
                               value={category}
                               onChange={(e) => setCategory(e.target.value)}
+                            />
+
+                            <Label>Category Name Arabic</Label>
+                            <Input
+                              type="text"
+                              placeholder="Category"
+                              value={categoryArabic}
+                              onChange={(e) => setCategoryArabic(e.target.value)}
                             />
                           </DialogDescription>
                         </DialogHeader>

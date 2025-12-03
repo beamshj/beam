@@ -10,7 +10,7 @@ import {
 } from "@/public/assets/FramerAnimation/animation";
 import SplitText from "@/components/SplitText";
 import { SchoolAchievementsProps } from "../type";
-
+import { useApplyLang } from "@/lib/applyLang";
 
 
 const ProudMoments: React.FC<{data: SchoolAchievementsProps['firstSection']}> = ({ data }) => {
@@ -19,6 +19,7 @@ const ProudMoments: React.FC<{data: SchoolAchievementsProps['firstSection']}> = 
 
   const openPopup = () => setIsOpen(true);
   const closePopup = () => setIsOpen(false);
+  const t = useApplyLang(data)
 
   return (
     <div className="container  overflow-hidden">
@@ -32,8 +33,8 @@ const ProudMoments: React.FC<{data: SchoolAchievementsProps['firstSection']}> = 
       >
         {/* Background Image */}
         <Image
-          src={data.image}
-          alt={data.imageAlt}
+          src={t.image}
+          alt={t.imageAlt}
           fill
           className="object-cover absolute top-0 left-0 z-10 rounded-[12px]"
         />
@@ -53,7 +54,7 @@ const ProudMoments: React.FC<{data: SchoolAchievementsProps['firstSection']}> = 
             <h2 className="text-white">
               <SplitText
                 tag="span"
-                text={data.title}
+                text={t.title}
                 className="text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl leading-[1.2] w-full md:max-w-[65%] font-light tracking-[0.04em] text-center md:text-left lettersp-4"
                 delay={60}
                 duration={0.3}
@@ -116,7 +117,7 @@ const ProudMoments: React.FC<{data: SchoolAchievementsProps['firstSection']}> = 
 
                 {/* YouTube Embed */}
                 <iframe
-                  src={data.videoLink}
+                  src={t.videoLink}
                   title="Video"
                   className="w-full h-full"
                   frameBorder="0"

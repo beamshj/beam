@@ -11,13 +11,15 @@ import SplitText from "@/components/SplitText";
 import { moveUp } from "../../motionVarients";
 import { useState } from "react";
 import { SchoolUniquenessProps } from "../type";
+import { useApplyLang } from "@/lib/applyLang";
+import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 
 
 const FosteringStrong = ({data }: { data: SchoolUniquenessProps['firstSection'] }) => {
-
-  console.log(data);
   const [activeIndex, setActiveIndex] = useState(0);
   const [openAccordion, setOpenAccordion] = useState<number | null>(0);
+  const t = useApplyLang(data)
+  const isArabic = useIsPreferredLanguageArabic()
 
   const imageVariants = {
     hidden: { opacity: 0, y: 30 },
@@ -40,7 +42,7 @@ const FosteringStrong = ({data }: { data: SchoolUniquenessProps['firstSection'] 
             <div>
               <SplitText
                 tag="h2"
-                text={data.title}
+                text={t.title}
                 className="text-lg lg:text-xl xl:text-2xl 2xl:text-4xl max-w-[50ch] font-light leading-[1.111111111] text-black mb-4 md:mb-6 xl:mb-8 2xl:mb-12"
                 delay={100}
                 duration={0.6}
@@ -50,11 +52,11 @@ const FosteringStrong = ({data }: { data: SchoolUniquenessProps['firstSection'] 
                 to={{ opacity: 1, y: 0 }}
                 threshold={0.1}
                 rootMargin="-100px"
-                textAlign="left"
+                textAlign={isArabic ? "right" : "left"}
               />
               <SplitText
                 tag="p"
-                text={data.description}
+                text={t.description}
                 className="text-sm leading-[1.526315789473684] font-light text-colorpara max-w-[54ch]"
                 delay={100}
                 duration={0.6}
@@ -64,13 +66,13 @@ const FosteringStrong = ({data }: { data: SchoolUniquenessProps['firstSection'] 
                 to={{ opacity: 1, y: 0 }}
                 threshold={0.1}
                 rootMargin="-100px"
-                textAlign="left"
+                textAlign={isArabic ? "right" : "left"}
               />
             </div>
 
             {/* Accordion / List */}
             <div className="mt-4 md:mt-6 xl:mt-8 2xl:mt-12">
-              {data.items.map((item, index) => {
+              {t.items.map((item, index) => {
                 const isActive = activeIndex === index;
                 const isOpen = openAccordion === index;
 
@@ -86,7 +88,7 @@ const FosteringStrong = ({data }: { data: SchoolUniquenessProps['firstSection'] 
                     {/* Header */}
                     <button
                       onClick={() => toggleAccordion(index)}
-                      className="flex justify-between items-center w-full text-left pt-7 pb-5  cursor-pointer group"
+                      className={`flex justify-between items-center w-full ${isArabic ? "text-right" : "text-left" } pt-7 pb-5  cursor-pointer group`}
                     >
                       <div className="flex items-cente gap-3">
                         <p
@@ -182,9 +184,9 @@ const FosteringStrong = ({data }: { data: SchoolUniquenessProps['firstSection'] 
           >
             <AnimatePresence mode="wait">
               <motion.img
-                key={data.items[activeIndex].image}
-                src={data.items[activeIndex].image}
-                alt={data.items[activeIndex].imageAlt}
+                key={t.items[activeIndex].image}
+                src={t.items[activeIndex].image}
+                alt={t.items[activeIndex].imageAlt}
                 variants={imageVariants}
                 initial="hidden"
                 animate="show"

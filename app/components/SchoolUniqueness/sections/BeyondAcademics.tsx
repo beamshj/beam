@@ -4,6 +4,8 @@ import Image from "next/image";
 import { useState } from "react";
 import SplitText from "@/components/SplitText";
 import { SchoolUniquenessProps } from "../type";
+import { useApplyLang } from "@/lib/applyLang";
+import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 
 
 const BeyondAcademics = ({
@@ -11,6 +13,8 @@ const BeyondAcademics = ({
 }: {
   data: SchoolUniquenessProps['secondSection'];
 }) => {
+  const t = useApplyLang(data)
+  const isArabic = useIsPreferredLanguageArabic()
   const [activeIndex, setActiveIndex] = useState<number | null>(0);
   return (
     <section className="pb-0 md:pb-12 lg:pb-20 2xl:pb-[135px] ">
@@ -19,7 +23,7 @@ const BeyondAcademics = ({
           <div>
             <SplitText
               tag="h2"
-              text={data.title}
+              text={t.title}
               className="text-lg lg:text-xl xl:text-2xl 2xl:text-4xl  font-light leading-[1.111111111] text-black mb-4 md:mb-6 xl:mb-8 2xl:mb-8"
               delay={100}
               duration={0.6}
@@ -33,7 +37,7 @@ const BeyondAcademics = ({
             />
             <SplitText
               tag="p"
-              text={data.description}
+              text={t.description}
               className="text-sm leading-[1.526315789473684] max-w-[70ch] mb-6 lg:mb-7 last:lg:mb-13 font-light  text-colorpara"
               delay={100}
               duration={0.6}
@@ -43,13 +47,13 @@ const BeyondAcademics = ({
               to={{ opacity: 1, y: 0 }}
               threshold={0.1}
               rootMargin="-100px"
-              textAlign="left"
+              textAlign={isArabic ? "right" : "left"}
             />
           </div>
           <div className="flex flex-col md:flex-row gap-8 md:gap-7 mb-8 md:mb-0">
-            {data.items.map((item, index) => {
+            {t.items.map((item, index) => {
               const isActive = index === activeIndex;
-
+              console.log(item)
               return (
                 <div
                   key={index}
@@ -71,7 +75,7 @@ const BeyondAcademics = ({
                   ></div>
 
                   <div
-                    className={`absolute  transition-all duration-400 top-[20px] right-[20px] xl:top-[40px] xl:right-[40px] p-2 bg-primary rounded-full w-12 h-12 lg:w-[75px] lg:h-[75px] flex items-center justify-center   ${
+                    className={`absolute  transition-all duration-400 top-[20px] ${isArabic ? "left-[20px]  xl:left-[40px]" : "right-[20px]  xl:right-[40px]" } xl:top-[40px] p-2 bg-primary rounded-full w-12 h-12 lg:w-[75px] lg:h-[75px] flex items-center justify-center   ${
                       isActive ? "bg-white" : ""
                     }  `}
                   >
@@ -79,7 +83,7 @@ const BeyondAcademics = ({
                       src="/images/home/arrow-top.svg"
                       alt={"ad"}
                       width={24}
-                      className={`brightness-0 invert  ${
+                      className={`brightness-0 invert ${isArabic && "-rotate-90"} ${
                         isActive ? "invert-0 brightness-100" : ""
                       }`}
                       height={24}
@@ -106,7 +110,7 @@ const BeyondAcademics = ({
                         opacity: isActive ? 1 : 0, // optional fade effect
                       }}
                     >
-                      <div dangerouslySetInnerHTML={{ __html: item.description }} className="school-uniqueness-second-section">
+                      <div dangerouslySetInnerHTML={{ __html: item.description }} className={`${isArabic ? "school-uniqueness-second-section-ar" : "school-uniqueness-second-section"}`}>
                         {/* <p className="text-[#E0E0E0] leading-[1.526315789473684] font-light max-w-[50ch]">
                           {item.description}
                         </p>

@@ -7,6 +7,7 @@ import Pagination from "../../Common/Pagination";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { NewsItem } from "../type";
+import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 
 const Newslist = ({
   data,
@@ -37,6 +38,8 @@ const Newslist = ({
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
+
+  const isArabic = useIsPreferredLanguageArabic()
 
   return (
     <div>
@@ -81,12 +84,13 @@ const Newslist = ({
                   {item.title}
                 </p>
               </div>
-              <div className=" group-hover:translate-x-1 mt-4 p-1 flex items-center justify-center bg-primary w-[27px] h-[27px] rounded-full transition-transform duration-300  rotate-45">
+              <div className={`${isArabic ? "group-hover:-translate-x-1" : "group-hover:translate-x-1"} mt-4 p-1 flex items-center justify-center bg-primary w-[27px] h-[27px] rounded-full transition-transform duration-300  rotate-45`}>
                 <Image
                   src="/assets/arrow.svg"
                   alt="arrow"
                   width={11}
                   height={11}
+                  className={`${isArabic && "rotate-180"}`}
                 />
               </div>
             </div>
