@@ -10,6 +10,7 @@ import { moveUp } from "../../motionVarients";
 import { motion } from "framer-motion";
 import { schoolData } from "../data";
 import ReCAPTCHA from "react-google-recaptcha";
+import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 
 const formSchema = z.object({
   fullName: z.string().min(1, "Required"),
@@ -40,6 +41,7 @@ const RegisterInterest = forwardRef<HTMLDivElement, RegisterInterestProps>(
 
     const recaptchaRef = useRef<ReCAPTCHA>(null);
     const [error, setError] = useState("");
+    const isArabic = useIsPreferredLanguageArabic()
 
     const onSubmit = async (data: FormData) => {
       try {
@@ -103,7 +105,7 @@ const RegisterInterest = forwardRef<HTMLDivElement, RegisterInterestProps>(
                 to={{ opacity: 1, y: 0 }}
                 threshold={0.1}
                 rootMargin="-10px"
-                textAlign="left"
+                textAlign={isArabic ? "right" : "left"}
               />
               <p className="text-white text-xl leading-[1.2] font-light mt-4 xl:mt-[27px]">
                 Take the first step
@@ -334,13 +336,13 @@ const RegisterInterest = forwardRef<HTMLDivElement, RegisterInterestProps>(
                     className="relative group flex items-center uppercase justify-center gap-[10px] px-[20px] py-[11px] w-full h-full text-white bg-transparent rounded-[50px] text-xs font-light overflow-hidden"
                   >
                     SEND ENQUIRY
-                    <span className="flex items-center justify-center w-[27px] h-[27px] bg-primary rounded-full transition-transform duration-300 group-hover:translate-x-2">
+                    <span className={`flex items-center justify-center w-[27px] h-[27px] bg-primary rounded-full transition-transform duration-300 ${isArabic ? "group-hover:-translate-x-2" : "group-hover:translate-x-2"}`}>
                       <Image
                         src="/images/arrow-black.svg"
                         alt="Arrow"
                         width={8}
                         height={8}
-                        className="object-contain filter invert"
+                        className={`object-contain filter invert ${isArabic && "-rotate-90"}`}
                       />
                     </span>
                   </button>

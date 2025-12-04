@@ -6,9 +6,11 @@ import { motion } from "framer-motion";
 import { moveUp } from "../../motionVarients";
 import { ScholarshipProps } from "../type";
 import { useApplyLang } from "@/lib/applyLang";
+import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 
 const OurLegacy = ({ data }: { data: ScholarshipProps["fourthSection"] }) => {
   const t = useApplyLang(data)
+  const isArabic = useIsPreferredLanguageArabic()
   return (
     <section
       className="py-14 lg:py-20 2xl:py-[135px] relative "
@@ -23,7 +25,7 @@ const OurLegacy = ({ data }: { data: ScholarshipProps["fourthSection"] }) => {
         className="absolute top-0 left-0 w-full h-full "
         style={{
           background:
-            "linear-gradient(90.62deg, rgba(0, 0, 0, 0.86) 4.04%, rgba(0, 0, 0, 0) 93.9%)",
+            isArabic ? "linear-gradient(270.62deg, rgba(0, 0, 0, 0.86) 4.04%, rgba(0, 0, 0, 0) 93.9%)" : "linear-gradient(90.62deg, rgba(0, 0, 0, 0.86) 4.04%, rgba(0, 0, 0, 0) 93.9%)",
         }}
       ></div>
       <div className="container relative z-10">
@@ -41,7 +43,7 @@ const OurLegacy = ({ data }: { data: ScholarshipProps["fourthSection"] }) => {
               to={{ opacity: 1, y: 0 }}
               threshold={0.1}
               rootMargin="-100px"
-              textAlign="left"
+              textAlign={isArabic ? "right" : "left"}
             />
 
             <SplitText
@@ -56,7 +58,7 @@ const OurLegacy = ({ data }: { data: ScholarshipProps["fourthSection"] }) => {
               to={{ opacity: 1, y: 0 }}
               threshold={0.1}
               rootMargin="-100px"
-              textAlign="left"
+              textAlign={isArabic ? "right" : "left"}
             />
           </div>
           <div className="md:flex gap-5 ">

@@ -12,6 +12,7 @@ import { FirstSection } from "../type";
 import { Listbox } from "@headlessui/react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useApplyLang } from "@/lib/applyLang";
+import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 
 const options = [
   { value: "", label: "Purpose of enquiry" },
@@ -38,6 +39,8 @@ type FormData = z.infer<typeof formSchema>;
 
 const ContactForm: React.FC<{ data: FirstSection }> = ({ data }) => {
   const t = useApplyLang(data);
+  const isArabic = useIsPreferredLanguageArabic()
+
   const {
     register,
     handleSubmit,
@@ -302,14 +305,14 @@ const ContactForm: React.FC<{ data: FirstSection }> = ({ data }) => {
                 >
                   {({ open }) => (
                     <div className="relative w-full">
-                      <Listbox.Button className="w-full border-b text-colorpara cursor-pointer border-colorpara py-2 xl:py-[23px] focus:outline-none placeholder:text-colorpara text-sm font-light text-left">
+                      <Listbox.Button className={`w-full border-b text-colorpara cursor-pointer border-colorpara py-2 xl:py-[23px] focus:outline-none placeholder:text-colorpara text-sm font-light ${isArabic ? "text-right" : "text-left"}`}>
                         {options.find((o) => o.value === field.value)?.label ||
                           "Purpose of enquiry"}
                       </Listbox.Button>
 
                       {/* Custom arrow icon */}
                       <span
-                        className={`absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none transition-transform duration-300 ${
+                        className={`absolute ${isArabic ? "left-0" : "right-0"} top-1/2 -translate-y-1/2 pointer-events-none transition-transform duration-300 ${
                           open ? "rotate-180" : "rotate-0"
                         }`}
                       >
@@ -390,13 +393,13 @@ const ContactForm: React.FC<{ data: FirstSection }> = ({ data }) => {
               >
                 SEND MESSAGE
                 {/* Arrow circle */}
-                <span className="flex items-center justify-center w-[27px] h-[27px] bg-primary rounded-full transition-transform duration-300 group-hover:translate-x-2">
+                <span className={`flex items-center justify-center w-[27px] h-[27px] bg-primary rounded-full transition-transform duration-300 ${isArabic ? "group-hover:-translate-x-2" : "group-hover:translate-x-2"}`}>
                   <Image
                     src="/images/arrow-black.svg"
                     alt="Arrow"
                     width={8}
                     height={8}
-                    className="object-contain transition-transform duration-300 group-hover:rotate-45"
+                    className={`object-contain transition-transform duration-300 ${isArabic ? "-rotate-90 group-hover:-rotate-135" : "group-hover:rotate-45"}`}
                   />
                 </span>
               </button>

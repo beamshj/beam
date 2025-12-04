@@ -5,11 +5,16 @@ import SplitText from "@/components/SplitText";
 import { motion } from "framer-motion";
 import { moveUp } from "../../motionVarients";
 import { SchoolAchievementsProps } from "../type";
+import { useApplyLang } from "@/lib/applyLang";
+import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 
 const SchoolAchievements: React.FC<{data: SchoolAchievementsProps['secondSection']}> = ({ data }) => {
   // const { title, subtitle, achievements } = data;
   
 const [isActive, setIsActive] = useState<number | null>(null);
+const t = useApplyLang(data)
+const isArabic = useIsPreferredLanguageArabic()
+
   return (
     <div className="py-10 xl:py-20 2xl:py-[135px]">
       <div className="container">
@@ -17,7 +22,7 @@ const [isActive, setIsActive] = useState<number | null>(null);
         <div className="mb-5 xl:mb-[30px]">
           <SplitText
             tag="h2"
-            text={data.title}
+            text={t.title}
             className="text-xl md:text-2xl xl:text-3xl 2xl:text-4xl font-light lettersp-4 xl:mb-[50px]"
             delay={200}
             duration={0.6}
@@ -27,11 +32,11 @@ const [isActive, setIsActive] = useState<number | null>(null);
             to={{ opacity: 1, y: 0 }}
             threshold={0.1}
             rootMargin="-10px"
-            textAlign="left"
+            textAlign={isArabic ? "right" : "left"}
           />
             <SplitText
               tag="span"
-              text={data.description}
+              text={t.description}
               className="text-sm font-light text-colorpara leading-[1.52] max-w-[72ch]"
               delay={200}
               duration={0.6}
@@ -41,13 +46,13 @@ const [isActive, setIsActive] = useState<number | null>(null);
               to={{ opacity: 1, y: 0 }}
               threshold={0.1}
               rootMargin="-10px"
-              textAlign="left"
+              textAlign={isArabic ? "right" : "left"}
             />
         </div>
 
         {/* Achievements Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8 justify-between">
-          {data.items.map((achievement, index) => (
+          {t.items.map((achievement, index) => (
             <motion.div
               key={index}
               variants={moveUp(index * 0.2)}
@@ -70,7 +75,7 @@ const [isActive, setIsActive] = useState<number | null>(null);
                     className="object-contain w-full h-auto"
                   />
                 </div>
-                <h3 className="text-md md:text-lg xl:text-xl font-light leading-[1.2] text-black lettersp-1">
+                <h3 className={`text-md md:text-lg xl:text-xl font-light leading-[1.2] text-black lettersp-1 ${isArabic && "text-right"}`}>
                   {achievement.title}
                 </h3>
               </div>
@@ -82,7 +87,7 @@ const [isActive, setIsActive] = useState<number | null>(null);
         }`}
         style={{
           background:
-            "linear-gradient(211deg, #42BADC 46.06%, #ccb1e9 122.85%)",
+            isArabic ? "linear-gradient(to bottom right, #42BADC 46.06%, #ccb1e9 122.85%)" : "linear-gradient(211deg, #42BADC 46.06%, #ccb1e9 122.85%)",
         }}
       >
         <div className="flex h-full items-end">

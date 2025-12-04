@@ -35,6 +35,12 @@ interface ContactFormProps {
     address: string;
     address_ar: string;
   };
+  secondSection:{
+    title:string;
+    title_ar:string;
+    description:string;
+    description_ar:string;
+  }
 }
 
 const ContactPage = () => {
@@ -77,6 +83,7 @@ const ContactPage = () => {
         setValue("metaDescription", data.data.metaDescription);
         setValue("metaDescription_ar", data.data.metaDescription_ar);
         setValue("firstSection", data.data.firstSection);
+        setValue("secondSection", data.data.secondSection);
       } else {
         const data = await response.json();
         toast.error(data.message);
@@ -246,6 +253,46 @@ const ContactPage = () => {
             </div>
           </div>
         </AdminItemContainer>
+
+
+        <AdminItemContainer>
+          <Label main>Second Section</Label>
+          <div className="p-5 rounded-md flex flex-col gap-2">
+            <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-1">
+                <Label className="font-bold">Title</Label>
+                <Input
+                  type="text"
+                  placeholder="Title"
+                  {...register("secondSection.title", {
+                    required: "Title is required",
+                  })}
+                />
+                {errors.secondSection?.title && (
+                  <p className="text-red-500">
+                    {errors.secondSection?.title.message}
+                  </p>
+                )}
+              </div>
+              <div>
+                <Label className="text-sm font-bold">Description</Label>
+                <Controller
+                  name="secondSection.description"
+                  control={control}
+                  rules={{ required: "Description is required" }}
+                  render={({ field }) => {
+                    return (
+                      <Textarea value={field.value} onChange={field.onChange} />
+                    );
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+        </AdminItemContainer>
+
+
+
         <div className="flex flex-col gap-2">
           <Label className="pl-3 font-bold">Meta Title</Label>
           <Input
@@ -409,6 +456,36 @@ const ContactPage = () => {
             </div>
           </div>
         </AdminItemContainer>
+
+                <AdminItemContainer>
+          <Label main>Second Section</Label>
+          <div className="p-5 rounded-md flex flex-col gap-2">
+            <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-1">
+                <Label className="font-bold">Title</Label>
+                <Input
+                  type="text"
+                  placeholder="Title"
+                  {...register("secondSection.title_ar")}
+                />
+              </div>
+              <div>
+                <Label className="text-sm font-bold">Description</Label>
+                <Controller
+                  name="secondSection.description_ar"
+                  control={control}
+                  render={({ field }) => {
+                    return (
+                      <Textarea value={field.value} onChange={field.onChange} />
+                    );
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+        </AdminItemContainer>
+
+
         <div className="flex flex-col gap-2">
           <Label className="pl-3 font-bold">Meta Title</Label>
           <Input

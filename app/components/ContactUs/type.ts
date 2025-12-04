@@ -25,6 +25,8 @@ export interface FirstSection {
 export interface SecondSection {
   title: string;
   description: string;
+  title_ar: string;
+  description_ar: string;
   items: SchoolItem[];
 }
 

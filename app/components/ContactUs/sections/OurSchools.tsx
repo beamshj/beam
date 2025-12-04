@@ -227,19 +227,22 @@ import { useState, useRef, useEffect } from "react";
 import SplitText from "@/components/SplitText";
 import { moveUp } from "../../motionVarients";
 import { BeamSchoolType } from "../../BeamSchools/type";
+import { useApplyLang } from "@/lib/applyLang";
+import { ContactPage } from "../type";
+import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 
 export default function OurSchools({
   data,
-  title,
-  description,
+  contactData
 }: {
   data: BeamSchoolType;
-  title: string;
-  description: string;
+  contactData: ContactPage;
 }) {
   const { schools } = data;
   const [activeIndex, setActiveIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const t = useApplyLang(schools)
+  const isArabic = useIsPreferredLanguageArabic()
 
   // Track screen size
   useEffect(() => {
@@ -288,7 +291,14 @@ export default function OurSchools({
         <div className="mb-5 md:mb-8 xl:mb-[30px]">
           <SplitText
             tag="h1"
-            text={title}
+            text={
+              isArabic
+                ? contactData.secondSection.title_ar?.trim()
+                  ? contactData.secondSection.title_ar
+                  : contactData.secondSection.title
+                : contactData.secondSection.title
+            }
+
             className="text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl font-light text-black leading-[1.1111]"
             delay={100}
             duration={0.6}
@@ -307,7 +317,7 @@ export default function OurSchools({
             viewport={{ once: true, amount: 0.2 }}
             className="text-colorpara font-light text-sm leading-[1.52] mt-3 xl:mt-[50px]"
           >
-            {description}
+            {isArabic ? contactData.secondSection.description_ar?.trim() ? contactData.secondSection.description_ar : contactData.secondSection.description : contactData.secondSection.description}
           </motion.p>
         </div>
 
@@ -319,7 +329,7 @@ export default function OurSchools({
           viewport={{ once: true, amount: 0.2 }}
           className="flex flex-wrap lg:flex-row gap-6 lg:gap-[1%] justify-between"
         >
-          {schools.map((school, i) => {
+          {t.map((school, i) => {
             const isActive = activeIndex === i;
             const showActive = isActive;
 
@@ -339,18 +349,16 @@ export default function OurSchools({
                 onClick={() =>
                   window.open(school.link, "_blank", "noopener,noreferrer")
                 }
-                className={`relative rounded-[12px] overflow-hidden h-[300px] md:h-[350px] xl:h-[544px] cursor-pointer flex-shrink-0 schl ${
-                  isActive ? "z-20" : "z-10"
-                }`}
+                className={`relative rounded-[12px] overflow-hidden h-[300px] md:h-[350px] xl:h-[544px] cursor-pointer flex-shrink-0 schl ${isActive ? "z-20" : "z-10"
+                  }`}
               >
                 {/* Image */}
                 <Image
                   src={school.image}
                   alt={school.imageAlt}
                   fill
-                  className={`object-cover transition-all duration-500 ${
-                    showActive ? "grayscale-0" : "grayscale"
-                  }`}
+                  className={`object-cover transition-all duration-500 ${showActive ? "grayscale-0" : "grayscale"
+                    }`}
                 />
                 {/* Overlay */}
                 {!showActive && (
@@ -413,7 +421,7 @@ export default function OurSchools({
                           alt="arrow"
                           width={25}
                           height={24}
-                          className="ml-[12px]"
+                          className={`ml-[12px] ${isArabic && "rotate-180"}`}
                         />
                       </div>
                     </motion.div>
@@ -425,7 +433,7 @@ export default function OurSchools({
                           alt="arrow"
                           width={24}
                           height={24}
-                          className="w-auto h-4 xl:h-[24px]"
+                          className={`w-auto h-4 xl:h-[24px] ${isArabic && "-rotate-90"}`}
                         />
                       </span>
                     </div>
@@ -439,6 +447,7 @@ export default function OurSchools({
                         alt="arrow"
                         width={24}
                         height={24}
+                        className={`w-auto h-4 xl:h-[24px] ${isArabic && "-rotate-90"}`}
                       />
                     </span>
                   </div>

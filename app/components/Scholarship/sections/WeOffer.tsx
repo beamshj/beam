@@ -5,11 +5,11 @@ import { motion } from "framer-motion";
 import { fadeIn, moveUp } from "../../motionVarients";
 import { ScholarshipProps } from "../type";
 import { useApplyLang } from "@/lib/applyLang";
-// import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
+import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 
 const WeOffer = ({ data }: { data: ScholarshipProps["secondSection"] }) => {
   const t = useApplyLang(data);
-  // const isArabic = useIsPreferredLanguageArabic();
+  const isArabic = useIsPreferredLanguageArabic();
   return (
     <section className="py-8 md:py-12 lg:py-20 2xl:py-[135px] bg-secondary">
       <div className="container">
@@ -27,7 +27,7 @@ const WeOffer = ({ data }: { data: ScholarshipProps["secondSection"] }) => {
               to={{ opacity: 1, y: 0 }}
               threshold={0.1}
               rootMargin="-100px"
-              textAlign="left"
+              textAlign={isArabic ? "right" : "left"}
             />
             {(t.description.split("\n")).map((item, index) => (
               <motion.p
@@ -46,7 +46,7 @@ const WeOffer = ({ data }: { data: ScholarshipProps["secondSection"] }) => {
             <div className="relative grid grid-cols-1 md:grid-cols-5 justify-between gap-6 md:gap-10 2xl:gap-0">
               {/* Vertical dotted line on mobile */}
               <motion.div
-                className="absolute top-0 left-[1.25rem] border-l-2 border-dotted border-primary md:hidden"
+                className={`absolute top-0 ${isArabic ? "right" : "left"}-[1.25rem] border-l-2 border-dotted border-primary md:hidden`}
                 initial={{ height: 0 }}
                 whileInView={{ height: "100%" }}
                 viewport={{ once: true, amount: 0.6 }}
@@ -60,13 +60,13 @@ const WeOffer = ({ data }: { data: ScholarshipProps["secondSection"] }) => {
                   whileInView="show"
                   viewport={{ once: true, amount: 0.1 }}
                   className={`relative z-10 flex gap-4 md:gap-0 flex-row md:flex-col items-center aftercontent${
-                    index + 1
+                    isArabic ? index + 1 + "_ar" : index + 1
                   }`}
                   key={index}
                 >
                   <div className="w-10 h-10 min-w-max lg:w-18 lg:h-18 flex items-center justify-center rounded-full bg-sky-200 border border-sky-400 text-xl font-semibold">
                     <p className="text-sm font-light leading-[1.526315789473684] mb-0">
-                      {index + 1}
+                      {isArabic ? (index + 1).toLocaleString("ar-EG") : (index + 1)}
                     </p>
                   </div>
                   <div className="md:mt-5 lg:mt-7 2xl:mt-[45px]">

@@ -5,6 +5,8 @@ import { motion } from "framer-motion";
 import { moveLeft } from "../../motionVarients";
 import { PLProgramProps } from "../type";
 import { useApplyLang } from "@/lib/applyLang";
+import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
+
 
 export default function PLProgram({
   data,
@@ -12,6 +14,7 @@ export default function PLProgram({
   data: PLProgramProps["firstSection"];
 }) {
   const t = useApplyLang(data);
+  const isArabic = useIsPreferredLanguageArabic()
 
   return (
     <section className="py-10 md:py-20 xl:py-[135px]">
@@ -31,7 +34,7 @@ export default function PLProgram({
               to={{ opacity: 1, y: 0 }}
               threshold={0.1}
               rootMargin="-10px"
-              textAlign="left"
+              textAlign={isArabic ? "right" : "left"}
             />
 
             <SplitText
@@ -46,7 +49,7 @@ export default function PLProgram({
               to={{ opacity: 1, y: 0 }}
               threshold={0.1}
               rootMargin="-10px"
-              textAlign="left"
+              textAlign={isArabic ? "right" : "left"}
             />
 
             <div className="">
@@ -68,7 +71,7 @@ export default function PLProgram({
                         to={{ opacity: 1, y: 0 }}
                         threshold={0.1}
                         rootMargin="-100px"
-                        textAlign="left"
+                        textAlign={isArabic ? "right" : "left"}
                       />
                     </div>
                   )
@@ -83,7 +86,7 @@ export default function PLProgram({
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
-            className="relative min-h-[300px] md:min-h-[300px] 2xl:w-[749px] w-full rounded-[12px] overflow-hidden  order-1 xl:order-2"
+            className="relative min-h-[300px] md:min-h-[300px] xl:min-h-[650px] 2xl:w-[749px] w-full rounded-[12px] overflow-hidden  order-1 xl:order-2"
           >
             <Image
               src={t.image}

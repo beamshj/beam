@@ -409,7 +409,7 @@ export default function LeadershipCarousel({ data }: { data: LeadershipData }) {
   const [mounted, setMounted] = useState(false);
   const [containerPaddingRight, setContainerPaddingRight] = useState(0);
   const t = useApplyLang(data);
-  const sliderData = t.firstSection.items;
+  const sliderData = t.secondSection.items;
 
   const n = sliderData.length;
   // const gap = 40;

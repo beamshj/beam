@@ -77,6 +77,22 @@ const contactSchema = new mongoose.Schema({
       type: String,
     },
   },
+  secondSection:{
+    title:{
+      type:String,
+      required:true
+    },
+    title_ar:{
+      type:String,
+    },
+    description:{
+      type:String,
+      required:true
+    },
+    description_ar:{
+      type:String,
+    }
+  }
 });
 
 export default mongoose.models.Contact ||
