@@ -5,7 +5,6 @@ import Image from "next/image";
 import { moveUp } from "../../motionVarients";
 import Pagination from "../../Common/Pagination";
 import { useState, useEffect } from "react";
-import Link from "next/link";
 import { NewsItem } from "../type";
 import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 import LangLink from "@/lib/LangLink";
