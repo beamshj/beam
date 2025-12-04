@@ -118,7 +118,7 @@ const RecentNews = ({ categories }: RecentNewsProps) => {
               className="p-4 md:p-6 xl:p-10 bg-[#F6F6F6] rounded-xl mb-5 md:mb-7 mt-25 lg:mt-0"
             >
               <p className="text-sm font-light text-colorpara mb-5">
-                {isArabic ? "أخبار شعبية" : "Popular News"}
+                {"Popular News"}
               </p>
               <PopularNews
                 data={

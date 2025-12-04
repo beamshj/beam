@@ -127,8 +127,7 @@ const Index = ({ contactData, schooldata }: IndexProps) => {
       <ContactForm data={contactData.firstSection} />
       <OurSchools
         data={schooldata}
-        title={contactData.secondSection.title}
-        description={contactData.secondSection.description}
+        contactData = {contactData}
       />
       <RegisterInterest ref={registerRef} />
     </>

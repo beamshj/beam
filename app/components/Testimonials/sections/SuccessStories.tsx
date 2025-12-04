@@ -11,6 +11,7 @@ import "swiper/css/pagination";
 import { moveUp } from "../../motionVarients";
 import { TestimonialsProps } from "../type";
 import { useApplyLang } from "@/lib/applyLang";
+import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 
 const SuccessStories = ({
   data,
@@ -21,6 +22,7 @@ const SuccessStories = ({
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
   const t = useApplyLang(data);
+  const isArabic = useIsPreferredLanguageArabic()
 
   return (
     <section className="pt-14 pb-8 md:py-20 lg:py-20 2xl:py-[135px]">
@@ -148,7 +150,7 @@ const SuccessStories = ({
                 className="overflow-visible"
               >
                 <path
-                  d="M9.57031 5.92993L3.50031 11.9999L9.57031 18.0699"
+                  d={isArabic ? "M14.43 5.92993L20.5 11.9999L14.43 18.0699" : "M9.57031 5.92993L3.50031 11.9999L9.57031 18.0699"}
                   stroke="#D3D3D3"
                   strokeWidth="1.5"
                   strokeLinecap="round"
@@ -161,7 +163,7 @@ const SuccessStories = ({
                   strokeWidth="1.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="origin-left transition-transform duration-500 group-hover:scale-x-[1.5] group-hover:stroke-[#23ABD2]"
+                  className={`${isArabic ? "origin-right" : "origin-left"} transition-transform duration-500 group-hover:scale-x-[1.5] group-hover:stroke-[#23ABD2]`}
                 />
               </svg>
             </button>
@@ -181,7 +183,7 @@ const SuccessStories = ({
                 className="overflow-visible"
               >
                 <path
-                  d="M14.43 5.92993L20.5 11.9999L14.43 18.0699"
+                  d={isArabic ? "M9.57031 5.92993L3.50031 11.9999L9.57031 18.0699" : "M14.43 5.92993L20.5 11.9999L14.43 18.0699"}
                   stroke="#D3D3D3"
                   strokeWidth="1.5"
                   strokeLinecap="round"
@@ -194,7 +196,7 @@ const SuccessStories = ({
                   strokeWidth="1.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="origin-right transition-transform duration-500 group-hover:scale-x-[1.5] group-hover:stroke-[#23ABD2]"
+                  className={`${isArabic ? "origin-left" : "origin-right"} transition-transform duration-500 group-hover:scale-x-[1.5] group-hover:stroke-[#23ABD2]`}
                 />
               </svg>
             </button>

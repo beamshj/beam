@@ -11,6 +11,7 @@ import {
 import SplitText from "@/components/SplitText";
 import { SchoolAchievementsProps } from "../type";
 import { useApplyLang } from "@/lib/applyLang";
+import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 
 
 const ProudMoments: React.FC<{data: SchoolAchievementsProps['firstSection']}> = ({ data }) => {
@@ -20,6 +21,7 @@ const ProudMoments: React.FC<{data: SchoolAchievementsProps['firstSection']}> = 
   const openPopup = () => setIsOpen(true);
   const closePopup = () => setIsOpen(false);
   const t = useApplyLang(data)
+  const isArabic = useIsPreferredLanguageArabic()
 
   return (
     <div className="container  overflow-hidden">
@@ -40,7 +42,7 @@ const ProudMoments: React.FC<{data: SchoolAchievementsProps['firstSection']}> = 
         />
 
         {/* Gradient Overlay */}
-        <div className="absolute top-0 left-0 w-full h-full z-20 bg-[linear-gradient(90deg,_rgba(0,0,0,0.9)_9%,_rgba(0,0,0,0)_84%)]"></div>
+        <div className={`absolute top-0 left-0 w-full h-full z-20 ${isArabic ? "bg-[linear-gradient(270deg,_rgba(0,0,0,0.9)_9%,_rgba(0,0,0,0)_84%)]" : "bg-[linear-gradient(90deg,_rgba(0,0,0,0.9)_9%,_rgba(0,0,0,0)_84%)]" }`}></div>
 
         {/* Content */}
         <div className="relative z-30 h-full flex items-end px-5 md:px-10 xl:px-[97px] bottom-5 md:bottom-10  xl:bottom-[74px]">
@@ -64,12 +66,12 @@ const ProudMoments: React.FC<{data: SchoolAchievementsProps['firstSection']}> = 
                 to={{ opacity: 1, y: 0 }}
                 threshold={0.1}
                 rootMargin="-100px"
-                textAlign="left"
+                textAlign={isArabic ? "right" : "left"}
               />
             </h2>
 
             <motion.div
-              className="w-full md:w-3/4 h-[1px] bg-gradient-to-r from-white to-transparent origin-left mt-5 xl:mt-[49px] mb-5 xl:mb-[68px]"
+              className={`w-full md:w-3/4 h-[1px] ${isArabic ? "bg-gradient-to-l" : "bg-gradient-to-r"} from-white to-transparent origin-left mt-5 xl:mt-[49px] mb-5 xl:mb-[68px]`}
               variants={lineFade}
             />
 
@@ -77,7 +79,7 @@ const ProudMoments: React.FC<{data: SchoolAchievementsProps['firstSection']}> = 
               className="flex items-center gap-3 md:gap-5 text-white text-md md:text-lg 2xl:text-xl font-light justify-start"
               variants={playFadeUp}
             >
-              <span>Play</span>
+              <span>{isArabic ? "يلعب" : "Play"}</span>
               <Image
                 src="/assets/home/play-icon.svg"
                 alt="Play"
@@ -86,7 +88,7 @@ const ProudMoments: React.FC<{data: SchoolAchievementsProps['firstSection']}> = 
                 onClick={openPopup}
                 className="cursor-pointer w-10 h-10 md:w-15 md:h-15 xl:w-[95px] xl:h-[95px] transition-transform duration-300 hover:scale-105"
               />
-              <span>Here</span>
+              <span>{isArabic ? "هنا" : "Here"}</span>
             </motion.div>
           </motion.div>
         </div>

@@ -102,7 +102,7 @@ const SchoolCards = ({
               to={{ opacity: 1, y: 0 }}
               threshold={0.1}
               rootMargin="-10px"
-              textAlign="left"
+              textAlign={isArabic ? "right" : "left"}
             />
           </h1>
           <SplitText
@@ -117,7 +117,7 @@ const SchoolCards = ({
             to={{ opacity: 1, y: 0 }}
             threshold={0.1}
             rootMargin="-10px"
-            textAlign="left"
+            textAlign={isArabic ? "right" : "left"}
           />
         </div>
 
@@ -234,7 +234,7 @@ const SchoolCards = ({
                       alt="arrow"
                       width={24}
                       height={24}
-                      className="w-[18px] h-[18px] xl:w-[24px] xl:h-[24px]"
+                      className={`w-[18px] h-[18px] xl:w-[24px] xl:h-[24px] ${isArabic && "-rotate-90"}`}
                     />
                   </div>
                 </div>

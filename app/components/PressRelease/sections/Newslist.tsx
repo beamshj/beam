@@ -5,9 +5,9 @@ import Image from "next/image";
 import { moveUp } from "../../motionVarients";
 import Pagination from "../../Common/Pagination";
 import { useState, useEffect } from "react";
-import Link from "next/link";
 import { NewsItem } from "../type";
 import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
+import LangLink from "@/lib/LangLink";
 
 const Newslist = ({
   data,
@@ -54,7 +54,7 @@ const Newslist = ({
   bg-white hover:bg-[linear-gradient(180deg,#FFFFFF_0%,#E2F5FF_100%)] 
   transition-colors duration-500 ease-in-out"
         >
-          <Link href={`/news-&-media/press-release/${item.slug}`}>
+          <LangLink href={`/news-&-media/press-release/${item.slug}`}>
             <div className="relative ">
               <div className=" rounded-t-lg overflow-hidden">
                 <Image
@@ -94,7 +94,7 @@ const Newslist = ({
                 />
               </div>
             </div>
-          </Link>
+          </LangLink>
         </motion.div>
       ))}
       {/* Pagination */}

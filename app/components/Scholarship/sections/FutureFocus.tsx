@@ -6,9 +6,11 @@ import SplitText from "@/components/SplitText";
 import { moveUp } from "../../motionVarients";
 import { ScholarshipProps } from "../type";
 import { useApplyLang } from "@/lib/applyLang";
+import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 
 const FutureFocus = ({ data }: { data: ScholarshipProps["firstSection"] }) => {
   const t = useApplyLang(data);
+  const isArabic = useIsPreferredLanguageArabic()
   return (
     <section className="py-8 md:py-12 lg:py-20 2xl:py-[135px]">
       <div className="container">
@@ -27,7 +29,7 @@ const FutureFocus = ({ data }: { data: ScholarshipProps["firstSection"] }) => {
               to={{ opacity: 1, y: 0 }}
               threshold={0.1}
               rootMargin="-40px"
-              textAlign="left"
+              textAlign={isArabic ? "right" : "left"}
             />
 
             <SplitText
@@ -42,7 +44,7 @@ const FutureFocus = ({ data }: { data: ScholarshipProps["firstSection"] }) => {
               to={{ opacity: 1, y: 0 }}
               threshold={0.1}
               rootMargin="-100px"
-              textAlign="left"
+              textAlign={isArabic ? "right" : "left"}
             />
           </div>
           {/* Right Image */}

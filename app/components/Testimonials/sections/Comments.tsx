@@ -11,9 +11,12 @@ import { motion } from "framer-motion";
 import { moveUp } from "../../motionVarients";
 import { TestimonialsProps } from "../type";
 import { useApplyLang } from "@/lib/applyLang";
+import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 
 const Comments = ({ data }: { data: TestimonialsProps["firstSection"] }) => {
   const t = useApplyLang(data);
+  const isArabic = useIsPreferredLanguageArabic()
+
   return (
     <section className="pt-8 md:pt-12 lg:pt-20 2xl:pt-[135px] pb-10 md:pb-10 lg:pb-10 2xl:pb-[40px] overflow-hidden ">
       <div className="container">
@@ -37,7 +40,7 @@ const Comments = ({ data }: { data: TestimonialsProps["firstSection"] }) => {
                     to={{ opacity: 1, y: 0 }}
                     threshold={0.1}
                     rootMargin="-100px"
-                    textAlign="left"
+                    textAlign={isArabic ? "right" : "left"}
                   />
                   {index < t.title.split(/<br\s*\/?>/gi).length - 1 && <br />}
                 </div>
@@ -48,7 +51,7 @@ const Comments = ({ data }: { data: TestimonialsProps["firstSection"] }) => {
             </p>
           </div>
           <div className="relative">
-            <div className="absolute -top-10 right-0 flex gap-3 z-10">
+            <div className={`absolute -top-10 ${isArabic ? "left-0" : "right-0"} flex gap-3 z-10`}>
               <button
                 className="swiper-button-prev-custom transition cursor-pointer group"
                 aria-label="Previous"
@@ -62,7 +65,7 @@ const Comments = ({ data }: { data: TestimonialsProps["firstSection"] }) => {
                   className="overflow-visible"
                 >
                   <path
-                    d="M9.57031 5.92993L3.50031 11.9999L9.57031 18.0699"
+                    d={isArabic ? "M14.43 5.92993L20.5 11.9999L14.43 18.0699" : "M9.57031 5.92993L3.50031 11.9999L9.57031 18.0699"}
                     stroke="#D3D3D3"
                     strokeWidth="1.5"
                     strokeLinecap="round"
@@ -76,7 +79,7 @@ const Comments = ({ data }: { data: TestimonialsProps["firstSection"] }) => {
                     strokeWidth="1.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="origin-left transition-transform duration-500 group-hover:scale-x-[1.5] group-hover:stroke-[#23ABD2]"
+                    className={`${isArabic ? "origin-right" : "origin-left"} transition-transform duration-500 group-hover:scale-x-[1.5] group-hover:stroke-[#23ABD2]`}
                   />
                 </svg>
               </button>
@@ -94,7 +97,7 @@ const Comments = ({ data }: { data: TestimonialsProps["firstSection"] }) => {
                   className="overflow-visible"
                 >
                   <path
-                    d="M14.43 5.92993L20.5 11.9999L14.43 18.0699"
+                    d={isArabic ? "M9.57031 5.92993L3.50031 11.9999L9.57031 18.0699" : "M14.43 5.92993L20.5 11.9999L14.43 18.0699"}
                     stroke="#D3D3D3"
                     strokeWidth="1.5"
                     strokeLinecap="round"
@@ -107,7 +110,7 @@ const Comments = ({ data }: { data: TestimonialsProps["firstSection"] }) => {
                     strokeWidth="1.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="origin-right transition-transform duration-500 group-hover:scale-x-[1.5] group-hover:stroke-[#23ABD2]"
+                    className={`${isArabic ? "origin-left" : "origin-right"} transition-transform duration-500 group-hover:scale-x-[1.5] group-hover:stroke-[#23ABD2]`}
                   />
                 </svg>
               </button>
