@@ -10,6 +10,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { AboutProps } from "../type";
 import { useApplyLang } from "@/lib/applyLang";
+import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 
 interface Props {
   data: AboutProps["historySection"];
@@ -17,7 +18,8 @@ interface Props {
 
 export default function MoreToExplore({ data }: Props) {
   const [activeIndex, setActiveIndex] = useState(0);
-  const t = useApplyLang(data)
+  const t = useApplyLang(data);
+  const isArabic = useIsPreferredLanguageArabic();
 
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [containerMarginLeft, setContainerMarginLeft] = useState(0);
@@ -46,9 +48,11 @@ export default function MoreToExplore({ data }: Props) {
         className=" relative"
         style={{
           paddingInline: "15px",
-          marginLeft: containerMarginLeft
-            ? `${containerMarginLeft}px`
-            : undefined,
+          ...(containerMarginLeft && {
+            [isArabic
+              ? "marginRight"
+              : "marginLeft"]: `${containerMarginLeft}px`,
+          }),
         }}
       >
         <div className="mt-5 md:mt-[155px] relative">
