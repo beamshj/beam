@@ -7,6 +7,7 @@ import { moveUp } from "../../motionVarients";
 import SplitText from "@/components/SplitText";
 import { AboutProps } from "../type";
 import { useApplyLang } from "@/lib/applyLang";
+import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 
 export default function HealthSafety({
   data,
@@ -15,6 +16,7 @@ export default function HealthSafety({
 }) {
   const [active, setActive] = useState(0);
   const t = useApplyLang(data)
+  const isArabic = useIsPreferredLanguageArabic()
 
   return (
     <section>
@@ -92,7 +94,7 @@ export default function HealthSafety({
                         alt="arrow-right-tip"
                         width={15}
                         height={15}
-                        className="w-[15px] h-[15px]"
+                        className={`w-[15px] h-[15px] ${isArabic && "rotate-180"}`}
                       />
                     </motion.div>
                   )}

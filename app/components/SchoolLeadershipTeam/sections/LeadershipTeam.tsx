@@ -383,6 +383,7 @@ import Image from "next/image";
 import { moveUp } from "../../motionVarients";
 import { LeadershipData, LeadershipItem } from "../type";
 import { useApplyLang } from "@/lib/applyLang";
+import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 
 // type Member = {
 //   id: number;
@@ -409,6 +410,7 @@ export default function LeadershipCarousel({ data }: { data: LeadershipData }) {
   const [mounted, setMounted] = useState(false);
   const [containerPaddingRight, setContainerPaddingRight] = useState(0);
   const t = useApplyLang(data);
+  const isArabic = useIsPreferredLanguageArabic()
   const sliderData = t.secondSection.items;
 
   const n = sliderData.length;
@@ -505,10 +507,18 @@ export default function LeadershipCarousel({ data }: { data: LeadershipData }) {
 
       // ACTIVE slide always on the rightmost
       const left = (() => {
-        if (isActive) return maxNonActive * (nonActiveSize.w + gap); // active always rightmost
-        // Position non-active slides behind active
-        return (maxNonActive - i) * (nonActiveSize.w + gap);
-      })();
+  if (isArabic) {
+    // Arabic layout (first logic)
+    if (isActive) return 0;
+
+    return activeSize.w + gap + (i - 1) * (nonActiveSize.w + gap);
+  } else {
+    // Normal LTR layout (second logic)
+    if (isActive) return maxNonActive * (nonActiveSize.w + gap);
+
+    return (maxNonActive - i) * (nonActiveSize.w + gap);
+  }
+})();
 
       const zIndex = isActive ? 20 : 10 + (maxNonActive - i);
 
@@ -577,8 +587,10 @@ export default function LeadershipCarousel({ data }: { data: LeadershipData }) {
           windowWidth < 1024 ? "container" : ""
         }`}
         style={{
-          paddingRight: windowWidth < 1024 ? 15 : containerPaddingRight,
-        }}
+  ...(isArabic
+    ? { paddingLeft: windowWidth < 1024 ? 15 : containerPaddingRight }
+    : { paddingRight: windowWidth < 1024 ? 15 : containerPaddingRight })
+}}
       >
         {/* Slides container */}
         <div
@@ -593,7 +605,7 @@ export default function LeadershipCarousel({ data }: { data: LeadershipData }) {
         >
           <div
             style={{
-              marginLeft: containerPaddingRight,
+              marginLeft: containerPaddingRight + (isArabic ? 360 : 0),
             }}
             className="hidden ios:block absolute top-0 left-0 max-w-[50%] h-full"
           >
@@ -706,7 +718,7 @@ export default function LeadershipCarousel({ data }: { data: LeadershipData }) {
                 alt="arrow-right"
                 width={20}
                 height={20}
-                className="w-[20px] h-[20px] rotate-45 "
+                className={`w-[20px] h-[20px] ${isArabic ? "-rotate-135" : "rotate-45"}`}
               />
             </button>
           </motion.div>

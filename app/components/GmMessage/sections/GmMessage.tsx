@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { moveUp, moveRight } from "../../motionVarients";
 import { GmMessageProps } from "../type";
 import { useApplyLang } from "@/lib/applyLang";
+import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 
 export default function GmMessage({
   data,
@@ -14,6 +15,7 @@ export default function GmMessage({
 }) {
   // const { title, intro, photo, name, designation, description } = data;
   const t = useApplyLang(data);
+  const isArabic = useIsPreferredLanguageArabic()
 
   return (
     <section className="pb-12 md:pb-20 xl:pb-[135px] pt-12  md:pt-20 xl:pt-25">
@@ -39,7 +41,7 @@ export default function GmMessage({
             to={{ opacity: 1, y: 0 }}
             threshold={0.1}
             rootMargin="-10px"
-            textAlign="left"
+            textAlign={isArabic ? "right" : "left"}
           />
 
           {/* For small screens, simplified stacked structure */}
@@ -54,9 +56,9 @@ export default function GmMessage({
             />
             {/* Info Box (mobile version) */}
             <div
-              className="absolute right-[5%] md:right-4 bottom-4 z-20 md:min-h-[250px]  md:bottom-6 w-[90%] md:w-[60%] lg:w-[70%] xl:w-[60%] rounded-[12px] p-[15px] 
+              className={`absolute ${isArabic ? "left-[5%] md:left-4" : "right-[5%] md:right-4"} bottom-4 z-20 md:min-h-[250px]  md:bottom-6 w-[90%] md:w-[60%] lg:w-[70%] xl:w-[60%] rounded-[12px] p-[15px] 
                        shadow-[0px_4px_66px_0px_rgba(0,0,0,0.16)] flex flex-col justify-center
-                       bg-gradient-to-r from-[#F5EBFF] to-[#C9F3FF]"
+                       bg-gradient-to-r from-[#F5EBFF] to-[#C9F3FF]`}
             >
               <p className="text-md md:text-xl leading-[1.2] font-light text-black mb-[6px]">
                 {t.name}
@@ -96,7 +98,7 @@ export default function GmMessage({
                       to={{ opacity: 1, y: 0 }}
                       threshold={0.1}
                       rootMargin="-10px"
-                      textAlign="left"
+                      textAlign={isArabic ? "right" : "left"}
                     />
                   </div>
                 )
@@ -132,8 +134,8 @@ export default function GmMessage({
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
-            className="hidden xl:block absolute z-30 left-0 bottom-[58px] rounded-[12px] py-[25px] px-[27px] 
-            xl:w-[445px] md:w-[300px] shadow-[0px_4px_66px_0px_rgba(0,0,0,0.16)]"
+            className={`hidden xl:block absolute z-30 ${isArabic ? "xl:left-[85px] 2xl:left-[200px]" : "left-0"} bottom-[58px] rounded-[12px] py-[25px] px-[27px] 
+            xl:w-[445px] md:w-[300px] shadow-[0px_4px_66px_0px_rgba(0,0,0,0.16)]`}
             style={{
               background: "linear-gradient(90deg, #F5EBFF 0%, #C9F3FF 100%)",
             }}
