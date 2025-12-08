@@ -823,7 +823,7 @@ body {
   }
 
   li {
-    @apply text-[#E0E0E0] font-light 
+    @apply text-[#E0E0E0] font-light
   }
 }
 
@@ -837,14 +837,17 @@ body {
   }
 
   li {
-    @apply text-[#E0E0E0] font-light 
+    @apply text-[#E0E0E0] font-light
   }
 }
 
 .school-uniqueness-second-section-ar ol {
-  direction: rtl;            /* keep Arabic flow */
-  list-style-position: inside; /* makes bullets visible */
-  padding-right: 1.25rem;    /* space for bullet */
+  direction: rtl;
+  /* keep Arabic flow */
+  list-style-position: inside;
+  /* makes bullets visible */
+  padding-right: 1.25rem;
+  /* space for bullet */
 }
 
 .school-uniqueness-second-section-ar li {
@@ -860,13 +863,13 @@ body {
 
 /* Paragraphs */
 .blog-content p {
-  @apply text-colorpara text-sm font-light mb-3 lg:mb-6;
+  @apply text-colorpara text-sm font-light mb-3 lg:mb-6 !pl-0;
   line-height: 1.526315789473684;
 }
 
 .blog-content p strong,
 .blog-content p b {
-  @apply font-medium;
+  @apply font-medium !pl-0;
   line-height: 1.526315789473684;
 }
 
@@ -897,11 +900,11 @@ body {
 
 /* Lists */
 .blog-content ul {
-  @apply pl-5 list-disc;
+  @apply pl-3 list-disc;
 }
 
 .blog-content ol {
-  @apply pl-5 list-decimal;
+  @apply pl-3 list-decimal;
 }
 
 

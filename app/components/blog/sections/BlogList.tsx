@@ -244,7 +244,7 @@ export default function BlogList({
   const [currentPage, setCurrentPage] = useState(1);
   const [blogsPerPage, setBlogsPerPage] = useState(9);
 
-  const t = useApplyLang(data)
+  const t = useApplyLang(data);
 
   useEffect(() => {
     const updateBlogsPerPage = () => {
@@ -264,7 +264,7 @@ export default function BlogList({
   const startIndex = (currentPage - 1) * blogsPerPage;
   const currentBlogs = t.slice(startIndex, startIndex + blogsPerPage);
 
-  const isArabic = useIsPreferredLanguageArabic()
+  const isArabic = useIsPreferredLanguageArabic();
 
   return (
     <section className="pb-10 xl:pb-20 2xl:pb-[135px]">
@@ -311,15 +311,25 @@ export default function BlogList({
                     <div className="absolute inset-0 bg-gradient-to-t from-black/75 to-black/0" />
 
                     {/* Hover Arrow */}
-                    <div className={`absolute top-[30px] ${isArabic ? "left-[30px]" : "right-[30px]"} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}>
+                    <div
+                      className={`absolute top-[30px] ${
+                        isArabic ? "left-[30px]" : "right-[30px]"
+                      } opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
+                    >
                       <button className="bg-primary text-white w-[74px] h-[74px] rounded-full flex items-center justify-center overflow-hidden cursor-pointer">
-                        <span className={`transition-all duration-400 translate-y-3 ${isArabic ? "translate-x-3" : "-translate-x-3"} group-hover:-translate-y-0 group-hover:translate-x-0 block`}>
+                        <span
+                          className={`transition-all duration-400 translate-y-3 ${
+                            isArabic ? "translate-x-3" : "-translate-x-3"
+                          } group-hover:-translate-y-0 group-hover:translate-x-0 block`}
+                        >
                           <Image
                             src="/images/arrow-right-up.svg"
                             alt="arrow"
                             width={24}
                             height={24}
-                            className={`${isArabic && "-rotate-90"} object-contain`}
+                            className={`${
+                              isArabic && "-rotate-90"
+                            } object-contain`}
                           />
                         </span>
                       </button>

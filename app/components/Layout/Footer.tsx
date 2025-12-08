@@ -17,6 +17,7 @@ import { useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 
 const formSchema = z.object({
   name: z.string().min(1, "Required"),
@@ -29,7 +30,8 @@ type FormData = z.infer<typeof formSchema>;
 
 const Footer = () => {
   const recaptchaRef = useRef<ReCAPTCHA>(null);
-  const [error, setError] = useState("")
+  const [error, setError] = useState("");
+  const isArabic = useIsPreferredLanguageArabic();
 
   const {
     register,
@@ -40,31 +42,30 @@ const Footer = () => {
     resolver: zodResolver(formSchema),
   });
 
-
   const onSubmit = async (data: FormData) => {
     try {
-      const captchaValue = recaptchaRef?.current?.getValue()
+      const captchaValue = recaptchaRef?.current?.getValue();
       if (!captchaValue) {
-        setError("Please verify yourself to continue")
+        setError("Please verify yourself to continue");
         return;
       }
-      setError("")
+      setError("");
       const response = await fetch("/api/admin/contact/footer", {
         method: "POST",
-        body: JSON.stringify(data)
-      })
-      const res = await response.json()
+        body: JSON.stringify(data),
+      });
+      const res = await response.json();
       if (res.success) {
-        alert(res.message)
-        reset()
+        alert(res.message);
+        reset();
       } else {
-        alert(res.message)
+        alert(res.message);
       }
     } catch (error) {
-      console.log("Error sending message", error)
-      alert("Sorry, something went wrong. Please try again later.")
-    }finally{
-      recaptchaRef.current?.reset()
+      console.log("Error sending message", error);
+      alert("Sorry, something went wrong. Please try again later.");
+    } finally {
+      recaptchaRef.current?.reset();
     }
   };
 
@@ -95,7 +96,7 @@ const Footer = () => {
                       className="text-md 2xl:text-2xl font-light lettersp-2"
                       variants={fadeUponeone}
                     >
-                      800 BEAM (2326)
+                      {isArabic ? "8002326 بيم" : "800 BEAM (2326)"}
                     </motion.h2>
                     <motion.p
                       className="text-md 2xl:text-2xl font-light break-words lettersp-2"
@@ -109,14 +110,19 @@ const Footer = () => {
                     className="mt-5 2xl:mt-10 pt-1"
                   >
                     <p className="text-md 2xl:text-lg font-light lettersp-2">
-                      The CityGate Tower
+                      {isArabic ? "برج سيتي جيت" : "The CityGate Tower"}
                       <br />
-                      P.O.Box 88, Sharjah, UAE
+                      {isArabic
+                        ? "ص.ب 88، الشارقة، الإمارات العربية المتحدة"
+                        : "P.O.Box 88, Sharjah, UAE"}
                     </p>
                   </motion.div>
                 </div>
                 <div className="flex gap-[7px]">
-                  <Link target="_blank" href="https://www.facebook.com/beamedusocial/">
+                  <Link
+                    target="_blank"
+                    href="https://www.facebook.com/beamedusocial/"
+                  >
                     <motion.div
                       variants={fadeUponeone}
                       className="rounded-full w-[46px] h-[46px] border border-white/35 hover:border-transparent flex items-center justify-center  hover:bg-primary cursor-pointer"
@@ -132,7 +138,10 @@ const Footer = () => {
                       <FaXTwitter className="text-sm" />
                     </motion.div>
                   </Link>
-                  <Link target="_blank" href="https://www.linkedin.com/company/bukhatireducation/">
+                  <Link
+                    target="_blank"
+                    href="https://www.linkedin.com/company/bukhatireducation/"
+                  >
                     <motion.div
                       variants={fadeUponeone}
                       className="rounded-full w-[46px] h-[46px] border border-white/35 hover:border-transparent flex items-center justify-center  hover:bg-primary cursor-pointer"
@@ -140,7 +149,10 @@ const Footer = () => {
                       <FaLinkedinIn className="text-sm" />
                     </motion.div>
                   </Link>
-                  <Link target="_blank" href="https://www.instagram.com/accounts/login/?next=%2Fbeamedusocial%2F&source=omni_redirect">
+                  <Link
+                    target="_blank"
+                    href="https://www.instagram.com/accounts/login/?next=%2Fbeamedusocial%2F&source=omni_redirect"
+                  >
                     <motion.div
                       variants={fadeUponeone}
                       className="rounded-full w-[46px] h-[46px] border border-white/35 hover:border-transparent flex items-center justify-center  hover:bg-primary cursor-pointer"
@@ -148,7 +160,10 @@ const Footer = () => {
                       <FaInstagram className="text-sm" />
                     </motion.div>
                   </Link>
-                  <Link target="_blank" href="https://www.youtube.com/c/BukhatirEducation">
+                  <Link
+                    target="_blank"
+                    href="https://www.youtube.com/c/BukhatirEducation"
+                  >
                     <motion.div
                       variants={fadeUponeone}
                       className="rounded-full w-[46px] h-[46px] border border-white/35 hover:border-transparent flex items-center justify-center  hover:bg-primary cursor-pointer"
@@ -177,7 +192,7 @@ const Footer = () => {
                     className="group relative overflow-hidden hover:text-primary"
                   >
                     <span className="block transition-transform duration-300 group-hover:translate-x-1">
-                      About Us
+                      {isArabic ? "معلومات عنا" : "About Us"}
                     </span>
                   </Link>
                   <Link
@@ -185,7 +200,7 @@ const Footer = () => {
                     className="group relative overflow-hidden hover:text-primary"
                   >
                     <span className="block transition-transform duration-300 group-hover:translate-x-1">
-                      Our Schools
+                      {isArabic ? "مدارسنا" : "Our Schools"}
                     </span>
                   </Link>
                   {/* <Link
@@ -204,11 +219,12 @@ const Footer = () => {
                       Application Process
                     </span>
                   </Link> */}
-                  <Link href="/contact-us?scroll=register"
+                  <Link
+                    href="/contact-us?scroll=register"
                     className="group relative overflow-hidden hover:text-primary max-md:mb-3"
                   >
                     <span className="block transition-transform duration-300 group-hover:translate-x-1">
-                      Register Your Interest
+                      {isArabic ? "سجل اهتمام" : "Register Your Interest"}
                     </span>
                   </Link>
                 </motion.div>
@@ -222,7 +238,7 @@ const Footer = () => {
                     className="group relative overflow-hidden hover:text-primary"
                   >
                     <span className="block transition-transform duration-300 group-hover:translate-x-1">
-                      Blogs
+                      {isArabic ? "مدونات" : "Blogs"}
                     </span>
                   </Link>
                   <Link
@@ -230,7 +246,7 @@ const Footer = () => {
                     className="group relative overflow-hidden hover:text-primary"
                   >
                     <span className="block transition-transform duration-300 group-hover:translate-x-1">
-                      Media Gallery
+                      {isArabic ? "معرض الوسائط" : "Media Gallery"}
                     </span>
                   </Link>
                   <Link
@@ -238,10 +254,9 @@ const Footer = () => {
                     className="group relative overflow-hidden hover:text-primary"
                   >
                     <span className="block transition-transform duration-300 group-hover:translate-x-1">
-                      Press Release
+                      {isArabic ? "بيان صحفي" : "Press Release"}
                     </span>
                   </Link>
-                  
                 </motion.div>
               </motion.div>
             </div>
@@ -249,19 +264,30 @@ const Footer = () => {
 
           {/* Right Column (Empty or for future use) */}
           <motion.div
-            className="flex flex-col md:pl-[45px] xl:pl-[75px] 2xl:pl-[144px] gap-2 md:gap-14 2xl:gap-[73px] pt-8 pb-0 xl:pt-0 md:pb-0 md:mt-0"
+            className={`flex flex-col ${
+              isArabic
+                ? "md:pr-[45px] xl:pr-[75px] 2xl:pr-[144px]"
+                : "md:pl-[45px] xl:pl-[75px] 2xl:pl-[144px]"
+            } gap-2 md:gap-14 2xl:gap-[73px] pt-8 pb-0 xl:pt-0 md:pb-0 md:mt-0`}
             variants={parentStagger}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.3 }}
           >
             <motion.div variants={fadeUponeone}>
-              <h2 className="text-xl xl:text-2xl 2xl:text-4xl font-light lettersp-4"> Register Interest </h2>
+              <h2 className="text-xl xl:text-2xl 2xl:text-4xl font-light lettersp-4">
+                {" "}
+                {isArabic ? "سجل اهتمام" : "Register Interest"}{" "}
+              </h2>
             </motion.div>
             <div className="text-sm font-light leading-[1.52] pt-5 xl:pt-15">
-              <form action="" className="flex flex-col gap-10 xl:gap-[43px]" onSubmit={handleSubmit(onSubmit)}>
+              <form
+                action=""
+                className="flex flex-col gap-10 xl:gap-[43px]"
+                onSubmit={handleSubmit(onSubmit)}
+              >
                 <motion.div className="flex flex-col" variants={fadeUponeone}>
-                  <label htmlFor="">Name</label>
+                  <label htmlFor="">{isArabic ? "الاسم" : "Name"}</label>
                   <input
                     type="text"
                     {...register("name")}
@@ -272,7 +298,9 @@ const Footer = () => {
                   </p>
                 </motion.div>
                 <motion.div className="flex flex-col" variants={fadeUponeone}>
-                  <label htmlFor="">Email</label>
+                  <label htmlFor="">
+                    {isArabic ? "البريد الإلكتروني" : "Email"}
+                  </label>
                   <input
                     type="email"
                     {...register("email")}
@@ -283,7 +311,7 @@ const Footer = () => {
                   </p>
                 </motion.div>
                 <motion.div className="flex flex-col" variants={fadeUponeone}>
-                  <label htmlFor="">Phone</label>
+                  <label htmlFor="">{isArabic ? "رقم الهاتف" : "Phone"}</label>
                   <input
                     type="text"
                     {...register("phone")}
@@ -294,7 +322,7 @@ const Footer = () => {
                   </p>
                 </motion.div>
                 <motion.div className="flex flex-col" variants={fadeUponeone}>
-                  <label htmlFor="">Message</label>
+                  <label htmlFor="">{isArabic ? "رسالة" : "Message"}</label>
                   <textarea
                     id=""
                     {...register("message")}
@@ -306,18 +334,37 @@ const Footer = () => {
                 </motion.div>
 
                 <div>
-                  <ReCAPTCHA sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""} ref={recaptchaRef} className='mt-5' />
+                  <ReCAPTCHA
+                    sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
+                    ref={recaptchaRef}
+                    className="mt-5"
+                  />
 
-                  {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
+                  {error && (
+                    <p className="text-red-500 text-xs mt-1">{error}</p>
+                  )}
                   <motion.div
                     variants={fadeUponeone}
-                    className="w-fit mt-5 md:mt-7  2xl:mt-6 p-[1px] group transition-all duration-300 border-[1px] border-primary rounded-full hover:translate-x-[5px] hover:shadow-[0_0_15px_rgba(66,186,220,0.5)]"
+                    className={`w-fit mt-5 md:mt-7  2xl:mt-6 p-[1px] group transition-all duration-300 border-[1px] border-primary rounded-full ${
+                      isArabic
+                        ? "hover:translate-x-[-5px] hover:shadow-[0_0_15px_rgba(66,186,220,0.5)]"
+                        : "hover:translate-x-[5px] hover:shadow-[0_0_15px_rgba(66,186,220,0.5)]"
+                    }`}
                   >
-                    <button type="submit" className="cursor-pointer px-2 md:px-5 py-2 md:py-3 bg-transparent rounded-full flex items-center gap-2 transition-all duration-300">
+                    <button
+                      type="submit"
+                      className="cursor-pointer px-2 md:px-5 py-2 md:py-3 bg-transparent rounded-full flex items-center gap-2 transition-all duration-300"
+                    >
                       <p className="text-xs font-light text-white uppercase transition-colors duration-300">
-                        Submit
+                        {isArabic ? "إرسال" : "Submit"}
                       </p>
-                      <div className="p-2 flex items-center justify-center bg-primary w-fit rounded-full transition-transform duration-300 group-hover:rotate-45">
+                      <div
+                        className={`p-2 flex items-center justify-center bg-primary w-fit rounded-full transition-transform duration-300 ${
+                          isArabic
+                            ? "-rotate-90 group-hover:-rotate-135"
+                            : "group-hover:rotate-45"
+                        } `}
+                      >
                         <Image
                           src="/assets/arrow.svg"
                           alt="arrow"
@@ -333,11 +380,14 @@ const Footer = () => {
           </motion.div>
         </div>
       </div>
+
       <div className="bg-[#101010] relative py-4">
         <div className="container">
           <motion.div variants={fadeUponeone}>
             <p className="text-[#626262] relative">
-              BEAM is a subsidiary of Bukhatir Group. © All Rights Reserved.
+              {isArabic
+                ? "مؤسسة بوخاطر لإدارة وتطوير التعليم بيم، هي إحدى شركات مجموعة بوخاطر. © جميع الحقوق محفوظة."
+                : "BEAM is a subsidiary of Bukhatir Group. © All Rights Reserved."}
             </p>
           </motion.div>
         </div>

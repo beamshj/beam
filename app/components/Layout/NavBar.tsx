@@ -100,7 +100,7 @@ const NavBar = () => {
             <div className="flex gap-12 items-center">
               <div className="flex items-center justify-center h-full gap-4">
                 <div className="lg:py-3">
-                  <Link href="/">
+                  <LangLink href="/">
                     <Image
                       src={
                         isArabic ? "/assets/logo-ar.png" : "/assets/logo.svg"
@@ -110,7 +110,7 @@ const NavBar = () => {
                       height={77}
                       className="h-[58px] lg:h-full"
                     />
-                  </Link>
+                  </LangLink>
                 </div>
                 <div className=" hidden lg:block h-full border-r-[1px] border-[#D3D3D3]"></div>
               </div>
@@ -403,7 +403,7 @@ const NavBar = () => {
                         </svg>
 
                         <span className="text-sm font-light text-white transition-all duration-300 group-hover:translate-x-1 hidden lg:block">
-                          MENU
+                          {isArabic ? "القائمة" : "MENU"}
                         </span>
                       </div>
                     </button>
