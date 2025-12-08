@@ -12,6 +12,7 @@ import { moveUp } from "@/app/components/motionVarients";
 import Link from "next/link";
 import { AboutProps } from "../type";
 import { useApplyLang } from "@/lib/applyLang";
+import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 
 export default function MoreToExplore({
   data,
@@ -22,6 +23,7 @@ export default function MoreToExplore({
   const headingRef = useRef<HTMLHeadingElement>(null);
   const [leftOffset, setLeftOffset] = useState(0);
   const t = useApplyLang(data);
+  const isArabic = useIsPreferredLanguageArabic()
 
   useEffect(() => {
     const updateOffset = () => {
@@ -52,12 +54,12 @@ export default function MoreToExplore({
               to={{ opacity: 1, y: 0 }}
               threshold={0.1}
               rootMargin="-10px"
-              textAlign="left"
+              textAlign={isArabic ? "right" : "left"}
             />
           </h2>
         </div>
         <div
-          style={{ paddingLeft: `${leftOffset}px` }}
+          style={{ paddingLeft: `${isArabic ? 0 : leftOffset}px`, paddingRight: `${isArabic ? leftOffset : 0}px` }}
           className="pr-3 sm:pr-0"
         >
           <Swiper
@@ -113,7 +115,7 @@ export default function MoreToExplore({
                           alt="arrow-right-tip"
                           width={15}
                           height={15}
-                          className="w-[15px] h-[15px]"
+                          className={`w-[15px] h-[15px] ${isArabic ? "-rotate-90" : ""}`}
                         />
                       </div>
                     </div>

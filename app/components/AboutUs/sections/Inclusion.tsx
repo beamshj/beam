@@ -9,6 +9,7 @@ import { useEffect } from "react";
 gsap.registerPlugin(ScrollTrigger);
 import { AboutProps } from "../type";
 import { useApplyLang } from "@/lib/applyLang";
+import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 
 interface InclusionSectionProps {
   data: AboutProps["fifthSection"];
@@ -16,6 +17,7 @@ interface InclusionSectionProps {
 
 const InclusionSection: React.FC<InclusionSectionProps> = ({ data }) => {
   const t = useApplyLang(data);
+  const isArabic = useIsPreferredLanguageArabic()
 
   useEffect(() => {
     gsap.from(".inclusion-section", {
@@ -52,12 +54,12 @@ const InclusionSection: React.FC<InclusionSectionProps> = ({ data }) => {
           <div
             style={{
               background:
-                "linear-gradient(270deg, rgba(0, 0, 0, 0) 0%, #066B7F 100%)",
+                `linear-gradient(${isArabic ? "90deg" : "270deg"}, rgba(0, 0, 0, 0) 0%, #066B7F 100%)`,
             }}
-            className="absolute left-0 w-[83%] h-full"
+            className={`absolute left-0 ${isArabic ? " w-[100%]" : " w-[83%]"} h-full`}
           ></div>
           {/* Content pinned bottom-left */}
-          <div className="absolute bottom-0 left-0 z-10 p-6 xl:p-[60px]">
+          <div className={`absolute bottom-0 ${isArabic ? "right-0" : "left-0"} z-10 p-6 xl:p-[60px]`}>
             <motion.h2
               variants={moveUp(0.2)}
               initial="hidden"

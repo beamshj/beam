@@ -8,7 +8,6 @@ const Page = async () => {
     }
   );
   const data = await response.json();
-  console.log(data, "hel");
   return (
     <>
       <Index data={data.data} />

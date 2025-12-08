@@ -101,7 +101,7 @@ export default function MoreToExplore({ data }: Props) {
                     <div className="w-[48px] h-[48px] bgseta rounded-full flex items-center justify-center relative z-[2]">
                       <div className="w-[24px] h-[24px] bgactive rounded-full"></div>
                     </div>
-                    <div className="absolute top-[25px] left-[28px] w-full h-[1px] bg-gradient-to-r from-[#7E5AA3] to-[#23ABD2]"></div>
+                    <div className={`absolute top-[25px] ${isArabic ? "right-[28px] bg-gradient-to-l" : "left-[28px] bg-gradient-to-r"} w-full h-[1px]  from-[#7E5AA3] to-[#23ABD2]`}></div>
                   </div>
 
                   {/* Animated Content */}
@@ -112,7 +112,7 @@ export default function MoreToExplore({ data }: Props) {
                     transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
                     className="md:mt-5 lg:mt-[71px] vhidden h-[200px] mb-10"
                   >
-                    <p className="text-[1.3rem] md:text-md xl:text-lg 2xl:text-xl font-light text-black leading-[1.18] mb-3">
+                    <p className="text-[1.3rem] md:text-md xl:text-lg 2xl:text-xl font-light text-black leading-[1.18] mb-3 max-w-[20ch]">
                       {item.title}
                     </p>
                     <div className="text-sm font-light text-colorpara leading-[1.3] max-w-[24ch] xl:max-w-[28ch]">
@@ -128,7 +128,7 @@ export default function MoreToExplore({ data }: Props) {
                     whileInView={{ opacity: 1, scale: 1, y: -40 }}
                     viewport={{ once: false, amount: 0.3 }}
                     transition={{ duration: 0.5, ease: "easeInOut" }}
-                    className="md:absolute  md:left-[40%] lg:left-[35%] z-[2] "
+                    className={`md:absolute  ${isArabic ? " md:right-[40%] lg:right-[35%]" : "md:left-[40%] lg:left-[35%]"} z-[2]`}
                   >
                     <Image
                       src={item.image}
@@ -155,7 +155,7 @@ export default function MoreToExplore({ data }: Props) {
                 height="24"
                 viewBox="0 0 24 24"
                 fill="none"
-                className="group-hover:scale-140  duration-300"
+                className={`group-hover:scale-140  duration-300 ${isArabic && "rotate-180"}`}
               >
                 <path
                   d="M15.0901 19.9201L8.57009 13.4001C7.80009 12.6301 7.80009 11.3701 8.57009 10.6001L15.0901 4.08008"
@@ -180,7 +180,7 @@ export default function MoreToExplore({ data }: Props) {
                 height="24"
                 viewBox="0 0 24 24"
                 fill="none"
-                className="group-hover:scale-140  duration-300 rotate-180"
+                className={`group-hover:scale-140  duration-300 ${!isArabic && "rotate-180"}`}
               >
                 <path
                   d="M15.0901 19.9201L8.57009 13.4001C7.80009 12.6301 7.80009 11.3701 8.57009 10.6001L15.0901 4.08008"
