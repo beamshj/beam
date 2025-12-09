@@ -12,6 +12,8 @@ import {
 import SplitText from "@/components/SplitText";
 import { HomeProps } from "../type";
 import SectionReveal from "./SectionReveal";
+import { useApplyLang } from "@/lib/applyLang";
+import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -21,6 +23,8 @@ const VideoSection = ({ data }: { data: HomeProps['fourthSection'] }) => {
   const openPopup = () => setIsOpen(true);
   const closePopup = () => setIsOpen(false);
   const imgRef = useRef<HTMLImageElement | null>(null);
+  const t = useApplyLang(data)
+  const isArabic = useIsPreferredLanguageArabic()
 
   useEffect(() => {
     if (!imgRef.current || !imageLoaded) return;
@@ -59,7 +63,7 @@ const VideoSection = ({ data }: { data: HomeProps['fourthSection'] }) => {
           )}
 
           <Image
-            src={data.image}
+            src={t.image}
             ref={imgRef}
             alt="Video"
             width={1920}
@@ -84,7 +88,7 @@ const VideoSection = ({ data }: { data: HomeProps['fourthSection'] }) => {
             >
               <SplitText
                 tag="h2"
-                text={data.title}
+                text={t.title}
                 className="text-xl md:text-2xl xl:text-3xl 2xl:text-4xl leading-[1.2] text-white w-full md:w-3/4 font-light lettersp-4 text-center md:text-left"
                 delay={100}
                 duration={0.6}
@@ -94,11 +98,11 @@ const VideoSection = ({ data }: { data: HomeProps['fourthSection'] }) => {
                 to={{ opacity: 1, y: 0 }}
                 threshold={0.1}
                 rootMargin="-100px"
-                textAlign="left"
+                textAlign={isArabic ? "right" : "left"}
               />
 
               <motion.div
-                className="w-full md:w-3/4 h-px bg-gradient-to-r from-white to-transparent origin-left"
+                className={`w-full md:w-3/4 h-px ${isArabic ? "bg-gradient-to-l origin-right" : "bg-gradient-to-r origin-left"} from-white to-transparent`}
                 variants={lineFade}
               ></motion.div>
 
@@ -123,7 +127,7 @@ const VideoSection = ({ data }: { data: HomeProps['fourthSection'] }) => {
             </motion.div>
           </div>
 
-          <div className="w-full h-full bg-[linear-gradient(90deg,_rgba(0,_0,_0,_0.9)_8.98%,_rgba(0,_0,_0,_0)_83.88%)] absolute top-0 left-0 z-20"></div>
+          <div className={`w-full h-full ${isArabic ? "bg-[linear-gradient(270deg,_rgba(0,_0,_0,_0.9)_8.98%,_rgba(0,_0,_0,_0)_83.88%)] absolute top-0 right-0" : "bg-[linear-gradient(90deg,_rgba(0,_0,_0,_0.9)_8.98%,_rgba(0,_0,_0,_0)_83.88%)] absolute top-0 left-0"} z-20`}></div>
         </motion.section>
       </SectionReveal>
 
@@ -156,7 +160,7 @@ const VideoSection = ({ data }: { data: HomeProps['fourthSection'] }) => {
 
               {/* YouTube Embed */}
               <iframe
-                src={`${data.videoLink}${data.videoLink.includes('?') ? '&' : '?'}autoplay=1`}
+                src={`${t.videoLink}${data.videoLink.includes('?') ? '&' : '?'}autoplay=1`}
                 title="Video"
                 className="w-full h-full border-0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

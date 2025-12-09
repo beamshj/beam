@@ -33,7 +33,7 @@ const AcademicCultural = ({ data }: { data: HomeProps["thirdSection"] }) => {
 
     const ctx = gsap.context(() => {
       gsap.to(imgRef.current, {
-        xPercent: 60, // move image 15% to the right
+        xPercent: isArabic ? 60 : -60, // move image 15% to the right
         ease: "none",
        // yoyo: true,
         scrollTrigger: {
@@ -95,7 +95,7 @@ const AcademicCultural = ({ data }: { data: HomeProps["thirdSection"] }) => {
 
             {/* Top Divider */}
             <div className="">
-              <div className={`bg-[linear-gradient(${isArabic ? "270deg" : "90deg"},_#000000_0%,_rgba(0,_0,_0,_0)_60%)] h-[1px] lg:bg-[linear-gradient(${isArabic ? "270deg" : "90deg"},_#000000_0%,_rgba(0,_0,_0,_0)_30%)]`}></div>
+              <div className={`${isArabic ? "bg-[linear-gradient(270deg,_#000000_0%,_rgba(0,_0,_0,_0)_60%)] h-[1px] lg:bg-[linear-gradient(270deg,_#000000_0%,_rgba(0,_0,_0,_0)_30%)]" : "bg-[linear-gradient(90deg,_#000000_0%,_rgba(0,_0,_0,_0)_60%)] h-[1px] lg:bg-[linear-gradient(90deg,_#000000_0%,_rgba(0,_0,_0,_0)_30%)]"}`}></div>
             </div>
 
             {/* List Items */}
@@ -128,7 +128,18 @@ const AcademicCultural = ({ data }: { data: HomeProps["thirdSection"] }) => {
                         : {}
                     }
                   >
-                    <div className={`w-0 group-hover:w-full absolute top-0 left-0 h-full bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)] ${isActive ? "bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)] transition-all duration-300 z-0 w-full" : "w-0 transition-all duration-300 z-0"}`}></div>
+                    <div
+  className={`
+    w-0 group-hover:w-full absolute top-0 
+    ${isArabic ? "right-0 bg-[linear-gradient(270deg,#42BADC_0%,rgba(66,186,220,0)_100%)]"
+               : "left-0 bg-[linear-gradient(90deg,#42BADC_0%,rgba(66,186,220,0)_100%)]"} 
+    h-full
+    ${isActive
+      ? "transition-all duration-300 z-0 w-full"
+      : "transition-all duration-300 z-0 w-0"}
+  `}
+></div>
+
                     <div className={`transition-all duration-300 mb-3 xl:mb-0 ${isActive ? "px-2" : "group-hover:px-2"}`}>
                       <Image
                         src={acdData.academicCulturalDataicons[index]}
@@ -169,7 +180,7 @@ const AcademicCultural = ({ data }: { data: HomeProps["thirdSection"] }) => {
             alt={t.imageAlt}
             width={737}
             height={1061}
-            className="scale-x-[-1]"
+            className={isArabic ? "scale-x-[-1]" : ""}
           />
         </div>
       </div>

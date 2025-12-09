@@ -19,6 +19,8 @@ import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { HomeProps } from "../type";
 import { iconanimated } from "../data";
+import { useApplyLang } from "@/lib/applyLang";
+import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 gsap.registerPlugin(ScrollTrigger);
 
 const DiverseGrowing = ({ data }: { data: HomeProps['fifthSection'] }) => {
@@ -28,6 +30,8 @@ const DiverseGrowing = ({ data }: { data: HomeProps['fifthSection'] }) => {
   const card3Ref = useRef<HTMLDivElement | null>(null);
   const card4Ref = useRef<HTMLDivElement | null>(null);
   const card5Ref = useRef<HTMLDivElement | null>(null);
+  const t = useApplyLang(data)
+  const isArabic = useIsPreferredLanguageArabic()
 
   useEffect(() => {
     if (!imgRef.current) return;
@@ -110,7 +114,7 @@ const DiverseGrowing = ({ data }: { data: HomeProps['fifthSection'] }) => {
             <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }}  >
               <SplitText
                 tag="h2"
-                text={data.title}
+                text={t.title}
                 className="text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-light leading-[1.111111111] text-black max-w-[20ch] lettersp-4 xl:mb-30 2xl:mb-40"
                 delay={100}
                 duration={0.6}
@@ -120,7 +124,7 @@ const DiverseGrowing = ({ data }: { data: HomeProps['fifthSection'] }) => {
                 to={{ opacity: 1, y: 0 }}
                 threshold={0.1}
                 rootMargin="-100px"
-                textAlign="left"
+                textAlign={isArabic ? "right" : "left"}
               />
             </motion.div>
             <div className="2xl:w-4/5 ml-auto mt-8 lg:mt-[140px]  xl:mt-[64px] relative">
@@ -134,24 +138,24 @@ const DiverseGrowing = ({ data }: { data: HomeProps['fifthSection'] }) => {
                     transition-all duration-500 ease-in-out
                     ${isActive === 1 ? "bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)]" : ""}`}>
                     <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none ${isActive === 1 ? "opacity-100" : ""}`}>
-                      <div className="w-full h-full bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)]"></div>
+                      <div className={`w-full h-full ${isArabic ? "bg-[linear-gradient(270deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)]" : "bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)]"}`}></div>
                     </div>
 
                     <div className="relative z-10">
                       <div className="flex justify-between items-center gap-4 pb-5">
                         <p className={`text-xl 2xl:text-2xl font-light  group-hover:text-black group-hover:-translate-x-3 transition-all duration-500 ${isActive === 1 ? "text-black -translate-x-3" : "text-primary"}`}>
-                          <Counter from={0} to={Number(data.items[0].number)} />+
+                          <Counter from={0} to={Number(t.items[0].number)} />+
                         </p>
                         <Image
                           className={`grayscale group-hover:grayscale-0 transition-all duration-400 group-hover:scale-110 ${isActive === 1 ? "grayscale-0 scale-110" : ""}`}
                           src={iconanimated.imgdata[0]}
-                          alt={data.items[0].logoAlt}
+                          alt={t.items[0].logoAlt}
                           width={50}
                           height={50}
                         />
                       </div>
                       <p className={`text-md 2xl:text-xl font-light text-[#626262] max-w-[9ch] group-hover:text-black group-hover:-translate-y-1 transition-all duration-500 ${isActive === 1 ? "text-black -translate-y-1" : ""}`}>
-                        {data.items[0].value}
+                        {t.items[0].value}
                       </p>
                     </div>
                   </div>
@@ -164,24 +168,24 @@ const DiverseGrowing = ({ data }: { data: HomeProps['fifthSection'] }) => {
                         transition-all duration-500 ease-in-out
                         ${isActive == 2 ? "bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)]" : ""}`}>
                       <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${isActive === 2 ? "opacity-100" : ""}`}>
-                        <div className="w-full h-full bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)]"></div>
+                        <div className={`w-full h-full ${isArabic ? "bg-[linear-gradient(270deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)]" : "bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)]"}`}></div>
                       </div>
 
                       <div className="relative z-10 flex flex-col justify-between min-w-full lg:min-w-[250px] 2xl:min-w-[434px] 2xl:min-h-[310px] px-6 pt-4 pb-5 2xl:px-10 xl:py-4">
                         <div className="flex justify-between items-center gap-4 pb-5">
                           <p className={`text-xl 2xl:text-2xl font-light text-[#7E5AA3] group-hover:text-black  group-hover:-translate-x-3 transition-all duration-500 ${isActive === 2 ? "text-black -translate-x-3" : ""}`}>
-                            <Counter from={0} to={Number(data.items[1].number)} />+
+                            <Counter from={0} to={Number(t.items[1].number)} />+
                           </p>
                           <Image
                             className={`grayscale group-hover:grayscale-0 transition-all duration-400 group-hover:scale-110 ${isActive === 2 ? "grayscale-0 scale-110" : ""}`}
                             src={iconanimated.imgdata[1]}
-                            alt={data.items[1].logoAlt}
+                            alt={t.items[1].logoAlt}
                             width={50}
                             height={50}
                           />
                         </div>
                         <p className={`text-md 2xl:text-xl font-light text-[#626262] max-w-[9ch] group-hover:text-black group-hover:-translate-y-1 transition-all duration-500  ${isActive === 2 ? "text-black -translate-y-1" : ""}`}>
-                          {data.items[1].value}
+                          {t.items[1].value}
                         </p>
                       </div>
                     </div>
@@ -192,24 +196,24 @@ const DiverseGrowing = ({ data }: { data: HomeProps['fifthSection'] }) => {
                         onTouchStart={() => handleTouch(3)}
                         className={`${isActive == 3 ? "bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)]" : ""} relative group overflow-hidden border bg-white/30  backdrop-blur-md border-[#ccc] rounded-[15px] w-full transition-all duration-500 ease-in-out`}>
                         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-                          <div className="w-full h-full bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)]"></div>
+                          <div className={`w-full h-full ${isArabic ? "bg-[linear-gradient(270deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)]" : "bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)]"}`}></div>
                         </div>
 
                         <div className="relative z-10 flex flex-col justify-between px-6 pt-4 pb-5 2xl:px-10 xl:py-4 min-w-full lg:min-w-[250px] 2xl:min-w-[389px] 2xl:min-h-[258px]">
                           <div className="flex justify-between items-center gap-4 pb-5">
                             <p className={`text-xl 2xl:text-2xl font-light transition-all duration-500  ${isActive === 3 ? "text-black -translate-x-3" : "text-[#7E5AA3] group-hover:text-black  group-hover:-translate-x-3 "}`}>
-                              <Counter from={0} to={Number(data.items[2].number)} />+
+                              <Counter from={0} to={Number(t.items[2].number)} />+
                             </p>
                             <Image
                               className={`grayscale group-hover:grayscale-0 transition-all duration-400 group-hover:scale-110 ${isActive === 3 ? "grayscale-0 scale-110" : ""}`}
                               src={iconanimated.imgdata[2]}
-                              alt={data.items[2].logoAlt}
+                              alt={t.items[2].logoAlt}
                               width={50}
                               height={50}
                             />
                           </div>
                           <p className={`text-md 2xl:text-xl font-light ${isActive === 3 ? "text-black -translate-y-1" : "text-[#626262] group-hover:text-black group-hover:-translate-y-1 transition-all duration-500 "}`}>
-                            {data.items[2].value}
+                            {t.items[2].value}
                           </p>
                         </div>
                       </div>
@@ -220,24 +224,24 @@ const DiverseGrowing = ({ data }: { data: HomeProps['fifthSection'] }) => {
                         className={`relative group overflow-hidden border bg-white/30 backdrop-blur-md border-[#ccc] rounded-[15px] 
                         w-full transition-all duration-500 ease-in-out ${isActive === 4 ? "bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)]" : ""}`}>
                         <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none ${isActive === 4 ? "opacity-100" : ""}`}>
-                          <div className="w-full h-full bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)]"></div>
+                          <div className={`w-full h-full ${isArabic ? "bg-[linear-gradient(270deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)]" : "bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)]"}`}></div>
                         </div>
 
                         <div className="relative z-10 flex flex-col justify-between px-6 pt-4 pb-5 2xl:px-10 xl:py-4 min-w-full lg:min-w-[250px] 2xl:min-w-[389px] 2xl:min-h-[245px]">
                           <div className="flex justify-between items-center gap-4 pb-5">
                             <p className={`text-xl 2xl:text-2xl font-light transition-all duration-500 ${isActive === 4 ? "text-black -translate-x-3" : "text-primary group-hover:text-black  group-hover:-translate-x-3 "}`}>
-                              <Counter from={0} to={Number(data.items[4].number)} />+
+                              <Counter from={0} to={Number(t.items[4].number)} />+
                             </p>
                             <Image
                               className={`grayscale group-hover:grayscale-0 transition-all duration-400 group-hover:scale-110 ${isActive === 4 ? "grayscale-0 scale-110" : ""}`}
                               src={iconanimated.imgdata[4]}
-                              alt={data.items[4].logoAlt}
+                              alt={t.items[4].logoAlt}
                               width={50}
                               height={50}
                             />
                           </div>
                           <p className={`text-md 2xl:text-xl font-light max-w-[9ch] group-hover:text-black group-hover:-translate-y-1 transition-all duration-500 ${isActive === 4 ? "text-black -translate-y-1" : "text-[#626262]"}`}>
-                            {data.items[4].value}
+                            {t.items[4].value}
                           </p>
                         </div>
                       </div>
@@ -249,24 +253,24 @@ const DiverseGrowing = ({ data }: { data: HomeProps['fifthSection'] }) => {
                       className={`relative group overflow-hidden border bg-white/30 backdrop-blur-md border-[#ccc] rounded-[15px] w-full 
                       transition-all duration-500 ease-in-out ${isActive === 5 ? "bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)]" : ""}`}>
                       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-                        <div className="w-full h-full bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)]"></div>
+                        <div className={`w-full h-full ${isArabic ? "bg-[linear-gradient(270deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)]" : "bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)]"}`}></div>
                       </div>
 
                       <div className="relative z-10 flex flex-col justify-between px-6 pt-4 pb-5 2xl:px-10 xl:py-4 min-w-full lg:min-w-[250px] 2xl:min-w-[417px] 2xl:min-h-[362px]">
                         <div className="flex justify-between items-center gap-4 xl:pb-5">
                           <p className={`text-xl 2xl:text-2xl font-light transition-all duration-500 ${isActive === 5 ? "text-black -translate-x-3" : "text-[#7E5AA3] group-hover:text-black  group-hover:-translate-x-3 "}`}>
-                            <Counter from={0} to={Number(data.items[3].number)} />+
+                            <Counter from={0} to={Number(t.items[3].number)} />+
                           </p>
                           <Image
                             className={`grayscale group-hover:grayscale-0 transition-all duration-400 group-hover:scale-110 ${isActive === 5 ? "grayscale-0 scale-110" : ""}`}
                             src={iconanimated.imgdata[3]}
-                            alt={data.items[3].logoAlt}
+                            alt={t.items[3].logoAlt}
                             width={50}
                             height={50}
                           />
                         </div>
                         <p className={`text-md 2xl:text-xl font-light transition-all duration-500 ${isActive === 5 ? "text-black -translate-y-1" : "text-[#626262] group-hover:text-black group-hover:-translate-y-1 transition-all duration-500 "}`}>
-                          {data.items[3].value}
+                          {t.items[3].value}
                         </p>
                       </div>
                     </div>
@@ -279,8 +283,8 @@ const DiverseGrowing = ({ data }: { data: HomeProps['fifthSection'] }) => {
         <div className="relative pt-5 lg:pt-0 left-0 lg:absolute bottom-0 lg:left-[5%] z-[-1] responsive md:w-[50%] 2xl:w-[913px]" >
           <Image
             ref={imgRef}
-            src={data.image}
-            alt={data.imageAlt}
+            src={t.image}
+            alt={t.imageAlt}
             width={913}
             height={944}
             className=""
