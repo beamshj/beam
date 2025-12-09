@@ -671,7 +671,7 @@ body {
 
 .aboutslide .yrmn {
   background: #F5EBFF;
-  @apply top-[25px] lg:right-[15px] mb-5
+  @apply top-[25px] mb-5
 }
 
 .aboutslide .swiper-slide-active .yrmn {
@@ -998,6 +998,10 @@ body {
   background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='15' height='15' viewBox='0 0 15 15' fill='none'><path d='M8.99121 3.7063L12.7731 7.50005L8.99121 11.2938' stroke='%23292D32' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round'/><path d='M2.18066 7.5H12.6666' stroke='%23292D32' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round'/></svg>") no-repeat center;
   background-size: contain;
 }
+html[dir="rtl"] .school-leadership-bullets li::before {
+  transform: scaleX(-1);
+}
+
 
 @keyframes schoolLeadFadeUp {
   to {

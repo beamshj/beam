@@ -90,7 +90,7 @@ export default function MoreToExplore({ data }: Props) {
                   // transition={{ duration: 0.9, ease: "easeOut" }}
                 >
                   {/* Year Badge (static) */}
-                  <div className="flex items-center border border-black rounded-full px-[15px] py-[7px] w-fit yrmn relative">
+                  <div className={`flex items-center border border-black rounded-full px-[15px] py-[7px] w-fit yrmn relative ${isArabic ? "lg:left-[15px]" : "lg:right-[15px]"}`}>
                     <p className="font-light text-black leading-[1]">
                       {item.year}
                     </p>
