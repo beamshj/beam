@@ -21,7 +21,7 @@ const Index = ({data, schooldata, categorydata, locationdata, blogdata, newsdata
   return (
     <>
       <HeroSection data={data.bannerSection}/>
-      <OurSchools schoolData={schooldata} categorydata={categorydata} locationdata={locationdata}/>
+      <OurSchools data={data.secondSection} schoolData={schooldata} categorydata={categorydata} locationdata={locationdata}/>
       <AcademicCultural data={data.thirdSection}/>
       <VideoSection data={data.fourthSection}/>
       <DiverseGrowing data={data.fifthSection}/>

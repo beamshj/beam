@@ -17,10 +17,14 @@ import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { HomeProps } from "../type";
 import { acdData } from "../data";
+import { useApplyLang } from "@/lib/applyLang";
+import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 gsap.registerPlugin(ScrollTrigger);
 
 const AcademicCultural = ({ data }: { data: HomeProps["thirdSection"] }) => {
-  const [activeIndex, setActiveIndex] = useState(1); // 2nd item active by default
+  const [activeIndex, setActiveIndex] = useState(1);
+  const t = useApplyLang(data);
+  const isArabic = useIsPreferredLanguageArabic() // 2nd item active by default
 
   const imgRef = useRef<HTMLImageElement | null>(null);
 
@@ -29,7 +33,7 @@ const AcademicCultural = ({ data }: { data: HomeProps["thirdSection"] }) => {
 
     const ctx = gsap.context(() => {
       gsap.to(imgRef.current, {
-        xPercent: -60, // move image 15% to the right
+        xPercent: 60, // move image 15% to the right
         ease: "none",
        // yoyo: true,
         scrollTrigger: {
@@ -60,7 +64,7 @@ const AcademicCultural = ({ data }: { data: HomeProps["thirdSection"] }) => {
 
             <SplitText
               tag="h2"
-              text={data.title}
+              text={t.title}
               className="text-lg md:text-xl xl:text-2xl 2xl:text-3xl font-light leading-tight text-black max-w-[13ch] lettersp-4"
               delay={100}
               duration={0.6}
@@ -85,18 +89,18 @@ const AcademicCultural = ({ data }: { data: HomeProps["thirdSection"] }) => {
               
               <p
                 className="text-sm font-light text-colorpara md:max-w-[68ch] 2xl:max-w-[82ch]"
-                dangerouslySetInnerHTML={{ __html: data.description }}
+                dangerouslySetInnerHTML={{ __html: t.description }}
               />
             </motion.div>
 
             {/* Top Divider */}
             <div className="">
-              <div className="bg-[linear-gradient(90deg,_#000000_0%,_rgba(0,_0,_0,_0)_60%)] h-[1px] lg:bg-[linear-gradient(90deg,_#000000_0%,_rgba(0,_0,_0,_0)_30%)]"></div>
+              <div className={`bg-[linear-gradient(${isArabic ? "270deg" : "90deg"},_#000000_0%,_rgba(0,_0,_0,_0)_60%)] h-[1px] lg:bg-[linear-gradient(${isArabic ? "270deg" : "90deg"},_#000000_0%,_rgba(0,_0,_0,_0)_30%)]`}></div>
             </div>
 
             {/* List Items */}
             <div>
-              {data.items.map((value, index) => {
+              {t.items.map((value, index) => {
                 const isActive = activeIndex === index;
                 return (
                   <motion.div
@@ -158,13 +162,14 @@ const AcademicCultural = ({ data }: { data: HomeProps["thirdSection"] }) => {
         </div>
 
         {/* Side Image */}
-        <div className="absolute bottom-0 right-0 xl:right-[-10%] hidden xl:block w-[640px] 2xl:w-[737px] z-20">
+        <div className={`absolute bottom-0 ${isArabic ? "left-0 xl:left-[-10%]" : "right-0 xl:right-[-10%]"} hidden xl:block w-[640px] 2xl:w-[737px] z-20`}>
           <Image
             ref={imgRef}
-            src={data.image}
-            alt={data.imageAlt}
+            src={t.image}
+            alt={t.imageAlt}
             width={737}
             height={1061}
+            className="scale-x-[-1]"
           />
         </div>
       </div>

@@ -129,19 +129,19 @@ export default function LeadershipCarousel({ data }: { data: LeadershipData }) {
       const height = isActive ? activeSize.h : nonActiveSize.h;
 
       // ACTIVE slide always on the rightmost
-const left = (() => {
-  if (isArabic) {
-    // Arabic layout (first logic)
-    if (isActive) return 0;
+      const left = (() => {
+        if (isArabic) {
+          // Arabic layout (first logic)
+          if (isActive) return 0;
 
-    return activeSize.w + gap + (i - 1) * (nonActiveSize.w + gap);
-  } else {
-    // Normal LTR layout (second logic)
-    if (isActive) return maxNonActive * (nonActiveSize.w + gap);
+          return activeSize.w + gap + (i - 1) * (nonActiveSize.w + gap);
+        } else {
+          // Normal LTR layout (second logic)
+          if (isActive) return maxNonActive * (nonActiveSize.w + gap);
 
-    return (maxNonActive - i) * (nonActiveSize.w + gap);
-  }
-})();
+          return (maxNonActive - i) * (nonActiveSize.w + gap);
+        }
+      })();
 
 
 
@@ -157,7 +157,7 @@ const left = (() => {
       });
     }
 
-    console.log("visileSlides",visibleSlides)
+    console.log("visileSlides", visibleSlides)
 
     return visibleSlides;
   };
@@ -201,14 +201,13 @@ const left = (() => {
         </motion.h1>
       </div>
       <div
-        className={`flex flex-col md:flex-row gap-[15px] md:gap-[36px] lg:gap-[56px] items-stretch ${
-          windowWidth < 1024 ? "container" : ""
-        }`}
+        className={`flex flex-col md:flex-row gap-[15px] md:gap-[36px] lg:gap-[56px] items-stretch ${windowWidth < 1024 ? "container" : ""
+          }`}
         style={{
-  ...(isArabic
-    ? { paddingLeft: windowWidth < 1024 ? 15 : containerPaddingRight }
-    : { paddingRight: windowWidth < 1024 ? 15 : containerPaddingRight })
-}}
+          ...(isArabic
+            ? { paddingLeft: windowWidth < 1024 ? 15 : containerPaddingRight }
+            : { paddingRight: windowWidth < 1024 ? 15 : containerPaddingRight })
+        }}
 
       >
         {/* Slides container */}
@@ -260,9 +259,8 @@ const left = (() => {
                 alt={m.name}
                 width={Math.max(1, Math.round(m.width))}
                 height={Math.max(1, Math.round(m.height))}
-                className={`w-full h-full lg:object-cover object-top ${
-                  !m.isActive ? "saturate-0" : ""
-                }`}
+                className={`w-full h-full lg:object-cover object-top ${!m.isActive ? "saturate-0" : ""
+                  }`}
               />
 
               {m.isActive && (

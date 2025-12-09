@@ -9,6 +9,8 @@ import "swiper/css/pagination";
 import "swiper/css/effect-fade";
 import { gsap } from "gsap";
 import { HomeProps } from "../type";
+import { useApplyLang } from "@/lib/applyLang";
+import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 
 const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
   const swiperRef = useRef<SwiperClass | null>(null);
@@ -22,6 +24,8 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
   const imageRefs = useRef<HTMLDivElement[]>([]);
   const leftCurtainRef = useRef<HTMLDivElement>(null);
   const rightCurtainRef = useRef<HTMLDivElement>(null);
+    const isArabic = useIsPreferredLanguageArabic();
+  const t = useApplyLang(data);
 
   const handleRegisterClick = () => {
     window.location.href = "/contact-us?scroll=register";
@@ -258,7 +262,7 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
   }, [isInitialLoad]);
 
   // Get first slide data for static content display
-  const firstSlide = data.items[0];
+  const activeSlide = t.items[currentSlide - 1] || t.items[0];
 
   return (
     <section className="lg:h-screen h-[65dvh] md:h-[85dvh] relative overflow-hidden max-w-[1920px] mx-auto">
@@ -286,7 +290,7 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
 
       {/* Swiper - Only for background images */}
       <Swiper
-        modules={[Autoplay, EffectFade]}
+        modules={[ EffectFade]}
         effect="fade"
         fadeEffect={{ crossFade: true }}
         autoplay={{ delay: 7000, disableOnInteraction: false }}
@@ -301,7 +305,7 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
         }}
         className="w-full h-full"
       >
-        {data.items.map((slide, index) => (
+        {t.items.map((slide, index) => (
           <SwiperSlide key={index}>
             <div className="h-full w-screen relative overflow-hidden">
               {/* Background image */}
@@ -383,9 +387,9 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
               <div className="xl:mb-[65px] col-span-1 md:col-span-5">
                 <h2 className="hero-title text-[1.8rem] md:text-2xl 2xl:text-4xl text-white leading-[1.2] xl:leading-[1.1] font-custom font-light lettersp-4-hero mb-0 max-w-none">
                   <span className="text-primary">
-                    {firstSlide.highlightText}{" "}
-                  </span>
-                  {firstSlide.title}
+                    {activeSlide.highlightText}
+                  </span>{" "}
+                  {activeSlide.title}
                 </h2>
               </div>
 
@@ -395,15 +399,12 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
                 className="hero-button md:mb-[35px] lg:mb-[85px] xl:mb-[120px] flex justify-end flex-col xl:items-end col-span-1 md:col-span-2"
               >
                 <div>
-                  <div className="mt-5 w-fit md:mt-10 p-[1px] group transition-all duration-300 bg-[linear-gradient(90deg,_#42BADC_0%,_#12586C_100%)] rounded-full hover:-translate-x-2 hover:shadow-[0_0_15px_rgba(66,186,220,0.5)]">
+                  <div className={`mt-5 w-fit md:mt-10 p-[1px] group transition-all duration-300 bg-[linear-gradient(90deg,_#42BADC_0%,_#12586C_100%)] rounded-full ${isArabic ? "hover:translate-x-2" : "hover:-translate-x-2"} hover:shadow-[0_0_15px_rgba(66,186,220,0.5)]`}>
                     <a
                       href="#"
                       className="cursor-pointer pl-4 pr-2 md:px-4 py-[10px] md:py-3 bg-primary rounded-full flex items-center gap-2 transition-all duration-300"
                     >
-                      <p className="group-hover:text-white text-xs font-light text-white uppercase transition-colors duration-300">
-                        Register Interest
-                      </p>
-                      <div className="p-2 flex items-center justify-center bg-white w-fit rounded-full transition-transform duration-300 group-hover:rotate-45">
+                      {isArabic && <div className="p-2 flex items-center justify-center bg-white w-fit rounded-full transition-transform duration-300 group-hover:rotate-45">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="10"
@@ -422,15 +423,38 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
                             strokeMiterlimit="10"
                           />
                         </svg>
-                      </div>
+                      </div>}
+                      <p className="group-hover:text-white text-xs font-light text-white uppercase transition-colors duration-300">
+                        {isArabic ? "سجل اهتمام" : "Register Interest"}
+                      </p>
+                      {!isArabic && <div className="p-2 flex items-center justify-center bg-white w-fit rounded-full transition-transform duration-300 group-hover:rotate-45">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="10"
+                          height="11"
+                          viewBox="0 0 10 11"
+                          fill="none"
+                        >
+                          <path
+                            d="M8.74639 1.76178L1.12891 9.36247"
+                            stroke="#42BADC"
+                            strokeMiterlimit="10"
+                          />
+                          <path
+                            d="M1.12891 1.76178H8.74639V9.21251"
+                            stroke="#42BADC"
+                            strokeMiterlimit="10"
+                          />
+                        </svg>
+                      </div>}
                     </a>
                   </div>
                 </div>
               </div>
 
               {/* Divider line */}
-              <div className="hero-divider absolute left-[40%] bottom-[83px] w-[80%] hidden xl:block">
-                <div className="h-[1px] w-full bg-gradient-to-r from-white via-white/30 to-transparent"></div>
+              <div className={`hero-divider absolute ${isArabic ? "right-[40%]" : "left-[40%]"} bottom-[83px] w-[80%] hidden xl:block`}>
+                <div className={`h-[1px] w-full ${isArabic ? "bg-gradient-to-l" : "bg-gradient-to-r"} from-white via-white/30 to-transparent`}></div>
               </div>
             </div>
           </div>
@@ -442,7 +466,7 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
         <div className="container flex justify-end">
           <span className="text-[15px] text-white whitespace-nowrap font-light relative -right-3 md:right-2 z-10 flex flex-col items-center">
             <div className="flex flex-col rotate-180">
-              {data.items.map((_, index) => (
+              {t.items.map((_, index) => (
                 <span
                   key={index}
                   className={`font-medium w-[1px] h-[10px] mt-2 transition-all duration-300 ${index === currentSlide - 1 ? "bg-primary" : "bg-white"
