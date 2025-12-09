@@ -219,6 +219,18 @@ body {
 
     z-index: 0;
   }
+
+  .aftergd_ar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 50%;
+    left: 0;
+    height: 100%;
+    background: radial-gradient(200.18% 159.42% at 96.84% 1.49%, #42BADC 0%, rgba(66, 186, 220, 0) 65%, rgba(66, 186, 220, 0) 100%);
+
+    z-index: 0;
+  }
 }
 
 .swiper-slide:nth-child(odd) .aluminibg {
