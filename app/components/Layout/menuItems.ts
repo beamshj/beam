@@ -77,8 +77,8 @@ export const mainMenuItems = [
         href: "/about-us/general-managers-message",
       },
       {
-        name: "Schools’ Leadership Team",
-        name_ar: "فريق القيادة المدرسية",
+        name: "BEAM Leadership Team",
+        name_ar: "فريق قيادة BEAM",
         href: "/about-us/school-leadership-team",
       },
       {
