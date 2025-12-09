@@ -135,7 +135,7 @@ const isArabic = useIsPreferredLanguageArabic()
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, amount: 0.3 }}
-              className="lg:absolute bottom-0 right-0"
+              className={`lg:absolute bottom-0 ${isArabic ? "right-0" : "left-0"}`}
             >
               <Image
                 src={t.image}
