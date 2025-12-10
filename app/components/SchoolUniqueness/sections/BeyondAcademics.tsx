@@ -18,9 +18,9 @@ const BeyondAcademics = ({
   const [activeIndex, setActiveIndex] = useState<number | null>(0);
   return (
     <section className="pb-0 md:pb-12 lg:pb-20 2xl:pb-[135px] ">
-      <div className="container ">
+      <div className="container">
         <div>
-          <div>
+          <div className="flex flex-col ">
             <SplitText
               tag="h2"
               text={t.title}
@@ -33,7 +33,7 @@ const BeyondAcademics = ({
               to={{ opacity: 1, y: 0 }}
               threshold={0.1}
               rootMargin="-100px"
-              textAlign="left"
+              textAlign={isArabic ? "right" : "left"}
             />
             <SplitText
               tag="p"
