@@ -44,27 +44,56 @@ export const OurSchoolsData = {
 
 export const schoolData = [
   {
-    name:"ASCS Nad Al Sheba",
-    grades:["Pre-KG","KG 1","KG 2","Grade 1","Grade 2","Grade 3","Grade 4","Grade 5","Grade 6","Grade 7","Grade 8","Grade 9","Grade 10"]
+    name: "ASCS Nad Al Sheba",
+    name_ar: "المدرسة الأمريكية بالشارقة - ند الشبا",
+    grades: [
+      "Pre-KG", "KG 1", "KG 2", "Grade 1", "Grade 2", "Grade 3", "Grade 4",
+      "Grade 5", "Grade 6", "Grade 7", "Grade 8", "Grade 9", "Grade 10"
+    ]
   },
   {
-    name:"ASCS Maliha",
-    grades:["Pre-KG","KG 1","KG 2","Grade 1","Grade 2","Grade 3","Grade 4","Grade 5","Grade 6","Grade 7","Grade 8","Grade 9","Grade 10","Grade 11","Grade 12"]
+    name: "ASCS Maliha",
+    name_ar: "المدرسة الأمريكية بالشارقة - مليحة",
+    grades: [
+      "Pre-KG", "KG 1", "KG 2", "Grade 1", "Grade 2", "Grade 3",
+      "Grade 4", "Grade 5", "Grade 6", "Grade 7", "Grade 8",
+      "Grade 9", "Grade 10", "Grade 11", "Grade 12"
+    ]
   },
   {
-    name:"ASCS Al Layyah",
-    grades:["Pre-KG","KG 1","KG 2","Grade 1","Grade 2","Grade 3","Grade 4","Grade 5","Grade 6","Grade 7","Grade 8"]
+    name: "ASCS Al Layyah",
+    name_ar: "المدرسة الأمريكية بالشارقة - الليه",
+    grades: [
+      "Pre-KG", "KG 1", "KG 2", "Grade 1", "Grade 2", "Grade 3",
+      "Grade 4", "Grade 5", "Grade 6", "Grade 7", "Grade 8"
+    ]
   },
   {
-    name:"ISCS Nad Al Sheba",
-    grades:["FS 1","FS 2","Year 1","Year 2","Year 3","Year 4","Year 5","Year 6","Year 7","Year 8","Year 9","Year 10","Year 11","Year 12","Year 13"]
+    name: "ISCS Nad Al Sheba",
+    name_ar: "المدرسة الدولية بالشارقة - ند الشبا",
+    grades: [
+      "FS 1", "FS 2", "Year 1", "Year 2", "Year 3", "Year 4",
+      "Year 5", "Year 6", "Year 7", "Year 8", "Year 9",
+      "Year 10", "Year 11", "Year 12", "Year 13"
+    ]
   },
   {
-    name:"ISCS Muwaileh",
-    grades:["Pre-KG / FS 1","KG 1 / FS 2","KG 2 / Year 1","Grade 1 / Year 2","Grade 2 / Year 3","Grade 3 / Year 4","Grade 4 / Year 5","Grade 5 / Year 6","Grade 6 / Year 7","Grade 7 / Year 8","Grade 8 / Year 9","Grade 9 / Year 10","Grade 10 / Year 11","Grade 11 / Year 12","Grade 12 / Year 13","Grade 13"]
+    name: "ISCS Muwaileh",
+    name_ar: "المدرسة الدولية بالشارقة - مويلح",
+    grades: [
+      "Pre-KG / FS 1", "KG 1 / FS 2", "KG 2 / Year 1", "Grade 1 / Year 2",
+      "Grade 2 / Year 3", "Grade 3 / Year 4", "Grade 4 / Year 5",
+      "Grade 5 / Year 6", "Grade 6 / Year 7", "Grade 7 / Year 8",
+      "Grade 8 / Year 9", "Grade 9 / Year 10", "Grade 10 / Year 11",
+      "Grade 11 / Year 12", "Grade 12 / Year 13", "Grade 13"
+    ]
   },
   {
-    name:"ISCS Bahrain",
-    grades:["FS 1","FS 2","Year 1","Year 2","Year 3","Year 4","Year 5","Year 6"]
+    name: "ISCS Bahrain",
+    name_ar: "المدرسة الدولية بالشارقة - البحرين",
+    grades: [
+      "FS 1", "FS 2", "Year 1", "Year 2", "Year 3", "Year 4",
+      "Year 5", "Year 6"
+    ]
   }
-]
+];

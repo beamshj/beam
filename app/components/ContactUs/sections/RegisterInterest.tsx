@@ -95,7 +95,7 @@ const RegisterInterest = forwardRef<HTMLDivElement, RegisterInterestProps>(
             <div className="lg:w-[36%]">
               <SplitText
                 tag="h1"
-                text="Register Your Interest"
+                text={isArabic ? "سجل اهتمام" : "Register Your Interest"}
                 delay={100}
                 className="lg:text-2xl xl:text-3xl 2xl:text-4xl text-white font-light leading-[1.111] lettersp-4"
                 duration={0.6}
@@ -112,8 +112,7 @@ const RegisterInterest = forwardRef<HTMLDivElement, RegisterInterestProps>(
               </p>
               <div className="mt-4 xl:mt-[27px] text-sm leading-[1.52] font-light">
                 <p className="text-white">
-                  Register your interest at BEAM’s Creative Science Schools to
-                  be contacted by our Registrations team.
+                  {isArabic ? "سجل اهتمام في مدارس الإبداع العلمي ليتم الاتصال بك من قبل فريق التسجيل لدينا." : "Register your interest at BEAM’s Creative Science Schools to be contacted by our Registrations team."}
                 </p>
               </div>
             </div>
@@ -132,7 +131,7 @@ const RegisterInterest = forwardRef<HTMLDivElement, RegisterInterestProps>(
                 >
                   <input
                     type="text"
-                    placeholder="Enter Your Full Name"
+                    placeholder={isArabic ? "الاسم الكامل" :"Enter Your Full Name"}
                     {...register("fullName")}
                     className="w-full border-b border-white py-[23px] focus:outline-none placeholder:text-white text-sm font-light text-white"
                   />
@@ -149,7 +148,7 @@ const RegisterInterest = forwardRef<HTMLDivElement, RegisterInterestProps>(
                 >
                   <input
                     type="email"
-                    placeholder="Enter Your Email ID"
+                    placeholder={isArabic ? "عنوان البريد الالكتروني" : "Enter Your Email ID"}
                     {...register("email")}
                     className="w-full border-b border-white py-[23px] focus:outline-none placeholder:text-white text-sm font-light text-white"
                   />
@@ -168,7 +167,7 @@ const RegisterInterest = forwardRef<HTMLDivElement, RegisterInterestProps>(
                 >
                   <input
                     type="text"
-                    placeholder="Enter Your Phone Number"
+                    placeholder={isArabic ? "الهاتف المتحرك" : "Enter Your Phone Number"}
                     {...register("phone")}
                     className="w-full border-b border-white py-[23px] focus:outline-none placeholder:text-white text-sm font-light text-white"
                   />
@@ -188,16 +187,16 @@ const RegisterInterest = forwardRef<HTMLDivElement, RegisterInterestProps>(
                     className="w-full border-b border-white py-[23px] pr-10 focus:outline-none text-white text-sm font-light appearance-none"
                   >
                     <option value="" className="bg-black">
-                      Where did you find us ?
+                      {isArabic ? "من أين وجدتنا؟" : "Where did you find us ?"}
                     </option>
                     <option value="instagram" className="bg-black ">
-                      Instagram
+                    {isArabic ? "إنستغرام" : "Instagram"}
                     </option>
                     <option value="website" className="bg-black ">
-                      Website
+                      {isArabic ? "الموقع الإلكتروني" : "Website"}
                     </option>
                     <option value="friends" className="bg-black ">
-                      Friends
+                      {isArabic ? "الأصدقا" : "Friends"}
                     </option>
                   </select>
                   {/* Custom arrow icon */}
@@ -232,7 +231,7 @@ const RegisterInterest = forwardRef<HTMLDivElement, RegisterInterestProps>(
                     onChange={(e) => setSelectedSchool(e.target.value)}
                   >
                     <option value="" className="bg-black">
-                      Select School
+                      {isArabic ? "اختر المدرسة" : "Select School"}
                     </option>
                     {schoolData.map((school) => (
                       <option
@@ -240,7 +239,7 @@ const RegisterInterest = forwardRef<HTMLDivElement, RegisterInterestProps>(
                         value={school.name}
                         className="bg-black"
                       >
-                        {school.name}
+                        {isArabic ? school.name_ar : school.name}
                       </option>
                     ))}
                     {/* <option value="" className="bg-black">Select School</option>
@@ -277,7 +276,7 @@ const RegisterInterest = forwardRef<HTMLDivElement, RegisterInterestProps>(
                     className="w-full border-b border-white py-[23px] pr-10 focus:outline-none text-white text-sm font-light appearance-none"
                   >
                     <option value="" className="bg-black">
-                      Select Grade
+                      {isArabic ? "اختر الصف" : "Select Grade"}
                     </option>
                     {schoolData
                       .find((school) => school.name === selectedSchool)
@@ -335,7 +334,7 @@ const RegisterInterest = forwardRef<HTMLDivElement, RegisterInterestProps>(
                     type="submit"
                     className="relative group flex items-center uppercase justify-center gap-[10px] px-[20px] py-[11px] w-full h-full text-white bg-transparent rounded-[50px] text-xs font-light overflow-hidden"
                   >
-                    SEND ENQUIRY
+                    {isArabic ? "إرسال الاستفسار" : "SEND ENQUIRY"}
                     <span className={`flex items-center justify-center w-[27px] h-[27px] bg-primary rounded-full transition-transform duration-300 ${isArabic ? "group-hover:-translate-x-2" : "group-hover:translate-x-2"}`}>
                       <Image
                         src="/images/arrow-black.svg"

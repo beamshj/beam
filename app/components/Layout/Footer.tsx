@@ -192,7 +192,7 @@ const Footer = () => {
                     className="group relative overflow-hidden hover:text-primary"
                   >
                     <span className={`block transition-transform duration-300 group-hover:${isArabic ? "-translate-x-1" : "translate-x-1"}`}>
-                      {isArabic ? "معلومات عنا" : "About Us"}
+                      {isArabic ? "نبذة عنا" : "About Us"}
                     </span>
                   </Link>
                   <Link
@@ -246,7 +246,7 @@ const Footer = () => {
                     className="group relative overflow-hidden hover:text-primary"
                   >
                     <span className={`block transition-transform duration-300 group-hover:${isArabic ? "-translate-x-1" : "translate-x-1"}`}>
-                      {isArabic ? "معرض الوسائط" : "Media Gallery"}
+                      {isArabic ? "الأخبار والفعاليات" : "Media Gallery"}
                     </span>
                   </Link>
                   <Link
@@ -254,7 +254,7 @@ const Footer = () => {
                     className="group relative overflow-hidden hover:text-primary"
                   >
                     <span className={`block transition-transform duration-300 group-hover:${isArabic ? "-translate-x-1" : "translate-x-1"}`}>
-                      {isArabic ? "بيان صحفي" : "Press Release"}
+                      {isArabic ? "Press Release" : "Press Release"}
                     </span>
                   </Link>
                 </motion.div>

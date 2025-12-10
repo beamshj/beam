@@ -19,7 +19,7 @@ const isArabic = useIsPreferredLanguageArabic()
     <div className="py-10 xl:py-20 2xl:py-[135px]">
       <div className="container">
         {/* Header Section */}
-        <div className="mb-5 xl:mb-[30px]">
+        <div className="mb-5 xl:mb-[30px] flex flex-col">
           <SplitText
             tag="h2"
             text={t.title}
@@ -66,7 +66,7 @@ const isArabic = useIsPreferredLanguageArabic()
             >
               {/* Default State - Logo and Title */}
               <div className="flex flex-col items-center justify-center transition-opacity duration-300 group-hover:opacity-0">
-                <div className="mb-[20px] relative  ">
+                <div className="mb-[20px] relative">
                   <Image
                     src={achievement.image}
                     alt={achievement.imageAlt} 

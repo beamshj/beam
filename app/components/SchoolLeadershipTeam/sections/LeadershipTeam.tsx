@@ -402,7 +402,6 @@ type Slide = LeadershipItem & {
 };
 
 export default function LeadershipCarousel({ data }: { data: LeadershipData }) {
-  console.log(data, "data");
   const [activeIndex, setActiveIndex] = useState(0);
   const [windowWidth, setWindowWidth] = useState(
     typeof window !== "undefined" ? window.innerWidth : 1024
@@ -560,6 +559,7 @@ export default function LeadershipCarousel({ data }: { data: LeadershipData }) {
   if (!mounted) {
     return <div className="h-[400px] w-full bg-gray-100 rounded-[12px]" />;
   }
+  
   return (
     <section className="overflow-hidden mx-auto max-w-[1920px] py-10 xl:py-20 2xl:py-[135px]">
       <div className="container flex flex-col ios:hidden h-full mb-[30px] lg:mb-[35px]">
@@ -570,7 +570,7 @@ export default function LeadershipCarousel({ data }: { data: LeadershipData }) {
           viewport={{ once: true, amount: 0.2 }}
           className="text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl lg:leading-[1.111] font-light mb-3 xl:mb-[30px] 2xl:mb-[50px] text-black lettersp-4"
         >
-          {data.secondSection.title}
+          {t.secondSection.title}
         </motion.h1>
         {/* <motion.p
           variants={moveUp(0.4)}
@@ -616,7 +616,7 @@ export default function LeadershipCarousel({ data }: { data: LeadershipData }) {
               viewport={{ once: true, amount: 0.2 }}
               className="text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl lg:leading-[1.111] font-light mb-3 xl:mb-[30px] 2xl:mb-[50px] text-black lettersp-4"
             >
-              {data.secondSection.title}
+              {t.secondSection.title}
             </motion.h1>
             {/* <motion.p
               variants={moveUp(0.4)}
@@ -711,7 +711,7 @@ export default function LeadershipCarousel({ data }: { data: LeadershipData }) {
           >
             <button
               onClick={next}
-              className="group-hover:translate-x-1 transition-all duration-300 w-[50px] h-[50px] 2xl:w-[75px] 2xl:h-[75px] rounded-full border border-bdrcolor flex items-center justify-center cursor-pointer"
+              className={`${isArabic ? "group-hover:-translate-x-1" : "group-hover:translate-x-1"} transition-all duration-300 w-[50px] h-[50px] 2xl:w-[75px] 2xl:h-[75px] rounded-full border border-bdrcolor flex items-center justify-center cursor-pointer`}
             >
               <Image
                 src="/images/arrow-primary.svg"

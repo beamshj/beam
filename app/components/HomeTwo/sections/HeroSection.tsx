@@ -385,7 +385,7 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
             >
               {/* Left text */}
               <div className="xl:mb-[65px] col-span-1 md:col-span-5">
-                <h2 className="hero-title text-[1.8rem] md:text-2xl 2xl:text-4xl text-white leading-[1.2] xl:leading-[1.1] font-custom font-light lettersp-4-hero mb-0 max-w-none">
+                <h2 className={`hero-title text-[1.8rem] md:text-2xl 2xl:text-4xl text-white leading-[1.2] xl:leading-[1.1] font-custom font-light lettersp-4-hero mb-0 ${isArabic ? "max-w-[90%]" : "max-w-none"}`}>
                   <span className="text-primary">
                     {activeSlide.highlightText}
                   </span>{" "}

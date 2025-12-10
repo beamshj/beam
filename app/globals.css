@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap');
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
@@ -61,7 +62,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: "DM Sans", sans-serif;
+  /* --font-sans: "DM Sans", sans-serif; */
+  --font-sans: var(--font-sans, "DM Sans"), sans-serif;
   --color-primary: var(--primary);
   --color-colorpara: var(--colorpara);
   --color-bdrcolor: var(--bdrcolor);
@@ -683,7 +685,7 @@ body {
 
 .aboutslide .yrmn {
   background: #F5EBFF;
-  @apply top-[25px] lg:right-[15px] mb-5
+  @apply top-[25px] mb-5
 }
 
 .aboutslide .swiper-slide-active .yrmn {
@@ -1010,6 +1012,10 @@ body {
   background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='15' height='15' viewBox='0 0 15 15' fill='none'><path d='M8.99121 3.7063L12.7731 7.50005L8.99121 11.2938' stroke='%23292D32' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round'/><path d='M2.18066 7.5H12.6666' stroke='%23292D32' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round'/></svg>") no-repeat center;
   background-size: contain;
 }
+html[dir="rtl"] .school-leadership-bullets li::before {
+  transform: scaleX(-1);
+}
+
 
 @keyframes schoolLeadFadeUp {
   to {
@@ -1140,4 +1146,21 @@ body {
 .custom-quill .ql-editor {
   height: 100%;
   overflow-y: auto;
+}
+
+
+html[dir="rtl"] {
+  --font-sans: "Almarai", sans-serif !important;
+  font-family: "Almarai", sans-serif !important;
+}
+
+
+/* Arabic font */
+.font-arabic {
+  font-family: "Almarai", sans-serif !important;
+}
+
+/* Default DM Sans font */
+.font-default {
+  font-family: var(--font-sans, "DM Sans"), sans-serif !important;
 }

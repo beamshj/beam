@@ -44,6 +44,7 @@ const schoolSchema = new mongoose.Schema({
       imageAlt: { type: String, required: true },
       imageAlt_ar: { type: String },
       logo: { type: String, required: true },
+      logo_ar: { type: String },
       logoAlt: { type: String, required: true },
       logoAlt_ar: { type: String },
       link: { type: String, required: true },

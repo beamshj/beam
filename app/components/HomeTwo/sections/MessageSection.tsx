@@ -91,7 +91,7 @@ const isArabic = useIsPreferredLanguageArabic()
 
               {/* h1 */}
               <motion.div
-                className="lg:pt-4 pb-4 xl:py-7 2xl:pt-[56px] 2xl:pb-[44px]"
+                className={`lg:pt-4 pb-4 xl:py-7 2xl:pt-[56px] 2xl:pb-[44px] ${isArabic ? "lg:h-[430px]" : ""}`}
                 variants={fadeTop}
               >
                 <div>
@@ -135,7 +135,7 @@ const isArabic = useIsPreferredLanguageArabic()
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, amount: 0.3 }}
-              className="lg:absolute bottom-0 right-0"
+              className={`lg:absolute bottom-0 ${isArabic ? "right-0" : "left-0"}`}
             >
               <Image
                 src={t.image}

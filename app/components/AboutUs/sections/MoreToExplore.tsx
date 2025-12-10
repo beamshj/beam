@@ -9,10 +9,10 @@ import { useEffect, useRef, useState } from "react";
 import SplitText from "@/components/SplitText";
 import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVarients";
-import Link from "next/link";
 import { AboutProps } from "../type";
 import { useApplyLang } from "@/lib/applyLang";
 import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
+import LangLink from "@/lib/LangLink";
 
 export default function MoreToExplore({
   data,
@@ -78,7 +78,7 @@ export default function MoreToExplore({
           >
             {t.items.map((card, idx) => (
               <SwiperSlide key={idx}>
-                <Link href={card.link}>
+                <LangLink href={card.link}>
                   <motion.div
                     variants={moveUp(idx * 0.1)}
                     initial="hidden"
@@ -120,7 +120,7 @@ export default function MoreToExplore({
                       </div>
                     </div>
                   </motion.div>
-                </Link>
+                </LangLink>
               </SwiperSlide>
             ))}
           </Swiper>
