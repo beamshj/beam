@@ -285,9 +285,6 @@
 // export default Breadcrumb;
 
 
-
-
-
 "use client";
 
 import React from "react";
@@ -297,7 +294,16 @@ import Image from "next/image";
 import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 import { mainMenuItems, filterMenuItems } from "@/app/components/Layout/menuItems";
 
-const Breadcrumb = () => {
+type MenuItem = {
+  name: string;
+  name_ar?: string;
+  href?: string;
+  submenu?: MenuItem[];
+};
+
+type SpecialLabels = Record<string, { en: string; ar: string }>;
+
+const Breadcrumb: React.FC = () => {
   const isArabic = useIsPreferredLanguageArabic();
   let pathname = usePathname().replace(/\/$/, "");
 
@@ -307,11 +313,11 @@ const Breadcrumb = () => {
   const segments = pathname.split("/").filter(Boolean);
 
   // manual overrides
-  const specialLabels: Record<string, { en: string; ar: string }> = {
+  const specialLabels: SpecialLabels = {
     "about-us": { en: "About Beam", ar: "تعرف على بيم" },
   };
 
-  const flattenMenuItems = (items: any[]) => {
+  const flattenMenuItems = (items: MenuItem[]) => {
     const flat: Record<string, { en: string; ar: string }> = {};
     items.forEach((item) => {
       if (item.href && item.href !== "#") {
@@ -321,7 +327,7 @@ const Breadcrumb = () => {
         };
       }
       if (item.submenu) {
-        item.submenu.forEach((sub: any) => {
+        item.submenu.forEach((sub) => {
           if (sub.href && sub.href !== "#") {
             flat[normalizeHref(sub.href)] = {
               en: sub.name,
@@ -371,7 +377,7 @@ const Breadcrumb = () => {
         const normalizedSegment = normalizeSegment(segment);
         const key = normalizedSegment;
 
-        const matchedItem = Object.entries(pathMap).find(([href, _]) =>
+        const matchedItem = Object.entries(pathMap).find(([href]) =>
           href.endsWith(normalizedSegment)
         );
 
