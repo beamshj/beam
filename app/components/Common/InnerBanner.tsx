@@ -5,6 +5,7 @@ import Breadcrump from "./BreadCrump";
 import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { useApplyLang } from "@/lib/applyLang";
+import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 
 interface PageBnrProps {
   BannerData?: {
@@ -21,6 +22,7 @@ interface PageBnrProps {
 const InnerBanner = ({ BannerData, data }: PageBnrProps) => {
   const pathname = usePathname();
   const t = useApplyLang(data);
+  const isArabic = useIsPreferredLanguageArabic()
 
   const lastWordPrimaryColor = pathname.includes("/general-managers-message")
     ? true
@@ -79,7 +81,7 @@ const InnerBanner = ({ BannerData, data }: PageBnrProps) => {
                 })()}
           </motion.h2>
         </div>
-        <div className="h-[1px] w-[60%] bg-gradient-to-r from-white to-transparent mb-[15px] md:mb-[20px] xl:mb-[25px]"></div>
+        <div className={`h-[1px] w-[60%] ${isArabic ? "bg-gradient-to-l from-white to-transparent" : "bg-gradient-to-r from-white to-transparent"} mb-[15px] md:mb-[20px] xl:mb-[25px]`}></div>
         <Breadcrump />
       </div>
     </section>

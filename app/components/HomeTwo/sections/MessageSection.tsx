@@ -91,7 +91,7 @@ const isArabic = useIsPreferredLanguageArabic()
 
               {/* h1 */}
               <motion.div
-                className="lg:pt-4 pb-4 xl:py-7 2xl:pt-[56px] 2xl:pb-[44px]"
+                className={`lg:pt-4 pb-4 xl:py-7 2xl:pt-[56px] 2xl:pb-[44px] ${isArabic ? "lg:h-[430px]" : ""}`}
                 variants={fadeTop}
               >
                 <div>

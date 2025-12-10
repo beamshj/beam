@@ -17,6 +17,7 @@ const NavBar = () => {
   const [isMobile, setIsMobile] = useState(false);
   const isArabic = useIsPreferredLanguageArabic();
   const tMainMenuItems = useApplyLang(mainMenuItems);
+  const tFilterMenuItems = useApplyLang(filterMenuItems)
   const pathname = usePathname();
   const router = useRouter();
 
@@ -30,9 +31,15 @@ const NavBar = () => {
       router.push("/ar" + pathname);
     }
   };
-  const handleRegisterClick = () => {
+  
+const handleRegisterClick = () => {
+  if (isArabic) {
+    window.location.href = "/ar/contact-us?scroll=register";
+  } else {
     window.location.href = "/contact-us?scroll=register";
-  };
+  }
+};
+
 
   useEffect(() => {
     if (isMenuOpen && isMobile) {
@@ -193,14 +200,14 @@ const NavBar = () => {
             </div>
             <div className="flex gap-2  sm:gap-5">
               <div className="flex items-center gap-5">
-                {process.env.NODE_ENV === "development" && (
+                {/* {process.env.NODE_ENV === "development" && ( */}
                   <button
                     onClick={switchLanguage}
-                    className="cursor-pointer hover:text-primary transition-colors duration-300"
+                    className={`cursor-pointer hover:text-primary transition-colors duration-300 ${isArabic ? "font-default" : "font-arabic"}`}
                   >
                     {isArabic ? "English" : "العربية"}
                   </button>
-                )}
+                {/* )} */}
 
                 <button
                   onClick={handleRegisterClick}
@@ -327,7 +334,7 @@ const NavBar = () => {
                 </div>
 
                 <div className="lg:py-3 block lg:hidden">
-                  <Link href={"/"}>
+                  <LangLink href={"/"}>
                     <Image
                       src="/assets/logo.svg"
                       alt="Logo"
@@ -335,7 +342,7 @@ const NavBar = () => {
                       height={77}
                       className="h-[58px] w-fit lg:h-full brightness-0 invert"
                     />
-                  </Link>
+                  </LangLink>
                 </div>
 
                 <div className="flex items-center gap-3 lg:gap-[78px] h-full">
@@ -344,30 +351,30 @@ const NavBar = () => {
                     initial={{ y: 20, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.4, duration: 0.5 }}
+                    onClick={() => setIsMenuOpen(false)}
                   >
-                    <Link
+                    <LangLink
                       href={"/contact-us"}
                       className="hidden lg:block"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
+                      >
                       <button
                         onClick={handleRegisterClick}
                         className="uppercase text-xs border-white text-white border-[1px] ps-5 pe-[12px] py-[11px] flex items-center gap-2 rounded-[50px] font-light cursor-pointer transition-all duration-300 group hover:bg-white hover:text-[#005871]"
                       >
-                        <span className="transition-all duration-300 group-hover:translate-x-1">
+                        <span className={`transition-all duration-300 ${isArabic ? "group-hover:-translate-x-1" : "group-hover:translate-x-1"}`}>
                           {isArabic ? "سجل اهتمام" : "Register Interest"}
                         </span>
-                        <span className="bg-primary rounded-full p-2 w-[27px] h-[27px] flex items-center justify-center transition-all duration-300 group-hover:translate-x-1 group-hover:bg-[#005871]">
+                        <span className={`bg-primary rounded-full p-2 w-[27px] h-[27px] flex items-center justify-center transition-all duration-300 ${isArabic ? "group-hover:-translate-x-1" : "group-hover:translate-x-1"} group-hover:bg-[#005871]`}>
                           <Image
                             src="/assets/arrow.svg"
                             alt="Arrow"
                             width={20}
                             height={20}
-                            className="transition-transform duration-300 group-hover:rotate-45"
+                            className={`transition-transform duration-300 ${isArabic ? "-rotate-90 group-hover:-rotate-135" : "group-hover:rotate-45"}`}
                           />
                         </span>
                       </button>
-                    </Link>
+                    </LangLink>
                   </motion.div>
 
                   {/* Close Button */}
@@ -384,7 +391,7 @@ const NavBar = () => {
                           height="18"
                           viewBox="0 0 19 18"
                           fill="none"
-                          className="transition-transform duration-300 group-hover:rotate-90 group-hover:scale-110"
+                          className={`transition-transform duration-300 ${isArabic ? "group-hover:-rotate-90" : "group-hover:rotate-90"} group-hover:scale-110`}
                         >
                           <line
                             x1="0.646447"
@@ -402,7 +409,7 @@ const NavBar = () => {
                           />
                         </svg>
 
-                        <span className="text-sm font-light text-white transition-all duration-300 group-hover:translate-x-1 hidden lg:block">
+                        <span className={`text-sm font-light text-white transition-all duration-300 ${isArabic ? "group-hover:-translate-x-1" : "group-hover:translate-x-1"} hidden lg:block`}>
                           {isArabic ? "القائمة" : "MENU"}
                         </span>
                       </div>
@@ -416,7 +423,7 @@ const NavBar = () => {
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
                 transition={{ delay: 0.4, duration: 0.5 }}
-                className="h-[1px] w-full bg-[#D3D3D3] origin-left"
+                className={`h-[1px] w-full bg-[#D3D3D3] ${isArabic ? "origin-right" : "origin-left"}`}
               />
 
               {/* SCROLLABLE MENU CONTENT */}
@@ -431,13 +438,13 @@ const NavBar = () => {
                   <div className="hidden lg:flex gap-6 lg:gap-[164px]">
                     <div className="flex overflow-y-auto h-full">
                       <ul className="flex flex-col gap-6 justify-between h-full">
-                        {filterMenuItems.slice(0, -2).map((item, index) => (
+                        {tFilterMenuItems.slice(0, -2).map((item, index) => (
                           <motion.li
                             key={index}
                             initial={{ opacity: 0, x: 30 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.1 * index, duration: 0.4 }}
-                            className="transition-all duration-300 transform hover:translate-x-1 pe-3"
+                            className={`transition-all duration-300 transform ${isArabic ? "hover:-translate-x-1" : "hover:translate-x-1"} pe-3`}
                           >
                             <Link
                               href={item.href}
@@ -456,7 +463,7 @@ const NavBar = () => {
                     {/* Right Column */}
                     <div className="flex flex-col flex-1 overflow-y-auto h-full">
                       <ul className="flex flex-col gap-6 justify-end h-full">
-                        {filterMenuItems.slice(-2).map((item, index) => (
+                        {tFilterMenuItems.slice(-2).map((item, index) => (
                           <motion.li
                             key={index}
                             initial={{ opacity: 0, x: 30 }}
@@ -465,7 +472,7 @@ const NavBar = () => {
                               delay: 0.1 * (index + 5),
                               duration: 0.4,
                             }}
-                            className="transition-all duration-300 transform hover:translate-x-1 pe-5"
+                            className={`transition-all duration-300 transform ${isArabic ? "hover:-translate-x-1" : "hover:translate-x-1"} pe-5`}
                           >
                             <Link
                               href={item.href}

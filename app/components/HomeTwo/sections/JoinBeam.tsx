@@ -5,11 +5,13 @@ import { motion } from "framer-motion";
 import { fadeUp } from "@/public/assets/FramerAnimation/animation";
 import { fadeInLeft } from "@/public/assets/FramerAnimation/animation";
 import { HomeProps } from "../type";
-import Link from "next/link";
 import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
+import { useApplyLang } from "@/lib/applyLang";
+import LangLink from "@/lib/LangLink";
 
 const JoinBeam = ({ data }: { data: HomeProps["tenthSection"] }) => {
   const isArabic = useIsPreferredLanguageArabic();
+  const t = useApplyLang(data)
   return (
     <motion.section
       className="w-full lg:h-full h-[330px] relative max-w-[1920px] mx-auto overflow-hidden"
@@ -42,7 +44,7 @@ const JoinBeam = ({ data }: { data: HomeProps["tenthSection"] }) => {
               whileInView="visible"
               viewport={{ once: true, amount: 0.2 }}
             >
-              {data.title}
+              {t.title}
             </motion.h2>
             <motion.div
               variants={fadeUp}
@@ -52,11 +54,11 @@ const JoinBeam = ({ data }: { data: HomeProps["tenthSection"] }) => {
               transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
             >
               <p className="text-base 2xl:text-lg font-light max-w-[45ch]">
-                {data.description}
+                {t.description}
               </p>
             </motion.div>
           </div>
-          <Link
+          <LangLink
             href={"https://careers.beam.co.ae/en/job-search-results"}
             target="_blank"
           >
@@ -70,7 +72,7 @@ const JoinBeam = ({ data }: { data: HomeProps["tenthSection"] }) => {
             >
               <div className="cursor-pointer px-2 md:px-5 py-2 md:py-3 bg-transparent rounded-full flex items-center gap-2 transition-all duration-300">
                 <p className="text-xs font-light text-white uppercase transition-colors duration-300">
-                  {data.buttonText}
+                  {t.buttonText}
                 </p>
                 <div className={`p-2 flex items-center justify-center bg-primary w-fit rounded-full transition-transform duration-300 ${isArabic ? "-rotate-90 group-hover:-rotate-135" : "group-hover:rotate-45"}`}>
                   <Image
@@ -82,7 +84,7 @@ const JoinBeam = ({ data }: { data: HomeProps["tenthSection"] }) => {
                 </div>
               </div>
             </motion.div>
-          </Link>
+          </LangLink>
         </div>
       </div>
       <div className={`w-full h-full absolute top-0 ${isArabic ? "right-0 bg-gradient-to-r from-transparent via-black/20 to-black/70" : "left-0 bg-gradient-to-l from-transparent via-black/20 to-black/70"} z-20`}></div>

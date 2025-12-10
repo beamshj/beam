@@ -25,7 +25,9 @@ export type BeamSchoolType = {
         image:string,
         imageAlt:string,
         logo:string,
+        logo_ar:string,
         logoAlt:string,
+        logoAlt_ar:string,
         link:string,
         specifications:{
             number:string,

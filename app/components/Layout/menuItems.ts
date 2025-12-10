@@ -62,28 +62,28 @@
 export const mainMenuItems = [
   {
     name: "About Beam",
-    name_ar: "",
+    name_ar: "تعرف على بيم",
     href: "#",
     submenu: [
       { name: "Overview", name_ar: "", href: "/about-us/our-story" },
       {
         name: "Founder’s Message",
-        name_ar: "",
+        name_ar: "كلمة المؤسس",
         href: "/about-us/founders-message",
       },
       {
         name: "General Managers’ Message",
-        name_ar: "",
+        name_ar: "كلمة المدير العام",
         href: "/about-us/general-managers-message",
       },
       {
         name: "BEAM Leadership Team",
-        name_ar: "",
+        name_ar: "فريق قيادة بيم",
         href: "/about-us/school-leadership-team",
       },
       {
         name: "Professional Learning Program",
-        name_ar: "",
+        name_ar: "برنامج التطوير المهني",
         href: "/about-us/professional-learning-program",
       },
     ],
@@ -91,23 +91,23 @@ export const mainMenuItems = [
 
   {
     name: "Beam Schools",
-    name_ar: "",
+    name_ar: "مدارسنا",
     href: "#",
     submenu: [
-      { name: "Beam Schools", name_ar: "", href: "/beam-schools" },
+      { name: "Beam Schools", name_ar: "مدارسنا", href: "/beam-schools" },
       {
         name: "Schools’ Uniqueness",
-        name_ar: "",
+        name_ar: "تميز مدارسنا",
         href: "/beam-schools/school-uniqueness",
       },
       {
         name: "Schools’ Achievements",
-        name_ar: "",
+        name_ar: "إنجازات مدارسنا",
         href: "/beam-schools/school-achievements",
       },
       {
         name: "Accreditation & Affiliation",
-        name_ar: "",
+        name_ar: "الشراكات والاعتمادات",
         href: "/beam-schools/accrediation-and-affiliation",
       },
       {
@@ -117,7 +117,7 @@ export const mainMenuItems = [
       },
       {
         name: "Parents & Students Testimonials",
-        name_ar: "",
+        name_ar: "شهادات أولياء الأمور والطلاب",
         href: "/beam-schools/testimonials",
       },
     ],
@@ -128,7 +128,7 @@ export const mainMenuItems = [
     name_ar: "",
     href: "#",
     submenu: [
-      { name: "Blog", name_ar: "", href: "/news-&-media/blog" },
+      { name: "Blog", name_ar: "مدونة", href: "/news-&-media/blog" },
       {
         name: "Press Release",
         name_ar: "",
@@ -142,7 +142,7 @@ export const mainMenuItems = [
 
   {
     name: "Careers",
-    name_ar: "فرص وظيفية",
+    name_ar: "انضم إلينا",
     href: "https://careers.beam.co.ae/en/job-search-results/",
   },
 ];
@@ -154,7 +154,7 @@ export const sliderMenuItems = [
   { name: "News and Media", href: "/ " },
   { name: "Curriculum Overview", href: "/ " },
   { name: "Application Process", href: "/ " },
-  { name: "Blogs", name_ar: "", href: "/ " },
+  { name: "Blogs", name_ar: "مدونة", href: "/ " },
   { name: "Media Gallery", href: "/ " },
   { name: "Press Release", href: "/ " },
   { name: "Register Your Interest", name_ar: "سجل إهتمام", href: "/ " },
@@ -163,34 +163,34 @@ export const sliderMenuItems = [
 export const filterMenuItems = [
   {
     name: "Schools’ Uniqueness",
-    name_ar: "", href: "/beam-schools/school-uniqueness"
+    name_ar: "تميز مدارسنا", href: "/beam-schools/school-uniqueness"
   },
   {
     name: "Schools Achievements",
-    name_ar: "", href: "/beam-schools/school-achievements"
+    name_ar: "إنجازات مدارسنا", href: "/beam-schools/school-achievements"
   },
   {
     name: "Accreditation & Affiliations",
-    name_ar: "",
+    name_ar: "الشراكات والاعتمادات",
     href: "/beam-schools/accrediation-and-affiliation",
   },
   {
     name: "Parents & Students Testimonials",
-    name_ar: "",
+    name_ar: "شهادات أولياء الأمور والطلاب",
     href: "/beam-schools/testimonials",
   },
   {
     name: "Founder’s Message",
-    name_ar: "", href: "/about-us/founders-message"
+    name_ar: "كلمة المؤسس", href: "/about-us/founders-message"
   },
   {
     name: "Schools’ Leadership Team",
-    name_ar: "",
+    name_ar: "فريق قيادة المدارس",
     href: "/about-us/school-leadership-team",
   },
   {
     name: "Professional Learning Program",
-    name_ar: "",
+    name_ar: "برنامج التطوير المهني",
     href: "/about-us/professional-learning-program",
   },
   {
@@ -199,7 +199,7 @@ export const filterMenuItems = [
   },
   {
     name: "Careers",
-    name_ar: "فرص وظيفية",
+    name_ar: "انضم إلينا",
     href: "https://careers.beam.co.ae/en/job-search-results/",
   },
 ];

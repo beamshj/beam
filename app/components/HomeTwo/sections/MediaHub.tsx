@@ -107,7 +107,7 @@ const MediaHub = ({
                         img: image,
                         date: "",
                         title: cat.title || section.title || "Gallery",
-                        category: isArabic ? "معرض" : "Gallery",
+                        category: isArabic ? "الأخبار والفعاليات" : "Media Hub",
 
                         images: cat.images,
                         description: cat.description,

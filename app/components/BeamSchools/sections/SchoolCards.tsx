@@ -7,9 +7,10 @@ import SplitText from "@/components/SplitText";
 import { motion } from "framer-motion";
 import { moveUp } from "../../motionVarients";
 import { BeamSchoolType, CategoryType, LocationType } from "../type";
-import Link from "next/link";
+// import Link from "next/link";
 import { useApplyLang } from "@/lib/applyLang";
 import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
+import LangLink from "@/lib/LangLink";
 
 const SchoolCards = ({
   data,
@@ -205,7 +206,7 @@ const SchoolCards = ({
               onClick={() => handleCardClick(campus._id)}
               className="relative rounded-[12px] overflow-hidden cursor-pointer w-full h-[300px] lg:h-[350px] xl:h-[480px] 2xl:h-[551px] 2xl:w-[485px] mx-auto group"
             >
-              <Link href={campus.link} target="_blank">
+              <LangLink href={campus.link} target="_blank">
                 {/* Background Image */}
                 <div
                   className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
@@ -300,7 +301,7 @@ const SchoolCards = ({
                     {campus.title}
                   </h3>
                 </div>
-              </Link>
+              </LangLink>
             </motion.div>
           ))}
         </div>

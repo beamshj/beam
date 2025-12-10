@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap');
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
@@ -61,7 +62,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: "DM Sans", sans-serif;
+  /* --font-sans: "DM Sans", sans-serif; */
+  --font-sans: var(--font-sans, "DM Sans"), sans-serif;
   --color-primary: var(--primary);
   --color-colorpara: var(--colorpara);
   --color-bdrcolor: var(--bdrcolor);
@@ -1144,4 +1146,21 @@ html[dir="rtl"] .school-leadership-bullets li::before {
 .custom-quill .ql-editor {
   height: 100%;
   overflow-y: auto;
+}
+
+
+html[dir="rtl"] {
+  --font-sans: "Almarai", sans-serif !important;
+  font-family: "Almarai", sans-serif !important;
+}
+
+
+/* Arabic font */
+.font-arabic {
+  font-family: "Almarai", sans-serif !important;
+}
+
+/* Default DM Sans font */
+.font-default {
+  font-family: var(--font-sans, "DM Sans"), sans-serif !important;
 }
