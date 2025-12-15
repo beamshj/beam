@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DM_Sans } from "next/font/google";
+import { DM_Sans, Almarai } from "next/font/google";
 import "../../globals.css";
 import NavBar from "@/app/components/Layout/NavBar";
 import Footer from "@/app/components/Layout/Footer";
@@ -7,6 +7,13 @@ import Footer from "@/app/components/Layout/Footer";
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
   subsets: ["latin"],
+});
+
+// Arabic font
+const almarai = Almarai({
+  variable: "--font-arabic",
+  weight: ["300", "400", "700", "800"],
+  subsets: ["arabic"],
 });
 
 export const metadata: Metadata = {
@@ -23,7 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${dmSans.variable}  antialiased`}>
+      <body className={`${dmSans.variable} ${almarai.variable} antialiased`}>
         <NavBar />
         {children}
         <Footer />

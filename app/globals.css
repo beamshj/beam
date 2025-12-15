@@ -64,6 +64,7 @@
   --color-foreground: var(--foreground);
   /* --font-sans: "DM Sans", sans-serif; */
   --font-sans: var(--font-sans, "DM Sans"), sans-serif;
+  --font-arabic: var(--font-arabic, "Almarai"), sans-serif;
   --color-primary: var(--primary);
   --color-colorpara: var(--colorpara);
   --color-bdrcolor: var(--bdrcolor);
@@ -1155,12 +1156,11 @@ html[dir="rtl"] {
 }
 
 
-/* Arabic font */
 .font-arabic {
   font-family: "Almarai", sans-serif !important;
 }
 
-/* Default DM Sans font */
 .font-default {
-  font-family: var(--font-sans, "DM Sans"), sans-serif !important;
+  font-family: "DM Sans", sans-serif !important;
 }
+
