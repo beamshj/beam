@@ -175,7 +175,6 @@
 
 // export default Breadcrump;
 
-
 // "use client";
 
 // import React from "react";
@@ -284,7 +283,6 @@
 
 // export default Breadcrumb;
 
-
 "use client";
 
 import React from "react";
@@ -295,141 +293,139 @@ import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 import { mainMenuItems, filterMenuItems } from "@/app/components/Layout/menuItems";
 
 type MenuItem = {
-  name: string;
-  name_ar?: string;
-  href?: string;
-  submenu?: MenuItem[];
+    name: string;
+    name_ar?: string;
+    href?: string;
+    submenu?: MenuItem[];
 };
 
 type SpecialLabels = Record<string, { en: string; ar: string }>;
 
 const Breadcrumb: React.FC = () => {
-  const isArabic = useIsPreferredLanguageArabic();
-  let pathname = usePathname().replace(/\/$/, "");
+    const isArabic = useIsPreferredLanguageArabic();
+    let pathname = usePathname().replace(/\/$/, "");
 
-  // Remove /ar from path
-  pathname = pathname.replace(/^\/ar/, "");
+    pathname = pathname.replace(/^\/ar/, "");
 
-  const segments = pathname.split("/").filter(Boolean);
+    const segments = pathname.split("/").filter(Boolean);
 
-  // manual overrides
-  const specialLabels: SpecialLabels = {
-    "about-us": { en: "About Beam", ar: "تعرف على بيم" },
-  };
+    // ⭐ Parent menu segments that should never be links
+    const NON_CLICKABLE_PARENTS = ["about-us", "beam-schools", "news-and-media"];
 
-  const flattenMenuItems = (items: MenuItem[]) => {
-    const flat: Record<string, { en: string; ar: string }> = {};
-    items.forEach((item) => {
-      if (item.href && item.href !== "#") {
-        flat[normalizeHref(item.href)] = {
-          en: item.name,
-          ar: item.name_ar || item.name,
-        };
-      }
-      if (item.submenu) {
-        item.submenu.forEach((sub) => {
-          if (sub.href && sub.href !== "#") {
-            flat[normalizeHref(sub.href)] = {
-              en: sub.name,
-              ar: sub.name_ar || sub.name,
-            };
-          }
+    const specialLabels: SpecialLabels = {
+        "about-us": { en: "About Beam", ar: "تعرف على بيم" },
+        "news-and-media": { en: "News & Media", ar: "News & Media" },
+    };
+
+    const normalizeSegment = (segment: string) => segment.toLowerCase().replace(/ /g, "-").replace(/&/g, "and");
+
+    const normalizeHref = (href: string) => href.toLowerCase().replace(/ /g, "-").replace(/&/g, "and").replace(/\/$/, "");
+
+    const flattenMenuItems = (items: MenuItem[]) => {
+        const flat: Record<string, { en: string; ar: string }> = {};
+        items.forEach((item) => {
+            if (item.href && item.href !== "#") {
+                flat[normalizeHref(item.href)] = {
+                    en: item.name,
+                    ar: item.name_ar || item.name,
+                };
+            }
+            item.submenu?.forEach((sub) => {
+                if (sub.href && sub.href !== "#") {
+                    flat[normalizeHref(sub.href)] = {
+                        en: sub.name,
+                        ar: sub.name_ar || sub.name,
+                    };
+                }
+            });
         });
-      }
-    });
-    return flat;
-  };
+        return flat;
+    };
 
-  const normalizeSegment = (segment: string) =>
-    segment.toLowerCase().replace(/ /g, "-").replace(/&/g, "and");
+    const pathMap = flattenMenuItems([...mainMenuItems, ...filterMenuItems]);
 
-  const normalizeHref = (href: string) =>
-    href.toLowerCase().replace(/ /g, "-").replace(/&/g, "and").replace(/\/$/, "");
+    const truncateLabel = (label: string) => (label.length > 12 ? label.slice(0, 12) + "…" : label);
 
-  const pathMap = flattenMenuItems([...mainMenuItems, ...filterMenuItems]);
+    let accumulatedPath = "";
 
-  const truncateLabel = (label: string) =>
-    label.length > 12 ? label.slice(0, 12) + "…" : label;
+    return (
+        <ul className="flex items-center gap-2 text-sm font-light text-[#D2D2D2]">
+            {/* Home */}
+            <li className="flex items-center gap-1">
+                <Link href="/" className="hover:underline">
+                    {isArabic ? "الرئيسية" : "Home"}
+                </Link>
 
-  let accumulatedPath = "";
+                {segments.length > 0 && (
+                    <Image
+                        src="/images/about-us/arrow-right.svg"
+                        alt="arrow"
+                        width={18}
+                        height={18}
+                        className={isArabic ? "rotate-180" : ""}
+                    />
+                )}
+            </li>
 
-  return (
-    <ul className="flex items-center gap-2 text-sm font-light text-[#D2D2D2]">
-      {/* Home */}
-      <li className="flex items-center gap-1">
-        <Link href="/" className="hover:underline">
-          {isArabic ? "الرئيسية" : "Home"}
-        </Link>
+            {segments.map((segment, idx) => {
+                const normalized = normalizeSegment(segment);
+                const key = normalized;
 
-        {segments.length > 0 && (
-          <Image
-            src="/images/about-us/arrow-right.svg"
-            alt="arrow-right"
-            width={18}
-            height={18}
-            className={`${isArabic ? "rotate-180" : ""}`}
-          />
-        )}
-      </li>
+                const matched = Object.entries(pathMap).find(([href]) => href.endsWith(normalized));
 
-      {/* Breadcrumb Items */}
-      {segments.map((segment, idx) => {
-        const normalizedSegment = normalizeSegment(segment);
-        const key = normalizedSegment;
+                const label =
+                    specialLabels[key]?.[isArabic ? "ar" : "en"] || matched?.[1]?.[isArabic ? "ar" : "en"] || segment;
 
-        const matchedItem = Object.entries(pathMap).find(([href]) =>
-          href.endsWith(normalizedSegment)
-        );
+                accumulatedPath += "/" + normalized;
 
-        // label logic with overrides
-        const label =
-          specialLabels[key]?.[isArabic ? "ar" : "en"] ||
-          matchedItem?.[1]?.[isArabic ? "ar" : "en"] ||
-          segment;
+                const isLast = idx === segments.length - 1;
+                const isNonClickableParent = NON_CLICKABLE_PARENTS.includes(normalized);
 
-        accumulatedPath += "/" + normalizedSegment;
+                return (
+                    <li
+                        key={idx}
+                        className={`flex items-center gap-1 ${isArabic ? "flex-row-reverse" : "flex-row"}`} // ← FIX: direction controlled here
+                    >
+                        {/* ARROW for Arabic (arrow BEFORE text) */}
+                        {!isLast && isArabic && (
+                            <Image
+                                src="/images/about-us/arrow-right.svg"
+                                alt="arrow"
+                                width={18}
+                                height={18}
+                                className="rotate-180"
+                            />
+                        )}
 
-        const isLast = idx === segments.length - 1;
+                        {/* LABEL OR LINK */}
+                        {!isLast ? (
+                            isNonClickableParent ? (
+                                <span className="cursor-default">
+                                    <span className="block sm:hidden">{truncateLabel(label)}</span>
+                                    <span className="hidden sm:block">{label}</span>
+                                </span>
+                            ) : (
+                                <Link href={accumulatedPath} className="hover:underline">
+                                    <span className="block sm:hidden">{truncateLabel(label)}</span>
+                                    <span className="hidden sm:block">{label}</span>
+                                </Link>
+                            )
+                        ) : (
+                            <span>
+                                <span className="block sm:hidden">{truncateLabel(label)}</span>
+                                <span className="hidden sm:block">{label}</span>
+                            </span>
+                        )}
 
-        return (
-          <li key={idx} className="flex items-center gap-1">
-            {/* arrow for English (before) */}
-            {!isLast && !isArabic && (
-              <Image
-                src="/images/about-us/arrow-right.svg"
-                alt="arrow-right"
-                width={18}
-                height={18}
-              />
-            )}
-
-            {!isLast ? (
-              <Link href={accumulatedPath} className="hover:underline">
-                <span className="block sm:hidden">{truncateLabel(label)}</span>
-                <span className="hidden sm:block">{label}</span>
-              </Link>
-            ) : (
-              <span>
-                <span className="block sm:hidden">{truncateLabel(label)}</span>
-                <span className="hidden sm:block">{label}</span>
-              </span>
-            )}
-
-            {/* arrow for Arabic (after) */}
-            {!isLast && isArabic && (
-              <Image
-                src="/images/about-us/arrow-right.svg"
-                alt="arrow-right"
-                width={18}
-                height={18}
-                className="rotate-180"
-              />
-            )}
-          </li>
-        );
-      })}
-    </ul>
-  );
+                        {/* ARROW for English (arrow AFTER text) */}
+                        {!isLast && !isArabic && (
+                            <Image src="/images/about-us/arrow-right.svg" alt="arrow" width={18} height={18} />
+                        )}
+                    </li>
+                );
+            })}
+        </ul>
+    );
 };
 
 export default Breadcrumb;
