@@ -39,14 +39,14 @@ interface BlogsPageProps {
   pageTitle_ar: string;
   firstSection: {
     title: string;
-    description: string;
+    title_ar: string;
   };
 }
 
 export default function Blogs() {
   const [category, setCategory] = useState<string>("");
   const [categoryArabic, setCategoryArabic] = useState<string>("");
-  const [blogList, setBlogList] = useState<{ _id: string; title: string }[]>(
+  const [blogList, setBlogList] = useState<{ _id: string; title: string, title_ar: string }[]>(
     []
   );
   const [categoryList, setCategoryList] = useState<
@@ -543,7 +543,10 @@ export default function Blogs() {
                   className="flex justify-between border p-2 items-center rounded-md shadow-md hover:shadow-lg transition-all duration-300"
                   key={item._id}
                 >
-                  <div className="text-[16px]">{item.title}</div>
+                  <div className="flex flex-col gap-2">
+                    <div className="text-[16px]">{item.title}</div>
+                    {item.title_ar?.trim().length > 1 ? <div className="text-[16px]">{item.title_ar}</div> : "---------"}
+                  </div>
                   <div className="flex gap-5">
                     <MdEdit
                       onClick={() =>
