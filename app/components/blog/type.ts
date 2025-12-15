@@ -10,6 +10,7 @@ export type BlogType = {
         name:string,
         blogs:{
             title:string,
+            title_ar:string,
             slug:string,
             category?:string,
             coverImage:string,
