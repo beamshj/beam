@@ -8,7 +8,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { useScroll, useTransform, motion } from "framer-motion";
+import { useScroll, useTransform, motion, useSpring } from "framer-motion";
 // Optional: Add modules if needed
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import SplitText from "@/components/SplitText";
@@ -160,16 +160,31 @@ const OurSchools = ({
 
   // Inside your component:
   const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start 0.6", "end 0.3"] // Starts a bit earlier but not too early
-  });
+const { scrollYProgress } = useScroll({
+  target: containerRef,
+  offset: ["start 0.8", "end 0.5"],
+});
+
+
 
   // More dramatic transformations
   // const opacity = useTransform(scrollYProgress, [0, 1, 1, 1], [0, 1, 1, 0]);
   // const scale = useTransform(scrollYProgress, [0, 0.75, 0.75, 1], [0.6, 1, 1, 0.6]); // Scales from 60% to 100%
   // const y = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [150, 0, 0, -150]); // Moves 150px
-  const rotateX = useTransform(scrollYProgress, [0, 0.30, 0.75, 1], [30, 5, -5, -30]);
+  // const rotateX = useTransform(scrollYProgress, [0, 0.30, 0.75, 1], [30, 5, -5, -30]);
+const rotateXRaw = useTransform(
+  scrollYProgress,
+  [0, 0.3, 0.75],
+  [30, 0, -0],
+  { clamp: true }
+);
+
+const rotateX = useSpring(rotateXRaw, {
+  stiffness: 120, 
+  damping: 30, 
+  mass: 0.5, 
+});
+
 
 
 
