@@ -163,7 +163,7 @@ const MediaHub = ({
                   delay={100}
                   duration={0.6}
                   ease="power3.out"
-                  splitType="chars"
+                  splitType="words"
                   from={{ opacity: 0, y: 40 }}
                   to={{ opacity: 1, y: 0 }}
                   threshold={0.1}
@@ -213,9 +213,8 @@ const MediaHub = ({
                 return (
                   <SwiperSlide key={index}>
                     <div
-                      className={`h-[350px] lg:h-[450px] xl:h-[557px] rounded-[15px] group slidegpmn cursor-pointer relative ${
-                        index == activeIndex ? "active-slide" : ""
-                      }`}
+                      className={`h-[350px] lg:h-[450px] xl:h-[557px] rounded-[15px] group slidegpmn cursor-pointer relative ${index == activeIndex ? "active-slide" : ""
+                        }`}
                       style={{
                         backgroundImage: `url(${value.img})`,
                         backgroundSize: "cover",
@@ -245,10 +244,9 @@ const MediaHub = ({
                           {value.date ? (
                             <p
                               className={`text-white text-sm font-light transform transition-all duration-500 delay-100
-                                ${
-                                  isActiveOnMobile
-                                    ? "opacity-100 translate-y-0"
-                                    : "opacity-0 translate-y-2 lg:group-hover:opacity-100 lg:group-hover:translate-y-0"
+                                ${isActiveOnMobile
+                                  ? "opacity-100 translate-y-0"
+                                  : "opacity-0 translate-y-2 lg:group-hover:opacity-100 lg:group-hover:translate-y-0"
                                 }`}
                             >
                               {value.date}
@@ -258,10 +256,9 @@ const MediaHub = ({
                           {/* ✅ title */}
                           <p
                             className={`text-white line-clamp-2 xl:line-clamp-3 text-lg lg:text-xl font-light leading-[1.2] mt-6 transform transition-all duration-500 delay-300
-                              ${
-                                isActiveOnMobile
-                                  ? "opacity-100 translate-x-0"
-                                  : "opacity-0 -translate-x-4 lg:group-hover:opacity-100 lg:group-hover:translate-x-0"
+                              ${isActiveOnMobile
+                                ? "opacity-100 translate-x-0"
+                                : "opacity-0 -translate-x-4 lg:group-hover:opacity-100 lg:group-hover:translate-x-0"
                               }`}
                           >
                             {value.title}
@@ -270,10 +267,9 @@ const MediaHub = ({
                           {/* ✅ arrow icon */}
                           <div
                             className={`transition-all duration-300 delay-200 top-5 right-5 p-2 mt-6 xl:mt-15 transform rounded-full w-[40px] h-[40px] lg:w-[75px] lg:h-[75px] flex items-center justify-center border border-white
-                              ${
-                                isActiveOnMobile
-                                  ? "opacity-100 -translate-y-2 delay-300"
-                                  : "opacity-0 lg:group-hover:opacity-100 lg:group-hover:-translate-y-2 lg:group-hover:delay-300"
+                              ${isActiveOnMobile
+                                ? "opacity-100 -translate-y-2 delay-300"
+                                : "opacity-0 lg:group-hover:opacity-100 lg:group-hover:-translate-y-2 lg:group-hover:delay-300"
                               }`}
                           >
                             <svg
@@ -302,10 +298,9 @@ const MediaHub = ({
                         {/* ✅ category badge */}
                         <div
                           className={`transition-all duration-300 px-3 py-1 border border-white rounded-full text-white absolute bottom-5 left-5
-                            ${
-                              isActiveOnMobile
-                                ? "translate-x-2 delay-300"
-                                : "lg:group-hover:translate-x-2 lg:group-hover:delay-300"
+                            ${isActiveOnMobile
+                              ? "translate-x-2 delay-300"
+                              : "lg:group-hover:translate-x-2 lg:group-hover:delay-300"
                             }`}
                         >
                           <p>{value.category}</p>

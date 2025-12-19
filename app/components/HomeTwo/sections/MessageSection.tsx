@@ -14,15 +14,15 @@ import { useApplyLang } from "@/lib/applyLang";
 import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 
 const MessageSection = ({ data }: { data: HomeProps["sixthSection"] }) => {
-const t = useApplyLang(data)
-const isArabic = useIsPreferredLanguageArabic()
+  const t = useApplyLang(data)
+  const isArabic = useIsPreferredLanguageArabic()
 
   return (
     <section
       className={`relative w-full bg-[#F6F6F6] ${isArabic ? "aftergd_ar" : "aftergd"} max-w-[1920px] mx-auto overflow-hidden`}
-      
+
     >
-    {/* <motion.section
+      {/* <motion.section
       className="relative w-full bg-[#F6F6F6] aftergd max-w-[1920px] mx-auto overflow-hidden"
       variants={fadeUp}
       initial="hidden"
@@ -39,7 +39,7 @@ const isArabic = useIsPreferredLanguageArabic()
               delay={100}
               duration={0.6}
               ease="power3.out"
-              splitType="chars"
+              splitType="words"
               from={{ opacity: 0, y: 40 }}
               to={{ opacity: 1, y: 0 }}
               threshold={0.1}
