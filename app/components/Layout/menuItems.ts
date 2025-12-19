@@ -62,10 +62,10 @@
 export const mainMenuItems = [
   {
     name: "About Beam",
-    name_ar: "تعرف على بيم",
+    name_ar: "نبذة عنا",
     href: "#",
     submenu: [
-      { name: "Overview", name_ar: "", href: "/about-us/our-story" },
+      { name: "Overview", name_ar: "نظرة عامة", href: "/about-us/our-story" },
       {
         name: "Founder’s Message",
         name_ar: "كلمة المؤسس",
@@ -77,8 +77,8 @@ export const mainMenuItems = [
         href: "/about-us/general-managers-message",
       },
       {
-        name: "BEAM Leadership Team",
-        name_ar: "فريق قيادة بيم",
+        name: "Leadership Team",
+        name_ar: "فريق قيادة",
         href: "/about-us/school-leadership-team",
       },
       {
@@ -111,8 +111,8 @@ export const mainMenuItems = [
         href: "/beam-schools/accrediation-and-affiliation",
       },
       {
-        name: "School Scholarship Programs",
-        name_ar: "",
+        name: "Scholarship Programs",
+        name_ar: "برنامج المنح الدراسية",
         href: "/beam-schools/school-scholarship-programs",
       },
       {
@@ -125,16 +125,16 @@ export const mainMenuItems = [
 
   {
     name: "News & Media",
-    name_ar: "",
+    name_ar: "الأخبار والمواد الإعلامية",
     href: "#",
     submenu: [
       { name: "Blog", name_ar: "مدونة", href: "/news-&-media/blog" },
       {
         name: "Press Release",
-        name_ar: "",
+        name_ar: "البيانات الصحفية",
         href: "/news-&-media/press-release",
       },
-      { name: "Gallery", name_ar: "", href: "/news-&-media/gallery" },
+      { name: "Gallery", name_ar: "الصور", href: "/news-&-media/gallery" },
     ],
   },
 
