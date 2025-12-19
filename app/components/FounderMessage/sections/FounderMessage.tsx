@@ -30,7 +30,7 @@ export default function FounderMessage({
                   delay={100 + idx * 50}
                   duration={0.6}
                   ease="power3.out"
-                  splitType="chars"
+                  splitType="words"
                   from={{ opacity: 0, y: 40 }}
                   to={{ opacity: 1, y: 0 }}
                   threshold={0.1}

@@ -174,7 +174,7 @@ const OurSchools = ({
               delay={100}
               duration={0.6}
               ease="power3.out"
-              splitType="chars"
+              splitType="words"
               from={{ opacity: 0, y: 40 }}
               to={{ opacity: 1, y: 0 }}
               threshold={0} // 50% of element must be visible
@@ -194,19 +194,17 @@ const OurSchools = ({
                   whileInView="show"
                   viewport={{ once: true, amount: 0.2 }}
                   onClick={() => setSelectedCurriculum(ALL_TEXT)}
-                  className={`p-[1px] group rounded-full cursor-pointer ${
-                    selectedCurriculum === ALL_TEXT
+                  className={`p-[1px] group rounded-full cursor-pointer ${selectedCurriculum === ALL_TEXT
                       ? "bg-[linear-gradient(90deg,_#42BADC_0%,_#12586C_100%)] "
                       : "bg-bdrcolor hover:bg-[linear-gradient(90deg,_#42BADC_0%,_#12586C_100%)]"
-                  }`}
+                    }`}
                 >
                   <div className="px-4 xl:px-5 py-2 md:py-2 xl:py-3 bg-white rounded-full">
                     <p
-                      className={`smtext10 text-xs font-light uppercase ${
-                        selectedCurriculum === "all"
+                      className={`smtext10 text-xs font-light uppercase ${selectedCurriculum === "all"
                           ? "text-black"
                           : "text-colorpara group-hover:text-black"
-                      }`}
+                        }`}
                     >
                       {ALL_TEXT}
                     </p>
@@ -223,19 +221,17 @@ const OurSchools = ({
                     whileInView="show"
                     viewport={{ once: true, amount: 0.2 }}
                     onClick={() => setSelectedCurriculum(curriculum)}
-                    className={`p-[1px] group rounded-full cursor-pointer ${
-                      selectedCurriculum === curriculum
+                    className={`p-[1px] group rounded-full cursor-pointer ${selectedCurriculum === curriculum
                         ? "bg-[linear-gradient(90deg,_#42BADC_0%,_#12586C_100%)]"
                         : "bg-bdrcolor hover:bg-[linear-gradient(90deg,_#42BADC_0%,_#12586C_100%)]"
-                    }`}
+                      }`}
                   >
                     <div className="px-2 md:px-4 xl:px-5 py-2 md:py-2 xl:py-3 bg-white rounded-full">
                       <p
-                        className={`smtext10 text-xs font-light uppercase ${
-                          selectedCurriculum === curriculum
+                        className={`smtext10 text-xs font-light uppercase ${selectedCurriculum === curriculum
                             ? "text-black"
                             : "text-foreground group-hover:text-black"
-                        }`}
+                          }`}
                       >
                         {curriculum}
                       </p>
@@ -362,18 +358,16 @@ const OurSchools = ({
                                 className={`relative group overflow-hidden flex justify-between items-center px-3 py-[2.5px] rounded-[10px] transition-all duration-500`}
                               >
                                 <div
-                                  className={`absolute inset-0 transition-opacity duration-500 ${
-                                    index % 2 === 0
+                                  className={`absolute inset-0 transition-opacity duration-500 ${index % 2 === 0
                                       ? "bg-[linear-gradient(90deg,#E2F5FF_0%,rgba(226,245,255,0)_100%)] group-hover:opacity-0"
                                       : "bg-[linear-gradient(90deg,#F5EBFF_0%,rgba(245,235,255,0)_100%)] group-hover:opacity-0"
-                                  }`}
+                                    }`}
                                 ></div>
                                 <div
-                                  className={`absolute inset-0 opacity-0 transition-opacity duration-500 ${
-                                    index % 2 === 0
+                                  className={`absolute inset-0 opacity-0 transition-opacity duration-500 ${index % 2 === 0
                                       ? "group-hover:opacity-100 bg-[linear-gradient(90deg,#42BADC_0%,rgba(66,186,220,0)_100%)]"
                                       : "group-hover:opacity-100 bg-[linear-gradient(90deg,#7E5AA3_0%,rgba(126,90,163,0)_100%)]"
-                                  }`}
+                                    }`}
                                 ></div>
                                 <div className="relative z-10 flex justify-between items-center w-full">
                                   <p className="xl:text-md font-light text-colorpara leading-[1.8] transition-colors duration-500 group-hover:text-black">

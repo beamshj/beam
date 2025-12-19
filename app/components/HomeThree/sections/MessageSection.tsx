@@ -15,9 +15,9 @@ const MessageSection = ({ data }: { data: HomeProps["sixthSection"] }) => {
   return (
     <section
       className="relative w-full bg-[#F6F6F6] aftergd max-w-[1920px] mx-auto overflow-hidden"
-      
+
     >
-    {/* <motion.section
+      {/* <motion.section
       className="relative w-full bg-[#F6F6F6] aftergd max-w-[1920px] mx-auto overflow-hidden"
       variants={fadeUp}
       initial="hidden"
@@ -34,7 +34,7 @@ const MessageSection = ({ data }: { data: HomeProps["sixthSection"] }) => {
               delay={100}
               duration={0.6}
               ease="power3.out"
-              splitType="chars"
+              splitType="words"
               from={{ opacity: 0, y: 40 }}
               to={{ opacity: 1, y: 0 }}
               threshold={0.1}

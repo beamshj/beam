@@ -13,7 +13,7 @@ import SplitText from "@/components/SplitText";
 import { HomeProps } from "../type";
 
 gsap.registerPlugin(ScrollTrigger);
-const VideoSection = ({data}: {data: HomeProps['fourthSection']}) => {
+const VideoSection = ({ data }: { data: HomeProps['fourthSection'] }) => {
   const [isOpen, setIsOpen] = useState(false);
   const openPopup = () => setIsOpen(true);
   const closePopup = () => setIsOpen(false);
@@ -65,7 +65,7 @@ const VideoSection = ({data}: {data: HomeProps['fourthSection']}) => {
             delay={100}
             duration={0.6}
             ease="power3.out"
-            splitType="chars"
+            splitType="words"
             from={{ opacity: 0, y: 40 }}
             to={{ opacity: 1, y: 0 }}
             threshold={0.1}
