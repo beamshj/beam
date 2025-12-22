@@ -8,7 +8,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { AboutProps } from "../type";
 import { useApplyLang } from "@/lib/applyLang";
-
+import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 gsap.registerPlugin(ScrollTrigger);
 
 interface OurStorySectionProps {
@@ -18,6 +18,7 @@ interface OurStorySectionProps {
 const OurStorySection: React.FC<OurStorySectionProps> = ({ data }) => {
   const imageRef = useRef<HTMLImageElement>(null);
   const t = useApplyLang(data);
+  const isArabic = useIsPreferredLanguageArabic()
 
   useEffect(() => {
     if (imageRef.current) {
@@ -70,7 +71,7 @@ const OurStorySection: React.FC<OurStorySectionProps> = ({ data }) => {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
-            className="absolute left-[20px] bottom-[20px] right-[20px] lg:right-[60px] xl:left-[50px] xl:bottom-[40px] 2xl:left-[60px] 2xl:bottom-[50px] text-white text-md md:text-lg max-w-[20ch] xl:max--w-0 xl:text-xl 2xl:text-4xl font-light leading-[1.111111111]"
+            className={`absolute left-[20px] bottom-[20px] right-[20px] lg:right-[60px] xl:left-[50px] xl:bottom-[40px] 2xl:left-[60px] 2xl:bottom-[50px] text-white text-md md:text-lg  xl:max--w-0 xl:text-xl 2xl:text-4xl font-light leading-[1.111111111] ${isArabic ? "max-w-6xl" : "max-w-[20ch]"}`}
           >
             {t.subTitle} <span className="text-primary">{t.highlight}</span>
           </motion.h2>
