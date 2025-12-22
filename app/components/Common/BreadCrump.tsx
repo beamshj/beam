@@ -314,7 +314,7 @@ const Breadcrumb: React.FC = () => {
 
     const specialLabels: SpecialLabels = {
         "about-us": { en: "About Beam", ar: "تعرف على بيم" },
-        "news-and-media": { en: "News & Media", ar: "News & Media" },
+        "news-and-media": { en: "News & Media", ar: "الأخبار والمواد الإعلامية" },
     };
 
     const normalizeSegment = (segment: string) => segment.toLowerCase().replace(/ /g, "-").replace(/&/g, "and");

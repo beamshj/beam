@@ -65,7 +65,7 @@ const AcademicCultural = ({ data }: { data: HomeProps["thirdSection"] }) => {
             <SplitText
               tag="h2"
               text={t.title}
-              className="text-lg md:text-xl xl:text-2xl 2xl:text-3xl font-light leading-tight text-black max-w-[13ch] lettersp-4"
+              className={`text-lg md:text-xl xl:text-2xl 2xl:text-3xl font-light leading-tight text-black max-w-[13ch] lettersp-4 `}
               delay={100}
               duration={0.6}
               ease="power3.out"
@@ -74,7 +74,7 @@ const AcademicCultural = ({ data }: { data: HomeProps["thirdSection"] }) => {
               to={{ opacity: 1, y: 0 }}
               threshold={0.1}
               rootMargin="-100px"
-              textAlign="left"
+              textAlign={isArabic ? "right" : "left"}
             />
 
             {/* Description */}

@@ -44,6 +44,7 @@ const Main = ({ data }: { data: AccreditationProps["firstSection"] }) => {
             className="absolute top-0 left-0 z-0 h-full object-cover"
           />
           <div className="relative z-30 text-white">
+            <div>
             <SplitText
               tag="h2"
               text={t.title}
@@ -56,8 +57,10 @@ const Main = ({ data }: { data: AccreditationProps["firstSection"] }) => {
               to={{ opacity: 1, y: 0 }}
               threshold={0.1}
               rootMargin="-100px"
-              textAlign="left"
+              textAlign={isArabic ? "right" : "left"}
             />
+            </div>
+            <div>
             <SplitText
               tag="p"
               text={t.description}
@@ -72,6 +75,7 @@ const Main = ({ data }: { data: AccreditationProps["firstSection"] }) => {
               rootMargin="-100px"
               textAlign={isArabic ? "right" : "left"}
             />
+            </div>
           </div>
         </motion.div>
       </div>
