@@ -43,12 +43,7 @@ const InclusionSection: React.FC<InclusionSectionProps> = ({ data }) => {
       <div className="container">
         <div className="relative h-[500px] 2xl:h-[638px] rounded-[12px] overflow-hidden ">
           {/* Background Image inside container */}
-          <Image
-            src={t.image}
-            alt={t.imageAlt}
-            fill
-            className="object-cover"
-          />
+          <Image src={t.image} alt={t.imageAlt} fill className="object-cover" />
           {/* overlay */}
           <div className="absolute inset-0 bg-black/40"></div>
           <div
@@ -65,7 +60,7 @@ const InclusionSection: React.FC<InclusionSectionProps> = ({ data }) => {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, amount: 0.2 }}
-              className="text-xl xl:text-3xl 2xl:text-4xl font-light mb-2 leading-[1.111111] text-white"
+              className={`text-xl xl:text-3xl 2xl:text-4xl font-light leading-[1.111111] text-white ${isArabic ? "mb-6" : "mb-2"}`}
             >
               {t.title}
             </motion.h2>
