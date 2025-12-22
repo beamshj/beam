@@ -102,9 +102,8 @@ export default function ValuesGrid({ data }: Props) {
                       {item.title}
                     </h3> */}
 
-                    <h3
-                      className={`
-                        absolute rounded-full text-[1.3rem] md:text-md xl:text-lg 2xl:text-xl font-light transition-all duration-500 flex items-center justify-center
+                    <h3 className={`
+                        absolute rounded-full  font-light transition-all duration-500 flex items-center justify-center ${isArabic ? "text-[1.3rem] md:text-md xl:text-lg" :"text-[1.3rem] md:text-md xl:text-lg 2xl:text-xl"}
                         ${
                           hovered === index
                             ? "top-[26px] left-1/2 -translate-x-1/2 w-[190px] lg:w-[220px] 2xl:w-[250px] text-center border-none bg-[linear-gradient(131deg,rgba(66,186,220,1)_0%,rgba(126,90,163,1)_100%)] px-3"
