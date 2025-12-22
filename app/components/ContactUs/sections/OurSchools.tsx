@@ -310,25 +310,13 @@ export default function OurSchools({
             rootMargin="-10px"
             textAlign="left"
           />
-          <motion.p
-            variants={moveUp(0.2)}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
-            className="text-colorpara font-light text-sm leading-[1.52] mt-3 xl:mt-[50px]"
-          >
+          <motion.p variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="text-colorpara font-light text-sm leading-[1.52] mt-3 xl:mt-[50px]" >
             {isArabic ? contactData.secondSection.description_ar?.trim() ? contactData.secondSection.description_ar : contactData.secondSection.description : contactData.secondSection.description}
           </motion.p>
         </div>
 
         {/* Cards */}
-        <motion.div
-          variants={moveUp(0.4)}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.2 }}
-          className="flex flex-wrap lg:flex-row gap-6 lg:gap-[1%] justify-between"
-        >
+        <motion.div variants={moveUp(0.4)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="flex flex-wrap lg:flex-row gap-6 lg:gap-[1%] justify-between" >
           {t.map((school, i) => {
             const isActive = activeIndex === i;
             const showActive = isActive;
@@ -415,7 +403,7 @@ export default function OurSchools({
                         {school.title}
                       </h3>
                       <div className="mt-[15px] inline-flex items-center text-sm font-light">
-                        Learn more{" "}
+                        {isArabic ? "تعرّف على المزيد" : "Learn more"}
                         <Image
                           src="/images/arrow-right-tip.svg"
                           alt="arrow"

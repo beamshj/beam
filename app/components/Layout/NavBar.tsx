@@ -222,7 +222,7 @@ const handleRegisterClick = () => {
                         : "group-hover:translate-x-1"
                     }`}
                   >
-                    {isArabic ? "سجل اهتمام" : "Register Interest"}
+                    {isArabic ? "سجل اهتمامك" : "Register Interest"}
                   </span>
                   <span
                     className="hidden sm:flex bg-primary rounded-full p-2 w-[27px] h-[27px]  items-center justify-center
@@ -362,7 +362,7 @@ const handleRegisterClick = () => {
                         className="uppercase text-xs border-white text-white border-[1px] ps-5 pe-[12px] py-[11px] flex items-center gap-2 rounded-[50px] font-light cursor-pointer transition-all duration-300 group hover:bg-white hover:text-[#005871]"
                       >
                         <span className={`transition-all duration-300 ${isArabic ? "group-hover:-translate-x-1" : "group-hover:translate-x-1"}`}>
-                          {isArabic ? "سجل اهتمام" : "Register Interest"}
+                          {isArabic ? "سجل اهتمامك" : "Register Interest"}
                         </span>
                         <span className={`bg-primary rounded-full p-2 w-[27px] h-[27px] flex items-center justify-center transition-all duration-300 ${isArabic ? "group-hover:-translate-x-1" : "group-hover:translate-x-1"} group-hover:bg-[#005871]`}>
                           <Image

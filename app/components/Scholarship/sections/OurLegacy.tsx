@@ -45,7 +45,8 @@ const OurLegacy = ({ data }: { data: ScholarshipProps["fourthSection"] }) => {
               rootMargin="-100px"
               textAlign={isArabic ? "right" : "left"}
             />
-
+          </div>
+          <div>
             <SplitText
               tag="p"
               text={t.description}
@@ -67,44 +68,31 @@ const OurLegacy = ({ data }: { data: ScholarshipProps["fourthSection"] }) => {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, amount: 0.1 }}
-              className="mb-5 md:mb-0 w-fit p-[1px] group transition-shadow border-[1px] border-primary rounded-full   hover:shadow-[0_0_15px_rgba(66,186,220,0.5)]"
-            > 
-                <div className="  px-3 md:px-5 py-0 md:py-3 bg-transparent rounded-full flex items-center md:gap-2 transition-all duration-300">
+              className="mb-5 md:mb-0 w-fit p-[1px] group transition-shadow border-[1px] border-primary rounded-full hover:shadow-[0_0_15px_rgba(66,186,220,0.5)]" > 
+                <div className="px-3 md:px-5 py-0 md:py-3 bg-transparent rounded-full flex items-center md:gap-2 transition-all duration-300">
                   <div className="p-2 flex items-center justify-center w-fit  ">
-                    <Image
-                      src="/images/scholarship/user.svg"
-                      alt="arrow"
-                      width={24}
-                      height={24}
-                    />
+                    <Image src="/images/scholarship/user.svg" alt="arrow" width={24} height={24} />
                   </div>
                   <p className="text-xs font-light text-white  transition-colors duration-300">
                     {t.buttonText}
                   </p>
                 </div> 
             </motion.div>
-            <motion.div
-              variants={moveUp(0.4)}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.1 }}
+            <motion.div variants={moveUp(0.4)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.1 }}>
+            <div
               className="w-fit p-[1px] group transition-all duration-300 border-[1px] border-primary rounded-full hover:translate-x-[5px] hover:shadow-[0_0_15px_rgba(66,186,220,0.5)]"
             >
               <a href={`mailto:${t.email}`}>
                 <div className="cursor-pointer px-3 md:px-5 py-0 md:py-3 bg-transparent rounded-full flex items-center md:gap-2 transition-all duration-300">
                   <div className="p-2 flex items-center justify-center w-fit ">
-                    <Image
-                      src="/images/scholarship/mail.svg"
-                      alt="arrow"
-                      width={24}
-                      height={24}
-                    />
+                    <Image src="/images/scholarship/mail.svg" alt="arrow" width={24} height={24} />
                   </div>
                   <p className="text-xs font-light text-white  transition-colors duration-300">
                     {t.email}
                   </p>
                 </div>
               </a>
+            </div>
             </motion.div>
           </div>
         </div>

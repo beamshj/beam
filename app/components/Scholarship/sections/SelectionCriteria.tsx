@@ -77,7 +77,7 @@ const SelectionCriteria = ({
               to={{ opacity: 1, y: 0 }}
               threshold={0.1}
               rootMargin="-100px"
-              textAlign="left"
+              textAlign={isArabic ? "right" : "left"}
             />
             {/* <p className=" text-sm leading-[1.526315789473684] max-w-[81ch] mb-0 font-light  text-colorpara">{criteriaData.seconddescription}</p> */}
             <div>
@@ -93,7 +93,7 @@ const SelectionCriteria = ({
                 to={{ opacity: 1, y: 0 }}
                 threshold={0.1}
                 rootMargin="-100px"
-                textAlign="left"
+                textAlign={isArabic ? "right" : "left"}
               />
             </div>
           </div>

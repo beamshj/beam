@@ -151,7 +151,7 @@ export const mainMenuItems = [
 export const sliderMenuItems = [
   { name: "About Us", href: "/ " },
   { name: "Our Schools", href: "/ " },
-  { name: "News and Media", href: "/ " },
+  { name: "News and Media", name_ar:"الأخبار والمواد الإعلامية", href: "/ " },
   { name: "Curriculum Overview", href: "/ " },
   { name: "Application Process", href: "/ " },
   { name: "Blogs", name_ar: "مدونة", href: "/ " },

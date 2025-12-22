@@ -148,7 +148,7 @@ const MediaHub = ({
     // ✅ FIXED: Memoize mediaHubData to prevent new object creation
     const mediaHubData = useMemo(
         () => ({
-            heading: "Media Hub",
+            heading: isArabic ? "الوسائط" : "Media Hub",
             mediaHub: combinedItems,
         }),
         [combinedItems]
