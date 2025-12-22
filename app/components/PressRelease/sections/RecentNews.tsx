@@ -96,10 +96,14 @@ const RecentNews = ({ categories }: RecentNewsProps) => {
               className="pb-4 md:pb-6 xl:pb-8 2xl:pb-12 text-colorpara text-sm font-light"
             >
               <p>
-                Stay informed with the latest updates, achievements, and events
-                from BEAM Education. Explore our news stories to see how our
-                schools are shaping futures.
+                {
+                  isArabic
+                    ? 'ابقَ على اطلاع بآخر المستجدات والإنجازات والفعاليات من مؤسسة "بيم" التعليمية. اطّلع على أخبارنا لتكتشف كيف تسهم مدارسنا في بناء مستقبل الأجيال.'
+                    : "Stay informed with the latest updates, achievements, and events from BEAM Education. Explore our news stories to see how our schools are shaping futures."
+                }
               </p>
+
+
             </motion.div>
 
             {/* ✅ Pass selectedCategory to Newslist */}
@@ -118,7 +122,7 @@ const RecentNews = ({ categories }: RecentNewsProps) => {
               className="p-4 md:p-6 xl:p-10 bg-[#F6F6F6] rounded-xl mb-5 md:mb-7 mt-25 lg:mt-0"
             >
               <p className="text-sm font-light text-colorpara mb-5">
-                {"Popular News"}
+                {isArabic ? "الأخبار الشائعة" : "Popular News"}
               </p>
               <PopularNews
                 data={

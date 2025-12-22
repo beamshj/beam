@@ -74,7 +74,7 @@ const ContactForm: React.FC<{ data: FirstSection }> = ({ data }) => {
 
     const options = isArabic
         ? [
-              { value: "", label: "الغرض من الاستفسار" }, // Purpose of enquiry
+            { value: "", label: "الغرض من الرسالة" }, // Purpose of enquiry
               { value: "admission", label: "القبول" }, // Admission
               { value: "career", label: "الوظائف" }, // Career
               { value: "general", label: "عام" }, // General
@@ -237,7 +237,7 @@ const ContactForm: React.FC<{ data: FirstSection }> = ({ data }) => {
                         >
                             <input
                                 type="text"
-                                placeholder={isArabic ? "اسم العائلة" : "Enter Second Name"}
+                                placeholder={isArabic ? "اسم العائلة" : "Enter Last Name"}
                                 {...register("lastName")}
                                 className="w-full border-b text-colorpara border-colorpara py-2 xl:py-[23px] focus:outline-none placeholder:text-colorpara text-sm font-light"
                             />
