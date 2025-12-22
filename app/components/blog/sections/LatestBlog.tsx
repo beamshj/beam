@@ -37,7 +37,7 @@ export default function LatestBlogs({
       <div className="container">
         <SplitText
           tag="h2"
-          text={`Latest Blogs`}
+          text={`${isArabic ? "أحدث المقالات" : "Latest Blogs"}`}
           className="text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl font-light text-black leading-[1.1111] mb-5 xl:mb-[30px] 2xl:mb-[50px]"
           delay={200}
           duration={0.6}
