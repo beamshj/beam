@@ -151,7 +151,7 @@ export const mainMenuItems = [
 export const sliderMenuItems = [
   { name: "About Us", href: "/ " },
   { name: "Our Schools", href: "/ " },
-  { name: "News and Media", name_ar:"الأخبار والمواد الإعلامية", href: "/ " },
+  { name: "News and Media", name_ar: "الأخبار والمواد الإعلامية", href: "/ " },
   { name: "Curriculum Overview", href: "/ " },
   { name: "Application Process", href: "/ " },
   { name: "Blogs", name_ar: "مدونة", href: "/ " },
@@ -163,11 +163,13 @@ export const sliderMenuItems = [
 export const filterMenuItems = [
   {
     name: "Schools’ Uniqueness",
-    name_ar: "تميز مدارسنا", href: "/beam-schools/school-uniqueness"
+    name_ar: "تميز مدارسنا",
+    href: "/beam-schools/school-uniqueness",
   },
   {
     name: "Schools Achievements",
-    name_ar: "إنجازات مدارسنا", href: "/beam-schools/school-achievements"
+    name_ar: "إنجازات مدارسنا",
+    href: "/beam-schools/school-achievements",
   },
   {
     name: "Accreditation & Affiliations",
@@ -181,11 +183,12 @@ export const filterMenuItems = [
   },
   {
     name: "Founder’s Message",
-    name_ar: "كلمة المؤسس", href: "/about-us/founders-message"
+    name_ar: "كلمة المؤسس",
+    href: "/about-us/founders-message",
   },
   {
-    name: "Schools’ Leadership Team",
-    name_ar: "فريق قيادة المدارس",
+    name: "Leadership Team",
+    name_ar: "فريق القيادة",
     href: "/about-us/school-leadership-team",
   },
   {
@@ -195,7 +198,8 @@ export const filterMenuItems = [
   },
   {
     name: "Contact Us",
-    name_ar: "تواصل معنا", href: "/contact-us"
+    name_ar: "تواصل معنا",
+    href: "/contact-us",
   },
   {
     name: "Careers",

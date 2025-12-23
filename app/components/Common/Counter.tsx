@@ -49,7 +49,7 @@ const Counter: React.FC<CounterProps> = ({ from = 0, to, duration = 2 }) => {
     }, 1000 / 60);
   };
 
-  return <span ref={ref}>{isNaN(count) ? 0 : count}</span>;
+  return <span ref={ref} dir="ltr">{isNaN(count) ? 0 : count}</span>;
 };
 
 export default Counter;

@@ -25,7 +25,7 @@ export default function PLProgram({
             <SplitText
               tag="h2"
               text={t.mainTitle}
-              className="text-lg lg:text-xl xl:text-2xl 2xl:text-4xl font-light leading-[1.111] mb-3 2xl:mb-[43px] lettersp-2"
+              className={` font-light leading-[1.111] mb-3 2xl:mb-[43px] lettersp-2 ${isArabic ? 'text-lg lg:text-xl xl:text-2xl 2xl:text-3xl' : 'text-lg lg:text-xl xl:text-2xl 2xl:text-4xl'}`}
               delay={200}
               duration={0.6}
               ease="power3.out"
@@ -40,7 +40,7 @@ export default function PLProgram({
             <SplitText
               tag="h3"
               text={t.subTitle}
-              className="text-md mb-1 xl:text-lg 2xl:text-xl text-black leading-[1.4] font-light  "
+              className={`text-md  xl:text-lg 2xl:text-xl text-black leading-[1.4] font-light ${isArabic ? 'mb-4' : 'mb-2'}`}
               delay={200}
               duration={0.6}
               ease="power3.out"
@@ -58,7 +58,7 @@ export default function PLProgram({
 
                 return (
                   line.trim() && (
-                    <div key={idx} className="whitespace-pre-line">
+                    <div key={idx} className="whitespace-pre-line mb-2 last:mb-0">
                       <SplitText
                         tag="span"
                         className="text-colorpara xl:max-w-[56ch]  text-sm font-light"

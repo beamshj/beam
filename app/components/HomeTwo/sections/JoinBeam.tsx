@@ -3,7 +3,7 @@ import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { fadeUp } from "@/public/assets/FramerAnimation/animation";
-import { fadeInLeft } from "@/public/assets/FramerAnimation/animation";
+import { fadeInRight } from "@/public/assets/FramerAnimation/animation";
 import { HomeProps } from "../type";
 import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 import { useApplyLang } from "@/lib/applyLang";
@@ -39,7 +39,7 @@ const JoinBeam = ({ data }: { data: HomeProps["tenthSection"] }) => {
           <div className="flex flex-col gap-4 2xl:gap-7">
             <motion.h2
               className="text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-light lettersp-4"
-              variants={fadeInLeft}
+              variants={fadeInRight}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.2 }}

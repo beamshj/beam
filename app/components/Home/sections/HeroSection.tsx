@@ -135,31 +135,14 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
                       >
                         <div>
                           <div className="mt-5 w-fit md:mt-10 p-[1px] group transition-all duration-300 bg-[linear-gradient(90deg,_#42BADC_0%,_#12586C_100%)] rounded-full hover:-translate-x-2 hover:shadow-[0_0_15px_rgba(66,186,220,0.5)]">
-                            <a
-                              href="#"
-                              className="cursor-pointer pl-4 pr-2 md:px-4 py-[10px] md:py-3 bg-primary rounded-full flex items-center gap-2 transition-all duration-300"
-                            >
+                            <a href="#" className="cursor-pointer pl-4 pr-2 md:px-4 py-[10px] md:py-3 bg-primary rounded-full flex items-center gap-2 transition-all duration-300">
                               <p className="group-hover:text-white text-xs font-light text-white uppercase transition-colors duration-300">
                                 {isArabic ? "سجل اهتمام" : "Register Interest"}
                               </p>
                               <div className="p-2 flex items-center justify-center bg-white w-fit rounded-full transition-transform duration-300 group-hover:rotate-45">
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  width="10"
-                                  height="11"
-                                  viewBox="0 0 10 11"
-                                  fill="none"
-                                >
-                                  <path
-                                    d="M8.74639 1.76178L1.12891 9.36247"
-                                    stroke="#42BADC"
-                                    strokeMiterlimit="10"
-                                  />
-                                  <path
-                                    d="M1.12891 1.76178H8.74639V9.21251"
-                                    stroke="#42BADC"
-                                    strokeMiterlimit="10"
-                                  />
+                                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="11" viewBox="0 0 10 11" fill="none" >
+                                  <path d="M8.74639 1.76178L1.12891 9.36247" stroke="#42BADC" strokeMiterlimit="10" />
+                                  <path d="M1.12891 1.76178H8.74639V9.21251" stroke="#42BADC" strokeMiterlimit="10" />
                                 </svg>
                               </div>
                             </a>
@@ -169,7 +152,7 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
 
                       {/* Divider line */}
                       <motion.div
-                        initial={{ opacity: 0, x: -60 }}
+                        initial={{ opacity: 0, x: isArabic ? 60 : -60 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{
                           duration: 0.6,
@@ -180,11 +163,7 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
                           isArabic ? "right-[40%]" : "left-[40%]"
                         }`}
                       >
-                        <div
-                          className={`h-[1px] w-full ${
-                            isArabic ? "bg-gradient-to-l" : "bg-gradient-to-r"
-                          } from-white via-white/30 to-transparent`}
-                        ></div>
+                        <div className={`h-[1px] w-full ${ isArabic ? "bg-gradient-to-l" : "bg-gradient-to-r" } from-white via-white/30 to-transparent`}></div>
                       </motion.div>
                     </div>
                   </div>

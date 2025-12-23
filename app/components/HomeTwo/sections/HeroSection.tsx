@@ -197,10 +197,20 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
 
     tl.fromTo(
       divider,
-      { scaleX: 0, opacity: 0, transformOrigin: "left" },
-      { scaleX: 1, opacity: 1, duration: 0.8, ease: "power2.inOut" },
+      {
+        scaleX: 0,
+        opacity: 0,
+        transformOrigin: isArabic ? "right center" : "left center",
+      },
+      {
+        scaleX: 1,
+        opacity: 1,
+        duration: 0.8,
+        ease: "power2.inOut",
+      },
       0.3
     );
+
 
     tl.fromTo(
       button,
@@ -405,46 +415,18 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
                       className="cursor-pointer pl-4 pr-2 md:px-4 py-[10px] md:py-3 bg-primary rounded-full flex items-center gap-2 transition-all duration-300"
                     >
                       {isArabic && <div className="p-2 flex items-center justify-center bg-white w-fit rounded-full transition-transform duration-300 group-hover:rotate-45">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="10"
-                          height="11"
-                          viewBox="0 0 10 11"
-                          fill="none"
-                        >
-                          <path
-                            d="M8.74639 1.76178L1.12891 9.36247"
-                            stroke="#42BADC"
-                            strokeMiterlimit="10"
-                          />
-                          <path
-                            d="M1.12891 1.76178H8.74639V9.21251"
-                            stroke="#42BADC"
-                            strokeMiterlimit="10"
-                          />
+                        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="11" viewBox="0 0 10 11" fill="none" >
+                          <path d="M8.74639 1.76178L1.12891 9.36247" stroke="#42BADC" strokeMiterlimit="10" />
+                          <path d="M1.12891 1.76178H8.74639V9.21251" stroke="#42BADC" strokeMiterlimit="10" />
                         </svg>
                       </div>}
                       <p className="group-hover:text-white text-xs font-light text-white uppercase transition-colors duration-300">
                         {isArabic ? "سجل اهتمام" : "Register Interest"}
                       </p>
                       {!isArabic && <div className="p-2 flex items-center justify-center bg-white w-fit rounded-full transition-transform duration-300 group-hover:rotate-45">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="10"
-                          height="11"
-                          viewBox="0 0 10 11"
-                          fill="none"
-                        >
-                          <path
-                            d="M8.74639 1.76178L1.12891 9.36247"
-                            stroke="#42BADC"
-                            strokeMiterlimit="10"
-                          />
-                          <path
-                            d="M1.12891 1.76178H8.74639V9.21251"
-                            stroke="#42BADC"
-                            strokeMiterlimit="10"
-                          />
+                        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="11" viewBox="0 0 10 11" fill="none" >
+                          <path d="M8.74639 1.76178L1.12891 9.36247" stroke="#42BADC" strokeMiterlimit="10" />
+                          <path d="M1.12891 1.76178H8.74639V9.21251" stroke="#42BADC" strokeMiterlimit="10" />
                         </svg>
                       </div>}
                     </a>
