@@ -88,12 +88,11 @@ const SchoolCards = ({
       <div className="container">
         {/* Title and Description */}
         <div className="mb-5 lg:mb-10 xl:mb-[50px]">
-          <h1
-            className="text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl leading-[1.25] lg:leading-[1.111] font-light mb-2 xl:mb-[30px] 2xl:mb-[50px] text-black
-           max-w-[91ch] lettersp-2"
-          >
+          <div>
             <SplitText
-              tag="span"
+              tag="h1"
+              className={`  font-light mb-2 xl:mb-[30px] 2xl:mb-[50px] text-black max-w-[91ch] 
+                ${isArabic ? 'text-lg lg:text-xl xl:text-2xl 2xl:text-3xl leading-[1.25] lg:leading-[1.5]' : 'text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl lettersp-2 leading-[1.25] lg:leading-[1.111]'}`}
               text={tData.firstSection.title}
               delay={100}
               duration={0.6}
@@ -105,7 +104,7 @@ const SchoolCards = ({
               rootMargin="-10px"
               textAlign={isArabic ? "right" : "left"}
             />
-          </h1>
+          </div>
           <SplitText
             tag="p"
             text={tData.firstSection.description}

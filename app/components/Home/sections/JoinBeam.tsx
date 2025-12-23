@@ -3,46 +3,26 @@ import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { fadeUp } from "@/public/assets/FramerAnimation/animation";
-import { fadeInLeft } from "@/public/assets/FramerAnimation/animation";
+import { fadeInLeft, fadeInRight } from "@/public/assets/FramerAnimation/animation";
 import { HomeProps } from "../type";
 import Link from "next/link";
 import { useApplyLang } from "@/lib/applyLang";
-
+import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 const JoinBeam = ({ data }: { data: HomeProps["tenthSection"] }) => {
   const t = useApplyLang(data);
+  const isArabic = useIsPreferredLanguageArabic();
 
   return (
-    <motion.section
-      className="w-full lg:h-full h-[330px] relative max-w-[1920px] mx-auto overflow-hidden"
-      variants={fadeUp}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
-    >
+    <motion.section className="w-full lg:h-full h-[330px] relative max-w-[1920px] mx-auto overflow-hidden" variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} >
       <div className="w-full h-full absolute z-10 left-0 top-0 right-0 bottom-0">
-        <Image
-          src={t.bigImage}
-          alt={t.bigImageAlt}
-          fill
-          className="hidden md:block object-cover h-full w-full"
-        />
-        <Image
-          src={t.smallImage}
-          alt={t.smallImageAlt}
-          fill
-          className="md:hidden object-cover h-full w-full"
-        />
+        <Image src={t.bigImage} alt={t.bigImageAlt} fill className="hidden md:block object-cover h-full w-full" />
+        <Image src={t.smallImage} alt={t.smallImageAlt} fill className="md:hidden object-cover h-full w-full" />
       </div>
       <div className="container h-full z-30 relative">
         <div className="relative z-20 flex justify-center h-full text-white flex-col w-full md:w-[75%] gap-0 2xl:gap-10 pt-8 pb-8 md:pt-12 md:pb-12 lg:pt-16 lg:pb-16 2xl:pt-20 2xl:pb-25 md:py-[160px]">
           <div className="flex flex-col gap-4 2xl:gap-7">
-            <motion.h2
-              className="text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-light lettersp-4"
-              variants={fadeInLeft}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-            >
+            <motion.h2 className="text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-light lettersp-4" variants={isArabic ? fadeInLeft : fadeInRight} initial="hidden" whileInView="visible"
+             viewport={{ once: true, amount: 0.2 }} >
               {t.title}
             </motion.h2>
             <motion.div
@@ -74,12 +54,7 @@ const JoinBeam = ({ data }: { data: HomeProps["tenthSection"] }) => {
                   {t.buttonText}
                 </p>
                 <div className="p-2 flex items-center justify-center bg-primary w-fit rounded-full transition-transform duration-300 group-hover:rotate-45">
-                  <Image
-                    src="/assets/arrow.svg"
-                    alt="arrow"
-                    width={7}
-                    height={7}
-                  />
+                  <Image src="/assets/arrow.svg" alt="arrow" width={7} height={7} />
                 </div>
               </div>
             </motion.div>

@@ -143,7 +143,7 @@ const DiverseGrowing = ({ data }: { data: HomeProps['fifthSection'] }) => {
 
                     <div className="relative z-10">
                       <div className="flex justify-between items-center gap-4 pb-5">
-                        <p className={`text-xl 2xl:text-2xl font-light  group-hover:text-black group-hover:-translate-x-3 transition-all duration-500 ${isActive === 1 ? "text-black -translate-x-3" : "text-primary"}`}>
+                        <p className={`text-xl 2xl:text-2xl font-light  group-hover:text-black group-hover:-translate-x-3 transition-all duration-500 ${isActive === 1 ? "text-black -translate-x-3" : "text-primary"}`} dir="ltr">
                           <Counter from={0} to={Number(t.items[0].number)} />+
                         </p>
                         <Image
@@ -173,7 +173,7 @@ const DiverseGrowing = ({ data }: { data: HomeProps['fifthSection'] }) => {
 
                       <div className="relative z-10 flex flex-col justify-between min-w-full lg:min-w-[250px] 2xl:min-w-[434px] 2xl:min-h-[310px] px-6 pt-4 pb-5 2xl:px-10 xl:py-4">
                         <div className="flex justify-between items-center gap-4 pb-5">
-                          <p className={`text-xl 2xl:text-2xl font-light text-[#7E5AA3] group-hover:text-black  group-hover:-translate-x-3 transition-all duration-500 ${isActive === 2 ? "text-black -translate-x-3" : ""}`}>
+                          <p className={`text-xl 2xl:text-2xl font-light text-[#7E5AA3] group-hover:text-black  group-hover:-translate-x-3 transition-all duration-500 ${isActive === 2 ? "text-black -translate-x-3" : ""}`} dir="ltr">
                             <Counter from={0} to={Number(t.items[1].number)} />+
                           </p>
                           <Image
@@ -201,7 +201,7 @@ const DiverseGrowing = ({ data }: { data: HomeProps['fifthSection'] }) => {
 
                         <div className="relative z-10 flex flex-col justify-between px-6 pt-4 pb-5 2xl:px-10 xl:py-4 min-w-full lg:min-w-[250px] 2xl:min-w-[389px] 2xl:min-h-[258px]">
                           <div className="flex justify-between items-center gap-4 pb-5">
-                            <p className={`text-xl 2xl:text-2xl font-light transition-all duration-500  ${isActive === 3 ? "text-black -translate-x-3" : "text-[#7E5AA3] group-hover:text-black  group-hover:-translate-x-3 "}`}>
+                            <p className={`text-xl 2xl:text-2xl font-light transition-all duration-500  ${isActive === 3 ? "text-black -translate-x-3" : "text-[#7E5AA3] group-hover:text-black  group-hover:-translate-x-3 "}`} dir="ltr">
                               <Counter from={0} to={Number(t.items[2].number)} />+
                             </p>
                             <Image
@@ -229,7 +229,7 @@ const DiverseGrowing = ({ data }: { data: HomeProps['fifthSection'] }) => {
 
                         <div className="relative z-10 flex flex-col justify-between px-6 pt-4 pb-5 2xl:px-10 xl:py-4 min-w-full lg:min-w-[250px] 2xl:min-w-[389px] 2xl:min-h-[245px]">
                           <div className="flex justify-between items-center gap-4 pb-5">
-                            <p className={`text-xl 2xl:text-2xl font-light transition-all duration-500 ${isActive === 4 ? "text-black -translate-x-3" : "text-primary group-hover:text-black  group-hover:-translate-x-3 "}`}>
+                            <p className={`text-xl 2xl:text-2xl font-light transition-all duration-500 ${isActive === 4 ? "text-black -translate-x-3" : "text-primary group-hover:text-black  group-hover:-translate-x-3 "}`} dir="ltr">
                               <Counter from={0} to={Number(t.items[4].number)} />+
                             </p>
                             <Image
@@ -258,7 +258,7 @@ const DiverseGrowing = ({ data }: { data: HomeProps['fifthSection'] }) => {
 
                       <div className="relative z-10 flex flex-col justify-between px-6 pt-4 pb-5 2xl:px-10 xl:py-4 min-w-full lg:min-w-[250px] 2xl:min-w-[417px] 2xl:min-h-[362px]">
                         <div className="flex justify-between items-center gap-4 xl:pb-5">
-                          <p className={`text-xl 2xl:text-2xl font-light transition-all duration-500 ${isActive === 5 ? "text-black -translate-x-3" : "text-[#7E5AA3] group-hover:text-black  group-hover:-translate-x-3 "}`}>
+                          <p className={`text-xl 2xl:text-2xl font-light transition-all duration-500 ${isActive === 5 ? "text-black -translate-x-3" : "text-[#7E5AA3] group-hover:text-black  group-hover:-translate-x-3 "} `} dir="ltr">
                             <Counter from={0} to={Number(t.items[3].number)} />+
                           </p>
                           <Image
