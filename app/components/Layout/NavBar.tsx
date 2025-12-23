@@ -447,7 +447,12 @@ const handleRegisterClick = () => {
                             className={`transition-all duration-300 transform ${isArabic ? "hover:-translate-x-1" : "hover:translate-x-1"} pe-3`}
                           >
                             <Link
-                              href={item.href}
+                              href={
+                                isArabic && !item.href.startsWith("http")
+                                  ? `/ar${item.href}`
+                                  : item.href
+                              }
+
                               onClick={() => setIsMenuOpen(false)}
                               className="flex items-center gap-5 text-sm font-light text-black hover:text-primary transition-colors duration-200 group"
                             >
@@ -475,7 +480,12 @@ const handleRegisterClick = () => {
                             className={`transition-all duration-300 transform ${isArabic ? "hover:-translate-x-1" : "hover:translate-x-1"} pe-5`}
                           >
                             <Link
-                              href={item.href}
+                              href={
+                                isArabic && !item.href.startsWith("http")
+                                  ? `/ar${item.href}`
+                                  : item.href
+                              }
+
                               onClick={() => setIsMenuOpen(false)}
                               className="flex items-center gap-5 text-sm font-light text-black hover:text-primary transition-colors duration-200 group"
                             >
@@ -513,7 +523,12 @@ const handleRegisterClick = () => {
                                 <span>{item.name}</span>
                               ) : (
                                 <Link
-                                  href={item.href}
+                                    href={
+                                      isArabic && !item.href.startsWith("http")
+                                        ? `/ar${item.href}`
+                                        : item.href
+                                    }
+
                                   onClick={() => setIsMenuOpen(false)}
                                   className="text-white/80 hover:text-[#23ABD2] transition-colors duration-200"
                                 >
