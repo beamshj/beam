@@ -108,7 +108,8 @@ const RegisterInterest = forwardRef<HTMLDivElement, RegisterInterestProps>(
                 textAlign={isArabic ? "right" : "left"}
               />
               <p className="text-white text-xl leading-[1.2] font-light mt-4 xl:mt-[27px]">
-                Take the first step
+                
+                {isArabic ? "ابدأ خطوتك الأولى معنا" : "Take the first step"}
               </p>
               <div className="mt-4 xl:mt-[27px] text-sm leading-[1.52] font-light">
                 <p className="text-white">
