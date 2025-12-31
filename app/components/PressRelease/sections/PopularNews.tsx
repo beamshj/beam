@@ -5,7 +5,7 @@ import Image from "next/image";
 import { moveUp } from "../../motionVarients";
 import Link from "next/link";
 import { NewsItem } from "../type";
-// import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
+import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 
 interface PopularNewsProps {
   data: NewsItem[];
@@ -16,7 +16,7 @@ const PopularNews = ({ data, selectedCategory }: PopularNewsProps) => {
   const filteredPopularnews = data.filter(
     (item) => item.category === selectedCategory && item.popularNews === "true"
   );
-  // const isArabic = useIsPreferredLanguageArabic()
+  const isArabic = useIsPreferredLanguageArabic()
   return (
     <>
       {filteredPopularnews.length > 0 ? (
@@ -82,7 +82,7 @@ const PopularNews = ({ data, selectedCategory }: PopularNewsProps) => {
         </div>
       ) : (
         <p className="text-center text-[14px] font-light text-colorpara">
-          {"No popular news found for the selected category."}
+            {isArabic ? "لا توجد أخبار شائعة للفئة المحددة." : "No popular news found for the selected category."}
         </p>
       )}
     </>
