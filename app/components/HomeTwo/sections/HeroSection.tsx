@@ -421,7 +421,7 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
                         </svg>
                       </div>}
                       <p className="group-hover:text-white text-xs font-light text-white uppercase transition-colors duration-300">
-                        {isArabic ? "سجل اهتمام" : "Register Interest"}
+                        {isArabic ? "سجل اهتمامك" : "Register Interest"}
                       </p>
                       {!isArabic && <div className="p-2 flex items-center justify-center bg-white w-fit rounded-full transition-transform duration-300 group-hover:rotate-45">
                         <svg xmlns="http://www.w3.org/2000/svg" width="10" height="11" viewBox="0 0 10 11" fill="none" >

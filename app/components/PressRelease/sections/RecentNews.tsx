@@ -38,7 +38,7 @@ const RecentNews = ({ categories }: RecentNewsProps) => {
         <div className="flex flex-col md:flex-row justify-between w-full md:items-center pb-4 md:pb-6 xl:pb-8 2xl:pb-12 mb-4 md:mb-6 xl:mb-8 2xl:mb-16 border-b border-bdrcolor gap-5 lg:gap-0">
           <SplitText
             tag="h2"
-            text={!isArabic ? "Recent News" : "الأخبار الأخيرة"}
+            text={!isArabic ? "Recent News" : "آخر الأخبار"}
             className="text-lg xl:text-2xl 2xl:text-4xl 2xl:max-w-[10ch] font-light leading-[1.111111111] text-black capitalize"
             delay={100}
             duration={0.6}

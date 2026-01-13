@@ -73,7 +73,7 @@ const OurStorySection: React.FC<OurStorySectionProps> = ({ data }) => {
             viewport={{ once: true, amount: 0.2 }}
             className={`absolute left-[20px] bottom-[20px] right-[20px] lg:right-[60px] xl:left-[50px] xl:bottom-[40px] 2xl:left-[60px] 2xl:bottom-[50px] text-white text-md md:text-lg  xl:max--w-0 xl:text-xl 2xl:text-4xl font-light leading-[1.111111111] ${isArabic ? "max-w-6xl" : "max-w-[20ch]"}`}
           >
-            {t.subTitle} <span className="text-primary">{t.highlight}</span>
+            {t.subTitle} {isArabic ? "" : <span className="text-primary">{t.highlight}</span>}
           </motion.h2>
         </div>
 

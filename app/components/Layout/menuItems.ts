@@ -78,7 +78,7 @@ export const mainMenuItems = [
       },
       {
         name: "Leadership Team",
-        name_ar: "فريق قيادة",
+        name_ar: "فريق القيادة",
         href: "/about-us/school-leadership-team",
       },
       {
@@ -94,7 +94,7 @@ export const mainMenuItems = [
     name_ar: "مدارسنا",
     href: "#",
     submenu: [
-      { name: "Beam Schools", name_ar: "مدارسنا", href: "/beam-schools" },
+      { name: "Creative Science Schools", name_ar: "مدارس الإبداع العلمي", href: "/beam-schools" },
       {
         name: "Schools’ Uniqueness",
         name_ar: "تميز مدارسنا",

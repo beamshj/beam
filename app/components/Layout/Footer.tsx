@@ -277,7 +277,7 @@ const Footer = () => {
             <motion.div variants={fadeUponeone}>
               <h2 className="text-xl xl:text-2xl 2xl:text-4xl font-light lettersp-4">
                 {" "}
-                {isArabic ? "سجل اهتمام" : "Register Interest"}{" "}
+                {isArabic ? "سجل اهتمامك" : "Register Interest"}{" "}
               </h2>
             </motion.div>
             <div className="text-sm font-light leading-[1.52] pt-5 xl:pt-15">
