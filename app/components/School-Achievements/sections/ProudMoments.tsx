@@ -79,7 +79,7 @@ const ProudMoments: React.FC<{data: SchoolAchievementsProps['firstSection']}> = 
               className="flex items-center gap-3 md:gap-5 text-white text-md md:text-lg 2xl:text-xl font-light justify-start"
               variants={playFadeUp}
             >
-              <span>{isArabic ? "يلعب" : "Play"}</span>
+              <span>{isArabic ? "اضغط" : "Play"}</span>
               <Image
                 src="/assets/home/play-icon.svg"
                 alt="Play"

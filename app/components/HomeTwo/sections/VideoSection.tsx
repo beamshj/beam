@@ -112,7 +112,7 @@ const VideoSection = ({ data }: { data: HomeProps['fourthSection'] }) => {
                 variants={playFadeUp}
                 aria-label="Play video"
               >
-                <span className="group-hover:opacity-80 transition-opacity">{isArabic ? 'يلعب' : 'Play'}</span>
+                <span className="group-hover:opacity-80 transition-opacity">{isArabic ? 'اضغط' : 'Play'}</span>
                 <div className="relative w-[95px] h-[95px] flex items-center justify-center">
                   <Image
                     src="/assets/home/play-icon.svg"

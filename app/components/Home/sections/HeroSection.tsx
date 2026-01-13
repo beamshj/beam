@@ -137,7 +137,7 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
                           <div className="mt-5 w-fit md:mt-10 p-[1px] group transition-all duration-300 bg-[linear-gradient(90deg,_#42BADC_0%,_#12586C_100%)] rounded-full hover:-translate-x-2 hover:shadow-[0_0_15px_rgba(66,186,220,0.5)]">
                             <a href="#" className="cursor-pointer pl-4 pr-2 md:px-4 py-[10px] md:py-3 bg-primary rounded-full flex items-center gap-2 transition-all duration-300">
                               <p className="group-hover:text-white text-xs font-light text-white uppercase transition-colors duration-300">
-                                {isArabic ? "سجل اهتمام" : "Register Interest"}
+                                {isArabic ? "سجل اهتمامك" : "Register Interest"}
                               </p>
                               <div className="p-2 flex items-center justify-center bg-white w-fit rounded-full transition-transform duration-300 group-hover:rotate-45">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="10" height="11" viewBox="0 0 10 11" fill="none" >
