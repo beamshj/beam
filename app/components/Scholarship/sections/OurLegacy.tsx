@@ -7,6 +7,7 @@ import { moveUp } from "../../motionVarients";
 import { ScholarshipProps } from "../type";
 import { useApplyLang } from "@/lib/applyLang";
 import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
+import Link from "next/link";
 
 const OurLegacy = ({ data }: { data: ScholarshipProps["fourthSection"] }) => {
   const t = useApplyLang(data)
@@ -82,7 +83,7 @@ const OurLegacy = ({ data }: { data: ScholarshipProps["fourthSection"] }) => {
             <div
               className="w-fit p-[1px] group transition-all duration-300 border-[1px] border-primary rounded-full hover:translate-x-[5px] hover:shadow-[0_0_15px_rgba(66,186,220,0.5)]"
             >
-              <a href={`mailto:${t.email}`}>
+              <Link href={`mailto:${t.email}`}>
                 <div className="cursor-pointer px-3 md:px-5 py-0 md:py-3 bg-transparent rounded-full flex items-center md:gap-2 transition-all duration-300">
                   <div className="p-2 flex items-center justify-center w-fit ">
                     <Image src="/images/scholarship/mail.svg" alt="arrow" width={24} height={24} />
@@ -91,7 +92,7 @@ const OurLegacy = ({ data }: { data: ScholarshipProps["fourthSection"] }) => {
                     {t.email}
                   </p>
                 </div>
-              </a>
+              </Link>
             </div>
             </motion.div>
           </div>
