@@ -1,9 +1,10 @@
+import dynamic from "next/dynamic";
 import React from "react";
-import HeroSection from "./sections/HeroSection";
-import VideoSection from "./sections/VideoSection";
-import OurSchools from "./sections/OurSchools";
-import AcademicCultural from "./sections/AcademicCultural";
-import MessageSection from "./sections/MessageSection";
+const HeroSection = dynamic(() => import("./sections/HeroSection"), { ssr: true });
+const VideoSection = dynamic(() => import("./sections/VideoSection"), { ssr: true });
+const OurSchools = dynamic(() => import("./sections/OurSchools"), { ssr: true });
+const AcademicCultural = dynamic(() => import("./sections/AcademicCultural"), { ssr: true });
+const MessageSection = dynamic(() => import("./sections/MessageSection"), { ssr: true });
 
 import DiverseGrowing from "./sections/DiverseGrowing";
 import Alumni from "./sections/Alumni";
