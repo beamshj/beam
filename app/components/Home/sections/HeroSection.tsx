@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
-import React, { useEffect, useRef, useState } from "react";
-import { BannerSliderData } from "@/app/data/BannerSlider";
+import React, { useEffect, useRef, useState, useMemo, useCallback } from "react";
+// import { BannerSliderData } from "@/app/data/BannerSlider";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade } from "swiper/modules";
 import { Swiper as SwiperClass } from "swiper";
@@ -18,35 +18,56 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
   const swiperRef = useRef<SwiperClass | null>(null);
   const [currentSlide, setCurrentSlide] = useState(1);
   const totalSlides = data.items.length;
-  const [textVersion, setTextVersion] = useState(0);
   const [isDesktop, setIsDesktop] = useState(false);
+  const [isClient, setIsClient] = useState(false);
   const isArabic = useIsPreferredLanguageArabic();
   const t = useApplyLang(data);
 
-  const handleRegisterClick = () => {
+  const handleRegisterClick = useCallback(() => {
     window.location.href = "/contact-us?scroll=register";
-  };
+  }, []);
 
-  const kenBurnsVariants: Variants = {
-    initial: { scale: 1, x: 0, y: 0, opacity: 0.7 },
-    animate: {
-      scale: 1.15,
-      x: [0, -20, -40],
-      y: [0, -15, -30],
-      opacity: 1,
-      transition: {
-        duration: 12,
-        ease: [0.43, 0.13, 0.23, 0.96],
-        opacity: { duration: 1.5, ease: "easeOut" },
+  const kenBurnsVariants: Variants = useMemo(
+    () => ({
+      initial: { scale: 1, x: 0, y: 0, opacity: 0.7 },
+      animate: {
+        scale: 1.15,
+        x: [0, -20, -40],
+        y: [0, -15, -30],
+        opacity: 1,
+        transition: {
+          duration: 12,
+          ease: [0.43, 0.13, 0.23, 0.96],
+          opacity: { duration: 1.5, ease: "easeOut" },
+        },
       },
-    },
-  };
+    }),
+    []
+  );
 
   useEffect(() => {
+    setIsClient(true);
+
     const checkScreen = () => setIsDesktop(window.innerWidth >= 1280);
     checkScreen();
-    window.addEventListener("resize", checkScreen);
-    return () => window.removeEventListener("resize", checkScreen);
+
+    let timeoutId: NodeJS.Timeout;
+
+    const debouncedResize = () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(checkScreen, 150);
+    };
+
+    window.addEventListener("resize", debouncedResize);
+
+    return () => {
+      clearTimeout(timeoutId);
+      window.removeEventListener("resize", debouncedResize);
+    };
+  }, []);
+
+  const handleSlideChange = useCallback((swiper: SwiperClass) => {
+    setCurrentSlide(swiper.realIndex + 1);
   }, []);
 
   return (
@@ -55,24 +76,25 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
         modules={[Autoplay, EffectFade]}
         effect="fade"
         fadeEffect={{ crossFade: true }}
-        autoplay={{ delay: 6000, disableOnInteraction: false }}
+        autoplay={{
+          delay: 6000,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: false,
+          waitForTransition: false,
+        }}
         speed={1800}
         slidesPerView={1}
-        loop
+        loop={true}
         onSwiper={(swiper) => (swiperRef.current = swiper)}
-        onSlideChange={(swiper) => {
-          setCurrentSlide(swiper.realIndex + 1);
-          setTextVersion((v) => v + 1);
-        }}
+        onSlideChange={handleSlideChange}
         className="w-full h-full"
       >
         {t.items.map((slide, index) => (
           <SwiperSlide key={index}>
             <div className="h-full w-screen relative overflow-hidden text-white">
-              {/* Background image with Ken Burns effect */}
+              {/* Background image */}
               <figure className="h-full w-full absolute -z-50 overflow-hidden">
                 <motion.div
-                  key={`kenburns-${index}-${textVersion}`}
                   variants={isDesktop ? kenBurnsVariants : {}}
                   initial={isDesktop ? "initial" : false}
                   animate={isDesktop ? "animate" : false}
@@ -80,12 +102,16 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
                   style={{ willChange: "transform, opacity" }}
                 >
                   <Image
-                    className={`h-full w-full object-cover object-center}`}
+                    className="h-full w-full object-cover object-center"
                     src={slide.image}
                     alt={slide.imageAlt}
                     width={1920}
                     height={1280}
                     priority={index === 0}
+                    loading={index === 0 ? "eager" : "lazy"}
+                    quality={85}
+                    placeholder="blur"
+                    blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="
                   />
                 </motion.div>
               </figure>
@@ -99,7 +125,6 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
                   <div className="h-full relative w-full overflow-hidden">
                     <div
                       className="absolute bottom-5 lg:bottom-[30px] xl:bottom-[50px] grid grid-cols-1 xl:grid-cols-7 items-end gap-2 transition-all ease-in-out"
-                      key={`${index}-${textVersion}`}
                     >
                       {/* Left text */}
                       <motion.div
@@ -112,7 +137,7 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
                           initial={{ opacity: 0, y: 40 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ duration: 1, ease: "easeOut" }}
-                          className="text-[1.8rem] md:text-2xl 2xl:text-4xl text-white leading-[1.2] xl:leading-[1.1] font-custom font-light lettersp-4-hero mb-0 max-w-none"
+                          className="hero-title text-[1.8rem] md:text-2xl 2xl:text-4xl text-white leading-[1.2] xl:leading-[1.1] font-custom font-light lettersp-4-hero mb-0 max-w-none"
                         >
                           <span className="text-primary">
                             {slide.highlightText}
@@ -135,22 +160,43 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
                       >
                         <div>
                           <div className="mt-5 w-fit md:mt-10 p-[1px] group transition-all duration-300 bg-[linear-gradient(90deg,_#42BADC_0%,_#12586C_100%)] rounded-full hover:-translate-x-2 hover:shadow-[0_0_15px_rgba(66,186,220,0.5)]">
-                            <a href="#" className="cursor-pointer pl-4 pr-2 md:px-4 py-[10px] md:py-3 bg-primary rounded-full flex items-center gap-2 transition-all duration-300">
+                            <button
+                              type="button"
+                              className="cursor-pointer pl-4 pr-2 md:px-4 py-[10px] md:py-3 bg-primary rounded-full flex items-center gap-2 transition-all duration-300"
+                              aria-label={
+                                isArabic ? "سجل اهتمامك" : "Register Interest"
+                              }
+                            >
                               <p className="group-hover:text-white text-xs font-light text-white uppercase transition-colors duration-300">
                                 {isArabic ? "سجل اهتمامك" : "Register Interest"}
                               </p>
                               <div className="p-2 flex items-center justify-center bg-white w-fit rounded-full transition-transform duration-300 group-hover:rotate-45">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="11" viewBox="0 0 10 11" fill="none" >
-                                  <path d="M8.74639 1.76178L1.12891 9.36247" stroke="#42BADC" strokeMiterlimit="10" />
-                                  <path d="M1.12891 1.76178H8.74639V9.21251" stroke="#42BADC" strokeMiterlimit="10" />
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  width="10"
+                                  height="11"
+                                  viewBox="0 0 10 11"
+                                  fill="none"
+                                  aria-hidden="true"
+                                >
+                                  <path
+                                    d="M8.74639 1.76178L1.12891 9.36247"
+                                    stroke="#42BADC"
+                                    strokeMiterlimit="10"
+                                  />
+                                  <path
+                                    d="M1.12891 1.76178H8.74639V9.21251"
+                                    stroke="#42BADC"
+                                    strokeMiterlimit="10"
+                                  />
                                 </svg>
                               </div>
-                            </a>
+                            </button>
                           </div>
                         </div>
                       </motion.div>
 
-                      {/* Divider line */}
+                      {/* Divider */}
                       <motion.div
                         initial={{ opacity: 0, x: isArabic ? 60 : -60 }}
                         animate={{ opacity: 1, x: 0 }}
@@ -159,11 +205,13 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
                           ease: "easeOut",
                           delay: 0.5,
                         }}
-                        className={`absolute  bottom-[83px] w-[80%] hidden xl:block ${
-                          isArabic ? "right-[40%]" : "left-[40%]"
-                        }`}
+                        className={`absolute bottom-[83px] w-[80%] hidden xl:block ${isArabic ? "right-[40%]" : "left-[40%]"
+                          }`}
                       >
-                        <div className={`h-[1px] w-full ${ isArabic ? "bg-gradient-to-l" : "bg-gradient-to-r" } from-white via-white/30 to-transparent`}></div>
+                        <div
+                          className={`h-[1px] w-full ${isArabic ? "bg-gradient-to-l" : "bg-gradient-to-r"
+                            } from-white via-white/30 to-transparent`}
+                        ></div>
                       </motion.div>
                     </div>
                   </div>
@@ -174,28 +222,31 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
         ))}
       </Swiper>
 
-      {/* Pagination Indicator */}
-      <div className="absolute bottom-[10%] md:bottom-[37%] w-full">
-        <div className="container flex justify-end">
-          <span className="text-[15px] text-white whitespace-nowrap font-light relative -right-3 md:right-2 z-10 flex flex-col items-center">
-            <div className="flex flex-col rotate-180">
-              {BannerSliderData.slides.map((_, index) => (
-                <span
-                  key={index}
-                  className={`font-medium w-[1px] h-[10px] mt-2 ${
-                    index === currentSlide - 1 ? "bg-primary" : "bg-white"
-                  }`}
-                ></span>
-              ))}
-            </div>
-            <span className="mt-4 -rotate-90 font-light text-[15px]">{`0${totalSlides}`}</span>
-            <span className="font-medium w-[1px] h-[8px] bg-white mt-1"></span>
-            <span className="font-[700] text-[15px] -rotate-90 mt-1">
-              {`0${currentSlide}`}
+      {/* Pagination */}
+      {isClient && (
+        <div className="absolute bottom-[10%] md:bottom-[37%] w-full">
+          <div className="container flex justify-end">
+            <span className="text-[15px] text-white whitespace-nowrap font-light relative -right-3 md:right-2 z-10 flex flex-col items-center">
+              <div className="flex flex-col rotate-180">
+                {t.items.map((_, index) => (
+                  <span
+                    key={index}
+                    className={`font-medium w-[1px] h-[10px] mt-2 ${index === currentSlide - 1
+                        ? "bg-primary"
+                        : "bg-white"
+                      }`}
+                  ></span>
+                ))}
+              </div>
+              <span className="mt-4 -rotate-90 font-light text-[15px]">{`0${totalSlides}`}</span>
+              <span className="font-medium w-[1px] h-[8px] bg-white mt-1"></span>
+              <span className="font-[700] text-[15px] -rotate-90 mt-1">
+                {`0${currentSlide}`}
+              </span>
             </span>
-          </span>
+          </div>
         </div>
-      </div>
+      )}
     </section>
   );
 };

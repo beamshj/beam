@@ -1,8 +1,8 @@
 "use client";
 import Image from "next/image";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { EffectFade } from "swiper/modules";
+import { Autoplay, EffectFade } from "swiper/modules";
 import { Swiper as SwiperClass } from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -24,18 +24,46 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
   const imageRefs = useRef<HTMLDivElement[]>([]);
   const leftCurtainRef = useRef<HTMLDivElement>(null);
   const rightCurtainRef = useRef<HTMLDivElement>(null);
-    const isArabic = useIsPreferredLanguageArabic();
+  const isArabic = useIsPreferredLanguageArabic();
   const t = useApplyLang(data);
 
-  const handleRegisterClick = () => {
+  // Memoize register click handler
+  const handleRegisterClick = useCallback(() => {
     window.location.href = "/contact-us?scroll=register";
-  };
+  }, []);
 
-  // Animate slide coming in by having its own image push in with notched edge
-  const animateSlideIn = (index: number) => {
+  // Memoize animation directions to prevent recreation
+  const directions = useMemo(() => [
+    {
+      from: { y: '-100%', x: 0 },
+      to: { y: '0%', x: 0 },
+      clipPath: 'polygon(0 0, 100% 0, 100% 100%, 80% 100%, 80% 92%, 60% 92%, 60% 100%, 40% 100%, 40% 92%, 20% 92%, 20% 100%, 0 100%)',
+      movement: { y: -20, x: 0 }
+    },
+    {
+      from: { y: 0, x: '100%' },
+      to: { y: 0, x: '0%' },
+      clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 80%, 8% 80%, 8% 60%, 0 60%, 0 40%, 8% 40%, 8% 20%, 0 20%)',
+      movement: { y: 0, x: 20 }
+    },
+    {
+      from: { y: '100%', x: 0 },
+      to: { y: '0%', x: 0 },
+      clipPath: 'polygon(0 0, 20% 0, 20% 8%, 40% 8%, 40% 0, 60% 0, 60% 8%, 80% 8%, 80% 0, 100% 0, 100% 100%, 0 100%)',
+      movement: { y: 20, x: 0 }
+    },
+    {
+      from: { y: 0, x: '-100%' },
+      to: { y: 0, x: '0%' },
+      clipPath: 'polygon(0 0, 100% 0, 100% 20%, 92% 20%, 92% 40%, 100% 40%, 100% 60%, 92% 60%, 92% 80%, 100% 80%, 100% 100%, 0 100%)',
+      movement: { y: 0, x: -20 }
+    },
+  ], []);
+
+  // Memoize slide animation function
+  const animateSlideIn = useCallback((index: number) => {
     // Skip animation for first slide on initial load
     if (index === 0 && isInitialLoad) {
-      // Only kill tweens on the first slide image, not curtains
       const img = imageRefs.current[0]?.querySelector("img");
       const overlay = slideOverlayRefs.current[0];
 
@@ -53,7 +81,7 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
         gsap.killTweensOf(overlay);
       }
 
-      return; // Stop animation function here
+      return;
     }
 
     const overlayElement = slideOverlayRefs.current[index];
@@ -64,49 +92,15 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
     const img = imgElement.querySelector("img");
     if (!img) return;
 
-    // Kill only overlay animations on all slides
     slideOverlayRefs.current.forEach((overlay) => {
       if (overlay) gsap.killTweensOf(overlay);
     });
 
-    // DON'T touch previous slide parallax animations yet - let them continue
-    // We'll stop them AFTER the overlay transition completes
-
     gsap.killTweensOf([overlayElement, imgElement, img]);
-
-    // Different reveal directions with notches on the LEADING edge
-    // Using translate instead of scale to avoid distortion
-    const directions = [
-      {
-        from: { y: '-100%', x: 0 },
-        to: { y: '0%', x: 0 },
-        clipPath: 'polygon(0 0, 100% 0, 100% 100%, 80% 100%, 80% 92%, 60% 92%, 60% 100%, 40% 100%, 40% 92%, 20% 92%, 20% 100%, 0 100%)',
-        movement: { y: -20, x: 0 }
-      }, // Top to bottom - notches at BOTTOM
-      {
-        from: { y: 0, x: '100%' },
-        to: { y: 0, x: '0%' },
-        clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 80%, 8% 80%, 8% 60%, 0 60%, 0 40%, 8% 40%, 8% 20%, 0 20%)',
-        movement: { y: 0, x: 20 }
-      }, // Right to left - notches at LEFT
-      {
-        from: { y: '100%', x: 0 },
-        to: { y: '0%', x: 0 },
-        clipPath: 'polygon(0 0, 20% 0, 20% 8%, 40% 8%, 40% 0, 60% 0, 60% 8%, 80% 8%, 80% 0, 100% 0, 100% 100%, 0 100%)',
-        movement: { y: 20, x: 0 }
-      }, // Bottom to top - notches at TOP
-      {
-        from: { y: 0, x: '-100%' },
-        to: { y: 0, x: '0%' },
-        clipPath: 'polygon(0 0, 100% 0, 100% 20%, 92% 20%, 92% 40%, 100% 40%, 100% 60%, 92% 60%, 92% 80%, 100% 80%, 100% 100%, 0 100%)',
-        movement: { y: 0, x: -20 }
-      }, // Left to right - notches at RIGHT
-    ];
 
     const direction = directions[index % directions.length];
     const tl = gsap.timeline();
 
-    // Overlay starts off-screen with notched edge
     gsap.set(overlayElement, {
       ...direction.from,
       clipPath: direction.clipPath,
@@ -121,14 +115,13 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
       y: 0
     });
 
-    // Animate overlay sliding in, then smoothly transition clip-path and fade
     tl.to(overlayElement, {
       ...direction.to,
       duration: 1.2,
       ease: "power3.inOut"
     })
       .to(overlayElement, {
-        clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)', // Smooth to rectangle
+        clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
         duration: 0.3,
         ease: "power2.inOut"
       }, "-=0.2")
@@ -137,12 +130,10 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
         duration: 0.5,
         ease: "power2.out",
         onComplete: () => {
-          // NOW stop previous slide parallax - after overlay transition is complete
           imageRefs.current.forEach((imgRef, idx) => {
             if (imgRef && idx !== index) {
               const prevImg = imgRef.querySelector("img");
               if (prevImg) {
-                // Smoothly animate back to center
                 gsap.to(prevImg, {
                   x: 0,
                   y: 0,
@@ -157,17 +148,16 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
         }
       }, "-=0.2");
 
-    // Subtle parallax movement - match autoplay delay timing
     gsap.to(img, {
       ...direction.movement,
       duration: 7,
       ease: "sine.inOut",
       delay: 0
     });
-  };
+  }, [directions, isInitialLoad]);
 
-  // Smooth content reveal - only called once on initial load
-  const animateContentIn = () => {
+  // Memoize content animation function
+  const animateContentIn = useCallback(() => {
     const contentElement = contentRef.current;
     if (!contentElement) return;
 
@@ -211,14 +201,13 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
       0.3
     );
 
-
     tl.fromTo(
       button,
       { x: 40, opacity: 0 },
       { x: 0, opacity: 1, duration: 0.8, ease: "power3.out" },
       0.4
     );
-  };
+  }, [isArabic]);
 
   // Curtain reveal animation on initial load
   useEffect(() => {
@@ -228,17 +217,14 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
     const rightCurtain = rightCurtainRef.current;
 
     if (leftCurtain && rightCurtain) {
-      // Start animation immediately without delay
       const tl = gsap.timeline({
         onComplete: () => {
           setShowCurtains(false);
         }
       });
 
-      // Show content first (before curtains open)
       setShowContent(true);
 
-      // Faster curtain animation
       tl.to(leftCurtain, {
         x: '-100%',
         duration: 1.2,
@@ -250,7 +236,6 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
           ease: "power2.out"
         }, 0);
 
-      // First slide image - NO ANIMATION, just set it visible and static
       const firstImg = imageRefs.current[0]?.querySelector("img");
       if (firstImg) {
         gsap.set(firstImg, {
@@ -259,24 +244,32 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
           x: 0,
           y: 0
         });
-        // NO parallax movement on first load
       }
 
-      // Show content once (300ms after curtains start)
       setTimeout(() => {
         animateContentIn();
       }, 300);
 
       setIsInitialLoad(false);
     }
-  }, [isInitialLoad]);
+  }, [isInitialLoad, animateContentIn]);
 
-  // Get first slide data for static content display
-  const activeSlide = t.items[currentSlide - 1] || t.items[0];
+  // Memoize slide change handler
+  const handleSlideChange = useCallback((swiper: SwiperClass) => {
+    const realIndex = swiper.realIndex;
+    setCurrentSlide(realIndex + 1);
+    animateSlideIn(realIndex);
+  }, [animateSlideIn]);
+
+  // Memoize active slide
+  const activeSlide = useMemo(() =>
+    t.items[currentSlide - 1] || t.items[0],
+    [t.items, currentSlide]
+  );
 
   return (
     <section className="lg:h-screen h-[65dvh] md:h-[85dvh] relative overflow-hidden max-w-[1920px] mx-auto">
-      {/* Curtain Overlays - Start visible, animate immediately */}
+      {/* Curtain Overlays */}
       {showCurtains && (
         <>
           <div
@@ -298,21 +291,17 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
         </>
       )}
 
-      {/* Swiper - Only for background images */}
+      {/* Swiper */}
       <Swiper
-        modules={[ EffectFade]}
+        modules={[Autoplay, EffectFade]}
         effect="fade"
         fadeEffect={{ crossFade: true }}
-        autoplay={{ delay: 7000, disableOnInteraction: false }}
-        speed={1000}
+        autoplay={{ delay: 6000, disableOnInteraction: false }}
+        speed={800}
         slidesPerView={1}
         loop
         onSwiper={(swiper) => (swiperRef.current = swiper)}
-        onSlideChange={(swiper) => {
-          const realIndex = swiper.realIndex;
-          setCurrentSlide(realIndex + 1);
-          animateSlideIn(realIndex);
-        }}
+        onSlideChange={handleSlideChange}
         className="w-full h-full"
       >
         {t.items.map((slide, index) => (
@@ -338,11 +327,16 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
                     width={1920}
                     height={1280}
                     priority={index === 0}
+                    loading={index === 0 ? "eager" : "lazy"}
+                    quality={85}
+                    placeholder="blur"
+                    blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="
+                    sizes="100vw"
                   />
                 </div>
               </figure>
 
-              {/* Slide overlay with same image that animates in with notched edge */}
+              {/* Slide overlay */}
               <div
                 ref={(el: HTMLDivElement | null) => {
                   if (el) {
@@ -363,13 +357,15 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
                     alt={slide.imageAlt}
                     width={1920}
                     height={1280}
+                    loading="lazy"
+                    quality={85}
+                    sizes="100vw"
                     style={{
                       position: 'absolute',
                       inset: 0,
                       transform: 'scale(1.05)'
                     }}
                   />
-                  {/* Match the gradient overlay */}
                   <div className="absolute inset-0 bg-[linear-gradient(180deg,_rgba(0,0,0,0)_21.7%,_rgba(0,0,0,0.6)_63.57%,_rgba(0,0,0,0.8)_100%)]"></div>
                 </div>
               </div>
@@ -381,7 +377,7 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
         ))}
       </Swiper>
 
-      {/* Static Content - Outside Swiper, positioned absolutely */}
+      {/* Static Content */}
       <div className="absolute w-full h-full top-0 left-0 pointer-events-none z-[70]">
         <div className="container h-full">
           <div className="h-full relative w-full overflow-hidden">
@@ -410,12 +406,13 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
               >
                 <div>
                   <div className={`mt-5 w-fit md:mt-10 p-[1px] group transition-all duration-300 bg-[linear-gradient(90deg,_#42BADC_0%,_#12586C_100%)] rounded-full ${isArabic ? "hover:translate-x-2" : "hover:-translate-x-2"} hover:shadow-[0_0_15px_rgba(66,186,220,0.5)]`}>
-                    <a
-                      href="#"
+                    <button
+                      type="button"
                       className="cursor-pointer pl-4 pr-2 md:px-4 py-[10px] md:py-3 bg-primary rounded-full flex items-center gap-2 transition-all duration-300"
+                      aria-label={isArabic ? "سجل اهتمامك" : "Register Interest"}
                     >
                       {isArabic && <div className="p-2 flex items-center justify-center bg-white w-fit rounded-full transition-transform duration-300 group-hover:rotate-45">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="11" viewBox="0 0 10 11" fill="none" >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="11" viewBox="0 0 10 11" fill="none" aria-hidden="true">
                           <path d="M8.74639 1.76178L1.12891 9.36247" stroke="#42BADC" strokeMiterlimit="10" />
                           <path d="M1.12891 1.76178H8.74639V9.21251" stroke="#42BADC" strokeMiterlimit="10" />
                         </svg>
@@ -424,12 +421,12 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
                         {isArabic ? "سجل اهتمامك" : "Register Interest"}
                       </p>
                       {!isArabic && <div className="p-2 flex items-center justify-center bg-white w-fit rounded-full transition-transform duration-300 group-hover:rotate-45">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="11" viewBox="0 0 10 11" fill="none" >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="11" viewBox="0 0 10 11" fill="none" aria-hidden="true">
                           <path d="M8.74639 1.76178L1.12891 9.36247" stroke="#42BADC" strokeMiterlimit="10" />
                           <path d="M1.12891 1.76178H8.74639V9.21251" stroke="#42BADC" strokeMiterlimit="10" />
                         </svg>
                       </div>}
-                    </a>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -444,15 +441,14 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
       </div>
 
       {/* Pagination Indicator */}
-      <div className="absolute bottom-[10%] md:bottom-[37%] w-full z-[80]">
+      <div className="absolute bottom-[10%] md:bottom-[37%] w-full z-[80] pointer-events-none">
         <div className="container flex justify-end">
           <span className="text-[15px] text-white whitespace-nowrap font-light relative -right-3 md:right-2 z-10 flex flex-col items-center">
             <div className="flex flex-col rotate-180">
               {t.items.map((_, index) => (
                 <span
                   key={index}
-                  className={`font-medium w-[1px] h-[10px] mt-2 transition-all duration-300 ${index === currentSlide - 1 ? "bg-primary" : "bg-white"
-                    }`}
+                  className={`font-medium w-[1px] h-[10px] mt-2 transition-all duration-300 ${index === currentSlide - 1 ? "bg-primary" : "bg-white"}`}
                 ></span>
               ))}
             </div>
