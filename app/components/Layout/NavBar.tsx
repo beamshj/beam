@@ -31,14 +31,14 @@ const NavBar = () => {
       router.push("/ar" + pathname);
     }
   };
-  
-const handleRegisterClick = () => {
-  if (isArabic) {
-    window.location.href = "/ar/contact-us?scroll=register";
-  } else {
-    window.location.href = "/contact-us?scroll=register";
-  }
-};
+
+  const handleRegisterClick = () => {
+    if (isArabic) {
+      window.location.href = "/ar/contact-us?scroll=register";
+    } else {
+      window.location.href = "/contact-us?scroll=register";
+    }
+  };
 
 
   useEffect(() => {
@@ -92,16 +92,11 @@ const handleRegisterClick = () => {
   const [hoveredMenu, setHoveredMenu] = useState<string | null>(null);
   return (
     <>
-      <header
-        className={`w-full fixed z-[999] transition-all duration-300 left-0 right-0 ${
-          isSticky ? "top-0 bg-white shadow-md" : "top-7"
-        }`}
-      >
+      <header className={`w-full fixed z-[999] transition-all duration-300 left-0 right-0 ${isSticky ? "top-0 bg-white shadow-md" : "top-7" }`}>
         <div className="container">
           <div
-            className={`bg-white flex justify-between ${
-              isArabic ? "lg:pr-3" : "lg:pl-3"
-            } rounded-[10px] h-[70px] lg:h-full`}
+            className={`bg-white flex justify-between ${isArabic ? "lg:pr-3" : "lg:pl-3"
+              } rounded-[10px] h-[70px] lg:h-full`}
             style={{ boxShadow: "0px 4px 45px 0px #0000000F" }}
           >
             <div className="flex gap-12 items-center">
@@ -116,6 +111,8 @@ const handleRegisterClick = () => {
                       width={158}
                       height={77}
                       className="h-[58px] lg:h-full"
+                      priority
+                      fetchPriority="high"
                     />
                   </LangLink>
                 </div>
@@ -128,7 +125,7 @@ const handleRegisterClick = () => {
                       (item) =>
                         item.href !== "/contact-us" &&
                         item.href !==
-                          "https://careers.beam.co.ae/en/job-search-results/"
+                        "https://careers.beam.co.ae/en/job-search-results/"
                     )
 
                     .map((item) => (
@@ -158,9 +155,8 @@ const handleRegisterClick = () => {
                                   duration: 0.25,
                                   ease: "easeInOut",
                                 }}
-                                className={`absolute ${
-                                  isArabic ? "right-0" : "left-0"
-                                } top-full mt-2 w-[378px] bg-white shadow-xl rounded-lg py-3 px-4 flex flex-col  z-50`}
+                                className={`absolute ${isArabic ? "right-0" : "left-0"
+                                  } top-full mt-2 w-[378px] bg-white shadow-xl rounded-lg py-3 px-4 flex flex-col  z-50`}
                               >
                                 {item.submenu.map((sub) => (
                                   <li
@@ -177,11 +173,10 @@ const handleRegisterClick = () => {
                                         <Image
                                           src="/assets/arrow.svg"
                                           alt="Arrow"
-                                          className={`${
-                                            isArabic
+                                          className={`${isArabic
                                               ? "-rotate-135"
                                               : "rotate-45"
-                                          }`}
+                                            }`}
                                           width={20}
                                           height={20}
                                         />
@@ -201,12 +196,12 @@ const handleRegisterClick = () => {
             <div className="flex gap-2  sm:gap-5">
               <div className="flex items-center gap-5">
                 {/* {process.env.NODE_ENV === "development" && ( */}
-                  <button
-                    onClick={switchLanguage}
-                    className={`cursor-pointer hover:text-primary transition-colors duration-300 ${isArabic ? "font-default" : "font-arabic"}`}
-                  >
-                    {isArabic ? "English" : "العربية"}
-                  </button>
+                <button
+                  onClick={switchLanguage}
+                  className={`cursor-pointer hover:text-primary transition-colors duration-300 ${isArabic ? "font-default" : "font-arabic"}`}
+                >
+                  {isArabic ? "English" : "العربية"}
+                </button>
                 {/* )} */}
 
                 <button
@@ -216,11 +211,10 @@ const handleRegisterClick = () => {
                                 hover:bg-primary hover:text-white"
                 >
                   <span
-                    className={`transition-transform duration-300 ${
-                      isArabic
+                    className={`transition-transform duration-300 ${isArabic
                         ? "group-hover:-translate-x-1"
                         : "group-hover:translate-x-1"
-                    }`}
+                      }`}
                   >
                     {isArabic ? "سجل اهتمامك" : "Register Interest"}
                   </span>
@@ -233,19 +227,17 @@ const handleRegisterClick = () => {
                       alt="Arrow"
                       width={20}
                       height={20}
-                      className={`transition-transform duration-300 group-hover:brightness-0 ${
-                        isArabic
+                      className={`transition-transform duration-300 group-hover:brightness-0 ${isArabic
                           ? "-rotate-90 group-hover:-rotate-135"
                           : "group-hover:rotate-45"
-                      }`}
+                        }`}
                     />
                   </span>
                 </button>
               </div>
               <div
-                className={`transition-all duration-300 ${
-                  isSticky ? "py-2 px-2" : "py-0 px-0"
-                }`}
+                className={`transition-all duration-300 ${isSticky ? "py-2 px-2" : "py-0 px-0"
+                  }`}
               >
                 <div
                   onClick={() => setIsMenuOpen(true)}
@@ -341,6 +333,8 @@ const handleRegisterClick = () => {
                       width={158}
                       height={77}
                       className="h-[58px] w-fit lg:h-full brightness-0 invert"
+                      priority
+                      fetchPriority="high"
                     />
                   </LangLink>
                 </div>
@@ -356,7 +350,7 @@ const handleRegisterClick = () => {
                     <LangLink
                       href={"/contact-us"}
                       className="hidden lg:block"
-                      >
+                    >
                       <button
                         onClick={handleRegisterClick}
                         className="uppercase text-xs border-white text-white border-[1px] ps-5 pe-[12px] py-[11px] flex items-center gap-2 rounded-[50px] font-light cursor-pointer transition-all duration-300 group hover:bg-white hover:text-[#005871]"
@@ -511,10 +505,10 @@ const handleRegisterClick = () => {
                               onClick={() =>
                                 hasSubmenu
                                   ? setHoveredMenu(
-                                      hoveredMenu === item.name
-                                        ? null
-                                        : item.name
-                                    )
+                                    hoveredMenu === item.name
+                                      ? null
+                                      : item.name
+                                  )
                                   : null
                               }
                               className="flex justify-between items-center text-[19px] font-light text-white/80 hover:text-[#23ABD2] cursor-pointer"
@@ -523,11 +517,11 @@ const handleRegisterClick = () => {
                                 <span>{item.name}</span>
                               ) : (
                                 <Link
-                                    href={
-                                      isArabic && !item.href.startsWith("http")
-                                        ? `/ar${item.href}`
-                                        : item.href
-                                    }
+                                  href={
+                                    isArabic && !item.href.startsWith("http")
+                                      ? `/ar${item.href}`
+                                      : item.href
+                                  }
 
                                   onClick={() => setIsMenuOpen(false)}
                                   className="text-white/80 hover:text-[#23ABD2] transition-colors duration-200"
@@ -538,9 +532,8 @@ const handleRegisterClick = () => {
 
                               {hasSubmenu && (
                                 <span
-                                  className={`transform transition-transform duration-300 ${
-                                    hoveredMenu === item.name ? "rotate-90" : ""
-                                  }`}
+                                  className={`transform transition-transform duration-300 ${hoveredMenu === item.name ? "rotate-90" : ""
+                                    }`}
                                 >
                                   <svg
                                     xmlns="http://www.w3.org/2000/svg"
