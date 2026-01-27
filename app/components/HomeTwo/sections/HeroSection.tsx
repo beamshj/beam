@@ -108,8 +108,10 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
       opacity: 1
     });
 
+    // Set initial scale based on screen size
+    const isMobile = window.innerWidth < 768;
     gsap.set(img, {
-      scale: 1.05,
+      scale: isMobile ? 1 : 1.05,
       opacity: 1,
       x: 0,
       y: 0
@@ -148,12 +150,15 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
         }
       }, "-=0.2");
 
-    gsap.to(img, {
-      ...direction.movement,
-      duration: 7,
-      ease: "sine.inOut",
-      delay: 0
-    });
+    // Only apply Ken Burns effect on desktop to avoid overlay visibility issues on mobile
+    if (!isMobile) {
+      gsap.to(img, {
+        ...direction.movement,
+        duration: 7,
+        ease: "sine.inOut",
+        delay: 0
+      });
+    }
   }, [directions, isInitialLoad]);
 
   // Memoize content animation function
@@ -296,7 +301,12 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
         modules={[Autoplay, EffectFade]}
         effect="fade"
         fadeEffect={{ crossFade: true }}
-        autoplay={{ delay: 6000, disableOnInteraction: false }}
+        autoplay={{
+          delay: 6000,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: false,
+          waitForTransition: false,
+        }}
         speed={800}
         slidesPerView={1}
         loop
@@ -327,12 +337,13 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
                     width={1920}
                     height={1280}
                     priority={index === 0}
-                    loading={index === 0 ? "eager" : "lazy"}
-                    quality={85}
-                    placeholder="blur"
+                    fetchPriority={index === 0 ? "high" : "auto"}
+                    quality={80}
+                    placeholder={index === 0 ? "empty" : "blur"}
                     blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="
                     sizes="100vw"
                   />
+
                 </div>
               </figure>
 
@@ -384,9 +395,13 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
             <div
               ref={contentRef}
               className="absolute bottom-5 lg:bottom-[30px] xl:bottom-[50px] grid grid-cols-1 xl:grid-cols-7 items-end gap-2 pointer-events-auto"
+             
               style={{
-                opacity: showContent ? 1 : 0,
-                transition: 'opacity 0.3s ease-out'
+                clipPath: showContent
+                  ? "inset(0 0 0 0)"
+                  : "inset(0 0 100% 0)",
+                transform: showContent ? "translateY(0)" : "translateY(20px)",
+                transition: "clip-path 0.6s ease-out, transform 0.6s ease-out"
               }}
             >
               {/* Left text */}

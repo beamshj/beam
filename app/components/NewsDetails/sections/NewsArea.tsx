@@ -8,6 +8,7 @@ import { NewsItem } from "../../PressRelease/type";
 import { Variants } from "framer-motion";
 import { useApplyLang } from "@/lib/applyLang";
 import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
+import Link from "next/link";
 
 const NewsArea = ({ data }: { data: NewsItem }) => {
     const t = useApplyLang(data)
@@ -45,7 +46,7 @@ const NewsArea = ({ data }: { data: NewsItem }) => {
                 </svg>
               </li>
               <li>
-                <a href="#">News & Media</a>
+                <Link href="/news">News & Media</Link>
               </li>
               <li>
                 <svg
