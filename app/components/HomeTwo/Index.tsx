@@ -5,13 +5,13 @@ const VideoSection = dynamic(() => import("./sections/VideoSection"), { ssr: tru
 const OurSchools = dynamic(() => import("./sections/OurSchools"), { ssr: true });
 const AcademicCultural = dynamic(() => import("./sections/AcademicCultural"), { ssr: true });
 const MessageSection = dynamic(() => import("./sections/MessageSection"), { ssr: true });
+const LogoSlider = dynamic(() => import("./sections/LogoSlider"), { ssr: true });
 
 import DiverseGrowing from "./sections/DiverseGrowing";
 import Alumni from "./sections/Alumni";
 import MediaHub from "./sections/MediaHub";
 import JoinBeam from "./sections/JoinBeam";
 
-import LogoSlider from "./sections/LogoSlider";
 import { HomeProps } from "./type";
 import { BeamSchoolType, CategoryType, LocationType } from "../BeamSchools/type";
 import { BlogType } from "../blog/type";

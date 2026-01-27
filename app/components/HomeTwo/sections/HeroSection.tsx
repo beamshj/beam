@@ -18,6 +18,7 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
   const [showCurtains, setShowCurtains] = useState(true);
   const [isInitialLoad, setIsInitialLoad] = useState(true);
   const [showContent, setShowContent] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const totalSlides = data.items.length;
   const slideOverlayRefs = useRef<HTMLDivElement[]>([]);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -27,12 +28,32 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
   const isArabic = useIsPreferredLanguageArabic();
   const t = useApplyLang(data);
 
-  // Memoize register click handler
+  // Cache screen size on mount and resize - prevents repeated width checks
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+
+    // Debounced resize handler
+    let timeoutId: NodeJS.Timeout;
+    const debouncedResize = () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(checkMobile, 150);
+    };
+
+    window.addEventListener("resize", debouncedResize);
+    return () => {
+      window.removeEventListener("resize", debouncedResize);
+      clearTimeout(timeoutId);
+    };
+  }, []);
+
   const handleRegisterClick = useCallback(() => {
     window.location.href = "/contact-us?scroll=register";
   }, []);
 
-  // Memoize animation directions to prevent recreation
   const directions = useMemo(() => [
     {
       from: { y: '-100%', x: 0 },
@@ -60,9 +81,8 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
     },
   ], []);
 
-  // Memoize slide animation function
+  // Optimized animation function - batches DOM reads/writes
   const animateSlideIn = useCallback((index: number) => {
-    // Skip animation for first slide on initial load
     if (index === 0 && isInitialLoad) {
       const img = imageRefs.current[0]?.querySelector("img");
       const overlay = slideOverlayRefs.current[0];
@@ -92,35 +112,37 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
     const img = imgElement.querySelector("img");
     if (!img) return;
 
-    slideOverlayRefs.current.forEach((overlay) => {
-      if (overlay) gsap.killTweensOf(overlay);
-    });
-
-    gsap.killTweensOf([overlayElement, imgElement, img]);
+    // Kill all tweens first (batch operation)
+    const tweenTargets = [overlayElement, imgElement, img, ...slideOverlayRefs.current.filter(Boolean)];
+    gsap.killTweensOf(tweenTargets);
 
     const direction = directions[index % directions.length];
-    const tl = gsap.timeline();
 
+    // Batch all GSAP sets together to minimize reflows
     gsap.set(overlayElement, {
       ...direction.from,
       clipPath: direction.clipPath,
       willChange: 'transform',
-      opacity: 1
+      opacity: 1,
+      force3D: true // Force GPU acceleration
     });
 
-    // Set initial scale based on screen size
-    const isMobile = window.innerWidth < 768;
     gsap.set(img, {
       scale: isMobile ? 1 : 1.05,
       opacity: 1,
       x: 0,
-      y: 0
+      y: 0,
+      force3D: true
     });
+
+    // Create timeline with all animations
+    const tl = gsap.timeline();
 
     tl.to(overlayElement, {
       ...direction.to,
       duration: 1.2,
-      ease: "power3.inOut"
+      ease: "power3.inOut",
+      force3D: true
     })
       .to(overlayElement, {
         clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
@@ -132,89 +154,96 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
         duration: 0.5,
         ease: "power2.out",
         onComplete: () => {
-          imageRefs.current.forEach((imgRef, idx) => {
-            if (imgRef && idx !== index) {
-              const prevImg = imgRef.querySelector("img");
-              if (prevImg) {
-                gsap.to(prevImg, {
-                  x: 0,
-                  y: 0,
-                  scale: 1,
-                  duration: 0.8,
-                  ease: "power2.out",
-                  overwrite: true
-                });
+          // Batch cleanup animations using requestAnimationFrame
+          requestAnimationFrame(() => {
+            imageRefs.current.forEach((imgRef, idx) => {
+              if (imgRef && idx !== index) {
+                const prevImg = imgRef.querySelector("img");
+                if (prevImg) {
+                  gsap.to(prevImg, {
+                    x: 0,
+                    y: 0,
+                    scale: 1,
+                    duration: 0.8,
+                    ease: "power2.out",
+                    overwrite: true,
+                    force3D: true
+                  });
+                }
               }
-            }
+            });
           });
         }
       }, "-=0.2");
 
-    // Only apply Ken Burns effect on desktop to avoid overlay visibility issues on mobile
+    // Ken Burns effect only on desktop
     if (!isMobile) {
       gsap.to(img, {
         ...direction.movement,
         duration: 7,
         ease: "sine.inOut",
-        delay: 0
+        delay: 0,
+        force3D: true
       });
     }
-  }, [directions, isInitialLoad]);
+  }, [directions, isInitialLoad, isMobile]);
 
-  // Memoize content animation function
   const animateContentIn = useCallback(() => {
     const contentElement = contentRef.current;
     if (!contentElement) return;
 
-    const title = contentElement.querySelector(".hero-title");
-    const button = contentElement.querySelector(".hero-button");
-    const divider = contentElement.querySelector(".hero-divider");
+    // Batch DOM queries
+    const elements = {
+      title: contentElement.querySelector(".hero-title"),
+      button: contentElement.querySelector(".hero-button"),
+      divider: contentElement.querySelector(".hero-divider")
+    };
 
+    const { title, button, divider } = elements;
+
+    // Kill all tweens at once
     gsap.killTweensOf([title, button, divider]);
 
-    const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+    const tl = gsap.timeline({ defaults: { ease: "power3.out", force3D: true } });
 
-    tl.fromTo(
-      title,
-      {
-        y: 60,
-        opacity: 0,
-      },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 1.2,
-        delay: 0.2,
-        ease: "power3.out"
-      },
-      0
-    );
+    if (title) {
+      tl.fromTo(
+        title,
+        { y: 60, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1.2, delay: 0.2 },
+        0
+      );
+    }
 
-    tl.fromTo(
-      divider,
-      {
-        scaleX: 0,
-        opacity: 0,
-        transformOrigin: isArabic ? "right center" : "left center",
-      },
-      {
-        scaleX: 1,
-        opacity: 1,
-        duration: 0.8,
-        ease: "power2.inOut",
-      },
-      0.3
-    );
+    if (divider) {
+      tl.fromTo(
+        divider,
+        {
+          scaleX: 0,
+          opacity: 0,
+          transformOrigin: isArabic ? "right center" : "left center",
+        },
+        {
+          scaleX: 1,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power2.inOut",
+        },
+        0.3
+      );
+    }
 
-    tl.fromTo(
-      button,
-      { x: 40, opacity: 0 },
-      { x: 0, opacity: 1, duration: 0.8, ease: "power3.out" },
-      0.4
-    );
+    if (button) {
+      tl.fromTo(
+        button,
+        { x: 40, opacity: 0 },
+        { x: 0, opacity: 1, duration: 0.8 },
+        0.4
+      );
+    }
   }, [isArabic]);
 
-  // Curtain reveal animation on initial load
+  // Curtain reveal animation
   useEffect(() => {
     if (!isInitialLoad) return;
 
@@ -233,12 +262,14 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
       tl.to(leftCurtain, {
         x: '-100%',
         duration: 1.2,
-        ease: "power2.out"
+        ease: "power2.out",
+        force3D: true
       }, 0)
         .to(rightCurtain, {
           x: '100%',
           duration: 1.2,
-          ease: "power2.out"
+          ease: "power2.out",
+          force3D: true
         }, 0);
 
       const firstImg = imageRefs.current[0]?.querySelector("img");
@@ -247,26 +278,32 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
           scale: 1,
           opacity: 1,
           x: 0,
-          y: 0
+          y: 0,
+          force3D: true
         });
       }
 
+      // Use requestAnimationFrame to defer content animation
       setTimeout(() => {
-        animateContentIn();
+        requestAnimationFrame(() => {
+          animateContentIn();
+        });
       }, 300);
 
       setIsInitialLoad(false);
     }
   }, [isInitialLoad, animateContentIn]);
 
-  // Memoize slide change handler
   const handleSlideChange = useCallback((swiper: SwiperClass) => {
     const realIndex = swiper.realIndex;
     setCurrentSlide(realIndex + 1);
-    animateSlideIn(realIndex);
+
+    // Defer animation to next frame to batch with other updates
+    requestAnimationFrame(() => {
+      animateSlideIn(realIndex);
+    });
   }, [animateSlideIn]);
 
-  // Memoize active slide
   const activeSlide = useMemo(() =>
     t.items[currentSlide - 1] || t.items[0],
     [t.items, currentSlide]
@@ -282,7 +319,7 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
             className="absolute top-0 left-0 w-1/2 h-full bg-[#0a1e28] z-[60]"
             style={{
               willChange: 'transform',
-              transform: 'translateX(0%)'
+              transform: 'translate3d(0, 0, 0)'
             }}
           />
           <div
@@ -290,7 +327,7 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
             className="absolute top-0 right-0 w-1/2 h-full bg-[#0a1e28] z-[60]"
             style={{
               willChange: 'transform',
-              transform: 'translateX(0%)'
+              transform: 'translate3d(0, 0, 0)'
             }}
           />
         </>
@@ -343,7 +380,6 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
                     blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="
                     sizes="100vw"
                   />
-
                 </div>
               </figure>
 
@@ -356,9 +392,10 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
                 }}
                 className="absolute inset-0 z-50 pointer-events-none overflow-hidden"
                 style={{
-                  willChange: 'clip-path, opacity',
+                  willChange: 'transform, clip-path, opacity',
                   backfaceVisibility: 'hidden',
-                  opacity: 0
+                  opacity: 0,
+                  transform: 'translate3d(0, 0, 0)'
                 }}
               >
                 <div className="h-full w-full absolute inset-0">
@@ -374,7 +411,7 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
                     style={{
                       position: 'absolute',
                       inset: 0,
-                      transform: 'scale(1.05)'
+                      transform: 'scale(1.05) translate3d(0, 0, 0)'
                     }}
                   />
                   <div className="absolute inset-0 bg-[linear-gradient(180deg,_rgba(0,0,0,0)_21.7%,_rgba(0,0,0,0.6)_63.57%,_rgba(0,0,0,0.8)_100%)]"></div>
@@ -395,7 +432,6 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
             <div
               ref={contentRef}
               className="absolute bottom-5 lg:bottom-[30px] xl:bottom-[50px] grid grid-cols-1 xl:grid-cols-7 items-end gap-2 pointer-events-auto"
-             
               style={{
                 clipPath: showContent
                   ? "inset(0 0 0 0)"
