@@ -102,7 +102,7 @@ const NavBar = () => {
             <div className="flex gap-12 items-center">
               <div className="flex items-center justify-center h-full gap-4">
                 <div className="lg:py-3">
-                  <LangLink href="/">
+                  <LangLink href="#">
                     <Image
                       src={
                         isArabic ? "/assets/logo-ar.png" : "/assets/logo.svg"
@@ -326,7 +326,7 @@ const NavBar = () => {
                 </div>
 
                 <div className="lg:py-3 block lg:hidden">
-                  <LangLink href={"/"}>
+                  <LangLink href={"#"}>
                     <Image
                       src="/assets/logo.svg"
                       alt="Logo"
