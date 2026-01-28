@@ -4,9 +4,10 @@ import React, { useEffect, useRef, useState, useCallback, useMemo } from "react"
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade } from "swiper/modules";
 import { Swiper as SwiperClass } from "swiper";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/effect-fade";
+// import "swiper/css";
+// import "swiper/css/pagination";
+// import "swiper/css/effect-fade";
+import "../../../swiper-minimal.css";
 import { gsap } from "gsap";
 import { HomeProps } from "../type";
 import { useApplyLang } from "@/lib/applyLang";
@@ -18,7 +19,6 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
   const [showCurtains, setShowCurtains] = useState(true);
   const [isInitialLoad, setIsInitialLoad] = useState(true);
   const [showContent, setShowContent] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
   const totalSlides = data.items.length;
   const slideOverlayRefs = useRef<HTMLDivElement[]>([]);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -28,32 +28,15 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
   const isArabic = useIsPreferredLanguageArabic();
   const t = useApplyLang(data);
 
-  // Cache screen size on mount and resize - prevents repeated width checks
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
+  // RAF throttle to prevent layout thrashing
+  const rafIdRef = useRef<number | null>(null);
 
-    checkMobile();
-
-    // Debounced resize handler
-    let timeoutId: NodeJS.Timeout;
-    const debouncedResize = () => {
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(checkMobile, 150);
-    };
-
-    window.addEventListener("resize", debouncedResize);
-    return () => {
-      window.removeEventListener("resize", debouncedResize);
-      clearTimeout(timeoutId);
-    };
-  }, []);
-
+  // Memoize register click handler
   const handleRegisterClick = useCallback(() => {
     window.location.href = "/contact-us?scroll=register";
   }, []);
 
+  // Memoize animation directions to prevent recreation
   const directions = useMemo(() => [
     {
       from: { y: '-100%', x: 0 },
@@ -81,19 +64,22 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
     },
   ], []);
 
-  // Optimized animation function - batches DOM reads/writes
+  // Optimized slide animation with reflow prevention
   const animateSlideIn = useCallback((index: number) => {
+    // Skip animation for first slide on initial load
     if (index === 0 && isInitialLoad) {
       const img = imageRefs.current[0]?.querySelector("img");
       const overlay = slideOverlayRefs.current[0];
 
       if (img) {
         gsap.killTweensOf(img);
+        // Use transform instead of direct style manipulation
         gsap.set(img, {
           scale: 1,
           opacity: 1,
           x: 0,
-          y: 0
+          y: 0,
+          force3D: true, // Force GPU acceleration
         });
       }
 
@@ -112,50 +98,64 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
     const img = imgElement.querySelector("img");
     if (!img) return;
 
-    // Kill all tweens first (batch operation)
-    const tweenTargets = [overlayElement, imgElement, img, ...slideOverlayRefs.current.filter(Boolean)];
-    gsap.killTweensOf(tweenTargets);
-
+    // Batch DOM reads before writes to prevent layout thrashing
     const direction = directions[index % directions.length];
 
-    // Batch all GSAP sets together to minimize reflows
+    // Kill existing tweens in batch
+    slideOverlayRefs.current.forEach((overlay) => {
+      if (overlay) gsap.killTweensOf(overlay);
+    });
+
+    gsap.killTweensOf([overlayElement, imgElement, img]);
+
+    // Create timeline with optimized settings
+    const tl = gsap.timeline({
+      defaults: {
+        force3D: true, // Force GPU acceleration for all animations
+        ease: "none"
+      }
+    });
+
+    // Set initial states using transforms (no reflow)
     gsap.set(overlayElement, {
       ...direction.from,
       clipPath: direction.clipPath,
-      willChange: 'transform',
+      willChange: 'transform, clip-path, opacity',
       opacity: 1,
-      force3D: true // Force GPU acceleration
+      force3D: true,
     });
 
     gsap.set(img, {
-      scale: isMobile ? 1 : 1.05,
+      scale: 1.05,
       opacity: 1,
       x: 0,
       y: 0,
-      force3D: true
+      force3D: true,
     });
 
-    // Create timeline with all animations
-    const tl = gsap.timeline();
-
+    // Animate with GPU-accelerated transforms
     tl.to(overlayElement, {
       ...direction.to,
       duration: 1.2,
       ease: "power3.inOut",
-      force3D: true
+      force3D: true,
     })
       .to(overlayElement, {
         clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
         duration: 0.3,
-        ease: "power2.inOut"
+        ease: "power2.inOut",
       }, "-=0.2")
       .to(overlayElement, {
         opacity: 0,
         duration: 0.5,
         ease: "power2.out",
         onComplete: () => {
-          // Batch cleanup animations using requestAnimationFrame
-          requestAnimationFrame(() => {
+          // Batch reset previous images using RAF
+          if (rafIdRef.current) {
+            cancelAnimationFrame(rafIdRef.current);
+          }
+
+          rafIdRef.current = requestAnimationFrame(() => {
             imageRefs.current.forEach((imgRef, idx) => {
               if (imgRef && idx !== index) {
                 const prevImg = imgRef.querySelector("img");
@@ -167,7 +167,7 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
                     duration: 0.8,
                     ease: "power2.out",
                     overwrite: true,
-                    force3D: true
+                    force3D: true,
                   });
                 }
               }
@@ -176,74 +176,90 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
         }
       }, "-=0.2");
 
-    // Ken Burns effect only on desktop
-    if (!isMobile) {
-      gsap.to(img, {
-        ...direction.movement,
-        duration: 7,
-        ease: "sine.inOut",
-        delay: 0,
-        force3D: true
-      });
-    }
-  }, [directions, isInitialLoad, isMobile]);
+    // Parallax movement with GPU acceleration
+    gsap.to(img, {
+      ...direction.movement,
+      duration: 7,
+      ease: "sine.inOut",
+      delay: 0,
+      force3D: true,
+    });
+  }, [directions, isInitialLoad]);
 
+  // Optimized content animation with batched DOM updates
   const animateContentIn = useCallback(() => {
     const contentElement = contentRef.current;
     if (!contentElement) return;
 
-    // Batch DOM queries
-    const elements = {
-      title: contentElement.querySelector(".hero-title"),
-      button: contentElement.querySelector(".hero-button"),
-      divider: contentElement.querySelector(".hero-divider")
-    };
+    // Batch query all elements at once
+    const title = contentElement.querySelector(".hero-title");
+    const button = contentElement.querySelector(".hero-button");
+    const divider = contentElement.querySelector(".hero-divider");
 
-    const { title, button, divider } = elements;
+    if (!title || !button || !divider) return;
 
-    // Kill all tweens at once
     gsap.killTweensOf([title, button, divider]);
 
-    const tl = gsap.timeline({ defaults: { ease: "power3.out", force3D: true } });
+    const tl = gsap.timeline({
+      defaults: {
+        ease: "power3.out",
+        force3D: true, // GPU acceleration
+      }
+    });
 
-    if (title) {
-      tl.fromTo(
-        title,
-        { y: 60, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1.2, delay: 0.2 },
-        0
-      );
-    }
+    // Animate all at once to minimize reflow
+    tl.fromTo(
+      title,
+      {
+        y: 60,
+        opacity: 0,
+        force3D: true,
+      },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 1.2,
+        delay: 0.2,
+        ease: "power3.out",
+      },
+      0
+    );
 
-    if (divider) {
-      tl.fromTo(
-        divider,
-        {
-          scaleX: 0,
-          opacity: 0,
-          transformOrigin: isArabic ? "right center" : "left center",
-        },
-        {
-          scaleX: 1,
-          opacity: 1,
-          duration: 0.8,
-          ease: "power2.inOut",
-        },
-        0.3
-      );
-    }
+    tl.fromTo(
+      divider,
+      {
+        scaleX: 0,
+        opacity: 0,
+        transformOrigin: isArabic ? "right center" : "left center",
+        force3D: true,
+      },
+      {
+        scaleX: 1,
+        opacity: 1,
+        duration: 0.8,
+        ease: "power2.inOut",
+      },
+      0.3
+    );
 
-    if (button) {
-      tl.fromTo(
-        button,
-        { x: 40, opacity: 0 },
-        { x: 0, opacity: 1, duration: 0.8 },
-        0.4
-      );
-    }
+    tl.fromTo(
+      button,
+      {
+        x: 40,
+        opacity: 0,
+        force3D: true,
+      },
+      {
+        x: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: "power3.out"
+      },
+      0.4
+    );
   }, [isArabic]);
 
-  // Curtain reveal animation
+  // Curtain reveal animation on initial load
   useEffect(() => {
     if (!isInitialLoad) return;
 
@@ -252,26 +268,31 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
 
     if (leftCurtain && rightCurtain) {
       const tl = gsap.timeline({
+        defaults: {
+          force3D: true, // GPU acceleration
+        },
         onComplete: () => {
           setShowCurtains(false);
+          // Clean up willChange after animation
+          gsap.set([leftCurtain, rightCurtain], { willChange: 'auto' });
         }
       });
 
       setShowContent(true);
 
+      // Animate both curtains simultaneously (no reflow)
       tl.to(leftCurtain, {
         x: '-100%',
         duration: 1.2,
         ease: "power2.out",
-        force3D: true
       }, 0)
         .to(rightCurtain, {
           x: '100%',
           duration: 1.2,
           ease: "power2.out",
-          force3D: true
         }, 0);
 
+      // Set first slide image without animation
       const firstImg = imageRefs.current[0]?.querySelector("img");
       if (firstImg) {
         gsap.set(firstImg, {
@@ -279,31 +300,44 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
           opacity: 1,
           x: 0,
           y: 0,
-          force3D: true
+          force3D: true,
         });
       }
 
-      // Use requestAnimationFrame to defer content animation
+      // Delay content animation to prevent simultaneous reflows
       setTimeout(() => {
-        requestAnimationFrame(() => {
-          animateContentIn();
-        });
+        animateContentIn();
       }, 300);
 
       setIsInitialLoad(false);
     }
   }, [isInitialLoad, animateContentIn]);
 
+  // Cleanup RAF on unmount
+  useEffect(() => {
+    return () => {
+      if (rafIdRef.current) {
+        cancelAnimationFrame(rafIdRef.current);
+      }
+    };
+  }, []);
+
+  // Memoize slide change handler
   const handleSlideChange = useCallback((swiper: SwiperClass) => {
     const realIndex = swiper.realIndex;
     setCurrentSlide(realIndex + 1);
 
-    // Defer animation to next frame to batch with other updates
-    requestAnimationFrame(() => {
+    // Use RAF to defer animation and prevent blocking
+    if (rafIdRef.current) {
+      cancelAnimationFrame(rafIdRef.current);
+    }
+
+    rafIdRef.current = requestAnimationFrame(() => {
       animateSlideIn(realIndex);
     });
   }, [animateSlideIn]);
 
+  // Memoize active slide
   const activeSlide = useMemo(() =>
     t.items[currentSlide - 1] || t.items[0],
     [t.items, currentSlide]
@@ -319,7 +353,7 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
             className="absolute top-0 left-0 w-1/2 h-full bg-[#0a1e28] z-[60]"
             style={{
               willChange: 'transform',
-              transform: 'translate3d(0, 0, 0)'
+              transform: 'translate3d(0, 0, 0)', // Force GPU layer
             }}
           />
           <div
@@ -327,7 +361,7 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
             className="absolute top-0 right-0 w-1/2 h-full bg-[#0a1e28] z-[60]"
             style={{
               willChange: 'transform',
-              transform: 'translate3d(0, 0, 0)'
+              transform: 'translate3d(0, 0, 0)', // Force GPU layer
             }}
           />
         </>
@@ -338,15 +372,12 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
         modules={[Autoplay, EffectFade]}
         effect="fade"
         fadeEffect={{ crossFade: true }}
-        autoplay={{
-          delay: 6000,
-          disableOnInteraction: false,
-          pauseOnMouseEnter: false,
-          waitForTransition: false,
-        }}
-        speed={800}
+        autoplay={{ delay: 6000, disableOnInteraction: false }}
+        speed={1000}
         slidesPerView={1}
         loop
+        observer={true} // Prevent layout thrashing
+        observeParents={true}
         onSwiper={(swiper) => (swiperRef.current = swiper)}
         onSlideChange={handleSlideChange}
         className="w-full h-full"
@@ -362,9 +393,11 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
                       imageRefs.current[index] = el;
                     }
                   }}
-                  className="h-full w-full relative will-change-transform"
+                  className="h-full w-full relative"
                   style={{
-                    transform: 'translate3d(0, 0, 0)',
+                    willChange: 'transform',
+                    transform: 'translate3d(0, 0, 0)', // Force GPU layer
+                    backfaceVisibility: 'hidden', // Prevent flickering
                   }}
                 >
                   <Image
@@ -374,11 +407,14 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
                     width={1920}
                     height={1280}
                     priority={index === 0}
-                    fetchPriority={index === 0 ? "high" : "auto"}
-                    quality={80}
-                    placeholder={index === 0 ? "empty" : "blur"}
+                    loading={index === 0 ? "eager" : "lazy"}
+                    quality={85}
+                    placeholder="blur"
                     blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="
                     sizes="100vw"
+                    style={{
+                      transform: 'translate3d(0, 0, 0)', // Force GPU
+                    }}
                   />
                 </div>
               </figure>
@@ -392,10 +428,10 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
                 }}
                 className="absolute inset-0 z-50 pointer-events-none overflow-hidden"
                 style={{
-                  willChange: 'transform, clip-path, opacity',
+                  willChange: 'clip-path, opacity, transform',
                   backfaceVisibility: 'hidden',
+                  transform: 'translate3d(0, 0, 0)', // Force GPU layer
                   opacity: 0,
-                  transform: 'translate3d(0, 0, 0)'
                 }}
               >
                 <div className="h-full w-full absolute inset-0">
@@ -411,7 +447,7 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
                     style={{
                       position: 'absolute',
                       inset: 0,
-                      transform: 'scale(1.05) translate3d(0, 0, 0)'
+                      transform: 'scale(1.05) translate3d(0, 0, 0)', // GPU acceleration
                     }}
                   />
                   <div className="absolute inset-0 bg-[linear-gradient(180deg,_rgba(0,0,0,0)_21.7%,_rgba(0,0,0,0.6)_63.57%,_rgba(0,0,0,0.8)_100%)]"></div>
@@ -433,11 +469,9 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
               ref={contentRef}
               className="absolute bottom-5 lg:bottom-[30px] xl:bottom-[50px] grid grid-cols-1 xl:grid-cols-7 items-end gap-2 pointer-events-auto"
               style={{
-                clipPath: showContent
-                  ? "inset(0 0 0 0)"
-                  : "inset(0 0 100% 0)",
-                transform: showContent ? "translateY(0)" : "translateY(20px)",
-                transition: "clip-path 0.6s ease-out, transform 0.6s ease-out"
+                opacity: showContent ? 1 : 0,
+                willChange: showContent ? 'auto' : 'opacity',
+                transform: 'translate3d(0, 0, 0)', // Force GPU layer
               }}
             >
               {/* Left text */}
