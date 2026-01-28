@@ -16,6 +16,7 @@ const dmSans = DM_Sans({
   variable: "--font-dm-sans",
   subsets: ["latin"],
   display: "swap",
+  preload: true
 });
 
 const almarai = Almarai({
@@ -23,6 +24,7 @@ const almarai = Almarai({
   weight: ["300", "400", "700", "800"],
   subsets: ["arabic"],
   display: "swap",
+  preload: true
 });
 
 
