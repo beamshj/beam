@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import { DM_Sans, Almarai } from "next/font/google";
 import "../../globals.css";
-import dynamic from "next/dynamic";
+// import dynamic from "next/dynamic";
 
-const NavBar = dynamic(() => import("@/app/components/Layout/NavBar"), { ssr: true });
-const Footer = dynamic(() => import("@/app/components/Layout/Footer"), { ssr: true });
+// const NavBar = dynamic(() => import("@/app/components/Layout/NavBar"), { ssr: true });
+// const Footer = dynamic(() => import("@/app/components/Layout/Footer"), { ssr: true });
+import NavBar from "@/app/components/Layout/NavBar";
+import Footer from "@/app/components/Layout/Footer";
 
-import type { Viewport } from "next";
+// import type { Viewport } from "next";
 
 
 const dmSans = DM_Sans({
@@ -27,12 +29,9 @@ export const metadata: Metadata = {
   title: "BEAM | Lighting The Way",
   description: "",
 };
-export const viewport: Viewport = {
-  width: "device-width",
-  initialScale: 1,
-};
 
-// export const dynamic = "force-dynamic";
+
+export const dynamic = "force-dynamic";
 
 export default function RootLayout({
   children,
