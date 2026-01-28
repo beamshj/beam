@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
 import { DM_Sans, Almarai } from "next/font/google";
 import "../../globals.css";
-// import dynamic from "next/dynamic";
+import dynamic from "next/dynamic";
 
-// const NavBar = dynamic(() => import("@/app/components/Layout/NavBar"), { ssr: true });
-// const Footer = dynamic(() => import("@/app/components/Layout/Footer"), { ssr: true });
-import NavBar from "@/app/components/Layout/NavBar";
-import Footer from "@/app/components/Layout/Footer";
+const NavBar = dynamic(() => import("@/app/components/Layout/NavBar"), { ssr: true });
+const Footer = dynamic(() => import("@/app/components/Layout/Footer"), { ssr: true });
 
-// import type { Viewport } from "next";
+import type { Viewport } from "next";
 
-
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
   subsets: ["latin"],
@@ -31,7 +32,7 @@ export const metadata: Metadata = {
 };
 
 
-export const dynamic = "force-dynamic";
+// export const dynamic = "force-dynamic";
 
 export default function RootLayout({
   children,
