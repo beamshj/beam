@@ -400,7 +400,7 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
                     backfaceVisibility: 'hidden', // Prevent flickering
                   }}
                 >
-                  <Image
+                  {/* <Image
                     className="h-full w-full object-cover object-center"
                     src={slide.image}
                     alt={slide.imageAlt}
@@ -414,6 +414,24 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
                     sizes="100vw"
                     style={{
                       transform: 'translate3d(0, 0, 0)', // Force GPU
+                    }}
+                  /> */}
+              
+                  <Image
+                    className="h-full w-full object-cover object-center"
+                    src={slide.image}
+                    alt={slide.imageAlt}
+                    width={1920}
+                    height={1280}
+                    priority={index === 0}
+                    fetchPriority={index === 0 ? "high" : "auto"} // ✅ ADD THIS
+                    loading={index === 0 ? "eager" : "lazy"}
+                    quality={index === 0 ? 90 : 75} // ✅ CHANGE THIS
+                    placeholder="blur"
+                    blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 1920px"
+                    style={{
+                      transform: 'translate3d(0, 0, 0)',
                     }}
                   />
                 </div>
@@ -435,7 +453,7 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
                 }}
               >
                 <div className="h-full w-full absolute inset-0">
-                  <Image
+                  {/* <Image
                     className="h-full w-full object-cover object-center overlay-image"
                     src={slide.image}
                     alt={slide.imageAlt}
@@ -448,6 +466,22 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
                       position: 'absolute',
                       inset: 0,
                       transform: 'scale(1.05) translate3d(0, 0, 0)', // GPU acceleration
+                    }}
+                  /> */}
+                  <Image
+                    className="h-full w-full object-cover object-center overlay-image"
+                    src={slide.image}
+                    alt={slide.imageAlt}
+                    width={1920}
+                    height={1280}
+                    fetchPriority={index === 0 ? "high" : "auto"} // ✅ ADD THIS
+                    loading={index === 0 ? "eager" : "lazy"} // ✅ CHANGE THIS
+                    quality={index === 0 ? 90 : 75} // ✅ ADD THIS
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 1920px" // ✅ ADD THIS
+                    style={{
+                      position: 'absolute',
+                      inset: 0,
+                      transform: 'scale(1.05) translate3d(0, 0, 0)',
                     }}
                   />
                   <div className="absolute inset-0 bg-[linear-gradient(180deg,_rgba(0,0,0,0)_21.7%,_rgba(0,0,0,0.6)_63.57%,_rgba(0,0,0,0.8)_100%)]"></div>
