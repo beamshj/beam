@@ -17,6 +17,8 @@ import type { Swiper as SwiperType } from "swiper";
 import { useRouter } from "next/navigation";
 import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 import { useApplyLang } from "@/lib/applyLang";
+import Image from "next/image";
+import { StaticImageData } from "next/image";
 
 const MediaHub = ({
     blogdata,
@@ -28,7 +30,7 @@ const MediaHub = ({
     gallerydata: GalleryProps;
 }) => {
     const [selectedItem, setSelectedItem] = useState<{
-        img: string;
+        img: string | StaticImageData;
         date: string;
         title: string;
         category: string;
@@ -54,12 +56,12 @@ const MediaHub = ({
                     img: blog.coverImage,
                     date: blog.date
                         ? new Date(blog.date)
-                              .toLocaleDateString("en-US", {
-                                  year: "numeric",
-                                  month: "numeric",
-                                  day: "numeric",
-                              })
-                              .replace(/\//g, "-")
+                            .toLocaleDateString("en-US", {
+                                year: "numeric",
+                                month: "numeric",
+                                day: "numeric",
+                            })
+                            .replace(/\//g, "-")
                         : "",
                     title: blog.title,
                     category: isArabic ? "مدونة" : "Blog",
@@ -80,12 +82,12 @@ const MediaHub = ({
                     img: news.coverImage,
                     date: news.date
                         ? new Date(news.date)
-                              .toLocaleDateString("en-US", {
-                                  year: "numeric",
-                                  month: "numeric",
-                                  day: "numeric",
-                              })
-                              .replace(/\//g, "-")
+                            .toLocaleDateString("en-US", {
+                                year: "numeric",
+                                month: "numeric",
+                                day: "numeric",
+                            })
+                            .replace(/\//g, "-")
                         : "",
                     title: news.title,
                     category: isArabic ? "أخبار" : "News",
@@ -108,7 +110,6 @@ const MediaHub = ({
                         date: "",
                         title: cat.title || section.title || "Gallery",
                         category: isArabic ? "الأخبار والفعاليات" : "Media Hub",
-
                         images: cat.images,
                         description: cat.description,
                         slug: "",
@@ -164,35 +165,7 @@ const MediaHub = ({
         }
     }, [selectedItem, swiperInstance]);
 
-    // Initialize vanilla-tilt on card elements
-    // useEffect(() => {
-    //   // Dynamically import vanilla-tilt
-    //   import("vanilla-tilt").then((VanillaTilt) => {
-    //     tiltRefs.current.forEach((el) => {
-    //       if (el) {
-    //         VanillaTilt.default.init(el, {
-    //           max: 15,
-    //           speed: 400,
-    //           glare: true,
-    //           "max-glare": 0.3,
-    //           scale: 1.05,
-    //         });
-    //       }
-    //     });
-    //   });
 
-    //   // Cleanup on unmount
-    //   return () => {
-    //     tiltRefs.current.forEach((el) => {
-    //       if (el && "vanillaTilt" in el) {
-    //         const tiltEl = el as HTMLDivElement & {
-    //           vanillaTilt: { destroy: () => void };
-    //         };
-    //         tiltEl.vanillaTilt?.destroy();
-    //       }
-    //     });
-    //   };
-    // }, [mediaHubData.mediaHub]);
 
     // Flip animation variant
     const flipVariant = {
@@ -214,13 +187,7 @@ const MediaHub = ({
     } as const;
 
     return (
-        <motion.section
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            className="max-w-[1920px] mx-auto overflow-hidden"
-        >
+        <motion.section variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} className="max-w-[1920px] mx-auto overflow-hidden" >
             <div>
                 <div className="container border-t border-bdrcolor"></div>
                 <div className="pt-7 pb-12 md:pt-10 md:pb-10 xl:pt-[83px] 2xl:pb-[150px] overflow-hidden">
@@ -293,15 +260,12 @@ const MediaHub = ({
                                             viewport={{ once: false, amount: 0.3 }}
                                             style={{
                                                 transformStyle: "preserve-3d",
-                                                backgroundImage: `url(${value.img})`,
-                                                backgroundSize: "cover",
-                                                backgroundPosition: "center",
+                                                transform: "rotateX(0deg)",
                                             }}
-                                            className={`h-[350px] lg:h-[450px] xl:h-[557px] rounded-[15px] group slidegpmn cursor-pointer relative ${
-                                                index === activeIndex ? "active-slide" : ""
-                                            }`}
+                                            className={`h-[350px] lg:h-[450px] xl:h-[557px] rounded-[15px] group slidegpmn cursor-pointer relative overflow-hidden ${index === activeIndex ? "active-slide" : ""
+                                                }`}
                                             onClick={() => {
-                                                if (value.category === "Gallery") {
+                                                if (value.category === "Media Hub") {
                                                     setSelectedItem({
                                                         ...value,
                                                         images: value.images ?? [],
@@ -314,75 +278,38 @@ const MediaHub = ({
                                                 }
                                             }}
                                         >
-                                            <div className="h-full rounded-[15px] transition-all duration-300 hdriv">
+                                            <div>
+                                                <Image src={value.img} alt={value.title} width={1500} height={700} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                                    priority={index === 0} className="w-full h-full object-cover absolute top-0 left-0 z-0" />
+                                            </div>
+                                            <div className="h-full rounded-[15px] transition-all duration-300 hdriv relative z-10 overflow-hidden">
                                                 <div className="p-10">
                                                     {value.date ? (
-                                                        <p
-                                                            className={`text-white text-sm font-light transform transition-all duration-500 delay-100
-                                ${
-                                    isActiveOnMobile
-                                        ? "opacity-100 translate-y-0"
-                                        : "opacity-0 translate-y-2 lg:group-hover:opacity-100 lg:group-hover:translate-y-0"
-                                }`}
+                                                        <p className={`text-white text-sm font-light transform transition-all duration-500 delay-100 ${isActiveOnMobile
+                                                                    ? "opacity-100 translate-y-0"
+                                                                    : "opacity-0 translate-y-2 lg:group-hover:opacity-100 lg:group-hover:translate-y-0"
+                                                                }`}
                                                         >
                                                             {value.date}
                                                         </p>
                                                     ) : null}
 
-                                                    <p
-                                                        className={`text-white line-clamp-2 xl:line-clamp-3 text-lg lg:text-xl font-light leading-[1.2] mt-6 transform transition-all duration-500 delay-300
-                              ${
-                                  isActiveOnMobile
-                                      ? "opacity-100 translate-x-0"
-                                      : "opacity-0 -translate-x-4 lg:group-hover:opacity-100 lg:group-hover:translate-x-0"
-                              }`}
+                                                    <p className={`text-white line-clamp-2 xl:line-clamp-3 text-lg lg:text-xl font-light leading-[1.2] mt-6 transform transition-all duration-500 delay-300 ${isActiveOnMobile ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-4 lg:group-hover:opacity-100 lg:group-hover:translate-x-0"}`}
                                                     >
                                                         {value.title}
                                                     </p>
 
-                                                    <div
-                                                        className={`transition-all duration-300 ${
-                                                            isArabic ? "-rotate-90" : ""
-                                                        } delay-200 top-5 right-5 p-2 mt-6 xl:mt-15 transform rounded-full w-[40px] h-[40px] lg:w-[75px] lg:h-[75px] flex items-center justify-center border border-white
-                              ${
-                                  isActiveOnMobile
-                                      ? "opacity-100 -translate-y-2 delay-300"
-                                      : "opacity-0 lg:group-hover:opacity-100 lg:group-hover:-translate-y-2 lg:group-hover:delay-300"
-                              }`}
-                                                    >
-                                                        <svg
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            width="15"
-                                                            height="15"
-                                                            viewBox="0 0 15 15"
-                                                            fill="none"
-                                                        >
-                                                            <path
-                                                                d="M13.3696 1.60156L0.419922 14.5227"
-                                                                stroke="#000000"
-                                                                className="transition-all duration-300 filter strokclass"
-                                                                strokeMiterlimit="10"
-                                                            />
-                                                            <path
-                                                                d="M0.417969 1.14551H13.3677V13.8117"
-                                                                stroke="#000000"
-                                                                className="transition-all duration-300 filter strokclass"
-                                                                strokeMiterlimit="10"
-                                                            />
+                                                    <div className={`transition-all duration-300 ${isArabic ? "-rotate-90" : ""
+                                                            } delay-200 top-5 right-5 p-2 mt-6 xl:mt-15 transform rounded-full w-[40px] h-[40px] lg:w-[75px] lg:h-[75px] flex items-center justify-center border border-white ${isActiveOnMobile ? "opacity 00 -translate-y-2 delay-300" : "opacity-0 lg:group-hover:opacity-100 lg:group-hover:-translate-y-2 lg:group-hover:delay-300"}`} >
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none" >
+                                                            <path d="M13.3696 1.60156L0.419922 14.5227" stroke="#000000" className="transition-all duration-300 filter strokclass" strokeMiterlimit="10" />
+                                                            <path d="M0.417969 1.14551H13.3677V13.8117" stroke="#000000" className="transition-all duration-300 filter strokclass" strokeMiterlimit="10" />
                                                         </svg>
                                                     </div>
                                                 </div>
 
                                                 <div
-                                                    className={`transition-all duration-300 px-3 py-1 border border-white rounded-full text-white absolute bottom-5 ${
-                                                        isArabic ? "right-5" : "left-5"
-                                                    }
-                            ${
-                                isActiveOnMobile
-                                    ? "translate-x-2 delay-300"
-                                    : "lg:group-hover:translate-x-2 lg:group-hover:delay-300"
-                            }`}
-                                                >
+                                                    className={`transition-all duration-300 px-3 py-1 border border-white rounded-full text-white absolute bottom-5 ${isArabic ? "right-5" : "left-5" } ${isActiveOnMobile ? "translate-x-2 delay-300" : "lg:group-hover:translate-x-2 lg:group-hover:delay-300" }`} >
                                                     <p>{value.category}</p>
                                                 </div>
                                             </div>
