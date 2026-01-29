@@ -160,36 +160,28 @@ const OurSchools = ({
 
   // Inside your component:
   const containerRef = useRef<HTMLDivElement>(null);
-const { scrollYProgress } = useScroll({
-  target: containerRef,
-  offset: ["start 0.8", "end 0.5"],
-});
-
-
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start 0.8", "end 0.5"],
+  });
 
   // More dramatic transformations
   // const opacity = useTransform(scrollYProgress, [0, 1, 1, 1], [0, 1, 1, 0]);
   // const scale = useTransform(scrollYProgress, [0, 0.75, 0.75, 1], [0.6, 1, 1, 0.6]); // Scales from 60% to 100%
   // const y = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [150, 0, 0, -150]); // Moves 150px
   // const rotateX = useTransform(scrollYProgress, [0, 0.30, 0.75, 1], [30, 5, -5, -30]);
-const rotateXRaw = useTransform(
-  scrollYProgress,
-  [0, 0.3, 0.75],
-  [30, 0, -0],
-  { clamp: true }
-);
+  const rotateXRaw = useTransform(
+    scrollYProgress,
+    [0, 0.3, 0.75],
+    [30, 0, -0],
+    { clamp: true }
+  );
 
-const rotateX = useSpring(rotateXRaw, {
-  stiffness: 120, 
-  damping: 30, 
-  mass: 0.5, 
-});
-
-
-
-
-
-
+  const rotateX = useSpring(rotateXRaw, {
+    stiffness: 120,
+    damping: 30,
+    mass: 0.5,
+  });
 
   return (
     <section className="py-8 xl:pt-20 xl:pb-25 2xl:pt-[133px] 2xl:pb-[160px]">
@@ -229,15 +221,15 @@ const rotateX = useSpring(rotateXRaw, {
                   viewport={{ once: true, amount: 0.2 }}
                   onClick={() => setSelectedCurriculum(ALL_TEXT)}
                   className={`p-[1px] group rounded-full cursor-pointer ${selectedCurriculum === ALL_TEXT
-                      ? "bg-[linear-gradient(90deg,_#42BADC_0%,_#12586C_100%)] "
-                      : "bg-bdrcolor hover:bg-[linear-gradient(90deg,_#42BADC_0%,_#12586C_100%)]"
+                    ? "bg-[linear-gradient(90deg,_#42BADC_0%,_#12586C_100%)] "
+                    : "bg-bdrcolor hover:bg-[linear-gradient(90deg,_#42BADC_0%,_#12586C_100%)]"
                     }`}
                 >
                   <div className="px-4 xl:px-5 py-2 md:py-2 xl:py-3 bg-white rounded-full">
                     <p
                       className={`smtext10 text-xs font-light uppercase ${selectedCurriculum === "all"
-                          ? "text-black"
-                          : "text-colorpara group-hover:text-black"
+                        ? "text-black"
+                        : "text-colorpara group-hover:text-black"
                         }`}
                     >
                       {ALL_TEXT}
@@ -256,15 +248,15 @@ const rotateX = useSpring(rotateXRaw, {
                     viewport={{ once: true, amount: 0.2 }}
                     onClick={() => setSelectedCurriculum(curriculum)}
                     className={`p-[1px] group rounded-full cursor-pointer ${selectedCurriculum === curriculum
-                        ? "bg-[linear-gradient(90deg,_#42BADC_0%,_#12586C_100%)]"
-                        : "bg-bdrcolor hover:bg-[linear-gradient(90deg,_#42BADC_0%,_#12586C_100%)]"
+                      ? "bg-[linear-gradient(90deg,_#42BADC_0%,_#12586C_100%)]"
+                      : "bg-bdrcolor hover:bg-[linear-gradient(90deg,_#42BADC_0%,_#12586C_100%)]"
                       }`}
                   >
                     <div className="px-2 md:px-4 xl:px-5 py-2 md:py-2 xl:py-3 bg-white rounded-full">
                       <p
                         className={`smtext10 text-xs font-light uppercase ${selectedCurriculum === curriculum
-                            ? "text-black"
-                            : "text-foreground group-hover:text-black"
+                          ? "text-black"
+                          : "text-foreground group-hover:text-black"
                           }`}
                       >
                         {curriculum}
@@ -337,100 +329,67 @@ const rotateX = useSpring(rotateXRaw, {
               {filteredSchools.map((school, index) => (
                 <SwiperSlide key={index}>
                   <SparkleCard index={index}>
-                  <Link href={school.link} target="_blank">
-                    <motion.div
-                      key={selectedCurriculum}
-                      className="bg-[#F5F5F5] rounded-[15px] p-1 hover:bg-[#F0F0F0] transition-color group"
-                      custom={index}
-                      variants={moveLeft(0.05)}
-                      initial="hidden"
-                      whileInView="show"
-                      viewport={{ once: true, amount: 0.2 }}
-                    >
-                      <div className="bg-[#F5F5F5] rounded-[15px] p-1 hover:bg-[#F0F0F0] transition-all duration-300 group">
-                        <div className="rounded-xl overflow-hidden relative">
-                          <Image
-                            src={school.image}
-                            alt={school.imageAlt}
-                            width={500}
-                            height={500}
-                          />
-                          <div className="absolute opacity-0 delay-200 group-hover:-translate-y-2 group-hover:opacity-100 transition-all duration-300 top-5 right-5 p-2 bg-white/30 backdrop-blur-md  rounded-full w-[75px] h-[75px] flex items-center justify-center border border-[#42BADC]">
-                            <Image
-                              src="/images/home/arrow-top.svg"
-                              alt={school.title}
-                              width={15}
-                              height={15}
-                            />
-                          </div>
-                          <div className="absolute bottom-2 left-2 p-2 bg-white rounded-md w-fit">
-                            <Image
-                              src={school.logo}
-                              alt={school.logoAlt}
-                              width={109}
-                              height={45}
-                            />
-                          </div>
-                        </div>
-                        <div className="p-2 md:p-3 xl:p-6 2xl:p-10">
-                          <div className="flex justify-between items-center pb-3 border-b border-bdrcolor pt-3 2xl:pt-0">
-                            <p className="text-xs font-light text-colorpara">
-                              {school.category.name}
-                            </p>
-                            <div className="flex items-center gap-2">
-                              <Image
-                                src="/images/home/location.svg"
-                                alt={school.title}
-                                width={12}
-                                height={16}
-                              />
-                              <p className="text-xs font-light text-colorpara">
-                                {school.location.name}
-                              </p>
+                    <Link href={school.link} target="_blank">
+                      <motion.div
+                        key={selectedCurriculum}
+                        className="bg-[#F5F5F5] rounded-[15px] p-1 hover:bg-[#F0F0F0] transition-color group"
+                        custom={index}
+                        variants={moveLeft(0.05)}
+                        initial="hidden"
+                        whileInView="show"
+                        viewport={{ once: true, amount: 0.2 }}
+                      >
+                        <div className="bg-[#F5F5F5] rounded-[15px] p-1 hover:bg-[#F0F0F0] transition-all duration-300 group">
+                          <div className="rounded-xl overflow-hidden relative">
+                            <Image src={school.image} alt={school.imageAlt} width={500} height={500} />
+                            <div className="absolute opacity-0 delay-200 group-hover:-translate-y-2 group-hover:opacity-100 transition-all duration-300 top-5 right-5 p-2 bg-white/30 backdrop-blur-md  rounded-full w-[75px] h-[75px] flex items-center justify-center border border-[#42BADC]">
+                              <Image src="/images/home/arrow-top.svg" alt={school.title} width={15} height={15} />
+                            </div>
+                            <div className="absolute bottom-2 left-2 p-2 bg-white rounded-md w-fit">
+                              <Image src={school.logo} alt={school.logoAlt} width={109} height={45} />
                             </div>
                           </div>
-                          <div className="my-4 2xl:mt-6 2xl:mb-8">
-                            <h3
-                              className="text-[1.3rem] md:text-md xl:text-lg 2xl:text-xl font-light text-black leading-[1.18] lettersp-1 
-                      overflow-hidden text-ellipsis line-clamp-2 min-h-[2.6em]"
-                            >
-                              {school.title}
-                            </h3>
-                          </div>
-                          <div>
-                            {school.specifications.map((label, index) => (
-                              <div
-                                key={index}
-                                className={`relative group overflow-hidden flex justify-between items-center px-3 py-[2.5px] rounded-[10px] transition-all duration-500`}
-                              >
-                                <div
-                                  className={`absolute inset-0 transition-opacity duration-500 ${index % 2 === 0
+                          <div className="p-2 md:p-3 xl:p-6 2xl:p-10">
+                            <div className="flex justify-between items-center pb-3 border-b border-bdrcolor pt-3 2xl:pt-0">
+                              <p className="text-xs font-light text-colorpara">{school.category.name}</p>
+                              <div className="flex items-center gap-2">
+                                <Image src="/images/home/location.svg" alt={school.title} width={12} height={16} />
+                                <p className="text-xs font-light text-colorpara"> {school.location.name} </p>
+                              </div>
+                            </div>
+                            <div className="my-4 2xl:mt-6 2xl:mb-8">
+                              <h3 className="text-[1.3rem] md:text-md xl:text-lg 2xl:text-xl font-light text-black leading-[1.18] lettersp-1 overflow-hidden text-ellipsis line-clamp-2 min-h-[2.6em]" >
+                                {school.title}
+                              </h3>
+                            </div>
+                            <div>
+                              {school.specifications.map((label, index) => (
+                                <div key={index} className={`relative group overflow-hidden flex justify-between items-center px-3 py-[2.5px] rounded-[10px] transition-all duration-500`} >
+                                  <div className={`absolute inset-0 transition-opacity duration-500 ${index % 2 === 0
                                       ? "bg-[linear-gradient(90deg,#E2F5FF_0%,rgba(226,245,255,0)_100%)] group-hover:opacity-0"
                                       : "bg-[linear-gradient(90deg,#F5EBFF_0%,rgba(245,235,255,0)_100%)] group-hover:opacity-0"
-                                    }`}
-                                ></div>
-                                <div
-                                  className={`absolute inset-0 opacity-0 transition-opacity duration-500 ${index % 2 === 0
+                                      }`}
+                                  ></div>
+                                  <div
+                                    className={`absolute inset-0 opacity-0 transition-opacity duration-500 ${index % 2 === 0
                                       ? "group-hover:opacity-100 bg-[linear-gradient(90deg,#42BADC_0%,rgba(66,186,220,0)_100%)]"
                                       : "group-hover:opacity-100 bg-[linear-gradient(90deg,#7E5AA3_0%,rgba(126,90,163,0)_100%)]"
-                                    }`}
-                                ></div>
-                                <div className="relative z-10 flex justify-between items-center w-full">
-                                  <p className="xl:text-md font-light text-colorpara leading-[1.8] transition-colors duration-500 group-hover:text-black">
-                                    {/* {label.number} + */}
-                                    {label.number}
-                                  </p>
-                                  <p className="text-sm font-light text-colorpara leading-[1.8] transition-colors duration-500">
-                                    {label.value}
-                                  </p>
+                                      }`}
+                                  ></div>
+                                  <div className="relative z-10 flex justify-between items-center w-full">
+                                    <p className="xl:text-md font-light text-colorpara leading-[1.8] transition-colors duration-500 group-hover:text-black">
+                                      {/* {label.number} + */}
+                                      {label.number}
+                                    </p>
+                                    <p className="text-sm font-light text-colorpara leading-[1.8] transition-colors duration-500"> {label.value} </p>
+                                  </div>
                                 </div>
-                              </div>
-                            ))}
+                              ))}
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </motion.div>
-                  </Link>
+                      </motion.div>
+                    </Link>
                   </SparkleCard>
                 </SwiperSlide>
               ))}

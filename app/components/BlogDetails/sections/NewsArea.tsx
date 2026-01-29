@@ -19,10 +19,12 @@ import {
 import { FacebookIcon, LinkedinIcon, WhatsappIcon, EmailIcon } from "react-share";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { useApplyLang } from "@/lib/applyLang";
+import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 
 const NewsArea = ({ data }: { data: BlogType["categories"][number]["blogs"][number] }) => {
     const t = useApplyLang(data);
-        const hasArabic = Boolean(data.title_ar?.trim());
+        // const hasArabic = Boolean(data.title_ar?.trim());
+        const hasArabic = useIsPreferredLanguageArabic();
     // Define variants with proper typing
     const contentTags: Variants = {
         hidden: { opacity: 0, y: 40 },
@@ -112,7 +114,7 @@ const readingTime = useMemo(() => {
     return (
         // <section className="pb-8 md:pb-12 lg:pb-20 2xl:pb-[135px] pt-[135px] lg:pt-[198px] 2xl:pt-[193px]">
         <section
-            dir={hasArabic ? "rtl" : "ltr"}
+            // dir={hasArabic ? "rtl" : "ltr"}
             className="pb-8 md:pb-12 lg:pb-20 2xl:pb-[135px] pt-[135px] lg:pt-[198px] 2xl:pt-[193px]"
         >
             <div className="container">
