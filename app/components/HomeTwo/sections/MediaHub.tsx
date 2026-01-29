@@ -47,6 +47,7 @@ const MediaHub = ({
     const tGalleryData = useApplyLang(gallerydata);
 
     const router = useRouter();
+    
 
     // ✅ FIXED: Memoize blog items to prevent recreation on every render
     const blogItems = useMemo(
