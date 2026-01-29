@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { FaFacebookF } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
@@ -12,7 +12,6 @@ import {
   parentStagger,
   fadeUponeone,
 } from "@/public/assets/FramerAnimation/animation";
-import ReCAPTCHA from "react-google-recaptcha";
 import { useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -29,8 +28,10 @@ const formSchema = z.object({
 type FormData = z.infer<typeof formSchema>;
 
 const Footer = () => {
-  const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const recaptchaRef = useRef<any>(null);
   const [error, setError] = useState("");
+  const [showCaptcha, setShowCaptcha] = useState(false);
+  const [ReCAPTCHAComponent, setReCAPTCHAComponent] = useState<any>(null);
   const isArabic = useIsPreferredLanguageArabic();
 
   const {
@@ -41,6 +42,15 @@ const Footer = () => {
   } = useForm({
     resolver: zodResolver(formSchema),
   });
+
+  // ✅ Load ReCAPTCHA dynamically when needed
+  useEffect(() => {
+    if (showCaptcha && !ReCAPTCHAComponent) {
+      import("react-google-recaptcha").then((mod) => {
+        setReCAPTCHAComponent(() => mod.default);
+      });
+    }
+  }, [showCaptcha, ReCAPTCHAComponent]);
 
   const onSubmit = async (data: FormData) => {
     try {
@@ -203,22 +213,6 @@ const Footer = () => {
                       {isArabic ? "مدارسنا" : "Our Schools"}
                     </span>
                   </Link>
-                  {/* <Link
-                    href="/"
-                    className="group relative overflow-hidden hover:text-primary"
-                  >
-                    <span className="block transition-transform duration-300 group-hover:translate-x-1">
-                      Curriculum Overview
-                    </span>
-                  </Link>
-                  <Link
-                    href="/"
-                    className="group relative overflow-hidden hover:text-primary"
-                  >
-                    <span className="block transition-transform duration-300 group-hover:translate-x-1">
-                      Application Process
-                    </span>
-                  </Link> */}
                   <Link
                     href="/contact-us?scroll=register"
                     className="group relative overflow-hidden hover:text-primary max-md:mb-3"
@@ -262,22 +256,21 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Right Column (Empty or for future use) */}
+          {/* Right Column */}
           <motion.div
-            className={`flex flex-col ${
-              isArabic
+            className={`flex flex-col ${isArabic
                 ? "md:pr-[45px] xl:pr-[75px] 2xl:pr-[144px]"
                 : "md:pl-[45px] xl:pl-[75px] 2xl:pl-[144px]"
-            } gap-2 md:gap-14 2xl:gap-[73px] pt-8 pb-0 xl:pt-0 md:pb-0 md:mt-0`}
+              } gap-2 md:gap-14 2xl:gap-[73px] pt-8 pb-0 xl:pt-0 md:pb-0 md:mt-0`}
             variants={parentStagger}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.3 }}
+            onViewportEnter={() => setShowCaptcha(true)}
           >
             <motion.div variants={fadeUponeone}>
               <h2 className="text-xl xl:text-2xl 2xl:text-4xl font-light lettersp-4">
-                {" "}
-                {isArabic ? "سجل اهتمامك" : "Register Interest"}{" "}
+                {isArabic ? "سجل اهتمامك" : "Register Interest"}
               </h2>
             </motion.div>
             <div className="text-sm font-light leading-[1.52] pt-5 xl:pt-15">
@@ -291,7 +284,7 @@ const Footer = () => {
                   <input
                     type="text"
                     {...register("name")}
-                    className="border-b border-[#666666] focus:outline-none"
+                    className="border-b border-[#666666] focus:outline-none bg-transparent"
                   />
                   <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
                     {errors.name?.message || ""}
@@ -304,7 +297,7 @@ const Footer = () => {
                   <input
                     type="email"
                     {...register("email")}
-                    className="border-b border-[#666666] focus:outline-none"
+                    className="border-b border-[#666666] focus:outline-none bg-transparent"
                   />
                   <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
                     {errors.email?.message || ""}
@@ -315,7 +308,7 @@ const Footer = () => {
                   <input
                     type="text"
                     {...register("phone")}
-                    className="border-b border-[#666666] focus:outline-none"
+                    className="border-b border-[#666666] focus:outline-none bg-transparent"
                   />
                   <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
                     {errors.phone?.message || ""}
@@ -326,7 +319,7 @@ const Footer = () => {
                   <textarea
                     id=""
                     {...register("message")}
-                    className="border-b border-[#666666] focus:outline-none h-[85px] 2xl:h-[115px]"
+                    className="border-b border-[#666666] focus:outline-none bg-transparent h-[85px] 2xl:h-[115px]"
                   ></textarea>
                   <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
                     {errors.message?.message || ""}
@@ -334,22 +327,24 @@ const Footer = () => {
                 </motion.div>
 
                 <div>
-                  <ReCAPTCHA
-                    sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
-                    ref={recaptchaRef}
-                    className="mt-5"
-                  />
+                  {ReCAPTCHAComponent ? (
+                    <ReCAPTCHAComponent
+                      sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
+                      ref={recaptchaRef}
+                    />
+                  ) : showCaptcha ? (
+                    <div className="h-[78px] bg-gray-800/50 animate-pulse rounded w-[304px]" />
+                  ) : null}
 
                   {error && (
                     <p className="text-red-500 text-xs mt-1">{error}</p>
                   )}
                   <motion.div
                     variants={fadeUponeone}
-                    className={`w-fit mt-5 md:mt-7  2xl:mt-6 p-[1px] group transition-all duration-300 border-[1px] border-primary rounded-full ${
-                      isArabic
+                    className={`w-fit mt-5 md:mt-7  2xl:mt-6 p-[1px] group transition-all duration-300 border-[1px] border-primary rounded-full ${isArabic
                         ? "hover:translate-x-[-5px] hover:shadow-[0_0_15px_rgba(66,186,220,0.5)]"
                         : "hover:translate-x-[5px] hover:shadow-[0_0_15px_rgba(66,186,220,0.5)]"
-                    }`}
+                      }`}
                   >
                     <button
                       type="submit"
@@ -359,11 +354,10 @@ const Footer = () => {
                         {isArabic ? "إرسال" : "Submit"}
                       </p>
                       <div
-                        className={`p-2 flex items-center justify-center bg-primary w-fit rounded-full transition-transform duration-300 ${
-                          isArabic
+                        className={`p-2 flex items-center justify-center bg-primary w-fit rounded-full transition-transform duration-300 ${isArabic
                             ? "-rotate-90 group-hover:-rotate-135"
                             : "group-hover:rotate-45"
-                        } `}
+                          } `}
                       >
                         <Image
                           src="/assets/arrow.svg"
