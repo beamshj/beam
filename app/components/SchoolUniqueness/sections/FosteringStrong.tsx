@@ -44,14 +44,14 @@ const FosteringStrong = ({ data }: { data: SchoolUniquenessProps['firstSection']
                 tag="h2"
                 text={t.title}
                 className="text-lg lg:text-xl xl:text-2xl 2xl:text-4xl max-w-[50ch] font-light leading-[1.111111111] text-black mb-4 md:mb-6 xl:mb-8 2xl:mb-12"
-                delay={100}
+                delay={10}
                 duration={0.6}
                 ease="power3.out"
                 splitType="words"
                 from={{ opacity: 0, y: 40 }}
                 to={{ opacity: 1, y: 0 }}
                 threshold={0.1}
-                rootMargin="-100px"
+                rootMargin="0px"
                 textAlign={isArabic ? "right" : "left"}
               />
               <SplitText
@@ -77,19 +77,9 @@ const FosteringStrong = ({ data }: { data: SchoolUniquenessProps['firstSection']
                 const isOpen = openAccordion === index;
 
                 return (
-                  <motion.div
-                    key={index}
-                    variants={moveUp(index * 0.2)}
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ amount: 0.1, once: true }}
-                    className="border-b border-[#D3D3D3] transition-colors duration-300"
-                  >
+                  <motion.div key={index} variants={moveUp(index * 0.2)} initial="hidden" whileInView="show" viewport={{ amount: 0.1, once: true }} className="border-b border-[#D3D3D3] transition-colors duration-300" >
                     {/* Header */}
-                    <button
-                      onClick={() => toggleAccordion(index)}
-                      className={`flex justify-between items-center w-full ${isArabic ? "text-right" : "text-left"} pt-7 pb-5  cursor-pointer group`}
-                    >
+                    <button onClick={() => toggleAccordion(index)} className={`flex justify-between items-center w-full ${isArabic ? "text-right" : "text-left"} pt-7 pb-5  cursor-pointer group`}>
                       <div className="flex items-cente gap-3">
                         <p className={`text-sm font-light leading-[1.2] transition-colors duration-300 mt-[7px] ${isActive ? "text-black" : "text-colorpara group-hover:text-black"}`}>
                           0{index + 1}
@@ -106,64 +96,24 @@ const FosteringStrong = ({ data }: { data: SchoolUniquenessProps['firstSection']
                       {/* Accordion icon for mobile */}
                       <span className="lg:hidden transition-transform duration-300">
                         {isOpen ? (
-                          <svg
-                            className="w-4 h-4 transform rotate-180"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M19 9l-7 7-7-7"
-                            />
+                          <svg className="w-4 h-4 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" >
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                           </svg>
                         ) : (
-                          <svg
-                            className="w-4 h-4"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M19 9l-7 7-7-7"
-                            />
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" >
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                           </svg>
                         )}
                       </span>
                     </button>
 
                     {/* Accordion Content (Mobile Only) */}
-                    <AnimatePresence>
+                    <AnimatePresence mode="wait">
                       {isOpen && (
-                        <motion.div
-                          key={`accordion-${index}`}
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.4, ease: easeInOut }}
-                          className="overflow-hidden lg:hidden"
-                        >
-                          <motion.div
-                            variants={imageVariants}
-                            initial="hidden"
-                            animate="show"
-                            exit="exit"
-                            className="w-full h-[250px] rounded-xl mb-4 overflow-hidden"
-                          >
-                            <Image
-                              src={item.image}
-                              alt={item.imageAlt}
-                              fill
-                              loading="lazy"
-                              sizes="(max-width: 768px) 100vw"
-                              className="object-cover"
-                            />
-                          </motion.div>
+                        <motion.div key={`accordion-${index}`} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4, ease: easeInOut }} className="overflow-hidden lg:hidden relative" >
+                          <div className="w-full h-[250px] rounded-xl mb-4 overflow-hidden relative">
+                            <Image src={item.image} alt={item.imageAlt} fill loading="lazy" sizes="(max-width: 768px) 100vw" className="object-cover" />
+                          </div>
                         </motion.div>
                       )}
                     </AnimatePresence>
@@ -174,41 +124,15 @@ const FosteringStrong = ({ data }: { data: SchoolUniquenessProps['firstSection']
           </div>
 
           {/* Right Image (Desktop only) */}
-          <motion.div
-            variants={moveUp(1.25)}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.1 }}
-            className="relative w-full h-[250px] lg:h-auto rounded-[12px] overflow-hidden hidden lg:block"
-          >
+          <div className="relative w-full h-[250px] lg:h-auto rounded-[12px] overflow-hidden hidden lg:block">
             <AnimatePresence mode="wait">
-              <motion.div
-                key={t.items[activeIndex].image}
-                variants={imageVariants}
-                initial="hidden"
-                animate="show"
-                exit="exit"
-                className="absolute inset-0"
-              >
-                <Image
-                  src={t.items[activeIndex].image}
-                  alt={t.items[activeIndex].imageAlt}
-                  fill
-                  loading="lazy"
-                  sizes="(min-width: 1024px) 39vw, 100vw"
-                  className="object-cover"
-                />
+              <motion.div key={t.items[activeIndex].image} variants={imageVariants} initial="hidden" animate="show" exit="exit" className="absolute inset-0" >
+                <Image src={t.items[activeIndex].image} alt={t.items[activeIndex].imageAlt} fill loading="lazy" sizes="(min-width: 1024px) 39vw, 100vw" className="object-cover" />
               </motion.div>
-
             </AnimatePresence>
-
-            <motion.div
-              className="absolute bottom-0 w-full h-[60%] bg-gradient-to-b from-black/0 to-[#42BADCC9]/79"
-              initial={{ y: "100%" }}
-              animate={{ y: "0%" }}
-              transition={{ duration: 0.4, ease: easeInOut }}
-            />
-          </motion.div>
+            <motion.div className="absolute bottom-0 w-full h-[60%] bg-gradient-to-b from-black/0 to-[#42BADCC9]/79" 
+            initial={{ y: "100%" }} animate={{ y: "0%" }} transition={{ duration: 0.4, ease: easeInOut }} />
+          </div>
         </div>
       </div>
     </section>
