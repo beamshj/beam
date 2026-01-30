@@ -68,59 +68,25 @@ const BeyondAcademics = ({
                   {/* Overlay */}
                   <div className="absolute inset-0 rounded-[12px] bg-gradient-to-b from-transparent to-black" />
 
-                  <div
-                    className={`absolute top-0 left-0 w-full h-full rounded-[12px] transition-all duration-500  ${
-                      isActive ? "bg-[#42BADC]/60" : ""
-                    }`}
-                  ></div>
+                  <div className={`absolute top-0 left-0 w-full h-full rounded-[12px] transition-all duration-500  ${isActive ? "bg-[#42BADC]/60" : ""}`}></div>
 
-                  <div
-                    className={`absolute  transition-all duration-400 top-[20px] ${isArabic ? "left-[20px]  xl:left-[40px]" : "right-[20px]  xl:right-[40px]" } xl:top-[40px] p-2 bg-primary rounded-full w-12 h-12 lg:w-[75px] lg:h-[75px] flex items-center justify-center   ${
-                      isActive ? "bg-white" : ""
-                    }  `}
-                  >
-                    <Image
-                      src="/images/home/arrow-top.svg"
-                      alt={"ad"}
-                      width={24}
-                      className={`brightness-0 invert ${isArabic && "-rotate-90"} ${
-                        isActive ? "invert-0 brightness-100" : ""
-                      }`}
-                      height={24}
-                    />
+                  <div className={`absolute  transition-all duration-400 top-[20px] ${isArabic ? "left-[20px]  xl:left-[40px]" : "right-[20px]  xl:right-[40px]" } xl:top-[40px] p-2 bg-primary rounded-full w-12 h-12 lg:w-[75px] lg:h-[75px] flex items-center justify-center   ${isActive ? "bg-white" : ""}  `}>
+                    <Image src="/images/home/arrow-top.svg" alt={"ad"} width={24} height={24}
+                    className={`brightness-0 invert ${isArabic && "-rotate-90"} ${ isActive ? "invert-0 brightness-100" : "" }`}  />
                   </div>
 
                   {/* Content Wrapper */}
                   <div className="absolute inset-0 flex flex-col justify-end p-[20px] 2xl:p-[40px] z-10 transition-all duration-500">
                     {/* Title */}
-                    <h3
-                      className={`text-[23px]  lg:text-[26px] xl:text-lg 2xl:text-xl font-light text-white leading-[1.2] max-w-[12ch]
-            transition-all duration-500 ease-in-out transform ${
-              isActive ? "-translate-y-[20px]" : ""
-            } `}
-                    >
-                      {item.title}
-                    </h3>
+                    <h3 className={`text-[23px]  lg:text-[26px] xl:text-lg 2xl:text-xl font-light text-white leading-[1.2] max-w-[12ch] transition-all duration-500 ease-in-out transform ${ isActive ? "-translate-y-[20px]" : "" } `}>{item.title}</h3>
 
                     {/* Description */}
-                    <div
-                      className={`transition-all duration-600 ease-in-out overflow-y-auto lg:overflow-y-hidden`}
+                    <div className={`transition-all duration-600 ease-in-out overflow-y-auto lg:overflow-y-hidden`}
                       style={{
                         maxHeight: isActive ? 310 : 0, // animate between 0 and 500px
                         opacity: isActive ? 1 : 0, // optional fade effect
-                      }}
-                    >
+                      }} >
                       <div dangerouslySetInnerHTML={{ __html: item.description }} className={`${isArabic ? "school-uniqueness-second-section-ar" : "school-uniqueness-second-section"}`}>
-                        {/* <p className="text-[#E0E0E0] leading-[1.526315789473684] font-light max-w-[50ch]">
-                          {item.description}
-                        </p>
-                        <ul className="mt-[20px] space-y-1 ml-5 list-disc">
-                          {item.list.map((listItem, i) => (
-                            <li key={i} className="text-[#E0E0E0] font-light">
-                              {listItem}
-                            </li>
-                          ))}
-                        </ul> */}
                       </div>
                     </div>
                   </div>

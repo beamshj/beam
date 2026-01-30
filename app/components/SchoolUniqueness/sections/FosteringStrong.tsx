@@ -1,5 +1,5 @@
 "use client";
-
+import Image from "next/image";
 import {
   AnimatePresence,
   motion,
@@ -15,7 +15,7 @@ import { useApplyLang } from "@/lib/applyLang";
 import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 
 
-const FosteringStrong = ({data }: { data: SchoolUniquenessProps['firstSection'] }) => {
+const FosteringStrong = ({ data }: { data: SchoolUniquenessProps['firstSection'] }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [openAccordion, setOpenAccordion] = useState<number | null>(0);
   const t = useApplyLang(data)
@@ -88,24 +88,17 @@ const FosteringStrong = ({data }: { data: SchoolUniquenessProps['firstSection'] 
                     {/* Header */}
                     <button
                       onClick={() => toggleAccordion(index)}
-                      className={`flex justify-between items-center w-full ${isArabic ? "text-right" : "text-left" } pt-7 pb-5  cursor-pointer group`}
+                      className={`flex justify-between items-center w-full ${isArabic ? "text-right" : "text-left"} pt-7 pb-5  cursor-pointer group`}
                     >
                       <div className="flex items-cente gap-3">
-                        <p
-                          className={`text-sm font-light leading-[1.2] transition-colors duration-300 mt-[7px] ${
-                            isActive
-                              ? "text-black"
-                              : "text-colorpara group-hover:text-black"
-                          }`}
-                        >
+                        <p className={`text-sm font-light leading-[1.2] transition-colors duration-300 mt-[7px] ${isActive ? "text-black" : "text-colorpara group-hover:text-black"}`}>
                           0{index + 1}
                         </p>
                         <p
-                          className={`text-[1.2rem] md:text-md xl:text-lg font-light leading-[1.2] transition-colors duration-300 ${
-                            isActive
+                          className={`text-[1.2rem] md:text-md xl:text-lg font-light leading-[1.2] transition-colors duration-300 ${isActive
                               ? "text-primary"
                               : "group-hover:text-primary"
-                          }`}
+                            }`}
                         >
                           {item.title}
                         </p>
@@ -155,16 +148,22 @@ const FosteringStrong = ({data }: { data: SchoolUniquenessProps['firstSection'] 
                           transition={{ duration: 0.4, ease: easeInOut }}
                           className="overflow-hidden lg:hidden"
                         >
-                          <motion.img
-                            key={index}
-                            src={item.image}
-                            alt={item.imageAlt}
+                          <motion.div
                             variants={imageVariants}
                             initial="hidden"
                             animate="show"
                             exit="exit"
-                            className="w-full h-[250px] object-cover rounded-xl mb-4"
-                          />
+                            className="w-full h-[250px] rounded-xl mb-4 overflow-hidden"
+                          >
+                            <Image
+                              src={item.image}
+                              alt={item.imageAlt}
+                              fill
+                              loading="lazy"
+                              sizes="(max-width: 768px) 100vw"
+                              className="object-cover"
+                            />
+                          </motion.div>
                         </motion.div>
                       )}
                     </AnimatePresence>
@@ -183,16 +182,24 @@ const FosteringStrong = ({data }: { data: SchoolUniquenessProps['firstSection'] 
             className="relative w-full h-[250px] lg:h-auto rounded-[12px] overflow-hidden hidden lg:block"
           >
             <AnimatePresence mode="wait">
-              <motion.img
+              <motion.div
                 key={t.items[activeIndex].image}
-                src={t.items[activeIndex].image}
-                alt={t.items[activeIndex].imageAlt}
                 variants={imageVariants}
                 initial="hidden"
                 animate="show"
                 exit="exit"
-                className="object-cover h-full w-full"
-              />
+                className="absolute inset-0"
+              >
+                <Image
+                  src={t.items[activeIndex].image}
+                  alt={t.items[activeIndex].imageAlt}
+                  fill
+                  loading="lazy"
+                  sizes="(min-width: 1024px) 39vw, 100vw"
+                  className="object-cover"
+                />
+              </motion.div>
+
             </AnimatePresence>
 
             <motion.div
