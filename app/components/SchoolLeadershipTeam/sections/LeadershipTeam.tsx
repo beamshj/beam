@@ -201,10 +201,7 @@ export default function LeadershipCarousel({ data }: { data: LeadershipData }) {
         <div
           className="relative flex items-stretch justify-center"
           style={{
-            width:
-              windowWidth < 768
-                ? "100%"
-                : activeSize.w + getMaxNonActive() * (nonActiveSize.w + gap),
+            width: windowWidth < 768 ? "100%" : activeSize.w + getMaxNonActive() * (nonActiveSize.w + gap),
             height: windowWidth < 768 ? 420 : activeSize.h,
           }}
         >
@@ -228,12 +225,7 @@ export default function LeadershipCarousel({ data }: { data: LeadershipData }) {
             <motion.div
               key={m._id}
               className="md:absolute bottom-0 rounded-[12px] overflow-hidden cursor-pointer"
-              animate={{
-                left: m.left,
-                width: m.width,
-                height: m.height,
-                zIndex: m.zIndex,
-              }}
+              animate={{ left: m.left, width: m.width, height: m.height, zIndex: m.zIndex }}
               transition={{ duration: 0.6, ease: "easeInOut" }}
               onClick={() =>
                 setActiveIndex(sliderData.findIndex((d) => d._id === m._id))
@@ -244,7 +236,7 @@ export default function LeadershipCarousel({ data }: { data: LeadershipData }) {
                 alt={m.name}
                 width={Math.max(1, Math.round(m.width))}
                 height={Math.max(1, Math.round(m.height))}
-                loading="lazy" sizes="(max-width: 768px) 90vw, 380px"
+                loading="lazy" sizes="(max-width: 768px) 60vw, 360px"
                 className={`w-full h-full lg:object-cover object-top ${!m.isActive ? "saturate-0" : ""
                   }`}
               />
