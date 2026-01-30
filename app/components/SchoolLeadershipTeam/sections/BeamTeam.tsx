@@ -254,14 +254,8 @@ export default function LeadershipCarousel({ data }: { data: LeadershipData }) {
                 )
               }
             >
-              <Image
-                src={m.image}
-                alt={m.name}
-                width={Math.max(1, Math.round(m.width))}
-                height={Math.max(1, Math.round(m.height))}
-                className={`w-full h-full lg:object-cover object-top ${!m.isActive ? "saturate-0" : ""
-                  }`}
-              />
+              <Image src={m.image} alt={m.name} width={Math.max(1, Math.round(m.width))} height={Math.max(1, Math.round(m.height))} loading="lazy" sizes="(max-width: 768px) 90vw, 380px"
+              className={`w-full h-full lg:object-cover object-top ${!m.isActive ? "saturate-0" : "" }`} />
 
               {m.isActive && (
                 <div className="absolute left-0 bottom-0 right-0 w-full h-[50%] bg-gradient-to-b from-transparent to-[#42BADC]" />
@@ -310,42 +304,7 @@ export default function LeadershipCarousel({ data }: { data: LeadershipData }) {
               viewport={{ once: true, amount: 0.2 }}
               className="mt-[30px] md:mt-[50px] space-y-2 text-sm text-black"
             >
-              {/* {activeSlide.bullets?.map((b, i) => (
-                <motion.li
-                  key={i}
-                  variants={moveUp(i * 0.12)}
-                  initial="hidden"
-                  whileInView="show"
-                  viewport={{ once: true, amount: 0.2 }}
-                  className="flex items-start gap-[13px]"
-                >
-                  <span className="mt-1">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="15"
-                      height="15"
-                      viewBox="0 0 15 15"
-                      fill="none"
-                    >
-                      <path
-                        d="M8.99121 3.7063L12.7731 7.50005L8.99121 11.2938"
-                        stroke="#292D32"
-                        strokeMiterlimit="10"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                      <path
-                        d="M2.18066 7.5H12.6666"
-                        stroke="#292D32"
-                        strokeMiterlimit="10"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </span>
-                  <span>{b}</span>
-                </motion.li>
-              ))} */}
+             
               <motion.div
                 variants={moveUp(0.4)}
                 initial="hidden"
