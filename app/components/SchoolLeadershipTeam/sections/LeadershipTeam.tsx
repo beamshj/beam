@@ -290,24 +290,11 @@ export default function LeadershipCarousel({ data }: { data: LeadershipData }) {
               dangerouslySetInnerHTML={{ __html: activeSlide.description }}
             />
           </div>
-          <motion.div
-            variants={moveUp(0.5)}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
-            className="mt-8 flex justify-start group w-fit"
-          >
-            <button
-              onClick={next}
+          <motion.div variants={moveUp(0.5)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="mt-8 flex justify-start group w-fit" >
+            <button onClick={next}
               className={`${isArabic ? "group-hover:-translate-x-1" : "group-hover:translate-x-1"} transition-all duration-300 w-[50px] h-[50px] 2xl:w-[75px] 2xl:h-[75px] rounded-full border border-bdrcolor flex items-center justify-center cursor-pointer`}
             >
-              <Image
-                src="/images/arrow-primary.svg"
-                alt="arrow-right"
-                width={20}
-                height={20}
-                className={`w-[20px] h-[20px] ${isArabic ? "-rotate-135" : "rotate-45"}`}
-              />
+              <Image src="/images/arrow-primary.svg" alt="arrow-right" width={20} height={20} className={`w-[20px] h-[20px] ${isArabic ? "-rotate-135" : "rotate-45"}`} />
             </button>
           </motion.div>
         </div>
