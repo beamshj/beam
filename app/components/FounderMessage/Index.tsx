@@ -6,10 +6,7 @@ import { FounderMessageProps } from "./type";
 const Index = ({ data }: { data: FounderMessageProps }) => {
   return (
     <>
-      <InnerBanner
-        BannerData={BannerData}
-        data={data}
-      />
+      <InnerBanner BannerData={BannerData} data={data} />
       <FounderMessage data={data.firstSection} />
     </>
   );
