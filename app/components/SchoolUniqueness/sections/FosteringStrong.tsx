@@ -69,7 +69,7 @@ const FosteringStrong = ({ data }: { data: SchoolUniquenessProps['firstSection']
                 textAlign={isArabic ? "right" : "left"}
               /> */}
               <motion.div variants={moveUp(0.2)} initial={"hidden"} animate={"show"}>
-              <p className="text-sm leading-[1.526315789473684] font-light text-colorpara max-w-[54ch]">{t.description}</p>
+              <p className={`text-sm leading-[1.526315789473684] font-light text-colorpara max-w-[54ch] ${isArabic ? "text-right" : "text-left"}`}>{t.description}</p>
               </motion.div>
             </div>
 

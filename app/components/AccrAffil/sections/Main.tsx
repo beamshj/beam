@@ -16,7 +16,7 @@ const Main = ({ data }: { data: AccreditationProps["firstSection"] }) => {
         <motion.div
           variants={moveUp(0.2)}
           initial="hidden"
-          whileInView="show"
+          animate="show"
           viewport={{
             amount: 0.1,
             once: true,
@@ -36,27 +36,21 @@ const Main = ({ data }: { data: AccreditationProps["firstSection"] }) => {
             }}
             className="absolute top-0 left-0 w-[90%] h-full bg-gradient-to-r from-[#066B7F] to-black/0 z-10 opacity-95"
           ></motion.div>
-          <Image
-            src={t.image}
-            alt={t.imageAlt}
-            width={1920}
-            height={1280}
-            className="absolute top-0 left-0 z-0 h-full object-cover"
-          />
+          <Image src={t.image} alt={t.imageAlt} width={1920} height={1280} loading="lazy" sizes="(max-width: 768px) 100vw" className="absolute top-0 left-0 z-0 h-full object-cover" />
           <div className="relative z-30 text-white">
             <div>
             <SplitText
               tag="h2"
               text={t.title}
               className="text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl leading-[1.111111111111111] mb-5 font-light"
-              delay={100}
+              delay={1600}
               duration={0.6}
               ease="power3.out"
               splitType="words"
               from={{ opacity: 0, y: 40 }}
               to={{ opacity: 1, y: 0 }}
               threshold={0.1}
-              rootMargin="-100px"
+              rootMargin="0px"
               textAlign={isArabic ? "right" : "left"}
             />
             </div>
