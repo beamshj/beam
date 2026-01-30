@@ -207,35 +207,23 @@ const SchoolCards = ({
             >
               <LangLink href={campus.link} target="_blank">
                 {/* Background Image */}
-                <div
-                  className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
-                  style={{ backgroundImage: `url(${campus.image})` }}
-                >
+                <div className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105">
+                  <Image src={campus.image} alt={campus.title} fill loading="lazy" sizes="(max-width: 768px) 90vw, (max-width: 1200px) 33vw, 485px" className="object-cover h-full rounded-[12px]" />
+                  {/* Gradient Overlay */}
                   <div className="absolute left-0 bottom-0 right-0 h-[50%] bg-gradient-to-t from-black to-black/0"></div>
                 </div>
 
                 {/* Location & Arrow */}
                 <div className="absolute top-[14px] left-[14px] right-[14px] xl:top-[32px] xl:left-[33px] xl:right-[33px] flex items-start justify-between">
                   <div className="flex items-center gap-x-2 bg-[#E6F7FF] backdrop-blur-sm px-[25px] py-[11px] rounded-[50px]">
-                    <Image
-                      src="/images/contact-us/icons/location.svg"
-                      alt="map-icon"
-                      width={24}
-                      height={24}
-                    />
+                    <Image src="/images/contact-us/icons/location.svg" alt="map-icon" width={24} height={24} />
                     <span className="text-xs font-light text-black">
                       {campus.address}
                     </span>
                   </div>
                   {/* Arrow */}
                   <div className="bg-transparent group-hover:bg-primary border-white group-hover:border-primary border xl:w-[75px] xl:h-[75px] w-[50px] h-[50px] rounded-[50px] flex items-center justify-center transition-colors duration-400">
-                    <Image
-                      src="/images/arrow-right-up.svg"
-                      alt="arrow"
-                      width={24}
-                      height={24}
-                      className={`w-[18px] h-[18px] xl:w-[24px] xl:h-[24px] ${isArabic && "-rotate-90"}`}
-                    />
+                    <Image src="/images/arrow-right-up.svg" alt="arrow" width={24} height={24} className={`w-[18px] h-[18px] xl:w-[24px] xl:h-[24px] ${isArabic && "-rotate-90"}`} />
                   </div>
                 </div>
 
@@ -291,9 +279,11 @@ const SchoolCards = ({
                     <Image
                       src={campus.logo}
                       alt={campus.logoAlt}
-                      width={500}
-                      height={500}
-                      className="w-[104px] h-[56px] object-contain"
+                      width={104}
+                      height={56}
+                      sizes="104px"
+                      loading="lazy"
+                      className="object-contain"
                     />
                   </div>
                   <h3 className="text-white text-md max-w-[80%] xl:max-w-[100%] md:text-lg xl:text-xl font-light leading-[1.2] mt-[11px]">
