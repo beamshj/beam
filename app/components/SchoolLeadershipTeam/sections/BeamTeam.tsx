@@ -254,7 +254,7 @@ export default function LeadershipCarousel({ data }: { data: LeadershipData }) {
                 )
               }
             >
-              <Image src={m.image} alt={m.name} width={Math.max(1, Math.round(m.width))} height={Math.max(1, Math.round(m.height))} loading="lazy" sizes="(max-width: 768px) 90vw, 380px"
+              <Image src={m.image} alt={m.name} width={Math.max(1, Math.round(m.width))} height={Math.max(1, Math.round(m.height))} loading="lazy" sizes="(max-width: 768px) 60vw, 360px"
               className={`w-full h-full lg:object-cover object-top ${!m.isActive ? "saturate-0" : "" }`} />
 
               {m.isActive && (

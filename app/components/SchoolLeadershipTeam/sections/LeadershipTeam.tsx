@@ -201,10 +201,7 @@ export default function LeadershipCarousel({ data }: { data: LeadershipData }) {
         <div
           className="relative flex items-stretch justify-center"
           style={{
-            width:
-              windowWidth < 768
-                ? "100%"
-                : activeSize.w + getMaxNonActive() * (nonActiveSize.w + gap),
+            width: windowWidth < 768 ? "100%" : activeSize.w + getMaxNonActive() * (nonActiveSize.w + gap),
             height: windowWidth < 768 ? 420 : activeSize.h,
           }}
         >
@@ -228,12 +225,7 @@ export default function LeadershipCarousel({ data }: { data: LeadershipData }) {
             <motion.div
               key={m._id}
               className="md:absolute bottom-0 rounded-[12px] overflow-hidden cursor-pointer"
-              animate={{
-                left: m.left,
-                width: m.width,
-                height: m.height,
-                zIndex: m.zIndex,
-              }}
+              animate={{ left: m.left, width: m.width, height: m.height, zIndex: m.zIndex }}
               transition={{ duration: 0.6, ease: "easeInOut" }}
               onClick={() =>
                 setActiveIndex(sliderData.findIndex((d) => d._id === m._id))
@@ -244,7 +236,7 @@ export default function LeadershipCarousel({ data }: { data: LeadershipData }) {
                 alt={m.name}
                 width={Math.max(1, Math.round(m.width))}
                 height={Math.max(1, Math.round(m.height))}
-                loading="lazy" sizes="(max-width: 768px) 90vw, 380px"
+                loading="lazy" sizes="(max-width: 768px) 60vw, 360px"
                 className={`w-full h-full lg:object-cover object-top ${!m.isActive ? "saturate-0" : ""
                   }`}
               />
@@ -298,24 +290,11 @@ export default function LeadershipCarousel({ data }: { data: LeadershipData }) {
               dangerouslySetInnerHTML={{ __html: activeSlide.description }}
             />
           </div>
-          <motion.div
-            variants={moveUp(0.5)}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
-            className="mt-8 flex justify-start group w-fit"
-          >
-            <button
-              onClick={next}
+          <motion.div variants={moveUp(0.5)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="mt-8 flex justify-start group w-fit" >
+            <button onClick={next}
               className={`${isArabic ? "group-hover:-translate-x-1" : "group-hover:translate-x-1"} transition-all duration-300 w-[50px] h-[50px] 2xl:w-[75px] 2xl:h-[75px] rounded-full border border-bdrcolor flex items-center justify-center cursor-pointer`}
             >
-              <Image
-                src="/images/arrow-primary.svg"
-                alt="arrow-right"
-                width={20}
-                height={20}
-                className={`w-[20px] h-[20px] ${isArabic ? "-rotate-135" : "rotate-45"}`}
-              />
+              <Image src="/images/arrow-primary.svg" alt="arrow-right" width={20} height={20} className={`w-[20px] h-[20px] ${isArabic ? "-rotate-135" : "rotate-45"}`} />
             </button>
           </motion.div>
         </div>
