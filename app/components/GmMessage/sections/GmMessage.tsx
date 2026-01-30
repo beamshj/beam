@@ -18,13 +18,6 @@ export default function GmMessage({ data }: { data: GmMessageProps["firstSection
             <div className="container mx-auto flex flex-col xl:flex-row xl:items-center justify-between gap-4 md:gap-12 xl:gap-[91px]">
                 {/* Left Column */}
                 <div className="w-full xl:max-w-[54%]">
-                    {/* {" "}
-            {title.split("\n").map((line, idx) => (
-              <span key={idx} className="xl:flex">
-                {" "}
-                {line}{" "}
-              </span>
-            ))}{" "} */}
                     <SplitText
                         tag="h2"
                         text={t.title}
@@ -43,13 +36,7 @@ export default function GmMessage({ data }: { data: GmMessageProps["firstSection
                     {/* For small screens, simplified stacked structure */}
                     <div className="relative xl:hidden w-full h-[440px] md:h-auto  xl:h-full rounded-[12px] overflow-hidden bg-[#F6F6F6] mb-[20px]">
                         <div className="absolute inset-0 rounded-[12px]  bg-[linear-gradient(163.29deg,rgba(66,186,220,0)_53.09%,#00C7FF_109.87%)] opacity-60 z-10 pointer-events-none" />
-                        <Image
-                            src={t.image}
-                            alt={t.imageAlt}
-                            height={540}
-                            width={616}
-                            className="object-contain xl:object-cover w-fit xl:w-[547px] h-[540px] z-0 rounded-[12px]  absolute right-0 md:relative"
-                        />
+                        <Image src={t.image} alt={t.imageAlt} height={540} width={616} sizes="(max-width: 768px) 90vw, 600px" className="object-contain xl:object-cover w-fit xl:w-[547px] h-[540px] z-0 rounded-[12px]  absolute right-0 md:relative" />
                         {/* Info Box (mobile version) */}
                         <div
                             className={`absolute ${
@@ -117,7 +104,7 @@ export default function GmMessage({ data }: { data: GmMessageProps["firstSection
                         viewport={{ once: true, amount: 0.2 }}
                         className="hidden xl:block absolute right-0 left-[44px] z-10 bottom-0 h-full xl:w-[567px] rounded-[12px] overflow-hidden"
                     >
-                        <Image src={t.image} alt={t.imageAlt} fill className="object-cover" />
+                        <Image src={t.image} alt={t.imageAlt} height={540} width={616} sizes="(max-width: 768px) 90vw, 600px" className="object-cover" />
                     </motion.div>
 
                     <motion.div
