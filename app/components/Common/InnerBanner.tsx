@@ -40,10 +40,14 @@ const InnerBanner = ({ BannerData, data }: PageBnrProps) => {
                     width={1920}
                     height={800}
                     className="w-full h-full object-cover"
+
+                    priority   // ⭐ IMPORTANT (fixes LCP)
+                    loading="eager"
+                    fetchPriority="high"
                 />
             </motion.div>
-            <div className="absolute top-0 left-0 w-full h-full z-0 bg-gradient-to-b from-black/0 from-0% via-black/60 via-60% to-black/80 to-100%"></div>
 
+            <div className="absolute top-0 left-0 w-full h-full z-0 bg-gradient-to-b from-black/0 from-0% via-black/60 via-60% to-black/80 to-100%"></div>
             <div className="container relative z-10">
                 <div>
                     <motion.h2
@@ -86,8 +90,7 @@ const InnerBanner = ({ BannerData, data }: PageBnrProps) => {
                               })()}
                     </motion.h2>
                 </div>
-                <div
-                    className={`h-[1px] w-[60%] ${
+                <div className={`h-[1px] w-[60%] ${
                         isArabic
                             ? "bg-gradient-to-l from-white to-transparent"
                             : "bg-gradient-to-r from-white to-transparent"
