@@ -40,8 +40,8 @@ const InnerBanner = ({ BannerData, data }: PageBnrProps) => {
                     width={1920}
                     height={800}
                     className="w-full h-full object-cover"
-
-                    priority   // ⭐ IMPORTANT (fixes LCP)
+                    sizes="100vw"
+                    priority
                     loading="eager"
                     fetchPriority="high"
                 />

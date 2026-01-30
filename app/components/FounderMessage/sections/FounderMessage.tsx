@@ -44,7 +44,7 @@ export default function FounderMessage({
           {/* For small screens, simplified stacked structure */}
           <div className="relative xl:hidden w-full h-[440px] md:h-auto  xl:h-full rounded-[12px] overflow-hidden bg-[#F6F6F6] mb-[20px]">
             <div className="absolute inset-0 rounded-[12px]  bg-[linear-gradient(163.29deg,rgba(66,186,220,0)_53.09%,#00C7FF_109.87%)] opacity-60 z-10 pointer-events-none" />
-            <Image src={t.image} alt={t.imageAlt} height={540} width={616} className="object-contain xl:object-cover w-fit xl:w-[547px] h-[540px] z-0 rounded-[12px]  absolute right-0 md:relative" />
+            <Image src={t.image} alt={t.imageAlt} height={540} width={616} sizes="(max-width: 768px) 90vw, 600px" className="object-contain xl:object-cover w-fit xl:w-[547px] h-[540px] z-0 rounded-[12px]  absolute right-0 md:relative" />
             {/* Info Box (mobile version) */}
             <div
               className={`absolute ${isArabic ? "left-[5%] md:left-4" : "right-[5%] md:right-4"} bottom-4 z-20 md:min-h-[250px] md:bottom-6 w-[90%] md:w-[60%] lg:w-[70%] xl:w-[60%] rounded-[12px] p-[15px] 
@@ -102,26 +102,12 @@ export default function FounderMessage({
           </div>
 
           {/* Original desktop design — unchanged */}
-          <motion.div
-            variants={moveUp(2)}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
-            className="hidden xl:block absolute right-0 left-[44px] z-10 bottom-0 h-full w-full xl:w-[567px] rounded-[12px] overflow-hidden"
-          >
-            <Image
-              src={t.image}
-              alt={t.imageAlt}
-              fill
-              className="object-cover w-full"
-            />
+          <motion.div variants={moveUp(2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} 
+          className="hidden xl:block absolute right-0 left-[44px] z-10 bottom-0 h-full w-full xl:w-[567px] rounded-[12px] overflow-hidden" >
+            <Image src={t.image} alt={t.imageAlt} height={540} width={616} sizes="(max-width: 768px) 90vw, 600px" className="object-cover w-full" loading="lazy" />
           </motion.div>
 
-          <motion.div
-            variants={moveRight(2)}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
+          <motion.div variants={moveRight(2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}
             className={`hidden xl:block absolute z-30 ${isArabic ? "xl:left-16 2xl:left-[180px]" : "left-0"} bottom-[58px] rounded-[12px] py-[25px] px-[27px] 
             xl:w-[445px] md:w-[300px] shadow-[0px_4px_66px_0px_rgba(0,0,0,0.16)]`}
             style={{
