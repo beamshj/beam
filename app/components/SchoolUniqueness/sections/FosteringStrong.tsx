@@ -54,11 +54,11 @@ const FosteringStrong = ({ data }: { data: SchoolUniquenessProps['firstSection']
                 rootMargin="0px"
                 textAlign={isArabic ? "right" : "left"}
               />
-              <SplitText
+              {/* <SplitText
                 tag="p"
                 text={t.description}
                 className="text-sm leading-[1.526315789473684] font-light text-colorpara max-w-[54ch]"
-                delay={100}
+                delay={10}
                 duration={0.6}
                 ease="power3.out"
                 splitType="lines"
@@ -67,7 +67,10 @@ const FosteringStrong = ({ data }: { data: SchoolUniquenessProps['firstSection']
                 threshold={0.1}
                 rootMargin="-100px"
                 textAlign={isArabic ? "right" : "left"}
-              />
+              /> */}
+              <motion.div variants={moveUp(0.2)} initial={"hidden"} animate={"show"}>
+              <p className="text-sm leading-[1.526315789473684] font-light text-colorpara max-w-[54ch]">{t.description}</p>
+              </motion.div>
             </div>
 
             {/* Accordion / List */}
