@@ -5,13 +5,10 @@ import { moveRight, moveUp } from "../../motionVarients";
 import SplitText from "@/components/SplitText";
 import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 import { useApplyLang } from "@/lib/applyLang";
+import { AlumniMainSection } from "../type";
 
 interface mainSectionType {
-    data: {
-        bgImage: string;
-        title: string;
-        description: string;
-    };
+    data: AlumniMainSection;
 }
 
 const Main = ({ data }: mainSectionType) => {
@@ -27,7 +24,7 @@ const Main = ({ data }: mainSectionType) => {
                     viewport={{
                         amount: 0.1,
                         once: true,
-                        margin: `-250px 0px -250px 0px`,
+                        margin: `-50px 0px -50px 0px`,
                     }}
                     className="relative overflow-hidden rounded-xl p-5 md:p-10 xl:p-15 xl:min-h-[435px] 2xl:min-h-[638px] flex items-end"
                 >
@@ -44,7 +41,7 @@ const Main = ({ data }: mainSectionType) => {
                         className="absolute top-0 left-0 w-[90%] h-full bg-gradient-to-r from-[#066B7F] to-black/0 z-10 opacity-95"
                     ></motion.div>
                     <Image
-                        src={t.bgImage}
+                        src={t.image}
                         alt={"Alumni"}
                         width={1920}
                         height={1280}

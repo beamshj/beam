@@ -53,6 +53,7 @@ const AdminNavbar = () => {
          { name: "School Uniqueness", href: "/admin/school-uniqueness", icon: TbBellStar },
          { name: "School Achievements", href: "/admin/school-achievements", icon: BriefcaseIcon },
          { name: "Scholarship Programs", href: "/admin/scholarship-programs", icon: FaMoneyBill },
+         { name: "Alumni", href: "/admin/alumni", icon: FaMoneyBill },
         // { name: "Our Team", href: "/admin/team", icon: UserGroupIcon },
         // { name: "Group Company", href: "/admin/group-company", icon: GroupIcon },
         // { name: "Awards", href: "/admin/awards", icon: AwardIcon },

@@ -2,7 +2,7 @@
 
 import InnerBanner from "../Common/InnerBanner";
 import {
-  BannerData,  applyTodayData
+  BannerData
 } from "./data"; 
 import FutureFocus from "./sections/FutureFocus"; 
 import WeOffer from "./sections/WeOffer";
@@ -19,7 +19,7 @@ const Index = ({data}: {data: ScholarshipProps}) => {
       <WeOffer data={data.secondSection}/> 
       <SelectionCriteria data={data.thirdSection}/> 
       <OurLegacy data={data.fourthSection}/> 
-      <ApplyBeam data={applyTodayData}/>
+      <ApplyBeam data={data.fifthSection}/>
     </>
   );
 };

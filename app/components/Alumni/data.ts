@@ -1,12 +1,6 @@
 export const AlumniBannerData = {
   BannerTitle: "Alumni",
-  BannerTitle_ar: "خرّيجونا",
-  BannerImg: "/images/alumni/banner.jpg",
-  banner: "/images/alumni/banner.jpg",
-  bannerAlt: "Alumni",
-  bannerAlt_ar: "خرّيجونا",
-  pageTitle: "Alumni",
-  pageTitle_ar: "خرّيجونا"
+  BannerImg: "",
 };
 
 export const mainSection = {
