@@ -19,23 +19,23 @@ export default function GalleryList({ data }: { data: GalleryProps }) {
 
   const filters = [(isArabic ? "الجميع" : "all"), ...t.gallery.map((item) => item.title)];
 
-const filteredItems =
-  activeFilter === "all" || "الجميع"
-    ? t.gallery.flatMap((item) => item.categories)
-    : t.gallery
+  const filteredItems =
+    activeFilter === "all" || "الجميع"
+      ? t.gallery.flatMap((item) => item.categories)
+      : t.gallery
         .find(
           (gallery) => gallery.title.toLowerCase() === activeFilter.toLowerCase()
         )
         ?.categories || [];
 
   const toArabicDigits = (num: number) => {
-  const arabicDigits = ["٠","١","٢","٣","٤","٥","٦","٧","٨","٩"];
-  return num
-    .toString()
-    .split("")
-    .map((d) => arabicDigits[Number(d)] ?? d)
-    .join("");
-};
+    const arabicDigits = ["٠", "١", "٢", "٣", "٤", "٥", "٦", "٧", "٨", "٩"];
+    return num
+      .toString()
+      .split("")
+      .map((d) => arabicDigits[Number(d)] ?? d)
+      .join("");
+  };
 
 
   return (
@@ -45,44 +45,42 @@ const filteredItems =
         <div className="flex flex-col lg:flex-row justify-between lg:items-center pb-5 2xl:pb-[31px] mb-10 2xl:mb-[65px] border-b border-bdrcolor">
           <h2 className="text-lg md:text-xl xl:text-3xl 2xl:text-4xl font-light text-black leading-[1.1111] mb-6 lg:mb-0">
             <SplitText
-             tag="span"
-             text={t.firstSection.title}
-             delay={100}
-             duration={0.6}
-             ease="power3.out"
-             splitType="words"
-             from={{ opacity: 0, y: 40 }}
-             to={{ opacity: 1, y: 0 }}
-             threshold={0.1}
-             rootMargin="-10px"
-             textAlign="left"
-           /> 
+              tag="span"
+              text={t.firstSection.title}
+              delay={100}
+              duration={0.6}
+              ease="power3.out"
+              splitType="words"
+              from={{ opacity: 0, y: 40 }}
+              to={{ opacity: 1, y: 0 }}
+              threshold={0.1}
+              rootMargin="-10px"
+              textAlign="left"
+            />
           </h2>
 
           {/* Filters */}
           <div className="flex gap-3">
-            {filters.map((f,index) => (
-                <motion.div
-                                key={f}
-                                variants={moveUp(index * 0.2)}
-                                initial="hidden"
-                                whileInView="show"
-                                viewport={{ once: true, amount: 0.2 }}
-                                className={`rounded-[50px] ${
-                                  activeFilter === f
-                                    ? "bg-gradient-to-r from-[#42BADC] to-[#12586C] p-[1px]" // gradient border
-                                    : "border border-bdrcolor"
-                                } transition-colors duration-200 `}
-                              > 
-              <motion.button variants={moveUp(index * 0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}
+            {filters.map((f, index) => (
+              <motion.div
                 key={f}
-                className={`px-[20px] py-[11px] text-xs text-black rounded-[50px] cursor-pointer font-light ${
-                  activeFilter === f ? "bg-[#C9F3FF] text-black" : "bg-white text-black hover:bg-[#F5F5F5]"
-                }`}
-                onClick={() => setActiveFilter(f)}
+                variants={moveUp(index * 0.2)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.2 }}
+                className={`rounded-[50px] ${activeFilter === f
+                    ? "bg-gradient-to-r from-[#42BADC] to-[#12586C] p-[1px]" // gradient border
+                    : "border border-bdrcolor"
+                  } transition-colors duration-200 `}
               >
-                {f.charAt(0).toUpperCase() + f.slice(1)}
-              </motion.button>
+                <motion.button variants={moveUp(index * 0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}
+                  key={f}
+                  className={`px-[20px] py-[11px] text-xs text-black rounded-[50px] cursor-pointer font-light ${activeFilter === f ? "bg-[#C9F3FF] text-black" : "bg-white text-black hover:bg-[#F5F5F5]"
+                    }`}
+                  onClick={() => setActiveFilter(f)}
+                >
+                  {f.charAt(0).toUpperCase() + f.slice(1)}
+                </motion.button>
               </motion.div>
             ))}
           </div>
@@ -96,7 +94,7 @@ const filteredItems =
               onClick={() => setSelectedItem(item)}
             >
               {/* Main Image */}
-              <Image src={item.images[0]} alt={item.title} fill className="object-cover" />
+              <Image src={item.images[0]} alt={item.title} fill priority fetchPriority="high" sizes="100vw" className="object-cover" />
               {/* Black Gradient (always visible) */}
               <div className="absolute inset-0 pointer-events-none"
                 style={{
@@ -112,7 +110,7 @@ const filteredItems =
               />
 
               {/* Hover Arrow */}
-              <div className={`absolute top-[30px] ${isArabic ? "left-[30px]" : "right-[30px]" } opacity-0 group-hover:opacity-100 transition-opacity duration-300`}>
+              <div className={`absolute top-[30px] ${isArabic ? "left-[30px]" : "right-[30px]"} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}>
                 <button className="bg-primary text-white w-[74px] h-[74px] rounded-full flex items-center justify-center">
                   <Image
                     src="/images/arrow-right-up.svg"
@@ -141,7 +139,7 @@ const filteredItems =
                         <Image width={50} height={50}
                           src={img}
                           alt={`thumb-${idx}`}
-                          className="w-full h-full object-cover" 
+                          className="w-full h-full object-cover"
                         />
                         {isLast && (
                           <div className="absolute inset-0 bg-primary flex items-center justify-center text-xs md:text-sm font-medium">
@@ -163,7 +161,7 @@ const filteredItems =
           item={{
             title: selectedItem.title,
             gallery: selectedItem.images,
-            description:selectedItem.description // map images → gallery
+            description: selectedItem.description // map images → gallery
           }}
           onClose={() => setSelectedItem(null)}
         />
