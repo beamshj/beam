@@ -118,40 +118,12 @@ export const countries = [
 
 export const testimonialsSection = {
   headingOne: "See What",
-  headingOne_ar: "See What",
+  headingOne_ar: "اكتشف",
   headingTwo: "Our Students Says",
-  headingTwo_ar: "Our Students Says",
+  headingTwo_ar: "آراء طلابنا وتجاربهم",
   items: [
     {
       id: 1,
-      name: "Ubadah Sabbagh",
-      name_ar: "عبادة سباغ",
-      content: `
-        <p>
-          Ubadah Sabbagh, PhD is a neuroscientist at the McGovern Institute for Brain Research at MIT.
-          He studies the role of networks between the thalamus and cortex in neurodevelopmental
-          and psychiatric disorders.
-        </p>
-        <ul>
-          <li>Associate in Arts/Science, Longview Community College</li>
-          <li>Bachelor of Science, Biology, University of Missouri</li>
-          <li>Ph.D in Translational Biology, Medicine, and Health, Virginia Tech</li>
-        </ul>
-      `,
-      content_ar: `
-        <p>
-        عبادة سباغ عالم أعصاب في معهد ماكغفرن لأبحاث الدماغ في معهد ماساتشوستس للتكنولوجيا. يدرس دور الشبكات العصبية بين المهاد والقشرة في الاضطرابات النمائية العصبية والنفسية.
-        </p>
-        <ul>
-          <li>مشارك في الآداب / العلوم، كلية مجتمع لونجفيلو</li>
-          <li>بكالوريوس علوم الأحياء، جامعة ميزوري، كانساس سيتي</li>
-          <li>دكتوراه في علم الأحياء والطب والصحة، جامعة فرجينيا للتكنولوجيا</li>
-        </ul>
-      `,
-      profileImage: "/images/alumni/profile1.jpg",
-    },
-    {
-      id: 2,
       name: "Ubadah Sabbagh",
       name_ar: "عبادة سباغ",
       content: `
