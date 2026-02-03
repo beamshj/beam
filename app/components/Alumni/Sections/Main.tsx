@@ -18,7 +18,7 @@ const Main = ({ data }: mainSectionType) => {
     const isArabic = useIsPreferredLanguageArabic();
     const t = useApplyLang(data);
     return (
-        <section className="pt-10 xl:pt-25 2xl:pt-[135px] pb-[50px]">
+        <section className="pt-10 xl:pt-25 2xl:pt-[135px] pb-[30px] lg:pb-[50px]">
             <div className="container">
                 <motion.div
                     variants={moveUp(0.2)}

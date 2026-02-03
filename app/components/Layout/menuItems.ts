@@ -120,6 +120,11 @@ export const mainMenuItems = [
         name_ar: "شهادات أولياء الأمور والطلاب",
         href: "/beam-schools/testimonials",
       },
+      {
+        name: "Alumni",
+        name_ar: "خرّيجونا",
+        href: "/beam-schools/alumni",
+      },
     ],
   },
 

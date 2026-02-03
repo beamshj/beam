@@ -17,6 +17,7 @@ interface CountrySectionType {
 
 export default function CountryCards({ data }: CountrySectionType) {
     const t = useApplyLang(data);
+    const [activeIndex, setActiveIndex] = useState<number | null>(0);
     return (
         <div className="container">
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 2xl:gap-[33px]">
@@ -29,7 +30,7 @@ export default function CountryCards({ data }: CountrySectionType) {
                         viewport={{ amount: 0.2, once: true }}
                         transition={{ duration: 0.5 }}
                     >
-                        <Card key={idx} item={item} />
+                        <Card item={item} isActive={activeIndex === idx} onClick={() => setActiveIndex(idx)} />
                     </motion.div>
                 ))}
             </div>
@@ -37,18 +38,26 @@ export default function CountryCards({ data }: CountrySectionType) {
     );
 }
 
-function Card({ item }: { item: CountrySectionType["data"][number] }) {
+function Card({
+    item,
+    isActive,
+    onClick,
+}: {
+    item: CountrySectionType["data"][number];
+    isActive: boolean;
+    onClick: () => void;
+}) {
     const isArabic = useIsPreferredLanguageArabic();
-    const [active, setActive] = useState(false);
     return (
         <div
-            onClick={() => setActive((v) => !v)}
+            onClick={onClick}
+            onMouseEnter={onClick}
             className="
-                group relative w-full 2xl:w-[485px] h-[585px]
-                rounded-[12px] border border-[#D3D3D3]
-                overflow-hidden cursor-pointer
-            "
-            data-active={active}
+        group relative w-full 2xl:w-[485px] h-[585px]
+        rounded-[12px] border border-[#D3D3D3]
+        overflow-hidden cursor-pointer
+    "
+            data-active={isActive}
         >
             {/* Base gradient */}
             <div
