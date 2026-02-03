@@ -7,17 +7,9 @@ import { BlogType } from "./type";
 const Index = ({ data }: { data: BlogType }) => {
   return (
     <>
-      <InnerBanner
-        BannerData={BannerData}
-        data={data}
-      />
-      <LatestBlogs
-        data={data.categories.flatMap((category) => category.blogs)}
-      />
-      <BlogList
-        data={data.categories.flatMap((category) => category.blogs)}
-        // categories={data.categories}
-      />
+      <InnerBanner BannerData={BannerData} data={data} />
+      <LatestBlogs data={data.categories.flatMap((category) => category.blogs)} />
+      <BlogList data={data.categories.flatMap((category) => category.blogs)} />
     </>
   );
 };
