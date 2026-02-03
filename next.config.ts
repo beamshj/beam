@@ -1,10 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  experimental: {
-    optimizeCss: true,
-    optimizePackageImports: ["gsap", "swiper", "lucide-react", "framer-motion", "react-select", "react-dropzone", "react-google-recaptcha", "react-intersection-observer", "react-quill-new", "react-select", "react-share", "sonner", "tinymce"],
-  },
+  // experimental: {
+  //   optimizeCss: false,
+  //   optimizePackageImports: ["gsap", "swiper", "lucide-react", "framer-motion", "react-select", "react-dropzone", "react-google-recaptcha", "react-intersection-observer", "react-quill-new", "react-select", "react-share", "sonner", "tinymce"],
+  // },
 
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
@@ -126,17 +126,17 @@ const withPWA = require("next-pwa")({
         },
       },
     },
-    {
-      urlPattern: /\.(?:css)$/i,
-      handler: "StaleWhileRevalidate",
-      options: {
-        cacheName: "static-style-assets",
-        expiration: {
-          maxEntries: 32,
-          maxAgeSeconds: 24 * 60 * 60,
-        },
-      },
-    },
+    // {
+    //   urlPattern: /\.(?:css)$/i,
+    //   handler: "StaleWhileRevalidate",
+    //   options: {
+    //     cacheName: "static-style-assets",
+    //     expiration: {
+    //       maxEntries: 32,
+    //       maxAgeSeconds: 24 * 60 * 60,
+    //     },
+    //   },
+    // },
     {
       urlPattern: /\/_next\/data\/.+\/.+\.json$/i,
       handler: "StaleWhileRevalidate",
