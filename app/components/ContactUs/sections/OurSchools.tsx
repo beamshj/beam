@@ -113,8 +113,7 @@ export default function OurSchools({
                 onMouseLeave={() => !isMobile && setActiveIndex(0)}
                 animate={{
                   width: "100%",
-                  // maxWidth: showActive ? "45%" : "10%",
-                  scaleX: showActive ? 1 : 0.25
+                  maxWidth: showActive ? "45%" : "10%",
                 }}
                 transition={{ duration: 0.6, ease: "easeInOut" }}
                 onClick={() =>
