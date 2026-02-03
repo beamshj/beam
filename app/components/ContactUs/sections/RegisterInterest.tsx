@@ -29,6 +29,25 @@ interface RegisterInterestProps {
 
 const RegisterInterest = forwardRef<HTMLDivElement, RegisterInterestProps>(
   ({ className }, ref) => {
+    const [loadCaptcha, setLoadCaptcha] = useState(false);
+    const captchaRef = useRef<HTMLDivElement>(null);
+    const recaptchaRef = useRef<ReCAPTCHA>(null);
+    useEffect(() => {
+      const captchaObserver = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setLoadCaptcha(true);
+            captchaObserver.disconnect();
+          }
+        },
+        { rootMargin: "100px" }
+      );
+
+      if (captchaRef.current) captchaObserver.observe(captchaRef.current);
+
+      return () => captchaObserver.disconnect();
+    }, []);
+
     const [selectedSchool, setSelectedSchool] = React.useState("");
     const {
       register,
@@ -39,7 +58,6 @@ const RegisterInterest = forwardRef<HTMLDivElement, RegisterInterestProps>(
       resolver: zodResolver(formSchema),
     });
 
-    const recaptchaRef = useRef<ReCAPTCHA>(null);
     const [error, setError] = useState("");
     const isArabic = useIsPreferredLanguageArabic()
 
@@ -119,7 +137,7 @@ const RegisterInterest = forwardRef<HTMLDivElement, RegisterInterestProps>(
             </div>
             {/* Right form */}
             <form
-              onSubmit={handleSubmit(onSubmit)}
+              onSubmit={handleSubmit(onSubmit)} onFocus={() => setLoadCaptcha(true)}
               className="lg:w-[68%] lg:space-y-12 mt-10 xl:mt-0"
             >
               <div className="flex flex-col lg:flex-row lg:gap-[54px]">
@@ -306,13 +324,14 @@ const RegisterInterest = forwardRef<HTMLDivElement, RegisterInterestProps>(
                 </motion.div>
               </div>
 
-              <div>
+              <div ref={captchaRef}>
+                {loadCaptcha && (
                 <ReCAPTCHA
                   sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
                   ref={recaptchaRef}
                   className="mt-5"
                 />
-
+                )}
                 {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
 
                 <motion.div
