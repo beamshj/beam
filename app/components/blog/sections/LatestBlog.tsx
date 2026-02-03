@@ -62,7 +62,8 @@ export default function LatestBlogs({
             >
               <Link href={`/news-&-media/blog/blog-details/${item.slug}`}>
                 {/* Main Image */}
-                <Image src={item.thumbnail || "/images/fallback.jpg"} alt={item.thumbnailAlt} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw" loading="lazy" className="object-cover" />
+                <Image src={item.thumbnail || "/images/fallback.jpg"} alt={item.thumbnailAlt} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
+                  priority className="object-cover" />
 
                 {/* Black Gradient (always visible) */}
                 <div
