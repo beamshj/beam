@@ -62,12 +62,7 @@ export default function LatestBlogs({
             >
               <Link href={`/news-&-media/blog/blog-details/${item.slug}`}>
                 {/* Main Image */}
-                <Image
-                  src={item.thumbnail || "/images/fallback.jpg"}
-                  alt={item.thumbnailAlt}
-                  fill
-                  className="object-cover"
-                />
+                <Image src={item.thumbnail || "/images/fallback.jpg"} alt={item.thumbnailAlt} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw" loading="lazy" className="object-cover" />
 
                 {/* Black Gradient (always visible) */}
                 <div
@@ -89,13 +84,7 @@ export default function LatestBlogs({
                 <div className={`absolute top-[30px] ${isArabic ? "left-[30px]" : "right-[30px]" } opacity-0 group-hover:opacity-100 transition-opacity duration-300`}>
                   <button className="bg-primary text-white w-[74px] h-[74px] rounded-full flex items-center justify-center overflow-hidden cursor-pointer">
                     <span className={`transition-all duration-400 translate-y-3 ${isArabic ? "translate-x-3" : "-translate-x-3" } group-hover:-translate-y-0 group-hover:translate-x-0 block`}>
-                      <Image
-                        src="/images/arrow-right-up.svg"
-                        alt="arrow"
-                        width={24}
-                        height={24}
-                        className={`${isArabic && "-rotate-90"} object-contain`}
-                      />
+                      <Image src="/images/arrow-right-up.svg" alt="arrow" width={24} height={24} className={`${isArabic && "-rotate-90"} object-contain`} />
                     </span>
                   </button>
                 </div>
@@ -120,13 +109,7 @@ export default function LatestBlogs({
                   </h3>
                   <div>
                     <button className="bg-primary text-white w-[27px] h-[27px] rounded-full flex items-center justify-center mt-[15px] cursor-pointer">
-                      <Image
-                        src="/images/arrow-right-tip.svg"
-                        alt="arrow"
-                        width={15}
-                        height={15}
-                        className={`${isArabic && "rotate-180"}`}
-                      />
+                      <Image src="/images/arrow-right-tip.svg" alt="arrow" width={15} height={15} className={`${isArabic && "rotate-180"}`} />
                     </button>
                   </div>
                 </div>
