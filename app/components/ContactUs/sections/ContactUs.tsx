@@ -39,6 +39,7 @@ const ContactForm: React.FC<{ data: FirstSection }> = ({ data }) => {
             ([entry]) => {
                 if (entry.isIntersecting) {
                     setShowMap(true);
+                    setLoadCaptcha(true); 
                     observer.disconnect();
                 }
             },

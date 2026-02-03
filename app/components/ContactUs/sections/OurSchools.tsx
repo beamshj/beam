@@ -155,12 +155,7 @@ export default function OurSchools({
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
                   >
-                    <Image
-                      src={"/images/contact-us/icons/location.svg"}
-                      alt="location"
-                      width={24}
-                      height={24}
-                    />
+                    <Image src={"/images/contact-us/icons/location.svg"} alt="location" width={24} height={24} />
                     {school.location.name}
                   </motion.div>
                 )}
@@ -180,25 +175,13 @@ export default function OurSchools({
                       </h3>
                       <div className="mt-[15px] inline-flex items-center text-sm font-light">
                         {isArabic ? "تعرّف على المزيد" : "Learn more"}
-                        <Image
-                          src="/images/arrow-right-tip.svg"
-                          alt="arrow"
-                          width={25}
-                          height={24}
-                          className={`ml-[12px] ${isArabic && "rotate-180"}`}
-                        />
+                        <Image src="/images/arrow-right-tip.svg" alt="arrow" width={25} height={24} className={`ml-[12px] ${isArabic && "rotate-180"}`} />
                       </div>
                     </motion.div>
                     {/* Right arrow button */}
                     <div>
                       <span className="w-8 h-8 md:w-12 md:h-12 xl:w-[74px] xl:h-[74px] flex items-center justify-center border border-white rounded-full">
-                        <Image
-                          src="/images/arrow-primary.svg"
-                          alt="arrow"
-                          width={24}
-                          height={24}
-                          className={`w-auto h-4 xl:h-[24px] ${isArabic && "-rotate-90"}`}
-                        />
+                        <Image src="/images/arrow-primary.svg" alt="arrow" width={24} height={24} className={`w-auto h-4 xl:h-[24px] ${isArabic && "-rotate-90"}`} />
                       </span>
                     </div>
                   </div>
@@ -206,13 +189,7 @@ export default function OurSchools({
                   // INACTIVE CARD
                   <div className="absolute bottom-[40px] left-5 xl:left-1/2 xl:-translate-x-1/2 z-10">
                     <span className="w-14 h-14 xl:w-[74px] xl:h-[74px] flex items-center justify-center border border-white rounded-full">
-                      <Image
-                        src="/images/arrow-primary.svg"
-                        alt="arrow"
-                        width={24}
-                        height={24}
-                        className={`w-auto h-4 xl:h-[24px] ${isArabic && "-rotate-90"}`}
-                      />
+                      <Image src="/images/arrow-primary.svg" alt="arrow" width={24} height={24} className={`w-auto h-4 xl:h-[24px] ${isArabic && "-rotate-90"}`} />
                     </span>
                   </div>
                 )}

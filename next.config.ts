@@ -1,10 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // experimental: {
+  experimental: {
   //   optimizeCss: false,
-  //   optimizePackageImports: ["gsap", "swiper", "lucide-react", "framer-motion", "react-select", "react-dropzone", "react-google-recaptcha", "react-intersection-observer", "react-quill-new", "react-select", "react-share", "sonner", "tinymce"],
-  // },
+    optimizePackageImports: ["gsap", "swiper", "lucide-react", "framer-motion", "react-select", "react-dropzone", "react-google-recaptcha", "react-intersection-observer", "react-quill-new", "react-select", "react-share", "sonner", "tinymce"],
+  },
 
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
