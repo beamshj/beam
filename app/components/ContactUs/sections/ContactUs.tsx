@@ -42,7 +42,7 @@ const ContactForm: React.FC<{ data: FirstSection }> = ({ data }) => {
                     observer.disconnect();
                 }
             },
-            { rootMargin: "200px" }
+            { rootMargin: "100px" }
         );
 
         if (mapRef.current) observer.observe(mapRef.current);
@@ -155,7 +155,7 @@ const ContactForm: React.FC<{ data: FirstSection }> = ({ data }) => {
                             </motion.div>
                         </div>
                     </div>
-                    <motion.div variants={moveUp(0.7)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} 
+                    <motion.div ref={mapRef} variants={moveUp(0.7)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} 
                     className="mt-[17px] w-full max-h-[287px] 2xl:max-w-[453px] rounded-[12px] overflow-hidden" >
                         <div className="relative w-full pt-[63.35%]">
                             {showMap && (
