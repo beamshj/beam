@@ -112,13 +112,7 @@ export default function GalleryList({ data }: { data: GalleryProps }) {
               {/* Hover Arrow */}
               <div className={`absolute top-[30px] ${isArabic ? "left-[30px]" : "right-[30px]"} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}>
                 <button className="bg-primary text-white w-[74px] h-[74px] rounded-full flex items-center justify-center">
-                  <Image
-                    src="/images/arrow-right-up.svg"
-                    alt="arrow"
-                    width={24}
-                    height={24}
-                    className={`${isArabic && "-rotate-90"} object-contain`}
-                  />
+                  <Image src="/images/arrow-right-up.svg" alt="arrow" width={24} height={24} className={`${isArabic && "-rotate-90"} object-contain`} />
                 </button>
               </div>
 
@@ -132,15 +126,8 @@ export default function GalleryList({ data }: { data: GalleryProps }) {
                   {item.images.slice(1, 5).map((img, idx) => {
                     const isLast = idx === 3 && item.images.length > 4;
                     return (
-                      <div
-                        key={idx}
-                        className="relative w-[33px] h-[33px] rounded-full overflow-hidden border-[1.1px] border-white"
-                      >
-                        <Image width={50} height={50}
-                          src={img}
-                          alt={`thumb-${idx}`}
-                          className="w-full h-full object-cover"
-                        />
+                      <div key={idx} className="relative w-[33px] h-[33px] rounded-full overflow-hidden border-[1.1px] border-white" >
+                        <Image width={50} height={50} src={img} alt={`thumb-${idx}`} className="w-full h-full object-cover" />
                         {isLast && (
                           <div className="absolute inset-0 bg-primary flex items-center justify-center text-xs md:text-sm font-medium">
                             +{isArabic ? toArabicDigits(item.images.length - 4) : item.images.length - 4}
