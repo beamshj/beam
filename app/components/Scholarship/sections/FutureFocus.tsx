@@ -20,7 +20,7 @@ const FutureFocus = ({ data }: { data: ScholarshipProps["firstSection"] }) => {
             <SplitText
               tag="h2"
               text={t.title}
-              className={` font-light leading-[1.111111111] text-black mb-4 md:mb-6 xl:mb-8 2xl:mb-12 ${isArabic ? "text-lg xl:text-2xl 2xl:text-3xl 2xl:max-w-4xl" : "text-lg xl:text-2xl 2xl:text-4xl 2xl:max-w-[8ch]"}`}
+              className={`font-light leading-[1.111111111] text-black mb-8 md:mb-6 xl:mb-8 2xl:mb-12 ${isArabic ? "text-lg xl:text-2xl 2xl:text-3xl 2xl:max-w-4xl" : "text-lg xl:text-2xl 2xl:text-4xl 2xl:max-w-[8ch] "}`}
               delay={100}
               duration={0.6}
               ease="power3.out"
@@ -35,7 +35,7 @@ const FutureFocus = ({ data }: { data: ScholarshipProps["firstSection"] }) => {
             <SplitText
               tag="p"
               text={t.description}
-              className=" text-sm leading-[1.526315789473684]  font-light  text-colorpara"
+              className="text-sm leading-[1.526315789473684] font-light text-colorpara"
               delay={100}
               duration={0.6}
               ease="power3.out"
@@ -48,25 +48,9 @@ const FutureFocus = ({ data }: { data: ScholarshipProps["firstSection"] }) => {
             />
           </div>
           {/* Right Image */}
-          <motion.div
-            variants={moveUp(1.25)}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.1 }}
-            className="relative w-full h-[250px] md:h-auto rounded-[12px] overflow-hidden"
-          >
-            <Image
-              src={t.image}
-              alt={t.imageAlt}
-              fill
-              className="object-cover transition-all duration-500"
-            />
-            <motion.div
-              className="absolute bottom-0 w-full h-[60%] bg-gradient-to-b from-black/0 to-[#42BADCC9]/79"
-              initial={{ y: "100%" }}
-              animate={{ y: "0%" }}
-              transition={{ duration: 0.4, ease: "easeInOut" }}
-            />
+          <motion.div variants={moveUp(1.25)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.1 }} className="relative w-full h-[250px] md:h-auto rounded-[12px] overflow-hidden" >
+            <Image src={t.image} alt={t.imageAlt} fill className="object-cover transition-all duration-500" />
+            <motion.div className="absolute bottom-0 w-full h-[60%] bg-gradient-to-b from-black/0 to-[#42BADCC9]/79" initial={{ y: "100%" }} animate={{ y: "0%" }} transition={{ duration: 0.4, ease: "easeInOut" }} />
           </motion.div>
         </div>
       </div>

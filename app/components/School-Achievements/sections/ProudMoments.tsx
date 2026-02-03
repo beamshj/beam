@@ -34,12 +34,7 @@ const ProudMoments: React.FC<{data: SchoolAchievementsProps['firstSection']}> = 
         viewport={{ once: true }}
       >
         {/* Background Image */}
-        <Image
-          src={t.image}
-          alt={t.imageAlt}
-          fill
-          className="object-cover absolute top-0 left-0 z-10 rounded-[12px]"
-        />
+        <Image src={t.image} alt={t.imageAlt} fill className="object-cover absolute top-0 left-0 z-10 rounded-[12px]" />
 
         {/* Gradient Overlay */}
         <div className={`absolute top-0 left-0 w-full h-full z-20 ${isArabic ? "bg-[linear-gradient(270deg,_rgba(0,0,0,0.9)_9%,_rgba(0,0,0,0)_84%)]" : "bg-[linear-gradient(90deg,_rgba(0,0,0,0.9)_9%,_rgba(0,0,0,0)_84%)]" }`}></div>
