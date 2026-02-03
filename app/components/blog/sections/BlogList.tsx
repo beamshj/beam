@@ -75,12 +75,7 @@ export default function BlogList({
 
                   {/* Image Section */}
                   <div className="relative w-full h-[301px] rounded-t-[12px] overflow-hidden flex-shrink-0">
-                    <Image
-                      src={blog.thumbnail || "/images/fallback.jpg"}
-                      alt={blog.thumbnailAlt}
-                      fill
-                      className="object-cover"
-                    />
+                    <Image src={blog.thumbnail || "/images/fallback.jpg"} alt={blog.thumbnailAlt} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" loading="lazy" className="object-cover w-full h-full" />
                     {/* Black overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/75 to-black/0" />
 
@@ -96,15 +91,7 @@ export default function BlogList({
                             isArabic ? "translate-x-3" : "-translate-x-3"
                           } group-hover:-translate-y-0 group-hover:translate-x-0 block`}
                         >
-                          <Image
-                            src="/images/arrow-right-up.svg"
-                            alt="arrow"
-                            width={24}
-                            height={24}
-                            className={`${
-                              isArabic && "-rotate-90"
-                            } object-contain`}
-                          />
+                          <Image src="/images/arrow-right-up.svg" alt="arrow" width={24} height={24} className={`${ isArabic && "-rotate-90" } object-contain`} />
                         </span>
                       </button>
                     </div>
@@ -130,13 +117,7 @@ export default function BlogList({
                     </h3>
                     <div>
                       <button className="bg-primary text-white w-[27px] h-[27px] rounded-full flex items-center justify-center mt-[15px] cursor-pointer">
-                        <Image
-                          src="/images/arrow-right-tip.svg"
-                          alt="arrow"
-                          width={15}
-                          height={15}
-                          className={`${isArabic && "rotate-180"}`}
-                        />
+                        <Image src="/images/arrow-right-tip.svg" alt="arrow" width={15} height={15} className={`${isArabic && "rotate-180"}`} />
                       </button>
                     </div>
                   </div>
