@@ -128,19 +128,19 @@ const ContactForm: React.FC<{ data: FirstSection }> = ({ data }) => {
                         rootMargin="-10px"
                         textAlign="left"
                     />
-                    <motion.p variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="text-colorpara font-light text-sm leading-[1.52] mt-[13px]" >
+                    <motion.p variants={moveUp(0.2)} initial="hidden" animate="show" viewport={{ once: true, amount: 0.2 }} className="text-colorpara font-light text-sm leading-[1.52] mt-[13px]" >
                         {t.description}
                     </motion.p>
                     <div className="mt-[13px] text-sm leading-[1.52] font-light">
-                        <motion.h2 variants={moveUp(0.3)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="text-primary text-md lg:text-lg xl:text-xl leading-[1.2] font-light" >
+                        <motion.h2 variants={moveUp(0.3)} initial="hidden" animate="show" viewport={{ once: true, amount: 0.2 }} className="text-primary text-md lg:text-lg xl:text-xl leading-[1.2] font-light" >
                             {t.subTitle}
                         </motion.h2>
-                        <motion.p variants={moveUp(0.4)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="text-colorpara mt-[17px] font-light whitespace-pre-line" >
+                        <motion.p variants={moveUp(0.4)} initial="hidden" animate="show" viewport={{ once: true, amount: 0.2 }} className="text-colorpara mt-[17px] font-light whitespace-pre-line" >
                             {t.address}
                         </motion.p>
                         <div className="space-y-[17px] mt-[17px]">
                             {/* First row */}
-                            <motion.div className="flex items-center gap-[20px]" variants={moveUp(0.5)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} >
+                            <motion.div className="flex items-center gap-[20px]" variants={moveUp(0.5)} initial="hidden" animate="show" viewport={{ once: true, amount: 0.2 }} >
                                 <Image src="/images/contact-us/icons/phone.svg" alt="Location" width={24} height={24} className="object-contain" />
                                 <motion.p variants={moveUp(0.5)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="font-light text-sm leading-[1.52] text-primary" >
                                     {t.phone}
