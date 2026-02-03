@@ -397,7 +397,7 @@ const AlumniPage = () => {
                                             >
                                                 <div className="absolute top-2 right-2">
                                                     <RiDeleteBinLine
-                                                        onClick={() => countryCardSectionRemove(index)}
+                                                        onClick={() => testimonialsSectionRemove(index)}
                                                         className="cursor-pointer text-red-600"
                                                     />
                                                 </div>
