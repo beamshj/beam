@@ -34,7 +34,7 @@ const OurStorySection: React.FC<OurStorySectionProps> = ({ data }) => {
     }
   }, []);
   return (
-    <section className="pt-10 xl:pt-20 2xl:pt-[135px]">
+    <section className="pt-10 xl:pt-20 2xl:pt-[35px]">
       <div className="container">
         <div className="mb-3 md:mb-6 xl:mb-15 2xl:mb-[50px]">
           <h1 className="text-lg md:text-xl xl:text-3xl 2xl:text-4xl font-light leading-[1.111111111] text-black">
