@@ -37,4 +37,13 @@ export type ScholarshipProps = {
     email: string;
     buttonText: string;
   };
+  fifthSection: {
+    title: string;
+    title_ar: string;
+    description: string;
+    description_ar: string;
+    footerText: string;
+    footerText_ar: string;
+    email: string;
+  };
 };

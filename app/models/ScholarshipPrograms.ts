@@ -179,6 +179,29 @@ const scholarshipProgramsSchema = new mongoose.Schema({
         buttonText_ar:{
             type:String,
         }
+    },
+    fifthSection:{
+        title:{
+            type:String,
+        },
+        title_ar:{
+            type:String,
+        },
+        description:{
+            type:String,
+        },
+        description_ar:{
+            type:String,
+        },
+        email:{
+            type:String,
+        },
+        footerText:{
+            type:String,
+        },
+        footerText_ar:{
+            type:String,
+        }
     }
 })
 

@@ -21,7 +21,7 @@ interface PageBnrProps {
 
 const InnerBanner = ({ BannerData, data }: PageBnrProps) => {
     const pathname = usePathname();
-    const t = useApplyLang(data);
+    const t = useApplyLang(data!);
     const isArabic = useIsPreferredLanguageArabic();
     const xValue = isArabic ? 30 : -30;
 

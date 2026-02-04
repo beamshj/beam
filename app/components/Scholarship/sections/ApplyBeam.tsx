@@ -6,19 +6,11 @@ import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 import { motion } from "framer-motion";
 import { moveUp } from "../../motionVarients";
 import { useApplyLang } from "@/lib/applyLang";
+import { ScholarshipProps } from "../type";
 
-interface ApplyTodayDataType {
-    data: {
-        title: string;
-        description: string;
-        email: string;
-        footerText: string;
-    };
-}
-
-export default function ApplyToday({ data }: ApplyTodayDataType) {
+export default function ApplyToday({ data }: { data: ScholarshipProps["fifthSection"] }) {
     const isArabic = useIsPreferredLanguageArabic();
-    const t = useApplyLang(data)
+    const t = useApplyLang(data);
     return (
         <section className="bg-[#F6F6F6]">
             <div className="container pt-10 xl:pt-25 2xl:pt-[135px] pb-10 xl:pb-25 2xl:pb-[135px]">
