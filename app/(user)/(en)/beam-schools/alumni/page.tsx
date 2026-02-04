@@ -1,4 +1,5 @@
 import Index from "@/app/components/Alumni/Index";
+export const dynamic = "force-dynamic";
 
 const Page = async () => {
   const response = await fetch(`${process.env.BASE_URL}/api/admin/alumni`, {
@@ -8,7 +9,7 @@ const Page = async () => {
 
   return (
     <>
-      <Index data={data.data} />
+      <Index data={data?.data} />
     </>
   );
 }
