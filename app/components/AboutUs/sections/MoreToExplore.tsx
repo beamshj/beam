@@ -86,37 +86,25 @@ export default function MoreToExplore({
                     viewport={{ once: false, amount: 0.7 }}
                     className="relative group h-[350px] 2xl:h-[468px] sm:max-w-[428px] overflow-hidden cursor-pointer rounded-[12px]"
                   >
-                    <Image
-                      src={card.image}
-                      alt={card.title}
-                      layout="fill"
-                      objectFit="cover"
-                      className="transition-transform rounded-[12px] duration-300 scale-100 group-hover:scale-105 object-cover object-top"
-                    />
+                    <Image src={card.image} alt={card.title} layout="fill" objectFit="cover" className="transition-transform rounded-[12px] duration-300 scale-100 group-hover:scale-105 object-cover object-top" />
                     {/* Gradient overlay at bottom */}
                     <div className="absolute bottom-0 left-0 right-0 h-[70%] bg-gradient-to-t from-black to-transparent z-10"></div>
                     {/* Title */}
                     {card.title && (
-                      <motion.div
+                      <motion.h3
                         variants={moveUp(0.1)}
                         initial="hidden"
                         whileInView="show"
                         viewport={{ once: false, amount: 0.7 }}
-                        className="absolute bottom-[15px] left-[15px] right-[15px] xl:bottom-[40px] xl:left-[40px] xl:right-[40px] z-20 leading-[1.2] text-white text-lg xl:text-xl font-light"
+                        className="absolute bottom-[15px] left-[15px] right-[15px] xl:bottom-[40px] xl:left-[40px] xl:right-[40px] z-20 leading-[1.2] text-white text-lg xl:text-xl font-light group-hover:!opacity-0"
                       >
                         {card.title}
-                      </motion.div>
+                      </motion.h3>
                     )}
                     {/* Hover overlay */}
-                    <div className="absolute inset-0 bg-[rgba(63,34,92,0.94)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-30">
+                    <div className="absolute inset-0 bg-[rgba(63,34,92,0.94)] opacity-0 group-hover:opacity-80 transition-opacity duration-300 flex items-center justify-center z-30">
                       <div className="w-[75px] h-[75px] border border-white rounded-full flex items-center justify-center text-white">
-                        <Image
-                          src="/images/arrow-primary.svg"
-                          alt="arrow-right-tip"
-                          width={15}
-                          height={15}
-                          className={`w-[15px] h-[15px] ${isArabic ? "-rotate-90" : ""}`}
-                        />
+                        <img src="/images/arrow-primary.svg" alt="arrow-right-tip" width={15} height={15} className={`w-[15px] h-[15px] ${isArabic ? "-rotate-90" : ""}`} />
                       </div>
                     </div>
                   </motion.div>

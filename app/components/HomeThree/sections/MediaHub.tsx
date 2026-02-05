@@ -36,8 +36,8 @@ const MediaHub = ({
   } | null>(null);
 
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
-
-  // ✅ track active slide index
+  
+  
   const [activeIndex, setActiveIndex] = useState(0);
 
   const router = useRouter();

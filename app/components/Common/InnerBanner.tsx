@@ -28,23 +28,8 @@ const InnerBanner = ({ BannerData, data }: PageBnrProps) => {
     const lastWordPrimaryColor = pathname.includes("/general-managers-message") ? true : false;
     return (
         <section className="relative h-[320px] md:h-[380px] xl:h-[470px] 2xl:h-[635px] flex flex-col justify-end pb-[25px] md:pb-[30px] xl:pb-[35px]">
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.4, ease: "easeInOut" }}
-                className="absolute top-0 left-0 w-full h-full z-0"
-            >
-                <Image
-                    src={t.banner || BannerData?.BannerImg || ""}
-                    alt={t.bannerAlt || BannerData?.BannerTitle || ""}
-                    width={1920}
-                    height={800}
-                    className="w-full h-full object-cover"
-                    sizes="100vw"
-                    priority
-                    loading="eager"
-                    fetchPriority="high"
-                />
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4, ease: "easeInOut" }} className="absolute top-0 left-0 w-full h-full z-0" >
+                <Image src={t.banner || BannerData?.BannerImg || ""} alt={t.bannerAlt || BannerData?.BannerTitle || ""} width={1920} height={800} className="w-full h-full object-cover" sizes="100vw" priority loading="eager" fetchPriority="high" />
             </motion.div>
 
             <div className="absolute top-0 left-0 w-full h-full z-0 bg-gradient-to-b from-black/0 from-0% via-black/60 via-60% to-black/80 to-100%"></div>

@@ -12,6 +12,7 @@ import { gsap } from "gsap";
 import { HomeProps } from "../type";
 import { useApplyLang } from "@/lib/applyLang";
 import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
+import { useRouter } from "next/navigation";
 
 const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
   const swiperRef = useRef<SwiperClass | null>(null);
@@ -30,11 +31,12 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
 
   // RAF throttle to prevent layout thrashing
   const rafIdRef = useRef<number | null>(null);
+  const router = useRouter();
 
   // Memoize register click handler
   const handleRegisterClick = useCallback(() => {
-    window.location.href = "/contact-us?scroll=register";
-  }, []);
+    router.push("/contact-us?scroll=register");
+  }, [router]);
 
   // Memoize animation directions to prevent recreation
   const directions = useMemo(() => [

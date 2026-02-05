@@ -224,7 +224,7 @@ const MediaHub = ({
                             loop={true}
                             speed={800}
                             autoplay={{
-                                delay: 3000,
+                                delay: 6000,
                                 waitForTransition: true,
                             }}
                             pagination={{

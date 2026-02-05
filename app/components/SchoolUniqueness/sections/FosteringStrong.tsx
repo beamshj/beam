@@ -35,7 +35,7 @@ const FosteringStrong = ({ data }: { data: SchoolUniquenessProps['firstSection']
   return (
     <section className="py-8 md:py-12 lg:py-20 2xl:py-[135px]">
       <div className="container">
-        <div className="grid lg:grid-cols-[56%_39%] gap-[5%]">
+        <div className="grid lg:grid-cols-[56%_39%] 2xl:grid-cols-[auto_657px] gap-4 2xl:gap-17">
           {/* Left Content */}
           <div>
             {/* Title + Description */}
@@ -87,8 +87,8 @@ const FosteringStrong = ({ data }: { data: SchoolUniquenessProps['firstSection']
                         <p className={`text-sm font-light leading-[1.2] transition-colors duration-300 mt-[7px] ${isActive ? "text-black" : "text-colorpara group-hover:text-black"}`}>
                           0{index + 1}
                         </p>
-                        <p
-                          className={`text-[1.2rem] md:text-md xl:text-lg font-light leading-[1.2] transition-colors duration-300 ${isActive
+                        <p className={`text-[1.2rem] md:text-md xl:text-lg font-light leading-[1.2] transition-colors duration-300 text-black
+                         ${isActive
                               ? "text-primary"
                               : "group-hover:text-primary"
                             }`}
@@ -130,7 +130,8 @@ const FosteringStrong = ({ data }: { data: SchoolUniquenessProps['firstSection']
           <div className="relative w-full h-[250px] lg:h-auto rounded-[12px] overflow-hidden hidden lg:block">
             <AnimatePresence mode="wait">
               <motion.div key={t.items[activeIndex].image} variants={imageVariants} initial="hidden" animate="show" exit="exit" className="absolute inset-0" >
-                <Image src={t.items[activeIndex].image} alt={t.items[activeIndex].imageAlt} fill loading="lazy" sizes="(min-width: 1024px) 39vw, 100vw" className="object-cover" />
+                <Image src={t.items[activeIndex].image} alt={t.items[activeIndex].imageAlt} width={1657} height={1400} loading="lazy" sizes="(min-width: 1024px) 39vw, 100vw"
+                 className="object-cover w-full h-full " />
               </motion.div>
             </AnimatePresence>
             <motion.div className="absolute bottom-0 w-full h-[60%] bg-gradient-to-b from-black/0 to-[#42BADCC9]/79" 

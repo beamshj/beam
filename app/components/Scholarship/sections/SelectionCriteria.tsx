@@ -57,7 +57,7 @@ const SelectionCriteria = ({
               return (
                 <motion.div variants={fadeIn(index*0.5)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.1 }} key={index} className="flex flex-col gap-3 md:gap-5 p-4 md:p-0 bg-secondary md:bg-transparent">
                   <Image src={item.image} alt={item.imageAlt } width={53} height={54} className="w-fit h-10 xl:h-[54px]" />
-                  <h3 className="text-md lg:text-xl xl:text-xl 2xl:text-xl font-light xl:max-w-[11ch] leading-[1.2]">{item.title}</h3>
+                  <h3 className="text-md lg:text-xl xl:text-xl 2xl:text-xl font-light xl:max-w-[11ch] leading-[1.2] text-black">{item.title}</h3>
                   <hr />
                   <p className="text-colorpara font-light xl:max-w-[26ch] text-sm">{item.description}</p>
                 </motion.div>
@@ -66,9 +66,9 @@ const SelectionCriteria = ({
           </div>
           <div>
             <SplitText
-              tag="h2"
+              tag="h3"
               text={t.subTitle}
-              className="text-md xl:text-lg 2xl:text-xl font-light leading-[1.111111111] text-black my-4 md:my-6 xl:mb-[25px] xl:mt-8 2xl:mt-[50px]"
+              className="text-md xl:text-lg 2xl:text-xl font-light leading-[1.111111111] text-black my-4 md:my-6 xl:mb-[25px] xl:mt-8 2xl:mt-[50px] tracking-normal"
               delay={100}
               duration={0.6}
               ease="power3.out"

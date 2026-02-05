@@ -24,7 +24,7 @@ const LogoSlider = ({data}: {data: HomeProps['ninethSection']}) => {
       viewport={{ once: true, amount: 0.2 }}
     >
       <div className="container">
-        <Swiper
+        <Swiper 
           modules={[Autoplay, Pagination]}
           spaceBetween={30}
           slidesPerView={2}
@@ -47,13 +47,16 @@ const LogoSlider = ({data}: {data: HomeProps['ninethSection']}) => {
           className="alumni-swiper"
         >
           {data.items.map((value, index) => (
-            <SwiperSlide key={index}>
+            <SwiperSlide key={index} >
               <div>
                 <Image
                   src={value.image}
                   alt={value.imageAlt}
                   width={196}
                   height={65}
+                  sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 196px"
+                  loading={index === 0 ? "eager" : "lazy"}
+                  priority={index === 0}  
                 />
               </div>
             </SwiperSlide>

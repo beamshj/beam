@@ -55,7 +55,7 @@ export default function MoreToExplore({ data }: Props) {
           }),
         }}
       >
-        <div className="mt-5 md:mt-[155px] relative">
+        <div className="mt-5 md:mt-[115px] relative">
           <Swiper
             spaceBetween={0}
             slidesPerView={1}

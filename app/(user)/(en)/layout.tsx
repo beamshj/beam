@@ -7,6 +7,7 @@ const NavBar = dynamic(() => import("@/app/components/Layout/NavBar"), { ssr: tr
 const Footer = dynamic(() => import("@/app/components/Layout/Footer"), { ssr: true });
 
 import type { Viewport } from "next";
+import ScrollToTop from "@/app/components/Common/ScrollToTop";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -46,6 +47,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${dmSans.variable} ${almarai.variable} antialiased`}>
         <NavBar />
+        <ScrollToTop />
         {children}
         <Footer />
       </body>

@@ -1,11 +1,23 @@
 import dynamic from "next/dynamic";
-import React from "react";
 const HeroSection = dynamic(() => import("./sections/HeroSection"), { ssr: true });
 const VideoSection = dynamic(() => import("./sections/VideoSection"), { ssr: true });
 const OurSchools = dynamic(() => import("./sections/OurSchools"), { ssr: true });
 const AcademicCultural = dynamic(() => import("./sections/AcademicCultural"), { ssr: true });
 const MessageSection = dynamic(() => import("./sections/MessageSection"), { ssr: true });
 const LogoSlider = dynamic(() => import("./sections/LogoSlider"), { ssr: true });
+
+// const DiverseGrowing = dynamic(() => import("./sections/DiverseGrowing"), { ssr: true });
+// const Alumni = dynamic(() => import("./sections/Alumni"), { ssr: true });
+// const MediaHub = dynamic(() => import("./sections/MediaHub"), { ssr: true });
+// const JoinBeam = dynamic(() => import("./sections/JoinBeam"), { ssr: true });
+
+
+// import HeroSection from "./sections/HeroSection";
+// import VideoSection from "./sections/VideoSection";
+// import OurSchools from "./sections/OurSchools";
+// import AcademicCultural from "./sections/AcademicCultural";
+// import MessageSection from "./sections/MessageSection";
+// import LogoSlider from "./sections/LogoSlider";
 
 import DiverseGrowing from "./sections/DiverseGrowing";
 import Alumni from "./sections/Alumni";

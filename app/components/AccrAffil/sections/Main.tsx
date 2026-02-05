@@ -24,7 +24,7 @@ const Main = ({ data }: { data: AccreditationProps["firstSection"] }) => {
           }}
           className="relative overflow-hidden rounded-xl p-5 md:p-10 xl:p-15 xl:min-h-[435px] 2xl:min-h-[635px] flex items-end"
         >
-          <div className="absolute top-0 left-0 w-full h-full bg-black/40 z-10"></div>
+          <div className="absolute top-0 left-0 w-full h-full bg-black/50 z-10"></div>
           <motion.div
             variants={moveRight(0.3)}
             initial="hidden"
@@ -34,7 +34,7 @@ const Main = ({ data }: { data: AccreditationProps["firstSection"] }) => {
               once: true,
               margin: `-250px 0px -250px 0px`,
             }}
-            className="absolute top-0 left-0 w-[90%] h-full bg-gradient-to-r from-[#066B7F] to-black/0 z-10 opacity-95"
+            className="absolute top-0 left-0 w-[75%] h-full bg-[linear-gradient(90deg,rgba(6,107,127,1)_0%,rgba(6,107,127,0)_100%)] z-10 opacity-70"
           ></motion.div>
           <Image src={t.image} alt={t.imageAlt} width={1920} height={1280} loading="lazy" sizes="(max-width: 768px) 100vw" className="absolute top-0 left-0 z-0 h-full object-cover" />
           <div className="relative z-30 text-white">

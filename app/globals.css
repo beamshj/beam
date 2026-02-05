@@ -1,6 +1,7 @@
-@import "tailwindcss/theme";
+/* @import "tailwindcss/theme";
 @import "tailwindcss/preflight";
-@import "tailwindcss/utilities";
+@import "tailwindcss/utilities"; */
+@import "tailwindcss"; 
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
@@ -9,6 +10,7 @@
   --primary: #42BADC;
   --bdrcolor: #D3D3D3;
   --colorpara: #626262;
+  --acc-clr: #7E5AA3;
   --text-4xl: clamp(4rem, 8vw, 5.625rem);
   /* 64px–90px */
   --text-3xl: clamp(3.5rem, 7vw, 5rem);
@@ -67,8 +69,9 @@
   --font-arabic: var(--font-arabic, "Almarai"), sans-serif;
   --color-primary: var(--primary);
   --color-colorpara: var(--colorpara);
+  --color-acc: var(--acc-clr);
   --color-bdrcolor: var(--bdrcolor);
-  --color-colorp: var(--colorp);
+  --color-colorp: var(--colorp); 
   --breakpoint-2xl: 96.875rem;
   --text-4xl: var(--text-4xl);
   --text-3xl: var(--text-3xl);
@@ -116,6 +119,9 @@
 body {
   font-family: var(--font-sans)
   
+}
+h2{
+  letter-spacing: -4px;
 }
 
 .container {
@@ -781,7 +787,7 @@ body {
 
 @media screen and (min-width: 1300px) {
 
-  h1,
+  h1,h2
   h2.text-xl {
     letter-spacing: -4px;
   }
@@ -970,10 +976,10 @@ body {
   padding: 0;
 }
 
-.school-leadership-bullets li {
+.school-leadership-bullets ol li , .school-leadership-bullets ul li {
   display: flex;
   align-items: start;
-  gap: 13px;
+  gap: 8px;
   margin-bottom: 8px;
   position: relative;
   opacity: 0;
@@ -1163,3 +1169,24 @@ html[dir="rtl"] {
   font-family: "DM Sans", sans-serif !important;
 }
 
+/* Desktop size */
+.react-select__dropdown-indicator svg {
+  width: 32px;
+  height: 32px;
+    transform: scale(1.15);
+}
+
+/* Mobile / small screens */
+@media (max-width: 768px) {
+  .react-select__dropdown-indicator svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+.grd-school{
+  background: linear-gradient(90deg,
+        rgba(66, 186, 220, 1) 0%,
+        rgba(120, 150, 200, 0.6) 55%,
+        rgba(126, 90, 163, 0.1) 100%);
+}
