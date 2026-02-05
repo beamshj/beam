@@ -39,7 +39,7 @@ export default function PLProgram({
             <SplitText
               tag="h3"
               text={t.subTitle}
-              className={`text-md  xl:text-lg 2xl:text-xl text-black leading-[1.4] font-light ${isArabic ? 'mb-4' : 'mb-2'}`}
+              className={`text-md xl:text-lg 2xl:text-xl text-black leading-[1.4] font-light w-full tracking-[-1px] ${isArabic ? 'mb-4' : 'mb-2'}`}
               delay={200}
               duration={0.6}
               ease="power3.out"

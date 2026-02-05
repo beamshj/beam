@@ -259,8 +259,8 @@ const Footer = () => {
           {/* Right Column */}
           <motion.div
             className={`flex flex-col ${isArabic
-                ? "md:pr-[45px] xl:pr-[75px] 2xl:pr-[144px]"
-                : "md:pl-[45px] xl:pl-[75px] 2xl:pl-[144px]"
+              ? "md:pr-[45px] xl:pr-[75px] 2xl:pr-[144px]"
+              : "md:pl-[45px] xl:pl-[75px] 2xl:pl-[144px]"
               } gap-2 md:gap-14 2xl:gap-[73px] pt-8 pb-0 xl:pt-0 md:pb-0 md:mt-0`}
             variants={parentStagger}
             initial="hidden"
@@ -342,8 +342,8 @@ const Footer = () => {
                   <motion.div
                     variants={fadeUponeone}
                     className={`w-fit mt-5 md:mt-7  2xl:mt-6 p-[1px] group transition-all duration-300 border-[1px] border-primary rounded-full ${isArabic
-                        ? "hover:translate-x-[-5px] hover:shadow-[0_0_15px_rgba(66,186,220,0.5)]"
-                        : "hover:translate-x-[5px] hover:shadow-[0_0_15px_rgba(66,186,220,0.5)]"
+                      ? "hover:translate-x-[-5px] hover:shadow-[0_0_15px_rgba(66,186,220,0.5)]"
+                      : "hover:translate-x-[5px] hover:shadow-[0_0_15px_rgba(66,186,220,0.5)]"
                       }`}
                   >
                     <button
@@ -355,8 +355,8 @@ const Footer = () => {
                       </p>
                       <div
                         className={`p-2 flex items-center justify-center bg-primary w-fit rounded-full transition-transform duration-300 ${isArabic
-                            ? "-rotate-90 group-hover:-rotate-135"
-                            : "group-hover:rotate-45"
+                          ? "-rotate-90 group-hover:-rotate-135"
+                          : "group-hover:rotate-45"
                           } `}
                       >
                         <Image

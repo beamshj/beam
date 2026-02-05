@@ -63,13 +63,14 @@ const VisionMissionSection = ({
   return (
     <section className="pt-10 xl:pt-[70px] 2xl:pt-[90px]">
       <div className="container" ref={containerRef}>
+        
         <div className="grid md:grid-cols-2 gap-8 xl:gap-[90px]">
           {/* Left Content */}
           <div>
             <SplitText
               tag="h2"
               text={t.title}
-              className="text-lg lg:text-xl xl:text-2xl 2xl:text-4xl font-light leading-[1.111111111] text-black mb-3 xl:mb-[40px] 2xl:mb-[30px]"
+              className="text-lg lg:text-xl xl:text-2xl 2xl:text-4xl font-light leading-[1.1111111]  lettersp-4 text-black mb-3 xl:mb-[40px] 2xl:mb-[30px]"
               delay={100}
               duration={0.6}
               ease="power3.out"

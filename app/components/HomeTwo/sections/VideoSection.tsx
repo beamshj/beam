@@ -31,7 +31,7 @@ const VideoSection = ({ data }: { data: HomeProps['fourthSection'] }) => {
 
     const ctx = gsap.context(() => {
       gsap.to(imgRef.current, {
-        scale: 1.8,
+        scale: 1.1,
         xPercent: -5,
         yPercent: -3,
         ease: "none",
@@ -51,7 +51,7 @@ const VideoSection = ({ data }: { data: HomeProps['fourthSection'] }) => {
     <>
       <SectionReveal revealType="square" className="w-full">
         <motion.section
-          className="w-full relative max-w-[1920px] mx-auto overflow-hidden 2xl:h-screen py-10 md:py-28 2xl:py-0"
+          className="w-full relative max-w-[1920px] h-auto mx-auto overflow-hidden 2xl:h-screen py-10 md:py-28 2xl:py-0"
           initial={{ opacity: 0, scale: 0.9, rotate: -4, x: -100 }}
           whileInView={{ opacity: 1, scale: 1, rotate: 0, x: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
@@ -73,19 +73,13 @@ const VideoSection = ({ data }: { data: HomeProps['fourthSection'] }) => {
             placeholder="blur"
             blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
             onLoadingComplete={() => setImageLoaded(true)}
-            className={`w-full h-full object-cover absolute z-10 top-0 right-0 transition-opacity duration-500 ${imageLoaded ? 'opacity-100' : 'opacity-0'
+            className={`w-full h-full object-cover absolute z-10 bottom-0 right-0 transition-opacity duration-500 ${imageLoaded ? 'opacity-100' : 'opacity-0'
               }`}
             sizes="100vw"
           />
 
           <div className="container flex items-center h-full">
-            <motion.div
-              className="relative z-30 flex flex-col gap-10"
-              variants={container}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.2 }}
-            >
+            <motion.div className="relative z-30 flex flex-col gap-10" variants={container} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} >
               <SplitText
                 tag="h2"
                 text={t.title}
@@ -101,10 +95,8 @@ const VideoSection = ({ data }: { data: HomeProps['fourthSection'] }) => {
                 textAlign={isArabic ? "right" : "left"}
               />
 
-              <motion.div
-                className={`w-full md:w-3/4 h-px ${isArabic ? "bg-gradient-to-l origin-right" : "bg-gradient-to-r origin-left"} from-white to-transparent`}
-                variants={lineFade}
-              ></motion.div>
+              <motion.div className={`w-full md:w-3/4 h-px ${isArabic ? "bg-gradient-to-l origin-right" : "bg-gradient-to-r origin-left"} from-white to-transparent`}
+                variants={lineFade} ></motion.div>
 
               <motion.button
                 onClick={openPopup}
@@ -114,13 +106,7 @@ const VideoSection = ({ data }: { data: HomeProps['fourthSection'] }) => {
               >
                 <span className="group-hover:opacity-80 transition-opacity">{isArabic ? 'اضغط' : 'Play'}</span>
                 <div className="relative w-[95px] h-[95px] flex items-center justify-center">
-                  <Image
-                    src="/assets/home/play-icon.svg"
-                    alt="Play"
-                    width={95}
-                    height={95}
-                    className="transition-transform duration-300 group-hover:scale-110"
-                  />
+                  <Image src="/assets/home/play-icon.svg" alt="Play" width={95} height={95} className="transition-transform duration-300 group-hover:scale-110" />
                 </div>
                 <span className="group-hover:opacity-80 transition-opacity">{isArabic ? 'هنا' : 'Here'}</span>
               </motion.button>

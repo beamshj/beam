@@ -31,6 +31,16 @@ import SparkleCard from "./SparkleCard";
 import { useApplyLang } from "@/lib/applyLang";
 import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 import { HomeProps } from "../type";
+import { ChevronDown } from "lucide-react"; // or any icon you prefer
+import { components } from "react-select";
+
+const DropdownIndicator = (props: any) => {
+  return (
+    <components.DropdownIndicator {...props}>
+      <img src="/assets/images/icons/drop-down.svg" alt="drop-down" width={16} height={16} />
+    </components.DropdownIndicator>
+  );
+};
 
 const Select = dynamic<SelectProps<OptionType, false, GroupBase<OptionType>>>(
   () => import("react-select"),
@@ -141,11 +151,17 @@ const OurSchools = ({
     dropdownIndicator: (provided) => ({
       ...provided,
       padding: 1,
-      width: "20px",
-      height: "20px",
+      width: "32px",
+      height: "32px",
       color: "#42BADC",
       fontWeight: 300,
+      "& svg": {
+        width: isSmallScreen ? "22px" : "32px",
+        height: isSmallScreen ? "22px" : "32px",
+      },
+    
     }),
+    
     indicatorSeparator: () => ({ display: "none" }),
     menu: (provided) => ({
       ...provided,
@@ -287,6 +303,10 @@ const OurSchools = ({
                   options={locationOptions}
                   styles={customStyles}
                   placeholder={LOCATION_TEXT}
+                  components={{
+                    DropdownIndicator,
+                    IndicatorSeparator: () => null, // removes the small vertical line
+                  }}
                 />
               </motion.div>
             </div>

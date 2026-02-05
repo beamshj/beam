@@ -98,37 +98,37 @@ const Alumni = ({ data }: { data: HomeProps["seventhSection"] }) => {
             {t.items.map((value, index) => (
               <SwiperSlide key={index}>
                 <SparkleCard index={index}>
-<motion.div
-  variants={cardVariants2}
-  className={`border-t border-bdrcolor pt-4 md:pt-6 group overflow-hidden flex flex-col ${isArabic ? "items-end" : "items-start"}`}
->
-  {/* Text container */}
-  <div className={isArabic ? "self-end text-right w-full" : "self-start text-left w-ful"}>
-    <h3 className="text-md 2xl:text-xl font-light text-black transition-all duration-300">
-      {value.name}
-    </h3>
-    <p className="text-sm font-light text-[#626262] transition-all duration-300">
-      {value.course}
-    </p>
-  </div>
+                  <motion.div
+                    variants={cardVariants2}
+                    className={`border-t border-bdrcolor pt-4 md:pt-6 group overflow-hidden flex flex-col ${isArabic ? "items-end" : "items-start"}`}
+                  >
+                    {/* Text container */}
+                    <div className={isArabic ? "self-end text-right w-full" : "self-start text-left w-ful"}>
+                      <h3 className="text-md 2xl:text-xl font-light text-black transition-all duration-300">
+                        {value.name}
+                      </h3>
+                      <p className="text-sm font-light text-[#626262] transition-all duration-300">
+                        {value.course}
+                      </p>
+                    </div>
 
-  <div className="mt-9 aluminibg transform transition-transform duration-500 group-hover:scale-105 xl:h-[378px] xl:w-[368px] 2xl:h-[438px] 2xl:w-[428px]">
-    <motion.div
-      variants={moveUp(0.2 * index)}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: false, amount: 0.2 }}
-    >
-      <Image
-        src={value.image}
-        alt={value.imageAlt}
-        width={351}
-        height={413}
-        className="w-full h-[260px] xl:h-full object-contain object-bottom-left"
-      />
-    </motion.div>
-  </div>
-</motion.div>
+                    <div className="mt-9 aluminibg transform transition-transform duration-500 group-hover:scale-105 xl:h-[378px] xl:w-[368px] 2xl:h-[438px] 2xl:w-[428px]">
+                      <motion.div
+                        variants={moveUp(0.2 * index)}
+                        initial="hidden"
+                        whileInView="show"
+                        viewport={{ once: false, amount: 0.2 }}
+                      >
+                        <Image
+                          src={value.image}
+                          alt={value.imageAlt}
+                          width={351}
+                          height={413}
+                          className="w-full h-[260px] xl:h-full object-contain object-bottom-left"
+                        />
+                      </motion.div>
+                    </div>
+                  </motion.div>
 
                 </SparkleCard>
               </SwiperSlide>
@@ -138,22 +138,22 @@ const Alumni = ({ data }: { data: HomeProps["seventhSection"] }) => {
 
         {/* Custom pagination container */}
         <div className="flex justify-between items-center">
-          <div className="w-full">
-            <LangLink href={t.link}>
+          <div className="w-fit">
+            <LangLink href={t.link} className="w-fit">
               <div className={`mt-5 w-fit md:mt-10 p-[1px] group transition-all duration-300 bg-bdrcolor bg-[linear-gradient(90deg,_#42BADC_0%,_#12586C_100%)] rounded-full ${isArabic ? "hover:-translate-x-[5px]" : "hover:translate-x-[5px]"} hover:shadow-[0_0_15px_rgba(66,186,220,0.5)]`}>
                 <div className="cursor-pointer pl-4 pr-2 md:px-5 py-2 md:py-3 bg-white rounded-full flex items-center gap-2 transition-all duration-300">
                   <p className="group-hover:text-black text-xs font-light text-colorpara uppercase transition-colors duration-300">
                     {t.buttonText}
                   </p>
                   <div className={`p-1 flex items-center justify-center bg-primary w-[27px] h-[27px] rounded-full transition-transform duration-300 ${isArabic ? "-rotate-90 group-hover:-rotate-135" : "group-hover:rotate-45"}`}>
-                    <Image src="/assets/arrow.svg" alt="arrow" width={11} height={11}/>
+                    <Image src="/assets/arrow.svg" alt="arrow" width={11} height={11} />
                   </div>
                 </div>
               </div>
             </LangLink>
           </div>
         </div>
-        <div className="alumni-pagination flex justify-center xl:justify-end gap-2 mt-10 xl:mt-0 relative z-20 pointer-events-auto"></div>
+        <div className="alumni-pagination flex justify-center xl:justify-end gap-[6px] mt-10 xl:mt-0 relative z-20 pointer-events-auto"></div>
       </div>
     </motion.section>
   );

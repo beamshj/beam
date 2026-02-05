@@ -21,9 +21,6 @@ export default function HealthSafety({
   return (
     <section>
       <div className="container">
-        <div className="grid xl:grid-cols-2 gap-10">
-          {/* LEFT COLUMN */}
-          <div className="flex flex-col justify-center">
             <h2 className="text-lg lg:text-xl xl:text-3xl 2xl:text-4xl font-light text-black mb-3 xl:mb-10 2xl:mb-[50px]">
               <SplitText
                 tag="span"
@@ -40,25 +37,16 @@ export default function HealthSafety({
                 textAlign="left"
               />
             </h2>
-            <motion.p
-              variants={moveUp(0.4)}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.2 }}
-              className="text-[#626262] text-sm mb-[50px] leading-[1.52] md:max-w-[55ch]"
-            >
+        <div className="grid xl:grid-cols-2 2xl:items-stretch gap-10">
+          {/* LEFT COLUMN */}
+          <div className="flex flex-col justify-center">
+            <motion.p variants={moveUp(0.4)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="text-[#626262] text-sm mb-[50px] leading-[1.52] md:max-w-[55ch]" >
               {t.description}
             </motion.p>
 
             <div className="xl:hidden mb-10 rounded-xl overflow-hidden">
               {/* <Image src={items[active].image} alt={items[active].title} fill className="object-cover object-center" /> */}
-              <Image
-                src={t.items[active].image}
-                alt={t.items[active].title}
-                width={300}
-                height={300}
-                className="xl:object-contain object-cover w-full h-[250px] xl:object-top-left"
-              />
+              <Image src={t.items[active].image} alt={t.items[active].title} width={300} height={300} className="xl:object-contain object-cover w-full h-[250px] xl:object-top-left" />
             </div>
 
             <ul className="group space-y-[30px] order-3">
@@ -89,13 +77,7 @@ export default function HealthSafety({
 
                   {active === index && (
                     <motion.div className="group bg-primary text-white w-[27px] h-[27px] flex items-center justify-center rounded-full">
-                      <Image
-                        src="/images/arrow-right-tip.svg"
-                        alt="arrow-right-tip"
-                        width={15}
-                        height={15}
-                        className={`w-[15px] h-[15px] ${isArabic && "rotate-180"}`}
-                      />
+                      <Image src="/images/arrow-right-tip.svg" alt="arrow-right-tip" width={15} height={15} className={`w-[15px] h-[15px] ${isArabic && "rotate-180"}`} />
                     </motion.div>
                   )}
                 </motion.li>
@@ -104,36 +86,12 @@ export default function HealthSafety({
           </div>
 
           {/* RIGHT COLUMN */}
-          <motion.div
-            variants={moveUp(0.2)}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
-            className="relative justify-center items-center hidden xl:flex"
-          >
-            <div className="relative w-full h-[400px] md:h-[500px] xl:h-[600px] 2xl:h-[743px] rounded-[12px] overflow-hidden">
+          <motion.div variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="relative justify-center  hidden xl:flex" >
+            <div className="relative w-full h-[400px] md:h-[500px] xl:h-[600px] 2xl:h-full rounded-[12px] overflow-hidden">
               <AnimatePresence mode="wait">
-                <motion.div
-                  key={t.items[active].image}
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  transition={{ duration: 0.6 }}
-                  viewport={{ once: true }}
-                  className="absolute inset-0"
-                >
-                  <Image
-                    src={t.items[active].image}
-                    alt={t.items[active].imageAlt}
-                    fill
-                    className="object-cover object-center"
-                  />
-                  <div
-                    style={{
-                      background:
-                        "linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(126, 90, 163, 0.72) 100%)",
-                    }}
-                    className="absolute bottom-0 h-[70%] w-full"
-                  />
+                <motion.div key={t.items[active].image} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="absolute h-full inset-0" >
+                  <Image src={t.items[active].image} alt={t.items[active].imageAlt} fill className="object-cover object-center" />
+                  <div style={{ background: "linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(126, 90, 163, 0.72) 100%)", }} className="absolute bottom-0 h-[70%] w-full" />
                 </motion.div>
               </AnimatePresence>
             </div>

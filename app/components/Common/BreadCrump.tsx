@@ -315,6 +315,7 @@ const Breadcrumb: React.FC = () => {
     const specialLabels: SpecialLabels = {
         "about-us": { en: "About Beam", ar: "تعرف على بيم" },
         "news-and-media": { en: "News & Media", ar: "الأخبار والمواد الإعلامية" },
+        "beam-schools": { en: "Beam Schools", ar: "مدارسنا" },
     };
 
     const normalizeSegment = (segment: string) => segment.toLowerCase().replace(/ /g, "-").replace(/&/g, "and");
@@ -357,13 +358,7 @@ const Breadcrumb: React.FC = () => {
                 </Link>
 
                 {segments.length > 0 && (
-                    <Image
-                        src="/images/about-us/arrow-right.svg"
-                        alt="arrow"
-                        width={18}
-                        height={18}
-                        className={isArabic ? "rotate-180" : ""}
-                    />
+                    <img src="/images/about-us/arrow-right.svg" alt="arrow" width={18} height={18} className={isArabic ? "rotate-180" : ""} />
                 )}
             </li>
 
@@ -382,19 +377,10 @@ const Breadcrumb: React.FC = () => {
                 const isNonClickableParent = NON_CLICKABLE_PARENTS.includes(normalized);
 
                 return (
-                    <li
-                        key={idx}
-                        className={`flex items-center gap-1 ${isArabic ? "flex-row-reverse" : "flex-row"}`} // ← FIX: direction controlled here
-                    >
+                    <li key={idx} className={`flex items-center gap-1 ${isArabic ? "flex-row-reverse" : "flex-row"}`}>
                         {/* ARROW for Arabic (arrow BEFORE text) */}
                         {!isLast && isArabic && (
-                            <Image
-                                src="/images/about-us/arrow-right.svg"
-                                alt="arrow"
-                                width={18}
-                                height={18}
-                                className="rotate-180"
-                            />
+                            <img src="/images/about-us/arrow-right.svg" alt="arrow" width={18} height={18} className="rotate-180" />
                         )}
 
                         {/* LABEL OR LINK */}

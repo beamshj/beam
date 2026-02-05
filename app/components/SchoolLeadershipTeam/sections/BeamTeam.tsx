@@ -200,8 +200,7 @@ export default function LeadershipCarousel({ data }: { data: LeadershipData }) {
           {t.firstSection.title}
         </motion.h1>
       </div>
-      <div
-        className={`flex flex-col md:flex-row gap-[15px] md:gap-[36px] lg:gap-[56px] items-stretch ${windowWidth < 1024 ? "container" : ""
+      <div className={`flex flex-col md:flex-row gap-[15px] md:gap-[36px] lg:gap-[56px] items-stretch ${windowWidth < 1024 ? "container" : ""
           }`}
         style={{
           ...(isArabic
@@ -211,22 +210,16 @@ export default function LeadershipCarousel({ data }: { data: LeadershipData }) {
 
       >
         {/* Slides container */}
-        <div
-          className="relative flex items-stretch justify-center"
+        <div className="relative flex items-stretch justify-center"
           style={{
             width:
               windowWidth < 768
                 ? "100%"
                 : activeSize.w + getMaxNonActive() * (nonActiveSize.w + gap),
-            height: windowWidth < 768 ? 420 : activeSize.h,
+            minHeight: windowWidth < 768 ? 420 : activeSize.h,
           }}
         >
-          <div
-            style={{
-              marginLeft: containerPaddingRight + (isArabic ? 360 : 0),
-            }}
-            className="hidden ios:block absolute top-0 left-0 max-w-[50%] h-full"
-          >
+          <div style={{ marginLeft: containerPaddingRight + (isArabic ? 360 : 0), }} className="hidden ios:block absolute top-0 left-0 max-w-[50%]" >
             <motion.h1
               variants={moveUp(0.2)}
               initial="hidden"
@@ -234,7 +227,8 @@ export default function LeadershipCarousel({ data }: { data: LeadershipData }) {
               viewport={{ once: true, amount: 0.2 }}
               className="text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl lg:leading-[1.111] font-light mb-3 xl:mb-[30px] 2xl:mb-[50px] text-black lettersp-4"
             >
-              {t.firstSection.title}
+              {isArabic ? (t.firstSection.title) : (<><span>BEAM</span> <br /> Leadership Team</>)}
+              {/* BEAM <br /> Leadership Team */}
             </motion.h1>
           </div>
           {slides.map((m) => (
@@ -267,72 +261,26 @@ export default function LeadershipCarousel({ data }: { data: LeadershipData }) {
           ))}
         </div>
         {/* Active Slide Content */}
-        <div className="flex flex-col justify-between mt-3 md:mt-0 w-[320px]">
-          <motion.p
-            variants={moveUp(0.2)}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
-            className="text-sm text-black font-light"
-          >
-            <span className="text-[#666666]">{"0" + n}</span>/
+        <div className="flex flex-col  md:mt-0 w-[320px] ">
+          <motion.p variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="text-sm text-black font-light" >
+            <span className="text-[#666666]">{"0" + n}/</span>
             {"0" + (activeIndex + 1)}
           </motion.p>
-          <div>
-            <motion.h3
-              variants={moveUp(0.3)}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.2 }}
-              className="text-xl font-light text-black"
-            >
+          <div className="mt-auto">
+            <motion.h3 variants={moveUp(0.3)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="text-xl font-light text-black" >
               {activeSlide.name}
             </motion.h3>
-            <motion.p
-              variants={moveUp(0.4)}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.2 }}
-              className="text-sm text-[#666666] font-light mt-[20px] md:mt-[30px]"
-            >
-              {activeSlide.designation}
-            </motion.p>
-            <motion.ul
-              variants={moveUp(0.4)}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.2 }}
-              className="mt-[30px] md:mt-[50px] space-y-2 text-sm text-black"
-            >
-             
-              <motion.div
-                variants={moveUp(0.4)}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, amount: 0.2 }}
-                className="mt-[30px] md:mt-[50px] text-sm font-light text-black school-leadership-bullets"
-                dangerouslySetInnerHTML={{ __html: activeSlide.description }}
-              />
-            </motion.ul>
+            <motion.p variants={moveUp(0.4)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="text-sm text-[#666666] font-light mt-[20px] md:mt-[30px]" > {activeSlide.designation} </motion.p>
+            <motion.div variants={moveUp(0.4)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="mt-[30px] md:mt-12 mb-8 xl:mb-13 space-y-1 font-light text-sm text-black school-leadership-bullets"
+              dangerouslySetInnerHTML={{ __html: activeSlide.description }} >
+              {/* <motion.div variants={moveUp(0.4)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="mt-[30px] md:mt-[50px] text-sm  text-black school-leadership-bullets" dangerouslySetInnerHTML={{ __html: activeSlide.description }}  /> */}
+            </motion.div>
           </div>
-          <motion.div
-            variants={moveUp(0.5)}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
-            className="mt-8 flex justify-start group w-fit"
-          >
-            <button
-              onClick={next}
-              className={`${isArabic ? "group-hover:-translate-x-1" : "group-hover:translate-x-1"} transition-all duration-300 w-[50px] h-[50px] 2xl:w-[75px] 2xl:h-[75px] rounded-full border border-bdrcolor flex items-center justify-center cursor-pointer`}
+          <motion.div variants={moveUp(0.5)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="mt-8 flex justify-start group w-fit" >
+            <button onClick={next}
+              className={`${isArabic ? "group-hover:-translate-x-1" : "group-hover:translate-x-1"} transition-all duration-300 w-[50px] h-[50px] 2xl:w-[75px] 2xl:h-[75px] rounded-full border border-black flex items-center justify-center cursor-pointer`}
             >
-              <Image
-                src="/images/arrow-primary.svg"
-                alt="arrow-right"
-                width={20}
-                height={20}
-                className={`w-[20px] h-[20px] ${isArabic ? "-rotate-135" : "rotate-45"}`}
-              />
+              <img src="/images/arrow-primary.svg" alt="arrow-right" width={20} height={20} className={`w-[20px] h-[20px] ${isArabic ? "-rotate-135" : "rotate-45"}`} />
             </button>
           </motion.div>
         </div>

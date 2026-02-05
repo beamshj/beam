@@ -84,14 +84,14 @@ const SchoolCards = ({
   }, []);
 
   return (
-    <section className="py-10 xl:py-20 2xl:py-[135px]">
+    <section className="py-10 xl:py-20 2xl:py-[135px] bg-accent">
       <div className="container">
         {/* Title and Description */}
         <div className="mb-5 lg:mb-10 xl:mb-[50px]">
           <div>
-            <SplitText
+            {/* <SplitText
               tag="h1"
-              className={`  font-light mb-2 xl:mb-[30px] 2xl:mb-[50px] text-black max-w-[91ch] 
+              className={`  font-light mb-2 xl:mb-[30px] 2xl:mb-[50px] text-black  
                 ${isArabic ? 'text-lg lg:text-xl xl:text-2xl 2xl:text-3xl leading-[1.25] lg:leading-[1.5]' : 'text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl lettersp-2 leading-[1.25] lg:leading-[1.111]'}`}
               text={tData.firstSection.title}
               delay={100}
@@ -103,7 +103,9 @@ const SchoolCards = ({
               threshold={0.1}
               rootMargin="-10px"
               textAlign={isArabic ? "right" : "left"}
-            />
+            /> */}
+            <motion.h2 variants={moveUp(0.2)} initial="hidden" animate="show" viewport={{ once: true, amount: 0.2 }} className={`  font-light mb-2 xl:mb-[30px] 2xl:mb-[50px] text-black  
+                ${isArabic ? 'text-lg lg:text-xl xl:text-2xl 2xl:text-3xl leading-[1.25] lg:leading-[1.5]' : 'text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl lettersp-2 leading-[1.25] lg:leading-[1.111]'}`}>{tData.firstSection.title}</motion.h2>
           </div>
           <SplitText
             tag="p"
@@ -134,9 +136,7 @@ const SchoolCards = ({
                 viewport={{ once: true, amount: 0.2 }}
                 onClick={() => setSelectedCurriculum(category.name)}
                 className={`px-2 md:px-4 xl:px-[20px] py-2 md:py-2 xl:py-[13px] border rounded-[50px] smtext10 text-xs font-light cursor-pointer uppercase ${
-                  selectedCurriculum === category.name
-                    ? "bg-[#C9F3FF] text-black border-[#12586C]"
-                    : "bg-white text-[#666666] hover:bg-gray-200 border-bdrcolor transition-colors duration-300"
+                  selectedCurriculum === category.name ? "bg-[#C9F3FF] text-black border-[#12586C]" : "bg-white text-[#666666] hover:bg-gray-200 border-bdrcolor transition-colors duration-300"
                 }`}
               >
                 {category.name}
@@ -208,7 +208,7 @@ const SchoolCards = ({
               <LangLink href={campus.link} target="_blank">
                 {/* Background Image */}
                 <div className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105">
-                  <Image src={campus.image} alt={campus.title} fill loading="lazy" sizes="(max-width: 768px) 90vw, (max-width: 1200px) 33vw, 485px" className="object-cover h-full rounded-[12px]" />
+                  <Image src={campus.image} alt={campus.title} fill loading="lazy"  className="object-cover object-center h-full rounded-[12px]" />
                   {/* Gradient Overlay */}
                   <div className="absolute left-0 bottom-0 right-0 h-[50%] bg-gradient-to-t from-black to-black/0"></div>
                 </div>
@@ -228,39 +228,28 @@ const SchoolCards = ({
                 </div>
 
                 {/* Stats Box */}
-                <div
-                  className={`absolute bottom-0 left-0 right-0 transition-all duration-300 z-10 ${
+                <div className={`absolute bottom-0 left-0 right-0 transition-all duration-300 z-10 ${
                     hoveredCard === campus._id
                       ? "translate-y-0 opacity-100"
                       : "translate-y-full opacity-0"
-                  }`}
-                >
+                  }`}>
+
                   <div className="bg-[#DDF7FF] backdrop-blur-sm xl:m-[6px] m-[2px] rounded-[12px] xl:px-[19px] xl:py-[18px] px-2 py-2 space-y-[5px] xl:space-y-[13px]">
                     {campus.specifications.map((specification, index) => (
-                      <div
-                        key={index}
-                        style={{
-                          background:
-                            "linear-gradient(90deg, #42BADC 0%, rgba(126, 90, 163, 0.1) 100%)",
-                        }}
-                        className="flex items-center justify-between px-[15px] py-[14px] rounded-[12px] hover:scale-[1.03] transition-all duration-300 ease-in-out"
+                      <div key={index}
+                        // style={{ background: "linear-gradient(90deg, #42BADC 0%, rgba(126, 90, 163, 0.1) 100%)",}}
+                        className="flex items-center justify-between grd-school px-[15px] py-[10px] rounded-[12px] hover:scale-[1.03] transition-all duration-300 ease-in-out"
                       >
                         <div className="flex items-center justify-center gap-[23px] flex-shrink-0">
-                          <Image
-                            src="/images/beam-schools/icons/1.svg"
-                            alt="map-icon"
-                            width={32}
-                            height={32}
-                            className="xl:h-[32px] w-auto h-6"
-                          />
-                          <div className="text-sm xl:text-md font-light text-black leading-[1.4]">
+                          <img src="/images/beam-schools/icons/1.svg" alt="map-icon" width={32} height={32} className="xl:h-[32px] w-auto h-6" />
+                          <h3 className="text-sm xl:text-md font-light text-black leading-[1.4]">
                             {/* {specification.number}+ */}
                             {specification.number}
-                          </div>
+                          </h3>
                         </div>
-                        <div className="text-sm xl:text-md font-light text-colorpara leading-[1.52]">
+                        <h3 className="text-sm xl:text-19 font-light text-colorpara leading-[1.52]">
                           {specification.value}
-                        </div>
+                        </h3>
                       </div>
                     ))}
                   </div>

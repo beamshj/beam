@@ -52,7 +52,7 @@ const ProudMoments: React.FC<{data: SchoolAchievementsProps['firstSection']}> = 
               <SplitText
                 tag="span"
                 text={t.title}
-                className="text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl leading-[1.2] w-full md:max-w-[65%] font-light tracking-[0.04em] text-center md:text-left lettersp-4"
+                className="text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl leading-[1.2] w-full md:max-w-[65%] 2xl:max-w-[14ch] font-light tracking-[0.04em] text-center md:text-left lettersp-4"
                 delay={60}
                 duration={0.3}
                 ease="power3.out"
@@ -64,6 +64,7 @@ const ProudMoments: React.FC<{data: SchoolAchievementsProps['firstSection']}> = 
                 textAlign={isArabic ? "right" : "left"}
               />
             </h2>
+              
 
             <motion.div
               className={`w-full md:w-3/4 h-[1px] ${isArabic ? "bg-gradient-to-l" : "bg-gradient-to-r"} from-white to-transparent origin-left mt-5 xl:mt-[49px] mb-5 xl:mb-[68px]`}
@@ -105,12 +106,7 @@ const ProudMoments: React.FC<{data: SchoolAchievementsProps['firstSection']}> = 
                 transition={{ duration: 0.5, ease: "easeOut" }}
               >
                 {/* Close button */}
-                <button
-                  onClick={closePopup}
-                  className="absolute top-0 right-0 text-white text-2xl z-10 cursor-pointer p-2"
-                >
-                  ✕
-                </button>
+                <button onClick={closePopup} className="absolute top-0 right-0 text-white text-xl z-10 cursor-pointer p-2">✕</button>
 
                 {/* YouTube Embed */}
                 <iframe

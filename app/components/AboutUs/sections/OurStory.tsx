@@ -37,7 +37,7 @@ const OurStorySection: React.FC<OurStorySectionProps> = ({ data }) => {
     <section className="pt-10 xl:pt-20 2xl:pt-[135px]">
       <div className="container">
         <div className="mb-3 md:mb-6 xl:mb-15 2xl:mb-[50px]">
-          <h1 className="text-lg md:text-xl xl:text-3xl 2xl:text-4xl font-light leading-[1.111111111] text-black">
+          <h2 className="text-lg md:text-xl xl:text-3xl 2xl:text-4xl font-light leading-[1.111111111] text-black">
             <SplitText
               tag="span"
               text={t.mainTitle}
@@ -52,27 +52,16 @@ const OurStorySection: React.FC<OurStorySectionProps> = ({ data }) => {
               rootMargin="-10px"
               textAlign="left"
             />
-          </h1>
+          </h2>
         </div>
         {/* Title + Image */}
         <div className="relative rounded-[12px] overflow-hidden">
-          <Image
-            src={t.image}
-            alt={t.imageAlt}
-            width={1200}
-            height={500}
-            className="w-full h-50 md:h-[300px] lg:h-[455px] xl:h-[500px] 2xl:h-[605px] object-cover"
-            ref={imageRef}
-          />
+          <Image src={t.image} alt={t.imageAlt} width={1200} height={500} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" loading="lazy" className="w-full h-50 md:h-[300px] lg:h-[455px] xl:h-[500px] 2xl:h-[605px] object-cover" ref={imageRef} />
           {/* Gradient overlay */}
           <div className="absolute bottom-0 w-full h-[60%] bg-gradient-to-t from-black to-transparent"></div>
-          <motion.h2
-            variants={moveUp(0.2)}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
-            className={`absolute left-[20px] bottom-[20px] right-[20px] lg:right-[60px] xl:left-[50px] xl:bottom-[40px] 2xl:left-[60px] 2xl:bottom-[50px] text-white text-md md:text-lg  xl:max--w-0 xl:text-xl 2xl:text-4xl font-light leading-[1.111111111] ${isArabic ? "max-w-6xl" : "max-w-[20ch]"}`}
-          >
+          <motion.h2 variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} 
+          className={`absolute left-[20px] bottom-[20px] right-[20px] lg:right-[60px] xl:left-[50px] xl:bottom-[40px] 
+          2xl:left-[60px] 2xl:bottom-[50px] text-white text-md md:text-lg  xl:max--w-0 xl:text-xl 2xl:text-4xl font-light lettersp-4 leading-[1.111111111] ${isArabic ? "max-w-6xl" : "max-w-[20ch]"}`} >
             {t.subTitle} {isArabic ? "" : <span className="text-primary">{t.highlight}</span>}
           </motion.h2>
         </div>

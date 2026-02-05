@@ -178,7 +178,7 @@ export default function LeadershipCarousel({ data }: { data: LeadershipData }) {
   return (
     <section className="overflow-hidden mx-auto max-w-[1920px] py-10 xl:py-20 2xl:py-[135px]">
       <div className="container flex flex-col ios:hidden h-full mb-[30px] lg:mb-[35px]">
-        <motion.h1
+        <motion.h2
           variants={moveUp(0.2)}
           initial="hidden"
           whileInView="show"
@@ -186,7 +186,7 @@ export default function LeadershipCarousel({ data }: { data: LeadershipData }) {
           className="text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl lg:leading-[1.111] font-light mb-3 xl:mb-[30px] 2xl:mb-[50px] text-black lettersp-4"
         >
           {t.secondSection.title}
-        </motion.h1>
+        </motion.h2>
       </div>
       <div
         className={`flex flex-col md:flex-row gap-[15px] md:gap-[36px] lg:gap-[56px] items-stretch ${windowWidth < 1024 ? "container" : ""
@@ -198,28 +198,16 @@ export default function LeadershipCarousel({ data }: { data: LeadershipData }) {
         }}
       >
         {/* Slides container */}
-        <div
-          className="relative flex items-stretch justify-center"
+        <div className="relative flex items-stretch justify-center"
           style={{
             width: windowWidth < 768 ? "100%" : activeSize.w + getMaxNonActive() * (nonActiveSize.w + gap),
             height: windowWidth < 768 ? 420 : activeSize.h,
           }}
         >
-          <div
-            style={{
-              marginLeft: containerPaddingRight + (isArabic ? 360 : 0),
-            }}
-            className="hidden ios:block absolute top-0 left-0 max-w-[50%] h-full"
-          >
-            <motion.h1
-              variants={moveUp(0.2)}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.2 }}
-              className="text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl lg:leading-[1.111] font-light mb-3 xl:mb-[30px] 2xl:mb-[50px] text-black lettersp-4"
-            >
+          <div style={{ marginLeft: containerPaddingRight + (isArabic ? 360 : 0), }} className="hidden ios:block absolute top-0 left-0 max-w-[50%] h-full">
+            <motion.h2 variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl lg:leading-[1.111] font-light mb-3 xl:mb-[30px] 2xl:mb-[50px] text-black lettersp-4" >
               {t.secondSection.title}
-            </motion.h1>
+            </motion.h2>
           </div>
           {slides.map((m) => (
             <motion.div
@@ -231,15 +219,7 @@ export default function LeadershipCarousel({ data }: { data: LeadershipData }) {
                 setActiveIndex(sliderData.findIndex((d) => d._id === m._id))
               }
             >
-              <Image
-                src={m.image}
-                alt={m.name}
-                width={Math.max(1, Math.round(m.width))}
-                height={Math.max(1, Math.round(m.height))}
-                loading="lazy" sizes="(max-width: 768px) 60vw, 360px"
-                className={`w-full h-full lg:object-cover object-top ${!m.isActive ? "saturate-0" : ""
-                  }`}
-              />
+              <Image src={m.image} alt={m.name} width={Math.max(1, Math.round(m.width))} height={Math.max(1, Math.round(m.height))} loading="lazy" sizes="(max-width: 768px) 60vw, 360px" className={`w-full h-full lg:object-cover object-top ${!m.isActive ? "saturate-0" : "" }`} />
 
               {m.isActive && (
                 <div className="absolute left-0 bottom-0 right-0 w-full h-[50%] bg-gradient-to-b from-transparent to-[#42BADC]" />
@@ -251,7 +231,7 @@ export default function LeadershipCarousel({ data }: { data: LeadershipData }) {
           ))}
         </div>
         {/* Active Slide Content */}
-        <div className="flex flex-col justify-between mt-3 md:mt-0 w-[320px]">
+        <div className="flex flex-col mt-3 md:mt-0 w-[320px]">
           <motion.p
             variants={moveUp(0.2)}
             initial="hidden"
@@ -262,7 +242,7 @@ export default function LeadershipCarousel({ data }: { data: LeadershipData }) {
             <span className="text-[#666666]">{"0" + n}</span>/
             {"0" + (activeIndex + 1)}
           </motion.p>
-          <div>
+          <div className="mt-auto">
             <motion.h3
               variants={moveUp(0.3)}
               initial="hidden"
@@ -286,13 +266,13 @@ export default function LeadershipCarousel({ data }: { data: LeadershipData }) {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, amount: 0.2 }}
-              className="mt-[30px] md:mt-[50px] text-sm font-light text-black school-leadership-bullets"
+              className="mt-8 md:mt-12 mb-8 md:mb-13 text-sm font-light text-black school-leadership-bullets"
               dangerouslySetInnerHTML={{ __html: activeSlide.description }}
             />
           </div>
           <motion.div variants={moveUp(0.5)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="mt-8 flex justify-start group w-fit" >
             <button onClick={next}
-              className={`${isArabic ? "group-hover:-translate-x-1" : "group-hover:translate-x-1"} transition-all duration-300 w-[50px] h-[50px] 2xl:w-[75px] 2xl:h-[75px] rounded-full border border-bdrcolor flex items-center justify-center cursor-pointer`}
+              className={`${isArabic ? "group-hover:-translate-x-1" : "group-hover:translate-x-1"} transition-all duration-300 w-[50px] h-[50px] 2xl:w-[75px] 2xl:h-[75px] rounded-full border border-black flex items-center justify-center cursor-pointer`}
             >
               <Image src="/images/arrow-primary.svg" alt="arrow-right" width={20} height={20} className={`w-[20px] h-[20px] ${isArabic ? "-rotate-135" : "rotate-45"}`} />
             </button>
