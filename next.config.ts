@@ -20,7 +20,7 @@ const nextConfig: NextConfig = {
     formats: ["image/webp", "image/avif"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    minimumCacheTTL: isDev ? 0 : 31536000, // No cache in dev
+    minimumCacheTTL: 31536000, // Always cache images for 1 year
   },
 
   turbopack: {},
@@ -49,10 +49,11 @@ const nextConfig: NextConfig = {
       ];
     }
 
-    // Production caching
+    // Production caching - OPTIMIZED
     return [
+      // Static assets (images) - cache for 1 year
       {
-        source: "/:all*(svg|jpg|jpeg|png|gif|webp|avif)",
+        source: "/:all*(svg|jpg|jpeg|png|gif|webp|avif|ico)",
         headers: [
           {
             key: "Cache-Control",
@@ -60,21 +61,43 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      // Next.js static files - cache for 1 year
       {
         source: "/_next/static/:path*",
         headers: [
           {
             key: "Cache-Control",
-            value: "public, max-age=2, immutable",
+            value: "public, max-age=31536000, immutable",
           },
         ],
       },
+      // Fonts - cache for 1 year
       {
         source: "/fonts/:path*",
         headers: [
           {
             key: "Cache-Control",
             value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      // HTML pages - cache for 1 hour with revalidation
+      {
+        source: "/:path*.html",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=3600, must-revalidate",
+          },
+        ],
+      },
+      // API routes - no cache
+      {
+        source: "/api/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "no-store, must-revalidate",
           },
         ],
       },
@@ -89,16 +112,17 @@ const withPWA = require("next-pwa")({
   dest: "public",
   register: true,
   skipWaiting: true,
-  disable: isDev, // This disables PWA in development
+  disable: isDev,
   runtimeCaching: [
+    // Google Fonts - cache for 1 year
     {
       urlPattern: /^https:\/\/fonts\.(?:gstatic)\.com\/.*/i,
       handler: "CacheFirst",
       options: {
         cacheName: "google-fonts-webfonts",
         expiration: {
-          maxEntries: 4,
-          maxAgeSeconds: 365 * 24 * 60 * 60,
+          maxEntries: 10,
+          maxAgeSeconds: 365 * 24 * 60 * 60, // 1 year
         },
       },
     },
@@ -108,93 +132,101 @@ const withPWA = require("next-pwa")({
       options: {
         cacheName: "google-fonts-stylesheets",
         expiration: {
-          maxEntries: 4,
-          maxAgeSeconds: 7 * 24 * 60 * 60,
+          maxEntries: 10,
+          maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
         },
       },
     },
+    // Static images - cache aggressively
     {
       urlPattern: /\.(?:jpg|jpeg|gif|png|svg|ico|webp|avif)$/i,
-      handler: "StaleWhileRevalidate",
+      handler: "CacheFirst",
       options: {
         cacheName: "static-image-assets",
         expiration: {
-          maxEntries: 64,
-          maxAgeSeconds: 24 * 60 * 60,
+          maxEntries: 100,
+          maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
         },
       },
     },
+    // Next.js optimized images - cache aggressively
     {
       urlPattern: /\/_next\/image\?url=.+$/i,
-      handler: "StaleWhileRevalidate",
+      handler: "CacheFirst",
       options: {
         cacheName: "next-image",
         expiration: {
-          maxEntries: 64,
-          maxAgeSeconds: 24 * 60 * 60,
+          maxEntries: 100,
+          maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
         },
       },
     },
+    // JavaScript files - cache first, they're versioned
     {
       urlPattern: /\.(?:js)$/i,
-      handler: "NetworkFirst", // Changed to NetworkFirst for fresher content
+      handler: "CacheFirst",
       options: {
         cacheName: "static-js-assets",
         expiration: {
-          maxEntries: 48,
-          maxAgeSeconds: 24 * 60 * 60,
+          maxEntries: 64,
+          maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
         },
       },
     },
-    // {
-    //   urlPattern: /\.(?:css)$/i,
-    //   handler: "StaleWhileRevalidate",
-    //   options: {
-    //     cacheName: "static-style-assets",
-    //     expiration: {
-    //       maxEntries: 32,
-    //       maxAgeSeconds: 24 * 60 * 60,
-    //     },
-    //   },
-    // },
+    // CSS files - cache first, they're versioned
+    {
+      urlPattern: /\.(?:css)$/i,
+      handler: "CacheFirst",
+      options: {
+        cacheName: "static-style-assets",
+        expiration: {
+          maxEntries: 32,
+          maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
+        },
+      },
+    },
+    // Next.js data files - stale while revalidate
     {
       urlPattern: /\/_next\/data\/.+\/.+\.json$/i,
-      handler: "NetworkFirst", // Changed to NetworkFirst
+      handler: "StaleWhileRevalidate",
       options: {
         cacheName: "next-data",
         expiration: {
           maxEntries: 32,
-          maxAgeSeconds: 24 * 60 * 60,
+          maxAgeSeconds: 24 * 60 * 60, // 1 day
         },
       },
     },
+    // Static data files
     {
       urlPattern: /\.(?:json|xml|csv)$/i,
-      handler: "NetworkFirst",
+      handler: "StaleWhileRevalidate",
       options: {
         cacheName: "static-data-assets",
         expiration: {
           maxEntries: 32,
-          maxAgeSeconds: 24 * 60 * 60,
+          maxAgeSeconds: 24 * 60 * 60, // 1 day
         },
       },
     },
+    // Same-origin pages - network first with timeout
     {
       urlPattern: ({ url }: any) => {
         const isSameOrigin = self.origin === url.origin;
         if (!isSameOrigin) return false;
         const pathname = url.pathname;
+        // Don't cache API routes
         if (pathname.startsWith("/api/")) return false;
         return true;
       },
       handler: "NetworkFirst",
       options: {
-        cacheName: "others",
+        cacheName: "pages",
         expiration: {
-          maxEntries: 32,
-          maxAgeSeconds: 24 * 60 * 60,
+          maxEntries: 50,
+          maxAgeSeconds: 24 * 60 * 60, // 1 day
         },
-        networkTimeoutSeconds: 10,
+        networkTimeoutSeconds: 5,
       },
     },
   ],
