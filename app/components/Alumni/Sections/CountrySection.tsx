@@ -6,13 +6,10 @@ import { moveUp } from "../../motionVarients";
 import { useApplyLang } from "@/lib/applyLang";
 import { useState } from "react";
 import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
+import { AlumniCountryCardSection } from "../type";
 
 interface CountrySectionType {
-    data: {
-        name: string;
-        flag: string;
-        universities: string;
-    }[];
+    data: AlumniCountryCardSection;
 }
 
 export default function CountryCards({ data }: CountrySectionType) {
@@ -21,10 +18,10 @@ export default function CountryCards({ data }: CountrySectionType) {
     return (
         <div className="container">
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 2xl:gap-[33px]">
-                {t.map((item, idx) => (
+                {t.items.map((item, idx) => (
                     <motion.div
                         key={idx}
-                        variants={moveUp(idx * 0.7)}
+                        variants={moveUp(idx * 0.5)}
                         initial="hidden"
                         whileInView="show"
                         viewport={{ amount: 0.2, once: true }}
@@ -43,7 +40,7 @@ function Card({
     isActive,
     onClick,
 }: {
-    item: CountrySectionType["data"][number];
+    item: CountrySectionType["data"]["items"][number];
     isActive: boolean;
     onClick: () => void;
 }) {

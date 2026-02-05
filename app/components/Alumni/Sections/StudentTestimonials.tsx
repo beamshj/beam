@@ -9,27 +9,18 @@ import "swiper/css/navigation";
 import SplitText from "@/components/SplitText";
 import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 import { motion } from "framer-motion";
-import { moveUp } from "../../motionVarients";
+import { moveLeft, moveRight, moveUp } from "../../motionVarients";
 import { useApplyLang } from "@/lib/applyLang";
+import { AlumniTestimonialsSection } from "../type";
 
-interface TestimonialItem {
-    id: number;
-    name: string;
-    content: string;
-    profileImage: string;
+interface StudentTestimonialsSectionType {
+    data?: AlumniTestimonialsSection;
 }
 
-interface TestimonialsType {
-    data: {
-        headingOne: string;
-        headingTwo: string;
-        items: TestimonialItem[];
-    };
-}
-
-export default function Testimonials({ data }: TestimonialsType) {
+export default function Testimonials({ data }: StudentTestimonialsSectionType) {
+    console.log(data, "ds");
     const isArabic = useIsPreferredLanguageArabic();
-    const t = useApplyLang(data);
+    const t = useApplyLang(data!);
 
     return (
         <section className="container pt-10 xl:pt-25 2xl:pt-[135px] pb-10 xl:pb-25 2xl:pb-[135px]">
@@ -163,7 +154,7 @@ export default function Testimonials({ data }: TestimonialsType) {
                 }}
             >
                 {t.items.map((item, index) => (
-                    <SwiperSlide key={item.id}>
+                    <SwiperSlide key={item._id}>
                         <motion.div
                             variants={moveUp(index * 0.5)}
                             initial="hidden"
@@ -183,19 +174,44 @@ export default function Testimonials({ data }: TestimonialsType) {
                         flex-1
                                 `}
                             >
-                                <Image
-                                    src="/images/alumni/quote.svg"
-                                    alt="Quote"
-                                    width={98}
-                                    height={73}
-                                    className="pb-8 lg:pb-10 2xl:pb-12.5 hidden lg:block"
+                                <motion.div
+                                    variants={moveRight(index * 1)}
+                                    initial="hidden"
+                                    whileInView="show"
+                                    viewport={{ once: true }}
+                                >
+                                    <Image
+                                        src="/images/alumni/quote.svg"
+                                        alt="Quote"
+                                        width={98}
+                                        height={73}
+                                        className="pb-8 lg:pb-10 2xl:pb-12.5 hidden lg:block"
+                                    />
+                                </motion.div>
+
+                                <motion.h4
+                                    variants={moveUp(index * 1)}
+                                    initial="hidden"
+                                    whileInView="show"
+                                    viewport={{ once: true }}
+                                    className="text-lg lg:text-xl font-medium mb-3 md:mb-6 lg:mb-10"
+                                >
+                                    {item.name}
+                                </motion.h4>
+
+                                <motion.div
+                                    variants={moveUp(index * 1.2)}
+                                    initial="hidden"
+                                    whileInView="show"
+                                    viewport={{ once: true }}
+                                    className="h-px w-full bg-[#D3D3D3] mb-3 md:mb-6 lg:mb-10"
                                 />
 
-                                <h4 className="text-lg lg:text-xl font-medium mb-3 md:mb-6 lg:mb-10">{item.name}</h4>
-
-                                <div className="h-px w-full bg-[#D3D3D3] mb-3 md:mb-6 lg:mb-10" />
-
-                                <div
+                                <motion.div
+                                    variants={moveUp(index * 1.6)}
+                                    initial="hidden"
+                                    whileInView="show"
+                                    viewport={{ once: true }}
                                     className={`
                             text-sm
                             leading-[1.52]
@@ -208,7 +224,11 @@ export default function Testimonials({ data }: TestimonialsType) {
                             </div>
 
                             {/* Right image */}
-                            <div
+                            <motion.div
+                                variants={moveLeft(index * 1.6)}
+                                initial="hidden"
+                                whileInView="show"
+                                viewport={{ once: true }}
                                 className="
                         h-[300px] sm:h-[450px] md:h-auto
                         w-[380px]
@@ -226,7 +246,7 @@ export default function Testimonials({ data }: TestimonialsType) {
                             rounded-[12px]
                         "
                                 />
-                            </div>
+                            </motion.div>
                         </motion.div>
                     </SwiperSlide>
                 ))}
