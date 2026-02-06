@@ -26,11 +26,11 @@ const Main = ({ data }: MainProps) => {
            
             <motion.p variants={moveUp(0.5)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="text-colorpara text-sm leading-[1.526315789473684] mb-[30px]">{data.description}</motion.p>
             <motion.h3 variants={moveUp(0.6)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="text-md font-seimibold mb-4 xl:mb-6">{data.subData.desc}</motion.h3>
-            <ul className="space-y-2">
+            <ul className="space-y-2 list-disc pr-5">
               {data.subData.list.map((item, index) => (
-                <motion.li variants={moveUp(0.6 + index * 0.1)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} key={index} className="flex items-center gap-2 group">
-                  <ChevronsLeft className="w-4 h-4 text-primary group-hover:translate-x-1 transition-transform duration-300" /> 
-                  <span>{item}</span>
+                <motion.li variants={moveUp(0.6 + index * 0.1)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} key={index}
+                  className="group text-colorpara font-normal">{item}
+                  {item}
                 </motion.li>
               ))}
             </ul>

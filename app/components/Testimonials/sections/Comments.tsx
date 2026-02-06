@@ -18,7 +18,7 @@ const Comments = ({ data }: { data: TestimonialsProps["firstSection"] }) => {
   const isArabic = useIsPreferredLanguageArabic()
 
   return (
-    <section className="pt-8 md:pt-12 lg:pt-20 2xl:pt-[135px] pb-10 md:pb-10 lg:pb-10 2xl:pb-[40px] overflow-x-hidden">
+    <section className="pt-8 md:pt-12 lg:pt-20 lg:mb-20 2xl:pt-[135px]  pb-10 md:pb-20 lg:pb-20 2xl:pb-20 overflow-x-hidden">
       <div className="container">
         <div>
           <div>
