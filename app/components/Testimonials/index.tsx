@@ -3,7 +3,7 @@ import {
   BannerData,   
 } from "./data";   
 import Comments from "./sections/Comments"; 
-import GuidedVision from "./sections/GuidedVision";
+// import GuidedVision from "./sections/GuidedVision";
 // import SuccessStories from "./sections/SuccessStories"; 
 import { TestimonialsProps } from "./type";
 
@@ -13,7 +13,7 @@ const Index = ({data}: {data: TestimonialsProps}) => {
       <InnerBanner BannerData={BannerData} data={data}/> 
       <Comments data={data.firstSection}/> 
       {/* <SuccessStories data={data.secondSection}/>    */}
-      <GuidedVision data={data.thirdSection}/>
+      {/* <GuidedVision data={data.thirdSection}/> */}
     </>
   );
 };
