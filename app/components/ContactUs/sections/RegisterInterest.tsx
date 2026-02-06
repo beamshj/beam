@@ -206,7 +206,48 @@ const RegisterInterest = forwardRef<HTMLDivElement, RegisterInterestProps>(
                     className="w-full border-b border-white py-[23px] pr-10 focus:outline-none text-white text-sm font-light appearance-none"
                   >
                     <option value="" className="bg-black">
-                      {isArabic ? "من أين وجدتنا؟" : "Where did you find us ?"}
+                      {isArabic ? "غرض الاستفسار" : "Purpose of inquiry"}
+                    </option>
+                    <option value="Admission" className="bg-black ">
+                      {isArabic ? "القبول" : "Admission"}
+                    </option>
+                    <option value="career" className="bg-black ">
+                      {isArabic ? "المسار المهني" : "Career"}
+                    </option>
+                    <option value="general" className="bg-black ">
+                      {isArabic ? "عام" : "General"}
+                    </option>
+                  </select>
+                  {/* Custom arrow icon */}
+                  <span className="absolute top-1/3 right-0 -translate-y-1/2 pointer-events-none">
+                    <Image
+                      src="/images/arrow-down.svg"
+                      width={24}
+                      height={24}
+                      alt="dropdown arrow"
+                      className="filter invert brightness-0 saturate-0 contrast-[2000%]"
+                    />
+                  </span>
+
+                  {errors.findUs && (
+                    <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
+                      {errors.findUs.message}
+                    </p>
+                  )}
+                </motion.div>
+                <motion.div
+                  variants={moveUp(0.8)}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true, amount: 0.2 }}
+                  className="w-full lg:w-1/2 relative"
+                >
+                  <select
+                    {...register("findUs")}
+                    className="w-full border-b border-white py-[23px] pr-10 focus:outline-none text-white text-sm font-light appearance-none"
+                  >
+                    <option value="" className="bg-black">
+                      {isArabic ? "من أين وجدتنا؟" : "How did you hear about us?"}
                     </option>
                     <option value="instagram" className="bg-black ">
                     {isArabic ? "إنستغرام" : "Instagram"}
@@ -304,6 +345,45 @@ const RegisterInterest = forwardRef<HTMLDivElement, RegisterInterestProps>(
                           {grade}
                         </option>
                       ))}
+                  </select>
+                  {/* Custom arrow icon */}
+                  <span className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none">
+                    <Image
+                      src="/images/arrow-down.svg"
+                      width={24}
+                      height={24}
+                      alt="dropdown arrow"
+                      className="filter invert brightness-0 saturate-0 contrast-[2000%]"
+                    />
+                  </span>
+
+                  {errors.selectGrade && (
+                    <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
+                      {errors.selectGrade.message}
+                    </p>
+                  )}
+                </motion.div>
+                <motion.div
+                  variants={moveUp(1.2)}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true, amount: 0.2 }}
+                  className="relative w-full lg:w-1/2"
+                >
+                  <select
+                    {...register("selectGrade")}
+                    className="w-full border-b border-white py-[23px] pr-10 focus:outline-none text-white text-sm font-light appearance-none"
+                  >
+                    <option value="" className="bg-black">
+                      {isArabic ? "سنة التسجيل" : "Enrollment Year"}
+                    </option>
+                   
+                    <option value="2025/2026" className="bg-black ">
+                      {isArabic ? "2025/2026" : "2025/2026"}
+                    </option>
+                    <option value="2026/2027" className="bg-black ">
+                      {isArabic ? "2026/2027" : "2026/2027"}
+                    </option>
                   </select>
                   {/* Custom arrow icon */}
                   <span className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none">

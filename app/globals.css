@@ -1,7 +1,7 @@
 /* @import "tailwindcss/theme";
 @import "tailwindcss/preflight";
 @import "tailwindcss/utilities"; */
-@import "tailwindcss"; 
+@import "tailwindcss";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
@@ -71,7 +71,7 @@
   --color-colorpara: var(--colorpara);
   --color-acc: var(--acc-clr);
   --color-bdrcolor: var(--bdrcolor);
-  --color-colorp: var(--colorp); 
+  --color-colorp: var(--colorp);
   --breakpoint-2xl: 96.875rem;
   --text-4xl: var(--text-4xl);
   --text-3xl: var(--text-3xl);
@@ -118,9 +118,9 @@
 
 body {
   font-family: var(--font-sans)
-  
 }
-h2{
+
+h2 {
   letter-spacing: -4px;
 }
 
@@ -787,8 +787,8 @@ h2{
 
 @media screen and (min-width: 1300px) {
 
-  h1,h2
-  h2.text-xl {
+  h1,
+  h2 h2.text-xl {
     letter-spacing: -4px;
   }
 
@@ -976,7 +976,8 @@ h2{
   padding: 0;
 }
 
-.school-leadership-bullets ol li , .school-leadership-bullets ul li {
+.school-leadership-bullets ol li,
+.school-leadership-bullets ul li {
   display: flex;
   align-items: start;
   gap: 8px;
@@ -1018,6 +1019,7 @@ h2{
   background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='15' height='15' viewBox='0 0 15 15' fill='none'><path d='M8.99121 3.7063L12.7731 7.50005L8.99121 11.2938' stroke='%23292D32' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round'/><path d='M2.18066 7.5H12.6666' stroke='%23292D32' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round'/></svg>") no-repeat center;
   background-size: contain;
 }
+
 html[dir="rtl"] .school-leadership-bullets li::before {
   transform: scaleX(-1);
 }
@@ -1173,7 +1175,7 @@ html[dir="rtl"] {
 .react-select__dropdown-indicator svg {
   width: 32px;
   height: 32px;
-    transform: scale(1.15);
+  transform: scale(1.15);
 }
 
 /* Mobile / small screens */
@@ -1184,9 +1186,13 @@ html[dir="rtl"] {
   }
 }
 
-.grd-school{
+.grd-school {
   background: linear-gradient(90deg,
-        rgba(66, 186, 220, 1) 0%,
-        rgba(120, 150, 200, 0.6) 55%,
-        rgba(126, 90, 163, 0.1) 100%);
+      rgba(66, 186, 220, 1) 0%,
+      rgba(120, 150, 200, 0.6) 55%,
+      rgba(126, 90, 163, 0.1) 100%);
+}
+
+.blog-content h2 {
+  @apply !tracking-normal;
 }
