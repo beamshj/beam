@@ -18,7 +18,7 @@ const Comments = ({ data }: { data: TestimonialsProps["firstSection"] }) => {
   const isArabic = useIsPreferredLanguageArabic()
 
   return (
-    <section className="pt-8 md:pt-12 lg:pt-20 2xl:pt-[135px] pb-10 md:pb-10 lg:pb-10 2xl:pb-[40px] overflow-hidden ">
+    <section className="pt-8 md:pt-12 lg:pt-20 2xl:pt-[135px] pb-10 md:pb-10 lg:pb-10 2xl:pb-[40px] overflow-x-hidden">
       <div className="container">
         <div>
           <div>
@@ -52,18 +52,8 @@ const Comments = ({ data }: { data: TestimonialsProps["firstSection"] }) => {
           </div>
           <div className="relative">
             <div className={`absolute -top-10 ${isArabic ? "left-0" : "right-0"} flex gap-3 z-10`}>
-              <button
-                className="swiper-button-prev-custom transition cursor-pointer group"
-                aria-label="Previous"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  className="overflow-visible"
-                >
+              <button className="swiper-button-prev-custom transition cursor-pointer group" aria-label="Previous" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" className="overflow-visible" >
                   <path
                     d={isArabic ? "M14.43 5.92993L20.5 11.9999L14.43 18.0699" : "M9.57031 5.92993L3.50031 11.9999L9.57031 18.0699"}
                     stroke="#D3D3D3"
@@ -84,10 +74,7 @@ const Comments = ({ data }: { data: TestimonialsProps["firstSection"] }) => {
                 </svg>
               </button>
 
-              <button
-                className="swiper-button-next-custom transition cursor-pointer group"
-                aria-label="Next"
-              >
+              <button className="swiper-button-next-custom transition cursor-pointer group" aria-label="Next" >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -117,13 +104,13 @@ const Comments = ({ data }: { data: TestimonialsProps["firstSection"] }) => {
             </div>
           </div>
           <div className="">
-            <div className="relative testimonialslider">
+            <div className="relative testimonialslider overflow-visible">
               <Swiper
                 spaceBetween={10}
                 slidesPerView={1}
                 breakpoints={{
                   768: { slidesPerView: 1 },
-                  1024: { slidesPerView: 1.7 },
+                  1024: { slidesPerView: 1.7,spaceBetween: 33 },
                 }}
                 navigation={{
                   nextEl: ".swiper-button-next-custom",
@@ -187,7 +174,7 @@ const Comments = ({ data }: { data: TestimonialsProps["firstSection"] }) => {
                   </SwiperSlide>
                 ))}
               </Swiper>
-              <div className="commentpagination rounded-2xl swiper-pagination-custom absolute !-bottom-8 !left-[50%] !translate-x-[-50%]  !w-fit !m-auto bg-[#D3D3D3] flex justify-center gap-0"></div>
+              <div className="commentpagination rounded-2xl swiper-pagination-custom absolute z-50 !-bottom-12 !left-[52%] !translate-x-[-52%]  !w-fit !m-auto bg-[#D3D3D3] 2xl:min-w-[280px] max-w-[280px] flex justify-center gap-0"></div>
             </div>
           </div>
         </div>

@@ -18,7 +18,7 @@ const Index = ({data}: {data: ScholarshipProps}) => {
       <FutureFocus data={data.firstSection}/> 
       <WeOffer data={data.secondSection}/> 
       <SelectionCriteria data={data.thirdSection}/> 
-      <OurLegacy data={data.fourthSection}/> 
+      {/* <OurLegacy data={data.fourthSection}/>  */}
       <ApplyBeam data={data.fifthSection}/>
     </>
   );

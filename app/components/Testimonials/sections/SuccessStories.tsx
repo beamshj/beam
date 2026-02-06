@@ -27,9 +27,9 @@ const SuccessStories = ({
   return (
     <section className="pt-14 pb-8 md:py-20 lg:py-20 2xl:py-[135px]">
       <div className="container relative">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6 md:gap-y-0 md:gap-x-10 xl:gap-x-18 items-center">
-          <div>
-            <div className="storyslide">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6 md:gap-y-0 md:gap-x-10 xl:gap-x-18">
+          <div className="h-[250px] md:h-[400px] ">
+            <div className="storyslide h-full ">
               <Swiper
                 spaceBetween={20}
                 slidesPerView={1}
@@ -50,27 +50,21 @@ const SuccessStories = ({
                   setIsBeginning(swiper.isBeginning);
                   setIsEnd(swiper.isEnd);
                 }}
+                className="h-full"
               >
                 {t.items.map((video, index) => {
                   const isPlaying = activeVideoIndex === index;
 
                   return (
-                    <SwiperSlide key={index} className="flex items-stretch">
+                    <SwiperSlide key={index} className="flex items-stretch h-full">
                       <motion.div
                         variants={moveUp(index * 0.2)}
                         initial="hidden"
                         whileInView="show"
                         viewport={{ amount: 0.1, once: true }}
-                        className="relative w-full h-[250px] md:h-[480px] rounded-[12px] overflow-hidden flex-grow"
+                        className="relative w-full h-full rounded-[12px] overflow-hidden flex-grow"
                       >
-                        <Image
-                          src={video.poster}
-                          alt={video.poster}
-                          fill
-                          className={`object-cover transition-all duration-500 ${
-                            isPlaying ? "blur-sm" : ""
-                          }`}
-                        />
+                        <Image src={video.poster} alt={video.poster} fill className={`object-cover transition-all duration-500 h-full ${isPlaying ? "blur-sm" : "" }`} />
                         <motion.div
                           className="absolute bottom-0 w-full h-full rounded-xl bg-[linear-gradient(0deg,rgba(0,0,0,0.2),rgba(0,0,0,0.2)),linear-gradient(180deg,rgba(0,0,0,0),rgba(126,90,163,0.6))]"
                           initial={{ y: "100%" }}
@@ -85,12 +79,7 @@ const SuccessStories = ({
                             className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer z-10"
                             onClick={() => setActiveVideoIndex(index)}
                           >
-                            <Image
-                              src="/images/testimonials/play.svg"
-                              alt="Play"
-                              width={90}
-                              height={90}
-                            />
+                            <Image src="/images/testimonials/play.svg" alt="Play" width={90} height={90} />
                           </motion.div>
                         )}
                         {isPlaying && (
@@ -131,76 +120,70 @@ const SuccessStories = ({
             </motion.p>
           </div>
 
-          {/* Navigation Buttons */}
-          <div className="flex gap-4 md:mt-8">
-            <button
-              className={`swiper-button-prev-story transition cursor-pointer group ${
-                isBeginning
-                  ? "opacity-50 cursor-not-allowed pointer-events-none"
-                  : ""
+        </div>
+        {/* Navigation Buttons */}
+        <div className="flex gap-4 md:mt-8">
+          <button
+            className={`swiper-button-prev-story transition cursor-pointer group ${isBeginning
+              ? "opacity-50 cursor-not-allowed pointer-events-none"
+              : ""
               }`}
-              aria-label="Previous"
+            aria-label="Previous"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              className="overflow-visible"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                className="overflow-visible"
-              >
-                <path
-                  d={isArabic ? "M14.43 5.92993L20.5 11.9999L14.43 18.0699" : "M9.57031 5.92993L3.50031 11.9999L9.57031 18.0699"}
-                  stroke="#D3D3D3"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="transition-all duration-300 group-hover:stroke-[#23ABD2]"
-                />
-                <path
-                  d="M20.5 12H3.67"
-                  stroke="#D3D3D3"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className={`${isArabic ? "origin-right" : "origin-left"} transition-transform duration-500 group-hover:scale-x-[1.5] group-hover:stroke-[#23ABD2]`}
-                />
-              </svg>
-            </button>
+              <path
+                d={isArabic ? "M14.43 5.92993L20.5 11.9999L14.43 18.0699" : "M9.57031 5.92993L3.50031 11.9999L9.57031 18.0699"}
+                stroke="#D3D3D3"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="transition-all duration-300 group-hover:stroke-[#23ABD2]"
+              />
+              <path
+                d="M20.5 12H3.67"
+                stroke="#D3D3D3"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className={`${isArabic ? "origin-right" : "origin-left"} transition-transform duration-500 group-hover:scale-x-[1.5] group-hover:stroke-[#23ABD2]`}
+              />
+            </svg>
+          </button>
 
-            <button
-              className={`swiper-button-next-story transition cursor-pointer group ${
-                isEnd ? "opacity-50 cursor-not-allowed pointer-events-none" : ""
-              }`}
-              aria-label="Next"
+          <button className={`swiper-button-next-story transition cursor-pointer group ${isEnd ? "opacity-50 cursor-not-allowed pointer-events-none" : ""}`} aria-label="Next" >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              className="overflow-visible"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                className="overflow-visible"
-              >
-                <path
-                  d={isArabic ? "M9.57031 5.92993L3.50031 11.9999L9.57031 18.0699" : "M14.43 5.92993L20.5 11.9999L14.43 18.0699"}
-                  stroke="#D3D3D3"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="transition-all duration-300 group-hover:stroke-[#23ABD2]"
-                />
-                <path
-                  d="M3.5 12H20.33"
-                  stroke="#D3D3D3"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className={`${isArabic ? "origin-left" : "origin-right"} transition-transform duration-500 group-hover:scale-x-[1.5] group-hover:stroke-[#23ABD2]`}
-                />
-              </svg>
-            </button>
-          </div>
+              <path
+                d={isArabic ? "M9.57031 5.92993L3.50031 11.9999L9.57031 18.0699" : "M14.43 5.92993L20.5 11.9999L14.43 18.0699"}
+                stroke="#D3D3D3"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="transition-all duration-300 group-hover:stroke-[#23ABD2]"
+              />
+              <path
+                d="M3.5 12H20.33"
+                stroke="#D3D3D3"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className={`${isArabic ? "origin-left" : "origin-right"} transition-transform duration-500 group-hover:scale-x-[1.5] group-hover:stroke-[#23ABD2]`}
+              />
+            </svg>
+          </button>
         </div>
 
         <div className="pt-6 md:pt-12 lg:pt-18 2xl:pt-[95px] w-full md:absolute border-b border-[#D3D3D3]" />

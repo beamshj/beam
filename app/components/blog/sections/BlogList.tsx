@@ -45,13 +45,7 @@ export default function BlogList({
       <div className="container">
         {/* Header */}
         <div className="w-full flex justify-between items-center border-b border-bdrcolor mb-5 xl:mb-[30px] 2xl:mb-[50px]">
-          <motion.h1
-            variants={moveUp(0.2)}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
-            className="text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl lg:leading-[1.111] font-light mb-3 xl:mb-[30px] 2xl:mb-[50px] text-black"
-          >
+          <motion.h1 variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl lg:leading-[1.111] font-light mb-3 xl:mb-[30px] 2xl:mb-[50px] text-black" >
             {isArabic ? "مدونة" : "Blog"}
           </motion.h1>
         </div>
@@ -61,13 +55,7 @@ export default function BlogList({
           {currentBlogs.map((blog, index) => (
             <div key={index}>
               <LangLink href={`/news-&-media/blog/blog-details/${blog.slug}`}>
-                <motion.div
-                  variants={moveUp(index * 0.1)}
-                  initial="hidden"
-                  whileInView="show"
-                  viewport={{ once: true, amount: 0.2 }}
-                  className="rounded-[12px] relative overflow-hidden h-full xl:h-[495px] border border-bdrcolor flex flex-col group"
-                >
+                <motion.div variants={moveUp(index * 0.09)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="rounded-[12px] relative overflow-hidden h-full xl:h-[495px] border border-bdrcolor flex flex-col group" >
                   {/* Sliding Gradient from bottom */}
                   <div className="absolute inset-0 -z-10 overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-t from-[#E2F5FF] to-white transform translate-y-full opacity-0 transition-all duration-700 ease-out group-hover:translate-y-0 group-hover:opacity-100" />
@@ -128,11 +116,7 @@ export default function BlogList({
         </div>
 
         {/* Pagination */}
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={setCurrentPage}
-        />
+        <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
       </div>
     </section>
   );
