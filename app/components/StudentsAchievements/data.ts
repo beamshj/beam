@@ -10,7 +10,6 @@ export const StudentsData = {
     pageTitle: "Students' Achievements",
   },
   MainData: {
-    title: "Celebrating Our Students' Achievements",
     description: "At Beam Schools, we take immense pride in the accomplishments of our students. From academic excellence to extracurricular triumphs, our students consistently demonstrate their dedication and talent. We celebrate their achievements as a testament to the supportive and nurturing environment we provide.",
     mainImg: "/assets/images/students-achievements/main-img.jpg",
     subData: {

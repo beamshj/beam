@@ -10,7 +10,6 @@ export const StudentsData = {
     pageTitle: "Students' Achievements",
   },
   MainData: {
-    title: "إنجازات طلابنا",
     description: "تولي مدارس الإبداع العلمي التابعة لمؤسسة بوخاطر لإدارة وتطوير التعليم أهمية للتنشئة المتكاملة للطلاب، مع الحرص على التميز الدراسي ضمن أساس قيمي متين، في سبيل تنشئة جيل ناجح ومزدهر محليا ودوليا.",
     mainImg: "/assets/images/students-achievements/main-img.jpg",
     subData: {
