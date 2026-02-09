@@ -94,7 +94,7 @@ const MessageSection = ({ data }: { data: HomeProps["sixthSection"] }) => {
                 variants={fadeTop}
               >
                 <div>
-                  <SplitText
+                  {/* <SplitText
                     tag="h2"
                     text={t.subTitle}
                     className="text-xl xl:text-2xl 2xl:text-4xl text-black leading-[1.2] xl:leading-[1.1] font-light 2xl:max-w-[82%] lettersp-4"
@@ -107,8 +107,9 @@ const MessageSection = ({ data }: { data: HomeProps["sixthSection"] }) => {
                     threshold={0.1}
                     rootMargin="-100px"
                     textAlign={isArabic ? "right" : "left"}
-                  />
-                  {/* <H2Title titleText={t.subTitle} textAlign={isArabic ? "text-right" : "text-left"} maxWidth={isArabic ? "100%" : "150px"} /> */}
+                  /> */}
+                  <H2Title titleText={t.subTitle} textAlign={isArabic ? "text-right" : "text-left"} maxWidth={isArabic ? "100%" : "11ch"} />
+                  {/* <H2Title titleText={t.subTitle} textAlign={isArabic ? "text-right" : "text-left"} maxWidth="11ch" /> */}
                 </div>
               </motion.div>
 
