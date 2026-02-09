@@ -31,7 +31,7 @@ const almarai = Almarai({
 
 
 export const metadata: Metadata = {
-  manifest: '/manifest.json',
+  // manifest: '/manifest.json',
   title: "BEAM | Lighting The Way",
   description: "",
 };

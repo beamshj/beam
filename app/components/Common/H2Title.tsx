@@ -106,7 +106,7 @@ const H2Title = ({
     <h2
       ref={titleRef}
       className={`sbt-fz font-light leading-[1.111111111111111] ${titleColor || "text-black"} ${textAlign || "text-left"} 
-      ${maxWidth ? `max-w-[${maxWidth}]` : ""} lettersp-4`}
+       lettersp-4`} style={{ maxWidth: maxWidth }}
     >
       {titleText}
     </h2>
