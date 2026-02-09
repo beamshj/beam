@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState } from "react";
 import { academicCulturalData } from "@/app/data/AcademicCultural";
 import Image from "next/image";
@@ -10,7 +11,7 @@ import {
   fadeUp,
   // fadeInRight,
 } from "@/public/assets/FramerAnimation/animation";
-import SplitText from "@/components/SplitText";
+// import SplitText from "@/components/SplitText";
 import { moveLeft } from "../../motionVarients";
 import { useRef, useEffect } from "react";
 import gsap from "gsap";
@@ -19,6 +20,7 @@ import { HomeProps } from "../type";
 import { acdData } from "../data";
 import { useApplyLang } from "@/lib/applyLang";
 import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
+import H2Title from "../../Common/H2Title";
 gsap.registerPlugin(ScrollTrigger);
 
 const AcademicCultural = ({ data }: { data: HomeProps["thirdSection"] }) => {
@@ -62,7 +64,7 @@ const AcademicCultural = ({ data }: { data: HomeProps["thirdSection"] }) => {
           <div>
             {/* Heading */}
 
-            <SplitText
+            {/* <SplitText
               tag="h2"
               text={t.title}
               className={`text-lg md:text-xl xl:text-2xl 2xl:text-3xl font-light leading-tight text-black max-w-[13ch] lettersp-4 `}
@@ -75,8 +77,8 @@ const AcademicCultural = ({ data }: { data: HomeProps["thirdSection"] }) => {
               threshold={0.1}
               rootMargin="-100px"
               textAlign={isArabic ? "right" : "left"}
-            />
-
+            /> */}
+            <H2Title titleText={t.title} textAlign={isArabic ? "text-right" : "text-left"} maxWidth="13ch" />
             {/* Description */}
             <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }} className="mt-5 md:mt-6 2xl:mt-[43px] mb-5 md:mb-7 2xl:mb-[93px]" >
               <p className="text-sm font-light text-colorpara md:max-w-[68ch] 2xl:max-w-[82ch]" dangerouslySetInnerHTML={{ __html: t.description }} />

@@ -106,6 +106,11 @@ export const mainMenuItems = [
         href: "/beam-schools/school-achievements",
       },
       {
+        name: "Students’ Achievements",
+        name_ar: "إنجازات الطلاب",
+        href: "/beam-schools/students-achievements",
+      },
+      {
         name: "Accreditation & Affiliation",
         name_ar: "الشراكات والاعتمادات",
         href: "/beam-schools/accrediation-and-affiliation",

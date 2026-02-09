@@ -172,7 +172,7 @@ const Footer = () => {
                   </Link>
                   <Link
                     target="_blank"
-                    href="https://www.instagram.com/accounts/login/?next=%2Fbeamedusocial%2F&source=omni_redirect"
+                    href="https://www.instagram.com/beamedusocial/"
                   >
                     <motion.div
                       variants={fadeUponeone}
@@ -218,6 +218,14 @@ const Footer = () => {
                   >
                     <span className={`block transition-transform duration-300 group-hover:${isArabic ? "-translate-x-1" : "translate-x-1"}`}>
                       {isArabic ? "مدارسنا" : "Our Schools"}
+                    </span>
+                  </Link>
+                  <Link
+                    href="/beam-schools/students-achievements"
+                    className="group relative overflow-hidden hover:text-primary"
+                  >
+                    <span className={`block transition-transform duration-300 group-hover:${isArabic ? "-translate-x-1" : "translate-x-1"}`}>
+                      {isArabic ? "إنجازات الطلاب" : "Students’ Achievements"}
                     </span>
                   </Link>
                   <Link

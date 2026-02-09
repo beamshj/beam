@@ -21,6 +21,7 @@ import { HomeProps } from "../type";
 import { iconanimated } from "../data";
 import { useApplyLang } from "@/lib/applyLang";
 import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
+import H2Title from "../../Common/H2Title";
 gsap.registerPlugin(ScrollTrigger);
 
 const DiverseGrowing = ({ data }: { data: HomeProps['fifthSection'] }) => {
@@ -111,7 +112,7 @@ const DiverseGrowing = ({ data }: { data: HomeProps['fifthSection'] }) => {
       <div className="relative pb-0 lg:pb-12 xl:pb-[150px] max-w-[1920px] mx-auto overflow-hidden">
         <div className="container">
           <div>
-            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }}  >
+            {/* <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }}  >
               <SplitText
                 tag="h2"
                 text={t.title}
@@ -126,7 +127,8 @@ const DiverseGrowing = ({ data }: { data: HomeProps['fifthSection'] }) => {
                 rootMargin="-100px"
                 textAlign={isArabic ? "right" : "left"}
               />
-            </motion.div>
+            </motion.div> */}
+            <H2Title titleText={t.title} textAlign={isArabic ? "text-right" : "text-left"} maxWidth="20ch" />
             <div className="2xl:w-4/5 ml-auto mt-8 lg:mt-[140px] xl:mt-[64px] relative">
               <div>
                 <div className="flex flex-col gap-5 lg:gap-0 xl:w-[80%] 2xl:w-fit m-auto xl:ml-auto mr-0 2xl:m-auto">

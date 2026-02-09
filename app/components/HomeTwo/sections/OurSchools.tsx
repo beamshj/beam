@@ -11,7 +11,7 @@ import "swiper/css/pagination";
 import { useScroll, useTransform, motion, useSpring } from "framer-motion";
 // Optional: Add modules if needed
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
-import SplitText from "@/components/SplitText";
+// import SplitText from "@/components/SplitText";
 import {
   fadeUp,
   // cardVariants,
