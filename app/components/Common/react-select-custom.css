@@ -46,7 +46,7 @@
 
 .custom-select__menu {
   background-color: black !important;
-  /* border: 1px solid white !important; */
+  border: none!important;
   margin-top: 4px !important;
 }
 
