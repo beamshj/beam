@@ -1,0 +1,22 @@
+.explr-slider {
+  .swiper-pagination {
+    text-align: center;
+  }
+
+  .swiper-pagination-bullet {
+    background: #d3d3d3;
+    border-radius: 0;
+    width: 60px;
+    height: 3px;
+    margin: 0 !important;
+    overflow: hidden;
+    @media (min-width: 1400px) {
+      min-width: 140px;
+    }
+  }
+
+  .swiper-pagination-bullet-active {
+    background: #42badc;
+    border-radius: 2px;
+  }
+}

@@ -58,10 +58,7 @@ export default function MoreToExplore({
             />
           </h2>
         </div>
-        <div
-          style={{ paddingLeft: `${isArabic ? 0 : leftOffset}px`, paddingRight: `${isArabic ? leftOffset : 0}px` }}
-          className="pr-3 sm:pr-0"
-        >
+        <div style={{ paddingLeft: `${isArabic ? 0 : leftOffset}px`, paddingRight: `${isArabic ? leftOffset : 0}px` }} className="pr-3 sm:pr-0" >
           <Swiper
             slidesPerView={1}
             spaceBetween={11}
@@ -74,7 +71,8 @@ export default function MoreToExplore({
               1024: { slidesPerView: 3.9 },
             }}
             modules={[Pagination]}
-            className="!pb-[60px]"
+            className="explr-slider !pb-[60px]"
+
           >
             {t.items.map((card, idx) => (
               <SwiperSlide key={idx}>
@@ -84,7 +82,7 @@ export default function MoreToExplore({
                     initial="hidden"
                     animate="show"
                     viewport={{ once: false, amount: 0.7 }}
-                    className="relative group h-[350px] 2xl:h-[468px] sm:max-w-[428px] overflow-hidden cursor-pointer rounded-[12px]"
+                    className="relative group h-[350px] 2xl:h-[468px]  w-full !mr-0 overflow-hidden cursor-pointer rounded-[12px]"
                   >
                     <Image src={card.image} alt={card.title} layout="fill" objectFit="cover" className="transition-transform rounded-[12px] duration-300 scale-100 group-hover:scale-105 object-cover object-top" />
                     {/* Gradient overlay at bottom */}
@@ -114,19 +112,7 @@ export default function MoreToExplore({
           </Swiper>
           {/* Custom pagination styling (globally apply) */}
           <style jsx global>{`
-            .swiper-pagination {
-              text-align: center;
-            }
-            .swiper-pagination-bullet {
-              background: #d3d3d3;
-              border-radius: 0;
-              width: 60px;
-              height: 3px;
-              margin: 0 !important;
-            }
-            .swiper-pagination-bullet-active {
-              background: #42badc;
-            }
+            
           `}</style>
         </div>
       </div>

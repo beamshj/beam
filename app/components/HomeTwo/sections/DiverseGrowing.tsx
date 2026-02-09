@@ -127,7 +127,7 @@ const DiverseGrowing = ({ data }: { data: HomeProps['fifthSection'] }) => {
                 textAlign={isArabic ? "right" : "left"}
               />
             </motion.div>
-            <div className="2xl:w-4/5 ml-auto mt-8 lg:mt-[140px]  xl:mt-[64px] relative">
+            <div className="2xl:w-4/5 ml-auto mt-8 lg:mt-[140px] xl:mt-[64px] relative">
               <div>
                 <div className="flex flex-col gap-5 lg:gap-0 xl:w-[80%] 2xl:w-fit m-auto xl:ml-auto mr-0 2xl:m-auto">
                   <div

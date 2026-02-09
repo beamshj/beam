@@ -33,6 +33,7 @@ import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 import { HomeProps } from "../type";
 import { ChevronDown } from "lucide-react"; // or any icon you prefer
 import { components } from "react-select";
+import H2Title from "../../Common/H2Title";
 
 const DropdownIndicator = (props: any) => {
   return (
@@ -201,15 +202,10 @@ const OurSchools = ({
 
   return (
     <section className="py-8 xl:pt-20 xl:pb-25 2xl:pt-[133px] 2xl:pb-[160px]">
-      <motion.div
-        variants={fadeUp}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0 }}
-      >
+      <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0 }} >
         <div className="container">
           <div className="mb-5 xl:mb-7 2xl:mb-[53px]">
-            <SplitText
+            {/* <SplitText
               tag="h2"
               text={tData.title}
               className="text-xl md:text-2xl xl:text-3xl 2xl:text-4xl font-light leading-[1.111111111111111] text-black lettersp-4"
@@ -222,7 +218,8 @@ const OurSchools = ({
               threshold={0} // 50% of element must be visible
               rootMargin="0"
               textAlign="left"
-            />
+            /> */}
+            <H2Title titleText={tData.title} />
           </div>
           <div className="pb-5 md:pb-7 border-b border-bdrcolor">
             <div className="flex-col md:flex-row flex justify-start md:justify-between items-start md:items-center gap-4 md:gap-0">
