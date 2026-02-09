@@ -5,7 +5,7 @@ import SplitText from "@/components/SplitText";
 import { AnimatePresence, motion, Variants } from "framer-motion";
 import { moveUp } from "../../motionVarients";
 import { BlogType } from "../../blog/type";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { getReadingTimeFromHTML } from "@/app/(user)/utils/getReadingTime";
 import Link from "next/link";
 import {
@@ -32,8 +32,12 @@ const NewsArea = ({
 }) => {
     const t = useApplyLang(data);
     const hasArabic = useIsPreferredLanguageArabic();
+
+    /* ---------------- Client-only state ---------------- */
+    const [sanitizedContent, setSanitizedContent] = useState("");
+    const [shareUrl, setShareUrl] = useState("");
+    const [isDesktop, setIsDesktop] = useState(false);
     const [showIcons, setShowIcons] = useState(false);
-    const shareUrl = typeof window !== "undefined" ? window.location.href : "";
 
     /* ---------------- Animation variants (simplified) ---------------- */
     const containerVariants: Variants = {
@@ -42,16 +46,11 @@ const NewsArea = ({
             opacity: 1,
             transition: { staggerChildren: 0.15 },
         },
-        exit: {
-            opacity: 0,
-            transition: { staggerChildren: 0.1 },
-        },
     };
 
     const itemVariants: Variants = {
         hidden: { opacity: 0, y: -10 },
         visible: { opacity: 1, y: 0 },
-        exit: { opacity: 0, y: -10 },
     };
 
     /* ---------------- Reading time (memoized) ---------------- */
@@ -59,9 +58,21 @@ const NewsArea = ({
         return getReadingTimeFromHTML(t.content, hasArabic);
     }, [t.content, hasArabic]);
 
-    /* ---------------- Sanitized HTML (memoized - NO side effects) ---------------- */
-    const sanitizedContent = useMemo(() => {
-        if (!t.content) return "";
+    /* ---------------- Share buttons config (memoized) ---------------- */
+    const shareButtons = useMemo(
+        () => [
+            { Component: EmailShareButton, Icon: EmailIcon },
+            { Component: FacebookShareButton, Icon: FacebookIcon },
+            { Component: TwitterShareButton, Icon: XIcon },
+            { Component: LinkedinShareButton, Icon: LinkedinIcon },
+            { Component: WhatsappShareButton, Icon: WhatsappIcon },
+        ],
+        []
+    );
+
+    /* ---------------- FIX #1: Safe HTML sanitization in useEffect ---------------- */
+    useEffect(() => {
+        if (!t.content) return;
 
         // Create temporary DOM element for manipulation
         const temp = document.createElement("div");
@@ -97,20 +108,25 @@ const NewsArea = ({
             }
         });
 
-        return temp.innerHTML;
+        setSanitizedContent(temp.innerHTML);
     }, [t.content]);
 
-    /* ---------------- Share buttons config ---------------- */
-    const shareButtons = useMemo(
-        () => [
-            { Component: EmailShareButton, Icon: EmailIcon },
-            { Component: FacebookShareButton, Icon: FacebookIcon },
-            { Component: TwitterShareButton, Icon: XIcon },
-            { Component: LinkedinShareButton, Icon: LinkedinIcon },
-            { Component: WhatsappShareButton, Icon: WhatsappIcon },
-        ],
-        []
-    );
+    /* ---------------- FIX #3 & #4: Client-only initialization ---------------- */
+    useEffect(() => {
+        // Set share URL
+        setShareUrl(window.location.href);
+
+        // Check viewport width
+        const checkViewport = () => {
+            setIsDesktop(window.innerWidth > 824);
+        };
+
+        checkViewport();
+
+        // Optional: Update on resize
+        window.addEventListener("resize", checkViewport);
+        return () => window.removeEventListener("resize", checkViewport);
+    }, []);
 
     /* ---------------- Render ---------------- */
     return (
@@ -143,84 +159,78 @@ const NewsArea = ({
                             from={{ opacity: 0, y: 30 }}
                             to={{ opacity: 1, y: 0 }}
                             threshold={0.1}
-                            rootMargin="-50px"
+                            rootMargin="0px"
                             textAlign={hasArabic ? "right" : "left"}
                         />
                     </div>
 
-                    {/* Reading time + Share */}
+                    {/* FIX #2: Reading time + Share - Proper HTML structure */}
                     <motion.div
                         variants={moveUp(0.15)}
                         initial="hidden"
-                        whileInView="show"
+                        animate="show"
                         viewport={{ amount: 0.1, once: true }}
                         className="w-full flex justify-end gap-10"
                     >
-                        <li className="text-black text-sm font-light list-disc">
-                            {readingTime}{" "}
-                            {hasArabic ? "قراءة دقيقة" : "mins read"}
-                        </li>
+                        {/* Properly wrapped list item */}
+                        <ul className="list-disc list-inside">
+                            <li className="text-black text-sm font-light">
+                                {readingTime}{" "}
+                                {hasArabic ? "قراءة دقيقة" : "mins read"}
+                            </li>
+                        </ul>
 
-                        {typeof window !== "undefined" &&
-                            window.innerWidth > 824 && (
-                                <div className="relative">
-                                    <AnimatePresence>
-                                        {showIcons && (
-                                            <motion.div
-                                                className="flex gap-3 md:mt-2 relative bottom-2 md:absolute mb-5 -right-1"
-                                                variants={containerVariants}
-                                                initial="hidden"
-                                                animate="visible"
-                                                exit="exit"
-                                            >
-                                                {shareButtons.map(
-                                                    (
-                                                        { Component, Icon },
-                                                        index
-                                                    ) => (
-                                                        <motion.div
-                                                            key={index}
-                                                            variants={
-                                                                itemVariants
-                                                            }
-                                                        >
-                                                            <Component
-                                                                url={shareUrl}
-                                                            >
-                                                                <Icon
-                                                                    size={32}
-                                                                    round
-                                                                    bgStyle={{
-                                                                        fill: "none",
-                                                                    }}
-                                                                />
-                                                            </Component>
-                                                        </motion.div>
-                                                    )
-                                                )}
-                                            </motion.div>
-                                        )}
-                                    </AnimatePresence>
+                        {/* Desktop-only share buttons - no hydration mismatch */}
+                        {isDesktop && (
+                            <div className="relative">
+                                <AnimatePresence>
+                                    {showIcons && (
+                                        <motion.div
+                                            className="flex gap-3 md:mt-2 relative bottom-2 md:absolute mb-5 -right-1"
+                                            variants={containerVariants}
+                                            initial="hidden"
+                                            animate="visible"
+                                            exit="hidden"
+                                        >
+                                            {shareButtons.map(
+                                                ({ Component, Icon }, index) => (
+                                                    <motion.div
+                                                        key={index}
+                                                        variants={itemVariants}
+                                                    >
+                                                        <Component url={shareUrl}>
+                                                            <Icon
+                                                                size={32}
+                                                                round
+                                                                bgStyle={{
+                                                                    fill: "none",
+                                                                }}
+                                                            />
+                                                        </Component>
+                                                    </motion.div>
+                                                )
+                                            )}
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
 
-                                    <Image
-                                        src="/images/newsdetails/share.svg"
-                                        alt="Share"
-                                        width={19}
-                                        height={22}
-                                        className="cursor-pointer"
-                                        onClick={() =>
-                                            setShowIcons((prev) => !prev)
-                                        }
-                                    />
-                                </div>
-                            )}
+                                <Image
+                                    src="/images/newsdetails/share.svg"
+                                    alt="Share"
+                                    width={19}
+                                    height={22}
+                                    className="cursor-pointer"
+                                    onClick={() => setShowIcons((prev) => !prev)}
+                                />
+                            </div>
+                        )}
                     </motion.div>
 
                     {/* Hero Image - Priority loading, faster animation */}
                     <motion.div
                         variants={moveUp(0.1)}
                         initial="hidden"
-                        whileInView="show"
+                        animate="show"
                         viewport={{ amount: 0.1, once: true }}
                         className="py-4 md:py-6 xl:py-8"
                     >
@@ -234,11 +244,10 @@ const NewsArea = ({
                         />
                     </motion.div>
 
-                    {/* Blog content - Renders immediately with sanitized HTML */}
-                    <div
-                        className="blog-content"
-                        dangerouslySetInnerHTML={{ __html: sanitizedContent }}
-                    />
+                    {/* Blog content - Renders after sanitization */}
+                    {sanitizedContent && (
+                        <div className="blog-content" dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
+                    )}
                 </div>
 
                 <div className="pt-8 md:pt-12 lg:pt-20 2xl:pt-[135px]">

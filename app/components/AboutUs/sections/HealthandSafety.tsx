@@ -21,7 +21,7 @@ export default function HealthSafety({
   return (
     <section>
       <div className="container">
-            <h2 className="text-lg lg:text-xl xl:text-3xl 2xl:text-4xl font-light text-black mb-3 xl:mb-10 2xl:mb-[50px]">
+            <h2 className="text-lg lg:text-xl xl:text-2xl 2xl:text-4xl font-light text-black mb-3 xl:mb-10 2xl:mb-[50px]">
               <SplitText
                 tag="span"
                 text={t.title}
@@ -86,8 +86,8 @@ export default function HealthSafety({
           </div>
 
           {/* RIGHT COLUMN */}
-          <motion.div variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="relative justify-center  hidden xl:flex" >
-            <div className="relative w-full h-[400px] md:h-[500px] xl:h-[600px] 2xl:h-full rounded-[12px] overflow-hidden">
+          <motion.div variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="relative  hidden xl:flex" >
+            <div className="relative w-full h-[400px] md:h-[500px] xl:h-full 2xl:h-full rounded-[12px] overflow-hidden">
               <AnimatePresence mode="wait">
                 <motion.div key={t.items[active].image} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="absolute h-full inset-0" >
                   <Image src={t.items[active].image} alt={t.items[active].imageAlt} fill className="object-cover object-center" />

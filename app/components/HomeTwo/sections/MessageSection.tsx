@@ -18,10 +18,7 @@ const MessageSection = ({ data }: { data: HomeProps["sixthSection"] }) => {
   const isArabic = useIsPreferredLanguageArabic()
 
   return (
-    <section
-      className={`relative w-full bg-[#F6F6F6] ${isArabic ? "aftergd_ar" : "aftergd"} max-w-[1920px] mx-auto overflow-hidden`}
-
-    >
+    <section className={`relative w-full bg-[#F6F6F6] ${isArabic ? "aftergd_ar" : "aftergd"} max-w-[1920px] mx-auto overflow-hidden`} >
       {/* <motion.section
       className="relative w-full bg-[#F6F6F6] aftergd max-w-[1920px] mx-auto overflow-hidden"
       variants={fadeUp}
@@ -71,7 +68,7 @@ const MessageSection = ({ data }: { data: HomeProps["sixthSection"] }) => {
       </div>
       <div className="container">
         <div className="grid grid-cols-1 lg:grid-cols-2  ">
-          <motion.div variants={moveLeft(0.4)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} className="py-8 lg:py-15 xl:py-[120px] 2xl:py-[142px]">
+          <motion.div variants={moveLeft(0.4)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} className="py-8 lg:py-15 2xl:py-[120px] 2xl:py-[142px]">
             <motion.div
               className="flex flex-col justify-center"
               variants={containerVariants}
@@ -84,9 +81,9 @@ const MessageSection = ({ data }: { data: HomeProps["sixthSection"] }) => {
                 className="border-b border-[#D3D3D3] pb-5 hidden lg:block w-[80%] lg:w-[75%]"
                 variants={fadeSide}
               >
-                <h2 className="text-md 2xl:text-xl font-light text-colorpara">
+                <h3 className="text-md 2xl:text-xl font-light text-colorpara">
                   {t.mainTitle}
-                </h2>
+                </h3>
               </motion.div>
 
               {/* h1 */}
@@ -130,36 +127,19 @@ const MessageSection = ({ data }: { data: HomeProps["sixthSection"] }) => {
             </motion.div>
           </motion.div>
           <motion.div variants={moveUp(0.6)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} className="relative z-10 hidden lg:block">
-            <motion.div
-              variants={moveUp(0.2)}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.3 }}
-              className={`lg:absolute bottom-0 ${isArabic ? "right-0" : "left-0"}`}
-            >
-              <Image
-                src={t.image}
-                alt={t.imageAlt}
-                width={702}
-                height={964}
-                className={`lg:w-[380px] xl:w-[460px] 2xl:w-[702px] ${isArabic && " scale-x-[-1]"}`}
-              />
+            <motion.div variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} className={`lg:absolute bottom-0 ${isArabic ? "right-0" : "left-0"}`} >
+              <Image src={t.image} alt={t.imageAlt} width={702} height={964} className={`lg:w-[380px] xl:w-[460px] 2xl:w-[702px] ${isArabic && " scale-x-[-1]"}`} />
             </motion.div>
             <motion.div
               variants={moveUp(0.4)}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, amount: 0.3 }}
-              className={`w-full ${isArabic ? "lg:mr-[55%] 2xl:mr-[67%]" : "lg:ml-[55%] 2xl:ml-[67%]"} lg:mt-[62%] 2xl:mt-[51%]  flex flex-col gap-1 z-10 custom-position-founder`}
+              className={`w-full ${isArabic ? "lg:mr-[55%] 2xl:mr-[67%]" : "lg:ml-[55%] 2xl:ml-[67%]"} lg:mt-[62%] xl:mt-60 2xl:mt-[51%]  flex flex-col gap-1 z-10 custom-position-founder`}
             >
-              <h3 className="text-black text-lg xl:text-xl font-light">
-                {t.name}
-              </h3>
+              <h3 className="text-black text-lg xl:text-xl font-light"> {t.name} </h3>
               {t.designation.split("\n").map((word, index) => (
-                <span
-                  key={index}
-                  className="text-sm font-light text-colorpara"
-                >
+                <span key={index} className="text-sm font-light text-colorpara" >
                   {word}
                   {index < t.designation.split("\n").length - 1 && <br />}
                 </span>

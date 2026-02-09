@@ -8,10 +8,7 @@ import { FaInstagram } from "react-icons/fa6";
 import { FaYoutube } from "react-icons/fa";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import {
-  parentStagger,
-  fadeUponeone,
-} from "@/public/assets/FramerAnimation/animation";
+import { parentStagger, fadeUponeone } from "@/public/assets/FramerAnimation/animation";
 import { useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -88,28 +85,22 @@ const Footer = () => {
       </div>
 
       {/* Content container on top */}
-      <div className="relative z-10 container py-12 xl:py-25 2xl:pt-[139px] 2xl:pb-[89px]">
-        <div className="grid grid-cols-1 lg:grid-cols-2 text-white">
+      <div className="relative z-10 container py-12 xl:py-25 2xl:pt-[134px] 2xl:pb-[89px]">
+        <div className="grid grid-cols-1 lg:grid-cols-2 text-white ">
           {/* Left Column */}
-          <div className="flex flex-col gap-5 xl:gap-25 2xl:gap-[167px]">
+          <div className="flex flex-col pr-10 md:pr-15 xl:pr-25 2xl:pr-[147px]">
             <div>
-              <motion.div
-                variants={parentStagger}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, amount: 0.3 }}
-                className="flex flex-col gap-5 md:gap-10"
-              >
+              <motion.div variants={parentStagger} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} className="flex flex-col gap-5 md:gap-10 2xl:gap-[43px]" >
                 <div>
-                  <div className="flex flex-col md:gap-3">
-                    <motion.h2
-                      className="text-md 2xl:text-2xl font-light lettersp-2"
-                      variants={fadeUponeone}
-                    >
-                      {isArabic ? "8002326 بيم" : "800 BEAM (2326)"}
+                  <div className="">
+                    <motion.h2 className="text-md md:text-xl xl:text-2xl 2xl:text-4xl font-light lettersp-2 border-b border-litgray pb-2 xl:pb-[47px] mb-4 xl:mb-[47px]" variants={fadeUponeone} >
+                      Work with us
                     </motion.h2>
+                    <motion.p className="text-md  font-light break-words lettersp-2" variants={fadeUponeone} >
+                      {isArabic ? "8002326 بيم" : "800 BEAM (2326)"}
+                    </motion.p>
                     <motion.p
-                      className="text-md 2xl:text-2xl font-light break-words lettersp-2"
+                      className="text-md font-light break-words lettersp-2 text-primary"
                       variants={fadeUponeone}
                     >
                       enquiries@beam.co.ae
@@ -128,7 +119,30 @@ const Footer = () => {
                     </p>
                   </motion.div>
                 </div>
-                <div className="flex gap-[7px]">
+                
+              </motion.div>
+            </div>
+
+            
+          </div>
+
+          {/* Right Column */}
+          <motion.div
+            className={`flex flex-col  ${isArabic
+              ? "md:pr-[45px] xl:pr-[75px] 2xl:pr-[144px]"
+              : "md:pl-[45px] xl:pl-[75px] 2xl:pl-[147px]"
+              } gap-2 md:gap-14 2xl:gap-[73px] pt-8 pb-0 xl:pt-0 md:pb-0 md:mt-0`}
+            variants={parentStagger}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.3 }}
+            onViewportEnter={() => setShowCaptcha(true)}
+          >
+           
+            <div>
+              <div className="flex flex-wrap justify-between items-center gap-y-3 xl:border-b border-litgray pb-5 xl:pb-[47px] mb-4 xl:mb-[47px] pt-4 md:pt-6 xl:pt-8 2xl:pt-12">
+                <h3 className="text-lg ">Quick Links</h3>
+                <div className="flex gap-[7px] ">
                   <Link
                     target="_blank"
                     href="https://www.facebook.com/beamedusocial/"
@@ -148,10 +162,7 @@ const Footer = () => {
                       <FaXTwitter className="text-sm" />
                     </motion.div>
                   </Link>
-                  <Link
-                    target="_blank"
-                    href="https://www.linkedin.com/company/bukhatireducation/"
-                  >
+                  <Link target="_blank" href="https://www.linkedin.com/company/bukhatireducation/" >
                     <motion.div
                       variants={fadeUponeone}
                       className="rounded-full w-[46px] h-[46px] border border-white/35 hover:border-transparent flex items-center justify-center  hover:bg-primary cursor-pointer"
@@ -182,10 +193,7 @@ const Footer = () => {
                     </motion.div>
                   </Link>
                 </div>
-              </motion.div>
-            </div>
-
-            <div>
+              </div>
               <motion.div
                 variants={parentStagger}
                 initial="hidden"
@@ -197,8 +205,7 @@ const Footer = () => {
                   className="flex flex-col gap-3 text-sm font-light"
                   variants={fadeUponeone}
                 >
-                  <Link
-                    href="/about-us/our-story"
+                  <Link href="/about-us/our-story"
                     className="group relative overflow-hidden hover:text-primary"
                   >
                     <span className={`block transition-transform duration-300 group-hover:${isArabic ? "-translate-x-1" : "translate-x-1"}`}>
@@ -218,7 +225,15 @@ const Footer = () => {
                     className="group relative overflow-hidden hover:text-primary max-md:mb-3"
                   >
                     <span className={`block transition-transform duration-300 group-hover:${isArabic ? "-translate-x-1" : "translate-x-1"}`}>
-                      {isArabic ? "سجل اهتمام" : "Register Your Interest"}
+                      {isArabic ? "سجل اهتمام" : "Curriculum Overview"}
+                    </span>
+                  </Link>
+                  <Link
+                    href="/contact-us?scroll=register"
+                    className="group relative overflow-hidden hover:text-primary max-md:mb-3"
+                  >
+                    <span className={`block transition-transform duration-300 group-hover:${isArabic ? "-translate-x-1" : "translate-x-1"}`}>
+                      {isArabic ? "سجل اهتمام" : "Application Process"}
                     </span>
                   </Link>
                 </motion.div>
@@ -251,125 +266,16 @@ const Footer = () => {
                       {isArabic ? "البيانات الصحفية" : "Press Release"}
                     </span>
                   </Link>
+                  <Link
+                    href="/news-&-media/press-release"
+                    className="group relative overflow-hidden hover:text-primary"
+                  >
+                    <span className={`block transition-transform duration-300 group-hover:${isArabic ? "-translate-x-1" : "translate-x-1"}`}>
+                      {isArabic ? "البيانات الصحفية" : "Register Your Interest"}
+                    </span>
+                  </Link>
                 </motion.div>
               </motion.div>
-            </div>
-          </div>
-
-          {/* Right Column */}
-          <motion.div
-            className={`flex flex-col ${isArabic
-              ? "md:pr-[45px] xl:pr-[75px] 2xl:pr-[144px]"
-              : "md:pl-[45px] xl:pl-[75px] 2xl:pl-[144px]"
-              } gap-2 md:gap-14 2xl:gap-[73px] pt-8 pb-0 xl:pt-0 md:pb-0 md:mt-0`}
-            variants={parentStagger}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.3 }}
-            onViewportEnter={() => setShowCaptcha(true)}
-          >
-            <motion.div variants={fadeUponeone}>
-              <h2 className="text-xl xl:text-2xl 2xl:text-4xl font-light lettersp-4">
-                {isArabic ? "سجل اهتمامك" : "Register Interest"}
-              </h2>
-            </motion.div>
-            <div className="text-sm font-light leading-[1.52] pt-5 xl:pt-15">
-              <form
-                action=""
-                className="flex flex-col gap-10 xl:gap-[43px]"
-                onSubmit={handleSubmit(onSubmit)}
-              >
-                <motion.div className="flex flex-col" variants={fadeUponeone}>
-                  <label htmlFor="">{isArabic ? "الاسم" : "Name"}</label>
-                  <input
-                    type="text"
-                    {...register("name")}
-                    className="border-b border-[#666666] focus:outline-none bg-transparent"
-                  />
-                  <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
-                    {errors.name?.message || ""}
-                  </p>
-                </motion.div>
-                <motion.div className="flex flex-col" variants={fadeUponeone}>
-                  <label htmlFor="">
-                    {isArabic ? "البريد الإلكتروني" : "Email"}
-                  </label>
-                  <input
-                    type="email"
-                    {...register("email")}
-                    className="border-b border-[#666666] focus:outline-none bg-transparent"
-                  />
-                  <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
-                    {errors.email?.message || ""}
-                  </p>
-                </motion.div>
-                <motion.div className="flex flex-col" variants={fadeUponeone}>
-                  <label htmlFor="">{isArabic ? "رقم الهاتف" : "Phone"}</label>
-                  <input
-                    type="text"
-                    {...register("phone")}
-                    className="border-b border-[#666666] focus:outline-none bg-transparent"
-                  />
-                  <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
-                    {errors.phone?.message || ""}
-                  </p>
-                </motion.div>
-                <motion.div className="flex flex-col" variants={fadeUponeone}>
-                  <label htmlFor="">{isArabic ? "رسالة" : "Message"}</label>
-                  <textarea
-                    id=""
-                    {...register("message")}
-                    className="border-b border-[#666666] focus:outline-none bg-transparent h-[85px] 2xl:h-[115px]"
-                  ></textarea>
-                  <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
-                    {errors.message?.message || ""}
-                  </p>
-                </motion.div>
-
-                <div>
-                  {ReCAPTCHAComponent ? (
-                    <ReCAPTCHAComponent
-                      sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
-                      ref={recaptchaRef}
-                    />
-                  ) : showCaptcha ? (
-                    <div className="h-[78px] bg-gray-800/50 animate-pulse rounded w-[304px]" />
-                  ) : null}
-
-                  {error && (
-                    <p className="text-red-500 text-xs mt-1">{error}</p>
-                  )}
-                  <motion.div
-                    variants={fadeUponeone}
-                    className={`w-fit mt-5 md:mt-7  2xl:mt-6 p-[1px] group transition-all duration-300 border-[1px] border-primary rounded-full ${isArabic
-                      ? "hover:translate-x-[-5px] hover:shadow-[0_0_15px_rgba(66,186,220,0.5)]"
-                      : "hover:translate-x-[5px] hover:shadow-[0_0_15px_rgba(66,186,220,0.5)]"
-                      }`}
-                  >
-                    <button
-                      type="submit"
-                      className="cursor-pointer px-2 md:px-5 py-2 md:py-3 bg-transparent rounded-full flex items-center gap-2 transition-all duration-300"
-                    >
-                      <p className="text-xs font-light text-white uppercase transition-colors duration-300">
-                        {isArabic ? "إرسال" : "Submit"}
-                      </p>
-                      <div
-                        className={`p-2 flex items-center justify-center bg-primary w-fit rounded-full transition-transform duration-300 ${isArabic
-                          ? "-rotate-90 group-hover:-rotate-135"
-                          : "group-hover:rotate-45"
-                          } `}
-                      >
-                        <Image
-                          src="/assets/arrow.svg"
-                          alt="arrow"
-                          width={7}
-                          height={7}
-                        />
-                      </div>
-                    </button>
-                  </motion.div>
-                </div>
-              </form>
             </div>
           </motion.div>
         </div>

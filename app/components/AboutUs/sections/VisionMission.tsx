@@ -70,7 +70,7 @@ const VisionMissionSection = ({
             <SplitText
               tag="h2"
               text={t.title}
-              className="text-lg lg:text-xl xl:text-2xl 2xl:text-4xl font-light leading-[1.1111111]  lettersp-4 text-black mb-3 xl:mb-[40px] 2xl:mb-[30px]"
+              className="text-lg lg:text-xl xl:text-[3.5rem] 2xl:text-4xl font-light leading-[1.1111111]  lettersp-4 text-black mb-3 xl:mb-[40px] 2xl:mb-[30px]"
               delay={100}
               duration={0.6}
               ease="power3.out"

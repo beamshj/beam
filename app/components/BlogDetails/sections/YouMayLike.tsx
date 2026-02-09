@@ -25,13 +25,7 @@ const YouMayLike = ({
             <div key={index}>
               <Link href={`/news-&-media/blog/blog-details/${item.slug}`}>
               <div className="relative">
-                <Image
-                  src={item.thumbnail}
-                  alt=""
-                  width={486}
-                  height={301}
-                  className="rounded-t-lg img-fluid object-cover w-full h-full"
-                />
+                  <Image src={item.thumbnail} alt="" width={486} height={301} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" loading="lazy" className="rounded-t-lg img-fluid object-cover w-full h-full" />
                 <div className="absolute inset-0 bg-[linear-gradient(180.12deg,rgba(0,0,0,0)_50%,rgba(0,0,0,0.75)_99.9%)] "></div>
               </div>
               <div className="p-5 md:p-6 xl:p-10 border-1 border-[#D3D3D3]  rounded-b-lg">
@@ -50,17 +44,8 @@ const YouMayLike = ({
                     {item.title}
                   </p>
                 </div>
-                <div
-                  className="mt-3 p-1 flex items-center justify-center bg-primary w-[27px] h-[27px] rounded-full transition-transform
-               duration-300  rotate-45"
-                >
-                  <Image
-                    src="/assets/arrow.svg"
-                    alt="arrow"
-                    width={11}
-                    height={11}
-                    className={`${isArabic && "rotate-180"}`}
-                  />
+                <div className="mt-3 p-1 flex items-center justify-center bg-primary w-[27px] h-[27px] rounded-full transition-transform duration-300  rotate-45" >
+                  <img src="/assets/arrow.svg" alt="arrow" width={11} height={11} className={`${isArabic && "rotate-180"}`} />
                 </div>
               </div>
               </Link>

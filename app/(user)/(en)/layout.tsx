@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { DM_Sans, Almarai } from "next/font/google";
 import "../../globals.css";
+import "../../components/Common/custom-css.css";
 import dynamic from "next/dynamic";
 
 const NavBar = dynamic(() => import("@/app/components/Layout/NavBar"), { ssr: true });

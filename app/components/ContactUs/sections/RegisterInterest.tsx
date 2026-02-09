@@ -1,5 +1,6 @@
 "use client";
-
+import Select from 'react-select';
+import { Controller } from 'react-hook-form';
 import React, { useEffect, useRef, useState, forwardRef } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -11,6 +12,7 @@ import { motion } from "framer-motion";
 import { schoolData } from "../data";
 import ReCAPTCHA from "react-google-recaptcha";
 import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
+import "../../Common/react-select-custom.css";
 
 const formSchema = z.object({
   fullName: z.string().min(1, "Required"),
@@ -19,6 +21,7 @@ const formSchema = z.object({
   findUs: z.string().min(1, "Please select an option"),
   selectSchool: z.string().min(1, "Please select an option"),
   selectGrade: z.string().min(1, "Please select an option"),
+  enrollmentYear: z.string().min(1, "Please select an option"),
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -27,6 +30,15 @@ interface RegisterInterestProps {
   className?: string;
 }
 
+
+// Custom dropdown indicator
+const DropdownIndicator = () => {
+  return (
+    <div className="pointer-events-none">
+      <img src="/images/arrow-down.svg" width={24} height={24} alt="dropdown arrow" className="filter invert brightness-0 saturate-0 contrast-[2000%]" />
+    </div>
+  );
+};
 const RegisterInterest = forwardRef<HTMLDivElement, RegisterInterestProps>(
   ({ className }, ref) => {
     const [loadCaptcha, setLoadCaptcha] = useState(false);
@@ -54,6 +66,7 @@ const RegisterInterest = forwardRef<HTMLDivElement, RegisterInterestProps>(
       handleSubmit,
       formState: { errors },
       reset,
+      control, 
     } = useForm<FormData>({
       resolver: zodResolver(formSchema),
     });
@@ -96,16 +109,9 @@ const RegisterInterest = forwardRef<HTMLDivElement, RegisterInterestProps>(
     }, []);
 
     return (
-      <div
-        className={`pb-0 lg:pb-20 xl:pb-[135px] ${className ?? ""}`}
-        ref={ref}
-        id="registerInterest"
-      >
-        <div
-          className="relative w-full max-w-[1920px] h-auto py-12 2xl:py-0 2xl:h-[736px] bg-cover bg-center flex justify-center items-center"
-          style={{
-            backgroundImage: "url('/images/contact-us/interest.jpg')",
-          }}
+      <div className={`pb-0 lg:pb-20 xl:pb-[135px] ${className ?? ""}`} ref={ref} id="registerInterest" >
+        <div className="relative w-full max-w-[1920px] h-auto py-12 2xl:py-[100px] bg-cover bg-center flex justify-center items-center"
+          style={{ backgroundImage: "url('/images/contact-us/interest.jpg')", }}
         >
           <div className="absolute inset-0 bg-black/78"></div>
           <div className="relative z-10 container flex flex-col lg:flex-row gap-0 lg:gap-[117px]">
@@ -194,40 +200,32 @@ const RegisterInterest = forwardRef<HTMLDivElement, RegisterInterestProps>(
                     {errors.phone?.message || ""}
                   </p>
                 </motion.div>
-                <motion.div
-                  variants={moveUp(0.8)}
-                  initial="hidden"
-                  whileInView="show"
-                  viewport={{ once: true, amount: 0.2 }}
-                  className="w-full lg:w-1/2 relative"
-                >
-                  <select
-                    {...register("findUs")}
-                    className="w-full border-b border-white py-[23px] pr-10 focus:outline-none text-white text-sm font-light appearance-none"
-                  >
-                    <option value="" className="bg-black">
-                      {isArabic ? "غرض الاستفسار" : "Purpose of inquiry"}
-                    </option>
-                    <option value="Admission" className="bg-black ">
-                      {isArabic ? "القبول" : "Admission"}
-                    </option>
-                    <option value="career" className="bg-black ">
-                      {isArabic ? "المسار المهني" : "Career"}
-                    </option>
-                    <option value="general" className="bg-black ">
-                      {isArabic ? "عام" : "General"}
-                    </option>
-                  </select>
-                  {/* Custom arrow icon */}
-                  <span className="absolute top-1/3 right-0 -translate-y-1/2 pointer-events-none">
-                    <Image
-                      src="/images/arrow-down.svg"
-                      width={24}
-                      height={24}
-                      alt="dropdown arrow"
-                      className="filter invert brightness-0 saturate-0 contrast-[2000%]"
-                    />
-                  </span>
+                <motion.div variants={moveUp(0.8)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="w-full lg:w-1/2 relative" >
+                  <Controller
+                    name="findUs"
+                    control={control}
+                    render={({ field }) => (
+                      <Select
+                        {...field}
+                        options={[
+                          { value: 'Admission', label: isArabic ? 'القبول' : 'Admission' },
+                          { value: 'career', label: isArabic ? 'المسار المهني' : 'Career' },
+                          { value: 'general', label: isArabic ? 'عام' : 'General' },
+                        ]}
+                        className="custom-select"
+                        classNamePrefix="custom-select"
+                        placeholder={isArabic ? "غرض الاستفسار" : "Purpose of inquiry"}
+                        components={{ DropdownIndicator }}
+                        isSearchable={false}
+                        onChange={(option) => field.onChange(option?.value || "")}
+                        value={[
+                          { value: 'Admission', label: isArabic ? 'القبول' : 'Admission' },
+                          { value: 'career', label: isArabic ? 'المسار المهني' : 'Career' },
+                          { value: 'general', label: isArabic ? 'عام' : 'General' },
+                        ].find(opt => opt.value === field.value) || null}
+                      />
+                    )}
+                  />
 
                   {errors.findUs && (
                     <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
@@ -235,49 +233,51 @@ const RegisterInterest = forwardRef<HTMLDivElement, RegisterInterestProps>(
                     </p>
                   )}
                 </motion.div>
-                <motion.div
-                  variants={moveUp(0.8)}
-                  initial="hidden"
-                  whileInView="show"
-                  viewport={{ once: true, amount: 0.2 }}
-                  className="w-full lg:w-1/2 relative"
-                >
-                  <select
-                    {...register("findUs")}
-                    className="w-full border-b border-white py-[23px] pr-10 focus:outline-none text-white text-sm font-light appearance-none"
-                  >
-                    <option value="" className="bg-black">
-                      {isArabic ? "من أين وجدتنا؟" : "How did you hear about us?"}
-                    </option>
-                    <option value="instagram" className="bg-black ">
-                    {isArabic ? "إنستغرام" : "Instagram"}
-                    </option>
-                    <option value="website" className="bg-black ">
-                      {isArabic ? "الموقع الإلكتروني" : "Website"}
-                    </option>
-                    <option value="friends" className="bg-black ">
-                      {isArabic ? "الأصدقا" : "Friends"}
-                    </option>
-                  </select>
-                  {/* Custom arrow icon */}
-                  <span className="absolute top-1/3 right-0 -translate-y-1/2 pointer-events-none">
-                    <Image
-                      src="/images/arrow-down.svg"
-                      width={24}
-                      height={24}
-                      alt="dropdown arrow"
-                      className="filter invert brightness-0 saturate-0 contrast-[2000%]"
-                    />
-                  </span>
-
-                  {errors.findUs && (
-                    <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
-                      {errors.findUs.message}
-                    </p>
-                  )}
-                </motion.div>
+                
               </div>
-              <div className="flex flex-col lg:flex-row lg:gap-[55px]">
+              <div className="flex flex-col lg:flex-row lg:gap-[54px]">
+                {/* How did you hear about us? */}
+                <motion.div
+                  variants={moveUp(0.8)}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true, amount: 0.2 }}
+                  className="w-full lg:w-1/2 relative"
+                >
+                  <Controller
+                    name="findUs"
+                    control={control}
+                    render={({ field }) => (
+                      <Select
+                        {...field}
+                        options={[
+                          { value: 'instagram', label: isArabic ? 'إنستغرام' : 'Instagram' },
+                          { value: 'facebook', label: isArabic ? 'فيسبوك' : 'Facebook' },
+                          { value: 'website', label: isArabic ? 'الموقع الإلكتروني' : 'Website' },
+                          { value: 'friends', label: isArabic ? 'الأصدقا' : 'Friends' },
+                        ]}
+                        className="custom-select"
+                        classNamePrefix="custom-select"
+                        placeholder={isArabic ? "من أين وجدتنا؟" : "How did you hear about us?"}
+                        components={{ DropdownIndicator }}
+                        isSearchable={false}
+                        onChange={(option) => field.onChange(option?.value || "")}
+                        value={[
+                          { value: 'instagram', label: isArabic ? 'إنستغرام' : 'Instagram' },
+                          { value: 'website', label: isArabic ? 'الموقع الإلكتروني' : 'Website' },
+                          { value: 'friends', label: isArabic ? 'الأصدقا' : 'Friends' },
+                        ].find(opt => opt.value === field.value) || null}
+                      />
+                    )}
+                  />
+
+                  {errors.findUs && (
+                    <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
+                      {errors.findUs.message}
+                    </p>
+                  )}
+                </motion.div>
+                {/* Select School */}
                 <motion.div
                   variants={moveUp(1)}
                   initial="hidden"
@@ -285,38 +285,32 @@ const RegisterInterest = forwardRef<HTMLDivElement, RegisterInterestProps>(
                   viewport={{ once: true, amount: 0.2 }}
                   className="w-full lg:w-1/2 relative"
                 >
-                  <select
-                    {...register("selectSchool")}
-                    className="w-full border-b border-white py-[23px] pr-10 focus:outline-none text-white text-sm font-light appearance-none"
-                    onChange={(e) => setSelectedSchool(e.target.value)}
-                  >
-                    <option value="" className="bg-black">
-                      {isArabic ? "اختر المدرسة" : "Select School"}
-                    </option>
-                    {schoolData.map((school) => (
-                      <option
-                        key={school.name}
-                        value={school.name}
-                        className="bg-black"
-                      >
-                        {isArabic ? school.name_ar : school.name}
-                      </option>
-                    ))}
-                    {/* <option value="" className="bg-black">Select School</option>
-                  <option value="admission" className="bg-black">Admission</option>
-                  <option value="career" className="bg-black">Career</option>
-                  <option value="general" className="bg-black">General</option> */}
-                  </select>
-                  {/* Custom arrow icon */}
-                  <span className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none">
-                    <Image
-                      src="/images/arrow-down.svg"
-                      width={24}
-                      height={24}
-                      alt="dropdown arrow"
-                      className="filter invert brightness-0 saturate-0 contrast-[2000%]"
-                    />
-                  </span>
+                  <Controller
+                    name="selectSchool"
+                    control={control}
+                    render={({ field }) => (
+                      <Select
+                        {...field}
+                        options={schoolData.map((school) => ({
+                          value: school.name,
+                          label: isArabic ? school.name_ar : school.name,
+                        }))}
+                        className="custom-select"
+                        classNamePrefix="custom-select"
+                        placeholder={isArabic ? "اختر المدرسة" : "Select School"}
+                        components={{ DropdownIndicator }}
+                        isSearchable={false}
+                        onChange={(option) => {
+                          field.onChange(option?.value || "");
+                          setSelectedSchool(option?.value || "");
+                        }}
+                        value={schoolData.map((school) => ({
+                          value: school.name,
+                          label: isArabic ? school.name_ar : school.name,
+                        })).find(opt => opt.value === field.value) || null}
+                      />
+                    )}
+                  />
 
                   {errors.selectSchool && (
                     <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
@@ -324,6 +318,9 @@ const RegisterInterest = forwardRef<HTMLDivElement, RegisterInterestProps>(
                     </p>
                   )}
                 </motion.div>
+                </div>
+              <div className="flex flex-col lg:flex-row lg:gap-[55px]">
+               
                 <motion.div
                   variants={moveUp(1.2)}
                   initial="hidden"
@@ -331,31 +328,39 @@ const RegisterInterest = forwardRef<HTMLDivElement, RegisterInterestProps>(
                   viewport={{ once: true, amount: 0.2 }}
                   className="relative w-full lg:w-1/2"
                 >
-                  <select
-                    {...register("selectGrade")}
-                    className="w-full border-b border-white py-[23px] pr-10 focus:outline-none text-white text-sm font-light appearance-none"
-                  >
-                    <option value="" className="bg-black">
-                      {isArabic ? "اختر الصف" : "Select Grade"}
-                    </option>
-                    {schoolData
-                      .find((school) => school.name === selectedSchool)
-                      ?.grades.map((grade) => (
-                        <option key={grade} value={grade} className="bg-black">
-                          {grade}
-                        </option>
-                      ))}
-                  </select>
-                  {/* Custom arrow icon */}
-                  <span className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none">
-                    <Image
-                      src="/images/arrow-down.svg"
-                      width={24}
-                      height={24}
-                      alt="dropdown arrow"
-                      className="filter invert brightness-0 saturate-0 contrast-[2000%]"
-                    />
-                  </span>
+                  <Controller
+                    name="selectGrade"
+                    control={control}
+                    render={({ field }) => (
+                      <Select
+                        {...field}
+                        options={
+                          schoolData
+                            .find((school) => school.name === selectedSchool)
+                            ?.grades.map((grade) => ({
+                              value: grade,
+                              label: grade,
+                            })) || []
+                        }
+                        className="custom-select"
+                        classNamePrefix="custom-select"
+                        placeholder={isArabic ? "اختر الصف" : "Select Grade"}
+                        components={{ DropdownIndicator }}
+                        isSearchable={false}
+                        isDisabled={!selectedSchool}
+                        onChange={(option) => field.onChange(option?.value || "")}
+                        value={
+                          schoolData
+                            .find((school) => school.name === selectedSchool)
+                            ?.grades.map((grade) => ({
+                              value: grade,
+                              label: grade,
+                            }))
+                            .find(opt => opt.value === field.value) || null
+                        }
+                      />
+                    )}
+                  />
 
                   {errors.selectGrade && (
                     <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
@@ -363,6 +368,8 @@ const RegisterInterest = forwardRef<HTMLDivElement, RegisterInterestProps>(
                     </p>
                   )}
                 </motion.div>
+
+                  
                 <motion.div
                   variants={moveUp(1.2)}
                   initial="hidden"
@@ -370,46 +377,45 @@ const RegisterInterest = forwardRef<HTMLDivElement, RegisterInterestProps>(
                   viewport={{ once: true, amount: 0.2 }}
                   className="relative w-full lg:w-1/2"
                 >
-                  <select
-                    {...register("selectGrade")}
-                    className="w-full border-b border-white py-[23px] pr-10 focus:outline-none text-white text-sm font-light appearance-none"
-                  >
-                    <option value="" className="bg-black">
-                      {isArabic ? "سنة التسجيل" : "Enrollment Year"}
-                    </option>
-                   
-                    <option value="2025/2026" className="bg-black ">
-                      {isArabic ? "2025/2026" : "2025/2026"}
-                    </option>
-                    <option value="2026/2027" className="bg-black ">
-                      {isArabic ? "2026/2027" : "2026/2027"}
-                    </option>
-                  </select>
-                  {/* Custom arrow icon */}
-                  <span className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none">
-                    <Image
-                      src="/images/arrow-down.svg"
-                      width={24}
-                      height={24}
-                      alt="dropdown arrow"
-                      className="filter invert brightness-0 saturate-0 contrast-[2000%]"
-                    />
-                  </span>
+                  <Controller
+                    name="enrollmentYear"
+                    control={control}
+                    render={({ field }) => (
+                      <Select
+                        {...field}
+                        options={[
+                          { value: '2025/2026', label: '2025/2026' },
+                          { value: '2026/2027', label: '2026/2027' },
+                        ]}
+                        className="custom-select"
+                        classNamePrefix="custom-select"
+                        placeholder={isArabic ? "سنة التسجيل" : "Enrollment Year"}
+                        components={{ DropdownIndicator }}
+                        isSearchable={false}
+                        onChange={(option) => field.onChange(option?.value || "")}
+                        value={[
+                          { value: '2025/2026', label: '2025/2026' },
+                          { value: '2026/2027', label: '2026/2027' },
+                        ].find(opt => opt.value === field.value) || null}
+                      />
+                    )}
+                  />
 
-                  {errors.selectGrade && (
+                  {errors.enrollmentYear && (
                     <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
-                      {errors.selectGrade.message}
+                      {errors.enrollmentYear.message}
                     </p>
                   )}
                 </motion.div>
+
               </div>
 
-              <div ref={captchaRef}>
+              <div ref={captchaRef} className=''>
                 {loadCaptcha && (
                 <ReCAPTCHA
                   sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
                   ref={recaptchaRef}
-                  className="mt-5"
+                  className="mt-5 mb-10"
                 />
                 )}
                 {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
