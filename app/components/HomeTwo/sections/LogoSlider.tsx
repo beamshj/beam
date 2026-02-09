@@ -17,7 +17,7 @@ import { HomeProps } from "../type";
 const LogoSlider = ({data}: {data: HomeProps['ninethSection']}) => {
   return (
     <motion.section
-      className="py-8 xl:py-25 2xl:py-23 max-w-[1920px] mx-auto overflow-hidden"
+      className="py-8 xl:py-25 2xl:py-23 max-w-[1920px] mx-auto overflow-hidden border-t border-bdrcolor"
       variants={fadeUp}
       initial="hidden"
       whileInView="visible"

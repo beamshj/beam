@@ -12,6 +12,7 @@ import SplitText from "@/components/SplitText";
 import { HomeProps } from "../type";
 import { useApplyLang } from "@/lib/applyLang";
 import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
+import H2Title from "../../Common/H2Title";
 
 const MessageSection = ({ data }: { data: HomeProps["sixthSection"] }) => {
   const t = useApplyLang(data)
@@ -28,7 +29,7 @@ const MessageSection = ({ data }: { data: HomeProps["sixthSection"] }) => {
     > */}
       <div className="relative z-10 block lg:hidden">
         <div className="container border-b border-[#D3D3D3] pb-5 pt-10 mb-10  w-[95%]">
-          <h2>
+          {/* <h2>
             <SplitText
               tag="span"
               text={t.mainTitle}
@@ -43,7 +44,8 @@ const MessageSection = ({ data }: { data: HomeProps["sixthSection"] }) => {
               rootMargin="-100px"
               textAlign="left"
             />
-          </h2>
+          </h2> */}
+          <H2Title titleText={t.mainTitle} textAlign="text-left" />
         </div>
         <div className={`lg:absolute bottom-0  flex ${isArabic ? "pr-[15px] right-0" : "pl-[15px] left-0"}`}>
           <Image
@@ -92,7 +94,7 @@ const MessageSection = ({ data }: { data: HomeProps["sixthSection"] }) => {
                 variants={fadeTop}
               >
                 <div>
-                  <SplitText
+                  {/* <SplitText
                     tag="h2"
                     text={t.subTitle}
                     className="text-xl xl:text-2xl 2xl:text-4xl text-black leading-[1.2] xl:leading-[1.1] font-light 2xl:max-w-[82%] lettersp-4"
@@ -105,7 +107,8 @@ const MessageSection = ({ data }: { data: HomeProps["sixthSection"] }) => {
                     threshold={0.1}
                     rootMargin="-100px"
                     textAlign={isArabic ? "right" : "left"}
-                  />
+                  /> */}
+                  <H2Title titleText={t.subTitle} textAlign={isArabic ? "text-right" : "text-left"} maxWidth={isArabic ? "100%" : "70ch"} />
                 </div>
               </motion.div>
 

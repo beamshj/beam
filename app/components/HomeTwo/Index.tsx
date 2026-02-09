@@ -21,7 +21,7 @@ const LogoSlider = dynamic(() => import("./sections/LogoSlider"), { ssr: true })
 
 import DiverseGrowing from "./sections/DiverseGrowing";
 import Alumni from "./sections/Alumni";
-import MediaHub from "./sections/MediaHub";
+// import MediaHub from "./sections/MediaHub";
 import JoinBeam from "./sections/JoinBeam";
 
 import { HomeProps } from "./type";
@@ -40,7 +40,7 @@ const Index = ({data, schooldata, categorydata, locationdata, blogdata, newsdata
       <DiverseGrowing data={data.fifthSection}/>
       <MessageSection data={data.sixthSection}/>
       <Alumni data={data.seventhSection}/>
-      <MediaHub blogdata={blogdata} newsdata={newsdata} gallerydata={gallerydata}/>
+      {/* <MediaHub blogdata={blogdata} newsdata={newsdata} gallerydata={gallerydata}/> */}
       <LogoSlider data={data.ninethSection}/>
       <JoinBeam data={data.tenthSection}/>
     </>

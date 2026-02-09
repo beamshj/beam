@@ -144,7 +144,7 @@ export const mainMenuItems = [
         name_ar: "البيانات الصحفية",
         href: "/news-&-media/press-release",
       },
-      { name: "Gallery", name_ar: "الصور", href: "/news-&-media/gallery" },
+      // { name: "Gallery", name_ar: "الصور", href: "/news-&-media/gallery" },
     ],
   },
 
