@@ -9,11 +9,12 @@ import {
   lineFade,
   playFadeUp,
 } from "@/public/assets/FramerAnimation/animation";
-import SplitText from "@/components/SplitText";
+// import SplitText from "@/components/SplitText";
 import { HomeProps } from "../type";
 import SectionReveal from "./SectionReveal";
 import { useApplyLang } from "@/lib/applyLang";
 import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
+import H2Title from "../../Common/H2Title";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -80,7 +81,7 @@ const VideoSection = ({ data }: { data: HomeProps['fourthSection'] }) => {
 
           <div className="container flex items-center h-full">
             <motion.div className="relative z-30 flex flex-col gap-10" variants={container} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} >
-              <SplitText
+              {/* <SplitText
                 tag="h2"
                 text={t.title}
                 className="text-xl md:text-2xl xl:text-3xl 2xl:text-4xl leading-[1.2] text-white w-full md:w-3/4 font-light lettersp-4 text-center md:text-left"
@@ -93,8 +94,8 @@ const VideoSection = ({ data }: { data: HomeProps['fourthSection'] }) => {
                 threshold={0.1}
                 rootMargin="-100px"
                 textAlign={isArabic ? "right" : "left"}
-              />
-
+              /> */}
+              <H2Title titleText={t.title} titleColor="text-white" textAlign={isArabic ? "text-right" : "text-left"} maxWidth="13ch" />
               <motion.div className={`w-full md:w-3/4 h-px ${isArabic ? "bg-gradient-to-l origin-right" : "bg-gradient-to-r origin-left"} from-white to-transparent`}
                 variants={lineFade} ></motion.div>
 
