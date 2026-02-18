@@ -417,22 +417,28 @@ export default function CurrentOpenings() {
               </div>
             </div>
           </AdminItemContainer>
-          <div className="flex flex-col gap-2">
-            <Label className="font-bold">Meta Title</Label>
-            <Input
-              type="text"
-              placeholder="Meta Title"
-              {...register("metaTitle")}
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            <Label className="font-bold">Meta Description</Label>
-            <Input
-              type="text"
-              placeholder="Meta Description"
-              {...register("metaDescription")}
-            />
-          </div>
+
+          <AdminItemContainer>
+            <Label main>SEO</Label>
+            <div className="flex flex-col gap-2 p-5">
+              <div className="flex flex-col gap-2">
+                <Label className="font-bold">Title</Label>
+                <Input
+                  type="text"
+                  placeholder=""
+                  {...register("metaTitle")}
+                />
+              </div>
+              <div className="flex flex-col gap-2">
+                <Label className="font-bold">Description</Label>
+                <Input
+                  type="text"
+                  placeholder=""
+                  {...register("metaDescription")}
+                />
+              </div>
+            </div>
+          </AdminItemContainer>
         </div>
 
         {/* Arabic Version */}
@@ -512,22 +518,28 @@ export default function CurrentOpenings() {
               </div>
             </div>
           </AdminItemContainer>
-          <div className="flex flex-col gap-2">
-            <Label className="font-bold">Meta Title</Label>
-            <Input
-              type="text"
-              placeholder="Meta Title"
-              {...register("metaTitle_ar")}
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            <Label className="font-bold">Meta Description</Label>
-            <Input
-              type="text"
-              placeholder="Meta Description"
-              {...register("metaDescription_ar")}
-            />
-          </div>
+
+          <AdminItemContainer>
+            <Label main>SEO</Label>
+            <div className="flex flex-col gap-2 p-5">
+              <div className="flex flex-col gap-2">
+                <Label className="font-bold">Title</Label>
+                <Input
+                  type="text"
+                  placeholder=""
+                  {...register("metaTitle_ar")}
+                />
+              </div>
+              <div className="flex flex-col gap-2">
+                <Label className="font-bold">Description</Label>
+                <Input
+                  type="text"
+                  placeholder=""
+                  {...register("metaDescription_ar")}
+                />
+              </div>
+            </div>
+          </AdminItemContainer>
         </div>
 
         {/* Submit Button */}
@@ -548,7 +560,7 @@ export default function CurrentOpenings() {
               <Label className="text-sm font-bold">Category</Label>
               <Dialog>
                 <DialogTrigger
-                  className="bg-black text-white px-2 py-1 rounded-md"
+                  className="bg-primary text-white px-2 py-1 rounded-md"
                   onClick={() => {
                     setCategory("");
                     setCategory_ar("");
@@ -666,7 +678,7 @@ export default function CurrentOpenings() {
               <Label className="text-sm font-bold">Location</Label>
               <Dialog>
                 <DialogTrigger
-                  className="bg-black text-white px-2 py-1 rounded-md"
+                  className="bg-primary text-white px-2 py-1 rounded-md"
                   onClick={() => {
                     setLocation("");
                     setLocation_ar("");

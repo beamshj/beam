@@ -866,13 +866,13 @@ const AboutPage = () => {
                           />
                           {errors.historySection?.items?.[index]
                             ?.description && (
-                            <p className="text-red-500">
-                              {
-                                errors.historySection?.items?.[index]
-                                  ?.description.message
-                              }
-                            </p>
-                          )}
+                              <p className="text-red-500">
+                                {
+                                  errors.historySection?.items?.[index]
+                                    ?.description.message
+                                }
+                              </p>
+                            )}
                         </div>
                       </div>
                     </div>
@@ -1188,22 +1188,27 @@ const AboutPage = () => {
           </div>
         </AdminItemContainer>
 
-        <div className="flex flex-col gap-2">
-          <Label className="pl-3 font-bold">Meta Title</Label>
-          <Input
-            type="text"
-            placeholder="Meta Title"
-            {...register("metaTitle")}
-          />
-        </div>
-        <div className="flex flex-col gap-2">
-          <Label className="pl-3 font-bold">Meta Description</Label>
-          <Input
-            type="text"
-            placeholder="Meta Description"
-            {...register("metaDescription")}
-          />
-        </div>
+        <AdminItemContainer>
+          <Label main>SEO</Label>
+          <div className="flex flex-col gap-2 p-5">
+            <div className="flex flex-col gap-2">
+              <Label className="font-bold">Title</Label>
+              <Input
+                type="text"
+                placeholder=""
+                {...register("metaTitle")}
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <Label className="font-bold">Description</Label>
+              <Input
+                type="text"
+                placeholder=""
+                {...register("metaDescription")}
+              />
+            </div>
+          </div>
+        </AdminItemContainer>
       </div>
 
       {/* Arabic Version */}
@@ -1444,13 +1449,13 @@ const AboutPage = () => {
                             />
                             {errors.secondSection?.items?.[index]
                               ?.logoAlt_ar && (
-                              <p className="text-red-500">
-                                {
-                                  errors.secondSection?.items?.[index]
-                                    ?.logoAlt_ar.message
-                                }
-                              </p>
-                            )}
+                                <p className="text-red-500">
+                                  {
+                                    errors.secondSection?.items?.[index]
+                                      ?.logoAlt_ar.message
+                                  }
+                                </p>
+                              )}
                           </div>
                         </div>
                       </div>
@@ -1587,13 +1592,13 @@ const AboutPage = () => {
                             />
                             {errors.thirdSection?.items?.[index]
                               ?.imageAlt_ar && (
-                              <p className="text-red-500">
-                                {
-                                  errors.thirdSection?.items?.[index]
-                                    ?.imageAlt_ar.message
-                                }
-                              </p>
-                            )}
+                                <p className="text-red-500">
+                                  {
+                                    errors.thirdSection?.items?.[index]
+                                      ?.imageAlt_ar.message
+                                  }
+                                </p>
+                              )}
                           </div>
                         </div>
                       </div>
@@ -1730,13 +1735,13 @@ const AboutPage = () => {
                           />
                           {errors.historySection?.items?.[index]
                             ?.imageAlt_ar && (
-                            <p className="text-red-500">
-                              {
-                                errors.historySection?.items?.[index]
-                                  ?.imageAlt_ar.message
-                              }
-                            </p>
-                          )}
+                              <p className="text-red-500">
+                                {
+                                  errors.historySection?.items?.[index]
+                                    ?.imageAlt_ar.message
+                                }
+                              </p>
+                            )}
                         </div>
                       </div>
                     </div>
@@ -1795,13 +1800,13 @@ const AboutPage = () => {
                           />
                           {errors.historySection?.items?.[index]
                             ?.description_ar && (
-                            <p className="text-red-500">
-                              {
-                                errors.historySection?.items?.[index]
-                                  ?.description_ar.message
-                              }
-                            </p>
-                          )}
+                              <p className="text-red-500">
+                                {
+                                  errors.historySection?.items?.[index]
+                                    ?.description_ar.message
+                                }
+                              </p>
+                            )}
                         </div>
                       </div>
                     </div>
@@ -2110,22 +2115,28 @@ const AboutPage = () => {
           </div>
         </AdminItemContainer>
 
-        <div className="flex flex-col gap-2">
-          <Label className="pl-3 font-bold">Meta Title</Label>
-          <Input
-            type="text"
-            placeholder="Meta Title"
-            {...register("metaTitle_ar")}
-          />
-        </div>
-        <div className="flex flex-col gap-2">
-          <Label className="pl-3 font-bold">Meta Description</Label>
-          <Input
-            type="text"
-            placeholder="Meta Description"
-            {...register("metaDescription_ar")}
-          />
-        </div>
+        <AdminItemContainer>
+          <Label main>SEO</Label>
+          <div className="flex flex-col gap-2 p-5">
+            <div className="flex flex-col gap-2">
+              <Label className="font-bold">Title</Label>
+              <Input
+                type="text"
+                placeholder=""
+                {...register("metaTitle_ar")}
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <Label className="font-bold">Description</Label>
+              <Input
+                type="text"
+                placeholder=""
+                {...register("metaDescription_ar")}
+              />
+            </div>
+          </div>
+        </AdminItemContainer>
+
       </div>
 
       <div className="col-span-2">

@@ -319,14 +319,19 @@ export default function Accreditation() {
           </AdminItemContainer>
 
 
-          <div className='flex flex-col gap-2'>
-            <Label className='font-bold'>Meta Title</Label>
-            <Input type='text' placeholder='Meta Title' {...register("metaTitle")} />
-          </div>
-          <div className='flex flex-col gap-2'>
-            <Label className='font-bold'>Meta Description</Label>
-            <Input type='text' placeholder='Meta Description' {...register("metaDescription")} />
-          </div>
+          <AdminItemContainer>
+            <Label main>SEO</Label>
+            <div className="flex flex-col gap-2 p-5">
+              <div className='flex flex-col gap-2'>
+                <Label className='font-bold'>Title</Label>
+                <Input type='text' placeholder='' {...register("metaTitle")} />
+              </div>
+              <div className='flex flex-col gap-2'>
+                <Label className='font-bold'>Description</Label>
+                <Input type='text' placeholder='' {...register("metaDescription")} />
+              </div>
+            </div>
+          </AdminItemContainer>
 
           {/* <div className='flex justify-center mt-5'>
                                     <Button type='submit' className="cursor-pointer text-white text-[16px] w-full">Submit</Button>
@@ -407,14 +412,19 @@ export default function Accreditation() {
           </AdminItemContainer>
 
 
-          <div className='flex flex-col gap-2'>
-            <Label className='font-bold'>Meta Title</Label>
-            <Input type='text' placeholder='Meta Title' {...register("metaTitle_ar")} />
-          </div>
-          <div className='flex flex-col gap-2'>
-            <Label className='font-bold'>Meta Description</Label>
-            <Input type='text' placeholder='Meta Description' {...register("metaDescription_ar")} />
-          </div>
+          <AdminItemContainer>
+            <Label main>SEO</Label>
+            <div className="flex flex-col gap-2 p-5">
+              <div className='flex flex-col gap-2'>
+                <Label className='font-bold'>Title</Label>
+                <Input type='text' placeholder='' {...register("metaTitle_ar")} />
+              </div>
+              <div className='flex flex-col gap-2'>
+                <Label className='font-bold'>Description</Label>
+                <Input type='text' placeholder='' {...register("metaDescription_ar")} />
+              </div>
+            </div>
+          </AdminItemContainer>
 
 
 
@@ -435,7 +445,7 @@ export default function Accreditation() {
             <div className="flex justify-between border-b-2 pb-2">
               <Label className="text-sm font-bold">Category</Label>
               <Dialog>
-                <DialogTrigger className="bg-black text-white px-2 py-1 rounded-md" onClick={() => { setCategory(""); setCategoryArabic("") }}>Add Category</DialogTrigger>
+                <DialogTrigger className="bg-primary text-white px-2 py-1 rounded-md" onClick={() => { setCategory(""); setCategoryArabic("") }}>Add Category</DialogTrigger>
                 <DialogContent>
                   <DialogHeader>
                     <DialogTitle>Add Category</DialogTitle>

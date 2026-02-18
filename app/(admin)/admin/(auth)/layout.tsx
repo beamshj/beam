@@ -43,13 +43,13 @@ export default function AdminLayout({
       {/* Main Content */}
       <main className="flex-1 h-screen overflow-hidden">
         {/* Fixed Top Bar */}
-        <div className="grid grid-cols-2 w-[calc(100vw-256px)]  shadow-sm py-4 px-4 fixed top-0 left-64 z-10 border-b">
+        <div className="grid grid-cols-2 w-[calc(100vw-256px)]  shadow-sm py-4 px-8 fixed top-0 left-64 z-10 border-b">
           <h2 className="font-bold text-primary">English Version</h2>
           <h2 className="font-bold text-primary text-right">Arabic Version</h2>
         </div>
 
         {/* Scrollable Content */}
-        <div className="mt-[56px] h-[calc(100vh-72px)] overflow-y-auto p-4 bg-gray-100">
+        <div className="mt-[56px] h-[calc(100vh-72px)] overflow-y-auto p-8 bg-gray-100">
           {children}
         </div>
       </main>
