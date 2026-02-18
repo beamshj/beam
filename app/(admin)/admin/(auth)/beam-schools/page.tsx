@@ -20,6 +20,9 @@ import { useForm, Controller } from "react-hook-form";
 import { ImageUploader } from "@/components/ui/image-uploader";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
+import { closestCorners, DndContext, DragEndEvent } from '@dnd-kit/core'
+import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
+import SchoolCard from "./SchoolCard";
 
 interface CurrentOpeningsPageProps {
   metaTitle: string;
@@ -55,6 +58,7 @@ export default function CurrentOpenings() {
   >([]);
 
   const router = useRouter();
+  const [reorderMode, setReorderMode] = useState(false);
 
   const {
     register,
@@ -280,6 +284,43 @@ export default function CurrentOpenings() {
       }
     } catch (error) {
       console.log("Error fetching school details", error);
+    }
+  };
+
+  const getTaskPos = (id: number | string) => schoolList.findIndex((item: { _id: string }) => (item._id == id))
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+
+    if (!over || active.id === over.id) return;
+
+    setSchoolList((schoolList: { _id: string; title: string; title_ar: string }[]) => {
+      const originalPos = getTaskPos(active.id);
+      const newPos = getTaskPos(over.id);
+      return arrayMove(schoolList, originalPos, newPos);
+    });
+  };
+
+
+  const confirmPosition = async () => {
+    setReorderMode(!reorderMode);
+
+    const updatedSchools = schoolList.map((school) => ({
+      ...school,
+    }));
+
+    setSchoolList(updatedSchools);
+
+    const formData = new FormData()
+    formData.append('schools', JSON.stringify(updatedSchools))
+    const response = await fetch(`/api/admin/beam-schools/reorder`, {
+      method: "POST",
+      body: formData
+    })
+    if (response.ok) {
+      const data = await response.json()
+      if (data.success) {
+        alert(data.message)
+      }
     }
   };
 
@@ -743,12 +784,28 @@ export default function CurrentOpenings() {
         <div className="h-screen w-full p-5 shadow-md border-gray-300 rounded-md overflow-y-hidden bg-white">
           <div className="flex justify-between border-b-2 pb-2">
             <Label className="text-sm font-bold">Schools</Label>
-            <Button onClick={() => router.push("/admin/beam-schools/add")}>
-              Add School
-            </Button>
+            <div className="flex gap-2">
+              <Button type="button" className={`text-white text-[16px] ${reorderMode ? "bg-yellow-700" : "bg-green-700"}`} onClick={() => reorderMode ? confirmPosition() : setReorderMode(!reorderMode)}>{reorderMode ? "Done" : "Reorder"}</Button>
+              {!reorderMode && <Button onClick={() => router.push("/admin/beam-schools/add")}>
+                Add School
+              </Button>}
+            </div>
           </div>
           <div className="mt-2 flex flex-col gap-2 overflow-y-scroll h-[90%]">
-            {schoolList.map((item) => (
+
+            {reorderMode &&
+
+              <DndContext collisionDetection={closestCorners} onDragEnd={handleDragEnd}>
+                <SortableContext items={schoolList.map((school) => school._id)} strategy={verticalListSortingStrategy}>
+                  {schoolList?.map((school, index) => (
+                    <SchoolCard key={index} school={school} id={school._id} />
+                  ))}
+                </SortableContext>
+              </DndContext>
+
+            }
+
+            {!reorderMode && schoolList.map((item) => (
               <div
                 className="flex justify-between border p-2 items-center rounded-md shadow-md hover:shadow-lg transition-all duration-300"
                 key={item._id}
