@@ -2,7 +2,7 @@
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useForm, useFieldArray, Controller } from "react-hook-form";
 import { Button } from "@/components/ui/button";
@@ -14,6 +14,9 @@ import "react-quill-new/dist/quill.snow.css";
 import dynamic from "next/dynamic";
 import AdminItemContainer from "@/app/components/Common/AdminItemContainer";
 import { toast } from "sonner";
+import { closestCorners, DndContext, DragEndEvent } from '@dnd-kit/core'
+import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
+import PersonCard from "./PersonCard";
 
 interface LeadershipTeamFormProps {
   metaTitle: string;
@@ -70,10 +73,13 @@ const LeadershipTeamPage = () => {
     formState: { errors },
   } = useForm<LeadershipTeamFormProps>();
 
+  const [reorderMode, setReorderMode] = useState("");
+
   const {
     fields: firstSectionItems,
     append: firstSectionAppend,
     remove: firstSectionRemove,
+    move: moveFirstSection,
   } = useFieldArray({
     control,
     name: "firstSection.items",
@@ -83,6 +89,7 @@ const LeadershipTeamPage = () => {
     fields: secondSectionItems,
     append: secondSectionAppend,
     remove: secondSectionRemove,
+    move: moveSecondSection,
   } = useFieldArray({
     control,
     name: "secondSection.items",
@@ -130,6 +137,42 @@ const LeadershipTeamPage = () => {
       console.log("Error in fetching leadership team data", error);
     }
   };
+
+
+  type ItemWithId = {
+    id: string | number;
+  };
+
+  const createHandleDragEnd = <T extends ItemWithId>(
+    items: T[],
+    move: (from: number, to: number) => void
+  ) => {
+    const getItemPos = (id: string | number) =>
+      items.findIndex((item) => item.id == id);
+
+    return (event: DragEndEvent) => {
+      const { active, over } = event;
+
+      if (!over || active.id === over.id) return;
+
+      const originalPos = getItemPos(active.id);
+      const newPos = getItemPos(over.id);
+
+      if (originalPos !== -1 && newPos !== -1) {
+        move(originalPos, newPos);
+      }
+    };
+  };
+
+  const handleFirstSectionDragEnd = createHandleDragEnd(
+    firstSectionItems,
+    moveFirstSection
+  );
+
+  const handleSecondSectionDragEnd = createHandleDragEnd(
+    secondSectionItems,
+    moveSecondSection
+  );
 
   useEffect(() => {
     fetchLeadershipTeamData();
@@ -215,9 +258,25 @@ const LeadershipTeamPage = () => {
                 />
               </div>
               <div>
-                <Label className="font-bold">Items</Label>
+                <div className="flex items-center justify-between my-2">
+                  <Label className="font-bold">Items</Label>
+                  <Button disabled={firstSectionItems.length < 2} type="button" className={`text-white text-[16px] ${reorderMode ? "bg-yellow-700" : "bg-green-700"}`} onClick={() => setReorderMode(reorderMode !== "" ? "" : "firstSection")}>{reorderMode ? "Done" : "Reorder"}</Button>
+                </div>
                 <div className="border p-2 rounded-md flex flex-col gap-5">
-                  {firstSectionItems.map((field, index) => (
+
+                  {reorderMode === "firstSection" &&
+
+                    <DndContext collisionDetection={closestCorners} onDragEnd={handleFirstSectionDragEnd}>
+                      <SortableContext items={firstSectionItems.map((item) => item.id)} strategy={verticalListSortingStrategy}>
+                        {firstSectionItems?.map((item, index) => (
+                          <PersonCard key={index} person={item} id={item.id} />
+                        ))}
+                      </SortableContext>
+                    </DndContext>
+
+                  }
+
+                  {reorderMode == "" && firstSectionItems.map((field, index) => (
                     <div
                       key={field.id}
                       className="grid grid-cols-2 gap-2 relative border-b pb-5 last:border-b-0"
@@ -309,13 +368,13 @@ const LeadershipTeamPage = () => {
                             />
                             {errors.firstSection?.items?.[index]
                               ?.designation && (
-                              <p className="text-red-500">
-                                {
-                                  errors.firstSection?.items?.[index]
-                                    ?.designation.message
-                                }
-                              </p>
-                            )}
+                                <p className="text-red-500">
+                                  {
+                                    errors.firstSection?.items?.[index]
+                                      ?.designation.message
+                                  }
+                                </p>
+                              )}
                           </div>
                           <div className="flex flex-col gap-1">
                             <Label className="font-bold">Description</Label>
@@ -339,7 +398,7 @@ const LeadershipTeamPage = () => {
                     </div>
                   ))}
                 </div>
-                <div className="flex justify-end mt-2">
+                {reorderMode == "" && <div className="flex justify-end mt-2">
                   <Button
                     type="button"
                     addItem
@@ -359,7 +418,7 @@ const LeadershipTeamPage = () => {
                   >
                     Add Item
                   </Button>
-                </div>
+                </div>}
               </div>
             </div>
           </div>
@@ -396,9 +455,25 @@ const LeadershipTeamPage = () => {
                 />
               </div>
               <div>
-                <Label className="font-bold">Items</Label>
+                <div className="flex items-center justify-between my-2">
+                  <Label className="font-bold">Items</Label>
+                  <Button disabled={secondSectionItems.length < 2} type="button" className={`text-white text-[16px] ${reorderMode ? "bg-yellow-700" : "bg-green-700"}`} onClick={() => setReorderMode(reorderMode !== "" ? "" : "secondSection")}>{reorderMode ? "Done" : "Reorder"}</Button>
+                </div>
                 <div className="border p-2 rounded-md flex flex-col gap-5">
-                  {secondSectionItems.map((field, index) => (
+
+                  {reorderMode === "secondSection" &&
+
+                    <DndContext collisionDetection={closestCorners} onDragEnd={handleSecondSectionDragEnd}>
+                      <SortableContext items={secondSectionItems.map((item) => item.id)} strategy={verticalListSortingStrategy}>
+                        {secondSectionItems?.map((item, index) => (
+                          <PersonCard key={index} person={item} id={item.id} />
+                        ))}
+                      </SortableContext>
+                    </DndContext>
+
+                  }
+
+                  {reorderMode == "" && secondSectionItems.map((field, index) => (
                     <div
                       key={field.id}
                       className="grid grid-cols-2 gap-2 relative border-b pb-5 last:border-b-0"
@@ -493,13 +568,13 @@ const LeadershipTeamPage = () => {
                             />
                             {errors.secondSection?.items?.[index]
                               ?.designation && (
-                              <p className="text-red-500">
-                                {
-                                  errors.secondSection?.items?.[index]
-                                    ?.designation.message
-                                }
-                              </p>
-                            )}
+                                <p className="text-red-500">
+                                  {
+                                    errors.secondSection?.items?.[index]
+                                      ?.designation.message
+                                  }
+                                </p>
+                              )}
                           </div>
                           <div className="flex flex-col gap-1">
                             <Label className="font-bold">Description</Label>
@@ -687,13 +762,13 @@ const LeadershipTeamPage = () => {
                             />
                             {errors.firstSection?.items?.[index]
                               ?.imageAlt_ar && (
-                              <p className="text-red-500">
-                                {
-                                  errors.firstSection?.items?.[index]
-                                    ?.imageAlt_ar.message
-                                }
-                              </p>
-                            )}
+                                <p className="text-red-500">
+                                  {
+                                    errors.firstSection?.items?.[index]
+                                      ?.imageAlt_ar.message
+                                  }
+                                </p>
+                              )}
                           </div>
                         </div>
                       </div>
@@ -728,13 +803,13 @@ const LeadershipTeamPage = () => {
                             />
                             {errors.firstSection?.items?.[index]
                               ?.designation_ar && (
-                              <p className="text-red-500">
-                                {
-                                  errors.firstSection?.items?.[index]
-                                    ?.designation_ar.message
-                                }
-                              </p>
-                            )}
+                                <p className="text-red-500">
+                                  {
+                                    errors.firstSection?.items?.[index]
+                                      ?.designation_ar.message
+                                  }
+                                </p>
+                              )}
                           </div>
                           <div className="flex flex-col gap-1">
                             <Label className="font-bold">Description</Label>
@@ -861,13 +936,13 @@ const LeadershipTeamPage = () => {
                             />
                             {errors.secondSection?.items?.[index]
                               ?.imageAlt_ar && (
-                              <p className="text-red-500">
-                                {
-                                  errors.secondSection?.items?.[index]
-                                    ?.imageAlt_ar.message
-                                }
-                              </p>
-                            )}
+                                <p className="text-red-500">
+                                  {
+                                    errors.secondSection?.items?.[index]
+                                      ?.imageAlt_ar.message
+                                  }
+                                </p>
+                              )}
                           </div>
                         </div>
                       </div>
@@ -902,13 +977,13 @@ const LeadershipTeamPage = () => {
                             />
                             {errors.secondSection?.items?.[index]
                               ?.designation_ar && (
-                              <p className="text-red-500">
-                                {
-                                  errors.secondSection?.items?.[index]
-                                    ?.designation_ar.message
-                                }
-                              </p>
-                            )}
+                                <p className="text-red-500">
+                                  {
+                                    errors.secondSection?.items?.[index]
+                                      ?.designation_ar.message
+                                  }
+                                </p>
+                              )}
                           </div>
                           <div className="flex flex-col gap-1">
                             <Label className="font-bold">Description</Label>
