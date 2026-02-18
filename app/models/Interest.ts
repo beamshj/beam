@@ -5,8 +5,10 @@ const interestSchema = new mongoose.Schema({
     email:String,
     phone:String,
     findUs:String,
+    purpose:String,
     selectSchool:String,
     selectGrade:String,
+    enrollmentYear:String,
     createdAt:{
         type:Date,
         default:Date.now

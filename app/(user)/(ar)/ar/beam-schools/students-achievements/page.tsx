@@ -1,7 +1,6 @@
 import Index from "@/app/components/StudentsAchievements";
 
 const Page = async () => {
-  console.log(process.env.BASE_URL);
   const response = await fetch(`${process.env.BASE_URL}/api/admin/students-achievements`, {
     next: { revalidate: 60 },
   });

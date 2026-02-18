@@ -8,7 +8,7 @@ const Page = async () => {
 
   return (
     <>
-      <Index data={data.data} />
+      {/* <Index data={data.data} /> */}
     </>
   );
 };

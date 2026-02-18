@@ -12,7 +12,7 @@ import { MdDelete } from "react-icons/md";
 
 const InterestsPage = () => {
 
-    const [interestList, setInterestList] = useState<{ _id: string, fullName: string, email: string, phone: string, findUs: string, selectSchool: string, selectGrade: string }[]>([]);
+    const [interestList, setInterestList] = useState<{ _id: string, fullName: string, email: string, phone: string, findUs: string, selectSchool: string, selectGrade: string, purpose: string, enrollmentYear: string }[]>([]);
 
     const handleFetchInterest = async () => {
         try {
@@ -81,7 +81,10 @@ const InterestsPage = () => {
                             Grade
                         </th>
                         <th scope="col" className="px-6 py-3">
-
+                            Purpose
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                            Enrollment Year
                         </th>
                     </tr>
                 </thead>
@@ -107,7 +110,12 @@ const InterestsPage = () => {
                                 <td className="px-6 py-4">
                                     {interest.selectGrade}
                                 </td>
-
+                                <td className="px-6 py-4">
+                                    {interest.purpose}
+                                </td>
+                                <td className="px-6 py-4">
+                                    {interest.enrollmentYear}
+                                </td>
 
                                 <td>
 
