@@ -45,7 +45,7 @@ export default function News() {
     []
   );
   const [categoryList, setCategoryList] = useState<
-    { _id: string; name: string,name_ar:string }[]
+    { _id: string; name: string, name_ar: string }[]
   >([]);
 
   const router = useRouter();
@@ -62,7 +62,7 @@ export default function News() {
     try {
       const response = await fetch("/api/admin/news/category", {
         method: "POST",
-        body: JSON.stringify({ name: category,name_ar: categoryArabic }),
+        body: JSON.stringify({ name: category, name_ar: categoryArabic }),
       });
       if (response.ok) {
         const data = await response.json();
@@ -97,7 +97,7 @@ export default function News() {
     try {
       const response = await fetch(`/api/admin/news/category?id=${id}`, {
         method: "PATCH",
-        body: JSON.stringify({ name: category,name_ar: categoryArabic }),
+        body: JSON.stringify({ name: category, name_ar: categoryArabic }),
       });
       if (response.ok) {
         const data = await response.json();
@@ -202,130 +202,140 @@ export default function News() {
     <div className="flex flex-col gap-5">
       <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-2 gap-10">
 
-{/*English Version */}
+        {/*English Version */}
         <div className="flex flex-col gap-5">
-        <AdminItemContainer>
-          <Label className="" main>
-            Banner
-          </Label>
-          <div className="p-5 rounded-md grid grid-cols-2 gap-5">
-            <div>
-              <Controller
-                name="banner"
-                control={control}
-                rules={{ required: "Banner is required" }}
-                render={({ field }) => (
-                  <ImageUploader
-                    value={field.value}
-                    onChange={field.onChange}
-                  />
+          <AdminItemContainer>
+            <Label className="" main>
+              Banner
+            </Label>
+            <div className="p-5 rounded-md grid grid-cols-2 gap-5">
+              <div>
+                <Controller
+                  name="banner"
+                  control={control}
+                  rules={{ required: "Banner is required" }}
+                  render={({ field }) => (
+                    <ImageUploader
+                      value={field.value}
+                      onChange={field.onChange}
+                    />
+                  )}
+                />
+                {errors.banner && (
+                  <p className="text-red-500">{errors.banner.message}</p>
                 )}
-              />
-              {errors.banner && (
-                <p className="text-red-500">{errors.banner.message}</p>
-              )}
-            </div>
-            <div className="flex flex-col gap-2">
-              <div className="flex flex-col gap-1">
-                <Label className="font-bold">Alt Tag</Label>
-                <Input
-                  type="text"
-                  placeholder="Alt Tag"
-                  {...register("bannerAlt")}
-                />
               </div>
-              <div className="flex flex-col gap-1">
-                <Label className="font-bold">Page Title</Label>
-                <Input
-                  type="text"
-                  placeholder="Page Title"
-                  {...register("pageTitle")}
-                />
+              <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-1">
+                  <Label className="font-bold">Alt Tag</Label>
+                  <Input
+                    type="text"
+                    placeholder="Alt Tag"
+                    {...register("bannerAlt")}
+                  />
+                </div>
+                <div className="flex flex-col gap-1">
+                  <Label className="font-bold">Page Title</Label>
+                  <Input
+                    type="text"
+                    placeholder="Page Title"
+                    {...register("pageTitle")}
+                  />
+                </div>
               </div>
             </div>
-          </div>
-        </AdminItemContainer>
+          </AdminItemContainer>
 
-        <div className="flex flex-col gap-2">
-          <Label className="font-bold">Meta Title</Label>
-          <Input
-            type="text"
-            placeholder="Meta Title"
-            {...register("metaTitle")}
-          />
-        </div>
-        <div className="flex flex-col gap-2">
-          <Label className="font-bold">Meta Description</Label>
-          <Input
-            type="text"
-            placeholder="Meta Description"
-            {...register("metaDescription")}
-          />
-        </div>
+          <AdminItemContainer>
+            <Label main>SEO</Label>
+            <div className="flex flex-col gap-2 p-5">
+              <div className="flex flex-col gap-2">
+                <Label className="font-bold">Title</Label>
+                <Input
+                  type="text"
+                  placeholder="Title"
+                  {...register("metaTitle")}
+                />
+              </div>
+              <div className="flex flex-col gap-2">
+                <Label className="font-bold">Description</Label>
+                <Input
+                  type="text"
+                  placeholder=""
+                  {...register("metaDescription")}
+                />
+              </div>
+            </div>
+          </AdminItemContainer>
 
         </div>
 
 
         {/*Arabic Version */}
         <div className="flex flex-col gap-5">
-        <AdminItemContainer>
-          <Label className="" main>
-            Banner
-          </Label>
-          <div className="p-5 rounded-md grid grid-cols-2 gap-5">
-            <div>
-              <Controller
-                name="banner"
-                control={control}
-                rules={{ required: "Banner is required" }}
-                render={({ field }) => (
-                  <ImageUploader
-                    value={field.value}
-                    onChange={field.onChange}
-                  />
+          <AdminItemContainer>
+            <Label className="" main>
+              Banner
+            </Label>
+            <div className="p-5 rounded-md grid grid-cols-2 gap-5">
+              <div>
+                <Controller
+                  name="banner"
+                  control={control}
+                  rules={{ required: "Banner is required" }}
+                  render={({ field }) => (
+                    <ImageUploader
+                      value={field.value}
+                      onChange={field.onChange}
+                    />
+                  )}
+                />
+                {errors.banner && (
+                  <p className="text-red-500">{errors.banner.message}</p>
                 )}
-              />
-              {errors.banner && (
-                <p className="text-red-500">{errors.banner.message}</p>
-              )}
-            </div>
-            <div className="flex flex-col gap-2">
-              <div className="flex flex-col gap-1">
-                <Label className="font-bold">Alt Tag</Label>
-                <Input
-                  type="text"
-                  placeholder="Alt Tag"
-                  {...register("bannerAlt_ar")}
-                />
               </div>
-              <div className="flex flex-col gap-1">
-                <Label className="font-bold">Page Title</Label>
-                <Input
-                  type="text"
-                  placeholder="Page Title"
-                  {...register("pageTitle_ar")}
-                />
+              <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-1">
+                  <Label className="font-bold">Alt Tag</Label>
+                  <Input
+                    type="text"
+                    placeholder="Alt Tag"
+                    {...register("bannerAlt_ar")}
+                  />
+                </div>
+                <div className="flex flex-col gap-1">
+                  <Label className="font-bold">Page Title</Label>
+                  <Input
+                    type="text"
+                    placeholder="Page Title"
+                    {...register("pageTitle_ar")}
+                  />
+                </div>
               </div>
             </div>
-          </div>
-        </AdminItemContainer>
+          </AdminItemContainer>
 
-        <div className="flex flex-col gap-2">
-          <Label className="font-bold">Meta Title</Label>
-          <Input
-            type="text"
-            placeholder="Meta Title"
-            {...register("metaTitle_ar")}
-          />
-        </div>
-        <div className="flex flex-col gap-2">
-          <Label className="font-bold">Meta Description</Label>
-          <Input
-            type="text"
-            placeholder="Meta Description"
-            {...register("metaDescription_ar")}
-          />
-        </div>
+          <AdminItemContainer>
+            <Label main>SEO</Label>
+            <div className="flex flex-col gap-2 p-5">
+              <div className="flex flex-col gap-2">
+                <Label className="font-bold">Title</Label>
+                <Input
+                  type="text"
+                  placeholder=""
+                  {...register("metaTitle_ar")}
+                />
+              </div>
+              <div className="flex flex-col gap-2">
+                <Label className="font-bold">Description</Label>
+                <Input
+                  type="text"
+                  placeholder=""
+                  {...register("metaDescription_ar")}
+                />
+              </div>
+            </div>
+          </AdminItemContainer>
 
         </div>
 
@@ -351,8 +361,8 @@ export default function News() {
               </div>
               <Dialog>
                 <DialogTrigger
-                  className="bg-black text-white px-2 py-1 rounded-md"
-                  onClick={() => {setCategory("");setCategoryArabic("")}}
+                  className="bg-primary text-white px-2 py-1 rounded-md"
+                  onClick={() => { setCategory(""); setCategoryArabic("") }}
                 >
                   Add Category
                 </DialogTrigger>

@@ -35,11 +35,11 @@ interface ContactFormProps {
     address: string;
     address_ar: string;
   };
-  secondSection:{
-    title:string;
-    title_ar:string;
-    description:string;
-    description_ar:string;
+  secondSection: {
+    title: string;
+    title_ar: string;
+    description: string;
+    description_ar: string;
   }
 }
 
@@ -292,23 +292,27 @@ const ContactPage = () => {
         </AdminItemContainer>
 
 
-
-        <div className="flex flex-col gap-2">
-          <Label className="pl-3 font-bold">Meta Title</Label>
-          <Input
-            type="text"
-            placeholder="Meta Title"
-            {...register("metaTitle")}
-          />
-        </div>
-        <div className="flex flex-col gap-2">
-          <Label className="pl-3 font-bold">Meta Description</Label>
-          <Input
-            type="text"
-            placeholder="Meta Description"
-            {...register("metaDescription")}
-          />
-        </div>
+        <AdminItemContainer>
+          <Label main>SEO</Label>
+          <div className="flex flex-col gap-2 p-5">
+            <div className="flex flex-col gap-2">
+              <Label className="font-bold">Title</Label>
+              <Input
+                type="text"
+                placeholder=""
+                {...register("metaTitle")}
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <Label className="font-bold">Description</Label>
+              <Input
+                type="text"
+                placeholder=""
+                {...register("metaDescription")}
+              />
+            </div>
+          </div>
+        </AdminItemContainer>
       </div>
 
       {/* Arabic Version */}
@@ -457,7 +461,7 @@ const ContactPage = () => {
           </div>
         </AdminItemContainer>
 
-                <AdminItemContainer>
+        <AdminItemContainer>
           <Label main>Second Section</Label>
           <div className="p-5 rounded-md flex flex-col gap-2">
             <div className="flex flex-col gap-2">
@@ -486,22 +490,27 @@ const ContactPage = () => {
         </AdminItemContainer>
 
 
-        <div className="flex flex-col gap-2">
-          <Label className="pl-3 font-bold">Meta Title</Label>
-          <Input
-            type="text"
-            placeholder="Meta Title"
-            {...register("metaTitle_ar")}
-          />
-        </div>
-        <div className="flex flex-col gap-2">
-          <Label className="pl-3 font-bold">Meta Description</Label>
-          <Input
-            type="text"
-            placeholder="Meta Description"
-            {...register("metaDescription_ar")}
-          />
-        </div>
+        <AdminItemContainer>
+          <Label main>SEO</Label>
+          <div className="flex flex-col gap-2 p-5">
+            <div className="flex flex-col gap-2">
+              <Label className="font-bold">Title</Label>
+              <Input
+                type="text"
+                placeholder=""
+                {...register("metaTitle_ar")}
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <Label className="font-bold">Description</Label>
+              <Input
+                type="text"
+                placeholder=""
+                {...register("metaDescription_ar")}
+              />
+            </div>
+          </div>
+        </AdminItemContainer>
       </div>
       <div className="col-span-2">
         <Button

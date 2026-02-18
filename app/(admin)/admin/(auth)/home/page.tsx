@@ -336,13 +336,13 @@ const HomePage = () => {
                           />
                           {errors.bannerSection?.items?.[index]
                             ?.highlightText && (
-                            <p className="text-red-500">
-                              {
-                                errors.bannerSection?.items?.[index]
-                                  ?.highlightText.message
-                              }
-                            </p>
-                          )}
+                              <p className="text-red-500">
+                                {
+                                  errors.bannerSection?.items?.[index]
+                                    ?.highlightText.message
+                                }
+                              </p>
+                            )}
                         </div>
                         <div className="flex flex-col gap-2">
                           <Label className="font-bold">Title</Label>
@@ -1171,13 +1171,13 @@ const HomePage = () => {
                               />
                               {errors.seventhSection?.items?.[index]
                                 ?.imageAlt && (
-                                <p className="text-red-500">
-                                  {
-                                    errors.seventhSection?.items?.[index]
-                                      ?.imageAlt.message
-                                  }
-                                </p>
-                              )}
+                                  <p className="text-red-500">
+                                    {
+                                      errors.seventhSection?.items?.[index]
+                                        ?.imageAlt.message
+                                    }
+                                  </p>
+                                )}
                             </div>
                           </div>
                         </div>
@@ -1329,13 +1329,13 @@ const HomePage = () => {
                               />
                               {errors.ninethSection?.items?.[index]
                                 ?.imageAlt && (
-                                <p className="text-red-500">
-                                  {
-                                    errors.ninethSection?.items?.[index]
-                                      ?.imageAlt.message
-                                  }
-                                </p>
-                              )}
+                                  <p className="text-red-500">
+                                    {
+                                      errors.ninethSection?.items?.[index]
+                                        ?.imageAlt.message
+                                    }
+                                  </p>
+                                )}
                             </div>
                           </div>
                         </div>
@@ -1487,22 +1487,27 @@ const HomePage = () => {
               </div>
             </div>
           </AdminItemContainer>
-          <div className="flex flex-col gap-2">
-            <Label className="pl-3 font-bold">Meta Title</Label>
-            <Input
-              type="text"
-              placeholder="Meta Title"
-              {...register("metaTitle")}
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            <Label className="pl-3 font-bold">Meta Description</Label>
-            <Input
-              type="text"
-              placeholder="Meta Description"
-              {...register("metaDescription")}
-            />
-          </div>
+          <AdminItemContainer>
+            <Label className="font-bold" main>SEO</Label>
+            <div className="p-5 flex flex-col gap-2">
+              <div className="flex flex-col gap-2">
+                <Label className="font-bold">Title</Label>
+                <Input
+                  type="text"
+                  placeholder=""
+                  {...register("metaTitle")}
+                />
+              </div>
+              <div className="flex flex-col gap-2">
+                <Label className="font-bold">Description</Label>
+                <Input
+                  type="text"
+                  placeholder=""
+                  {...register("metaDescription")}
+                />
+              </div>
+            </div>
+          </AdminItemContainer>
         </div>
       </div>
 
@@ -1562,13 +1567,13 @@ const HomePage = () => {
                           />
                           {errors.bannerSection?.items?.[index]
                             ?.imageAlt_ar && (
-                            <p className="text-red-500">
-                              {
-                                errors.bannerSection?.items?.[index]
-                                  ?.imageAlt_ar?.message
-                              }
-                            </p>
-                          )}
+                              <p className="text-red-500">
+                                {
+                                  errors.bannerSection?.items?.[index]
+                                    ?.imageAlt_ar?.message
+                                }
+                              </p>
+                            )}
                         </div>
                       </div>
                     </div>
@@ -1585,13 +1590,13 @@ const HomePage = () => {
                           />
                           {errors.bannerSection?.items?.[index]
                             ?.highlightText_ar && (
-                            <p className="text-red-500">
-                              {
-                                errors.bannerSection?.items?.[index]
-                                  ?.highlightText_ar.message
-                              }
-                            </p>
-                          )}
+                              <p className="text-red-500">
+                                {
+                                  errors.bannerSection?.items?.[index]
+                                    ?.highlightText_ar.message
+                                }
+                              </p>
+                            )}
                         </div>
                         <div className="flex flex-col gap-2">
                           <Label className="font-bold">Title</Label>
@@ -1773,13 +1778,13 @@ const HomePage = () => {
                               />
                               {errors.thirdSection?.items?.[index]
                                 ?.logoAlt_ar && (
-                                <p className="text-red-500">
-                                  {
-                                    errors.thirdSection?.items?.[index]
-                                      ?.logoAlt_ar.message
-                                  }
-                                </p>
-                              )}
+                                  <p className="text-red-500">
+                                    {
+                                      errors.thirdSection?.items?.[index]
+                                        ?.logoAlt_ar.message
+                                    }
+                                  </p>
+                                )}
                             </div>
                           </div>
                         </div>
@@ -2099,13 +2104,13 @@ const HomePage = () => {
                               />
                               {errors.fifthSection?.items?.[index]
                                 ?.logoAlt_ar && (
-                                <p className="text-red-500">
-                                  {
-                                    errors.fifthSection?.items?.[index]
-                                      ?.logoAlt_ar.message
-                                  }
-                                </p>
-                              )}
+                                  <p className="text-red-500">
+                                    {
+                                      errors.fifthSection?.items?.[index]
+                                        ?.logoAlt_ar.message
+                                    }
+                                  </p>
+                                )}
                             </div>
                           </div>
                         </div>
@@ -2372,13 +2377,13 @@ const HomePage = () => {
                               />
                               {errors.seventhSection?.items?.[index]
                                 ?.imageAlt_ar && (
-                                <p className="text-red-500">
-                                  {
-                                    errors.seventhSection?.items?.[index]
-                                      ?.imageAlt_ar.message
-                                  }
-                                </p>
-                              )}
+                                  <p className="text-red-500">
+                                    {
+                                      errors.seventhSection?.items?.[index]
+                                        ?.imageAlt_ar.message
+                                    }
+                                  </p>
+                                )}
                             </div>
                           </div>
                         </div>
@@ -2519,13 +2524,13 @@ const HomePage = () => {
                               />
                               {errors.ninethSection?.items?.[index]
                                 ?.imageAlt_ar && (
-                                <p className="text-red-500">
-                                  {
-                                    errors.ninethSection?.items?.[index]
-                                      ?.imageAlt_ar.message
-                                  }
-                                </p>
-                              )}
+                                  <p className="text-red-500">
+                                    {
+                                      errors.ninethSection?.items?.[index]
+                                        ?.imageAlt_ar.message
+                                    }
+                                  </p>
+                                )}
                             </div>
                           </div>
                         </div>
@@ -2667,22 +2672,27 @@ const HomePage = () => {
               </div>
             </div>
           </AdminItemContainer>
-          <div className="flex flex-col gap-2">
-            <Label className="pl-3 font-bold">Meta Title</Label>
-            <Input
-              type="text"
-              placeholder="Meta Title"
-              {...register("metaTitle_ar")}
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            <Label className="pl-3 font-bold">Meta Description</Label>
-            <Input
-              type="text"
-              placeholder="Meta Description"
-              {...register("metaDescription_ar")}
-            />
-          </div>
+          <AdminItemContainer>
+            <Label className="font-bold" main>SEO</Label>
+            <div className="p-5 flex flex-col gap-2">
+              <div className="flex flex-col gap-2">
+                <Label className="font-bold">Title</Label>
+                <Input
+                  type="text"
+                  placeholder=""
+                  {...register("metaTitle_ar")}
+                />
+              </div>
+              <div className="flex flex-col gap-2">
+                <Label className="font-bold">Description</Label>
+                <Input
+                  type="text"
+                  placeholder=""
+                  {...register("metaDescription_ar")}
+                />
+              </div>
+            </div>
+          </AdminItemContainer>
         </div>
       </div>
       <div className="col-span-2">

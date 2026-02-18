@@ -441,13 +441,13 @@ const AlumniPage = () => {
                                                             />
                                                             {errors.testimonialsSection?.items?.[index]
                                                                 ?.profileImageAlt && (
-                                                                <p className="text-red-500">
-                                                                    {
-                                                                        errors.testimonialsSection?.items?.[index]
-                                                                            ?.profileImageAlt.message
-                                                                    }
-                                                                </p>
-                                                            )}
+                                                                    <p className="text-red-500">
+                                                                        {
+                                                                            errors.testimonialsSection?.items?.[index]
+                                                                                ?.profileImageAlt.message
+                                                                        }
+                                                                    </p>
+                                                                )}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -526,14 +526,19 @@ const AlumniPage = () => {
                         </div>
                     </AdminItemContainer>
 
-                    <div className="flex flex-col gap-2">
-                        <Label className="pl-3 font-bold">Meta Title</Label>
-                        <Input type="text" placeholder="Meta Title" {...register("metaTitle")} />
-                    </div>
-                    <div className="flex flex-col gap-2">
-                        <Label className="pl-3 font-bold">Meta Description</Label>
-                        <Input type="text" placeholder="Meta Description" {...register("metaDescription")} />
-                    </div>
+                    <AdminItemContainer>
+                        <Label main>SEO</Label>
+                        <div className="flex flex-col gap-2 p-5">
+                            <div className="flex flex-col gap-2">
+                                <Label className="font-bold">Title</Label>
+                                <Input type="text" placeholder="" {...register("metaTitle")} />
+                            </div>
+                            <div className="flex flex-col gap-2">
+                                <Label className="font-bold">Description</Label>
+                                <Input type="text" placeholder="" {...register("metaDescription")} />
+                            </div>
+                        </div>
+                    </AdminItemContainer>
                 </div>
             </div>
 
@@ -852,14 +857,19 @@ const AlumniPage = () => {
                         </div>
                     </AdminItemContainer>
 
-                    <div className="flex flex-col gap-2">
-                        <Label className="pl-3 font-bold">Meta Title</Label>
-                        <Input type="text" placeholder="Meta Title" {...register("metaTitle_ar")} />
-                    </div>
-                    <div className="flex flex-col gap-2">
-                        <Label className="pl-3 font-bold">Meta Description</Label>
-                        <Input type="text" placeholder="Meta Description" {...register("metaDescription_ar")} />
-                    </div>
+                    <AdminItemContainer>
+                        <Label main>SEO</Label>
+                        <div className="flex flex-col gap-2 p-5">
+                            <div className="flex flex-col gap-2">
+                                <Label className="font-bold">Title</Label>
+                                <Input type="text" placeholder="" {...register("metaTitle_ar")} />
+                            </div>
+                            <div className="flex flex-col gap-2">
+                                <Label className="font-bold">Description</Label>
+                                <Input type="text" placeholder="" {...register("metaDescription_ar")} />
+                            </div>
+                        </div>
+                    </AdminItemContainer>
                 </div>
             </div>
 
