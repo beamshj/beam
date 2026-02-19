@@ -1357,3 +1357,22 @@ html[dir="rtl"] {
 .ql-editor {
   overflow: hidden
 }
+
+.students-achievemnets-content-html ul {
+  list-style: disc;
+  padding-left: 1.25rem;
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.students-achievemnets-content-html li {
+  color: var(--colorpara);
+  font-weight: 400;
+}
+
+.students-achievemnets-content-html p {
+  margin-bottom: 0.75rem;
+}
