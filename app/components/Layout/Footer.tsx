@@ -266,14 +266,14 @@ const Footer = () => {
                       {isArabic ? "الأخبار والفعاليات" : "Media Gallery"}
                     </span>
                   </Link> */}
-                  <Link
+                  {/* <Link
                     href="/news-&-media/press-release"
                     className="group relative overflow-hidden hover:text-primary"
                   >
                     <span className={`block transition-transform duration-300 group-hover:${isArabic ? "-translate-x-1" : "translate-x-1"}`}>
                       {isArabic ? "البيانات الصحفية" : "Press Release"}
                     </span>
-                  </Link>
+                  </Link> */}
                   <Link
                     href="/news-&-media/press-release"
                     className="group relative overflow-hidden hover:text-primary"
