@@ -1,7 +1,5 @@
 import Index from "@/app/components/StudentsAchievements";
 
-export const dynamic = "force-dynamic";
-
 const Page = async () => {
   const response = await fetch(`${process.env.BASE_URL}/api/admin/students-achievements`, {
     next: { revalidate: 60 },
