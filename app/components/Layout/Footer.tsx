@@ -100,7 +100,7 @@ const Footer = () => {
                       {isArabic ? "8002326 بيم" : "800 BEAM (2326)"}
                     </motion.p>
                     <motion.p
-                      className="text-md font-light break-words lettersp-2 text-primary"
+                      className="text-md font-light break-words lettersp-1 text-primary"
                       variants={fadeUponeone}
                     >
                       enquiries@beam.co.ae
@@ -110,7 +110,7 @@ const Footer = () => {
                     variants={fadeUponeone}
                     className="mt-5 2xl:mt-10 pt-1"
                   >
-                    <p className="text-md 2xl:text-lg font-light lettersp-2">
+                    <p className="text-md font-light lettersp-1">
                       {isArabic ? "برج سيتي جيت" : "The CityGate Tower"}
                       <br />
                       {isArabic
