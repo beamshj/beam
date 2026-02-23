@@ -9,11 +9,12 @@ import Image from "next/image";
 import SplitText from "@/components/SplitText";
 import { moveUp } from "../../motionVarients";
 import { motion } from "framer-motion";
-import { schoolData } from "../data";
+// import { schoolData } from "../data";
 import ReCAPTCHA from "react-google-recaptcha";
 import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 import "../../Common/react-select-custom.css";
 import { useApplyLang } from "@/lib/applyLang";
+import { BeamSchoolType } from "../../BeamSchools/type";
 
 const formSchema = z.object({
   fullName: z.string().min(1, "Required"),
@@ -30,6 +31,7 @@ type FormData = z.infer<typeof formSchema>;
 
 interface RegisterInterestProps {
   className?: string;
+  schoolData: BeamSchoolType["schools"];
 }
 
 // Custom dropdown indicator
@@ -47,7 +49,8 @@ const DropdownIndicator = () => {
   );
 };
 const RegisterInterest = forwardRef<HTMLDivElement, RegisterInterestProps>(
-  ({ className }, ref) => {
+  ({ className, schoolData }, ref) => {
+    console.log("schoolData", schoolData);
     const [loadCaptcha, setLoadCaptcha] = useState(false);
     const captchaRef = useRef<HTMLDivElement>(null);
     const recaptchaRef = useRef<ReCAPTCHA>(null);
@@ -115,14 +118,16 @@ const RegisterInterest = forwardRef<HTMLDivElement, RegisterInterestProps>(
       return () => clearTimeout(timer);
     }, []);
 
-    const tSchoolData = useApplyLang(schoolData);
     const getGradeOptions = (schoolName: string, isArabic: boolean) => {
-      const school = tSchoolData.find((s) => s.name === schoolName);
-      if (!school) return [];
+      const school = schoolData.find(
+        (s) => s.registerInterest?.schoolName === schoolName,
+      );
 
-      return school.grades.map((g) => ({
-        value: g.en, // stable value
-        label: isArabic ? g.ar : g.en, // UI label
+      if (!school || !school.registerInterest) return [];
+
+      return school.registerInterest.grades.map((g) => ({
+        value: g.en,
+        label: isArabic ? g.ar : g.en,
       }));
     };
 
@@ -385,10 +390,14 @@ const RegisterInterest = forwardRef<HTMLDivElement, RegisterInterestProps>(
                     render={({ field }) => (
                       <Select
                         {...field}
-                        options={schoolData.map((school) => ({
-                          value: isArabic ? school.name_ar : school.name,
-                          label: isArabic ? school.name_ar : school.name,
-                        }))}
+                        options={schoolData
+                          .filter((school) => school.registerInterest) // safety
+                          .map((school) => ({
+                            value: school.registerInterest.schoolName,
+                            label: isArabic
+                              ? school.registerInterest.schoolName_ar
+                              : school.registerInterest.schoolName,
+                          }))}
                         className="custom-select"
                         classNamePrefix="custom-select"
                         placeholder={
@@ -403,8 +412,10 @@ const RegisterInterest = forwardRef<HTMLDivElement, RegisterInterestProps>(
                         value={
                           schoolData
                             .map((school) => ({
-                              value: isArabic ? school.name_ar : school.name,
-                              label: isArabic ? school.name_ar : school.name,
+                              value: school.registerInterest.schoolName,
+                              label: isArabic
+                                ? school.registerInterest.schoolName_ar
+                                : school.registerInterest.schoolName,
                             }))
                             .find((opt) => opt.value === field.value) || null
                         }

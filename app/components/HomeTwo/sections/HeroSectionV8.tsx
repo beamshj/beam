@@ -122,9 +122,9 @@ const animateCinematicCurtain = (
 
   const gradient = `linear-gradient(180deg,rgba(0,0,0,0) 21.7%,rgba(0,0,0,0.6) 63.57%,rgba(0,0,0,0.8) 100%)`;
 
-  // ── Hide swiper immediately — no raw slide can flash through ──────────────
+  // ── Safety fallback: ensure swiper is hidden (already set in handleBeforeTransition) ──
   const swiperEl = container.querySelector(".swiper") as HTMLElement | null;
-  if (swiperEl) swiperEl.style.opacity = "0";
+  if (swiperEl && swiperEl.style.opacity !== "0") swiperEl.style.opacity = "0";
 
   const root = document.createElement("div");
   root.style.cssText = `
@@ -309,6 +309,10 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
       directionRef.current = delta >= 0 ? 1 : -1;
 
       isAnimating.current = true;
+
+      // ── FIX: Hide swiper IMMEDIATELY, synchronously, before any async work ──
+      const swiperEl = sectionRef.current.querySelector(".swiper") as HTMLElement | null;
+      if (swiperEl) swiperEl.style.opacity = "0";
 
       // No content hiding — content stays visible during slide transitions
       animateCinematicCurtain(

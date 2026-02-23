@@ -33,6 +33,14 @@ export type BeamSchoolType = {
             number:string,
             value:string,
         }[],
+        registerInterest:{
+            schoolName:string,
+            schoolName_ar:string,
+            grades:{
+                en:string,
+                ar:string,
+            }[],
+        }
     }[],
 }
 

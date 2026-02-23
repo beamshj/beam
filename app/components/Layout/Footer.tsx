@@ -275,7 +275,7 @@ const Footer = () => {
                     </span>
                   </Link> */}
                   <Link
-                    href="/news-&-media/press-release"
+                    href="/contact-us?scroll=register"
                     className="group relative overflow-hidden hover:text-primary"
                   >
                     <span className={`block transition-transform duration-300 group-hover:${isArabic ? "-translate-x-1" : "translate-x-1"}`}>
