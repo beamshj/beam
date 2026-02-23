@@ -68,7 +68,7 @@ const Index = ({ contactData, schooldata }: IndexProps) => {
       />
       <ContactForm data={contactData.firstSection} />
       <OurSchools data={schooldata} contactData = {contactData} />
-      <RegisterInterest ref={registerRef} />
+      <RegisterInterest ref={registerRef} schoolData={schooldata.schools} />
     </>
   );
 };

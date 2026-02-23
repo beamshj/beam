@@ -126,9 +126,11 @@ const animateCinematicCurtain = (
   const MAX_R   = Math.sqrt(Math.max(OX, W - OX) ** 2 + Math.max(OY, H - OY) ** 2) * 1.05;
   const FEATHER = MAX_R * 0.28;
 
-  // ── Hide swiper wrapper immediately so no raw slide flash is possible ──────
+  // ── Safety fallback: ensure swiper is hidden (already set in handleBeforeTransition) ──
   const swiperWrapper = container.querySelector(".swiper") as HTMLElement | null;
-  if (swiperWrapper) swiperWrapper.style.opacity = "0";
+  if (swiperWrapper && swiperWrapper.style.opacity !== "0") {
+    swiperWrapper.style.opacity = "0";
+  }
 
   // ── Main canvas — sits above swiper, below content ────────────────────────
   const canvas = document.createElement("canvas");
@@ -341,6 +343,10 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
       directionRef.current = delta >= 0 ? 1 : -1;
 
       isAnimating.current = true;
+
+      // ── FIX: Hide swiper IMMEDIATELY here, synchronously, before any async work ──
+      const swiperEl = sectionRef.current.querySelector(".swiper") as HTMLElement | null;
+      if (swiperEl) swiperEl.style.opacity = "0";
 
       animateCinematicCurtain(
         prevImage,

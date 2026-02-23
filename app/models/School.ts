@@ -57,6 +57,16 @@ const schoolSchema = new mongoose.Schema({
           value_ar: { type: String },
         },
       ],
+      registerInterest: {
+        schoolName: { type: String },
+        schoolName_ar: { type: String },
+        grades: [
+          {
+            en: { type: String },
+            ar: { type: String },
+          },
+        ],
+      },
     },
   ],
 });

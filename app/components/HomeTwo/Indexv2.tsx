@@ -22,6 +22,6 @@ const Indexv2 = ({data}: {data: HomeProps}) => {
       <HeroSectionV9 data={data.bannerSection}/>
     </>
   );
-};``
+};
 
 export default Indexv2;
