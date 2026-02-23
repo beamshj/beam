@@ -12,9 +12,9 @@ import { useApplyLang } from "@/lib/applyLang";
 import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 import { useRouter } from "next/navigation";
 
-// ─── Preload all slide images ─────────────────────────────────────────────────
-// Warms the browser cache on mount so images are always decoded when a
-// transition fires — eliminates the rare glitch from cache misses.
+// ─── Preload all slide images on module level ─────────────────────────────────
+// Called once after mount — warms the browser cache so images are always ready
+// when a transition fires, eliminating the rare glitch caused by cache misses.
 const preloadImages = (urls: string[]) => {
   urls.forEach((url) => {
     if (!url) return;
@@ -50,7 +50,6 @@ const animateContentIn = () => {
 const animateEntry = (container: HTMLElement) => {
   const W = container.offsetWidth;
 
-  // Hide content immediately — only slider image visible during flash
   gsap.set([".hero-title", ".hero-button", ".hero-divider", ".hero-pagination"], { opacity: 0, y: 22 });
 
   const root = document.createElement("div");
@@ -86,7 +85,7 @@ const animateEntry = (container: HTMLElement) => {
   const tl = gsap.timeline({
     onComplete: () => {
       root.remove();
-      animateContentIn(); // content animates in only after flash completes
+      animateContentIn();
     },
   });
 
@@ -97,12 +96,12 @@ const animateEntry = (container: HTMLElement) => {
   }, 0);
 };
 
-// ─── Cinematic Curtain Reveal ─────────────────────────────────────────────────
+// ─── Fluid Splash Dissolve ────────────────────────────────────────────────────
 //
-//  DOM slice animation. Swiper is hidden (opacity:0) for the entire duration
-//  so no raw slide — including its object-cover jump — can ever bleed through.
-//  Swiper opacity is restored in onComplete before root fades out, making the
-//  handoff seamless. Images are pre-cached on mount so slices paint instantly.
+//  Canvas-based transition. gsap.ticker drives the draw loop (tab-safe).
+//  Swiper slides are hidden via opacity:0 on the swiper wrapper during the
+//  transition so no raw slide ever flashes through. Canvas is the single
+//  source of truth for what's visible on screen during the transition.
 //
 const animateCinematicCurtain = (
   prevImage: string,
@@ -111,132 +110,166 @@ const animateCinematicCurtain = (
   onDone: () => void,
   container: HTMLElement
 ) => {
-  const W = container.offsetWidth;
-  const H = container.offsetHeight;
+  const W   = container.offsetWidth;
+  const H   = container.offsetHeight;
+  const DPR = Math.min(window.devicePixelRatio || 1, 2);
 
-  const SLICE_COUNT     = 15;
-  const sliceH          = H / SLICE_COUNT;
-  const BASE_DUR        = 0.88;
-  const MAX_EXTRA_DELAY = 0.38;
-  const startX          = direction === 1 ? W + 120 : -(W + 120);
+  const GRADIENT_STOPS = [
+    { stop: 0,     alpha: 0   },
+    { stop: 0.217, alpha: 0   },
+    { stop: 0.636, alpha: 0.6 },
+    { stop: 1,     alpha: 0.8 },
+  ];
 
-  const gradient = `linear-gradient(180deg,rgba(0,0,0,0) 21.7%,rgba(0,0,0,0.6) 63.57%,rgba(0,0,0,0.8) 100%)`;
+  const OX      = direction === 1 ? W * 0.05 : W * 0.95;
+  const OY      = H * 0.5;
+  const MAX_R   = Math.sqrt(Math.max(OX, W - OX) ** 2 + Math.max(OY, H - OY) ** 2) * 1.05;
+  const FEATHER = MAX_R * 0.28;
 
-  // ── Hide swiper immediately — no raw slide can flash through ──────────────
-  const swiperEl = container.querySelector(".swiper") as HTMLElement | null;
-  if (swiperEl) swiperEl.style.opacity = "0";
+  // ── Hide swiper wrapper immediately so no raw slide flash is possible ──────
+  const swiperWrapper = container.querySelector(".swiper") as HTMLElement | null;
+  if (swiperWrapper) swiperWrapper.style.opacity = "0";
 
-  const root = document.createElement("div");
-  root.style.cssText = `
-    position:absolute; inset:0; z-index:60;
-    pointer-events:none; overflow:hidden;
+  // ── Main canvas — sits above swiper, below content ────────────────────────
+  const canvas = document.createElement("canvas");
+  canvas.width  = W * DPR;
+  canvas.height = H * DPR;
+  canvas.style.cssText = `
+    position:absolute; inset:0;
+    width:${W}px; height:${H}px;
+    z-index:60; pointer-events:none;
   `;
-  container.appendChild(root);
+  container.appendChild(canvas);
+  const ctx = canvas.getContext("2d")!;
+  ctx.scale(DPR, DPR);
 
-  const prevLayer = document.createElement("div");
-  prevLayer.style.cssText = `position:absolute; inset:0;`;
-  const prevImg = document.createElement("img");
-  prevImg.src = prevImage;
-  prevImg.style.cssText = `
-    width:100%; height:100%; object-fit:cover;
-    will-change:transform, filter;
-  `;
-  const prevGrad = document.createElement("div");
-  prevGrad.style.cssText = `position:absolute; inset:0; background:${gradient};`;
-  prevLayer.appendChild(prevImg);
-  prevLayer.appendChild(prevGrad);
-  root.appendChild(prevLayer);
+  // ── Offscreen canvas — created once, reused every frame ───────────────────
+  const offscreen = document.createElement("canvas");
+  offscreen.width  = W * DPR;
+  offscreen.height = H * DPR;
+  const oc = offscreen.getContext("2d")!;
+  oc.scale(DPR, DPR);
 
-  const tl = gsap.timeline({
-    onComplete: () => {
-      // Restore swiper before fading root so handoff is seamless
-      if (swiperEl) swiperEl.style.opacity = "1";
-      gsap.to(root, {
-        opacity: 0,
-        duration: 0.1,
-        ease: "none",
-        onComplete: () => {
-          root.remove();
-          onDone();
-        },
-      });
-    },
-  });
+  // ── Images — use pre-cached refs ───────────────────────────────────────────
+  const imgPrev = new window.Image();
+  const imgNext = new window.Image();
+  imgPrev.src   = prevImage;
+  imgNext.src   = nextImage;
 
-  tl.to(prevImg, {
-    scale: 1.045,
-    duration: MAX_EXTRA_DELAY + BASE_DUR * 0.9,
-    ease: "power2.inOut",
-  }, 0);
+  // ── GSAP proxy state ───────────────────────────────────────────────────────
+  const state = { radius: 0, prevOpacity: 1, prevDrift: 0 };
 
-  for (let i = 0; i < SLICE_COUNT; i++) {
-    const t_n  = i / (SLICE_COUNT - 1);
-    const delay = MAX_EXTRA_DELAY * (1 - Math.sin(Math.PI * t_n));
+  let done = false;
 
-    const slice = document.createElement("div");
-    slice.style.cssText = `
-      position:absolute;
-      left:0; top:${i * sliceH}px;
-      width:100%; height:${sliceH + 1}px;
-      overflow:hidden;
-      transform-origin:center center;
-      will-change:transform;
-    `;
+  // ── Helpers ────────────────────────────────────────────────────────────────
+  const applyGradient = (c: CanvasRenderingContext2D, w: number, h: number) => {
+    const g = c.createLinearGradient(0, 0, 0, h);
+    GRADIENT_STOPS.forEach(({ stop, alpha }) =>
+      g.addColorStop(stop, `rgba(0,0,0,${alpha})`)
+    );
+    c.globalAlpha = 1;
+    c.fillStyle   = g;
+    c.fillRect(0, 0, w, h);
+  };
 
-    const img = document.createElement("img");
-    img.src = nextImage;
-    img.style.cssText = `
-      position:absolute;
-      left:0; top:${-i * sliceH}px;
-      width:100%; height:${H}px;
-      object-fit:cover;
-      will-change:transform;
-    `;
+  const coverDraw = (
+    c: CanvasRenderingContext2D,
+    img: HTMLImageElement,
+    w: number, h: number,
+    dx = 0, alpha = 1
+  ) => {
+    if (!img.naturalWidth) return;
+    const s  = Math.max(w / img.naturalWidth, h / img.naturalHeight);
+    const iw = img.naturalWidth  * s;
+    const ih = img.naturalHeight * s;
+    c.globalAlpha = alpha;
+    c.drawImage(img, (w - iw) / 2 + dx, (h - ih) / 2, iw, ih);
+  };
 
-    const imgGrad = document.createElement("div");
-    imgGrad.style.cssText = `
-      position:absolute;
-      left:0; top:${-i * sliceH}px;
-      width:100%; height:${H}px;
-      background:${gradient};
-      pointer-events:none;
-    `;
+  // ── Draw — gsap.ticker, runs even when tab is hidden ──────────────────────
+  const draw = () => {
+    if (done) return;
+    ctx.clearRect(0, 0, W, H);
 
-    const shimmer = document.createElement("div");
-    shimmer.style.cssText = `
-      position:absolute; inset:0;
-      background:rgba(255,255,255,0.14);
-      opacity:0; pointer-events:none;
-    `;
+    // Layer 1: outgoing image
+    ctx.save();
+    ctx.globalCompositeOperation = "source-over";
+    coverDraw(ctx, imgPrev, W, H, state.prevDrift, state.prevOpacity);
+    applyGradient(ctx, W, H);
+    ctx.restore();
 
-    slice.appendChild(img);
-    slice.appendChild(imgGrad);
-    slice.appendChild(shimmer);
-    root.appendChild(slice);
+    // Layer 2: incoming image through feathered radial mask
+    if (state.radius > 0) {
+      oc.globalCompositeOperation = "source-over";
+      oc.globalAlpha = 1;
+      oc.clearRect(0, 0, W, H);
+      coverDraw(oc, imgNext, W, H, 0, 1);
+      applyGradient(oc, W, H);
 
-    gsap.set(slice, { x: startX, scaleY: 0.93 });
-    gsap.set(img,   { x: -startX });
+      oc.globalCompositeOperation = "destination-in";
+      const inner = Math.max(0, state.radius - FEATHER);
+      const mask  = oc.createRadialGradient(OX, OY, inner, OX, OY, state.radius);
+      mask.addColorStop(0, "rgba(0,0,0,1)");
+      mask.addColorStop(1, "rgba(0,0,0,0)");
+      oc.fillStyle = mask;
+      oc.fillRect(0, 0, W, H);
 
-    tl.to(slice, {
-      x: 0,
-      scaleY: 1,
-      duration: BASE_DUR,
-      ease: "expo.out",
-    }, delay);
+      ctx.save();
+      ctx.globalCompositeOperation = "source-over";
+      ctx.globalAlpha = 1;
+      ctx.drawImage(offscreen, 0, 0, W, H);
+      ctx.restore();
+    }
+  };
 
-    tl.to(img, {
-      x: 0,
-      duration: BASE_DUR,
-      ease: "expo.out",
-    }, delay);
+  gsap.ticker.add(draw);
+
+  // ── Cleanup — restore swiper, fade canvas, call onDone ────────────────────
+  const cleanup = () => {
+    gsap.ticker.remove(draw);
+    // Restore swiper visibility before canvas fades so the handoff is seamless
+    if (swiperWrapper) swiperWrapper.style.opacity = "1";
+    gsap.to(canvas, {
+      opacity: 0,
+      duration: 0.1,
+      ease: "none",
+      onComplete: () => {
+        done = true;
+        canvas.remove();
+        onDone();
+      },
+    });
+  };
+
+  // ── Timeline ──────────────────────────────────────────────────────────────
+  function runTimeline() {
+    const tl = gsap.timeline({ onComplete: cleanup });
+
+    tl.to(state, {
+      radius: MAX_R * 1.2,
+      duration: 1.1,
+      ease: "power2.inOut",
+    }, 0);
+
+    tl.to(state, {
+      prevDrift:   direction * W * 0.03,
+      prevOpacity: 0,
+      duration: 0.75,
+      ease: "power1.inOut",
+    }, 0.15);
   }
 
-  // Safety: guarantee onDone fires even if something goes wrong
-  setTimeout(() => {
-    if (swiperEl) swiperEl.style.opacity = "1";
-    root.remove();
-    onDone();
-  }, 4000);
+  // ── Start once both images decoded ─────────────────────────────────────────
+  let loaded = 0;
+  const onLoad = () => {
+    loaded++;
+    if (loaded === 2) runTimeline();
+  };
+  if (imgPrev.complete) onLoad(); else imgPrev.onload = onLoad;
+  if (imgNext.complete) onLoad(); else imgNext.onload = onLoad;
+
+  // Safety: guarantee cleanup if images never load within 3s
+  setTimeout(() => { if (!done) cleanup(); }, 3000);
 };
 
 // ─── Component ────────────────────────────────────────────────────────────────
@@ -300,7 +333,6 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
       if (!nextImage || !prevImage) return;
       if (nextIndex === prevIndexRef.current) return;
 
-      // Detect direction
       const total = t.items.length;
       let delta = nextIndex - prevIndexRef.current;
       if (Math.abs(delta) > total / 2) {
@@ -310,7 +342,6 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
 
       isAnimating.current = true;
 
-      // No content hiding — content stays visible during slide transitions
       animateCinematicCurtain(
         prevImage,
         nextImage,

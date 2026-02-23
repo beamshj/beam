@@ -4,12 +4,11 @@
 // import HeroSectionV5 from "./sections/HeroSectionV5";
 // import HeroSectionV6 from "./sections/HeroSectionV6";
 // import HeroSectionV7 from "./sections/HeroSectionV7";
-// import HeroSectionV8 from "./sections/HeroSectionV8";
-import HeroSectionV9 from "./sections/HeroSectionV9";
+import HeroSectionV8 from "./sections/HeroSectionV8";
 
 import { HomeProps } from "./type";
 
-const Indexv2 = ({data}: {data: HomeProps}) => {
+const Indexv4 = ({data}: {data: HomeProps}) => {
   return (
     <>
       {/* <HeroSectionV6 data={data.bannerSection}/> */}
@@ -18,10 +17,9 @@ const Indexv2 = ({data}: {data: HomeProps}) => {
       {/* <HeroSectionV4 data={data.bannerSection}/> */}
       {/* <HeroSectionV5 data={data.bannerSection}/> */}
       {/* <HeroSectionV7 data={data.bannerSection}/> */}
-      {/* <HeroSectionV8 data={data.bannerSection}/> */}
-      <HeroSectionV9 data={data.bannerSection}/>
+      <HeroSectionV8 data={data.bannerSection}/>
     </>
   );
 };``
 
-export default Indexv2;
+export default Indexv4;
