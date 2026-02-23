@@ -228,7 +228,7 @@ const Footer = () => {
                       {isArabic ? "إنجازات الطلاب" : "Students’ Achievements"}
                     </span>
                   </Link>
-                  <Link
+                  {/* <Link
                     href="/contact-us?scroll=register"
                     className="group relative overflow-hidden hover:text-primary max-md:mb-3"
                   >
@@ -243,7 +243,7 @@ const Footer = () => {
                     <span className={`block transition-transform duration-300 group-hover:${isArabic ? "-translate-x-1" : "translate-x-1"}`}>
                       {isArabic ? "سجل اهتمام" : "Application Process"}
                     </span>
-                  </Link>
+                  </Link> */}
                 </motion.div>
 
                 <motion.div

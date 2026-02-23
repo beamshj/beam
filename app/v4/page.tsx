@@ -1,5 +1,5 @@
 
-import Indexv2 from "@/app/components/HomeTwo/Indexv2";
+import Indev4 from "@/app/components/HomeTwo/Indev4";
 
 const Page = async () => {
   
@@ -10,7 +10,7 @@ const Page = async () => {
 
   return (
     <>
-      <Indexv2 data={data.data} />
+      <Indev4 data={data.data} />
     </>
   );
 };
