@@ -1,6 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import Image from "next/image";
+import { useState, useEffect } from "react";
 import { FaFacebookF } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaLinkedinIn } from "react-icons/fa6";
@@ -17,6 +16,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
+import LangLink from "@/lib/LangLink";
 
 const formSchema = z.object({
   name: z.string().min(1, "Required"),
@@ -157,7 +157,7 @@ const Footer = () => {
                   {isArabic ? "روابط سريعة" : "Quick Links"}
                 </h3>
                 <div className="flex gap-[7px] ">
-                  <Link
+                  <LangLink
                     target="_blank"
                     href="https://www.facebook.com/beamedusocial/"
                   >
@@ -167,16 +167,16 @@ const Footer = () => {
                     >
                       <FaFacebookF className="text-sm" />
                     </motion.div>
-                  </Link>
-                  <Link target="_blank" href="https://x.com/beamedusocial">
+                  </LangLink>
+                  <LangLink target="_blank" href="https://x.com/beamedusocial">
                     <motion.div
                       variants={fadeUponeone}
                       className="rounded-full w-[46px] h-[46px] border border-white/35 hover:border-transparent flex items-center justify-center  hover:bg-primary cursor-pointer"
                     >
                       <FaXTwitter className="text-sm" />
                     </motion.div>
-                  </Link>
-                  <Link
+                  </LangLink>
+                  <LangLink
                     target="_blank"
                     href="https://www.linkedin.com/company/bukhatireducation/"
                   >
@@ -186,8 +186,8 @@ const Footer = () => {
                     >
                       <FaLinkedinIn className="text-sm" />
                     </motion.div>
-                  </Link>
-                  <Link
+                  </LangLink>
+                  <LangLink
                     target="_blank"
                     href="https://www.instagram.com/beamedusocial/"
                   >
@@ -197,8 +197,8 @@ const Footer = () => {
                     >
                       <FaInstagram className="text-sm" />
                     </motion.div>
-                  </Link>
-                  <Link
+                  </LangLink>
+                  <LangLink
                     target="_blank"
                     href="https://www.youtube.com/c/BukhatirEducation"
                   >
@@ -208,7 +208,7 @@ const Footer = () => {
                     >
                       <FaYoutube className="text-sm" />
                     </motion.div>
-                  </Link>
+                  </LangLink>
                 </div>
               </div>
               <motion.div
@@ -222,7 +222,7 @@ const Footer = () => {
                   className="flex flex-col gap-3 text-sm font-light"
                   variants={fadeUponeone}
                 >
-                  <Link
+                  <LangLink
                     href="/about-us/our-story"
                     className="group relative overflow-hidden hover:text-primary"
                   >
@@ -231,8 +231,8 @@ const Footer = () => {
                     >
                       {isArabic ? "نبذة عنا" : "About Us"}
                     </span>
-                  </Link>
-                  <Link
+                  </LangLink>
+                  <LangLink
                     href="/beam-schools"
                     className="group relative overflow-hidden hover:text-primary"
                   >
@@ -241,8 +241,8 @@ const Footer = () => {
                     >
                       {isArabic ? "مدارسنا" : "Our Schools"}
                     </span>
-                  </Link>
-                  <Link
+                  </LangLink>
+                  <LangLink
                     href="/about-us/professional-learning-program"
                     className="group relative overflow-hidden hover:text-primary"
                   >
@@ -253,8 +253,8 @@ const Footer = () => {
                         ? "برنامج التطوير المهني"
                         : "Professional Learning Program"}
                     </span>
-                  </Link>
-                  <Link
+                  </LangLink>
+                  <LangLink
                     href="/beam-schools/school-scholarship-programs"
                     className="group relative overflow-hidden hover:text-primary"
                   >
@@ -265,7 +265,7 @@ const Footer = () => {
                         ? "برنامج المنح الدراسية"
                         : "School Scholarship Programs"}
                     </span>
-                  </Link>
+                  </LangLink>
                   {/* <Link
                     href="/beam-schools/students-achievements"
                     className="group relative overflow-hidden hover:text-primary"
@@ -312,7 +312,7 @@ const Footer = () => {
                       {isArabic ? "البيانات الصحفية" : "Press Release"}
                     </span>
                   </Link> */}
-                  <Link
+                  <LangLink
                     href="/beam-schools/school-uniqueness"
                     className="group relative overflow-hidden hover:text-primary"
                   >
@@ -321,8 +321,8 @@ const Footer = () => {
                     >
                       {isArabic ? "تميز مداسنا" : "Schools’ Uniqueness"}
                     </span>
-                  </Link>
-                                    <Link
+                  </LangLink>
+                                    <LangLink
                     href="/beam-schools/accrediation-and-affiliation"
                     className="group relative overflow-hidden hover:text-primary"
                   >
@@ -331,8 +331,8 @@ const Footer = () => {
                     >
                       {isArabic ? "الشراكات و الاعتمادات" : "Accreditation & Affiliation"}
                     </span>
-                  </Link>
-                  <Link
+                  </LangLink>
+                  <LangLink
                     href="/contact-us?scroll=register"
                     className="group relative overflow-hidden hover:text-primary"
                   >
@@ -341,8 +341,8 @@ const Footer = () => {
                     >
                       {isArabic ? "سجل اهتمام" : "Register Your Interest"}
                     </span>
-                  </Link>
-                  <Link
+                  </LangLink>
+                  <LangLink
                     href="/news-&-media/blog"
                     className="group relative overflow-hidden hover:text-primary"
                   >
@@ -351,7 +351,7 @@ const Footer = () => {
                     >
                       {isArabic ? "مدونات" : "Blogs"}
                     </span>
-                  </Link>
+                  </LangLink>
                 </motion.div>
               </motion.div>
             </div>

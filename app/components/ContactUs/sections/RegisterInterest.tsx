@@ -50,7 +50,6 @@ const DropdownIndicator = () => {
 };
 const RegisterInterest = forwardRef<HTMLDivElement, RegisterInterestProps>(
   ({ className, schoolData }, ref) => {
-    console.log("schoolData", schoolData);
     const [loadCaptcha, setLoadCaptcha] = useState(false);
     const captchaRef = useRef<HTMLDivElement>(null);
     const recaptchaRef = useRef<ReCAPTCHA>(null);
@@ -147,7 +146,7 @@ const RegisterInterest = forwardRef<HTMLDivElement, RegisterInterestProps>(
             <div className="lg:w-[36%]">
               <SplitText
                 tag="h1"
-                text={isArabic ? "سجل اهتمام" : "Register Your Interest"}
+                text={isArabic ? "سجل اهتمامك" : "Register Your Interest"}
                 delay={100}
                 className="lg:text-2xl xl:text-3xl 2xl:text-4xl text-white font-light leading-[1.111] lettersp-4"
                 duration={0.6}
@@ -165,7 +164,7 @@ const RegisterInterest = forwardRef<HTMLDivElement, RegisterInterestProps>(
               <div className="mt-4 xl:mt-[27px] text-sm leading-[1.52] font-light">
                 <p className="text-white">
                   {isArabic
-                    ? "سجل اهتمام في مدارس الإبداع العلمي ليتم الاتصال بك من قبل فريق التسجيل لدينا."
+                    ? "سجل اهتمامك في مدارس الإبداع العلمي ليتم الاتصال بك من قبل فريق التسجيل لدينا"
                     : "Register your interest at BEAM’s Creative Science Schools to be contacted by our Registrations team."}
                 </p>
               </div>
@@ -261,7 +260,7 @@ const RegisterInterest = forwardRef<HTMLDivElement, RegisterInterestProps>(
                           },
                           {
                             value: "general",
-                            label: isArabic ? "عام" : "General",
+                            label: isArabic ? "الأصدقاء" : "General",
                           },
                         ]}
                         className="custom-select"
