@@ -348,7 +348,6 @@ import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 import LangLink from "@/lib/LangLink";
 import { FooterData } from "./type";
 import { useApplyLang } from "@/lib/applyLang";
-// import Image from "next/image";
 import { FaFacebookF } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaLinkedinIn } from "react-icons/fa6";
@@ -378,7 +377,9 @@ const Footer = ({ footerData }: { footerData: FooterData }) => {
       <div className="relative z-10 container py-12 xl:py-25 2xl:pt-[134px] 2xl:pb-[89px]">
         <div className="grid grid-cols-1 lg:grid-cols-2 text-white ">
           {/* Left Column */}
-          <div className="flex flex-col pr-10 md:pr-15 xl:pr-25 2xl:pr-[147px]">
+          <div
+            className={`flex flex-col ${isArabic ? "pl-10 md:pl-15 xl:pl-25 2xl:pl-[147px]" : "pr-10 md:pr-15 xl:pr-25 2xl:pr-[147px]"}`}
+          >
             <div>
               <motion.div
                 variants={parentStagger}
@@ -436,39 +437,16 @@ const Footer = ({ footerData }: { footerData: FooterData }) => {
             viewport={{ once: true, amount: 0.3 }}
           >
             <div>
-              <div className="flex flex-wrap justify-between items-center gap-y-3 xl:border-b border-litgray pb-10 xl:pb-[47px] mb-4 xl:mb-[47px] pt-4 md:pt-6 xl:pt-8 2xl:pt-12">
-                <h3 className="text-lg ">{tData?.quickLinksSection?.title}</h3>
-                {/* <div className="flex gap-[7px]">
-                  {tData?.socialLinks?.links?.map((item, index) => (
-                    <LangLink
-                      key={index}
-                      target="_blank"
-                      href={item.link || "#"}
-                    >
-                      <motion.div
-                        variants={fadeUponeone}
-                        className="rounded-full w-[46px] h-[46px] border border-white/35 hover:border-transparent flex items-center justify-center hover:bg-primary cursor-pointer"
-                      >
-                        <Image
-                          src={item.icon}
-                          alt={item.iconAlt || "social icon"}
-                          width={18}
-                          height={18}
-                          className="object-contain"
-                        />
-                      </motion.div>
-                    </LangLink>
-                  ))}
-                </div> */}
-                <div className="flex gap-[7px] ">
+              <div className="grid grid-cols-2 gap-4 lg:gap-10 items-center xl:border-b border-litgray pb-10 xl:pb-[47px] mb-4 xl:mb-[47px] pt-4 md:pt-6 xl:pt-8 2xl:pt-12">
+                <h3 className="text-lg">{tData?.quickLinksSection?.title}</h3>
+                <div className="flex gap-[7px]">
                   <LangLink
                     target="_blank"
                     href="https://www.facebook.com/beamedusocial/"
                   >
-                    {" "}
                     <motion.div
                       variants={fadeUponeone}
-                      className="rounded-full w-[46px] h-[46px] border border-white/35 hover:border-transparent flex items-center justify-center  hover:bg-primary cursor-pointer"
+                      className="rounded-full w-[46px] h-[46px] border border-white/35 hover:border-transparent flex items-center justify-center hover:bg-primary cursor-pointer"
                     >
                       <FaFacebookF className="text-sm" />
                     </motion.div>
@@ -476,7 +454,7 @@ const Footer = ({ footerData }: { footerData: FooterData }) => {
                   <LangLink target="_blank" href="https://x.com/beamedusocial">
                     <motion.div
                       variants={fadeUponeone}
-                      className="rounded-full w-[46px] h-[46px] border border-white/35 hover:border-transparent flex items-center justify-center  hover:bg-primary cursor-pointer"
+                      className="rounded-full w-[46px] h-[46px] border border-white/35 hover:border-transparent flex items-center justify-center hover:bg-primary cursor-pointer"
                     >
                       <FaXTwitter className="text-sm" />
                     </motion.div>
@@ -487,7 +465,7 @@ const Footer = ({ footerData }: { footerData: FooterData }) => {
                   >
                     <motion.div
                       variants={fadeUponeone}
-                      className="rounded-full w-[46px] h-[46px] border border-white/35 hover:border-transparent flex items-center justify-center  hover:bg-primary cursor-pointer"
+                      className="rounded-full w-[46px] h-[46px] border border-white/35 hover:border-transparent flex items-center justify-center hover:bg-primary cursor-pointer"
                     >
                       <FaLinkedinIn className="text-sm" />
                     </motion.div>
@@ -498,7 +476,7 @@ const Footer = ({ footerData }: { footerData: FooterData }) => {
                   >
                     <motion.div
                       variants={fadeUponeone}
-                      className="rounded-full w-[46px] h-[46px] border border-white/35 hover:border-transparent flex items-center justify-center  hover:bg-primary cursor-pointer"
+                      className="rounded-full w-[46px] h-[46px] border border-white/35 hover:border-transparent flex items-center justify-center hover:bg-primary cursor-pointer"
                     >
                       <FaInstagram className="text-sm" />
                     </motion.div>
@@ -509,7 +487,7 @@ const Footer = ({ footerData }: { footerData: FooterData }) => {
                   >
                     <motion.div
                       variants={fadeUponeone}
-                      className="rounded-full w-[46px] h-[46px] border border-white/35 hover:border-transparent flex items-center justify-center  hover:bg-primary cursor-pointer"
+                      className="rounded-full w-[46px] h-[46px] border border-white/35 hover:border-transparent flex items-center justify-center hover:bg-primary cursor-pointer"
                     >
                       <FaYoutube className="text-sm" />
                     </motion.div>
