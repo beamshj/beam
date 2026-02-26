@@ -85,6 +85,7 @@ const AdminNavbar = () => {
         // ] },
         
         // // { name: "Sustainability", href: "/admin/sustainability", icon: LeafIcon },
+        { name: "Footer", href: "/admin/footer", icon: TbBellStar},
         { name: "Settings", href: "/admin/settings", icon: SettingsIcon},
       ];
 
