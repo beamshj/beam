@@ -189,7 +189,7 @@ const RegisterInterest = forwardRef<HTMLDivElement, RegisterInterestProps>(
                       isArabic ? "الاسم الكامل" : "Enter Your Full Name"
                     }
                     {...register("fullName")}
-                    className="w-full border-b border-white py-[23px] focus:outline-none placeholder:text-white text-sm font-light text-white"
+                    className="w-full border-b border-white py-[23px] focus:outline-none placeholder:text-white text-sm font-light text-white placeholder:py-2"
                   />
                   <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
                     {errors.fullName?.message || ""}
@@ -208,7 +208,7 @@ const RegisterInterest = forwardRef<HTMLDivElement, RegisterInterestProps>(
                       isArabic ? "عنوان البريد الالكتروني" : "Enter Your Email"
                     }
                     {...register("email")}
-                    className="w-full border-b border-white py-[23px] focus:outline-none placeholder:text-white text-sm font-light text-white"
+                    className="w-full border-b border-white py-[23px] focus:outline-none placeholder:text-white text-sm font-light text-white placeholder:py-2"
                   />
                   <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
                     {errors.email?.message || ""}
@@ -229,7 +229,7 @@ const RegisterInterest = forwardRef<HTMLDivElement, RegisterInterestProps>(
                       isArabic ? "الهاتف المتحرك" : "Enter Your Phone Number"
                     }
                     {...register("phone")}
-                    className="w-full border-b border-white py-[23px] focus:outline-none placeholder:text-white text-sm font-light text-white"
+                    className="w-full border-b border-white py-[23px] focus:outline-none placeholder:text-white text-sm font-light text-white placeholder:py-2"
                   />
                   <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
                     {errors.phone?.message || ""}
@@ -318,11 +318,11 @@ const RegisterInterest = forwardRef<HTMLDivElement, RegisterInterestProps>(
                         options={[
                           {
                             value: "instagram",
-                            label: isArabic ? "إنستغرام" : "Instagram",
+                            label: isArabic ? "إنستاغرام" : "Instagram",
                           },
                           {
                             value: "facebook",
-                            label: isArabic ? "فيسبوك" : "Facebook",
+                            label: isArabic ? "فيس بوك" : "Facebook",
                           },
                           {
                             value: "website",
@@ -330,7 +330,7 @@ const RegisterInterest = forwardRef<HTMLDivElement, RegisterInterestProps>(
                           },
                           {
                             value: "friends",
-                            label: isArabic ? "الأصدقا" : "Friends",
+                            label: isArabic ? "الأصدقاء" : "Friends",
                           },
                         ]}
                         className="custom-select"
@@ -390,7 +390,7 @@ const RegisterInterest = forwardRef<HTMLDivElement, RegisterInterestProps>(
                       <Select
                         {...field}
                         options={schoolData
-                          .filter((school) => school.registerInterest) // safety
+                          .filter((school) => school.registerInterest)
                           .map((school) => ({
                             value: school.registerInterest.schoolName,
                             label: isArabic
