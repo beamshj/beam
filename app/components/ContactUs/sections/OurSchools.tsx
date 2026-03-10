@@ -15,7 +15,7 @@ import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 
 export default function OurSchools({
   data,
-  contactData
+  contactData,
 }: {
   data: BeamSchoolType;
   contactData: ContactPage;
@@ -23,8 +23,8 @@ export default function OurSchools({
   const { schools } = data;
   const [activeIndex, setActiveIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
-  const t = useApplyLang(schools)
-  const isArabic = useIsPreferredLanguageArabic()
+  const t = useApplyLang(schools);
+  const isArabic = useIsPreferredLanguageArabic();
 
   // Track screen size
   useEffect(() => {
@@ -51,7 +51,7 @@ export default function OurSchools({
             }
           });
         },
-        { threshold: 0.6 }
+        { threshold: 0.6 },
       );
       observer.observe(ref);
       return observer;
@@ -80,7 +80,6 @@ export default function OurSchools({
                   : contactData.secondSection.title
                 : contactData.secondSection.title
             }
-
             className="text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl font-light text-black leading-[1.1111]"
             delay={100}
             duration={0.6}
@@ -92,16 +91,33 @@ export default function OurSchools({
             rootMargin="-10px"
             textAlign="left"
           />
-          <motion.p variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="text-colorpara font-light text-sm leading-[1.52] mt-3 xl:mt-[50px]" >
-            {isArabic ? contactData.secondSection.description_ar?.trim() ? contactData.secondSection.description_ar : contactData.secondSection.description : contactData.secondSection.description}
+          <motion.p
+            variants={moveUp(0.2)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+            className="text-colorpara font-light text-sm leading-[1.52] mt-3 xl:mt-[50px]"
+          >
+            {isArabic
+              ? contactData.secondSection.description_ar?.trim()
+                ? contactData.secondSection.description_ar
+                : contactData.secondSection.description
+              : contactData.secondSection.description}
           </motion.p>
         </div>
 
         {/* Cards */}
-        <motion.div variants={moveUp(0.4)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="flex flex-wrap lg:flex-row gap-6 lg:gap-[1%] justify-between" >
+        <motion.div
+          variants={moveUp(0.4)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
+          className="flex flex-wrap lg:flex-row gap-6 lg:gap-[1%] justify-between"
+        >
           {t.map((school, i) => {
-            const isActive = activeIndex === i;
-            const showActive = isActive;
+const isActive = activeIndex === i;
+const isMdToLg = typeof window !== "undefined" && window.innerWidth >= 768 && window.innerWidth < 1024;
+const showActive = t.length === 2 ? true : isMdToLg ? true : isActive;
 
             return (
               <motion.div
@@ -119,11 +135,18 @@ export default function OurSchools({
                 onClick={() =>
                   window.open(school.link, "_blank", "noopener,noreferrer")
                 }
-                className={`relative rounded-[12px] overflow-hidden h-[300px] md:h-[350px] xl:h-[544px] cursor-pointer flex-shrink-0 schl ${isActive ? "z-20" : "z-10"
-                  }`}
+                className={`relative rounded-[12px] overflow-hidden h-[300px] md:h-[350px] xl:h-[544px] cursor-pointer flex-shrink-0 schl ${
+                  isActive ? "z-20" : "z-10"
+                }`}
               >
                 {/* Image */}
-                <Image src={school.image} alt={school.imageAlt} fill className={`object-cover transition-all duration-500 ${showActive ? "grayscale-0" : "grayscale"}`} sizes="(max-width: 768px) 100vw, 45vw" />
+                <Image
+                  src={school.image}
+                  alt={school.imageAlt}
+                  fill
+                  className={`object-cover transition-all duration-500 ${showActive ? "grayscale-0" : "grayscale"}`}
+                  sizes="(max-width: 768px) 100vw, 45vw"
+                />
                 {/* Overlay */}
                 {!showActive && (
                   <motion.div
@@ -155,7 +178,12 @@ export default function OurSchools({
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
                   >
-                    <Image src={"/images/contact-us/icons/location.svg"} alt="location" width={24} height={24} />
+                    <Image
+                      src={"/images/contact-us/icons/location.svg"}
+                      alt="location"
+                      width={24}
+                      height={24}
+                    />
                     {school.location.name}
                   </motion.div>
                 )}
@@ -175,21 +203,50 @@ export default function OurSchools({
                       </h3>
                       <div className="mt-[15px] inline-flex items-center text-sm font-light">
                         {isArabic ? "تعرّف على المزيد" : "Learn more"}
-                        <Image src="/images/arrow-right-tip.svg" alt="arrow" width={25} height={24} className={`ml-[12px] ${isArabic && "rotate-180"}`} />
+                        <Image
+                          src="/images/arrow-right-tip.svg"
+                          alt="arrow"
+                          width={25}
+                          height={24}
+                          className={`ml-[12px] ${isArabic && "rotate-180"}`}
+                        />
                       </div>
                     </motion.div>
                     {/* Right arrow button */}
                     <div>
                       <span className="w-8 h-8 md:w-12 md:h-12 xl:w-[74px] xl:h-[74px] flex items-center justify-center border border-white rounded-full">
-                        <Image src="/images/arrow-primary.svg" alt="arrow" width={24} height={24} className={`w-auto h-4 xl:h-[24px] ${isArabic && "-rotate-90"}`} />
+                        <Image
+                          src="/images/arrow-primary.svg"
+                          alt="arrow"
+                          width={24}
+                          height={24}
+                          className={`w-auto h-4 xl:h-[24px] ${isArabic && "-rotate-90"}`}
+                        />
                       </span>
                     </div>
                   </div>
                 ) : (
                   // INACTIVE CARD
-                  <div className="absolute bottom-[40px] left-5 xl:left-1/2 xl:-translate-x-1/2 z-10">
+                  <div className="absolute py-[40px] flex items-center w-full z-10 flex flex-col h-full justify-between">
+                    <div className="flex gap-[8px] lg:gap-[6px] text-black text-sm lg:text-[15px] font-light self-start ml-5 lg:ml-0 lg:self-center bg-white/70 px-[20px] py-[11px] lg:px-1 xl:px-2 xl:pr-3 lg:py-[5px] justify-center items-center rounded-[50px] lg:rounded-full">
+                      <Image
+                        src={"/images/contact-us/icons/location.svg"}
+                        alt="location"
+                        width={24}
+                        height={24}
+                        className="xl:w-[22px] xl:h-[20px]"
+                      />
+                      <p>{school.location.name}</p>
+                    </div>
+
                     <span className="w-14 h-14 xl:w-[74px] xl:h-[74px] flex items-center justify-center border border-white rounded-full">
-                      <Image src="/images/arrow-primary.svg" alt="arrow" width={24} height={24} className={`w-auto h-4 xl:h-[24px] ${isArabic && "-rotate-90"}`} />
+                      <Image
+                        src="/images/arrow-primary.svg"
+                        alt="arrow"
+                        width={24}
+                        height={24}
+                        className={`w-auto h-4 xl:h-[24px] ${isArabic && "-rotate-90"}`}
+                      />
                     </span>
                   </div>
                 )}
