@@ -203,9 +203,8 @@ const SchoolCards = ({
               onMouseEnter={() => setHoveredCard(campus._id)}
               onMouseLeave={() => setHoveredCard(null)}
               onClick={() => handleCardClick(campus._id)}
-              className="relative rounded-[12px] overflow-hidden cursor-pointer w-full h-[300px] lg:h-[350px] xl:h-[480px] 2xl:h-[551px] 2xl:w-[485px] mx-auto group"
+              className="relative rounded-[12px] overflow-hidden w-full h-[300px] lg:h-[350px] xl:h-[480px] 2xl:h-[551px] 2xl:w-[485px] mx-auto group"
             >
-              <LangLink href={campus.link} target="_blank">
                 {/* Background Image */}
                 <div className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105">
                   <Image src={campus.image} alt={campus.title} fill loading="lazy"  className="object-cover object-center h-full rounded-[12px]" />
@@ -222,9 +221,11 @@ const SchoolCards = ({
                     </span>
                   </div>
                   {/* Arrow */}
-                  <div className="bg-transparent group-hover:bg-primary border-white group-hover:border-primary border xl:w-[75px] xl:h-[75px] w-[50px] h-[50px] rounded-[50px] flex items-center justify-center transition-colors duration-400">
+                                <LangLink href={campus.link} target="_blank">
+                  <div className="cursor-pointer bg-transparent hover:bg-primary border-white hover:border-primary border xl:w-[75px] xl:h-[75px] w-[50px] h-[50px] rounded-[50px] flex items-center justify-center transition-colors duration-400">
                     <Image src="/images/arrow-right-up.svg" alt="arrow" width={24} height={24} className={`w-[18px] h-[18px] xl:w-[24px] xl:h-[24px] ${isArabic && "-rotate-90"}`} />
                   </div>
+                  </LangLink>
                 </div>
 
                 {/* Stats Box */}
@@ -279,7 +280,7 @@ const SchoolCards = ({
                     {campus.title}
                   </h3>
                 </div>
-              </LangLink>
+              {/* </LangLink> */}
             </motion.div>
           ))}
         </div>
