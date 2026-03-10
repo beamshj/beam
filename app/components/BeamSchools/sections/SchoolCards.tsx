@@ -264,7 +264,7 @@ const SchoolCards = ({
                     : "opacity-100 translate-y-0"
                 }`}
                 >
-                  <div className="bg-white w-fit px-[3px]">
+                  <div className="bg-white w-fit p-[3px] rounded-[5px]">
                     <Image
                       src={campus.logo}
                       alt={campus.logoAlt}
