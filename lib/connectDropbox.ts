@@ -63,7 +63,7 @@ async function getAccessToken(): Promise<string> {
 let dropboxInstance: Dropbox | null = null;
 let currentAccessToken: string | null = null;
 
-async function getDropboxInstance(): Promise<Dropbox> {
+export async function getDropboxInstance(): Promise<Dropbox> {
   const accessToken = await getAccessToken();
 
   if (!dropboxInstance || currentAccessToken !== accessToken) {
@@ -112,5 +112,16 @@ export async function uploadToDropbox(file: File, filePath: string): Promise<str
   } catch (error) {
     console.error("Error uploading file to Dropbox:", error);
     throw error;
+  }
+}
+
+export async function deleteDropboxFile(path: string) {
+  try {
+    const dropbox = await getDropboxInstance();
+    await dropbox.filesDeleteV2({ path });
+  } catch (error: any) {
+    if (error?.status !== 409) {
+      throw error;
+    }
   }
 }

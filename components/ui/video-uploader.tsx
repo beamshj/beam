@@ -6,6 +6,7 @@ import { Upload, X, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "./button";
 import { uploadToDropbox } from "@/lib/connectDropbox";
+import { toast } from "sonner";
 
 interface VideoUploaderProps {
   value?: string;
@@ -77,24 +78,42 @@ export function VideoUploader({ value, onChange, className, deleteAfterUpload = 
     multiple: false,
   });
 
-  const removeVideo = useCallback(() => {
-    setLocalVideoUrl(null);
-    setIsUploadComplete(false);
-    onChange("", undefined);
-  }, [onChange]);
+  const removeVideo = async () => {
+
+    if (!displayUrl) return;
+
+    const response = await fetch("/api/admin/delete-video", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ url: displayUrl }),
+    });
+
+    if (response.ok) {
+      setLocalVideoUrl(null);
+      setIsUploadComplete(false);
+      onChange("", undefined);
+      toast.success("Video deleted successfully")
+    }
+  };
 
   const displayUrl = localVideoUrl || value;
 
   return (
     <div className={cn("space-y-4 w-full", className)}>
       {displayUrl && isUploadComplete ? (
-        <div className="relative w-full max-w-[400px] aspect-video overflow-hidden rounded-lg border">
-          <video src={value ? value : displayUrl} controls className="object-cover w-full h-full" />
+        <div className="relative w-full max-w-[400px] aspect-video overflow-hidden rounded-lg border border-black/20">
+          <video src={value ? value : `{${displayUrl}?t=${Date.now()}`} onError={() => {
+            setLocalVideoUrl(null);
+            setIsUploadComplete(false);
+            onChange("", undefined);
+          }} controls className="object-cover w-full h-full" />
           <Button
             type="button"
             variant="destructive"
             size="icon"
-            className="absolute right-2 top-2"
+            className="absolute right-2 top-2 bg-red-500"
             onClick={removeVideo}
           >
             <X className="h-4 w-4" />

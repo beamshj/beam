@@ -3,6 +3,7 @@ import { DM_Sans, Almarai } from "next/font/google";
 import "../../globals.css";
 import "../../components/Common/custom-css.css";
 import dynamic from "next/dynamic";
+import { initCron } from "@/lib/initCron";
 
 const NavBar = dynamic(() => import("@/app/components/Layout/NavBar"), { ssr: true });
 const Footer = dynamic(() => import("@/app/components/Layout/Footer"), { ssr: true });
@@ -44,6 +45,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  initCron();
   return (
     <html lang="en">
       <body className={`${dmSans.variable} ${almarai.variable} antialiased`}>
