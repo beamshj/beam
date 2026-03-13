@@ -104,7 +104,7 @@ const SchoolCards = ({
               rootMargin="-10px"
               textAlign={isArabic ? "right" : "left"}
             /> */}
-            <motion.h2 variants={moveUp(0.2)} initial="hidden" animate="show" viewport={{ once: true, amount: 0.2 }} className={`  font-light mb-2 xl:mb-[30px] 2xl:mb-[50px] text-black  
+            <motion.h2 variants={moveUp(0.2)} initial="hidden" animate="show" viewport={{ once: true, amount: 0.2 }} className={`  font-light mb-2 md:mb-[25px] xl:mb-[30px] 2xl:mb-[50px] text-black  
                 ${isArabic ? 'text-lg lg:text-xl xl:text-2xl 2xl:text-3xl leading-[1.25] lg:leading-[1.5]' : 'text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl lettersp-2 leading-[1.25] lg:leading-[1.111]'}`}>{tData.firstSection.title}</motion.h2>
           </div>
           <SplitText
@@ -145,7 +145,7 @@ const SchoolCards = ({
           </div>
 
           {/* Right Dropdown (Location Filter) */}
-          <div className="relative w-full md:w-fit" ref={dropdownRef}>
+          <div className="relative w-fit" ref={dropdownRef}>
             <motion.button
               variants={moveUp(0.6)}
               initial="hidden"

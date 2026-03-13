@@ -70,7 +70,7 @@ const VisionMissionSection = ({
             <SplitText
               tag="h2"
               text={t.title}
-              className="text-lg lg:text-xl xl:text-[3.5rem] 2xl:text-4xl font-light leading-[1.1111111]  lettersp-4 text-black mb-3 xl:mb-[40px] 2xl:mb-[30px]"
+              className="max-w-[12ch] text-lg lg:text-xl xl:text-[3.5rem] 2xl:text-4xl font-light leading-[1.1111111]  lettersp-4 text-black mb-3 xl:mb-[40px] 2xl:mb-[30px]"
               delay={100}
               duration={0.6}
               ease="power3.out"
@@ -108,7 +108,7 @@ const VisionMissionSection = ({
 
                   {/* Right content - natural height */}
                   <motion.div variants={moveUp(index * 0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="flex flex-col justify-center flex-1 ml-[10px]" >
-                    <h3 className="text-xl font-light text-black leading-[1.2] mb-[15px]">
+                    <h3 className="text-[24px] lg:text-xl font-light text-black leading-[1.2] mb-[15px]">
                       {item.title}
                     </h3>
                     <p className="text-[#6D6E71] text-sm leading-[1.526315789473684] max-w-[39ch]">

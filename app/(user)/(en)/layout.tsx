@@ -6,11 +6,16 @@ import dynamic from "next/dynamic";
 import { initCron } from "@/lib/initCron";
 import { getFooter } from "@/lib/getFooter";
 
-const NavBar = dynamic(() => import("@/app/components/Layout/NavBar"), { ssr: true });
-const Footer = dynamic(() => import("@/app/components/Layout/Footer"), { ssr: true });
+const NavBar = dynamic(() => import("@/app/components/Layout/NavBar"), {
+  ssr: true,
+});
+const Footer = dynamic(() => import("@/app/components/Layout/Footer"), {
+  ssr: true,
+});
 
 import type { Viewport } from "next";
 import ScrollToTop from "@/app/components/Common/ScrollToTop";
+import LenisProvider from "@/app/components/Layout/LenisProvider";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -20,7 +25,7 @@ const dmSans = DM_Sans({
   variable: "--font-dm-sans",
   subsets: ["latin"],
   display: "swap",
-  preload: true
+  preload: true,
 });
 
 const almarai = Almarai({
@@ -28,16 +33,14 @@ const almarai = Almarai({
   weight: ["300", "400", "700", "800"],
   subsets: ["arabic"],
   display: "swap",
-  preload: true
+  preload: true,
 });
-
 
 export const metadata: Metadata = {
   // manifest: '/manifest.json',
   title: "BEAM | Lighting The Way",
   description: "",
 };
-
 
 // export const dynamic = "force-dynamic";
 
@@ -51,10 +54,12 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={`${dmSans.variable} ${almarai.variable} antialiased`}>
-        <NavBar />
-        <ScrollToTop />
-        {children}
-        <Footer footerData={footerData} />
+        <LenisProvider>
+          <NavBar />
+          <ScrollToTop />
+          {children}
+          <Footer footerData={footerData} />
+        </LenisProvider>
       </body>
     </html>
   );

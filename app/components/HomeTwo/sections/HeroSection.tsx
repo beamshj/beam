@@ -562,16 +562,24 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
       </div>
 
       {/* Pagination Indicator */}
-      <div className="absolute bottom-[10%] md:bottom-[37%] w-full z-[80] pointer-events-none">
+      <div className="absolute bottom-[10%] md:bottom-[37%] w-full z-[80]">
         <div className="container flex justify-end">
           <span className="text-[15px] text-white whitespace-nowrap font-light relative -right-3 md:right-2 z-10 flex flex-col items-center">
             <div className="flex flex-col rotate-180">
-              {t.items.map((_, index) => (
-                <span
-                  key={index}
-                  className={`font-medium w-[1px] h-[10px] mt-2 transition-all duration-300 ${index === currentSlide - 1 ? "bg-primary" : "bg-white"}`}
-                ></span>
-              ))}
+{t.items.map((_, index) => (
+  <span
+    key={index}
+    onClick={() => {
+      swiperRef.current?.slideToLoop(index);
+      setCurrentSlide(index + 1);
+    }}
+    className="cursor-pointer pointer-events-auto px-3 py-1"
+  >
+    <span
+      className={`font-medium block w-[1px] h-[10px] transition-all duration-300 ${index === currentSlide - 1 ? "bg-primary" : "bg-white"}`}
+    />
+  </span>
+))}
             </div>
             <span className="mt-4 -rotate-90 font-light text-[15px]">{`0${totalSlides}`}</span>
             <span className="font-medium w-[1px] h-[8px] bg-white mt-1"></span>

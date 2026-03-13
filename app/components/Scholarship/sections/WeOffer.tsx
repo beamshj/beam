@@ -46,7 +46,7 @@ const WeOffer = ({ data }: { data: ScholarshipProps["secondSection"] }) => {
             <div className="relative grid grid-cols-1 md:grid-cols-5 justify-between gap-6 md:gap-10 2xl:gap-0">
               {/* Vertical dotted line on mobile */}
               <motion.div
-                className={`absolute top-0 ${isArabic ? "right" : "left"}-[1.25rem] border-l-2 border-dotted border-primary md:hidden`}
+                className={`absolute top-0 ${isArabic ? "right-[1.25rem]" : "left-[1.25rem]"} border-l-2 border-dotted border-primary md:hidden`}
                 initial={{ height: 0 }}
                 whileInView={{ height: "100%" }}
                 viewport={{ once: true, amount: 0.6 }}
@@ -70,7 +70,7 @@ const WeOffer = ({ data }: { data: ScholarshipProps["secondSection"] }) => {
                     </p>
                   </div>
                   <div className="md:mt-5 lg:mt-7 2xl:mt-[45px]">
-                    <p className="text-sm lg:text-md 2xl:text-xl md:text-center font-light leading-[1.1] mb-0 xl:tracking-[-1px] 2xl:tracking-[-2px]">
+                    <p className="text-sm lg:text-md 2xl:text-xl md:text-center text-black font-light leading-[1.1] mb-0 xl:tracking-[-1px] 2xl:tracking-[-2px]">
                       {item.title}
                     </p>
                   </div>

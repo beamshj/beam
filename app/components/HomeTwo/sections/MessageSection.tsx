@@ -108,7 +108,7 @@ const MessageSection = ({ data }: { data: HomeProps["sixthSection"] }) => {
                     rootMargin="-100px"
                     textAlign={isArabic ? "right" : "left"}
                   /> */}
-                  <H2Title titleText={t.subTitle} textAlign={isArabic ? "text-right" : "text-left"} maxWidth={isArabic ? "100%" : "11ch"} />
+                  <H2Title titleText={t.subTitle} textAlign={isArabic ? "text-right" : "text-left"} maxWidthClass={isArabic ? "max-w-[13ch]" : "max-w-[14ch] lg:max-w-[11ch]"} />
                   {/* <H2Title titleText={t.subTitle} textAlign={isArabic ? "text-right" : "text-left"} maxWidth="11ch" /> */}
                 </div>
               </motion.div>

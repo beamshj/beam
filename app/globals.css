@@ -4,6 +4,11 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* Lenis compatibility */
+.lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 :root {
@@ -168,7 +173,7 @@ h2 {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   margin-top: 2.5rem;
 }
 
@@ -802,24 +807,22 @@ h2 {
 
 .values-description-about {
   color: white;
-  /* make all text white by default */
+  overflow-x: hidden;
 
   ol,
   ul {
-    @apply list-disc list-outside pl-4 xl:pl-9 space-y-1 text-sm font-light text-white;
+    @apply list-disc list-outside pl-5 space-y-1 text-sm font-light text-white;
+    padding-right: 0.5rem;
   }
 
   li {
     color: white !important;
-    /* ensure all list items stay white */
+    overflow-wrap: break-word;
+    word-break: normal;
   }
 
-  p,
-  span,
-  strong,
-  em {
+  p, span, strong, em {
     color: white !important;
-    /* make sure other text tags also stay white */
   }
 }
 
@@ -983,11 +986,18 @@ h2 {
   display: flex;
   align-items: start;
   gap: 8px;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
   position: relative;
   opacity: 0;
   transform: translateY(20px);
   animation: schoolLeadFadeUp 0.5s ease forwards;
+}
+
+@media (min-width: 1500px) {
+.school-leadership-bullets ol li,
+.school-leadership-bullets ul li {
+  margin-bottom: 8px;
+}
 }
 
 /* Staggered animation effect */
@@ -1017,7 +1027,7 @@ h2 {
   width: 15px;
   height: 15px;
   flex-shrink: 0;
-  margin-top: 3px;
+  margin-top: 7px;
   background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='15' height='15' viewBox='0 0 15 15' fill='none'><path d='M8.99121 3.7063L12.7731 7.50005L8.99121 11.2938' stroke='%23292D32' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round'/><path d='M2.18066 7.5H12.6666' stroke='%23292D32' stroke-miterlimit='10' stroke-linecap='round' stroke-linejoin='round'/></svg>") no-repeat center;
   background-size: contain;
 }
@@ -1330,17 +1340,24 @@ html[dir="rtl"] {
 }
 
 .sbt-fz {
-  font-size: 2.5rem !important;
+  font-size: 2.1rem !important;
 
 }
 
 @media (min-width: 786px) {
   .sbt-fz {
-    font-size: clamp(3rem, 8vw + 0.1rem, 4.625rem) !important;
+    /* font-size: clamp(3rem, 8vw + 0.1rem, 4.625rem) !important; */
+    font-size: clamp(2.9rem, 8vw + 0.1rem, 3rem) !important;
   }
 }
 
 @media(min-width: 1280px) {
+  .sbt-fz {
+    font-size: clamp(4rem, 6vw, 5.4rem) !important;
+  }
+}
+
+@media(min-width: 1480px) {
   .sbt-fz {
     font-size: clamp(4rem, 8vw, 5.625rem) !important;
   }

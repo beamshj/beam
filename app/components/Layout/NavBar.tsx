@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { mainMenuItems } from "./menuItems";
 import { filterMenuItems } from "./menuItems";
@@ -96,13 +96,13 @@ const NavBar = () => {
         <div className="container">
           <div
             className={`bg-white flex justify-between ${isArabic ? "lg:pr-3" : "lg:pl-3"
-              } rounded-[10px] h-[70px] lg:h-full`}
+              } rounded-[10px] h-[65px] lg:h-full`}
             style={{ boxShadow: "0px 4px 45px 0px #0000000F" }}
           >
-            <div className="flex gap-12 items-center">
+            <div className="flex gap-6 xl:gap-12 items-center">
               <div className="flex items-center justify-center h-full gap-4">
-                <div className="lg:py-3">
-                  <LangLink href="#">
+                <div className={`lg:py-3 ${isArabic ? "-ml-2" : "ml-0"}`}>
+                  <LangLink href="/">
                     <Image
                       src={
                         isArabic ? "/assets/logo-ar.png" : "/assets/logo.svg"
@@ -110,7 +110,7 @@ const NavBar = () => {
                       alt="Logo"
                       width={158}
                       height={77}
-                      className="h-[58px] lg:h-full"
+                      className={`h-[54px] lg:h-full ${isArabic ? "w-[130px] sm:w-full" : "w-[145px] sm:w-full"}`}
                       priority
                       fetchPriority="high"
                     />
@@ -119,7 +119,7 @@ const NavBar = () => {
                 <div className=" hidden lg:block h-full border-r-[1px] border-[#D3D3D3]"></div>
               </div>
               <div className="hidden lg:flex h-full items-center">
-                <ul className="flex gap-[30px] text-black relative h-full items-center">
+                <ul className="flex gap-[20px] xl:gap-[30px] text-black relative h-full items-center">
                   {tMainMenuItems
                     .filter(
                       (item) =>
@@ -136,12 +136,18 @@ const NavBar = () => {
                         onMouseLeave={() => setHoveredMenu(null)}
                       >
                         {/* Top-level Link */}
-                        <LangLink
-                          href={item.href}
-                          className="text-sm font-light transition-colors duration-300 ease-in-out group-hover:text-primary group-hover:underline group-hover:underline-offset-4"
-                        >
-                          {item.name}
-                        </LangLink>
+{item.submenu ? (
+  <span className="text-xs xl:text-sm font-light transition-colors duration-300 ease-in-out group-hover:text-primary group-hover:underline group-hover:underline-offset-4 cursor-pointer">
+    {item.name}
+  </span>
+) : (
+  <LangLink
+    href={item.href}
+    className="text-sm font-light transition-colors duration-300 ease-in-out group-hover:text-primary group-hover:underline group-hover:underline-offset-4"
+  >
+    {item.name}
+  </LangLink>
+)}
 
                         {/* Submenu */}
                         {item.submenu && (
@@ -193,7 +199,7 @@ const NavBar = () => {
                 </ul>
               </div>
             </div>
-            <div className="flex gap-2  sm:gap-5">
+            <div className="flex gap-2 sm:gap-5">
               <div className="flex items-center gap-5">
                 {/* {process.env.NODE_ENV === "development" && ( */}
                 <button
@@ -206,7 +212,7 @@ const NavBar = () => {
 
                 <button
                   onClick={handleRegisterClick}
-                  className="uppercase border-primary border-[1px] px-3 py-1 flex items-center gap-2 rounded-[50px]
+                  className="uppercase border-primary border-[1px] px-2 sm:px-3 py-1 flex items-center gap-2 rounded-[50px]
                                 text-[10px] sm:text-xs font-light cursor-pointer text-black transition-all duration-300 group
                                 hover:bg-primary hover:text-white"
                 >
@@ -241,7 +247,7 @@ const NavBar = () => {
               >
                 <div
                   onClick={() => setIsMenuOpen(true)}
-                  className="rounded-[10px] bg-[#42BADC] h-full flex items-center justify-center px-[20px] sm:px-[30px] xl:px-[35px] gap-3 cursor-pointer 
+                  className="rounded-[10px] bg-[#42BADC] h-full flex items-center justify-center px-[15px] sm:px-[30px] xl:px-[35px] gap-3 cursor-pointer 
              transition-all duration-300 hover:bg-[#23ABD2] group"
                 >
                   <div className="flex gap-[6px] flex-col w-[24px] relative transition-all duration-300">
@@ -261,11 +267,11 @@ const NavBar = () => {
                     ></div>
                   </div>
 
-                  {!isMobile && (
-                    <p className="text-black text-sm font-medium transition-transform duration-300 group-hover:translate-x-1">
+                  {
+                    <p className="hidden sm:block text-black text-sm font-medium transition-transform duration-300 group-hover:translate-x-1">
                       {isArabic ? "القائمة" : "MENU"}
                     </p>
-                  )}
+                  }
                 </div>
               </div>
             </div>
@@ -307,7 +313,7 @@ const NavBar = () => {
               duration: 0.6,
               ease: [0.25, 1, 0.5, 1],
             }}
-            className="fixed top-0 right-0 bottom-0 lg:left-0 h-screen w-[300px] md:w-[500px] lg:w-full z-1000"
+            className="fixed top-0 right-0 bottom-0 lg:left-0 h-screen w-[300px] px-2 md:px-4 xl:px-0 md:w-[500px] lg:w-full z-1000"
             style={{
               background:
                 "linear-gradient(251.6deg, #42BADC -12.46%, #005871 100.42%)",

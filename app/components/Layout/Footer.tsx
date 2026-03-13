@@ -370,7 +370,7 @@ const Footer = ({ footerData }: { footerData: FooterData }) => {
       {/* Background 2-column grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 w-full h-full absolute top-0 left-0 z-0">
         <div className="bg-black"></div>
-        <div className="bg-black md:bg-[#1A1A1A]"></div>
+        <div className="bg-black md:bg-[#1A1A1A] pt-0 sm:pt-25 lg:pt-0"></div>
       </div>
 
       {/* Content container on top */}
@@ -391,7 +391,7 @@ const Footer = ({ footerData }: { footerData: FooterData }) => {
                 <div>
                   <div className="">
                     <motion.h2
-                      className="text-md md:text-xl xl:text-2xl 2xl:text-4xl font-light lettersp-2 border-b border-litgray pb-2 xl:pb-[47px] mb-4 xl:mb-[47px]"
+                      className="text-md md:text-xl xl:text-2xl 2xl:text-4xl font-light lettersp-2 border-b border-litgray pb-2 xl:pb-[47px] mb-4 xl:mb-[47px] "
                       variants={fadeUponeone}
                     >
                       {tData?.footerTitle}
@@ -437,9 +437,9 @@ const Footer = ({ footerData }: { footerData: FooterData }) => {
             viewport={{ once: true, amount: 0.3 }}
           >
             <div>
-              <div className="grid grid-cols-2 gap-4 lg:gap-10 items-center xl:border-b border-litgray pb-10 xl:pb-[47px] mb-4 xl:mb-[47px] pt-4 md:pt-6 xl:pt-8 2xl:pt-12">
+              <div className="grid grid-cols-1 sm:grid-cols-[185px_auto] xl:grid-cols-2 gap-4 sm:gap-6 xl:gap-10 items-center xl:border-b border-litgray pb-10 xl:pb-[47px] mb-4 xl:mb-[47px] xl:pt-8 2xl:pt-12">
                 <h3 className="text-lg">{tData?.quickLinksSection?.title}</h3>
-                <div className="flex gap-[7px]">
+                <div className="flex gap-[7px] lg:gap-[4px] xl:gap-[7px]">
                   <LangLink
                     target="_blank"
                     href="https://www.facebook.com/beamedusocial/"
@@ -499,7 +499,7 @@ const Footer = ({ footerData }: { footerData: FooterData }) => {
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true, amount: 0.3 }}
-                className="grid grid-cols-1 gap-4 lg:gap-10 lg:grid-cols-2 text-sm text-white"
+                className="grid grid-cols-1 gap-4 sm:gap-6 xl:gap-10 sm:grid-cols-[185px_auto] xl:grid-cols-2 text-sm text-white"
               >
                 {/* First Column */}
                 <motion.div

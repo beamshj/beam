@@ -1,288 +1,260 @@
 "use client";
 
-import React, { useState, useEffect, useLayoutEffect } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect, useLayoutEffect, useMemo, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { moveUp } from "../../motionVarients";
 import { LeadershipData } from "../type";
 import { useApplyLang } from "@/lib/applyLang";
 import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 
-type Member = {
-  _id: string;
-  name: string;
-  designation: string;
-  image: string;
-  bullets?: string[];
-  description: string;
-};
+// ─── Types ────────────────────────────────────────────────────────────────────
 
-type Slide = Member & {
-  left: number;
-  width: number;
-  height: number;
-  zIndex: number;
-  isActive: boolean;
-};
+type Member = { _id: string; name: string; designation: string; image: string; description: string };
+type Mode   = "mobile" | "tablet" | "desktop";
+type Layout = { activeW: number; activeH: number; thumbW: number; thumbH: number; thumbCount: number; gap: number; mode: Mode };
 
-export default function LeadershipCarousel({ data }: { data: LeadershipData }) {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [windowWidth, setWindowWidth] = useState(
-    typeof window !== "undefined" ? window.innerWidth : 1024
-  ); // default for SSR
-  const [mounted, setMounted] = useState(false);
-  const [containerPaddingRight, setContainerPaddingRight] = useState(0);
-  const t = useApplyLang(data);
-  const isArabic = useIsPreferredLanguageArabic()
-  const beamleadersData = t.firstSection.items;
+// ─── Layout resolver ──────────────────────────────────────────────────────────
 
-  const n = beamleadersData.length;
-  // const gap = 40;
+function resolveLayout(vw: number): Layout {
+  if (vw >= 1615) return { activeW: 459, activeH: 653, thumbW: 255, thumbH: 255, thumbCount: 3, gap: 40, mode: "desktop" };
+  if (vw >= 1536) return { activeW: 370, activeH: 480, thumbW: 220, thumbH: 220, thumbCount: 2, gap: 40, mode: "desktop" };
+  if (vw >= 1280) return { activeW: 370, activeH: 490, thumbW: 220, thumbH: 220, thumbCount: 2, gap: 28, mode: "desktop" };
+  if (vw >= 1024) return { activeW: 280, activeH: 300, thumbW: 160, thumbH: 160, thumbCount: 2, gap: 20, mode: "desktop" };
+  if (vw >= 540)  return { activeW: Math.round(vw * 0.45), activeH: Math.round(vw * 0.55), thumbW: 0, thumbH: 0, thumbCount: 0, gap: 0, mode: "tablet" };
+  return { activeW: vw - 32, activeH: Math.round((vw - 32) * 1.1), thumbW: 0, thumbH: 0, thumbCount: 0, gap: 0, mode: "mobile" };
+}
 
-  const gapValues = {
-    "2xl": 40,
-    xl: 28,
-    lg: 20,
-    md: 18,
-    sm: 15,
-  };
+// ─── Hooks ────────────────────────────────────────────────────────────────────
 
-  // Dynamically choose gap based on current window width
-  const getDynamicGap = () => {
-    if (windowWidth >= 1536) return gapValues["2xl"];
-    if (windowWidth >= 1280) return gapValues.xl;
-    if (windowWidth >= 1024) return gapValues.lg;
-    if (windowWidth >= 768) return gapValues.md;
-    return gapValues.sm;
-  };
-
-  const gap = getDynamicGap();
-
-  const sizes = {
-    active: {
-      "3xl": { w: 459, h: 653 },
-      "2xl": { w: 370, h: 480 },
-      xl: { w: 370, h: 490 },
-      lg: { w: 280, h: 300 },
-      md: { w: 240, h: 380 },
-      sm: { w: 220, h: 260 },
-    },
-    nonActive: {
-      "3xl": { w: 255, h: 255 },
-      "2xl": { w: 220, h: 220 },
-      xl: { w: 220, h: 220 },
-      lg: { w: 160, h: 160 },
-      md: { w: 140, h: 140 },
-      sm: { w: 120, h: 120 },
-    },
-  };
-
-  // Update windowWidth on resize
+function useWindowWidth() {
+  const [w, setW] = useState(typeof window !== "undefined" ? window.innerWidth : 1280);
   useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    const h = () => setW(window.innerWidth);
+    window.addEventListener("resize", h);
+    return () => window.removeEventListener("resize", h);
   }, []);
+  return w;
+}
 
-  // Safe size getters
-  const getSafeActiveSize = () => {
-    if (windowWidth >= 1615) return sizes.active["3xl"];
-    if (windowWidth >= 1536) return sizes.active["2xl"];
-    if (windowWidth >= 1280) return sizes.active.xl;
-    if (windowWidth >= 1024) return sizes.active.lg;
-    if (windowWidth >= 768) return sizes.active.md;
-    return { w: windowWidth - 32, h: 420 }; // mobile fallback
-  };
-
-  const getSafeNonActiveSize = () => {
-    if (windowWidth >= 1615) return sizes.nonActive["3xl"];
-    if (windowWidth >= 1536) return sizes.nonActive["2xl"];
-    if (windowWidth >= 1280) return sizes.nonActive.xl;
-    if (windowWidth >= 1024) return sizes.nonActive.lg;
-    if (windowWidth >= 768) return sizes.nonActive.md;
-    return { w: 0, h: 0 }; // hide non-active on tablet/mobile
-  };
-
-  const activeSize = getSafeActiveSize();
-  const nonActiveSize = getSafeNonActiveSize();
-
-  const getMaxNonActive = () => {
-    if (windowWidth >= 1813) return 3;
-    if (windowWidth >= 1024) return 2;
-    if (windowWidth >= 768) return 1;
-    return 0; // tablet/mobile shows only active
-  };
-
-  const next = () => {
-    setActiveIndex((prev) => (prev + 1) % n);
-  };
-
-  const slidesWithPosition = (): Slide[] => {
-    const maxNonActive = getMaxNonActive();
-    const visibleSlides: Slide[] = [];
-
-    for (let i = 0; i <= maxNonActive; i++) {
-      const realIndex = (activeIndex + i) % n;
-      const isActive = i === 0;
-
-      const width = isActive ? activeSize.w : nonActiveSize.w;
-      const height = isActive ? activeSize.h : nonActiveSize.h;
-
-      // ACTIVE slide always on the rightmost
-      const left = (() => {
-        if (isArabic) {
-          // Arabic layout (first logic)
-          if (isActive) return 0;
-
-          return activeSize.w + gap + (i - 1) * (nonActiveSize.w + gap);
-        } else {
-          // Normal LTR layout (second logic)
-          if (isActive) return maxNonActive * (nonActiveSize.w + gap);
-
-          return (maxNonActive - i) * (nonActiveSize.w + gap);
-        }
-      })();
-
-
-
-      const zIndex = isActive ? 20 : 10 + (maxNonActive - i);
-
-      visibleSlides.push({
-        ...beamleadersData[realIndex],
-        left,
-        width,
-        height,
-        zIndex,
-        isActive,
-      });
-    }
-
-    console.log("visileSlides", visibleSlides)
-
-    return visibleSlides;
-  };
-
-  const slides = slidesWithPosition();
-  const activeSlide = beamleadersData[activeIndex];
-
+function useContainerEdge() {
+  const [edge, setEdge] = useState(0);
   useLayoutEffect(() => {
-    // Try to find the nearest container on mount
-    const container = document.querySelector(
-      ".container"
-    ) as HTMLElement | null;
-    if (!container) return;
-
-    const updatePadding = () => {
-      const rect = container.getBoundingClientRect();
-      setContainerPaddingRight(window.innerWidth - rect.right);
+    const update = () => {
+      const el = document.querySelector(".container") as HTMLElement | null;
+      if (el) setEdge(window.innerWidth - el.getBoundingClientRect().right);
     };
-
-    updatePadding(); // initial
-    window.addEventListener("resize", updatePadding);
-    return () => window.removeEventListener("resize", updatePadding);
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
   }, []);
+  return edge;
+}
+
+// ─── Sub-components ───────────────────────────────────────────────────────────
+
+function SectionTitle({ text, className }: { text: string; className?: string }) {
+  return (
+    <motion.h1
+      initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.5, ease: "easeOut" }}
+      className={`font-light text-black lettersp-4 ${className}`}
+    >
+      {text}
+    </motion.h1>
+  );
+}
+
+function NextBtn({ onClick, size, isArabic }: { onClick: () => void; size: "sm" | "lg"; isArabic: boolean }) {
+  return (
+    <button
+      onClick={onClick} aria-label="Next"
+      className={`rounded-full border border-black flex items-center justify-center transition-transform duration-300
+        ${isArabic ? "hover:-translate-x-1" : "hover:translate-x-1"}
+        ${size === "lg" ? "w-[50px] h-[50px] 2xl:w-[75px] 2xl:h-[75px]" : "w-9 h-9"}`}
+    >
+      <img
+        src="/images/arrow-primary.svg" alt=""
+        className={`${size === "lg" ? "w-5 h-5" : "w-3 h-3"} ${isArabic ? "-rotate-135" : "rotate-45"}`}
+      />
+    </button>
+  );
+}
+
+function Photo({ member, width, height }: { member: Member; width: number; height: number }) {
+  return (
+    <div className="relative flex-shrink-0 rounded-2xl overflow-hidden" style={{ width, height }}>
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={member._id} className="absolute inset-0"
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+          transition={{ duration: 0.4 }}
+        >
+          <Image src={member.image} alt={member.name} fill loading="lazy" className="object-cover object-top" />
+          <div className="absolute inset-x-0 bottom-0 h-[50%] pointer-events-none"
+            style={{ background: "linear-gradient(to bottom, transparent, #42BADC)" }} />
+        </motion.div>
+      </AnimatePresence>
+    </div>
+  );
+}
+
+function ContentPanel({
+  active, total, activeIdx, layout, isArabic, onNext,
+}: {
+  active: Member; total: number; activeIdx: number; layout: Layout; isArabic: boolean; onNext: () => void;
+}) {
+  return (
+    <div className="flex flex-col h-full">
+      {/* Counter + next btn (mobile/tablet) — pinned at TOP */}
+      <div className="flex items-center justify-between mb-4">
+        <p className="text-sm font-light text-black">
+          <span className="text-[#666666]">{String(total).padStart(2, "0")}/</span>
+          {String(activeIdx + 1).padStart(2, "0")}
+        </p>
+        {layout.mode !== "desktop" && <NextBtn onClick={onNext} size="sm" isArabic={isArabic} />}
+      </div>
+
+      {/* Member info — pushed to BOTTOM via mt-auto */}
+      <div className="mt-auto relative overflow-hidden">
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div
+            key={active._id}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0, position: "absolute", top: 0, left: 0, right: 0 }}
+            transition={{ duration: 0.25, ease: "easeInOut" }}
+          >
+            <h3 className="text-xl font-light text-black leading-snug">{active.name}</h3>
+            <p className="text-sm text-[#666666] font-light mt-4 3xl:mt-[30px]">{active.designation}</p>
+            <div
+              className="mt-5 md:mt-8 space-y-1 font-light text-sm text-black school-leadership-bullets"
+              dangerouslySetInnerHTML={{ __html: active.description }}
+            />
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      {/* Next btn (desktop only) — after member info, at bottom */}
+      {layout.mode === "desktop" && (
+        <div className="mt-8">
+          <NextBtn onClick={onNext} size="lg" isArabic={isArabic} />
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─── Main component ───────────────────────────────────────────────────────────
+
+export default function BeamTeam({ data }: { data: LeadershipData }) {
+  const t        = useApplyLang(data);
+  const isArabic = useIsPreferredLanguageArabic();
+  const members: Member[] = t.firstSection.items;
+  const total = members.length;
+
+  const [activeIdx, setActiveIdx] = useState(0);
+  const [mounted, setMounted]     = useState(false);
+
+  const vw     = useWindowWidth();
+  const edge   = useContainerEdge();
+  const layout = useMemo(() => resolveLayout(vw), [vw]);
+  const active = members[activeIdx];
 
   useEffect(() => setMounted(true), []);
+  const goNext = useCallback(() => setActiveIdx((p) => (p + 1) % total), [total]);
+
+  const desktopCards = useMemo(() => {
+    if (layout.mode !== "desktop") return [];
+    return Array.from({ length: layout.thumbCount + 1 }, (_, i) => {
+      const isActive = i === 0;
+      const w    = isActive ? layout.activeW : layout.thumbW;
+      const h    = isActive ? layout.activeH : layout.thumbH;
+      const left = isArabic
+        ? isActive ? 0 : layout.activeW + layout.gap + (i - 1) * (layout.thumbW + layout.gap)
+        : isActive ? layout.thumbCount * (layout.thumbW + layout.gap) : (layout.thumbCount - i) * (layout.thumbW + layout.gap);
+      return { member: members[(activeIdx + i) % total], isActive, w, h, left, zIndex: isActive ? 20 : 10 + layout.thumbCount - i };
+    });
+  }, [activeIdx, total, layout, isArabic, members]);
 
   if (!mounted) {
-    return <div className="h-[400px] w-full bg-gray-100 rounded-[12px]" />;
+    return <div className="container py-10"><div className="h-[460px] w-full animate-pulse rounded-2xl bg-gray-100" /></div>;
   }
-  return (
-    <section className="overflow-hidden  py-10 xl:py-20 2xl:py-[135px]">
-      <div className="container flex flex-col ios:hidden h-full mb-[30px] lg:mb-[35px]">
-        <motion.h1
-          variants={moveUp(0.2)}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.2 }}
-          className="text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl lg:leading-[1.111] font-light mb-3 xl:mb-[30px] 2xl:mb-[50px] text-black lettersp-4"
-        >
-          {t.firstSection.title}
-        </motion.h1>
+
+  const sharedProps = { active, total, activeIdx, layout, isArabic, onNext: goNext };
+
+  // ── Mobile ────────────────────────────────────────────────────────────────
+
+  if (layout.mode === "mobile") return (
+    <section className="overflow-hidden py-10">
+      <div className="container">
+        <SectionTitle text={t.firstSection.title} className="text-lg mb-5" />
+        <Photo member={active} width={layout.activeW} height={layout.activeH} />
+        <div className="mt-5"><ContentPanel {...sharedProps} /></div>
       </div>
-      <div className={`flex flex-col md:flex-row gap-[15px] md:gap-[36px] lg:gap-[56px] items-stretch ${windowWidth < 1024 ? "container" : ""
-          }`}
-        style={{
-          ...(isArabic
-            ? { paddingLeft: windowWidth < 1024 ? 15 : containerPaddingRight }
-            : { paddingRight: windowWidth < 1024 ? 15 : containerPaddingRight })
-        }}
+    </section>
+  );
 
-      >
-        {/* Slides container */}
-        <div className="relative flex items-stretch justify-center"
-          style={{
-            width:
-              windowWidth < 768
-                ? "100%"
-                : activeSize.w + getMaxNonActive() * (nonActiveSize.w + gap),
-            minHeight: windowWidth < 768 ? 420 : activeSize.h,
-          }}
-        >
-          <div style={{ marginLeft: containerPaddingRight + (isArabic ? 360 : 0), }} className="hidden ios:block absolute top-0 left-0 max-w-[50%]" >
-            <motion.h1
-              variants={moveUp(0.2)}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.2 }}
-              className="text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl lg:leading-[1.111] font-light mb-3 xl:mb-[30px] 2xl:mb-[50px] text-black lettersp-4"
-            >
-              {isArabic ? (t.firstSection.title) : (<><span>BEAM</span> <br /> Leadership Team</>)}
-              {/* BEAM <br /> Leadership Team */}
-            </motion.h1>
+  // ── Tablet ────────────────────────────────────────────────────────────────
+
+  if (layout.mode === "tablet") return (
+    <section className="overflow-hidden py-10">
+      <div className="container">
+        <SectionTitle text={t.firstSection.title} className="text-xl mb-6" />
+        <div className={`flex gap-6 items-stretch ${isArabic ? "flex-row-reverse" : "flex-row"}`}>
+          <Photo member={active} width={layout.activeW} height={layout.activeH} />
+          <div className="flex-1" style={{ minHeight: layout.activeH }}>
+            <ContentPanel {...sharedProps} />
           </div>
-          {slides.map((m) => (
-            <motion.div
-              key={m._id}
-              className="md:absolute bottom-0 rounded-[12px] overflow-hidden cursor-pointer"
-              animate={{
-                left: m.left,
-                width: m.width,
-                height: m.height,
-                zIndex: m.zIndex,
-              }}
-              transition={{ duration: 0.6, ease: "easeInOut" }}
-              onClick={() =>
-                setActiveIndex(
-                  beamleadersData.findIndex((d) => d._id === m._id)
-                )
-              }
-            >
-              <Image src={m.image} alt={m.name} width={Math.max(1, Math.round(m.width))} height={Math.max(1, Math.round(m.height))} loading="lazy" sizes="(max-width: 768px) 60vw, 360px"
-              className={`w-full h-full lg:object-cover object-top ${!m.isActive ? "saturate-0" : "" }`} />
+        </div>
+      </div>
+    </section>
+  );
 
-              {m.isActive && (
-                <div className="absolute left-0 bottom-0 right-0 w-full h-[50%] bg-gradient-to-b from-transparent to-[#42BADC]" />
+  // ── Desktop ───────────────────────────────────────────────────────────────
+
+  const slidesW = layout.activeW + layout.thumbCount * (layout.thumbW + layout.gap);
+  const bleed   = vw < 1024 ? 15 : edge;
+
+  return (
+    <section className="overflow-hidden py-10 xl:py-20 2xl:py-[135px]">
+      <div className="container ios:hidden mb-5 lg:mb-9 2xl:mb-14">
+        <SectionTitle text={t.firstSection.title} className="text-2xl xl:text-3xl 2xl:text-4xl leading-[1.111]" />
+      </div>
+
+      <div className="flex flex-row items-stretch gap-9 lg:gap-14"
+        style={isArabic ? { paddingLeft: bleed } : { paddingRight: bleed }}
+      >
+        {/* Carousel */}
+        <div className="relative flex-shrink-0" style={{ width: slidesW, minHeight: layout.activeH }}>
+          <div className="hidden ios:block absolute top-0 z-30 max-w-[47%] pointer-events-none"
+            style={isArabic ? { right: edge } : { left: edge }}
+          >
+            <SectionTitle text={t.firstSection.title} className="text-2xl xl:text-3xl 2xl:text-4xl leading-[1.111]" />
+          </div>
+
+          {desktopCards.map(({ member, isActive, w, h, left, zIndex }) => (
+            <motion.div
+              key={member._id}
+              className="absolute bottom-0 rounded-2xl overflow-hidden cursor-pointer select-none"
+              animate={{ left, width: w, height: h, zIndex }}
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              onClick={() => setActiveIdx(members.findIndex((m) => m._id === member._id))}
+            >
+              <Image src={member.image} alt={member.name} fill loading="lazy" sizes="460px"
+                className={`object-cover object-top transition-[filter] duration-500 ${isActive ? "saturate-100" : "saturate-0"}`}
+              />
+              {isActive && (
+                <div className="absolute inset-x-0 bottom-0 h-[55%] pointer-events-none"
+                  style={{ background: "linear-gradient(to bottom, transparent, #42BADC)" }} />
               )}
-              {!m.isActive && (
-                <div className="absolute inset-0 bg-black/40 rounded-[12px]" />
-              )}
+              {!isActive && <div className="absolute inset-0 bg-black/40 pointer-events-none" />}
             </motion.div>
           ))}
         </div>
-        {/* Active Slide Content */}
-        <div className="flex flex-col  md:mt-0 w-[320px] ">
-          <motion.p variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="text-sm text-black font-light" >
-            <span className="text-[#666666]">{"0" + n}/</span>
-            {"0" + (activeIndex + 1)}
-          </motion.p>
-          <div className="mt-auto">
-            <motion.h3 variants={moveUp(0.3)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="text-xl font-light text-black" >
-              {activeSlide.name}
-            </motion.h3>
-            <motion.p variants={moveUp(0.4)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="text-sm text-[#666666] font-light mt-[20px] md:mt-[30px]" > {activeSlide.designation} </motion.p>
-            <motion.div variants={moveUp(0.4)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="mt-[30px] md:mt-12 mb-8 xl:mb-13 space-y-1 font-light text-sm text-black school-leadership-bullets"
-              dangerouslySetInnerHTML={{ __html: activeSlide.description }} >
-              {/* <motion.div variants={moveUp(0.4)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="mt-[30px] md:mt-[50px] text-sm  text-black school-leadership-bullets" dangerouslySetInnerHTML={{ __html: activeSlide.description }}  /> */}
-            </motion.div>
-          </div>
-          <motion.div variants={moveUp(0.5)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="mt-8 flex justify-start group w-fit" >
-            <button onClick={next}
-              className={`${isArabic ? "group-hover:-translate-x-1" : "group-hover:translate-x-1"} transition-all duration-300 w-[50px] h-[50px] 2xl:w-[75px] 2xl:h-[75px] rounded-full border border-black flex items-center justify-center cursor-pointer`}
-            >
-              <img src="/images/arrow-primary.svg" alt="arrow-right" width={20} height={20} className={`w-[20px] h-[20px] ${isArabic ? "-rotate-135" : "rotate-45"}`} />
-            </button>
-          </motion.div>
+
+        {/* Content */}
+        <div className="w-[300px] lg:w-[320px] flex-shrink-0">
+          <ContentPanel {...sharedProps} />
         </div>
       </div>
     </section>
