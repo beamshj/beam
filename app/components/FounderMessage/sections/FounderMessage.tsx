@@ -21,7 +21,7 @@ export default function FounderMessage({
       <div className="container mx-auto flex flex-col md:flex-row md:items-center justify-between xl:gap-[91px]">
         {/* Left Column */}
         <div className="w-full xl:max-w-[55%] order-2 xl:order-1">
-          <h2 className="text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl leading-[1.1111] font-light text-black mb-6 xl:mb-[30px] 2xl:mb-[50px]">
+          <h2 className="text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl leading-[1.1111] -tracking-[0.05em] font-light text-black mb-6 xl:mb-[30px] 2xl:mb-[50px]">
             {t.title.split("\n").map((line, idx) => (
               <span key={idx} className="xl:flex">
                 <SplitText
@@ -47,7 +47,7 @@ export default function FounderMessage({
             <Image src={t.image} alt={t.imageAlt} height={540} width={616} sizes="(max-width: 768px) 90vw, 600px" className="object-contain xl:object-cover w-fit xl:w-[547px] h-[540px] z-0 rounded-[12px]  absolute right-0 md:relative" />
             {/* Info Box (mobile version) */}
             <div
-              className={`absolute ${isArabic ? "left-[5%] md:left-4" : "right-[5%] md:right-4"} bottom-4 z-20 md:min-h-[250px] md:bottom-6 w-[90%] md:w-[60%] lg:w-[70%] xl:w-[60%] rounded-[12px] p-[15px] 
+              className={`absolute ${isArabic ? "left-[5%] md:left-4" : "right-[5%] md:right-4"} bottom-4 z-20 xl:min-h-[250px] md:bottom-6 w-[90%] md:w-[60%] lg:w-[70%] xl:w-[60%] rounded-[12px] p-[15px] md:py-5 xl:py-0
               shadow-[0px_4px_66px_0px_rgba(0,0,0,0.16)] flex flex-col justify-center
               bg-gradient-to-r from-[#F5EBFF] to-[#C9F3FF]`}
             >

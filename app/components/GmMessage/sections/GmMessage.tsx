@@ -21,7 +21,7 @@ export default function GmMessage({ data }: { data: GmMessageProps["firstSection
                     <SplitText
                         tag="h2"
                         text={t.title}
-                        className="text-lg md:text-xl xl:text-3xl 2xl:text-4xl leading-[1.1111] font-light text-black mb-6 xl:mb-[30px] 2xl:mb-[50px]"
+                        className="text-lg md:text-xl xl:text-3xl 2xl:text-4xl -tracking-[0.05em] leading-[1.1111] font-light text-black mb-6 xl:mb-[30px] 2xl:mb-[50px]"
                         delay={100}
                         duration={1}
                         ease="power3.out"
@@ -41,7 +41,7 @@ export default function GmMessage({ data }: { data: GmMessageProps["firstSection
                         <div
                             className={`absolute ${
                                 isArabic ? "left-[5%] md:left-4" : "right-[5%] md:right-4"
-                            } bottom-4 z-20 md:min-h-[250px]  md:bottom-6 w-[90%] md:w-[60%] lg:w-[70%] xl:w-[60%] rounded-[12px] p-[15px] 
+                            } bottom-4 z-20 xl:min-h-[250px]  md:bottom-6 w-[90%] md:w-[60%] lg:w-[70%] xl:w-[60%] rounded-[12px] p-[15px] md:py-5 xl:py-0
                        shadow-[0px_4px_66px_0px_rgba(0,0,0,0.16)] flex flex-col justify-center
                        bg-gradient-to-r from-[#F5EBFF] to-[#C9F3FF]`}
                         >
@@ -90,9 +90,11 @@ export default function GmMessage({ data }: { data: GmMessageProps["firstSection
                 </div>
 
                 {/* Right Column */}
-                <div className="relative w-ful max-w-[616px] xl:h-[906px] xl:w-[616px] bg-white">
+                {/* <div className="relative w-ful max-w-[616px] xl:h-[906px] xl:w-[616px] bg-white"> */}
+                <div className="relative w-ful max-w-[616px] xl:h-[806px] xl:w-[616px] bg-white">
                     {/* Grey Div (desktop only) */}
-                    <div className="hidden xl:block absolute right-0 bottom-0 left-[44px] h-[813px] xl:w-[567px] rounded-[12px] bg-[#F6F6F6] overflow-hidden">
+                    {/* <div className="hidden xl:block absolute right-0 bottom-0 left-[44px] h-[913px] xl:w-[567px] rounded-[12px] bg-[#F6F6F6] overflow-hidden"> */}
+                    <div className="hidden xl:block absolute right-0 bottom-0 left-[44px] h-[713px] xl:w-[567px] rounded-[12px] bg-[#F6F6F6] overflow-hidden">
                         <div className="absolute inset-0 rounded-[12px] z-20 bg-[linear-gradient(164.5deg,rgba(126,90,163,0)_52%,rgba(126,90,163,0.85)_105.08%)] opacity-60 pointer-events-none" />
                     </div>
 

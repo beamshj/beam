@@ -17,6 +17,10 @@ export default function ValuesGrid({ data }: Props) {
   const t = useApplyLang(data);
   const isArabic = useIsPreferredLanguageArabic();
 
+  const sanitizeHtml = (html: string) => html.replace(/&nbsp;/g, " ");
+
+  console.log(t);
+
   return (
     <section className="container">
       <div className="py-10 md:py-20 2xl:py-[135px]">
@@ -102,8 +106,9 @@ export default function ValuesGrid({ data }: Props) {
                       {item.title}
                     </h3> */}
 
-                    <h3 className={`
-                        absolute rounded-full  font-light transition-all duration-500 flex items-center justify-center ${isArabic ? "text-[1.3rem] md:text-md xl:text-lg" :"text-[1.3rem] md:text-md xl:text-lg 2xl:text-xl"}
+                    <h3
+                      className={`
+                        absolute rounded-full  font-light transition-all duration-500 flex items-center justify-center ${isArabic ? "text-[1.3rem] md:text-md xl:text-lg" : "text-[1.3rem] md:text-md xl:text-lg 2xl:text-xl"}
                         ${
                           hovered === index
                             ? "top-[26px] left-1/2 -translate-x-1/2 w-[190px] lg:w-[220px] 2xl:w-[250px] text-center border-none bg-[linear-gradient(131deg,rgba(66,186,220,1)_0%,rgba(126,90,163,1)_100%)] px-3"
@@ -120,17 +125,12 @@ export default function ValuesGrid({ data }: Props) {
                       <div
                         className={`absolute bottom-0 left-0 right-0 w-full
                bg-gradient-to-t from-black/100 to-black/0 ${
-                 isArabic ? "px-10" : "px-3"
+                 isArabic ? "px-10" : "px-4"
                } pt-4 pb-5 values-description-about max-h-[75%] overflow-y-auto 2xl:overflow-y-hidden`}
-                        dangerouslySetInnerHTML={{ __html: item.description }}
-                      >
-                        {/* <ul className="list-disc list-outside pl-4 xl:pl-9 space-y-1 text-sm text-white font-light">
-                          {item.points.map((point, i) => (
-                            <li key={i}>{point}</li>
-                          ))}
-                        </ul> */}
-                        {/* {item.description} */}
-                      </div>
+                        dangerouslySetInnerHTML={{
+                          __html: sanitizeHtml(item.description),
+                        }}
+                      ></div>
                     )}
                   </div>
                 </div>

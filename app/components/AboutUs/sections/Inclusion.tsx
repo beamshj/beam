@@ -17,7 +17,7 @@ interface InclusionSectionProps {
 
 const InclusionSection: React.FC<InclusionSectionProps> = ({ data }) => {
   const t = useApplyLang(data);
-  const isArabic = useIsPreferredLanguageArabic()
+  const isArabic = useIsPreferredLanguageArabic();
 
   useEffect(() => {
     gsap.from(".inclusion-section", {
@@ -41,25 +41,42 @@ const InclusionSection: React.FC<InclusionSectionProps> = ({ data }) => {
   return (
     <section className="py-10 xl:py-20 2xl:py-[135px] ">
       <div className="container">
-        <div className="relative h-[500px] 2xl:h-[638px] rounded-[12px] overflow-hidden ">
-          {/* Background Image inside container */}
-          <Image src={t.image} alt={t.imageAlt} fill className="object-cover" />
-          {/* overlay */}
-          <div className="absolute inset-0 bg-black/50"></div>
-          <div style={{ background: `linear-gradient(${isArabic ? "90deg" : "270deg"}, rgba(0, 0, 0, 0) 0%, #066B7F 100%)` }} 
-          className={`absolute left-0 ${isArabic ? " w-[80%]" : " w-[83%]"} h-full`}
-          ></div>
-          {/* Content pinned bottom-left */}
-          <div className={`absolute bottom-0 ${isArabic ? "right-0" : "left-0"} z-10 p-6 xl:p-[60px]`}>
-            <motion.h2 variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}
-              className={`text-xl xl:text-3xl 2xl:text-4xl font-light leading-[1.111111] text-white ${isArabic ? "mb-6" : "mb-2"}`} >
-              {t.title}
-            </motion.h2>
-            <motion.p variants={moveUp(0.4)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="text-sm font-light leading-[1.52] text-white max-w-[83ch]" >
-              {t.description}
-            </motion.p>
-          </div>
-        </div>
+<div className="relative min-h-[500px] md:min-h-[450px] xl:min-h-[500px] 2xl:min-h-[638px] rounded-[12px] overflow-hidden">
+  {/* Background Image inside container */}
+  <Image src={t.image} alt={t.imageAlt} fill className="object-cover" />
+  {/* overlay */}
+  <div className="absolute inset-0 bg-black/40"></div>
+  <div
+    style={{
+      background: `linear-gradient(${isArabic ? "90deg" : "270deg"}, rgba(0, 0, 0, 0) 0%, #066B7F 100%)`,
+    }}
+    className={`absolute inset-0 ${isArabic ? "right-0 w-[85%]" : "left-0 w-[80%]"} h-full`}
+  ></div>
+
+  {/* ✅ Change: from absolute to relative flow, with top padding to push content down */}
+  <div
+    className={`relative z-10 flex flex-col justify-end min-h-[500px] md:min-h-[450px] xl:min-h-[500px] 2xl:min-h-[638px] ${isArabic ? "items-end" : "items-start"} p-6 pt-10 xl:p-[60px]`}
+  >
+    <motion.h2
+      variants={moveUp(0.2)}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.2 }}
+      className={`text-xl xl:text-3xl 2xl:text-4xl font-light leading-[1.111111] text-white ${isArabic ? "mb-6" : "mb-3 md:mb-2"}`}
+    >
+      {t.title}
+    </motion.h2>
+    <motion.p
+      variants={moveUp(0.4)}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.2 }}
+      className="text-sm font-light leading-[1.52] text-white max-w-[83ch]"
+    >
+      {t.description}
+    </motion.p>
+  </div>
+</div>
       </div>
     </section>
   );

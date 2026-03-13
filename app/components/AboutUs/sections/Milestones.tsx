@@ -37,7 +37,7 @@ export default function MoreToExplore({ data }: Props) {
     return () => window.removeEventListener("resize", updateMargin);
   }, []);
   return (
-    <section className="pt-10 xl:pt-20 2xl:pt-[135px] pb-[80px] xl:pb-[100px] 2xl:pb-[165px] bg-[#F6F6F6] overflow-hidden">
+    <section className="pt-10 xl:pt-20 2xl:pt-[135px] md:pb-12  xl:pb-[100px] 2xl:pb-[135px] bg-[#F6F6F6] overflow-hidden">
       <div className="container " ref={containerRef}>
         <h2 className="text-lg xl:text-2xl 2xl:text-4xl font-light md:mb-4 xl:mb-8 2xl:mb-[50px]">
           {t.title}
@@ -110,7 +110,7 @@ export default function MoreToExplore({ data }: Props) {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: false, amount: 0.3 }}
                     transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
-                    className="md:mt-5 lg:mt-[71px] vhidden h-[200px] mb-10"
+                    className={`md:mt-5 lg:mt-[71px] vhidden ${isArabic ? "h-[260px]" : "h-[180px]"} md:h-[200px] mb-10`}
                   >
                     <p className="text-[1.3rem] md:text-md xl:text-lg 2xl:text-xl font-light text-black leading-[1.18] mb-3 max-w-[20ch]">
                       {item.title}
@@ -128,14 +128,14 @@ export default function MoreToExplore({ data }: Props) {
                     whileInView={{ opacity: 1, scale: 1, y: -40 }}
                     viewport={{ once: false, amount: 0.3 }}
                     transition={{ duration: 0.5, ease: "easeInOut" }}
-                    className={`md:absolute  ${isArabic ? " md:right-[40%] lg:right-[35%]" : "md:left-[40%] lg:left-[35%]"} z-[2]`}
+                    className={`md:absolute lg:-top-3 ${isArabic ? " md:right-[40%] lg:right-[35%]" : "md:left-[40%] lg:left-[35%]"} z-[2]`}
                   >
                     <Image
                       src={item.image}
                       alt={item.imageAlt}
                       width={500}
                       height={500}
-                      className="object-cover rounded-[12px] h-[300px] w-full lg:h-[380px] xl:h-[425px] md:w-[85%] lg:w-[85%] 2xl:w-[100%]"
+                      className="object-cover rounded-[12px] h-[260px] w-full lg:h-[380px] xl:h-[425px] md:w-[85%] lg:w-[85%] 2xl:w-[100%]"
                     />
                   </motion.div>
                 </motion.div>
@@ -144,7 +144,7 @@ export default function MoreToExplore({ data }: Props) {
           </Swiper>
 
           {/* Pagination + Navigation */}
-          <div className="flex gap-9 w-fit m-auto relative top-5 lg:top-10 left-0 xl:left-12">
+          <div className={`flex gap-9 w-fit m-auto relative -top-8 md:-top-6 ${isArabic ? "left-0 xl:right-12" : "right-0 xl:left-12"}`}>
             <button
               className="swiper-button-prev-custom transition cursor-pointer group"
               aria-label="Previous"

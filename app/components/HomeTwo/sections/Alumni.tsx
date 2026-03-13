@@ -124,7 +124,7 @@ const Alumni = ({ data }: { data: HomeProps["seventhSection"] }) => {
                           alt={value.imageAlt}
                           width={351}
                           height={413}
-                          className="w-full h-[260px] xl:h-full object-contain object-bottom-left"
+                          className="w-full h-[360px] xl:h-full object-contain object-bottom-left"
                         />
                       </motion.div>
                     </div>
@@ -153,7 +153,7 @@ const Alumni = ({ data }: { data: HomeProps["seventhSection"] }) => {
             </LangLink>
           </div>
         </div>
-        <div className="alumni-pagination flex justify-center xl:justify-end gap-[6px] mt-10 xl:mt-0 relative z-20 pointer-events-auto"></div>
+        <div className="alumni-pagination flex justify-center xl:justify-end mt-10 xl:mt-0 relative z-20 pointer-events-auto"></div>
       </div>
     </motion.section>
   );

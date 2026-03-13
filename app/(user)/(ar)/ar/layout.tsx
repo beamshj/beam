@@ -9,8 +9,6 @@
 //   subsets: ["latin"],
 // });
 
-
-
 // export const metadata: Metadata = {
 //   title: "BEAM | Lighting The Way",
 //   description: "",
@@ -34,14 +32,13 @@
 //   );
 // }
 
-
-
 import type { Metadata } from "next";
 import { DM_Sans, Almarai } from "next/font/google";
 import "../../../globals.css";
 import NavBar from "@/app/components/Layout/NavBar";
 import Footer from "@/app/components/Layout/Footer";
 import { getFooter } from "@/lib/getFooter";
+import LenisProvider from "@/app/components/Layout/LenisProvider";
 
 // English font
 const dmSans = DM_Sans({
@@ -71,10 +68,12 @@ export default async function RootLayout({
   const footerData = await getFooter();
   return (
     <html lang="ar" dir="rtl">
-      <body className={`${dmSans.variable} ${almarai.variable} antialiased`}>
-        <NavBar />
-        {children}
-        <Footer footerData={footerData} />
+      <body className={`${dmSans.variable} ${almarai.variable} antialiased `}>
+        <LenisProvider>
+          <NavBar />
+          {children}
+          <Footer footerData={footerData} />
+        </LenisProvider>
       </body>
     </html>
   );

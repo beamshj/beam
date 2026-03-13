@@ -82,7 +82,7 @@ export default function PLProgram({
           {/* Right Image */}
           <div className="relative min-h-[300px] md:min-h-[450px] h-auto 2xl:w-[749px] w-full rounded-[12px] overflow-hidden  order-1 xl:order-2">
             <Image src={t.image} alt={t.imageAlt} fill loading="lazy" sizes="(max-width: 768px) 80vw, 400px" className="object-cover h-full rounded-[12px]" />
-            <div style={{ background: "linear-gradient(183.56deg, rgba(66, 186, 220, 0) 43.99%, #7E5AA3 116.63%)", }} className="absolute  w-full h-[50%] left-0 bottom-0" />
+            <div style={{ background: "linear-gradient(183.56deg, rgba(66, 186, 220, 0) 43.99%, #7E5AA3 116.63%)" }} className="absolute  w-full inset-0" />
           </div>
         </div>
       </div>

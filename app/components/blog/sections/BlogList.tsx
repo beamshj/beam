@@ -10,13 +10,24 @@ import { BlogType } from "../type";
 import { useApplyLang } from "@/lib/applyLang";
 import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 import LangLink from "@/lib/LangLink";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
 
 export default function BlogList({
   data,
 }: {
   data: BlogType["categories"][number]["blogs"];
 }) {
-  const [currentPage, setCurrentPage] = useState(1);
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const currentPage = Number(searchParams.get("page")) || 1;
+
+  const setCurrentPage = (page: number) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("page", page.toString());
+    router.push(`${pathname}?${params.toString()}`, { scroll: false });
+  };
   const [blogsPerPage, setBlogsPerPage] = useState(9);
 
   const t = useApplyLang(data);
@@ -45,7 +56,13 @@ export default function BlogList({
       <div className="container">
         {/* Header */}
         <div className="w-full flex justify-between items-center border-b border-bdrcolor mb-5 xl:mb-[30px] 2xl:mb-[50px]">
-          <motion.h1 variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl lg:leading-[1.111] font-light mb-3 xl:mb-[30px] 2xl:mb-[50px] text-black" >
+          <motion.h1
+            variants={moveUp(0.2)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+            className="text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl lg:leading-[1.111] font-light mb-3 xl:mb-[30px] 2xl:mb-[50px] text-black"
+          >
             {isArabic ? "مدونة" : "Blog"}
           </motion.h1>
         </div>
@@ -55,7 +72,13 @@ export default function BlogList({
           {currentBlogs.map((blog, index) => (
             <div key={index}>
               <LangLink href={`/news-&-media/blog/blog-details/${blog.slug}`}>
-                <motion.div variants={moveUp(index * 0.09)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="rounded-[12px] relative overflow-hidden h-full xl:h-[495px] border border-bdrcolor flex flex-col group" >
+                <motion.div
+                  variants={moveUp(index * 0.09)}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true, amount: 0.2 }}
+                  className="rounded-[12px] relative overflow-hidden h-full xl:h-[495px] border border-bdrcolor flex flex-col group"
+                >
                   {/* Sliding Gradient from bottom */}
                   <div className="absolute inset-0 -z-10 overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-t from-[#E2F5FF] to-white transform translate-y-full opacity-0 transition-all duration-700 ease-out group-hover:translate-y-0 group-hover:opacity-100" />
@@ -63,7 +86,14 @@ export default function BlogList({
 
                   {/* Image Section */}
                   <div className="relative w-full h-[301px] rounded-t-[12px] overflow-hidden flex-shrink-0">
-                    <Image src={blog.thumbnail || "/images/fallback.jpg"} alt={blog.thumbnailAlt} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" loading="lazy" className="object-cover w-full h-full" />
+                    <Image
+                      src={blog.thumbnail || "/images/fallback.jpg"}
+                      alt={blog.thumbnailAlt}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      loading="lazy"
+                      className="object-cover w-full h-full"
+                    />
                     {/* Black overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/75 to-black/0" />
 
@@ -79,7 +109,13 @@ export default function BlogList({
                             isArabic ? "translate-x-3" : "-translate-x-3"
                           } group-hover:-translate-y-0 group-hover:translate-x-0 block`}
                         >
-                          <Image src="/images/arrow-right-up.svg" alt="arrow" width={24} height={24} className={`${ isArabic && "-rotate-90" } object-contain`} />
+                          <Image
+                            src="/images/arrow-right-up.svg"
+                            alt="arrow"
+                            width={24}
+                            height={24}
+                            className={`${isArabic && "-rotate-90"} object-contain`}
+                          />
                         </span>
                       </button>
                     </div>
@@ -105,7 +141,13 @@ export default function BlogList({
                     </h3>
                     <div>
                       <button className="bg-primary text-white w-[27px] h-[27px] rounded-full flex items-center justify-center mt-[15px] cursor-pointer">
-                        <Image src="/images/arrow-right-tip.svg" alt="arrow" width={15} height={15} className={`${isArabic && "rotate-180"}`} />
+                        <Image
+                          src="/images/arrow-right-tip.svg"
+                          alt="arrow"
+                          width={15}
+                          height={15}
+                          className={`${isArabic && "rotate-180"}`}
+                        />
                       </button>
                     </div>
                   </div>
@@ -116,7 +158,11 @@ export default function BlogList({
         </div>
 
         {/* Pagination */}
-        <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+        />
       </div>
     </section>
   );

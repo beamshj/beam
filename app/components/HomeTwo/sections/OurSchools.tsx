@@ -201,7 +201,7 @@ const OurSchools = ({
   });
 
   return (
-    <section className="py-8 xl:pt-20 xl:pb-25 2xl:pt-[133px] 2xl:pb-[160px]">
+    <section className="py-8 xl:pt-20 xl:pb-25 2xl:pt-[133px] 2xl:pb-[160px] overflow-hidden">
       <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0 }} >
         <div className="container">
           <div className="mb-5 xl:mb-7 2xl:mb-[53px]">

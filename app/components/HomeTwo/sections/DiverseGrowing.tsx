@@ -109,7 +109,7 @@ const DiverseGrowing = ({ data }: { data: HomeProps['fifthSection'] }) => {
 
   return (
     <section className="pt-8 xl:pt-20 2xl:pt-[137px]">
-      <div className="relative pb-0 lg:pb-12 xl:pb-[150px] max-w-[1920px] mx-auto overflow-hidden">
+      <div className="relative pb-10 lg:pb-12 xl:pb-[150px] max-w-[1920px] mx-auto overflow-hidden">
         <div className="container">
           <div>
             {/* <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }}  >
@@ -231,7 +231,7 @@ const DiverseGrowing = ({ data }: { data: HomeProps['fifthSection'] }) => {
 
                         <div className="relative z-10 flex flex-col justify-between px-6 pt-4 pb-5 2xl:px-10 xl:py-4 min-w-full lg:min-w-[250px] 2xl:min-w-[389px] 2xl:min-h-[245px]">
                           <div className="flex justify-between items-center gap-4 pb-5">
-                            <p className={`text-xl 2xl:text-2xl font-light transition-all duration-500 ${isActive === 4 ? "text-black -translate-x-3" : "text-primary group-hover:text-black  group-hover:-translate-x-3 "}`} dir="ltr">
+                            <p className={`text-xl 2xl:text-2xl font-light transition-all duration-500 ${isActive === 4 ? "text-black -translate-x-3" : "lg:text-primary text-[#7E5AA3] group-hover:text-black  group-hover:-translate-x-3 "}`} dir="ltr">
                               <Counter from={0} to={Number(t.items[4].number)} />+
                             </p>
                             <Image
@@ -260,7 +260,7 @@ const DiverseGrowing = ({ data }: { data: HomeProps['fifthSection'] }) => {
 
                       <div className="relative z-10 flex flex-col justify-between px-6 pt-4 pb-5 2xl:px-10 xl:py-4 min-w-full lg:min-w-[250px] 2xl:min-w-[417px] 2xl:min-h-[362px]">
                         <div className="flex justify-between items-center gap-4 xl:pb-5">
-                          <p className={`text-xl 2xl:text-2xl font-light transition-all duration-500 ${isActive === 5 ? "text-black -translate-x-3" : "text-[#7E5AA3] group-hover:text-black  group-hover:-translate-x-3 "} `} dir="ltr">
+                          <p className={`text-xl 2xl:text-2xl font-light transition-all duration-500 ${isActive === 5 ? "text-black -translate-x-3" : "lg:text-[#7E5AA3] text-primary group-hover:text-black  group-hover:-translate-x-3 "} `} dir="ltr">
                             <Counter from={0} to={Number(t.items[3].number)} />+
                           </p>
                           <Image
@@ -282,7 +282,7 @@ const DiverseGrowing = ({ data }: { data: HomeProps['fifthSection'] }) => {
             </div>
           </div>
         </div>
-        <div className="relative pt-5 lg:pt-0 left-0 lg:absolute bottom-0 lg:left-[5%] z-[-1] responsive md:w-[50%] 2xl:w-[913px]" >
+        <div className="hidden lg:block relative pt-5 lg:pt-0 left-0 lg:absolute bottom-0 lg:left-[5%] z-[-1] responsive md:w-[50%] 2xl:w-[913px]" >
           <Image
             ref={imgRef}
             src={t.image}

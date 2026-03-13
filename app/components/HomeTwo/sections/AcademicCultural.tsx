@@ -78,7 +78,7 @@ const AcademicCultural = ({ data }: { data: HomeProps["thirdSection"] }) => {
               rootMargin="-100px"
               textAlign={isArabic ? "right" : "left"}
             /> */}
-            <H2Title titleText={t.title} textAlign={isArabic ? "text-right" : "text-left"} maxWidth="13ch" />
+            <H2Title titleText={t.title} textAlign={isArabic ? "text-right" : "text-left"} maxWidthClass="max-w-[13ch] lg:max-w-[12ch]" />
             {/* Description */}
             <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }} className="mt-5 md:mt-6 2xl:mt-[43px] mb-5 md:mb-7 2xl:mb-[93px]" >
               <p className="text-sm font-light text-colorpara md:max-w-[68ch] 2xl:max-w-[82ch]" dangerouslySetInnerHTML={{ __html: t.description }} />
@@ -132,7 +132,7 @@ const AcademicCultural = ({ data }: { data: HomeProps["thirdSection"] }) => {
                       />
                     </div>
                     <div>
-                      <p className={`text-md md:text-lg 2xl:text-xl font-light text-black leading-[1.2] lettersp-1 relative z-10 ${index === academicCulturalData.accvalues.length - 1
+                      <p className={`text-md 2xl:text-xl font-light text-black leading-[1.2] lettersp-1 relative z-10 ${index === academicCulturalData.accvalues.length - 1
                         ? "max-w-[15ch]"
                         : "max-w-[18ch]"
                         } transition-all duration-300 ${isActive ? "px-2 lg:px-0" : ""

@@ -8,7 +8,7 @@ gsap.registerPlugin(ScrollTrigger, GSAPSplitText, useGSAP);
 
 export interface SplitTextProps {
   text: string;
-  className?: string;
+  className?: string; 
   delay?: number;
   duration?: number;
   ease?: string | ((t: number) => number);

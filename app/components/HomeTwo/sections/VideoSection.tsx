@@ -50,7 +50,7 @@ const VideoSection = ({ data }: { data: HomeProps['fourthSection'] }) => {
 
   return (
     <>
-      <SectionReveal revealType="square" className="w-full">
+      <SectionReveal revealType="square" className="w-full overflow-hidden">
         <motion.section
           className="w-full relative max-w-[1920px] h-auto mx-auto overflow-hidden 2xl:h-screen py-10 md:py-28 2xl:py-0"
           initial={{ opacity: 0, scale: 0.9, rotate: -4, x: -100 }}
@@ -95,7 +95,7 @@ const VideoSection = ({ data }: { data: HomeProps['fourthSection'] }) => {
                 rootMargin="-100px"
                 textAlign={isArabic ? "right" : "left"}
               /> */}
-              <H2Title titleText={t.title} titleColor="text-white" textAlign={isArabic ? "text-right" : "text-left"} maxWidth="13ch" />
+              <H2Title titleText={t.title} titleColor="text-white" textAlign={isArabic ? "text-right" : "text-left"} maxWidth="13ch" leading="leading-[1.22222222]" />
               <motion.div className={`w-full md:w-3/4 h-px ${isArabic ? "bg-gradient-to-l origin-right" : "bg-gradient-to-r origin-left"} from-white to-transparent`}
                 variants={lineFade} ></motion.div>
 
@@ -106,8 +106,8 @@ const VideoSection = ({ data }: { data: HomeProps['fourthSection'] }) => {
                 aria-label="Play video"
               >
                 <span className="group-hover:opacity-80 transition-opacity">{isArabic ? 'اضغط' : 'Play'}</span>
-                <div className="relative w-[95px] h-[95px] flex items-center justify-center">
-                  <Image src="/assets/home/play-icon.svg" alt="Play" width={95} height={95} className="transition-transform duration-300 group-hover:scale-110" />
+                <div className="relative w-[65px] h-[65px] xl:w-[95px] xl:h-[95px] flex items-center justify-center">
+                  <Image src="/assets/home/play-icon.svg" alt="Play" width={95} height={95} className="transition-transform duration-300 group-hover:scale-110 w-[65px] h-[65px] xl:w-[95px] xl:h-[95px]" />
                 </div>
                 <span className="group-hover:opacity-80 transition-opacity">{isArabic ? 'هنا' : 'Here'}</span>
               </motion.button>

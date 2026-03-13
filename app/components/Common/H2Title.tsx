@@ -7,7 +7,9 @@ interface H2TitleProps {
   titleColor?: string;
   textAlign?: string;
   maxWidth?: string;
+  maxWidthClass?: string;
   splitType?: 'letter' | 'word' | 'line';
+  leading?: string;
 }
 
 const H2Title = ({
@@ -16,6 +18,8 @@ const H2Title = ({
   textAlign,
   maxWidth,
   splitType = 'word',
+  maxWidthClass,
+  leading
 }: H2TitleProps) => {
   const titleRef = useRef<HTMLHeadingElement>(null);
 
@@ -105,8 +109,8 @@ const H2Title = ({
   return (
     <h2
       ref={titleRef}
-      className={`sbt-fz font-light leading-[1.111111111111111] ${titleColor || "text-black"} ${textAlign || "text-left"} 
-       lettersp-4`} style={{ maxWidth: maxWidth }}
+      className={`sbt-fz font-light ${leading || "leading-[1.111111111111111]"} ${titleColor || "text-black"} ${textAlign || "text-left"} lettersp-4 ${maxWidthClass || ""}`}
+      style={{ maxWidth: maxWidth }}
     >
       {titleText}
     </h2>
