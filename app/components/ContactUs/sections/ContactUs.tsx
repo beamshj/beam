@@ -186,7 +186,7 @@ const ContactForm: React.FC<{ data: FirstSection }> = ({ data }) => {
                                 type="text"
                                 placeholder={isArabic ? "الاسم الأول" : "Enter Your First Name"}
                                 {...register("firstName")}
-                                className="w-full border-b text-colorpara border-colorpara py-2 xl:py-[23px] focus:outline-none placeholder:text-colorpara text-sm font-light"
+                                className="w-full border-b text-colorpara border-colorpara py-2 xl:py-[23px] focus:outline-none placeholder:text-colorpara text-sm font-light placeholder:py-2"
                             />
                             <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
                                 {errors.firstName?.message || ""}
@@ -204,7 +204,7 @@ const ContactForm: React.FC<{ data: FirstSection }> = ({ data }) => {
                                 type="text"
                                 placeholder={isArabic ? "اسم العائلة" : "Enter Last Name"}
                                 {...register("lastName")}
-                                className="w-full border-b text-colorpara border-colorpara py-2 xl:py-[23px] focus:outline-none placeholder:text-colorpara text-sm font-light"
+                                className="w-full border-b text-colorpara border-colorpara py-2 xl:py-[23px] focus:outline-none placeholder:text-colorpara text-sm font-light placeholder:py-2"
                             />
                             <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
                                 {errors.lastName?.message || ""}
@@ -224,7 +224,7 @@ const ContactForm: React.FC<{ data: FirstSection }> = ({ data }) => {
                                 type="email"
                                 placeholder={isArabic ? "البريد الالكتروني" : "Enter Your Email ID"}
                                 {...register("email")}
-                                className="w-full border-b text-colorpara border-colorpara py-2 xl:py-[23px] focus:outline-none placeholder:text-colorpara text-sm font-light"
+                                className="w-full border-b text-colorpara border-colorpara py-2 xl:py-[23px] focus:outline-none placeholder:text-colorpara text-sm font-light placeholder:py-2"
                             />
                             <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
                                 {errors.email?.message || ""}
@@ -246,7 +246,7 @@ const ContactForm: React.FC<{ data: FirstSection }> = ({ data }) => {
                                     const input = e.target as HTMLInputElement;
                                     input.value = input.value.replace(/\D/g, ""); // remove non-digits
                                 }}
-                                className="w-full border-b text-colorpara border-colorpara py-2 xl:py-[23px] focus:outline-none placeholder:text-colorpara text-sm font-light"
+                                className="w-full border-b text-colorpara border-colorpara py-2 xl:py-[23px] focus:outline-none placeholder:text-colorpara text-sm font-light placeholder:py-2"
                             />
                             <p className="text-red-500 text-xs font-light pt-1 min-h-[20px]">
                                 {errors.phone?.message || ""}

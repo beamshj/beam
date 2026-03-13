@@ -139,11 +139,11 @@ export const mainMenuItems = [
     href: "#",
     submenu: [
       { name: "Blog", name_ar: "مدونة", href: "/news-&-media/blog" },
-      {
-        name: "Press Release",
-        name_ar: "البيانات الصحفية",
-        href: "/news-&-media/press-release",
-      },
+      // {
+      //   name: "Press Release",
+      //   name_ar: "البيانات الصحفية",
+      //   href: "/news-&-media/press-release",
+      // },
       // { name: "Gallery", name_ar: "الصور", href: "/news-&-media/gallery" },
     ],
   },

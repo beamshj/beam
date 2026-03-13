@@ -47,7 +47,7 @@ const InnerBanner = ({ BannerData, data }: PageBnrProps) => {
                             clipPath: "inset(0 0% 0 0)",
                         }}
                         transition={{ duration: 1.3, ease: "easeOut" }}
-                        className="text-white text-xl md:text-2xl xl:text-2xl 2xl:text-3xl leading-[1.125] mb-[25px] md:mb-[30px] xl:mb-[40px] 2xl:mb-[50px] font-light"
+                        className={`text-white text-xl md:text-2xl xl:text-2xl 2xl:text-3xl mb-[22px] md:mb-[27px] xl:mb-[37px] 2xl:mb-[47px] font-light ${isArabic ? "leading-[1.43]" : "leading-[1.125]"}`}
                     >
                         {!lastWordPrimaryColor
                             ? (() => {

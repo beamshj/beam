@@ -6,8 +6,8 @@ import Interest from "@/app/models/Interest"
 export async function POST(req:NextRequest){
     try {
         await connectDB()
-        const {fullName,email,phone,findUs,selectSchool,selectGrade} = await req.json()
-        const interest = await Interest.create({fullName,email,phone,findUs,selectSchool,selectGrade})
+        const {fullName,email,phone,findUs,selectSchool,selectGrade, purpose, enrollmentYear} = await req.json()
+        const interest = await Interest.create({fullName,email,phone,findUs,selectSchool,selectGrade, purpose, enrollmentYear})
         if(!interest){
             return NextResponse.json({message:"Error sending message",success:false},{status:500})
         }

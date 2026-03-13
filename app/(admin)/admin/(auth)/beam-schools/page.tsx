@@ -48,7 +48,7 @@ export default function CurrentOpenings() {
   const [category, setCategory] = useState<string>("");
   const [category_ar, setCategory_ar] = useState("");
   const [schoolList, setSchoolList] = useState<
-    { _id: string; title: string; title_ar: string }[]
+    { _id: string; title: string; title_ar: string; address: string }[]
   >([]);
   const [locationList, setLocationList] = useState<
     { _id: string; name: string; name_ar: string }[]
@@ -293,7 +293,7 @@ export default function CurrentOpenings() {
 
     if (!over || active.id === over.id) return;
 
-    setSchoolList((schoolList: { _id: string; title: string; title_ar: string }[]) => {
+    setSchoolList((schoolList: { _id: string; title: string; title_ar: string; address: string }[]) => {
       const originalPos = getTaskPos(active.id);
       const newPos = getTaskPos(over.id);
       return arrayMove(schoolList, originalPos, newPos);
@@ -823,7 +823,7 @@ export default function CurrentOpenings() {
                 key={item._id}
               >
                 <div className="flex flex-col gap-2">
-                  <span>{item.title}</span>
+                  <span>{item.title} - {item.address}</span>
                   <span>{item.title_ar || "—"}</span>
                 </div>
                 <div className="flex gap-5">
