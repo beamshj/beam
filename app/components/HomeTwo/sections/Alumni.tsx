@@ -25,12 +25,12 @@ import LangLink from "@/lib/LangLink";
 // Optional: Add modules if needed
 
 const Alumni = ({ data }: { data: HomeProps["seventhSection"] }) => {
-  const isArabic = useIsPreferredLanguageArabic()
+  const isArabic = useIsPreferredLanguageArabic();
   const t = useApplyLang(data);
   const textParts = t.title.split("\n");
   return (
     <motion.section
-      className="py-8 xl:pt-20 xl:pb-25 2xl:pt-[135px] 2xl:pb-[126px] max-w-[1920px] mx-auto overflow-hidden"
+      className="py-8 xl:pt-20 xl:pb-25 2xl:pt-[135px] 2xl:pb-[126px]   overflow-hidden"
       variants={fadeUp}
       initial="hidden"
       whileInView="visible"
@@ -103,7 +103,13 @@ const Alumni = ({ data }: { data: HomeProps["seventhSection"] }) => {
                     className={`border-t border-bdrcolor pt-4 md:pt-6 group overflow-hidden flex flex-col ${isArabic ? "items-end" : "items-start"}`}
                   >
                     {/* Text container */}
-                    <div className={isArabic ? "self-end text-right w-full" : "self-start text-left w-ful"}>
+                    <div
+                      className={
+                        isArabic
+                          ? "self-end text-right w-full"
+                          : "self-start text-left w-ful"
+                      }
+                    >
                       <h3 className="text-md 2xl:text-xl font-light text-black transition-all duration-300">
                         {value.name}
                       </h3>
@@ -129,7 +135,6 @@ const Alumni = ({ data }: { data: HomeProps["seventhSection"] }) => {
                       </motion.div>
                     </div>
                   </motion.div>
-
                 </SparkleCard>
               </SwiperSlide>
             ))}
@@ -140,13 +145,22 @@ const Alumni = ({ data }: { data: HomeProps["seventhSection"] }) => {
         <div className="flex justify-between items-center">
           <div className="w-fit">
             <LangLink href={t.link} className="w-fit">
-              <div className={`mt-5 w-fit md:mt-10 p-[1px] group transition-all duration-300 bg-bdrcolor bg-[linear-gradient(90deg,_#42BADC_0%,_#12586C_100%)] rounded-full ${isArabic ? "hover:-translate-x-[5px]" : "hover:translate-x-[5px]"} hover:shadow-[0_0_15px_rgba(66,186,220,0.5)]`}>
+              <div
+                className={`mt-5 w-fit md:mt-10 p-[1px] group transition-all duration-300 bg-bdrcolor bg-[linear-gradient(90deg,_#42BADC_0%,_#12586C_100%)] rounded-full ${isArabic ? "hover:-translate-x-[5px]" : "hover:translate-x-[5px]"} hover:shadow-[0_0_15px_rgba(66,186,220,0.5)]`}
+              >
                 <div className="cursor-pointer pl-4 pr-2 md:px-5 py-2 md:py-3 bg-white rounded-full flex items-center gap-2 transition-all duration-300">
                   <p className="group-hover:text-black text-xs font-light text-colorpara uppercase transition-colors duration-300">
                     {t.buttonText}
                   </p>
-                  <div className={`p-1 flex items-center justify-center bg-primary w-[27px] h-[27px] rounded-full transition-transform duration-300 ${isArabic ? "-rotate-90 group-hover:-rotate-135" : "group-hover:rotate-45"}`}>
-                    <Image src="/assets/arrow.svg" alt="arrow" width={11} height={11} />
+                  <div
+                    className={`p-1 flex items-center justify-center bg-primary w-[27px] h-[27px] rounded-full transition-transform duration-300 ${isArabic ? "-rotate-90 group-hover:-rotate-135" : "group-hover:rotate-45"}`}
+                  >
+                    <Image
+                      src="/assets/arrow.svg"
+                      alt="arrow"
+                      width={11}
+                      height={11}
+                    />
                   </div>
                 </div>
               </div>

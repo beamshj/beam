@@ -26,7 +26,7 @@ const Alumni = ({ data }: { data: HomeProps["seventhSection"] }) => {
   const textParts = t.title.split("\n");
   return (
     <motion.section
-      className="py-8 xl:pt-20 xl:pb-25 2xl:pt-[135px] 2xl:pb-[126px] max-w-[1920px] mx-auto overflow-hidden"
+      className="py-8 xl:pt-20 xl:pb-25 2xl:pt-[135px] 2xl:pb-[126px]   overflow-hidden"
       variants={fadeUp}
       initial="hidden"
       whileInView="visible"

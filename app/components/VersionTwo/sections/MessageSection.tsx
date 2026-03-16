@@ -15,7 +15,7 @@ import { HomeProps } from "../type";
 const MessageSection = ({ data }: { data: HomeProps["sixthSection"] }) => {
   return (
     <motion.section
-      className="relative w-full bg-[#F6F6F6] aftergd max-w-[1920px] mx-auto overflow-hidden"
+      className="relative w-full bg-[#F6F6F6] aftergd   overflow-hidden"
       variants={fadeUp}
       initial="hidden"
       whileInView="visible"
@@ -148,10 +148,7 @@ const MessageSection = ({ data }: { data: HomeProps["sixthSection"] }) => {
                 {data.name}
               </h3>
               {data.designation.split("\n").map((word, index) => (
-                <span
-                  key={index}
-                  className="text-sm font-light text-colorpara"
-                >
+                <span key={index} className="text-sm font-light text-colorpara">
                   {word}
                   {index < data.designation.split("\n").length - 1 && <br />}
                 </span>

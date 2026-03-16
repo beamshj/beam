@@ -14,17 +14,17 @@ import { motion } from "framer-motion";
 import { fadeUp } from "@/public/assets/FramerAnimation/animation";
 import { HomeProps } from "../type";
 
-const LogoSlider = ({data}: {data: HomeProps['ninethSection']}) => {
+const LogoSlider = ({ data }: { data: HomeProps["ninethSection"] }) => {
   return (
     <motion.section
-      className="py-8 xl:py-25 2xl:py-23 max-w-[1920px] mx-auto overflow-hidden border-t border-bdrcolor"
+      className="py-8 xl:py-25 2xl:py-23   overflow-hidden border-t border-bdrcolor"
       variants={fadeUp}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
     >
       <div className="container">
-        <Swiper 
+        <Swiper
           modules={[Autoplay, Pagination]}
           spaceBetween={30}
           slidesPerView={2}
@@ -40,14 +40,14 @@ const LogoSlider = ({data}: {data: HomeProps['ninethSection']}) => {
             },
           }}
           breakpoints={{
-            992: { slidesPerView: 3,spaceBetween: 20 },
-            1024: { slidesPerView: 4,spaceBetween: 20 },
-            1400: { slidesPerView: 5,spaceBetween: 10 },
+            992: { slidesPerView: 3, spaceBetween: 20 },
+            1024: { slidesPerView: 4, spaceBetween: 20 },
+            1400: { slidesPerView: 5, spaceBetween: 10 },
           }}
           className="alumni-swiper"
         >
           {data.items.map((value, index) => (
-            <SwiperSlide key={index} >
+            <SwiperSlide key={index}>
               <div>
                 <Image
                   src={value.image}
@@ -56,7 +56,7 @@ const LogoSlider = ({data}: {data: HomeProps['ninethSection']}) => {
                   height={65}
                   sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 196px"
                   loading={index === 0 ? "eager" : "lazy"}
-                  priority={index === 0}  
+                  priority={index === 0}
                 />
               </div>
             </SwiperSlide>

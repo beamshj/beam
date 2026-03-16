@@ -18,7 +18,6 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import { HomeProps } from "../type";
 import { useApplyLang } from "@/lib/applyLang";
 
-
 gsap.registerPlugin(ScrollTrigger);
 
 const AcademicCultural = ({ data }: { data: HomeProps["thirdSection"] }) => {
@@ -52,7 +51,7 @@ const AcademicCultural = ({ data }: { data: HomeProps["thirdSection"] }) => {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
-      className="pt-8 xl:pt-20 2xl:pt-[137px] max-w-[1920px] mx-auto overflow-hidden bg-[#F6F6F6]"
+      className="pt-8 xl:pt-20 2xl:pt-[137px]   overflow-hidden bg-[#F6F6F6]"
     >
       <div className="relative pb-12 md:pb-15 xl:pb-[150px]">
         <div className="container">

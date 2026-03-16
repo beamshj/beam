@@ -137,7 +137,7 @@ const RegisterInterest = forwardRef<HTMLDivElement, RegisterInterestProps>(
         id="registerInterest"
       >
         <div
-          className="relative w-full max-w-[1920px] h-auto py-12 2xl:py-[100px] bg-cover bg-center flex justify-center items-center"
+          className="relative w-full  h-auto py-12 2xl:py-[100px] bg-cover bg-center flex justify-center items-center"
           style={{ backgroundImage: "url('/images/contact-us/interest.jpg')" }}
         >
           <div className="absolute inset-0 bg-black/78"></div>

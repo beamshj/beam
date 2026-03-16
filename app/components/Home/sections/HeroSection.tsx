@@ -1,6 +1,12 @@
 "use client";
 import Image from "next/image";
-import React, { useEffect, useRef, useState, useMemo, useCallback } from "react";
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  useMemo,
+  useCallback,
+} from "react";
 // import { BannerSliderData } from "@/app/data/BannerSlider";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade } from "swiper/modules";
@@ -42,7 +48,7 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
         },
       },
     }),
-    []
+    [],
   );
 
   useEffect(() => {
@@ -71,7 +77,7 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
   }, []);
 
   return (
-    <section className="lg:h-screen h-[65dvh] md:h-[85dvh] relative overflow-hidden max-w-[1920px] mx-auto">
+    <section className="lg:h-screen h-[65dvh] md:h-[85dvh] relative overflow-hidden  ">
       <Swiper
         modules={[Autoplay, EffectFade]}
         effect="fade"
@@ -123,9 +129,7 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
               <div className="absolute w-full h-full">
                 <div className="container h-full">
                   <div className="h-full relative w-full overflow-hidden">
-                    <div
-                      className="absolute bottom-5 lg:bottom-[30px] xl:bottom-[50px] grid grid-cols-1 xl:grid-cols-7 items-end gap-2 transition-all ease-in-out"
-                    >
+                    <div className="absolute bottom-5 lg:bottom-[30px] xl:bottom-[50px] grid grid-cols-1 xl:grid-cols-7 items-end gap-2 transition-all ease-in-out">
                       {/* Left text */}
                       <motion.div
                         initial={{ opacity: 0, y: 40 }}
@@ -205,12 +209,14 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
                           ease: "easeOut",
                           delay: 0.5,
                         }}
-                        className={`absolute bottom-[83px] w-[80%] hidden xl:block ${isArabic ? "right-[40%]" : "left-[40%]"
-                          }`}
+                        className={`absolute bottom-[83px] w-[80%] hidden xl:block ${
+                          isArabic ? "right-[40%]" : "left-[40%]"
+                        }`}
                       >
                         <div
-                          className={`h-[1px] w-full ${isArabic ? "bg-gradient-to-l" : "bg-gradient-to-r"
-                            } from-white via-white/30 to-transparent`}
+                          className={`h-[1px] w-full ${
+                            isArabic ? "bg-gradient-to-l" : "bg-gradient-to-r"
+                          } from-white via-white/30 to-transparent`}
                         ></div>
                       </motion.div>
                     </div>
@@ -231,10 +237,9 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
                 {t.items.map((_, index) => (
                   <span
                     key={index}
-                    className={`font-medium w-[1px] h-[10px] mt-2 ${index === currentSlide - 1
-                        ? "bg-primary"
-                        : "bg-white"
-                      }`}
+                    className={`font-medium w-[1px] h-[10px] mt-2 ${
+                      index === currentSlide - 1 ? "bg-primary" : "bg-white"
+                    }`}
                   ></span>
                 ))}
               </div>

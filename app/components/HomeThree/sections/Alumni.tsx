@@ -25,7 +25,7 @@ const Alumni = ({ data }: { data: HomeProps["seventhSection"] }) => {
   const textParts = data.title.split("\n");
   return (
     <motion.section
-      className="py-8 xl:pt-20 xl:pb-25 2xl:pt-[135px] 2xl:pb-[126px] max-w-[1920px] mx-auto overflow-hidden"
+      className="py-8 xl:pt-20 xl:pb-25 2xl:pt-[135px] 2xl:pb-[126px]   overflow-hidden"
       variants={fadeUp}
       initial="hidden"
       whileInView="visible"
@@ -91,26 +91,26 @@ const Alumni = ({ data }: { data: HomeProps["seventhSection"] }) => {
             {data.items.map((value, index) => (
               <SwiperSlide key={index}>
                 <SparkleCard index={index}>
-                <motion.div
-                  variants={cardVariants2}
-                  className="border-t border-bdrcolor pt-4 md:pt-6 group overflow-hidden"
-                >
-                  <h3 className="text-md 2xl:text-xl font-light text-black transition-all duration-300">
-                    {value.name}
-                  </h3>
-                  <p className="text-sm font-light text-[#626262] transition-all duration-300">
-                    {value.course}
-                  </p>
-                  <div className="mt-9 aluminibg transform transition-transform duration-500 group-hover:scale-105 xl:h-[378px] xl:w-[368px] 2xl:h-[438px] 2xl:w-[428px]">
-                    <Image
-                      src={value.image}
-                      alt={value.imageAlt}
-                      width={351}
-                      height={413}
-                      className="w-full h-[260px] xl:h-full object-contain object-bottom-left"
-                    />
-                  </div>
-                </motion.div>
+                  <motion.div
+                    variants={cardVariants2}
+                    className="border-t border-bdrcolor pt-4 md:pt-6 group overflow-hidden"
+                  >
+                    <h3 className="text-md 2xl:text-xl font-light text-black transition-all duration-300">
+                      {value.name}
+                    </h3>
+                    <p className="text-sm font-light text-[#626262] transition-all duration-300">
+                      {value.course}
+                    </p>
+                    <div className="mt-9 aluminibg transform transition-transform duration-500 group-hover:scale-105 xl:h-[378px] xl:w-[368px] 2xl:h-[438px] 2xl:w-[428px]">
+                      <Image
+                        src={value.image}
+                        alt={value.imageAlt}
+                        width={351}
+                        height={413}
+                        className="w-full h-[260px] xl:h-full object-contain object-bottom-left"
+                      />
+                    </div>
+                  </motion.div>
                 </SparkleCard>
               </SwiperSlide>
             ))}
