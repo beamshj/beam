@@ -26,7 +26,7 @@ gsap.registerPlugin(ScrollTrigger);
 const AcademicCultural = ({ data }: { data: HomeProps["thirdSection"] }) => {
   const [activeIndex, setActiveIndex] = useState(1);
   const t = useApplyLang(data);
-  const isArabic = useIsPreferredLanguageArabic() // 2nd item active by default
+  const isArabic = useIsPreferredLanguageArabic(); // 2nd item active by default
 
   const imgRef = useRef<HTMLImageElement | null>(null);
 
@@ -57,7 +57,7 @@ const AcademicCultural = ({ data }: { data: HomeProps["thirdSection"] }) => {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
-      className="pt-8 xl:pt-20 2xl:pt-[137px] max-w-[1920px] mx-auto overflow-hidden bg-[#F6F6F6]"
+      className="pt-8 xl:pt-20 2xl:pt-[137px]   overflow-hidden bg-[#F6F6F6]"
     >
       <div className="relative pb-12 md:pb-15 xl:pb-[150px]">
         <div className="container">
@@ -78,15 +78,31 @@ const AcademicCultural = ({ data }: { data: HomeProps["thirdSection"] }) => {
               rootMargin="-100px"
               textAlign={isArabic ? "right" : "left"}
             /> */}
-            <H2Title titleText={t.title} textAlign={isArabic ? "text-right" : "text-left"} maxWidthClass="max-w-[13ch] lg:max-w-[12ch]" />
+            <H2Title
+              titleText={t.title}
+              textAlign={isArabic ? "text-right" : "text-left"}
+              maxWidthClass="max-w-[13ch] lg:max-w-[12ch]"
+            />
             {/* Description */}
-            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }} className="mt-5 md:mt-6 2xl:mt-[43px] mb-5 md:mb-7 2xl:mb-[93px]" >
-              <p className="text-sm font-light text-colorpara md:max-w-[68ch] 2xl:max-w-[82ch]" dangerouslySetInnerHTML={{ __html: t.description }} />
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
+              className="mt-5 md:mt-6 2xl:mt-[43px] mb-5 md:mb-7 2xl:mb-[93px]"
+            >
+              <p
+                className="text-sm font-light text-colorpara md:max-w-[68ch] 2xl:max-w-[82ch]"
+                dangerouslySetInnerHTML={{ __html: t.description }}
+              />
             </motion.div>
 
             {/* Top Divider */}
             <div className="">
-              <div className={`${isArabic ? "bg-[linear-gradient(270deg,#000000_0%,rgba(0,0,0,0)_60%)] h-px lg:bg-[linear-gradient(270deg,#000000_0%,rgba(0,0,0,0)_30%)]" : "bg-[linear-gradient(90deg,#000000_0%,rgba(0,0,0,0)_60%)] h-px lg:bg-[linear-gradient(90deg,#000000_0%,rgba(0,0,0,0)_30%)]"}`}></div>
+              <div
+                className={`${isArabic ? "bg-[linear-gradient(270deg,#000000_0%,rgba(0,0,0,0)_60%)] h-px lg:bg-[linear-gradient(270deg,#000000_0%,rgba(0,0,0,0)_30%)]" : "bg-[linear-gradient(90deg,#000000_0%,rgba(0,0,0,0)_60%)] h-px lg:bg-[linear-gradient(90deg,#000000_0%,rgba(0,0,0,0)_30%)]"}`}
+              ></div>
             </div>
 
             {/* List Items */}
@@ -110,32 +126,50 @@ const AcademicCultural = ({ data }: { data: HomeProps["thirdSection"] }) => {
                     style={
                       !isActive
                         ? {
-                          borderBottomWidth: "1px",
-                          borderStyle: "solid",
-                          borderImageSlice: 1,
-                          borderImageSource:
-                            "linear-gradient(90deg, #000000 0%, rgba(0, 0, 0, 0) 100%)",
-                        }
+                            borderBottomWidth: "1px",
+                            borderStyle: "solid",
+                            borderImageSlice: 1,
+                            borderImageSource:
+                              "linear-gradient(90deg, #000000 0%, rgba(0, 0, 0, 0) 100%)",
+                          }
                         : {}
                     }
                   >
-                    <div className={`w-0 group-hover:w-full absolute top-0 ${isArabic ? "right-0 bg-[linear-gradient(270deg,#42BADC_0%,rgba(66,186,220,0)_100%)]"
-                          : "left-0 bg-[linear-gradient(90deg,#42BADC_0%,rgba(66,186,220,0)_100%)]"} h-full ${isActive
+                    <div
+                      className={`w-0 group-hover:w-full absolute top-0 ${
+                        isArabic
+                          ? "right-0 bg-[linear-gradient(270deg,#42BADC_0%,rgba(66,186,220,0)_100%)]"
+                          : "left-0 bg-[linear-gradient(90deg,#42BADC_0%,rgba(66,186,220,0)_100%)]"
+                      } h-full ${
+                        isActive
                           ? "transition-all duration-300 z-0 w-full"
-                          : "transition-all duration-300 z-0 w-0"} `} ></div>
+                          : "transition-all duration-300 z-0 w-0"
+                      } `}
+                    ></div>
 
-                    <div className={`transition-all duration-300 mb-3 xl:mb-0 ${isActive ? "px-2" : "group-hover:px-2"}`}>
-                      <Image src={acdData.academicCulturalDataicons[index]} alt={value.title} width={60} height={75} className={`transition-all duration-300 w-15  h-auto ${isActive
-                          ? "filter-[brightness(0)]"
-                          : "group-hover:filter-[brightness(0)]"
-                          }`}
+                    <div
+                      className={`transition-all duration-300 mb-3 xl:mb-0 ${isActive ? "px-2" : "group-hover:px-2"}`}
+                    >
+                      <Image
+                        src={acdData.academicCulturalDataicons[index]}
+                        alt={value.title}
+                        width={60}
+                        height={75}
+                        className={`transition-all duration-300 w-15  h-auto ${
+                          isActive
+                            ? "filter-[brightness(0)]"
+                            : "group-hover:filter-[brightness(0)]"
+                        }`}
                       />
                     </div>
                     <div>
-                      <p className={`text-md 2xl:text-xl font-light text-black leading-[1.2] lettersp-1 relative z-10 ${index === academicCulturalData.accvalues.length - 1
-                        ? "max-w-[15ch]"
-                        : "max-w-[18ch]"
-                        } transition-all duration-300 ${isActive ? "px-2 lg:px-0" : ""
+                      <p
+                        className={`text-md 2xl:text-xl font-light text-black leading-[1.2] lettersp-1 relative z-10 ${
+                          index === academicCulturalData.accvalues.length - 1
+                            ? "max-w-[15ch]"
+                            : "max-w-[18ch]"
+                        } transition-all duration-300 ${
+                          isActive ? "px-2 lg:px-0" : ""
                         }`}
                       >
                         {value.title}
@@ -152,8 +186,19 @@ const AcademicCultural = ({ data }: { data: HomeProps["thirdSection"] }) => {
         </div>
 
         {/* Side Image */}
-        <div className={`absolute bottom-0 ${isArabic ? "left-0 xl:left-[-10%]" : "right-0 xl:right-[-10%]"} hidden xl:block w-[640px] 2xl:w-[737px] z-20`}>
-          <Image ref={imgRef} src={t.image} alt={t.imageAlt} width={737} height={1061} sizes="(max-width: 768px) 100vw, 737px" loading="lazy" className={isArabic ? "scale-x-[-1]" : ""} />
+        <div
+          className={`absolute bottom-0 ${isArabic ? "left-0 xl:left-[-10%]" : "right-0 xl:right-[-10%]"} hidden xl:block w-[640px] 2xl:w-[737px] z-20`}
+        >
+          <Image
+            ref={imgRef}
+            src={t.image}
+            alt={t.imageAlt}
+            width={737}
+            height={1061}
+            sizes="(max-width: 768px) 100vw, 737px"
+            loading="lazy"
+            className={isArabic ? "scale-x-[-1]" : ""}
+          />
         </div>
       </div>
     </motion.section>

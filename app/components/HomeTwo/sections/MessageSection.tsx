@@ -6,7 +6,7 @@ import { moveLeft, moveUp } from "../../motionVarients";
 import {
   containerVariants,
   fadeTop,
-  fadeSide
+  fadeSide,
 } from "@/public/assets/FramerAnimation/animation";
 import SplitText from "@/components/SplitText";
 import { HomeProps } from "../type";
@@ -15,13 +15,15 @@ import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 import H2Title from "../../Common/H2Title";
 
 const MessageSection = ({ data }: { data: HomeProps["sixthSection"] }) => {
-  const t = useApplyLang(data)
-  const isArabic = useIsPreferredLanguageArabic()
+  const t = useApplyLang(data);
+  const isArabic = useIsPreferredLanguageArabic();
 
   return (
-    <section className={`relative w-full bg-[#F6F6F6] ${isArabic ? "aftergd_ar" : "aftergd"} max-w-[1920px] mx-auto overflow-hidden`} >
+    <section
+      className={`relative w-full bg-[#F6F6F6] ${isArabic ? "aftergd_ar" : "aftergd"}   overflow-hidden`}
+    >
       {/* <motion.section
-      className="relative w-full bg-[#F6F6F6] aftergd max-w-[1920px] mx-auto overflow-hidden"
+      className="relative w-full bg-[#F6F6F6] aftergd   overflow-hidden"
       variants={fadeUp}
       initial="hidden"
       whileInView="visible"
@@ -47,7 +49,9 @@ const MessageSection = ({ data }: { data: HomeProps["sixthSection"] }) => {
           </h2> */}
           <H2Title titleText={t.mainTitle} textAlign="text-left" />
         </div>
-        <div className={`lg:absolute bottom-0  flex ${isArabic ? "pr-[15px] right-0" : "pl-[15px] left-0"}`}>
+        <div
+          className={`lg:absolute bottom-0  flex ${isArabic ? "pr-[15px] right-0" : "pl-[15px] left-0"}`}
+        >
           <Image
             src={t.image}
             alt="Message"
@@ -70,7 +74,13 @@ const MessageSection = ({ data }: { data: HomeProps["sixthSection"] }) => {
       </div>
       <div className="container">
         <div className="grid grid-cols-1 lg:grid-cols-2  ">
-          <motion.div variants={moveLeft(0.4)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} className="py-8 lg:py-15 2xl:py-[120px] 2xl:py-[142px]">
+          <motion.div
+            variants={moveLeft(0.4)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.3 }}
+            className="py-8 lg:py-15 2xl:py-[120px] 2xl:py-[142px]"
+          >
             <motion.div
               className="flex flex-col justify-center"
               variants={containerVariants}
@@ -108,7 +118,13 @@ const MessageSection = ({ data }: { data: HomeProps["sixthSection"] }) => {
                     rootMargin="-100px"
                     textAlign={isArabic ? "right" : "left"}
                   /> */}
-                  <H2Title titleText={t.subTitle} textAlign={isArabic ? "text-right" : "text-left"} maxWidthClass={isArabic ? "max-w-[13ch]" : "max-w-[14ch] lg:max-w-[11ch]"} />
+                  <H2Title
+                    titleText={t.subTitle}
+                    textAlign={isArabic ? "text-right" : "text-left"}
+                    maxWidthClass={
+                      isArabic ? "max-w-[13ch]" : "max-w-[14ch] lg:max-w-[11ch]"
+                    }
+                  />
                   {/* <H2Title titleText={t.subTitle} textAlign={isArabic ? "text-right" : "text-left"} maxWidth="11ch" /> */}
                 </div>
               </motion.div>
@@ -130,9 +146,27 @@ const MessageSection = ({ data }: { data: HomeProps["sixthSection"] }) => {
               </motion.div>
             </motion.div>
           </motion.div>
-          <motion.div variants={moveUp(0.6)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} className="relative z-10 hidden lg:block">
-            <motion.div variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} className={`lg:absolute bottom-0 ${isArabic ? "right-0" : "left-0"}`} >
-              <Image src={t.image} alt={t.imageAlt} width={702} height={964} className={`lg:w-[380px] xl:w-[460px] 2xl:w-[702px] ${isArabic && " scale-x-[-1]"}`} />
+          <motion.div
+            variants={moveUp(0.6)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.3 }}
+            className="relative z-10 hidden lg:block"
+          >
+            <motion.div
+              variants={moveUp(0.2)}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.3 }}
+              className={`lg:absolute bottom-0 ${isArabic ? "right-0" : "left-0"}`}
+            >
+              <Image
+                src={t.image}
+                alt={t.imageAlt}
+                width={702}
+                height={964}
+                className={`lg:w-[380px] xl:w-[460px] 2xl:w-[702px] ${isArabic && " scale-x-[-1]"}`}
+              />
             </motion.div>
             <motion.div
               variants={moveUp(0.4)}
@@ -141,9 +175,12 @@ const MessageSection = ({ data }: { data: HomeProps["sixthSection"] }) => {
               viewport={{ once: true, amount: 0.3 }}
               className={`w-full ${isArabic ? "lg:mr-[55%] 2xl:mr-[67%]" : "lg:ml-[55%] 2xl:ml-[67%]"} lg:mt-[62%] xl:mt-60 2xl:mt-[51%]  flex flex-col gap-1 z-10 custom-position-founder`}
             >
-              <h3 className="text-black text-lg xl:text-xl font-light"> {t.name} </h3>
+              <h3 className="text-black text-lg xl:text-xl font-light">
+                {" "}
+                {t.name}{" "}
+              </h3>
               {t.designation.split("\n").map((word, index) => (
-                <span key={index} className="text-sm font-light text-colorpara" >
+                <span key={index} className="text-sm font-light text-colorpara">
                   {word}
                   {index < t.designation.split("\n").length - 1 && <br />}
                 </span>

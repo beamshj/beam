@@ -6,19 +6,16 @@ import { moveLeft, moveUp } from "../../motionVarients";
 import {
   containerVariants,
   fadeTop,
-  fadeSide
+  fadeSide,
 } from "@/public/assets/FramerAnimation/animation";
 import SplitText from "@/components/SplitText";
 import { HomeProps } from "../type";
 
 const MessageSection = ({ data }: { data: HomeProps["sixthSection"] }) => {
   return (
-    <section
-      className="relative w-full bg-[#F6F6F6] aftergd max-w-[1920px] mx-auto overflow-hidden"
-
-    >
+    <section className="relative w-full bg-[#F6F6F6] aftergd   overflow-hidden">
       {/* <motion.section
-      className="relative w-full bg-[#F6F6F6] aftergd max-w-[1920px] mx-auto overflow-hidden"
+      className="relative w-full bg-[#F6F6F6] aftergd   overflow-hidden"
       variants={fadeUp}
       initial="hidden"
       whileInView="visible"
@@ -66,7 +63,13 @@ const MessageSection = ({ data }: { data: HomeProps["sixthSection"] }) => {
       </div>
       <div className="container">
         <div className="grid grid-cols-1 lg:grid-cols-2  ">
-          <motion.div variants={moveLeft(0.4)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} className="py-8 lg:py-15 xl:py-[120px] 2xl:py-[142px]">
+          <motion.div
+            variants={moveLeft(0.4)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.3 }}
+            className="py-8 lg:py-15 xl:py-[120px] 2xl:py-[142px]"
+          >
             <motion.div
               className="flex flex-col justify-center"
               variants={containerVariants}
@@ -124,7 +127,13 @@ const MessageSection = ({ data }: { data: HomeProps["sixthSection"] }) => {
               </motion.div>
             </motion.div>
           </motion.div>
-          <motion.div variants={moveUp(0.6)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} className="relative z-10 hidden lg:block">
+          <motion.div
+            variants={moveUp(0.6)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.3 }}
+            className="relative z-10 hidden lg:block"
+          >
             <motion.div
               variants={moveUp(0.2)}
               initial="hidden"
@@ -151,10 +160,7 @@ const MessageSection = ({ data }: { data: HomeProps["sixthSection"] }) => {
                 {data.name}
               </h3>
               {data.designation.split("\n").map((word, index) => (
-                <span
-                  key={index}
-                  className="text-sm font-light text-colorpara"
-                >
+                <span key={index} className="text-sm font-light text-colorpara">
                   {word}
                   {index < data.designation.split("\n").length - 1 && <br />}
                 </span>

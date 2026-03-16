@@ -36,8 +36,7 @@ const MediaHub = ({
   } | null>(null);
 
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
-  
-  
+
   const [activeIndex, setActiveIndex] = useState(0);
 
   const router = useRouter();
@@ -58,7 +57,7 @@ const MediaHub = ({
         images: [],
         description: "",
         slug: blog.slug,
-      }))
+      })),
     ) || [];
 
   const newsItems =
@@ -77,7 +76,7 @@ const MediaHub = ({
         images: [],
         description: "",
         slug: news.slug,
-      }))
+      })),
     ) || [];
 
   const galleryItems =
@@ -91,8 +90,8 @@ const MediaHub = ({
           images: cat.images,
           description: cat.description,
           slug: "",
-        }))
-      )
+        })),
+      ),
     ) || [];
 
   //  Helper: Shuffle and pick N random items
@@ -106,7 +105,7 @@ const MediaHub = ({
       description: string;
       slug: string;
     }[],
-    n: number
+    n: number,
   ) => arr.sort(() => 0.5 - Math.random()).slice(0, n);
 
   const randomBlogs = getRandomItems(blogItems, 3);
@@ -114,7 +113,7 @@ const MediaHub = ({
   const randomGallery = getRandomItems(galleryItems, 3);
 
   const combinedItems = [...randomBlogs, ...randomNews, ...randomGallery].sort(
-    () => 0.5 - Math.random()
+    () => 0.5 - Math.random(),
   );
 
   const mediaHubData = {
@@ -138,7 +137,7 @@ const MediaHub = ({
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
-      className="max-w-[1920px] mx-auto overflow-hidden"
+      className="  overflow-hidden"
     >
       <div>
         <div className="container border-t border-bdrcolor"></div>
@@ -202,7 +201,7 @@ const MediaHub = ({
                 return (
                   <SwiperSlide key={index}>
                     <motion.div
-                      variants={moveLeft(0.2*index)}
+                      variants={moveLeft(0.2 * index)}
                       initial="hidden"
                       whileInView="show"
                       viewport={{ once: true, amount: 0.2 }}
@@ -223,11 +222,11 @@ const MediaHub = ({
                           });
                         } else if (value.category === "Blog") {
                           router.push(
-                            `/news-&-media/blog/blog-details/${value.slug}`
+                            `/news-&-media/blog/blog-details/${value.slug}`,
                           );
                         } else if (value.category === "News") {
                           router.push(
-                            `/news-&-media/press-release/${value.slug}`
+                            `/news-&-media/press-release/${value.slug}`,
                           );
                         }
                       }}
@@ -236,7 +235,8 @@ const MediaHub = ({
                         <div className="p-10">
                           {/* ✅ date */}
                           {value.date ? (
-                            <p className={`text-white text-sm font-light transform transition-all duration-500 delay-100
+                            <p
+                              className={`text-white text-sm font-light transform transition-all duration-500 delay-100
                                 ${
                                   isActiveOnMobile
                                     ? "opacity-100 translate-y-0"
@@ -248,7 +248,8 @@ const MediaHub = ({
                           ) : null}
 
                           {/* ✅ title */}
-                          <p className={`text-white line-clamp-2 xl:line-clamp-3 text-lg lg:text-xl font-light leading-[1.2] mt-6 transform transition-all duration-500 delay-300
+                          <p
+                            className={`text-white line-clamp-2 xl:line-clamp-3 text-lg lg:text-xl font-light leading-[1.2] mt-6 transform transition-all duration-500 delay-300
                               ${
                                 isActiveOnMobile
                                   ? "opacity-100 translate-x-0"

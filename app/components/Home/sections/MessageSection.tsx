@@ -18,7 +18,7 @@ const MessageSection = ({ data }: { data: HomeProps["sixthSection"] }) => {
 
   return (
     <motion.section
-      className="relative w-full bg-[#F6F6F6] aftergd max-w-[1920px] mx-auto overflow-hidden"
+      className="relative w-full bg-[#F6F6F6] aftergd   overflow-hidden"
       variants={fadeUp}
       initial="hidden"
       whileInView="visible"

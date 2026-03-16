@@ -49,7 +49,7 @@ const AcademicCultural = ({ data }: { data: HomeProps["thirdSection"] }) => {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
-      className="pt-8 xl:pt-20 2xl:pt-[137px] max-w-[1920px] mx-auto overflow-hidden bg-[#F6F6F6]"
+      className="pt-8 xl:pt-20 2xl:pt-[137px]   overflow-hidden bg-[#F6F6F6]"
     >
       <div className="relative pb-12 md:pb-15 xl:pb-[150px]">
         <div className="container">
@@ -110,33 +110,41 @@ const AcademicCultural = ({ data }: { data: HomeProps["thirdSection"] }) => {
                     style={
                       !isActive
                         ? {
-                          borderBottomWidth: "1px",
-                          borderStyle: "solid",
-                          borderImageSlice: 1,
-                          borderImageSource:
-                            "linear-gradient(90deg, #000000 0%, rgba(0, 0, 0, 0) 100%)",
-                        }
+                            borderBottomWidth: "1px",
+                            borderStyle: "solid",
+                            borderImageSlice: 1,
+                            borderImageSource:
+                              "linear-gradient(90deg, #000000 0%, rgba(0, 0, 0, 0) 100%)",
+                          }
                         : {}
                     }
                   >
-                    <div className={`w-0 group-hover:w-full absolute top-0 left-0 h-full bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)] ${isActive ? "bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)] transition-all duration-300 z-0 w-0" : "w-0 transition-all duration-300 z-0"}`}></div>
-                    <div className={`transition-all duration-300 mb-3 xl:mb-0 ${isActive ? "px-2" : "group-hover:px-2"}`}>
+                    <div
+                      className={`w-0 group-hover:w-full absolute top-0 left-0 h-full bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)] ${isActive ? "bg-[linear-gradient(90deg,_#42BADC_0%,_rgba(66,_186,_220,_0)_100%)] transition-all duration-300 z-0 w-0" : "w-0 transition-all duration-300 z-0"}`}
+                    ></div>
+                    <div
+                      className={`transition-all duration-300 mb-3 xl:mb-0 ${isActive ? "px-2" : "group-hover:px-2"}`}
+                    >
                       <Image
                         src={acdData.academicCulturalDataicons[index]}
                         alt={value.title}
                         width={60}
                         height={75}
-                        className={`transition-all duration-300 w-15  h-auto ${isActive
-                          ? "filter-[brightness(0)]"
-                          : "group-hover:filter-[brightness(0)]"
-                          }`}
+                        className={`transition-all duration-300 w-15  h-auto ${
+                          isActive
+                            ? "filter-[brightness(0)]"
+                            : "group-hover:filter-[brightness(0)]"
+                        }`}
                       />
                     </div>
                     <div>
-                      <p className={`text-md md:text-lg 2xl:text-xl font-light text-black leading-[1.2] lettersp-1 relative z-10 ${index === academicCulturalData.accvalues.length - 1
-                        ? "max-w-[15ch]"
-                        : "max-w-[18ch]"
-                        } transition-all duration-300 ${isActive ? "px-2 lg:px-0" : ""
+                      <p
+                        className={`text-md md:text-lg 2xl:text-xl font-light text-black leading-[1.2] lettersp-1 relative z-10 ${
+                          index === academicCulturalData.accvalues.length - 1
+                            ? "max-w-[15ch]"
+                            : "max-w-[18ch]"
+                        } transition-all duration-300 ${
+                          isActive ? "px-2 lg:px-0" : ""
                         }`}
                       >
                         {value.title}

@@ -44,7 +44,7 @@ const VideoSection = ({ data }: { data: HomeProps["fourthSection"] }) => {
 
   return (
     <motion.section
-      className="w-full relative max-w-[1920px] mx-auto overflow-hidden 2xl:h-screen py-10 md:py-28 2xl:py-0"
+      className="w-full relative   overflow-hidden 2xl:h-screen py-10 md:py-28 2xl:py-0"
       initial={{ opacity: 0, scale: 0.9, rotate: -4, x: -100 }}
       whileInView={{ opacity: 1, scale: 1, rotate: 0, x: 0 }}
       transition={{ duration: 0.8, ease: "easeOut" }}

@@ -80,7 +80,7 @@
 //   };
 
 //   return (
-//     <footer className="relative w-full max-w-[1920px] mx-auto overflow-hidden">
+//     <footer className="relative w-full   overflow-hidden">
 //       {/* Background 2-column grid */}
 //       <div className="grid grid-cols-1 lg:grid-cols-2 w-full h-full absolute top-0 left-0 z-0">
 //         <div className="bg-black"></div>
@@ -366,7 +366,7 @@ const Footer = ({ footerData }: { footerData: FooterData }) => {
   const secondColumn = links.slice(middleIndex);
 
   return (
-    <footer className="relative w-full max-w-[1920px] mx-auto overflow-hidden">
+    <footer className="relative w-full   overflow-hidden">
       {/* Background 2-column grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 w-full h-full absolute top-0 left-0 z-0">
         <div className="bg-black"></div>

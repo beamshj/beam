@@ -11,10 +11,10 @@ import LangLink from "@/lib/LangLink";
 
 const JoinBeam = ({ data }: { data: HomeProps["tenthSection"] }) => {
   const isArabic = useIsPreferredLanguageArabic();
-  const t = useApplyLang(data)
+  const t = useApplyLang(data);
   return (
     <motion.section
-      className="w-full lg:h-full h-[330px] relative max-w-[1920px] mx-auto overflow-hidden"
+      className="w-full lg:h-full h-[330px] relative   overflow-hidden"
       variants={fadeUp}
       initial="hidden"
       whileInView="visible"
@@ -74,7 +74,9 @@ const JoinBeam = ({ data }: { data: HomeProps["tenthSection"] }) => {
                 <p className="text-xs font-light text-white uppercase transition-colors duration-300">
                   {t.buttonText}
                 </p>
-                <div className={`p-2 flex items-center justify-center bg-primary w-fit rounded-full transition-transform duration-300 ${isArabic ? "-rotate-90 group-hover:-rotate-135" : "group-hover:rotate-45"}`}>
+                <div
+                  className={`p-2 flex items-center justify-center bg-primary w-fit rounded-full transition-transform duration-300 ${isArabic ? "-rotate-90 group-hover:-rotate-135" : "group-hover:rotate-45"}`}
+                >
                   <Image
                     src="/assets/arrow.svg"
                     alt="arrow"
@@ -87,7 +89,9 @@ const JoinBeam = ({ data }: { data: HomeProps["tenthSection"] }) => {
           </LangLink>
         </div>
       </div>
-      <div className={`w-full h-full absolute top-0 ${isArabic ? "right-0 bg-gradient-to-r from-transparent via-black/20 to-black/70" : "left-0 bg-gradient-to-l from-transparent via-black/20 to-black/70"} z-20`}></div>
+      <div
+        className={`w-full h-full absolute top-0 ${isArabic ? "right-0 bg-gradient-to-r from-transparent via-black/20 to-black/70" : "left-0 bg-gradient-to-l from-transparent via-black/20 to-black/70"} z-20`}
+      ></div>
     </motion.section>
   );
 };

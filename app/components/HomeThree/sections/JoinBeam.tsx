@@ -10,7 +10,7 @@ import Link from "next/link";
 const JoinBeam = ({ data }: { data: HomeProps["tenthSection"] }) => {
   return (
     <motion.section
-      className="w-full lg:h-full h-[330px] relative max-w-[1920px] mx-auto overflow-hidden"
+      className="w-full lg:h-full h-[330px] relative   overflow-hidden"
       variants={fadeUp}
       initial="hidden"
       whileInView="visible"

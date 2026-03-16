@@ -1,6 +1,12 @@
 "use client";
 import Image from "next/image";
-import React, { useRef, useState, useCallback, useMemo, useEffect } from "react";
+import React, {
+  useRef,
+  useState,
+  useCallback,
+  useMemo,
+  useEffect,
+} from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade } from "swiper/modules";
 import { Swiper as SwiperClass } from "swiper";
@@ -24,7 +30,7 @@ const animateContentIn = () => {
   gsap.fromTo(
     targets,
     { opacity: 0, y: 25 },
-    { opacity: 1, y: 0, duration: 0.5, ease: "power2.out", stagger: 0.23 }
+    { opacity: 1, y: 0, duration: 0.5, ease: "power2.out", stagger: 0.23 },
   );
 };
 
@@ -132,15 +138,29 @@ const animateEntry = (container: HTMLElement) => {
   });
 
   // Seam ignites first — crack of light appears
-  tl.to(seam, { opacity: 1, scaleX: 1.8, duration: 0.18, ease: "power4.out" }, 0.05);
+  tl.to(
+    seam,
+    { opacity: 1, scaleX: 1.8, duration: 0.18, ease: "power4.out" },
+    0.05,
+  );
   tl.to(halo, { opacity: 1, duration: 0.22, ease: "power2.out" }, 0.05);
 
   // Halves rip apart
-  tl.to(left,  { x: -(W * 0.52), duration: 0.72, ease: "expo.in" }, 0.18);
-  tl.to(right, { x:   W * 0.52,  duration: 0.72, ease: "expo.in" }, 0.18);
+  tl.to(left, { x: -(W * 0.52), duration: 0.72, ease: "expo.in" }, 0.18);
+  tl.to(right, { x: W * 0.52, duration: 0.72, ease: "expo.in" }, 0.18);
 
   // Seam widens then vanishes as halves clear
-  tl.to(seam, { opacity: 0, scaleX: 8, filter: "blur(12px)", duration: 0.35, ease: "power2.in" }, 0.52);
+  tl.to(
+    seam,
+    {
+      opacity: 0,
+      scaleX: 8,
+      filter: "blur(12px)",
+      duration: 0.35,
+      ease: "power2.in",
+    },
+    0.52,
+  );
   tl.to(halo, { opacity: 0, duration: 0.3, ease: "power1.in" }, 0.6);
 
   // Vapor trails — thin streaks that linger briefly
@@ -173,18 +193,18 @@ const animateBladeWipe = (
   nextImage: string,
   direction: 1 | -1,
   onDone: () => void,
-  container: HTMLElement
+  container: HTMLElement,
 ) => {
   const W = container.offsetWidth;
   const H = container.offsetHeight;
 
   // ── Config ────────────────────────────────────────────────────────────────
-  const BLADE_COUNT    = 8;
-  const bladeW         = W / BLADE_COUNT;
-  const skewPx         = H * 0.18;
-  const STAGGER        = 0.068;
-  const BLADE_DUR      = 1.45;
-  const offscreen      = direction === 1 ? W + 250 : -(W + 250);
+  const BLADE_COUNT = 8;
+  const bladeW = W / BLADE_COUNT;
+  const skewPx = H * 0.18;
+  const STAGGER = 0.068;
+  const BLADE_DUR = 1.45;
+  const offscreen = direction === 1 ? W + 250 : -(W + 250);
 
   const bladeClip = (i: number, dx: number): string => {
     const x1 = i * bladeW - 1;
@@ -241,11 +261,15 @@ const animateBladeWipe = (
     },
   });
 
-  tl.to(prevImg, {
-    scale: 1.2,
-    duration: totalDuration * 0.85,
-    ease: "power2.in",
-  }, 0);
+  tl.to(
+    prevImg,
+    {
+      scale: 1.2,
+      duration: totalDuration * 0.85,
+      ease: "power2.in",
+    },
+    0,
+  );
 
   for (let i = 0; i < BLADE_COUNT; i++) {
     const idx = direction === 1 ? i : BLADE_COUNT - 1 - i;
@@ -277,20 +301,29 @@ const animateBladeWipe = (
 
     const delay = i * STAGGER;
 
-    tl.to(blade, {
-      clipPath: bladeClip(idx, 0),
-      duration: BLADE_DUR,
-      ease: "expo.inOut",
-    }, delay);
+    tl.to(
+      blade,
+      {
+        clipPath: bladeClip(idx, 0),
+        duration: BLADE_DUR,
+        ease: "expo.inOut",
+      },
+      delay,
+    );
 
-    tl.to(vignette, {
-      opacity: 0,
-      duration: 0.35,
-      ease: "power1.out",
-    }, delay + BLADE_DUR * 0.6);
+    tl.to(
+      vignette,
+      {
+        opacity: 0,
+        duration: 0.35,
+        ease: "power1.out",
+      },
+      delay + BLADE_DUR * 0.6,
+    );
   }
 
-  const streakAngleDeg = -Math.atan2(skewPx * 2, bladeW) * (180 / Math.PI) * 0.5;
+  const streakAngleDeg =
+    -Math.atan2(skewPx * 2, bladeW) * (180 / Math.PI) * 0.5;
 
   const streak = document.createElement("div");
   streak.style.cssText = `
@@ -314,11 +347,15 @@ const animateBladeWipe = (
   `;
   root.appendChild(streak);
 
-  tl.to(streak, {
-    x: direction === 1 ? W + 120 : -(W + 120),
-    duration: totalDuration * 0.88,
-    ease: "power2.inOut",
-  }, 0.04);
+  tl.to(
+    streak,
+    {
+      x: direction === 1 ? W + 120 : -(W + 120),
+      duration: totalDuration * 0.88,
+      ease: "power2.inOut",
+    },
+    0.04,
+  );
 
   const flashOriginX = direction === 1 ? 0 : W;
   const glow = document.createElement("div");
@@ -338,30 +375,34 @@ const animateBladeWipe = (
   tl.to(glow, { opacity: 1, scale: 6, duration: 0.25, ease: "power4.out" }, 0);
   tl.to(glow, { opacity: 0, scale: 14, duration: 0.5, ease: "power2.in" }, 0.2);
 
-  tl.to(root, {
-    opacity: 0,
-    duration: 0.2,
-    ease: "power1.in",
-  }, totalDuration - 0.2);
+  tl.to(
+    root,
+    {
+      opacity: 0,
+      duration: 0.2,
+      ease: "power1.in",
+    },
+    totalDuration - 0.2,
+  );
 };
 
 // ─── Component ────────────────────────────────────────────────────────────────
 const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
-  const swiperRef    = useRef<SwiperClass | null>(null);
+  const swiperRef = useRef<SwiperClass | null>(null);
   const prevIndexRef = useRef<number>(0);
   const prevImageRef = useRef<string | null>(null);
   const directionRef = useRef<1 | -1>(1);
-  const isAnimating  = useRef(false);
-  const sectionRef   = useRef<HTMLElement | null>(null);
+  const isAnimating = useRef(false);
+  const sectionRef = useRef<HTMLElement | null>(null);
   const entryDoneRef = useRef(false);
 
   const [currentSlide, setCurrentSlide] = useState(1);
-  const [isMobile, setIsMobile]         = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const totalSlides = data.items.length;
 
   const isArabic = useIsPreferredLanguageArabic();
-  const t        = useApplyLang(data);
-  const router   = useRouter();
+  const t = useApplyLang(data);
+  const router = useRouter();
 
   // ── Entry animation on mount ──────────────────────────────────────────────
   useEffect(() => {
@@ -386,7 +427,7 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
 
   const activeSlide = useMemo(
     () => t.items[currentSlide - 1] || t.items[0],
-    [t.items, currentSlide]
+    [t.items, currentSlide],
   );
 
   const handleBeforeTransition = useCallback(
@@ -422,20 +463,20 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
         nextImage,
         directionRef.current,
         () => {
-          isAnimating.current  = false;
+          isAnimating.current = false;
           prevIndexRef.current = nextIndex;
           prevImageRef.current = nextImage;
         },
-        sectionRef.current
+        sectionRef.current,
       );
     },
-    [t.items]
+    [t.items],
   );
 
   return (
     <section
       ref={sectionRef}
-      className="lg:h-screen h-[65dvh] md:h-[85dvh] relative overflow-hidden max-w-[1920px] mx-auto"
+      className="lg:h-screen h-[65dvh] md:h-[85dvh] relative overflow-hidden  "
     >
       {/* Swiper */}
       <Swiper
@@ -450,7 +491,7 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
         observer={true}
         observeParents={true}
         onSwiper={(swiper) => {
-          swiperRef.current    = swiper;
+          swiperRef.current = swiper;
           prevIndexRef.current = swiper.realIndex;
           prevImageRef.current = t.items[swiper.realIndex]?.image ?? null;
         }}
@@ -497,8 +538,12 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
             <div className="absolute bottom-5 lg:bottom-[30px] xl:bottom-[50px] grid grid-cols-1 xl:grid-cols-7 items-end gap-2 pointer-events-auto">
               {/* Left text */}
               <div className="xl:mb-[65px] col-span-1 md:col-span-5">
-                <h2 className={`hero-title text-[1.8rem] md:text-2xl 2xl:text-4xl text-white leading-[1.2] xl:leading-[1.1] font-custom font-light lettersp-4-hero mb-0 ${isArabic ? "max-w-[90%]" : "max-w-none"}`}>
-                  <span className="text-primary">{activeSlide.highlightText}</span>{" "}
+                <h2
+                  className={`hero-title text-[1.8rem] md:text-2xl 2xl:text-4xl text-white leading-[1.2] xl:leading-[1.1] font-custom font-light lettersp-4-hero mb-0 ${isArabic ? "max-w-[90%]" : "max-w-none"}`}
+                >
+                  <span className="text-primary">
+                    {activeSlide.highlightText}
+                  </span>{" "}
                   {activeSlide.title}
                 </h2>
               </div>
@@ -509,17 +554,36 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
                 className="hero-button md:mb-[35px] lg:mb-[85px] xl:mb-[120px] flex justify-end flex-col xl:items-end col-span-1 md:col-span-2"
               >
                 <div>
-                  <div className={`mt-5 w-fit md:mt-10 p-[1px] group transition-all duration-300 bg-[linear-gradient(90deg,_#42BADC_0%,_#12586C_100%)] rounded-full ${isArabic ? "hover:translate-x-2" : "hover:-translate-x-2"} hover:shadow-[0_0_15px_rgba(66,186,220,0.5)]`}>
+                  <div
+                    className={`mt-5 w-fit md:mt-10 p-[1px] group transition-all duration-300 bg-[linear-gradient(90deg,_#42BADC_0%,_#12586C_100%)] rounded-full ${isArabic ? "hover:translate-x-2" : "hover:-translate-x-2"} hover:shadow-[0_0_15px_rgba(66,186,220,0.5)]`}
+                  >
                     <button
                       type="button"
                       className="cursor-pointer pl-4 pr-2 md:px-4 py-[10px] md:py-3 bg-primary rounded-full flex items-center gap-2 transition-all duration-300"
-                      aria-label={isArabic ? "سجل اهتمامك" : "Register Interest"}
+                      aria-label={
+                        isArabic ? "سجل اهتمامك" : "Register Interest"
+                      }
                     >
                       {isArabic && (
                         <div className="p-2 flex items-center justify-center bg-white w-fit rounded-full transition-transform duration-300 group-hover:rotate-45">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="10" height="11" viewBox="0 0 10 11" fill="none" aria-hidden="true">
-                            <path d="M8.74639 1.76178L1.12891 9.36247" stroke="#42BADC" strokeMiterlimit="10" />
-                            <path d="M1.12891 1.76178H8.74639V9.21251" stroke="#42BADC" strokeMiterlimit="10" />
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="10"
+                            height="11"
+                            viewBox="0 0 10 11"
+                            fill="none"
+                            aria-hidden="true"
+                          >
+                            <path
+                              d="M8.74639 1.76178L1.12891 9.36247"
+                              stroke="#42BADC"
+                              strokeMiterlimit="10"
+                            />
+                            <path
+                              d="M1.12891 1.76178H8.74639V9.21251"
+                              stroke="#42BADC"
+                              strokeMiterlimit="10"
+                            />
                           </svg>
                         </div>
                       )}
@@ -528,9 +592,24 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
                       </p>
                       {!isArabic && (
                         <div className="p-2 flex items-center justify-center bg-white w-fit rounded-full transition-transform duration-300 group-hover:rotate-45">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="10" height="11" viewBox="0 0 10 11" fill="none" aria-hidden="true">
-                            <path d="M8.74639 1.76178L1.12891 9.36247" stroke="#42BADC" strokeMiterlimit="10" />
-                            <path d="M1.12891 1.76178H8.74639V9.21251" stroke="#42BADC" strokeMiterlimit="10" />
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="10"
+                            height="11"
+                            viewBox="0 0 10 11"
+                            fill="none"
+                            aria-hidden="true"
+                          >
+                            <path
+                              d="M8.74639 1.76178L1.12891 9.36247"
+                              stroke="#42BADC"
+                              strokeMiterlimit="10"
+                            />
+                            <path
+                              d="M1.12891 1.76178H8.74639V9.21251"
+                              stroke="#42BADC"
+                              strokeMiterlimit="10"
+                            />
                           </svg>
                         </div>
                       )}
@@ -540,8 +619,12 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
               </div>
 
               {/* Divider line */}
-              <div className={`hero-divider absolute ${isArabic ? "right-[40%]" : "left-[40%]"} bottom-[83px] w-[80%] hidden xl:block`}>
-                <div className={`h-[1px] w-full ${isArabic ? "bg-gradient-to-l" : "bg-gradient-to-r"} from-white via-white/30 to-transparent`}></div>
+              <div
+                className={`hero-divider absolute ${isArabic ? "right-[40%]" : "left-[40%]"} bottom-[83px] w-[80%] hidden xl:block`}
+              >
+                <div
+                  className={`h-[1px] w-full ${isArabic ? "bg-gradient-to-l" : "bg-gradient-to-r"} from-white via-white/30 to-transparent`}
+                ></div>
               </div>
             </div>
           </div>

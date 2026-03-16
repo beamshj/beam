@@ -46,7 +46,7 @@ const HeroSection = ({ data }: { data: HomeProps["bannerSection"] }) => {
   }, []);
 
   return (
-    <section className="lg:h-screen h-[65dvh] md:h-[85dvh] relative overflow-hidden max-w-[1920px] mx-auto">
+    <section className="lg:h-screen h-[65dvh] md:h-[85dvh] relative overflow-hidden  ">
       <Swiper
         modules={[Autoplay, EffectFade]}
         effect="fade"
