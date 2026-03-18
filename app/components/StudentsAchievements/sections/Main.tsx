@@ -21,7 +21,7 @@ const Main = ({ data }: MainProps) => {
         <div className="grid grid-cols-1 md:grid-cols-2 md:items-stretch gap-x-6 gap-y-6 md:gap-y-0 md:gap-x-10 xl:gap-x-18">
           <div className="flex flex-col">
             <motion.p
-              variants={moveUp(0.5)}
+              variants={moveUp(0.2)}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, amount: 0.2 }}
@@ -30,7 +30,7 @@ const Main = ({ data }: MainProps) => {
               {t.intro}
             </motion.p>
             <motion.h3
-              variants={moveUp(0.6)}
+              variants={moveUp(0.35)}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, amount: 0.2 }}
@@ -38,7 +38,11 @@ const Main = ({ data }: MainProps) => {
             >
               {t.secondIntro}
             </motion.h3>
-            <div
+            <motion.div
+              variants={moveUp(0.5)}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.2 }}
               className={`students-achievemnets-content-html text-colorpara ${isArabic ? "pr-[1.25rem]" : "pl-[1.25rem]"}`}
               dangerouslySetInnerHTML={{ __html: t.content }}
             />
@@ -51,7 +55,12 @@ const Main = ({ data }: MainProps) => {
               ))}
             </ul> */}
           </div>
-          <div className="relative overflow-hidden rounded-xl md:h-full min-h-[300px]">
+          <motion.div
+            variants={moveUp(0.2)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+            className="relative overflow-hidden rounded-xl md:h-full min-h-[300px]">
             <Image
               src={t.image}
               alt={t.imageAlt}
@@ -60,7 +69,7 @@ const Main = ({ data }: MainProps) => {
               loading="lazy"
               className="object-cover object-top"
             />
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

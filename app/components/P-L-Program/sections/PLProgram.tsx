@@ -2,7 +2,7 @@
 import Image from "next/image";
 import SplitText from "@/components/SplitText";
 import { motion } from "framer-motion";
-import { moveLeft } from "../../motionVarients";
+import { moveUp } from "../../motionVarients";
 import { PLProgramProps } from "../type";
 import { useApplyLang } from "@/lib/applyLang";
 import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
@@ -80,10 +80,15 @@ export default function PLProgram({
           </div>
 
           {/* Right Image */}
-          <div className="relative min-h-[300px] md:min-h-[450px] h-auto 2xl:w-[749px] w-full rounded-[12px] overflow-hidden  order-1 xl:order-2">
+          <motion.div
+            variants={moveUp(0.4)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+            className="relative min-h-[300px] md:min-h-[450px] h-auto 2xl:w-[749px] w-full rounded-[12px] overflow-hidden  order-1 xl:order-2">
             <Image src={t.image} alt={t.imageAlt} fill loading="lazy" sizes="(max-width: 768px) 80vw, 400px" className="object-cover h-full rounded-[12px]" />
             <div style={{ background: "linear-gradient(183.56deg, rgba(66, 186, 220, 0) 43.99%, #7E5AA3 116.63%)" }} className="absolute  w-full inset-0" />
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

@@ -130,6 +130,25 @@ const RegisterInterest = forwardRef<HTMLDivElement, RegisterInterestProps>(
       }));
     };
 
+    const gradeMenuRef = useRef<HTMLDivElement | null>(null);
+
+const handleGradeMenuOpen = () => {
+  setTimeout(() => {
+    const menuList = document.querySelector(".grade-select .custom-select__menu-list") as HTMLDivElement;
+    if (!menuList) return;
+    gradeMenuRef.current = menuList;
+
+    menuList.addEventListener("wheel", (e: WheelEvent) => {
+      const atBottom = menuList.scrollTop + menuList.clientHeight >= menuList.scrollHeight - 1;
+      const atTop = menuList.scrollTop === 0;
+      if ((e.deltaY > 0 && !atBottom) || (e.deltaY < 0 && !atTop)) {
+        e.stopPropagation();
+      }
+      // at boundary → let window scroll naturally
+    }, { passive: true });
+  }, 50);
+};
+
     return (
       <div
         className={`pb-0 lg:pb-20 xl:pb-[135px] ${className ?? ""}`}
@@ -445,22 +464,18 @@ const RegisterInterest = forwardRef<HTMLDivElement, RegisterInterestProps>(
                       const options = getGradeOptions(selectedSchool, isArabic);
 
                       return (
-                        <Select
-                          options={options}
-                          className={`custom-select ${!selectedSchool ? "opacity-50" : ""}`}
-                          classNamePrefix="custom-select"
-                          placeholder={isArabic ? "اختر الصف" : "Select Grade"}
-                          components={{ DropdownIndicator }}
-                          isSearchable={false}
-                          isDisabled={!selectedSchool}
-                          onChange={(option) =>
-                            field.onChange(option?.value || "")
-                          }
-                          value={
-                            options.find((opt) => opt.value === field.value) ||
-                            null
-                          }
-                        />
+<Select
+  options={options}
+  className={`custom-select grade-select ${!selectedSchool ? "opacity-50" : ""}`}
+  classNamePrefix="custom-select"
+  onMenuOpen={handleGradeMenuOpen}
+  placeholder={isArabic ? "اختر الصف" : "Select Grade"}
+  components={{ DropdownIndicator }}
+  isSearchable={false}
+  isDisabled={!selectedSchool}
+  onChange={(option) => field.onChange(option?.value || "")}
+  value={options.find((opt) => opt.value === field.value) || null}
+/>
                       );
                     }}
                   />
