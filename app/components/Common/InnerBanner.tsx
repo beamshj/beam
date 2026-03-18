@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { useApplyLang } from "@/lib/applyLang";
 import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
+import { moveLeft, moveRight } from "../motionVarients";
 
 interface PageBnrProps {
     BannerData?: {
@@ -75,13 +76,15 @@ const InnerBanner = ({ BannerData, data }: PageBnrProps) => {
                               })()}
                     </motion.h2>
                 </div>
-                <div className={`h-[1px] w-[60%] ${
+                <motion.div initial="hidden" whileInView="show" variants={ isArabic ? moveLeft(0.2) : moveRight(0.2)} viewport={{once: true}} className={`h-[1px] w-[60%] ${
                         isArabic
                             ? "bg-gradient-to-l from-white to-transparent"
                             : "bg-gradient-to-r from-white to-transparent"
                     } mb-[15px] md:mb-[20px] xl:mb-[25px]`}
-                ></div>
-                <Breadcrump />
+                ></motion.div>
+                <motion.div initial="hidden" whileInView="show" variants={ isArabic ? moveLeft(0.35) : moveRight(0.35)} viewport={{once: true}}>
+                    <Breadcrump />
+                </motion.div>
             </div>
         </section>
     );
