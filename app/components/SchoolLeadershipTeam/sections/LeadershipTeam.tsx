@@ -365,6 +365,8 @@ function Photo({ member, width, height }: { member: Member; width: number; heigh
   );
 }
 
+const sanitizeHtml = (html: string) => html.replace(/&nbsp;/g, " ");
+
 function ContentPanel({
   active, total, activeIdx, layout, isArabic, onNext,
 }: {
@@ -392,7 +394,7 @@ function ContentPanel({
             <p className="text-sm text-[#666666] font-light mt-4 3xl:mt-[30px]">{active.designation}</p>
             <div
               className="mt-5 md:mt-8 space-y-1 font-light text-sm text-black school-leadership-bullets"
-              dangerouslySetInnerHTML={{ __html: active.description }}
+              dangerouslySetInnerHTML={{ __html: sanitizeHtml(active.description) }}
             />
           </motion.div>
         </AnimatePresence>
