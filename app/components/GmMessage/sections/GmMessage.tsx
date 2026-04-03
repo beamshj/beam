@@ -14,8 +14,8 @@ export default function GmMessage({ data }: { data: GmMessageProps["firstSection
     const isArabic = useIsPreferredLanguageArabic();
 
     return (
-        <section className="pb-12 md:pb-20 xl:pb-[135px] pt-12  md:pt-20 xl:pt-25">
-            <div className="container mx-auto flex flex-col xl:flex-row xl:items-center justify-between gap-4 md:gap-12 xl:gap-[91px]">
+        <section className="pb-12 md:pb-20 xl:pb-[135px] pt-12  md:pt-20 xl:pt-25 overflow-hidden">
+            <div className="container mx-auto flex flex-col xl:flex-row xl:items-center justify-between gap-4 md:gap-16 xl:gap-[91px]">
                 {/* Left Column */}
                 <div className="w-full xl:max-w-[54%]">
                     <SplitText

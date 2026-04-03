@@ -3,9 +3,9 @@ import Main from "../AccrAffil/sections/Main";
 import { accrData } from "./data";
 import DataTab from "../AccrAffil/sections/DataTab";
 import { AccreditationProps } from "./type";
+import Affliation from "./sections/Affliation";
 
 const AccrAffil = ({ data }: { data: AccreditationProps }) => {
-  console.log(data);
   return (
     <>
       <InnerBanner
@@ -17,6 +17,7 @@ const AccrAffil = ({ data }: { data: AccreditationProps }) => {
         awards={data.categories.flatMap((category) => category.accreditations)}
         //  categories={data.categories.map((category) => category.name)}
       />
+      <Affliation data={data.secondSection} />
     </>
   );
 };

@@ -155,7 +155,8 @@ const DataTab = ({
   );
   const [isActive, setIsActive] = useState<number | null>(null);
   return (
-    <section className="pb-10 lg:pb-20 xl:pb-25 2xl:pb-[135px]">
+    <section className="pb-8 xl:pb-14 2xl:pb-[75px]">
+    {/* <section className="pb-10 lg:pb-20 xl:pb-25 2xl:pb-[135px]"> */}
       <div className="container">
         <AnimatePresence mode="wait">
           <motion.div
