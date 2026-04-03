@@ -23,6 +23,15 @@ const accreditationSchema = new mongoose.Schema({
         imageAlt:{type:String},
         imageAlt_ar:{type:String},
     },
+    secondSection:{
+        title:{type:String},
+        title_ar:{type:String},
+        description:{type:String},
+        description_ar:{type:String},
+        image:{type:String},
+        imageAlt:{type:String},
+        imageAlt_ar:{type:String},
+    },
     categories:[{
         name:{type:String},
         name_ar:{type:String},

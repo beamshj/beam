@@ -11,14 +11,15 @@ import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 export default function FounderMessage({
   data,
 }: {
-  data: FounderMessageProps['firstSection'];
+  data: FounderMessageProps["firstSection"];
 }) {
-  const t = useApplyLang(data)
-  const isArabic = useIsPreferredLanguageArabic()
+  const t = useApplyLang(data);
+  const isArabic = useIsPreferredLanguageArabic();
 
   return (
-    <section className="pb-12 md:pb-20 xl:pb-[135px] pt-12 md:pt-20 xl:pt-0">
-      <div className="container mx-auto flex flex-col md:flex-row md:items-center justify-between xl:gap-[91px]">
+    <section className="pb-12 md:pb-20 xl:pb-[135px] pt-12 md:pt-20 xl:pt-0 overflow-hidden">
+      {/* <div className="container mx-auto flex flex-col md:flex-row md:items-center justify-between xl:gap-[91px]"> */}
+      <div className="container mx-auto flex flex-col md:flex-row md:items-end justify-between xl:gap-16 2xl:gap-[91px]">
         {/* Left Column */}
         <div className="w-full xl:max-w-[55%] order-2 xl:order-1">
           <h2 className="text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl leading-[1.1111] -tracking-[0.05em] font-light text-black mb-6 xl:mb-[30px] 2xl:mb-[50px]">
@@ -44,14 +45,23 @@ export default function FounderMessage({
           {/* For small screens, simplified stacked structure */}
           <div className="relative xl:hidden w-full h-[440px] md:h-auto  xl:h-full rounded-[12px] overflow-hidden bg-[#F6F6F6] mb-[20px]">
             <div className="absolute inset-0 rounded-[12px]  bg-[linear-gradient(163.29deg,rgba(66,186,220,0)_53.09%,#00C7FF_109.87%)] opacity-60 z-10 pointer-events-none" />
-            <Image src={t.image} alt={t.imageAlt} height={540} width={616} sizes="(max-width: 768px) 90vw, 600px" className="object-contain xl:object-cover w-fit xl:w-[547px] h-[540px] z-0 rounded-[12px]  absolute right-0 md:relative" />
+            <Image
+              src={t.image}
+              alt={t.imageAlt}
+              height={540}
+              width={616}
+              sizes="(max-width: 768px) 90vw, 600px"
+              className="object-contain xl:object-cover w-fit xl:w-[547px] h-[540px] z-0 rounded-[12px]  absolute right-0 md:relative"
+            />
             {/* Info Box (mobile version) */}
             <div
               className={`absolute ${isArabic ? "left-[5%] md:left-4" : "right-[5%] md:right-4"} bottom-4 z-20 xl:min-h-[250px] md:bottom-6 w-[90%] md:w-[60%] lg:w-[70%] xl:w-[60%] rounded-[12px] p-[15px] md:py-5 xl:py-0
               shadow-[0px_4px_66px_0px_rgba(0,0,0,0.16)] flex flex-col justify-center
               bg-gradient-to-r from-[#F5EBFF] to-[#C9F3FF]`}
             >
-              <p className="text-md md:text-xl leading-[1.2] font-light text-black mb-[6px]">{t.name}</p>
+              <p className="text-md md:text-xl leading-[1.2] font-light text-black mb-[6px]">
+                {t.name}
+              </p>
               <p className="text-sm xl:text-base leading-[1.31] font-light text-[#666666]">
                 {(() => {
                   const words = t.designation.trim().split(" ");
@@ -89,25 +99,44 @@ export default function FounderMessage({
                       textAlign={isArabic ? "right" : "left"}
                     />
                   </div>
-                )
+                ),
             )}
           </div>
         </div>
 
         {/* Right Column */}
-        <div className="relative w-full md:w-fit xl:max-w-[616px] xl:h-[948px] xl:w-[616px] bg-white order-1 xl:order-2">
+        <div className="relative w-full md:w-fit xl:max-w-[616px] xl:h-[868px] xl:w-[616px] bg-white order-1 xl:order-2">
+        {/* <div className="relative w-full md:w-fit xl:max-w-[616px] xl:h-[948px] xl:w-[616px] bg-white order-1 xl:order-2"> */}
           {/* Grey Div (desktop only) */}
-          <div className="hidden xl:block absolute right-0 bottom-0 left-[44px] h-[813px] xl:w-[567px] rounded-[12px] bg-[#F6F6F6] overflow-hidden">
+          <div className="hidden xl:block absolute right-0 bottom-0 left-[44px] h-[663px] xl:w-[567px] rounded-[12px] bg-[#F6F6F6] overflow-hidden">
             <div className="absolute inset-0 rounded-[12px] z-20 bg-[linear-gradient(163.29deg,rgba(66,186,220,0)_53.09%,#00C7FF_109.87%)] opacity-60 pointer-events-none" />
           </div>
 
           {/* Original desktop design — unchanged */}
-          <motion.div variants={moveUp(2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} 
-          className="hidden xl:block absolute right-0 left-[44px] z-10 bottom-0 h-full w-full xl:w-[567px] rounded-[12px] overflow-hidden" >
-            <Image src={t.image} alt={t.imageAlt} height={540} width={616} sizes="(max-width: 768px) 90vw, 600px" className="object-cover w-full" loading="lazy" />
+          <motion.div
+            variants={moveUp(2)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+            // className="hidden xl:block absolute right-0 left-[44px] z-10 bottom-0 h-full w-full xl:w-[567px] rounded-[12px] overflow-hidden"
+            className="hidden xl:block absolute right-0 left-[44px] z-10 bottom-0 w-full xl:w-[567px] rounded-[12px] overflow-hidden"
+          >
+            <Image
+              src={t.image}
+              alt={t.imageAlt}
+              height={540}
+              width={616}
+              sizes="(max-width: 768px) 90vw, 600px"
+              className="object-cover w-full"
+              loading="lazy"
+            />
           </motion.div>
 
-          <motion.div variants={moveRight(2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}
+          <motion.div
+            variants={moveRight(2)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
             className={`hidden xl:block absolute z-30 ${isArabic ? "xl:left-16 2xl:left-[180px]" : "left-0"} bottom-[58px] rounded-[12px] py-[25px] px-[27px] 
             xl:w-[445px] md:w-[300px] shadow-[0px_4px_66px_0px_rgba(0,0,0,0.16)]`}
             style={{

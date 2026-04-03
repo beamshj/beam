@@ -12,6 +12,12 @@ export type AccreditationProps = {
         image:string,
         imageAlt:string,
     },
+    secondSection:{
+        title:string,
+        description:string,
+        image:string,
+        imageAlt:string,
+    },
     categories:{
         name:string,
         accreditations:{
