@@ -43,8 +43,9 @@ export default function LogoSlider({ data }: LogoGridSectionProps) {
           speed={700}
           spaceBetween={16.3}
           breakpoints={{
-            0: { slidesPerView: 3 },
-            640: { slidesPerView: 4 },
+            0: { slidesPerView: 2 },
+            640: { slidesPerView: 3 },
+            1024: { slidesPerView: 4 },
             1280: { slidesPerView: 5 },
             1450: { slidesPerView: 6 },
           }}
@@ -56,7 +57,7 @@ export default function LogoSlider({ data }: LogoGridSectionProps) {
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
-                className="relative w-full h-[55px] sm:h-[62px] lg:h-[70px] 2xl:h-[82px]"
+                className="relative w-full h-[115px] xl:h-[110px] 2xl:h-[115px]"
               >
                 <Image
                   src={logo.image}
