@@ -18,6 +18,14 @@ export type AccreditationProps = {
         image:string,
         imageAlt:string,
     },
+    logoSection:{
+        items:{
+            image:string,
+            imageAlt:string,
+            imageAlt_ar:string,
+            _id:string,
+        }[],
+    },
     categories:{
         name:string,
         accreditations:{

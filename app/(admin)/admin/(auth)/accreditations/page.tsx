@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { MdDelete, MdEdit } from "react-icons/md";
@@ -16,7 +16,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
 import AdminItemContainer from "@/app/components/Common/AdminItemContainer";
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller, useFieldArray } from "react-hook-form";
 import { ImageUploader } from "@/components/ui/image-uploader";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
@@ -27,6 +27,7 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import AccreditationCard from "./SchoolCard";
+import { RiDeleteBinLine } from "react-icons/ri";
 
 interface AccreditationPageProps {
   metaTitle: string;
@@ -46,6 +47,13 @@ interface AccreditationPageProps {
     image: string;
     imageAlt: string;
     imageAlt_ar: string;
+  };
+  logoSection: {
+    items: {
+      image: string;
+      imageAlt: string;
+      imageAlt_ar: string;
+    }[];
   };
   secondSection: {
     title: string;
@@ -78,6 +86,15 @@ export default function Accreditation() {
     control,
     formState: { errors },
   } = useForm<AccreditationPageProps>();
+
+  const {
+    fields: logoSectionItems,
+    append: logoSectionAppend,
+    remove: logoSectionRemove,
+  } = useFieldArray({
+    control,
+    name: "logoSection.items",
+  });
 
   const handleAddCategory = async () => {
     try {
@@ -208,6 +225,7 @@ export default function Accreditation() {
         setValue("pageTitle", data.data.pageTitle);
         setValue("pageTitle_ar", data.data.pageTitle_ar);
         setValue("firstSection", data.data.firstSection);
+        setValue("logoSection.items", data.data.logoSection.items);
         setValue("secondSection", data.data.secondSection);
         setAccreditationsList(
           data.data.categories.flatMap(
@@ -369,7 +387,75 @@ export default function Accreditation() {
             </div>
           </AdminItemContainer>
 
-                    <AdminItemContainer>
+          <AdminItemContainer>
+            <Label className="" main>
+              Logo Section
+            </Label>
+            <div className="p-5 rounded-md grid grid-cols-1 gap-5">
+                            <div>
+                <Label className="font-bold">Items</Label>
+                <div className="border p-2 rounded-md flex flex-col gap-5">
+                  {logoSectionItems.map((field, index) => (
+                    <div
+                      key={field.id}
+                      className="grid grid-cols-2 gap-2 relative border-b pb-5 last:border-b-0"
+                    >
+                      <div className="absolute top-2 right-2">
+                        <RiDeleteBinLine
+                          onClick={() => logoSectionRemove(index)}
+                          className="cursor-pointer text-red-600"
+                        />
+                      </div>
+                      <div className="flex flex-col gap-2">
+                        <div>
+                          <div className="flex flex-col gap-2">
+                            <Label className="font-bold">Logo</Label>
+                            <Controller
+                              name={`logoSection.items.${index}.image`}
+                              control={control}
+                              render={({ field }) => (
+                                <ImageUploader
+                                  value={field.value}
+                                  onChange={field.onChange}
+                                />
+                              )}
+                            />
+                          </div>
+                          <div className="flex flex-col gap-1">
+                            <Label className="font-bold">Logo Alt</Label>
+                            <Input
+                              type="text"
+                              placeholder="Image Alt"
+                              {...register(
+                                `logoSection.items.${index}.imageAlt`
+                              )}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div className="flex justify-end mt-2">
+                  <Button
+                    type="button"
+                    addItem
+                    onClick={() =>
+                      logoSectionAppend({
+                        image: "",
+                        imageAlt: "",
+                        imageAlt_ar: "",
+                      })
+                    }
+                  >
+                    Add Item
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </AdminItemContainer>
+
+          <AdminItemContainer>
             <Label className="" main>
               Second Section (Affliation)
             </Label>
@@ -533,6 +619,74 @@ export default function Accreditation() {
           </AdminItemContainer>
 
                     <AdminItemContainer>
+            <Label className="" main>
+              Logo Section
+            </Label>
+            <div className="p-5 rounded-md grid grid-cols-1 gap-5">
+                            <div>
+                <Label className="font-bold">Items</Label>
+                <div className="border p-2 rounded-md flex flex-col gap-5">
+                  {logoSectionItems.map((field, index) => (
+                    <div
+                      key={field.id}
+                      className="grid grid-cols-2 gap-2 relative border-b pb-5 last:border-b-0"
+                    >
+                      <div className="absolute top-2 right-2">
+                        <RiDeleteBinLine
+                          onClick={() => logoSectionRemove(index)}
+                          className="cursor-pointer text-red-600"
+                        />
+                      </div>
+                      <div className="flex flex-col gap-2">
+                        <div>
+                          <div className="flex flex-col gap-2">
+                            <Label className="font-bold">Logo</Label>
+                            <Controller
+                              name={`logoSection.items.${index}.image`}
+                              control={control}
+                              render={({ field }) => (
+                                <ImageUploader
+                                  value={field.value}
+                                  onChange={field.onChange}
+                                />
+                              )}
+                            />
+                          </div>
+                          <div className="flex flex-col gap-1">
+                            <Label className="font-bold">Logo Alt</Label>
+                            <Input
+                              type="text"
+                              placeholder="Image Alt"
+                              {...register(
+                                `logoSection.items.${index}.imageAlt_ar`
+                              )}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div className="flex justify-end mt-2">
+                  <Button
+                    type="button"
+                    addItem
+                    onClick={() =>
+                      logoSectionAppend({
+                        image: "",
+                        imageAlt: "",
+                        imageAlt_ar: "",
+                      })
+                    }
+                  >
+                    Add Item
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </AdminItemContainer>
+
+          <AdminItemContainer>
             <Label className="" main>
               Second Section (Affliation)
             </Label>
