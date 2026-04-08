@@ -11,7 +11,7 @@ const Main = ({ data }: { data: AccreditationProps["secondSection"] }) => {
   const t = useApplyLang(data);
   const isArabic = useIsPreferredLanguageArabic();
   return (
-    <section className="pb-10 lg:pb-20 xl:pb-25 2xl:pb-[135px]">
+    <section className="pb-8 xl:pb-14 2xl:pb-[65px]">
       <div className="container">
         <motion.div
           variants={moveUp(0)}
@@ -22,7 +22,7 @@ const Main = ({ data }: { data: AccreditationProps["secondSection"] }) => {
             once: true,
             margin: `-250px 0px -250px 0px`,
           }}
-          className="relative overflow-hidden rounded-xl p-5 pt-15 md:p-10 xl:p-15 xl:min-h-[435px] 2xl:min-h-[635px] flex items-end"
+          className="relative overflow-hidden rounded-xl p-5 pt-15 md:p-10 xl:p-15 min-h-[350px] sm:min-h-[400px] xl:min-h-[435px] 2xl:min-h-[635px] flex items-end"
         >
           <div className="absolute top-0 left-0 w-full h-full bg-black/50 z-10"></div>
           <motion.div
