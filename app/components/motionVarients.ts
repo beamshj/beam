@@ -19,6 +19,7 @@ export const moveUp = (delay: number = 0) => ({
   },
 });
 
+
 export const moveDown = (delay: number = 0) => ({
   hidden: { opacity: 0, y: -50 },
   show: {

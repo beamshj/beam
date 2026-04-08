@@ -5,6 +5,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import { useApplyLang } from "@/lib/applyLang";
+import { moveUp } from "../../motionVarients";
+import { motion } from "framer-motion";
 
 interface Logo {
   _id: string;
@@ -21,7 +23,16 @@ export default function LogoSlider({ data }: LogoGridSectionProps) {
   const tData = useApplyLang(data);
   return (
     <section className="w-full bg-white pb-10 xl:pb-25 2xl:pb-[135px]">
-      <div className="container">
+      <motion.div
+        variants={moveUp(0.12)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{
+          amount: 0.1,
+          once: true,
+        }}
+        className="container"
+      >
         <Swiper
           modules={[Autoplay]}
           loop={false}
@@ -38,20 +49,26 @@ export default function LogoSlider({ data }: LogoGridSectionProps) {
             1450: { slidesPerView: 6 },
           }}
         >
-          {tData?.map((logo) => (
+          {tData?.map((logo, i) => (
             <SwiperSlide key={logo._id}>
-              <div className="relative w-full h-[55px] sm:h-[62px] lg:h-[70px] 2xl:h-[82px]">
+              <motion.div
+                variants={moveUp(i * 0.09)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+                className="relative w-full h-[55px] sm:h-[62px] lg:h-[70px] 2xl:h-[82px]"
+              >
                 <Image
                   src={logo.image}
                   alt={logo.imageAlt}
                   fill
                   className="object-contain"
                 />
-              </div>
+              </motion.div>
             </SwiperSlide>
           ))}
         </Swiper>
-      </div>
+      </motion.div>
     </section>
   );
 }
