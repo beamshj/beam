@@ -969,7 +969,12 @@ h2 {
 
 /* Images inside content */
 .blog-content img {
-  @apply w-full rounded-md object-cover max-h-[550px];
+  /* @apply w-full rounded-md object-cover max-h-[550px]; */
+  display: none !important;
+}
+
+.blog-content h2:has(img) {
+  display: none !important;
 }
 
 
@@ -1154,9 +1159,9 @@ html[dir="rtl"] .school-leadership-bullets li::before {
   visibility: hidden;
 }
 
-.blog-content h6 img {
+/* .blog-content h2 img {
   visibility: visible !important;
-}
+} */
 
 .custom-quill .ql-container {
   height: 160px !important;
