@@ -72,7 +72,7 @@ export const mainMenuItems = [
         href: "/about-us/founders-message",
       },
       {
-        name: "General Managers’ Message",
+        name: "General Manager’s Message",
         name_ar: "كلمة المدير العام",
         href: "/about-us/general-managers-message",
       },
@@ -96,17 +96,17 @@ export const mainMenuItems = [
     submenu: [
       { name: "Creative Science Schools", name_ar: "مدارس الإبداع العلمي", href: "/beam-schools" },
       {
-        name: "Schools’ Uniqueness",
+        name: "School’s Uniqueness",
         name_ar: "تميز مدارسنا",
         href: "/beam-schools/school-uniqueness",
       },
       {
-        name: "Schools’ Achievements",
+        name: "School’s Achievements",
         name_ar: "إنجازات مدارسنا",
         href: "/beam-schools/school-achievements",
       },
       {
-        name: "Students’ Achievements",
+        name: "Student’s Achievements",
         name_ar: "إنجازات الطلاب",
         href: "/beam-schools/students-achievements",
       },
@@ -172,12 +172,12 @@ export const sliderMenuItems = [
 
 export const filterMenuItems = [
   {
-    name: "Schools’ Uniqueness",
+    name: "School’s Uniqueness",
     name_ar: "تميز مدارسنا",
     href: "/beam-schools/school-uniqueness",
   },
   {
-    name: "Schools Achievements",
+    name: "School’s Achievements",
     name_ar: "إنجازات مدارسنا",
     href: "/beam-schools/school-achievements",
   },

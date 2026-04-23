@@ -313,9 +313,9 @@ const Breadcrumb: React.FC = () => {
     const NON_CLICKABLE_PARENTS = ["about-us", "beam-schools", "news-and-media"];
 
     const specialLabels: SpecialLabels = {
-        "about-us": { en: "About Beam", ar: "تعرف على بيم" },
+        "about-us": { en: "About BEAM", ar: "تعرف على بيم" },
         "news-and-media": { en: "News & Media", ar: "الأخبار والمواد الإعلامية" },
-        "beam-schools": { en: "Beam Schools", ar: "مدارسنا" },
+        "beam-schools": { en: "BEAM Schools", ar: "مدارسنا" },
     };
 
     const normalizeSegment = (segment: string) => segment.toLowerCase().replace(/ /g, "-").replace(/&/g, "and");
