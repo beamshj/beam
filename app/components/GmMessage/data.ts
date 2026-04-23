@@ -4,7 +4,7 @@ export const BannerData = {
 };
 
 export const gmMessageData = {
-  title: `General Managers’ Message`,
+  title: `General Manager’s Message`,
   photo: "/images/gm-message/gm.png",
   name: "Shadi Hassan",
   designation: "General Manager BEAM",
