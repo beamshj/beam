@@ -1,8 +1,6 @@
 "use client";
-import { ChevronsRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { moveUp } from "../../motionVarients";
-import { StaticImageData } from "next/image";
 import Image from "next/image";
 import { StudentsAchievementsProps } from "../type";
 import { useApplyLang } from "@/lib/applyLang";
@@ -46,21 +44,14 @@ const Main = ({ data }: MainProps) => {
               className={`students-achievemnets-content-html text-colorpara ${isArabic ? "pr-[1.25rem]" : "pl-[1.25rem]"}`}
               dangerouslySetInnerHTML={{ __html: t.content }}
             />
-
-            {/* <ul className="list-disc space-y-2 list-inside ">
-              {t.subData.list.map((item, index) => (
-                <motion.li variants={moveUp(0.6 + index * 0.1)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} key={index}
-                  className="text-colorpara group text-colorpara font-normal ">{item}
-                </motion.li>
-              ))}
-            </ul> */}
           </div>
           <motion.div
             variants={moveUp(0.2)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
-            className="relative overflow-hidden rounded-xl md:h-full min-h-[300px]">
+            className="relative overflow-hidden rounded-xl md:h-full min-h-[300px]"
+          >
             <Image
               src={t.image}
               alt={t.imageAlt}

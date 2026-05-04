@@ -70,7 +70,7 @@ const VisionMissionSection = ({
             <SplitText
               tag="h2"
               text={t.title}
-              className="max-w-[12ch] text-lg lg:text-xl xl:text-[3.5rem] 2xl:text-4xl font-light leading-[1.1111111]  lettersp-4 text-black mb-3 xl:mb-[40px] 2xl:mb-[30px]"
+              className="md:max-w-[12ch] text-lg lg:text-xl xl:text-[3.5rem] 2xl:text-4xl font-light leading-[1.1111111]  lettersp-4 text-black mb-3 xl:mb-[40px] 2xl:mb-[30px]"
               delay={100}
               duration={0.6}
               ease="power3.out"
@@ -120,7 +120,7 @@ const VisionMissionSection = ({
             </div>
           </div>
           {/* Right Image */}
-          <div className="relative w-full h-[300px]  md:h-auto rounded-[12px] overflow-hidden" ref={imageRef} >
+          <div className="hidden md:block relative w-full h-[300px]  md:h-auto rounded-[12px] overflow-hidden" ref={imageRef} >
             <Image src={t.image} alt={t.imageAlt} fill className="object-cover  transition-all duration-500" />
             <motion.div ref={overlayRef} className="absolute bottom-0 w-full h-[60%] bg-gradient-to-b from-black/0 to-[#42BADCC9]/79" initial={{ y: "100%" }} animate={{ y: "0%" }} transition={{ duration: 0.4, ease: "easeInOut" }} />
           </div>

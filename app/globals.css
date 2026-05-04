@@ -843,7 +843,7 @@ h2 {
     @apply text-[#E0E0E0] leading-[1.526315789473684] font-light max-w-[50ch];
   }
 
-  ol {
+  ol, ul {
     @apply mt-[20px] space-y-1 ml-5 list-disc
   }
 
@@ -857,7 +857,7 @@ h2 {
     @apply text-[#E0E0E0] leading-[1.526315789473684] font-light max-w-[50ch];
   }
 
-  ol {
+  ol, ul {
     @apply mt-[20px] space-y-1 ml-5 list-disc
   }
 
@@ -866,7 +866,8 @@ h2 {
   }
 }
 
-.school-uniqueness-second-section-ar ol {
+.school-uniqueness-second-section-ar ol,
+.school-uniqueness-second-section-ar ul {
   direction: rtl;
   /* keep Arabic flow */
   list-style-position: inside;
@@ -888,7 +889,7 @@ h2 {
 
 /* Paragraphs */
 .blog-content p {
-  @apply text-colorpara text-sm font-light mb-3 lg:mb-6 !pl-0;
+  @apply text-colorpara text-sm font-light mb-3 lg:mb-6 !pl-0 text-[#626262];
   line-height: 1.526315789473684;
 }
 
@@ -925,21 +926,21 @@ h2 {
 
 /* Lists */
 .blog-content ul {
-  @apply pl-3 list-disc;
+  @apply pl-3 list-disc text-[#626262];
 }
 
 .blog-content ol {
-  @apply pl-3 list-decimal;
+  @apply pl-3 list-decimal text-[#626262];
 }
 
 
 .blog-content li {
-  @apply text-sm font-light mb-3 xl:mb-6;
+  @apply text-sm font-light mb-3 xl:mb-6 text-[#626262];
 }
 
 .blog-content li strong,
 .blog-content li b {
-  @apply font-medium text-black;
+  @apply font-medium text-[#626262];
 }
 
 /* Bold or strong text */

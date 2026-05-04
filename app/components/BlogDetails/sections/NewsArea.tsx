@@ -103,9 +103,10 @@ const NewsArea = ({
             }
 
             // Ensure all styled elements have a color
-            if (!el.style.color) {
-                el.style.color = "#000000";
-            }
+if (!el.style.color) {
+    el.style.color = "#626262";
+}
+
         });
 
         setSanitizedContent(temp.innerHTML);
@@ -202,9 +203,9 @@ const NewsArea = ({
                                                             <Icon
                                                                 size={32}
                                                                 round
-                                                                bgStyle={{
-                                                                    fill: "none",
-                                                                }}
+                                                                // bgStyle={{
+                                                                //     fill: "none",
+                                                                // }}
                                                             />
                                                         </Component>
                                                     </motion.div>

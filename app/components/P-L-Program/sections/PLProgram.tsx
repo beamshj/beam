@@ -13,7 +13,7 @@ export default function PLProgram({
   data: PLProgramProps["firstSection"];
 }) {
   const t = useApplyLang(data);
-  const isArabic = useIsPreferredLanguageArabic()
+  const isArabic = useIsPreferredLanguageArabic();
 
   return (
     <section className="py-10 md:py-20 xl:py-[135px]">
@@ -24,7 +24,7 @@ export default function PLProgram({
             <SplitText
               tag="h2"
               text={t.mainTitle}
-              className={` font-light leading-[1.111] mb-3 2xl:mb-[43px] lettersp-2 ${isArabic ? 'text-lg lg:text-xl xl:text-2xl 2xl:text-3xl' : 'text-lg lg:text-xl xl:text-2xl 2xl:text-4xl'}`}
+              className={` font-light leading-[1.111] mb-3 2xl:mb-[43px] lettersp-2 ${isArabic ? "text-lg lg:text-xl xl:text-2xl 2xl:text-3xl" : "text-lg lg:text-xl xl:text-2xl 2xl:text-4xl"}`}
               delay={200}
               duration={0.6}
               ease="power3.out"
@@ -36,10 +36,35 @@ export default function PLProgram({
               textAlign={isArabic ? "right" : "left"}
             />
 
+            {/* Right Image */}
+            <motion.div
+              variants={moveUp(0.4)}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.2 }}
+              className="xl:hidden my-[20px] relative min-h-[300px] md:min-h-[450px] h-auto 2xl:w-[749px] w-full rounded-[12px] overflow-hidden  order-1 xl:order-2"
+            >
+              <Image
+                src={t.image}
+                alt={t.imageAlt}
+                fill
+                loading="lazy"
+                sizes="(max-width: 768px) 80vw, 400px"
+                className="object-cover h-full rounded-[12px]"
+              />
+              <div
+                style={{
+                  background:
+                    "linear-gradient(183.56deg, rgba(66, 186, 220, 0) 43.99%, #7E5AA3 116.63%)",
+                }}
+                className="absolute  w-full inset-0"
+              />
+            </motion.div>
+
             <SplitText
               tag="h3"
               text={t.subTitle}
-              className={`text-md xl:text-lg 2xl:text-xl text-black leading-[1.4] font-light w-full tracking-[-1px] ${isArabic ? 'mb-4' : 'mb-2'}`}
+              className={`text-md xl:text-lg 2xl:text-xl text-black leading-[1.4] font-light w-full tracking-[-1px] ${isArabic ? "mb-4" : "mb-2"}`}
               delay={200}
               duration={0.6}
               ease="power3.out"
@@ -57,7 +82,10 @@ export default function PLProgram({
 
                 return (
                   line.trim() && (
-                    <div key={idx} className="whitespace-pre-line mb-2 last:mb-0">
+                    <div
+                      key={idx}
+                      className="whitespace-pre-line mb-2 last:mb-0"
+                    >
                       <SplitText
                         tag="span"
                         className="text-colorpara xl:max-w-[56ch]  text-sm font-light"
@@ -85,9 +113,23 @@ export default function PLProgram({
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
-            className="relative min-h-[300px] md:min-h-[450px] h-auto 2xl:w-[749px] w-full rounded-[12px] overflow-hidden  order-1 xl:order-2">
-            <Image src={t.image} alt={t.imageAlt} fill loading="lazy" sizes="(max-width: 768px) 80vw, 400px" className="object-cover h-full rounded-[12px]" />
-            <div style={{ background: "linear-gradient(183.56deg, rgba(66, 186, 220, 0) 43.99%, #7E5AA3 116.63%)" }} className="absolute  w-full inset-0" />
+            className="hidden xl:block relative min-h-[300px] md:min-h-[450px] h-auto 2xl:w-[749px] w-full rounded-[12px] overflow-hidden  order-1 xl:order-2"
+          >
+            <Image
+              src={t.image}
+              alt={t.imageAlt}
+              fill
+              loading="lazy"
+              sizes="(max-width: 768px) 80vw, 400px"
+              className="object-cover h-full rounded-[12px]"
+            />
+            <div
+              style={{
+                background:
+                  "linear-gradient(183.56deg, rgba(66, 186, 220, 0) 43.99%, #7E5AA3 116.63%)",
+              }}
+              className="absolute  w-full inset-0"
+            />
           </motion.div>
         </div>
       </div>

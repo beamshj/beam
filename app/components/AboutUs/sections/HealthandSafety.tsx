@@ -84,7 +84,7 @@ export default function HealthSafety({
                           alt="arrow-right-tip"
                           width={15}
                           height={15}
-                          className={`w-[15px] h-[15px] ${isArabic && "rotate-180"}`}
+                          className={`w-[15px] h-[15px] ${isArabic ? "rotate-90 xl:rotate-180" : "rotate-90 xl:rotate-0"}`}
                         />
                       </motion.div>
                     )}

@@ -1,4 +1,33 @@
 import Index from "@/app/components/P-L-Program/Index";
+import { Metadata } from "next";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const response = await fetch(`${process.env.BASE_URL}/api/admin/learning-program`, {
+    next: { revalidate: 60 },
+  });
+  const data = await response.json();
+  const d = data.data;
+
+const title =
+  d.metaTitle?.length > 2
+    ? d.metaTitle
+    : d.pageTitle
+    ?? d.bannerSection?.items?.[0]?.title
+    ?? d.secondSection?.title
+    ?? d.thirdSection?.title
+    ?? "BEAM Schools";
+
+const description =
+  d.metaDescription?.length > 2
+    ? d.metaDescription
+    : d.pageTitle
+    ?? d.bannerSection?.items?.[0]?.title
+    ?? d.secondSection?.title
+    ?? d.thirdSection?.title
+    ?? "BEAM Schools";
+
+  return { title, description };
+}
 
 const Page = async () => {
   const response = await fetch(`${process.env.BASE_URL}/api/admin/learning-program`, {

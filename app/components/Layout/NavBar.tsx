@@ -246,7 +246,8 @@ const NavBar = () => {
                   }`}
               >
                 <div
-                  onClick={() => setIsMenuOpen(true)}
+                  // onClick={() => setIsMenuOpen(true)}
+                  onClick={() => { setIsMenuOpen(true); setHoveredMenu(null); }}
                   className="rounded-[10px] bg-[#42BADC] h-full flex items-center justify-center px-[15px] sm:px-[30px] xl:px-[35px] gap-3 cursor-pointer 
              transition-all duration-300 hover:bg-[#23ABD2] group"
                 >
