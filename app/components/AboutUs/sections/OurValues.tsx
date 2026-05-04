@@ -143,15 +143,18 @@
 //   );
 // }
 
+
+
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { moveUp } from "../../motionVarients";
 import { AboutProps } from "../type";
 import { useApplyLang } from "@/lib/applyLang";
 import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
+
 
 interface Props {
   data: AboutProps["thirdSection"];
@@ -161,10 +164,55 @@ export default function ValuesGrid({ data }: Props) {
   const [hovered, setHovered] = useState<number | null>(0);
   const t = useApplyLang(data);
   const isArabic = useIsPreferredLanguageArabic();
+    const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const sanitizeHtml = (html: string) => html.replace(/&nbsp;/g, " ");
 
-  console.log(t);
+
+    useEffect(() => {
+    const isMobile = () => window.innerWidth < 768;
+
+    if (!isMobile()) return;
+
+    const observers: IntersectionObserver[] = [];
+
+    cardRefs.current.forEach((ref, index) => {
+      if (!ref) return;
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            // Only act on mobile
+            if (!isMobile()) return;
+            if (entry.isIntersecting) {
+              setHovered(index);
+            }
+          });
+        },
+        {
+          threshold: 0.2,
+          rootMargin: "0px 0px -10% 0px",
+        }
+      );
+
+      observer.observe(ref);
+      observers.push(observer);
+    });
+
+    const handleResize = () => {
+      if (!isMobile()) {
+        // Clean up observers if resized to non-mobile
+        observers.forEach((obs) => obs.disconnect());
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      observers.forEach((obs) => obs.disconnect());
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [t.items]);
 
   return (
     <section className="container">
@@ -208,10 +256,14 @@ export default function ValuesGrid({ data }: Props) {
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true, amount: 0.2 }}
+                                ref={(el) => {
+                  cardRefs.current[index] = el;
+                }}
                 onMouseEnter={() => setHovered(index)}
                 onMouseLeave={() => setHovered(index)}
                 className="relative h-[400px] lg:h-[430px] xl:h-[525px] 2xl:h-[729px] w-full 2xl:max-w-[295px] rounded-[12px]  group cursor-pointer"
               >
+                {hovered === index && <div className="absolute bottom-0 left-0 right-0 w-full h-full bg-gradient-to-t from-black/80 via-black/70 to-black/0 max-h-[95%] z-10" />}
                 {/* Background image */}
                 <div className="absolute inset-0 overflow-hidden rounded-[12px]">
                   <Image
@@ -230,7 +282,7 @@ export default function ValuesGrid({ data }: Props) {
                 <div className="absolute inset-0 z-10 flex flex-col justify-end text-white">
                   <div
                     className={`absolute bottom-0 left-0 w-full
-                      bg-gradient-to-t from-[#42BADC]/60 to-transparent
+                      bg-gradient-to-t from-[#42BADC]/60 to-transparent rounded-b-[12px]
                       transition-all duration-500 ease-in-out
                       ${hovered === index ? "h-[41%]" : "h-0"}
                     `}
@@ -238,21 +290,6 @@ export default function ValuesGrid({ data }: Props) {
 
                   {/* Content */}
                   <div className="relative z-10 h-full w-full">
-                    {/* Title that moves */}
-                    {/* <h3
-                      className={`
-                        absolute rounded-full text-[1.3rem] md:text-md xl:text-lg 2xl:text-xl font-light transition-all duration-500 flex items-center justify-center
-                        ${
-                          hovered === index
-                            ? "top-[26px] left-[26px] w-fit text-center border-none bg-[linear-gradient(131deg,rgba(66,186,220,1)_0%,rgba(126,90,163,1)_100%)] px-3"
-                            : "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[190px] lg:w-[220px] 2xl:w-[250px] text-center border border-white"
-                        }
-                        
-                      `}
-                    >
-                      {item.title}
-                    </h3> */}
-
                     <h3
                       className={`
                         absolute rounded-full  font-light transition-all duration-500 flex items-center justify-center ${isArabic ? "text-[1.3rem] md:text-md xl:text-lg" : "text-[1.3rem] md:text-md xl:text-lg 2xl:text-xl"}
@@ -271,7 +308,7 @@ export default function ValuesGrid({ data }: Props) {
                     {hovered === index && (
                       <div
                         className={`absolute bottom-0 left-0 right-0 w-full max-h-[75%]
-    bg-gradient-to-t from-black/100 to-black/0
+    bg-gradient-to-t from-black/100 to-black/0 rounded-b-[12px]
     ${isArabic ? "px-10" : "px-4"} pt-4`}
                       >
                         <div
