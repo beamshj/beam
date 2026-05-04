@@ -115,9 +115,13 @@ export default function MoreToExplore({ data }: Props) {
                     <p className="text-[1.3rem] md:text-md xl:text-lg 2xl:text-xl font-light text-black leading-[1.18] mb-3 max-w-[20ch]">
                       {item.title}
                     </p>
-                    <div className="text-sm font-light text-colorpara leading-[1.3] max-w-[24ch] xl:max-w-[28ch]">
+                    <div className="text-sm font-light text-colorpara leading-[1.3] max-w-none md:max-w-[20ch] lg:max-w-[24ch] xl:max-w-[28ch]">
                       {item.description.split("\n").map((line, i) => (
-                        <div key={i}>{line}</div>
+                        <div key={i}>
+                          <ul className="list-disc pl-4">
+                            <li>{line}</li>
+                          </ul>
+                        </div>
                       ))}
                     </div>
                   </motion.div>
