@@ -53,7 +53,7 @@ const JoinBeam = ({ data }: { data: HomeProps["tenthSection"] }) => {
               viewport={{ once: true, amount: 0.2 }}
               transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
             >
-              <p className="text-base 2xl:text-lg font-light max-w-[45ch]">
+              <p className={`text-base 2xl:text-lg font-light ${isArabic ? "max-w-[95%]" : "max-w-[30ch]"} sm:max-w-[45ch] `}>
                 {t.description}
               </p>
             </motion.div>
@@ -90,7 +90,7 @@ const JoinBeam = ({ data }: { data: HomeProps["tenthSection"] }) => {
         </div>
       </div>
       <div
-        className={`w-full h-full absolute top-0 ${isArabic ? "right-0 bg-gradient-to-r from-transparent via-black/20 to-black/70" : "left-0 bg-gradient-to-l from-transparent via-black/20 to-black/70"} z-20`}
+        className={`w-full h-full absolute top-0 ${isArabic ? "right-0  bg-gradient-to-r  from-black/40 to-black/70   sm:from-transparent sm:via-black/50 sm:to-black/70 md:from-transparent md:via-black/20 md:to-black/70" : "left-0 bg-gradient-to-l from-black/40 to-black/70   sm:from-transparent sm:via-black/50 sm:to-black/70 md:from-transparent md:via-black/20 md:to-black/70"} z-20`}
       ></div>
     </motion.section>
   );

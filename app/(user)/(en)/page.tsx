@@ -1,26 +1,62 @@
-
 import Index from "@/app/components/HomeTwo/Index";
+import { Metadata } from "next";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const response = await fetch(`${process.env.BASE_URL}/api/admin/home`, {
+    next: { revalidate: 60 },
+  });
+  const data = await response.json();
+  const d = data.data;
+
+const title =
+  d.metaTitle?.length > 2
+    ? d.metaTitle
+    : d.pageTitle
+    ?? d.bannerSection?.items?.[0]?.title
+    ?? d.secondSection?.title
+    ?? d.thirdSection?.title
+    ?? "BEAM Schools";
+
+const description =
+  d.metaDescription?.length > 2
+    ? d.metaDescription
+    : d.pageTitle
+    ?? d.bannerSection?.items?.[0]?.title
+    ?? d.secondSection?.title
+    ?? d.thirdSection?.title
+    ?? "BEAM Schools";
+
+  return { title, description };
+}
 
 const Page = async () => {
-  
   const response = await fetch(`${process.env.BASE_URL}/api/admin/home`, {
     next: { revalidate: 60 },
   });
   const data = await response.json();
 
-  const schoolresponse = await fetch(`${process.env.BASE_URL}/api/admin/beam-schools`, {
-    next: { revalidate: 60 },
-  });
+  const schoolresponse = await fetch(
+    `${process.env.BASE_URL}/api/admin/beam-schools`,
+    {
+      next: { revalidate: 60 },
+    },
+  );
   const schooldata = await schoolresponse.json();
 
-  const categoryresponse = await fetch(`${process.env.BASE_URL}/api/admin/beam-schools/category`, {
-    next: { revalidate: 60 },
-  });
+  const categoryresponse = await fetch(
+    `${process.env.BASE_URL}/api/admin/beam-schools/category`,
+    {
+      next: { revalidate: 60 },
+    },
+  );
   const categorydata = await categoryresponse.json();
 
-  const locationresponse = await fetch(`${process.env.BASE_URL}/api/admin/beam-schools/location`, {
-    next: { revalidate: 60 },
-  });
+  const locationresponse = await fetch(
+    `${process.env.BASE_URL}/api/admin/beam-schools/location`,
+    {
+      next: { revalidate: 60 },
+    },
+  );
   const locationdata = await locationresponse.json();
 
   const blogresponse = await fetch(`${process.env.BASE_URL}/api/admin/blogs`, {
@@ -33,14 +69,25 @@ const Page = async () => {
   });
   const newsdata = await newsresponse.json();
 
-  const galleryresponse = await fetch(`${process.env.BASE_URL}/api/admin/gallery`, {
-    next: { revalidate: 60 },
-  });
+  const galleryresponse = await fetch(
+    `${process.env.BASE_URL}/api/admin/gallery`,
+    {
+      next: { revalidate: 60 },
+    },
+  );
   const gallerydata = await galleryresponse.json();
 
   return (
     <>
-      <Index data={data.data} schooldata={schooldata.data} categorydata={categorydata.data} locationdata={locationdata.data} blogdata={blogdata.data} newsdata={newsdata.data} gallerydata={gallerydata.data} />
+      <Index
+        data={data.data}
+        schooldata={schooldata.data}
+        categorydata={categorydata.data}
+        locationdata={locationdata.data}
+        blogdata={blogdata.data}
+        newsdata={newsdata.data}
+        gallerydata={gallerydata.data}
+      />
     </>
   );
 };

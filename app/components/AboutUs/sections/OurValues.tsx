@@ -261,7 +261,7 @@ export default function ValuesGrid({ data }: Props) {
                 }}
                 onMouseEnter={() => setHovered(index)}
                 onMouseLeave={() => setHovered(index)}
-                className="relative h-[400px] lg:h-[430px] xl:h-[525px] 2xl:h-[729px] w-full 2xl:max-w-[295px] rounded-[12px]  group cursor-pointer"
+                className="relative h-[500px] lg:h-[430px] xl:h-[525px] 2xl:h-[729px] w-full 2xl:max-w-[295px] rounded-[12px]  group cursor-pointer overflow-hidden"
               >
                 {hovered === index && <div className="absolute bottom-0 left-0 right-0 w-full h-full bg-gradient-to-t from-black/80 via-black/70 to-black/0 max-h-[95%] z-10" />}
                 {/* Background image */}

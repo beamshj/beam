@@ -24,6 +24,14 @@ export default function MoreToExplore({
   const [leftOffset, setLeftOffset] = useState(0);
   const t = useApplyLang(data);
   const isArabic = useIsPreferredLanguageArabic()
+  const [isDesktop, setIsDesktop] = useState(false);
+
+useEffect(() => {
+  const check = () => setIsDesktop(window.innerWidth >= 1280);
+  check();
+  window.addEventListener("resize", check);
+  return () => window.removeEventListener("resize", check);
+}, []);
 
   useEffect(() => {
     const updateOffset = () => {
@@ -60,7 +68,7 @@ export default function MoreToExplore({
         </div>
         <div style={{ paddingLeft: `${isArabic ? 0 : leftOffset}px`, paddingRight: `${isArabic ? leftOffset : 0}px` }} className="pr-3 sm:pr-0" >
           <Swiper
-            slidesPerView={1}
+            slidesPerView={1.2}
             spaceBetween={11}
             pagination={{
               clickable: true,
@@ -92,9 +100,9 @@ export default function MoreToExplore({
                       <motion.h3
                         variants={moveUp(0.1)}
                         initial="hidden"
-                        whileInView="show"
-                        viewport={{ once: false, amount: 0.7 }}
-                        className="absolute bottom-[15px] left-[15px] right-[15px] xl:bottom-[40px] xl:left-[40px] xl:right-[40px] z-20 leading-[1.2] text-white text-lg xl:text-xl font-light group-hover:!opacity-0"
+                        animate="show"
+                        // viewport={{ once: false, amount: 0.7 }}
+                        className="absolute bottom-[25px] left-[25px] right-[25px] xl:bottom-[40px] xl:left-[40px] xl:right-[40px] z-20 leading-[1.2] text-white text-lg xl:text-xl font-light group-hover:!opacity-0"
                       >
                         {card.title}
                       </motion.h3>

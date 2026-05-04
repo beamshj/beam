@@ -174,7 +174,58 @@ const Comments = ({ data }: { data: TestimonialsProps["firstSection"] }) => {
                   </SwiperSlide>
                 ))}
               </Swiper>
-              <div className="commentpagination rounded-2xl swiper-pagination-custom absolute z-50 !-bottom-12 !left-[52%] !translate-x-[-52%]  !w-fit !m-auto bg-[#D3D3D3] 2xl:min-w-[280px] max-w-[280px] flex justify-center gap-0"></div>
+                          <div className={` md:hidden w-full justify-center my-[20px] flex gap-3 z-10`}>
+              <button className="swiper-button-prev-custom transition cursor-pointer group" aria-label="Previous" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" className="overflow-visible" >
+                  <path
+                    d={isArabic ? "M14.43 5.92993L20.5 11.9999L14.43 18.0699" : "M9.57031 5.92993L3.50031 11.9999L9.57031 18.0699"}
+                    stroke="#D3D3D3"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="transition-all duration-300 group-hover:stroke-[#23ABD2]"
+                  />
+
+                  <path
+                    d="M20.5 12H3.67"
+                    stroke="#D3D3D3"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className={`${isArabic ? "origin-right" : "origin-left"} transition-transform duration-500 group-hover:scale-x-[1.5] group-hover:stroke-[#23ABD2]`}
+                  />
+                </svg>
+              </button>
+
+              <button className="swiper-button-next-custom transition cursor-pointer group" aria-label="Next" >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  className="overflow-visible"
+                >
+                  <path
+                    d={isArabic ? "M9.57031 5.92993L3.50031 11.9999L9.57031 18.0699" : "M14.43 5.92993L20.5 11.9999L14.43 18.0699"}
+                    stroke="#D3D3D3"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="transition-all duration-300 group-hover:stroke-[#23ABD2]"
+                  />
+                  <path
+                    d="M3.5 12H20.33"
+                    stroke="#D3D3D3"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className={`${isArabic ? "origin-left" : "origin-right"} transition-transform duration-500 group-hover:scale-x-[1.5] group-hover:stroke-[#23ABD2]`}
+                  />
+                </svg>
+              </button>
+            </div>
+              <div className="commentpagination rounded-2xl swiper-pagination-custom absolute z-50 !-bottom-6 md:!-bottom-12 !left-[50%] !translate-x-[-50%]  !w-fit !m-auto bg-[#D3D3D3] 2xl:min-w-[280px] max-w-[280px] flex justify-center gap-0"></div>
             </div>
           </div>
         </div>

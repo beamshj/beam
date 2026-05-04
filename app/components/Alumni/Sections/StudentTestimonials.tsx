@@ -189,6 +189,30 @@ export default function Testimonials({ data }: StudentTestimonialsSectionType) {
                                     />
                                 </motion.div>
 
+                                                            <motion.div
+                                variants={moveLeft(index * 1.6)}
+                                initial="hidden"
+                                whileInView="show"
+                                viewport={{ once: true }}
+                                className="mb-[20px] md:hidden
+                        max-[450px]:h-[380px] h-auto
+                        w-auto
+                        2xl:w-[455px]
+                        shrink-0
+                    "
+                            >
+                                <Image
+                                    src={item.profileImage}
+                                    alt={item.name}
+                                    width={455}
+                                    height={806}
+                                    className="
+                            w-full h-full object-top object-cover
+                            rounded-[12px]
+                        "
+                                />
+                            </motion.div>
+
                                 <motion.h4
                                     variants={moveUp(index * 1)}
                                     initial="hidden"
@@ -229,8 +253,8 @@ export default function Testimonials({ data }: StudentTestimonialsSectionType) {
                                 initial="hidden"
                                 whileInView="show"
                                 viewport={{ once: true }}
-                                className="
-                        h-[300px] sm:h-[450px] md:h-auto
+                                className="hidden md:block
+                        h-auto sm:h-[450px] md:h-auto
                         w-[380px]
                         2xl:w-[455px]
                         shrink-0
