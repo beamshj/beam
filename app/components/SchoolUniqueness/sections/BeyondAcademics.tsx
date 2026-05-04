@@ -1,21 +1,65 @@
 "use client";
 
-import Image from "next/image";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import SplitText from "@/components/SplitText";
 import { SchoolUniquenessProps } from "../type";
 import { useApplyLang } from "@/lib/applyLang";
 import useIsPreferredLanguageArabic from "@/lib/getPreferredLanguage";
 
-
 const BeyondAcademics = ({
   data,
 }: {
-  data: SchoolUniquenessProps['secondSection'];
+  data: SchoolUniquenessProps["secondSection"];
 }) => {
-  const t = useApplyLang(data)
-  const isArabic = useIsPreferredLanguageArabic()
+  const t = useApplyLang(data);
+  const isArabic = useIsPreferredLanguageArabic();
   const [activeIndex, setActiveIndex] = useState<number | null>(0);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const isMobile = () => window.innerWidth < 768;
+
+    if (!isMobile()) return;
+
+    const observers: IntersectionObserver[] = [];
+
+    cardRefs.current.forEach((ref, index) => {
+      if (!ref) return;
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!isMobile()) return;
+            if (entry.isIntersecting) {
+              setActiveIndex(index);
+            }
+          });
+        },
+        {
+          threshold: 0.3,
+          rootMargin: "0px 0px -10% 0px",
+        },
+      );
+
+      observer.observe(ref);
+      observers.push(observer);
+    });
+
+    const handleResize = () => {
+      if (!isMobile()) {
+        observers.forEach((obs) => obs.disconnect());
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      observers.forEach((obs) => obs.disconnect());
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [t.items]);
+
+  const sanitizeHtml = (html: string) => html.replace(/&nbsp;/g, " ");
   return (
     <section className="pb-0 md:pb-12 lg:pb-20 2xl:pb-[135px] ">
       <div className="container">
@@ -53,10 +97,12 @@ const BeyondAcademics = ({
           <div className="flex flex-col md:flex-row gap-8 md:gap-7 mb-8 md:mb-0">
             {t.items.map((item, index) => {
               const isActive = index === activeIndex;
-              console.log(item)
               return (
                 <div
                   key={index}
+                  ref={(el) => {
+                    cardRefs.current[index] = el;
+                  }}
                   className={` relative h-[450px] md:h-[500px]  lg:h-[549px]  2xl:h-[549px] rounded-[12px] flex flex-col p-4 md:p-0 overflow-hidden transition-all ease-in-out duration-400  ${
                     isActive ? "w-full md:w-[50%]" : "w-full  md:w-[25%]"
                   } group `}
@@ -68,26 +114,38 @@ const BeyondAcademics = ({
                   {/* Overlay */}
                   <div className="absolute inset-0 rounded-[12px] bg-gradient-to-b from-transparent to-black" />
 
-                  <div className={`absolute top-0 left-0 w-full h-full rounded-[12px] transition-all duration-500  ${isActive ? "bg-[#42BADC]/60" : ""}`}></div>
+                  <div
+                    className={`absolute top-0 left-0 w-full h-full rounded-[12px] transition-all duration-500  ${isActive ? "bg-[#42BADC]/60" : ""}`}
+                  ></div>
 
-                  <div className={`absolute  transition-all duration-400 top-[20px] ${isArabic ? "left-[20px]  xl:left-[40px]" : "right-[20px]  xl:right-[40px]" } xl:top-[40px] p-2 bg-primary rounded-full w-12 h-12 lg:w-[75px] lg:h-[75px] flex items-center justify-center   ${isActive ? "bg-white" : ""}  `}>
+                  {/* <div className={`absolute  transition-all duration-400 top-[20px] ${isArabic ? "left-[20px]  xl:left-[40px]" : "right-[20px]  xl:right-[40px]" } xl:top-[40px] p-2 bg-primary rounded-full w-12 h-12 lg:w-[75px] lg:h-[75px] flex items-center justify-center   ${isActive ? "bg-white" : ""}  `}>
                     <Image src="/images/home/arrow-top.svg" alt={"ad"} width={24} height={24}
                     className={`brightness-0 invert ${isArabic && "-rotate-90"} ${ isActive ? "invert-0 brightness-100" : "" }`}  />
-                  </div>
+                  </div> */}
 
                   {/* Content Wrapper */}
                   <div className="absolute inset-0 flex flex-col justify-end p-[20px] 2xl:p-[40px] z-10 transition-all duration-500">
                     {/* Title */}
-                    <h3 className={`text-[23px]  lg:text-[26px] xl:text-lg 2xl:text-xl font-light text-white leading-[1.2] max-w-[12ch] transition-all duration-500 ease-in-out transform ${ isActive ? "-translate-y-[20px]" : "" } `}>{item.title}</h3>
+                    <h3
+                      className={`text-[23px]  lg:text-[26px] xl:text-lg 2xl:text-xl font-light text-white leading-[1.2] max-w-[12ch] transition-all duration-500 ease-in-out transform ${isActive ? "-translate-y-[20px]" : ""} `}
+                    >
+                      {item.title}
+                    </h3>
 
                     {/* Description */}
-                    <div className={`transition-all duration-600 ease-in-out overflow-y-auto lg:overflow-y-hidden`}
+                    <div
+                      className={`transition-all duration-600 ease-in-out overflow-y-auto overflow-x-hidden`}
                       style={{
-                        maxHeight: isActive ? 310 : 0, // animate between 0 and 500px
-                        opacity: isActive ? 1 : 0, // optional fade effect
-                      }} >
-                      <div dangerouslySetInnerHTML={{ __html: item.description }} className={`${isArabic ? "school-uniqueness-second-section-ar" : "school-uniqueness-second-section"}`}>
-                      </div>
+                        maxHeight: isActive ? "65%" : 0,
+                        opacity: isActive ? 1 : 0,
+                      }}
+                    >
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: sanitizeHtml(item.description),
+                        }}
+                        className={`${isArabic ? "school-uniqueness-second-section-ar" : "school-uniqueness-second-section"}`}
+                      ></div>
                     </div>
                   </div>
                 </div>

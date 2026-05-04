@@ -843,7 +843,7 @@ h2 {
     @apply text-[#E0E0E0] leading-[1.526315789473684] font-light max-w-[50ch];
   }
 
-  ol {
+  ol, ul {
     @apply mt-[20px] space-y-1 ml-5 list-disc
   }
 
@@ -857,7 +857,7 @@ h2 {
     @apply text-[#E0E0E0] leading-[1.526315789473684] font-light max-w-[50ch];
   }
 
-  ol {
+  ol, ul {
     @apply mt-[20px] space-y-1 ml-5 list-disc
   }
 
@@ -866,7 +866,8 @@ h2 {
   }
 }
 
-.school-uniqueness-second-section-ar ol {
+.school-uniqueness-second-section-ar ol,
+.school-uniqueness-second-section-ar ul {
   direction: rtl;
   /* keep Arabic flow */
   list-style-position: inside;
