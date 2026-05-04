@@ -151,7 +151,8 @@ const handleGradeMenuOpen = () => {
 
     return (
       <div
-        className={`pb-0 lg:pb-20 xl:pb-[135px] ${className ?? ""}`}
+        // className={`pb-0 lg:pb-20 xl:pb-[135px] ${className ?? ""}`}
+        className={`pb-0 ${className ?? ""}`}
         ref={ref}
         id="registerInterest"
       >
@@ -215,7 +216,7 @@ const handleGradeMenuOpen = () => {
                   </p>
                 </motion.div>
                 <motion.div
-                  variants={moveUp(0.4)}
+                  variants={moveUp(0.3)}
                   initial="hidden"
                   whileInView="show"
                   viewport={{ once: true, amount: 0.2 }}
@@ -236,7 +237,7 @@ const handleGradeMenuOpen = () => {
               </div>
               <div className="flex flex-col lg:flex-row lg:gap-[54px]">
                 <motion.div
-                  variants={moveUp(0.6)}
+                  variants={moveUp(0.4)}
                   initial="hidden"
                   whileInView="show"
                   viewport={{ once: true, amount: 0.2 }}
@@ -255,7 +256,7 @@ const handleGradeMenuOpen = () => {
                   </p>
                 </motion.div>
                 <motion.div
-                  variants={moveUp(0.8)}
+                  variants={moveUp(0.5)}
                   initial="hidden"
                   whileInView="show"
                   viewport={{ once: true, amount: 0.2 }}
@@ -322,7 +323,7 @@ const handleGradeMenuOpen = () => {
               <div className="flex flex-col lg:flex-row lg:gap-[54px]">
                 {/* How did you hear about us? */}
                 <motion.div
-                  variants={moveUp(0.8)}
+                  variants={moveUp(0.6)}
                   initial="hidden"
                   whileInView="show"
                   viewport={{ once: true, amount: 0.2 }}
@@ -396,7 +397,7 @@ const handleGradeMenuOpen = () => {
                 </motion.div>
                 {/* Select School */}
                 <motion.div
-                  variants={moveUp(1)}
+                  variants={moveUp(0.7)}
                   initial="hidden"
                   whileInView="show"
                   viewport={{ once: true, amount: 0.2 }}
@@ -450,7 +451,7 @@ const handleGradeMenuOpen = () => {
               </div>
               <div className="flex flex-col lg:flex-row lg:gap-[55px]">
                 <motion.div
-                  variants={moveUp(1.2)}
+                  variants={moveUp(0.9)}
                   initial="hidden"
                   whileInView="show"
                   viewport={{ once: true, amount: 0.2 }}
@@ -488,7 +489,7 @@ const handleGradeMenuOpen = () => {
                 </motion.div>
 
                 <motion.div
-                  variants={moveUp(1.2)}
+                  variants={moveUp(1)}
                   initial="hidden"
                   whileInView="show"
                   viewport={{ once: true, amount: 0.2 }}
@@ -543,7 +544,7 @@ const handleGradeMenuOpen = () => {
                 {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
 
                 <motion.div
-                  variants={moveUp(1.4)}
+                  variants={moveUp(1.1)}
                   initial="hidden"
                   whileInView="show"
                   viewport={{ once: true, amount: 0.2 }}
@@ -580,13 +581,13 @@ const handleGradeMenuOpen = () => {
             </form>
           </div>
         </div>
-        <motion.div
-          variants={moveUp(1.6)}
+        {/* <motion.div
+          variants={moveUp(1.2)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.2 }}
           className="h-[1px] bg-[#D3D3D3] w-full container mt-12 md:mt-20 xl:mt-[135px]"
-        />
+        /> */}
       </div>
     );
   },
